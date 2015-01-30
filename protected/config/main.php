@@ -25,6 +25,9 @@ return array(
 		'application.modules.cruge.components.*',
 		'application.modules.cruge.extensions.crugemailer.*',
 		'bootstrap.helpers.TbHtml',
+        'bootstrap.helpers.TbArray',
+        'bootstrap.behaviors.TbWidget',
+
 	),
 
 	'modules'=>array(
