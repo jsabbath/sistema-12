@@ -16,13 +16,15 @@
 <div class="row">
 	<div class="span3" ></div>
 	<div class="span6" id="login">
+		
 		<div id="caja">
-			<?php echo $form->textField($model,'username', array('placeholder'=>'Usuario')); ?>
+			<?php echo "<img src=\"images/logo2.png\"> <br>"; ?> 
+			<?php echo "<br>"; ?> 
+		    <?php echo $form->textField($model,'username', array('placeholder'=>'Usuario')); ?>
 			<?php echo $form->error($model,'username',array('class'=>TbHtml::ALERT_COLOR_ERROR, '...')); ?><br/>
 			<?php echo $form->passwordField($model,'password', array('placeholder'=>'Clave')); ?>
 			<?php echo $form->error($model,'password'); ?>
-		</div>
-		<div id="boton">
+			<?php echo "<br><br>"; ?>
 			<input type="submit" class="botonSubmit" value="Ingresar">
 		</div>
 	</div>
