@@ -1280,3 +1280,19 @@ REQUEST_URI=/sistema/index.php?r=cruge/ui/login
 in C:\wamp\www\sistema\protected\modules\cruge\views\ui\login.php (20)
 in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (162)
 in C:\wamp\www\sistema\index.php (13)
+2015/02/01 01:55:46 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/02/01 01:55:53 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)

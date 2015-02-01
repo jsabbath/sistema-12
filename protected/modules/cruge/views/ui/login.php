@@ -12,7 +12,7 @@
 	),
 )); ?>
 
-<?php echo TbHtml::alert(TbHtml::ALERT_COLOR_ERROR, '...'); ?>
+
 <div class="row">
 	<div class="span3" ></div>
 	<div class="span6" id="login">
