@@ -7,9 +7,10 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Amsys',
 	'defaultController'=>'site/index',
-
+	'language'=>'es',
+	'sourceLanguage'=>'en',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -27,7 +28,7 @@ return array(
 		'bootstrap.helpers.TbHtml',
         'bootstrap.helpers.TbArray',
         'bootstrap.behaviors.TbWidget',
-
+        'bootstrap.Widgets.*'
 	),
 
 	'modules'=>array(

@@ -8,7 +8,7 @@
 return array(
     'Login' => 'Iniciar Sesión',
     'Logout' => 'Cerrar Sesión',
-    'User not found' => 'el usuario no fue hallado',
+    'User not found' => 'Usuario o clave invalida',
     'Password' => 'Clave de Acceso',
     'Remember this machine' => 'Recordar en este equipo',
     'Security code' => 'Código de seguridad',

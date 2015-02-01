@@ -809,3 +809,474 @@ REQUEST_URI=/sistema/index.php?r=usuario
 in C:\wamp\www\sistema\protected\extensions\bootstrap\helpers\TbHtml.php (4333)
 in C:\wamp\www\sistema\protected\extensions\bootstrap\helpers\TbHtml.php (632)
 in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbListView.php (42)
+2015/01/31 04:26:25 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Please fix the following input errors:</p>
+<ul>
+<li>clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (158)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 04:26:32 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 04:26:32 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 04:26:32 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Please fix the following input errors:</p>
+<ul>
+<li>Username or Email: cannot be blank.</li>
+<li>User not found</li>
+<li>Password: cannot be blank.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (158)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 04:26:37 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asdasd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 04:26:37 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asdasd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 04:26:37 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Please fix the following input errors:</p>
+<ul>
+<li>User not found</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (158)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 04:27:27 [error] [php] include(TbDataColumn.php): failed to open stream: No such file or directory (C:\wamp\www\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php(92): spl_autoload_call()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(383): TbGridView->createDataColumn()
+#2 C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php(75): TbGridView->initColumns()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(359): TbGridView->initColumns()
+#4 C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php(44): TbGridView->init()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(172): UsuarioController->createWidget()
+#7 C:\wamp\www\sistema\protected\views\usuario\admin.php(64): UsuarioController->widget()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(95): UsuarioController->renderInternal()
+#10 C:\wamp\www\yii\framework\web\CController.php(869): UsuarioController->renderFile()
+#11 C:\wamp\www\yii\framework\web\CController.php(782): UsuarioController->renderPartial()
+#12 C:\wamp\www\sistema\protected\controllers\UsuarioController.php(150): UsuarioController->render()
+#13 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): UsuarioController->actionAdmin()
+#14 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#15 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): UsuarioController->runAction()
+#16 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#17 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#18 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): UsuarioController->filterAccessControl()
+#19 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#20 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#21 C:\wamp\www\yii\framework\web\CController.php(265): UsuarioController->runActionWithFilters()
+#22 C:\wamp\www\yii\framework\web\CWebApplication.php(282): UsuarioController->run()
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#24 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#25 C:\wamp\www\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=usuario/admin
+in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php (92)
+in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php (75)
+in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php (44)
+2015/01/31 04:27:34 [error] [php] include(TbDataColumn.php): failed to open stream: No such file or directory (C:\wamp\www\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php(92): spl_autoload_call()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(383): TbGridView->createDataColumn()
+#2 C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php(75): TbGridView->initColumns()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(359): TbGridView->initColumns()
+#4 C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php(44): TbGridView->init()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(172): UsuarioController->createWidget()
+#7 C:\wamp\www\sistema\protected\views\usuario\admin.php(64): UsuarioController->widget()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(95): UsuarioController->renderInternal()
+#10 C:\wamp\www\yii\framework\web\CController.php(869): UsuarioController->renderFile()
+#11 C:\wamp\www\yii\framework\web\CController.php(782): UsuarioController->renderPartial()
+#12 C:\wamp\www\sistema\protected\controllers\UsuarioController.php(150): UsuarioController->render()
+#13 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): UsuarioController->actionAdmin()
+#14 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#15 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): UsuarioController->runAction()
+#16 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#17 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#18 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): UsuarioController->filterAccessControl()
+#19 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#20 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#21 C:\wamp\www\yii\framework\web\CController.php(265): UsuarioController->runActionWithFilters()
+#22 C:\wamp\www\yii\framework\web\CWebApplication.php(282): UsuarioController->run()
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#24 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#25 C:\wamp\www\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=usuario/admin
+in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php (92)
+in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php (75)
+in C:\wamp\www\sistema\protected\extensions\bootstrap\widgets\TbGridView.php (44)
+2015/01/31 04:43:51 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 04:43:51 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 04:43:51 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (158)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 21:21:05 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 22:00:41 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 22:00:41 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 22:00:41 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 22:03:30 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 22:03:30 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 22:03:30 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 22:03:35 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 22:03:35 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 22:03:35 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:00:30 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:00:30 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:00:30 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:18:27 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:18:27 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:18:27 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:18:33 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:18:33 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:18:33 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:24:50 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:24:50 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:24:50 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:53:57 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:53:57 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:53:57 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:54:04 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:54:04 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:54:04 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>el usuario no fue hallado</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:54:28 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:54:28 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:54:28 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>el usuario no fue hallado</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:54:56 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:54:56 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:54:56 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>el usuario no fue hallado</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/01/31 23:55:09 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/01/31 23:55:09 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/01/31 23:55:09 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>el usuario no fue hallado</li>
+<li>usuario o correo invalido</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/02/01 00:05:26 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/02/01 00:05:26 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/02/01 00:05:26 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>el usuario no fue hallado</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/02/01 00:05:31 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/02/01 00:05:31 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/02/01 00:05:31 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>el usuario no fue hallado</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/02/01 00:07:13 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/02/01 00:07:14 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** asd
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\wamp\www\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\wamp\www\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/02/01 00:07:14 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\wamp\www\sistema\index.php (13)
+2015/02/01 00:17:05 [error] [php] Illegal string offset 'name' (C:\wamp\www\yii\framework\web\helpers\CHtml.php:2458)
+Stack trace:
+#0 C:\wamp\www\sistema\protected\modules\cruge\views\ui\login.php(20): CActiveForm->textField()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): UiController->renderInternal()
+#3 C:\wamp\www\yii\framework\web\CController.php(869): UiController->renderFile()
+#4 C:\wamp\www\yii\framework\web\CController.php(782): UiController->renderPartial()
+#5 C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php(162): UiController->render()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): UiController->actionLogin()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): UiController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CrugeUiAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): UiController->filterAccessControl()
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): UiController->runActionWithFilters()
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): UiController->run()
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=cruge/ui/login
+in C:\wamp\www\sistema\protected\modules\cruge\views\ui\login.php (20)
+in C:\wamp\www\sistema\protected\modules\cruge\controllers\UiController.php (162)
+in C:\wamp\www\sistema\index.php (13)
