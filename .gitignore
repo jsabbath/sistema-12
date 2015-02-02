@@ -1,0 +1,8 @@
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+themes/classic/views/
+protected/config/*.php
+/*.php
+/nbproject/private/
