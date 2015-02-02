@@ -15,7 +15,7 @@
     ?>
 
 
-
+<div class="container">
     <div class="row">
         <div class="span3" ></div>
         <div class="span6" id="login">
@@ -34,19 +34,15 @@
                         echo "<br>";
                         echo TbHtml::alert(TbHtml::ALERT_COLOR_ERROR, '<strong>ERROR!</strong> Ingrese datos nuevamente.');
                         } ?>
-
-                
-
-
                 <?php echo "<br><br>"; ?>
                 <input type="submit" class="botonSubmit" value="Ingresar">
             </div>
         </div>
-
-
-
-
         <div class="span3"></div>
+</div>
+
+
+        
 
         <?php
         //	si el componente CrugeConnector existe lo usa:
