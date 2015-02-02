@@ -6,31 +6,50 @@
 
 <div class="wide form">
 
-    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+<?php $form=$this->beginWidget('CActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_id',array('span'=>5)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_id'); ?>
+		<?php echo $form->textField($model,'usu_id'); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_nombres',array('span'=>5,'maxlength'=>100)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_nombres'); ?>
+		<?php echo $form->textField($model,'usu_nombres',array('size'=>60,'maxlength'=>100)); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_apepat',array('span'=>5,'maxlength'=>30)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_apepat'); ?>
+		<?php echo $form->textField($model,'usu_apepat',array('size'=>30,'maxlength'=>30)); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_apemat',array('span'=>5,'maxlength'=>30)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_apemat'); ?>
+		<?php echo $form->textField($model,'usu_apemat',array('size'=>30,'maxlength'=>30)); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_rut',array('span'=>5)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_rut'); ?>
+		<?php echo $form->textField($model,'usu_rut'); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_clave',array('span'=>5,'maxlength'=>8)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_cargo'); ?>
+		<?php echo $form->textField($model,'usu_cargo'); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_cargo',array('span'=>5)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'usu_estado'); ?>
+		<?php echo $form->textField($model,'usu_estado'); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'usu_estado',array('span'=>5)); ?>
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Search'); ?>
+	</div>
 
-        <div class="form-actions">
-        <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>
-    </div>
-
-    <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 
 </div><!-- search-form -->

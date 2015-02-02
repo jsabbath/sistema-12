@@ -67,11 +67,11 @@ class UsuarioController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Usuario'])) {
+		if(isset($_POST['Usuario']))
+		{
 			$model->attributes=$_POST['Usuario'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->usu_id));
-			}
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class UsuarioController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Usuario'])) {
+		if(isset($_POST['Usuario']))
+		{
 			$model->attributes=$_POST['Usuario'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->usu_id));
-			}
 		}
 
 		$this->render('update',array(
@@ -110,17 +110,11 @@ class UsuarioController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if (Yii::app()->request->isPostRequest) {
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if (!isset($_GET['ajax'])) {
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-			}
-		} else {
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		}
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -141,9 +135,8 @@ class UsuarioController extends Controller
 	{
 		$model=new Usuario('search');
 		$model->unsetAttributes();  // clear any default values
-		if (isset($_GET['Usuario'])) {
+		if(isset($_GET['Usuario']))
 			$model->attributes=$_GET['Usuario'];
-		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -160,9 +153,8 @@ class UsuarioController extends Controller
 	public function loadModel($id)
 	{
 		$model=Usuario::model()->findByPk($id);
-		if ($model===null) {
+		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		}
 		return $model;
 	}
 
@@ -172,7 +164,8 @@ class UsuarioController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if (isset($_POST['ajax']) && $_POST['ajax']==='usuario-form') {
+		if(isset($_POST['ajax']) && $_POST['ajax']==='usuario-form')
+		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

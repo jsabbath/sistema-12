@@ -1,9 +1,7 @@
 <?php
 /* @var $this UsuarioController */
 /* @var $model Usuario */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
 	'Create',

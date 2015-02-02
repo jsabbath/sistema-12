@@ -1,9 +1,7 @@
 <?php
 /* @var $this UsuarioController */
 /* @var $model Usuario */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
 	$model->usu_id,
@@ -20,18 +18,14 @@ $this->menu=array(
 
 <h1>View Usuario #<?php echo $model->usu_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView',array(
-    'htmlOptions' => array(
-        'class' => 'table table-striped table-condensed table-hover',
-    ),
-    'data'=>$model,
-    'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model,
+	'attributes'=>array(
 		'usu_id',
 		'usu_nombres',
 		'usu_apepat',
 		'usu_apemat',
 		'usu_rut',
-		'usu_clave',
 		'usu_cargo',
 		'usu_estado',
 	),

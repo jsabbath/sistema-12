@@ -9,9 +9,11 @@
  * @property string $usu_apepat
  * @property string $usu_apemat
  * @property integer $usu_rut
- * @property string $usu_clave
  * @property integer $usu_cargo
  * @property integer $usu_estado
+ *
+ * The followings are the available model relations:
+ * @property AAsignatura[] $aAsignaturas
  */
 class Usuario extends CActiveRecord
 {
@@ -31,14 +33,13 @@ class Usuario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usu_nombres, usu_apepat, usu_apemat, usu_rut, usu_clave, usu_cargo, usu_estado', 'required'),
+			array('usu_nombres, usu_apepat, usu_apemat, usu_rut, usu_cargo, usu_estado', 'required'),
 			array('usu_rut, usu_cargo, usu_estado', 'numerical', 'integerOnly'=>true),
 			array('usu_nombres', 'length', 'max'=>100),
 			array('usu_apepat, usu_apemat', 'length', 'max'=>30),
-			array('usu_clave', 'length', 'max'=>8),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('usu_id, usu_nombres, usu_apepat, usu_apemat, usu_rut, usu_clave, usu_cargo, usu_estado', 'safe', 'on'=>'search'),
+			array('usu_id, usu_nombres, usu_apepat, usu_apemat, usu_rut, usu_cargo, usu_estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,6 +51,7 @@ class Usuario extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'aAsignaturas' => array(self::HAS_MANY, 'AAsignatura', 'aa_docente'),
 		);
 	}
 
@@ -64,7 +66,6 @@ class Usuario extends CActiveRecord
 			'usu_apepat' => 'Usu Apepat',
 			'usu_apemat' => 'Usu Apemat',
 			'usu_rut' => 'Usu Rut',
-			'usu_clave' => 'Usu Clave',
 			'usu_cargo' => 'Usu Cargo',
 			'usu_estado' => 'Usu Estado',
 		);
@@ -93,7 +94,6 @@ class Usuario extends CActiveRecord
 		$criteria->compare('usu_apepat',$this->usu_apepat,true);
 		$criteria->compare('usu_apemat',$this->usu_apemat,true);
 		$criteria->compare('usu_rut',$this->usu_rut);
-		$criteria->compare('usu_clave',$this->usu_clave,true);
 		$criteria->compare('usu_cargo',$this->usu_cargo);
 		$criteria->compare('usu_estado',$this->usu_estado);
 
