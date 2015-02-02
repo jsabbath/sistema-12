@@ -24,13 +24,11 @@
     <body>
 
         <div class="container" id="page">
-
-
-
             <?php
             if (!Yii::app()->user->isGuest) {
                 $this->widget('bootstrap.widgets.TbNavbar', array(
                     'brandLabel' => 'AMSYS',
+                    'collapse' => true,
                     'display' => null, // default is static to top
                     'items' => array(
                         array(
@@ -39,6 +37,7 @@
                                 array('label' => 'Home', 'icon' => 'home', 'url' => array('/site/index')),
                                 array('label' => 'About','icon'=>'question-sign' ,'url' =>array('/site/page', 'view'=>'about')),
                                 array('label' => 'Contact','icon' => 'random' ,'url'=>array('/site/contact')  ),
+                               
                             ),
                         ),
                         
@@ -46,6 +45,8 @@
                             'class' => 'bootstrap.widgets.TbNav',
                             'htmlOptions' => array('class' => 'pull-right'),
                             'items' => array(
+                                 array('label' => 'Administrar Usuarios' ,'icon' => 'pencil', 'url' =>Yii::app()->user->ui->userManagementAdminUrl ,'visible'=>!Yii::app()->user->isGuest),
+                            
                                 array('label' => 'Logout (' . Yii::app()->user->name . ')'
                                     , 'url' => Yii::app()->user->ui->logoutUrl
                                     , 'icon' => 'user'

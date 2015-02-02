@@ -16,10 +16,7 @@
 	$this->beginContent('//layouts/'.Yii::app()->layout); 
 ?>
 
-<?php	
-	if(Yii::app()->user->isSuperAdmin)
-		echo Yii::app()->user->ui->superAdminNote();
-?>
+
 <div class="container">
 	<div class="span-19">
 		<div id="content">
