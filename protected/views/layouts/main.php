@@ -34,10 +34,27 @@
                         array(
                             'class' => 'bootstrap.widgets.TbNav',
                             'items' => array(
-                                array('label' => 'Home', 'icon' => 'home', 'url' => array('/site/index')),
-                                array('label' => 'About','icon'=>'question-sign' ,'url' =>array('/site/page', 'view'=>'about')),
-                                array('label' => 'Contact','icon' => 'random' ,'url'=>array('/site/contact')  ),
-                               
+                                array('label' => 'Inicio', 'icon' => 'home', 'url' => array('/site/index')),
+								array('label' => 'Admision', 'items' => array(
+									array('label' => 'Ingreso Matricula', 'url' => '#'),
+									array('label' => 'Modificar Matricula', 'url' => '#'),
+									array('label' => 'Bajar Matricula', 'url' => '#'),)),
+								array('label' => 'Academico', 'items' => array(
+									array('label' => 'Administracion de Cursos', 'url' => '#'),
+									array('label' => 'Another action', 'url' => '#'),
+									array('label' => 'Something else here', 'url' => '#'),)),
+					            array('label' => 'Calificaciones y Conducta', 'items' => array(
+									array('label' => 'Calificaciones Parciales', 'url' => '#'),
+									array('label' => 'Informe de Personalidad', 'url' => '#'), )),
+								array('label' => 'Administrar', 'items' => array(
+									array('label' => 'Perfil Establecimiento', 'url' => '#'),
+									array('label' => 'Administrar Usuarios' ,'icon' => 'pencil', 'url' =>Yii::app()->user->ui->userManagementAdminUrl ,'visible'=>!Yii::app()->user->isGuest),
+									array('label' => 'Asignacion de Roles', 'url' => '#'),
+									array('label' => 'Asignacion de Roles', 'url' => '#'),
+									array('label' => 'Asignacion de Perfiles', 'url' => '#'),)),
+								array('label' => 'Parametros', 'items' => array(
+									array('label' => 'Calificaciones Parciales', 'url' => '#'),
+									array('label' => 'Informe de Personalidad', 'url' => '#'),)),   
                             ),
                         ),
                         
@@ -45,9 +62,9 @@
                             'class' => 'bootstrap.widgets.TbNav',
                             'htmlOptions' => array('class' => 'pull-right'),
                             'items' => array(
-                                 array('label' => 'Administrar Usuarios' ,'icon' => 'pencil', 'url' =>Yii::app()->user->ui->userManagementAdminUrl ,'visible'=>!Yii::app()->user->isGuest),
+
                             
-                                array('label' => 'Logout (' . Yii::app()->user->name . ')'
+                                array('label' => 'Salir (' . Yii::app()->user->name . ')'
                                     , 'url' => Yii::app()->user->ui->logoutUrl
                                     , 'icon' => 'user'
                                     , 'visible' => !Yii::app()->user->isGuest),
