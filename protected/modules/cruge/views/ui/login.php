@@ -40,7 +40,7 @@
 
                         } ?>
                 <?php echo "<br><br>"; ?>
-                <input type="submit" class="botonSubmit" value="Ingresar" onerror="wena()">
+                <input type="submit" class="botonSubmit" value="Ingresar">
             </div>
         </div>
         <div class="span3"></div>
