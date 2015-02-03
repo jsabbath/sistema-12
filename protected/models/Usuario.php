@@ -151,7 +151,7 @@ class Usuario extends CActiveRecord
         $pattern2 = '/^([0-9.]{1}+\-+[0-9kK]{1}+)$/';
         $pattern3 = '/^([0.]+\-+[0-9kK]{1}+)$/';
         if (!preg_match($pattern, $this->$attribute) OR preg_match($pattern2, $this->$attribute) OR preg_match($pattern3, $this->$attribute))
-            $this->addError($attribute, 'El Rut no es válido');
+            $this->addError($attribute, 'el rut deve ser: 11.111.111-1');
     }
     public function validaRutUnico($attribute, $params) {
         if (Yii::app()->user->um->loadUser($this->$attribute))
