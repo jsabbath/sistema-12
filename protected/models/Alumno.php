@@ -46,11 +46,12 @@ class Alumno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_f_nac, alum_direccion', 'required'),
 			array('alum_region, alum_ciudad, alum_comuna, alum_genero, alum_salud, alum_estado', 'numerical', 'integerOnly'=>true),
 			array('alum_rut', 'length', 'max'=>12),
 			array('alum_nombres, alum_direccion', 'length', 'max'=>100),
 			array('alum_apepat, alum_apemat', 'length', 'max'=>50),
-			array('alum_f_nac, alum_obs', 'safe'),
+			array('alum_obs', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_f_nac, alum_direccion, alum_region, alum_ciudad, alum_comuna, alum_genero, alum_salud, alum_obs, alum_estado', 'safe', 'on'=>'search'),

@@ -30,6 +30,7 @@ class Asignatura extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('asi_descripcion, asi_codigo, asi_nombrecorto', 'required'),
 			array('asi_descripcion', 'length', 'max'=>100),
 			array('asi_codigo', 'length', 'max'=>10),
 			array('asi_nombrecorto', 'length', 'max'=>5),

@@ -35,6 +35,7 @@ class Matricula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('mat_ano', 'required'),
 			array('mat_cur, mat_alu_id, mat_numero', 'numerical', 'integerOnly'=>true),
 			array('mat_ano', 'length', 'max'=>4),
 			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),

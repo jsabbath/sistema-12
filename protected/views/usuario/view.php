@@ -27,7 +27,6 @@ $this->menu=array(
 		'usu_apepat',
 		'usu_apemat',
 		'usu_rut',
-		'usu_cargo',
 		'usu_estado',
 	),
 )); ?>

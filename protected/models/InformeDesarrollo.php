@@ -29,6 +29,7 @@ class InformeDesarrollo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('id_descripcion', 'required'),
 			array('id_descripcion', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

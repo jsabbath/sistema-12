@@ -41,10 +41,6 @@
 		<?php echo $form->textField($model,'usu_rut'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'usu_cargo'); ?>
-		<?php echo $form->textField($model,'usu_cargo'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'usu_estado'); ?>

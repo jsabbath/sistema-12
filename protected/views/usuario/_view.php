@@ -30,9 +30,6 @@
 	<?php echo CHtml::encode($data->usu_rut); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usu_cargo')); ?>:</b>
-	<?php echo CHtml::encode($data->usu_cargo); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('usu_estado')); ?>:</b>
 	<?php echo CHtml::encode($data->usu_estado); ?>

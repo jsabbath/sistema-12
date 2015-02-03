@@ -42,6 +42,7 @@ class Curso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('cur_ano, cur_notas_periodo', 'required'),
 			array('cur_nivel, cur_jornada, cur_letra, cur_pjefe, cur_infd, cur_tperiodo, cur_notas_periodo', 'numerical', 'integerOnly'=>true),
 			array('cur_ano', 'length', 'max'=>4),
 			// The following rule is used by search().

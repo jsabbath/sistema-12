@@ -29,6 +29,7 @@ class Escala extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('esc_descripcion', 'required'),
 			array('esc_concepto', 'numerical', 'integerOnly'=>true),
 			array('esc_descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().

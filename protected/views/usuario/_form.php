@@ -61,19 +61,16 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'usu_cargo'); ?>
-		<?php echo $form->textField($model,'usu_cargo'); ?>
-		<?php echo $form->error($model,'usu_cargo'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'usu_estado'); ?>
 		<?php echo $form->textField($model,'usu_estado'); ?>
 		<?php echo $form->error($model,'usu_estado'); ?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="form-actions">
+		<?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array(
+		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
+		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
+		)) ?>
 	</div>
 
 <?php $this->endWidget(); ?>

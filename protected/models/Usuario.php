@@ -9,12 +9,13 @@
  * @property string $usu_nombre2
  * @property string $usu_apepat
  * @property string $usu_apemat
- * @property integer $usu_rut
- * @property integer $usu_cargo
+ * @property string $usu_rut
  * @property integer $usu_estado
+ * @property integer $usu_iduser
  *
  * The followings are the available model relations:
  * @property AAsignatura[] $aAsignaturas
+ * @property CrugeUser $usuIduser
  */
 class Usuario extends CActiveRecord
 {
@@ -34,17 +35,18 @@ class Usuario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_rut, usu_cargo, usu_estado', 'required'),
-			array('usu_cargo, usu_estado', 'numerical', 'integerOnly'=>true),
-			array('usu_nombre1, usu_nombre2', 'length', 'max'=>100),
+			array('usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_rut, usu_estado', 'required'),
+			array('usu_estado, usu_iduser', 'numerical', 'integerOnly'=>true),
+			array('usu_nombre1', 'length', 'max'=>20),
+			array('usu_nombre2', 'length', 'max'=>50),
 			array('usu_apepat, usu_apemat', 'length', 'max'=>30),
-                        array('usu_rut','length','max'=>12),
+			array('usu_rut', 'length', 'max'=>12),
                         array('usu_rut','validateRut' ),
                         array('usu_rut','validaRutCaracter'),
                         array('usu_rut', 'validaRutUnico'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('usu_id, usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_rut, usu_cargo, usu_estado', 'safe', 'on'=>'search'),
+			array('usu_id, usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_rut, usu_estado, usu_iduser', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,6 +59,7 @@ class Usuario extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'aAsignaturas' => array(self::HAS_MANY, 'AAsignatura', 'aa_docente'),
+			'usuIduser' => array(self::BELONGS_TO, 'CrugeUser', 'usu_iduser'),
 		);
 	}
 
@@ -68,12 +71,12 @@ class Usuario extends CActiveRecord
 		return array(
 			'usu_id' => 'Usu',
 			'usu_nombre1' => 'Usu Nombre1',
-                        'usu_nombre2' => 'Usu Nombre2',
+			'usu_nombre2' => 'Usu Nombre2',
 			'usu_apepat' => 'Usu Apepat',
 			'usu_apemat' => 'Usu Apemat',
 			'usu_rut' => 'Usu Rut',
-			'usu_cargo' => 'Usu Cargo',
 			'usu_estado' => 'Usu Estado',
+			'usu_iduser' => 'Usu Iduser',
 		);
 	}
 
@@ -98,11 +101,11 @@ class Usuario extends CActiveRecord
 		$criteria->compare('usu_id',$this->usu_id);
 		$criteria->compare('usu_nombre1',$this->usu_nombre1,true);
 		$criteria->compare('usu_nombre2',$this->usu_nombre2,true);
-                $criteria->compare('usu_apepat',$this->usu_apepat,true);
+		$criteria->compare('usu_apepat',$this->usu_apepat,true);
 		$criteria->compare('usu_apemat',$this->usu_apemat,true);
-		$criteria->compare('usu_rut',$this->usu_rut);
-		$criteria->compare('usu_cargo',$this->usu_cargo);
+		$criteria->compare('usu_rut',$this->usu_rut,true);
 		$criteria->compare('usu_estado',$this->usu_estado);
+		$criteria->compare('usu_iduser',$this->usu_iduser);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -120,9 +123,7 @@ class Usuario extends CActiveRecord
 		return parent::model($className);
 	}
         
-        
-        
- public function validateRut($attribute, $params) {
+        public function validateRut($attribute, $params) {
         if (strpos($this->$attribute, "-") == false) {
             $data[0] = substr($this->$attribute, 0, -1);
             $data[1] = substr($this->$attribute, -1);
@@ -160,5 +161,6 @@ class Usuario extends CActiveRecord
         if (Yii::app()->user->um->loadUser($this->$attribute))
             $this->addError($attribute, 'Rut ya existe y esta siendo ocupado');
     }
+
 
 }
