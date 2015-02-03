@@ -32,10 +32,15 @@
                     <?php
                     if ($form->error($model, 'username') || $form->error($model, 'password')) {
                         echo "<br>";
-                        echo TbHtml::alert(TbHtml::ALERT_COLOR_ERROR, '<strong>ERROR!</strong> Ingrese datos nuevamente.');
+                        //echo TbHtml::alert(TbHtml::ALERT_COLOR_ERROR, '<strong>ERROR!</strong> Ingrese datos nuevamente.');
+                        echo '<script type="text/javascript">'
+                           , 'window.alert("Ingrese datos nuevamente");'
+                           , '</script>'
+                        ;
+
                         } ?>
                 <?php echo "<br><br>"; ?>
-                <input type="submit" class="botonSubmit" value="Ingresar">
+                <input type="submit" class="botonSubmit" value="Ingresar" onerror="wena()">
             </div>
         </div>
         <div class="span3"></div>
