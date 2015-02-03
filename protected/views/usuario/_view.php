@@ -9,9 +9,14 @@
 	<?php echo CHtml::link(CHtml::encode($data->usu_id), array('view', 'id'=>$data->usu_id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usu_nombres')); ?>:</b>
-	<?php echo CHtml::encode($data->usu_nombres); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('usu_nombre1')); ?>:</b>
+	<?php echo CHtml::encode($data->usu_nombre1); ?>
 	<br />
+        
+        <b><?php echo CHtml::encode($data->getAttributeLabel('usu_nombre2')); ?>:</b>
+	<?php echo CHtml::encode($data->usu_nombre2); ?>
+	<br />
+
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('usu_apepat')); ?>:</b>
 	<?php echo CHtml::encode($data->usu_apepat); ?>

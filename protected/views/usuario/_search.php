@@ -17,10 +17,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'usu_nombres'); ?>
-		<?php echo $form->textField($model,'usu_nombres',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->label($model,'usu_nombre1'); ?>
+		<?php echo $form->textField($model,'usu_nombre1',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
-
+    
+        <div class="row">
+		<?php echo $form->label($model,'usu_nombre2'); ?>
+		<?php echo $form->textField($model,'usu_nombre2',array('size'=>60,'maxlength'=>100)); ?>
+	</div>
+    
 	<div class="row">
 		<?php echo $form->label($model,'usu_apepat'); ?>
 		<?php echo $form->textField($model,'usu_apepat',array('size'=>30,'maxlength'=>30)); ?>

@@ -31,9 +31,15 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'usu_nombres'); ?>
-		<?php echo $form->textField($model,'usu_nombres',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'usu_nombres'); ?>
+		<?php echo $form->labelEx($model,'usu_nombre1'); ?>
+		<?php echo $form->textField($model,'usu_nombre1',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'usu_nombre1'); ?>
+	</div>
+        
+	<div class="row">
+		<?php echo $form->labelEx($model,'usu_nombre2'); ?>
+		<?php echo $form->textField($model,'usu_nombre2',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'usu_nombre2'); ?>
 	</div>
 
 	<div class="row">
