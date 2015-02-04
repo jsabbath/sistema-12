@@ -69,8 +69,10 @@ class UsuarioController extends Controller
 		if(isset($_POST['Usuario']))
 		{
 			$model->attributes=$_POST['Usuario'];
-			if($model->save())
+			if($model->save()){
+				$this->registroCruge($model);
 				$this->redirect(array('view','id'=>$model->usu_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -169,4 +171,34 @@ class UsuarioController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function registroCruge($modelo){
+      // asi se crea un usuario (una nueva instancia en memoria volatil)
+      $usuarioNuevo = Yii::app()->user->um->createBlankUser();
+      $usuarioNuevo->username = $modelo->usu_rut;
+      $usuarioNuevo->email = $modelo->usu_nombre1.'_'.$modelo->usu_apepat.'@gmail.com';
+      // la establece como "Activada"
+      Yii::app()->user->um->activateAccount($usuarioNuevo);
+      // verifica para no duplicar
+      if(Yii::app()->user->um->loadUser($usuarioNuevo->username) != null)
+      {
+         echo "El usuario {$usuarioNuevo->username} ya ha sido creado.";
+         return;
+      }
+      // ahora a ponerle una clave
+	      Yii::app()->user->um->changePassword($usuarioNuevo,$modelo->usu_rut);
+
+      // IMPORTANTE: guarda usando el API, la cual hace pasar al usuario 
+      // por el sistema de filtros, por eso user->um->save()
+      // 
+      if(Yii::app()->user->um->save($usuarioNuevo)){
+            //echo "Usuario creado: id=".$usuarioNuevo->primaryKey;
+            $modelo->usu_iduser = $usuarioNuevo->primaryKey;
+            $modelo->update();
+      }
+      else{
+            $errores = CHtml::errorSummary($usuarioNuevo);
+            echo "no se pudo crear el usuario: ".$errores;
+         }
+      }
 }
