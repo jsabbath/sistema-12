@@ -67,11 +67,11 @@ class AlumnoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Alumno']))
-		{
+		if (isset($_POST['Alumno'])) {
 			$model->attributes=$_POST['Alumno'];
-			if($model->save())
+			if ($model->save()) {
 				$this->redirect(array('view','id'=>$model->alum_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class AlumnoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Alumno']))
-		{
+		if (isset($_POST['Alumno'])) {
 			$model->attributes=$_POST['Alumno'];
-			if($model->save())
+			if ($model->save()) {
 				$this->redirect(array('view','id'=>$model->alum_id));
+			}
 		}
 
 		$this->render('update',array(
@@ -110,11 +110,17 @@ class AlumnoController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if (Yii::app()->request->isPostRequest) {
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if (!isset($_GET['ajax'])) {
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			}
+		} else {
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		}
 	}
 
 	/**
@@ -135,8 +141,9 @@ class AlumnoController extends Controller
 	{
 		$model=new Alumno('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Alumno']))
+		if (isset($_GET['Alumno'])) {
 			$model->attributes=$_GET['Alumno'];
+		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -153,8 +160,9 @@ class AlumnoController extends Controller
 	public function loadModel($id)
 	{
 		$model=Alumno::model()->findByPk($id);
-		if($model===null)
+		if ($model===null) {
 			throw new CHttpException(404,'The requested page does not exist.');
+		}
 		return $model;
 	}
 
@@ -164,8 +172,7 @@ class AlumnoController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='alumno-form')
-		{
+		if (isset($_POST['ajax']) && $_POST['ajax']==='alumno-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

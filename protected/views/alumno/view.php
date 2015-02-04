@@ -1,7 +1,9 @@
 <?php
 /* @var $this AlumnoController */
 /* @var $model Alumno */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Alumnos'=>array('index'),
 	$model->alum_id,
@@ -18,9 +20,12 @@ $this->menu=array(
 
 <h1>View Alumno #<?php echo $model->alum_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView',array(
+    'htmlOptions' => array(
+        'class' => 'table table-striped table-condensed table-hover',
+    ),
+    'data'=>$model,
+    'attributes'=>array(
 		'alum_id',
 		'alum_rut',
 		'alum_nombres',

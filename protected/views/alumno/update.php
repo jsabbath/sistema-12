@@ -1,7 +1,9 @@
 <?php
 /* @var $this AlumnoController */
 /* @var $model Alumno */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Alumnos'=>array('index'),
 	$model->alum_id=>array('view','id'=>$model->alum_id),
@@ -16,6 +18,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Alumno <?php echo $model->alum_id; ?></h1>
+    <h1>Update Alumno <?php echo $model->alum_id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -6,85 +6,43 @@
 
 <div class="wide form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_id'); ?>
-		<?php echo $form->textField($model,'alum_id'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_id',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_rut'); ?>
-		<?php echo $form->textField($model,'alum_rut',array('size'=>12,'maxlength'=>12)); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_rut',array('span'=>5,'maxlength'=>12)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_nombres'); ?>
-		<?php echo $form->textField($model,'alum_nombres',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_nombres',array('span'=>5,'maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_apepat'); ?>
-		<?php echo $form->textField($model,'alum_apepat',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_apepat',array('span'=>5,'maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_apemat'); ?>
-		<?php echo $form->textField($model,'alum_apemat',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_apemat',array('span'=>5,'maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_f_nac'); ?>
-		<?php echo $form->textField($model,'alum_f_nac'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_f_nac',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_direccion'); ?>
-		<?php echo $form->textField($model,'alum_direccion',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_direccion',array('span'=>5,'maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_region'); ?>
-		<?php echo $form->textField($model,'alum_region'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_region',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_ciudad'); ?>
-		<?php echo $form->textField($model,'alum_ciudad'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_ciudad',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_comuna'); ?>
-		<?php echo $form->textField($model,'alum_comuna'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_comuna',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_genero'); ?>
-		<?php echo $form->textField($model,'alum_genero'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_genero',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_salud'); ?>
-		<?php echo $form->textField($model,'alum_salud'); ?>
-	</div>
+                    <?php echo $form->textAreaControlGroup($model,'alum_salud',array('rows'=>6,'span'=>8)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_obs'); ?>
-		<?php echo $form->textArea($model,'alum_obs',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+                    <?php echo $form->textAreaControlGroup($model,'alum_obs',array('rows'=>6,'span'=>8)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'alum_estado'); ?>
-		<?php echo $form->textField($model,'alum_estado'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'alum_estado',array('span'=>5)); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
+        <div class="form-actions">
+        <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>
+    </div>
 
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->

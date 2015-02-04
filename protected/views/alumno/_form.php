@@ -1,12 +1,12 @@
 <?php
 /* @var $this AlumnoController */
 /* @var $model Alumno */
-/* @var $form CActiveForm */
+/* @var $form TbActiveForm */
 ?>
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'alumno-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -15,92 +15,43 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="help-block">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_rut'); ?>
-		<?php echo $form->textField($model,'alum_rut',array('size'=>12,'maxlength'=>12)); ?>
-		<?php echo $form->error($model,'alum_rut'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_rut',array('span'=>5,'maxlength'=>12)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_nombres'); ?>
-		<?php echo $form->textField($model,'alum_nombres',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'alum_nombres'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_nombres',array('span'=>5,'maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_apepat'); ?>
-		<?php echo $form->textField($model,'alum_apepat',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'alum_apepat'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_apepat',array('span'=>5,'maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_apemat'); ?>
-		<?php echo $form->textField($model,'alum_apemat',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'alum_apemat'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_apemat',array('span'=>5,'maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_f_nac'); ?>
-		<?php echo $form->textField($model,'alum_f_nac'); ?>
-		<?php echo $form->error($model,'alum_f_nac'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_f_nac',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_direccion'); ?>
-		<?php echo $form->textField($model,'alum_direccion',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'alum_direccion'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_direccion',array('span'=>5,'maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_region'); ?>
-		<?php echo $form->textField($model,'alum_region'); ?>
-		<?php echo $form->error($model,'alum_region'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_region',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_ciudad'); ?>
-		<?php echo $form->textField($model,'alum_ciudad'); ?>
-		<?php echo $form->error($model,'alum_ciudad'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_ciudad',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_comuna'); ?>
-		<?php echo $form->textField($model,'alum_comuna'); ?>
-		<?php echo $form->error($model,'alum_comuna'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_comuna',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_genero'); ?>
-		<?php echo $form->textField($model,'alum_genero'); ?>
-		<?php echo $form->error($model,'alum_genero'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_genero',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_salud'); ?>
-		<?php echo $form->textField($model,'alum_salud'); ?>
-		<?php echo $form->error($model,'alum_salud'); ?>
-	</div>
+            <?php echo $form->textAreaControlGroup($model,'alum_salud',array('rows'=>6,'span'=>8)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_obs'); ?>
-		<?php echo $form->textArea($model,'alum_obs',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'alum_obs'); ?>
-	</div>
+            <?php echo $form->textAreaControlGroup($model,'alum_obs',array('rows'=>6,'span'=>8)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alum_estado'); ?>
-		<?php echo $form->textField($model,'alum_estado'); ?>
-		<?php echo $form->error($model,'alum_estado'); ?>
-	</div>
+            <?php echo $form->textFieldControlGroup($model,'alum_estado',array('span'=>5)); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+        <div class="form-actions">
+        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array(
+		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
+		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
+		)); ?>
+    </div>
 
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- form -->

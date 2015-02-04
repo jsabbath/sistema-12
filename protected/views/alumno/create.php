@@ -1,7 +1,9 @@
 <?php
 /* @var $this AlumnoController */
 /* @var $model Alumno */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Alumnos'=>array('index'),
 	'Create',

@@ -15,7 +15,7 @@
  * @property integer $alum_ciudad
  * @property integer $alum_comuna
  * @property integer $alum_genero
- * @property integer $alum_salud
+ * @property string $alum_salud
  * @property string $alum_obs
  * @property integer $alum_estado
  *
@@ -24,7 +24,6 @@
  * @property Ciudad $alumCiudad
  * @property Comuna $alumComuna
  * @property Parametro $alumGenero
- * @property Parametro $alumSalud
  * @property Parametro $alumEstado
  * @property Matricula[] $matriculas
  */
@@ -47,11 +46,11 @@ class Alumno extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_f_nac, alum_direccion', 'required'),
-			array('alum_region, alum_ciudad, alum_comuna, alum_genero, alum_salud, alum_estado', 'numerical', 'integerOnly'=>true),
+			array('alum_region, alum_ciudad, alum_comuna, alum_genero, alum_estado', 'numerical', 'integerOnly'=>true),
 			array('alum_rut', 'length', 'max'=>12),
 			array('alum_nombres, alum_direccion', 'length', 'max'=>100),
 			array('alum_apepat, alum_apemat', 'length', 'max'=>50),
-			array('alum_obs', 'safe'),
+			array('alum_salud, alum_obs', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_f_nac, alum_direccion, alum_region, alum_ciudad, alum_comuna, alum_genero, alum_salud, alum_obs, alum_estado', 'safe', 'on'=>'search'),
@@ -70,7 +69,6 @@ class Alumno extends CActiveRecord
 			'alumCiudad' => array(self::BELONGS_TO, 'Ciudad', 'alum_ciudad'),
 			'alumComuna' => array(self::BELONGS_TO, 'Comuna', 'alum_comuna'),
 			'alumGenero' => array(self::BELONGS_TO, 'Parametro', 'alum_genero'),
-			'alumSalud' => array(self::BELONGS_TO, 'Parametro', 'alum_salud'),
 			'alumEstado' => array(self::BELONGS_TO, 'Parametro', 'alum_estado'),
 			'matriculas' => array(self::HAS_MANY, 'Matricula', 'mat_alu_id'),
 		);
@@ -128,7 +126,7 @@ class Alumno extends CActiveRecord
 		$criteria->compare('alum_ciudad',$this->alum_ciudad);
 		$criteria->compare('alum_comuna',$this->alum_comuna);
 		$criteria->compare('alum_genero',$this->alum_genero);
-		$criteria->compare('alum_salud',$this->alum_salud);
+		$criteria->compare('alum_salud',$this->alum_salud,true);
 		$criteria->compare('alum_obs',$this->alum_obs,true);
 		$criteria->compare('alum_estado',$this->alum_estado);
 

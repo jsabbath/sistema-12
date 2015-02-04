@@ -9,6 +9,8 @@
     
 </script>
 
+
+
 <?php
 /* @var $this UsuarioController */
 /* @var $model Usuario */
@@ -73,6 +75,8 @@
 		)) ?>
 	</div>
 
+        
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+

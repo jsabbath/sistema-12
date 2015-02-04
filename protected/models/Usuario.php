@@ -42,6 +42,7 @@ class Usuario extends CActiveRecord
 			array('usu_apepat, usu_apemat', 'length', 'max'=>30),
 			array('usu_rut', 'length', 'max'=>12),
                         array('usu_rut','validateRut' ),
+                        array('usu_rut','unique','message' => 'Este Rut ya esta registrado'),
                         array('usu_rut','validaRutCaracter'),
                         array('usu_rut', 'validaRutUnico'),
 			// The following rule is used by search().
