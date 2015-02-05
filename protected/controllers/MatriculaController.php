@@ -56,18 +56,34 @@ class MatriculaController extends Controller {
      */
     public function actionCreate() {
         $model = new Matricula;
+        $alumnoModel = new Alumno;
+        
+        //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
+        $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
+        $ciudad = CHtml::listData(Ciudad::model()->findAll(array('condition' => 'ciu_reg=:x', 
+                                'params' => array(':x' => '1'))), 'ciu_id', 'ciu_descripcion');
+        $comuna = CHtml::listData(Comuna::model()->findAll(array('condition' => 'com_ciu=:x', 
+                                'params' => array(':x' => '1'))), 'com_id', 'com_descripcion');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Matricula'])) {
             $model->attributes = $_POST['Matricula'];
-            if ($model->save())
+            $model->mat_fingreso = date('d-m-Y');
+            if ($model->save()){
+                $alumnoModel->save();
                 $this->redirect(array('view', 'id' => $model->mat_id));
+
+            }
         }
 
         $this->render('create', array(
             'model' => $model,
+            'alumnoModel' => $alumnoModel,
+            'region'=>$region,
+            'ciudad'=>$ciudad,
+            'comuna'=>$comuna,
         ));
     }
 
