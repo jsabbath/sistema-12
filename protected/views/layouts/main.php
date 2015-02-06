@@ -36,7 +36,11 @@ $cursos = Curso::model()->findAll();
 
     <body>
 
-        <div class="container" id="page">       
+        <div class="container" id="page">    
+			<div>
+				<img src="<?php echo Yii::app()->request->baseUrl;?>/images/logo_colegio.png">
+			</div>
+		
  		<div id="logo" style="text-align:right"><?php echo CHtml::encode(Yii::app()->name); ?></div>   
                 <div id="logo" style="text-align:left">Colegioblabal</div>   
                <div id="logo" style="text-align:center"> Sistema de Administracion Academica</div>   
