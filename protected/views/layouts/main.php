@@ -6,7 +6,9 @@ $modelo_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::
 if ($modelo_usuario) {
     $nombre = "" . $modelo_usuario->usu_nombre1 . " " . $modelo_usuario->usu_apepat;
 }
-
+$cursos = Curso::model()->findAll();
+ $anos = CHtml::listData(Curso::model()->findAll(/*array('order '=>'cur_ano ASC')*/), 'cur_ano', 'cur_ano');
+            
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,8 +36,15 @@ if ($modelo_usuario) {
 
     <body>
 
-        <div class="container" id="page">
-            <?php
+        <div class="container" id="page">       
+ 		<div id="logo" style="text-align:right"><?php echo CHtml::encode(Yii::app()->name); ?></div>   
+                <div id="logo" style="text-align:left">Colegioblabal</div>   
+               <div id="logo" style="text-align:center"> Sistema de Administracion Academica</div>   
+               
+                <div style="text-align: center">
+                    <?php echo CHtml::dropDownList('años',$cursos,$anos); ?> 
+                </div>
+            <?php    
             if (!Yii::app()->user->isGuest) {
                 $this->widget('bootstrap.widgets.TbNavbar', array(
                     'brandLabel' => 'AMSYS',
@@ -47,9 +56,10 @@ if ($modelo_usuario) {
                             'items' => array(
                                 array('label' => 'Inicio', 'icon' => 'home', 'url' => array('/site/index')),
                                 array('label' => 'Admision', 'items' => array(
-                                    array('label' => 'Ingreso Matricula', 'url' => '#'),
+                                    array('label' => 'Ingreso Matricula', 'url' =>'#',
+                                                                                      ),
                                     array('label' => 'Modificar Matricula', 'url' => '#'),
-                                    array('label' => 'Bajar Matricula', 'url' => '#'),)),
+                                    array('label' => 'Bajar Matricula', 'url' => array('/matricula/admin')),)),
                                 array('label' => 'Academico', 'items' => array(
                                     array('label' => 'Administracion de Cursos', 'url' => '#'),
                                     array('label' => 'Another action', 'url' => '#'),
@@ -102,5 +112,9 @@ if ($modelo_usuario) {
 
         </div><!-- page -->
 <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
+
+
+
+
     </body>
 </html>
