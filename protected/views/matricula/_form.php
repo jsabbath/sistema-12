@@ -72,7 +72,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Seleccione genero'); ?>
-		<?php echo $form->dropDownList($alumnoModel,'alum_genero',array("Masculino","Femenino"),array('promp'=>'Seleccione genero')); ?>
+		<?php echo $form->dropDownList($alumnoModel,'alum_genero',array("MASCULINO","FEMENINO"),array('promp'=>'Seleccione genero')); ?>
 		<?php echo $form->error($model,'mat_genero'); ?>
 	</div>
 
@@ -130,7 +130,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
