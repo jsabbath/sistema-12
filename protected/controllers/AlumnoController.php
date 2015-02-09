@@ -28,15 +28,15 @@ class AlumnoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','regiones','ciudades'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','regiones','ciudades'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','regiones','ciudades'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -63,19 +63,26 @@ class AlumnoController extends Controller
 	public function actionCreate()
 	{
 		$model=new Alumno;
+		$matricula = new Matricula;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		$region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
 
 		if (isset($_POST['Alumno'])) {
+			$matricula->attributes = $_POST['Matricula'];
+            $matricula->mat_fingreso = date('d-m-Y');
 			$model->attributes=$_POST['Alumno'];
 			if ($model->save()) {
+				$matricula->save();
 				$this->redirect(array('view','id'=>$model->alum_id));
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'matricula'=>$matricula,
+			'region'=>$region,
 		));
 	}
 
@@ -177,4 +184,20 @@ class AlumnoController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionRegiones() {
+        $districts = Ciudad::model()->findAll('ciu_reg=:id', array(':id' => $_POST['Alumno']['alum_region']));
+        $return = CHtml::listData($districts, 'ciu_id', 'ciu_descripcion');
+        foreach ($return as $districtId => $districtName) {
+        echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($districtName), true);
+    	}
+    }
+
+    public function actionCiudades() {
+        $districts = Comuna::model()->findAll('com_ciu=:id', array(':id' => $_POST['Alumno']['alum_ciudad']));
+        $return = CHtml::listData($districts, 'com_id', 'com_descripcion');
+        foreach ($return as $districtId => $districtName) {
+        echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($districtName), true);
+    	}
+    }
 }

@@ -23,75 +23,91 @@
 	<?php echo $form->errorSummary($model); ?>
 	<h3>Datos alumno</h3>
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Nombres'); ?>
-		<?php echo $form->textField($alumnoModel,'alum_nombres'); ?>
-		<?php echo $form->error($alumnoModel,'alum_nombres'); ?>
+		<?php echo $form->labelEx($alumno,'Nombres'); ?>
+		<?php echo $form->textField($alumno,'alum_nombres'); ?>
+		<?php echo $form->error($alumno,'alum_nombres'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Apellido paterno'); ?>
-		<?php echo $form->textField($alumnoModel,'alum_apepat'); ?>
-		<?php echo $form->error($alumnoModel,'alum_apepat'); ?>
+		<?php echo $form->labelEx($alumno,'Apellido paterno'); ?>
+		<?php echo $form->textField($alumno,'alum_apepat'); ?>
+		<?php echo $form->error($alumno,'alum_apepat'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Apellido materno'); ?>
-		<?php echo $form->textField($alumnoModel,'alum_apemat'); ?>
-		<?php echo $form->error($alumnoModel,'alum_apemat'); ?>
+		<?php echo $form->labelEx($alumno,'Apellido materno'); ?>
+		<?php echo $form->textField($alumno,'alum_apemat'); ?>
+		<?php echo $form->error($alumno,'alum_apemat'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Fecha de nacimiento'); ?>
-		<?php echo $form->textField($alumnoModel,'alum_f_nac'); ?>
-		<?php echo $form->error($alumnoModel,'alum_f_nac'); ?>
+		<?php echo $form->labelEx($alumno,'Fecha de nacimiento'); ?>
+		<?php echo $form->textField($alumno,'alum_f_nac'); ?>
+		<?php echo $form->error($alumno,'alum_f_nac'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Direccion'); ?>
-		<?php echo $form->textField($alumnoModel,'alum_direccion'); ?>
-		<?php echo $form->error($alumnoModel,'alum_direccion'); ?>
+		<?php echo $form->labelEx($alumno,'Direccion'); ?>
+		<?php echo $form->textField($alumno,'alum_direccion'); ?>
+		<?php echo $form->error($alumno,'alum_direccion'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Region'); ?>
-		<?php echo $form->dropDownList($alumnoModel,'alum_region',$region,array('promp'=>'Seleccione region')); ?>
-		<?php echo $form->error($alumnoModel,'alum_region'); ?>
+		<?php echo $form->labelEx($alumno,'Region'); ?>
+		<?php
+		echo $form->dropDownList($alumno, 'alum_region', $region, array(
+			'prompt' => 'Seleccione region',
+			'ajax' => array(
+				'type' => 'POST',
+				'url' => CController::createUrl('alumno/regiones'),
+				'update' => '#Alumno_alum_ciudad',
+				)
+			));
+		?>
+		<?php echo $form->error($alumno,'alum_region'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Ciudad'); ?>
-		<?php echo $form->dropDownList($alumnoModel,'alum_ciudad', $ciudad,array('promp'=>'Seleccione ciudad')); ?>
-		<?php echo $form->error($alumnoModel,'alum_ciudad'); ?>
+		<?php echo $form->labelEx($alumno,'Ciudad'); ?>
+		<?php echo $form->dropDownList($alumno, 'alum_ciudad', array(),array(
+			'prompt' => 'Seleccione ciudad',
+			'ajax' => array(
+				'type' => 'POST',
+				'url' => CController::createUrl('alumno/ciudades'),
+				'update' => '#Alumno_alum_comuna',
+			)));
+?>
+		<?php echo $form->error($alumno,'alum_ciudad'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Comuna'); ?>
-		<?php echo $form->dropDownList($alumnoModel,'alum_comuna', $comuna,array('promp'=>'Seleccione comuna')); ?>
-		<?php echo $form->error($alumnoModel,'alum_comuna'); ?>
+		<?php echo $form->labelEx($alumno,'Comuna'); ?>
+		<?php echo $form->dropDownList($alumno, 'alum_comuna', array()); ?>
+		<?php echo $form->error($alumno,'alum_comuna'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Seleccione genero'); ?>
-		<?php echo $form->dropDownList($alumnoModel,'alum_genero',array("MASCULINO","FEMENINO"),array('promp'=>'Seleccione genero')); ?>
+		<?php echo $form->dropDownList($alumno,'alum_genero',array("MASCULINO","FEMENINO"),array('promp'=>'Seleccione genero')); ?>
 		<?php echo $form->error($model,'mat_genero'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Salud'); ?>
-		<?php echo $form->textArea($alumnoModel,'alum_salud'); ?>
-		<?php echo $form->error($alumnoModel,'alum_salud'); ?>
+		<?php echo $form->labelEx($alumno,'Salud'); ?>
+		<?php echo $form->textArea($alumno,'alum_salud'); ?>
+		<?php echo $form->error($alumno,'alum_salud'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Observacion'); ?>
-		<?php echo $form->textArea($alumnoModel,'alum_obs'); ?>
-		<?php echo $form->error($alumnoModel,'alum_obs'); ?>
+		<?php echo $form->labelEx($alumno,'Observacion'); ?>
+		<?php echo $form->textArea($alumno,'alum_obs'); ?>
+		<?php echo $form->error($alumno,'alum_obs'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($alumnoModel,'Estado'); ?>
-		<?php echo $form->textField($alumnoModel,'alum_estado'); ?>
-		<?php echo $form->error($alumnoModel,'alum_estado'); ?>
+		<?php echo $form->labelEx($alumno,'Estado'); ?>
+		<?php echo $form->textField($alumno,'alum_estado'); ?>
+		<?php echo $form->error($alumno,'alum_estado'); ?>
 	</div>
 
 	<h3>Datos matricula</h3>
