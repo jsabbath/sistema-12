@@ -63,6 +63,7 @@ class UsuarioController extends Controller
 	public function actionCreate()
 	{
 		$model=new Usuario;
+		$temporal = new Temp;
 		// Uncomment the following line if AJAX validation is needed
 		//$this->performAjaxValidation($model);
 
@@ -71,6 +72,8 @@ class UsuarioController extends Controller
 			$model->attributes=$_POST['Usuario'];
 			if($model->save()){
 				$this->registroCruge($model);
+				$temporal->temp_iduser = $model->usu_iduser;
+				$temporal->save();
 				$this->redirect(array('view','id'=>$model->usu_id));
 			}
 		}
