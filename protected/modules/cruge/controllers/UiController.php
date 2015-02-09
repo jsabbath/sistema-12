@@ -193,6 +193,18 @@ class UiController extends Controller
     {
 		// retorna false si ocurrio un error O si el filtro de sesion
 		// dispone de onBeforeLogin el cual ha retornado false.
+       
+     // esto sirve para resetear el año  seleccionado por el usuario.
+         $temp = Temp::model()->findByAttributes(
+                     array('temp_iduser'=>Yii::app()->user->id)
+                 );                                     
+        
+        $ano = $temp->temp_ano;
+        if ( $ano !=0 ){
+            $temp->temp_ano = 0;
+            $temp->save();
+        }
+        
         if(Yii::app()->user->logout() == false){
 			// se devuelve a la URL de donde vino
 	        $this->redirect(Yii::app()->user->returnUrl);
