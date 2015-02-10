@@ -18,7 +18,8 @@ if( $temp->temp_ano != 0 ){
 } else {
     $ano_selec = $par->par_descripcion;
 }
-
+Yii::app()->session['userid'] = Yii::app()->user->id;
+Yii::app()->session['ano'] = $ano_selec;
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,16 +55,21 @@ if( $temp->temp_ano != 0 ){
                 <div id="logo" style="text-align:center"> Sistema de Administracion Academica</div>   
 
                 <div style="text-align: center">
-                    <?php echo CHtml::dropDownList('años', $cursos, $anos,
-                                                    array('prompt'=>$ano_selec,
-                                                    'ajax'=> array( 
-                                                                'type' => 'POST', 
-                                                                'url' => CController::createUrl('Temp/ajax_ano')   
-                                                            )
-                                                        ));  
+                <?php echo CHtml::dropDownList('anos', $cursos, $anos,array(
+                                                'prompt'=>$ano_selec,
+                                                'id'=>'dropitem',
+                                                'ajax' =>
+                                                    array('type'=>'POST',
+                                                        'url'=>$this->createUrl('recieveValue'), // write in controller this action
+                                                        'update'=>'#price',
+                                                        'data'=>array('ano'=>'js:this.value'),
+                                                    )
+                                                ));  
 
-                    ?> 
+                ?> 
+
                 </div>
+                <p id="price"></p>
 
 
 
@@ -132,8 +138,12 @@ if( $temp->temp_ano != 0 ){
         </div><!-- page -->
 <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 
-
-
-
+<script type="text/javascript">
+$('#dropitem').change(function(){ 
+    var value = $('#dropitem :selected').text();
+    console.log(value);
+    //Here update the div where you need to see the selected value
+});
+</script>
     </body>
 </html>

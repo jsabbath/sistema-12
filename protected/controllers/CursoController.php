@@ -28,15 +28,15 @@ class CursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','recieveValue'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','recieveValue'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','recieveValue'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -122,8 +122,7 @@ class CursoController extends Controller
 	 */
 	public function actionIndex()
 	{
-                
-                $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+                //$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
                 $temp = Temp::model()->findByAttributes(
                      array('temp_iduser'=>Yii::app()->user->id)
                  );      
@@ -131,12 +130,11 @@ class CursoController extends Controller
                 if ( $temp->temp_ano != 0 ){
                       $ano = array($temp->temp_ano);
                 } else {
-                    $ano = array($par->par_descripcion);
+                    $ano = array(Yii::app()->session['ano']);
                 }
                 
                 $criteria = new CDbCriteria();
                 $criteria->addInCondition('cur_ano', $ano, 'or');
-                
                 
 		$dataProvider=new CActiveDataProvider('Curso', array(
                 'criteria' => $criteria
@@ -188,5 +186,9 @@ class CursoController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionRecieveValue(){
+		Yii::app()->session['ano'] = $_POST['ano'];
 	}
 }

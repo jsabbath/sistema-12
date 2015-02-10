@@ -178,8 +178,4 @@ class TempController extends Controller
 		}
 	}
         
-        public function actionAjax_ano(){
-            $ano = $_POST['Temp'];
-            
-        }
 }
