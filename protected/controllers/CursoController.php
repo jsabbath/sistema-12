@@ -122,25 +122,20 @@ class CursoController extends Controller
 	 */
 	public function actionIndex()
 	{
-                //$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
-                $temp = Temp::model()->findByAttributes(
-                     array('temp_iduser'=>Yii::app()->user->id)
-                 );      
-            
-                if ( $temp->temp_ano != 0 ){
-                      $ano = array($temp->temp_ano);
-                } else {
-                    $ano = array(Yii::app()->session['ano']);
-                }
-                
-                $criteria = new CDbCriteria();
-                $criteria->addInCondition('cur_ano', $ano, 'or');
-                
-		$dataProvider=new CActiveDataProvider('Curso', array(
-                'criteria' => $criteria
-                ));
-                
-		$this->render('index',array(
+		$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+		
+		if ( $temp->temp_ano != 0 ){
+			$ano = array($temp->temp_ano);
+		} else {
+			$ano = array($par->par_descripcion);
+		}
+			$criteria = new CDbCriteria();
+			$criteria->addInCondition('cur_ano', $ano, 'or');
+			$dataProvider=new CActiveDataProvider('Curso', array(
+			'criteria' => $criteria
+		));
+			$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
@@ -188,7 +183,12 @@ class CursoController extends Controller
 		}
 	}
 
+	//Esta funcion actualiza el año actual de los cursos
 	public function actionRecieveValue(){
-		Yii::app()->session['ano'] = $_POST['ano'];
+		$tempid = $_POST['tempid'];
+		$anio = $_POST['ano'];
+		$temp = Temp::model()->findByAttributes(array('temp_id'=>$tempid));
+		$temp->temp_ano = $anio;
+		$temp->update();
 	}
 }
