@@ -1,3 +1,7 @@
+
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/ui-autocomplete.min.js" type="text/javascript"></script>
+
+
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
@@ -26,18 +30,36 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Cursos</h1>
+<h1>Buscar Cursos</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+<?php echo CHtml::textField('Text', '',
+    array('id'=>'pn',
+        'placeholder' => 'Ingrese nombre Profesor',))?>
+
+
+<?php echo TbHtml::button('limiar',array('color'=> TbHtml::ALERT_COLOR_SUCCESS, 'id' =>'limpiar' ))?>
+    
+<div>
+    
+    <?php echo CHtml::textField('Text', '',
+        array('id'=>'nombre',
+            'placeholder' => 'Nombres',
+            'disabled'=>'disabled',))?>
+    
+   
+    <?php echo CHtml::textField('Text', '',
+        array('id'=>'apellido',
+            'placeholder' => 'Apellidos',
+            'disabled'=>'disabled',
+             ))?>
+    
+</div>
+
+<?php echo TbHtml::button('Ver cursos',array('color'=> TbHtml::ALERT_COLOR_INFO, 'id' =>'buscar'))?>
+   
+
+<div class="search-form" style="display:none">    
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -46,11 +68,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'cur_id',
-		'cur_ano',
+		//'cur_ano',
 		'cur_nivel',
 		'cur_jornada',
 		'cur_letra',
-		'cur_pjefe',
+		//'cur_pjefe',
 		/*
 		'cur_infd',
 		'cur_tperiodo',
@@ -61,3 +83,55 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 	),
 )); ?>
+
+
+<script>
+	$(function(){
+        $('#pn').autocomplete({
+       		 source : function( request, response ) {
+       		 $.ajax({
+                    url: '<?php echo $this->createUrl('curso/Buscar_prof'); ?>',
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function(data) {
+                                response($.map(data, function(item) {
+                                            return {
+                                                    label: item.nombre +'/' + item.apellido,
+                                                    apellido: item.apellido + ' ' + item.apellido2,
+                                                    nombre: item.nombre + ' ' + item.nombre2,
+                                                    id: item.id, 
+                                                    }
+                                        }))
+                            }
+                        })
+    		    },
+                    select: function(event, ui) {
+                        $("#nombre").val(ui.item.nombre)
+                        $("#apellido").val(ui.item.apellido)
+                      //  $("#buscar").removeAttr('disabled')
+                    },
+                   
+                })
+    	 });
+</script>    
+    
+
+<script>
+     $("#limpiar").on('click', function() {
+                        $("#nombre").val(""),
+                        $("#apellido").val(""),
+                        $("#pn").val(""),
+                    });
+</script>
+
+<script>
+     $("#buscar").on('click', function() {
+                       var a = $("#buscar")
+                        window.alert(a);
+
+    
+    });
+</script>
+
+
+
