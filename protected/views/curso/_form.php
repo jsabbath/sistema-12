@@ -14,32 +14,34 @@
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 )); ?>
-
+    
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row"> 
 		<?php echo $form->labelEx($model,'cur_ano'); ?>
-		<?php echo $form->textField($model,'cur_ano',array('size'=>4,'maxlength'=>4)); ?>
+		<?php echo $form->textField($model,'cur_ano',array('size'=>4,'maxlength'=>4, 'placeholder'=>$ano,'disabled'=>'true')); ?>
 		<?php echo $form->error($model,'cur_ano'); ?>
 	</div>
-
+          
+        <div class="row">
+		<?php echo $form->labelEx($model,'cur_jornada'); ?>
+		<?php echo $form->dropDownList($model,'cur_jornada',$jornada,array('promp'=>'Seleccione jornada')); ?>
+		<?php echo $form->error($model,'cur_jornada'); ?>
+	</div>
+        
 	<div class="row">
 		<?php echo $form->labelEx($model,'cur_nivel'); ?>
-		<?php echo $form->textField($model,'cur_nivel'); ?>
+		<?php echo $form->dropDownList($model,'cur_nivel',$niveles,array('promp'=>'Seleccione genero')); ?>
 		<?php echo $form->error($model,'cur_nivel'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'cur_jornada'); ?>
-		<?php echo $form->textField($model,'cur_jornada'); ?>
-		<?php echo $form->error($model,'cur_jornada'); ?>
-	</div>
+	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cur_letra'); ?>
-		<?php echo $form->textField($model,'cur_letra'); ?>
+		<?php echo $form->dropDownList($model,'cur_letra',$letra,array('promp'=>'Seleccione letra')); ?>
 		<?php echo $form->error($model,'cur_letra'); ?>
 	</div>
 
@@ -57,13 +59,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cur_tperiodo'); ?>
-		<?php echo $form->textField($model,'cur_tperiodo'); ?>
+		<?php echo $form->dropDownList($model,'cur_tperiodo',$tp,array('promp'=>'Seleccione Tipo periodo')); ?>
 		<?php echo $form->error($model,'cur_tperiodo'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cur_notas_periodo'); ?>
-		<?php echo $form->textField($model,'cur_notas_periodo'); ?>
+		<?php echo $form->textField($model,'cur_notas_periodo',array('size'=>2,'maxlength'=>2)); ?>
 		<?php echo $form->error($model,'cur_notas_periodo'); ?>
 	</div>
 

@@ -1,7 +1,7 @@
-
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/ui-autocomplete.min.js" type="text/javascript"></script>
-
-
+       <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
+       <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
+        
+       
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
@@ -38,7 +38,7 @@ $('.search-form form').submit(function(){
         'placeholder' => 'Ingrese nombre Profesor',))?>
 
 
-<?php echo TbHtml::button('limiar',array('color'=> TbHtml::ALERT_COLOR_SUCCESS, 'id' =>'limpiar' ))?>
+<?php echo TbHtml::button('limpiar',array('color'=> TbHtml::ALERT_COLOR_SUCCESS, 'id' =>'limpiar' ))?>
     
 <div>
     
@@ -120,7 +120,7 @@ $('.search-form form').submit(function(){
      $("#limpiar").on('click', function() {
                         $("#nombre").val(""),
                         $("#apellido").val(""),
-                        $("#pn").val(""),
+                        $("#pn").val("")
                     });
 </script>
 

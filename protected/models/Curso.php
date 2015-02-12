@@ -42,7 +42,7 @@ class Curso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cur_ano, cur_notas_periodo', 'required'),
+			array('cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_tperiodo', 'required'),
 			array('cur_nivel, cur_jornada, cur_letra, cur_pjefe, cur_infd, cur_tperiodo, cur_notas_periodo', 'numerical', 'integerOnly'=>true),
 			array('cur_ano', 'length', 'max'=>4),
 			// The following rule is used by search().
@@ -76,15 +76,15 @@ class Curso extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cur_id' => 'Cur',
-			'cur_ano' => 'Cur Ano',
-			'cur_nivel' => 'Cur Nivel',
-			'cur_jornada' => 'Cur Jornada',
-			'cur_letra' => 'Cur Letra',
-			'cur_pjefe' => 'Cur Pjefe',
-			'cur_infd' => 'Cur Infd',
-			'cur_tperiodo' => 'Cur Tperiodo',
-			'cur_notas_periodo' => 'Cur Notas Periodo',
+			'cur_id' => 'Curso',
+			'cur_ano' => 'Año',
+			'cur_nivel' => 'Nivel',
+			'cur_jornada' => 'Jornada',
+			'cur_letra' => 'Letra',
+			'cur_pjefe' => 'profesor jefe',
+			'cur_infd' => 'Informe Desarrollo',
+			'cur_tperiodo' => 'Tipo Periodo',
+			'cur_notas_periodo' => 'Notas Periodo',
 		);
 	}
 

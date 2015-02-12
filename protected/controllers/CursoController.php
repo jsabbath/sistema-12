@@ -63,19 +63,48 @@ class CursoController extends Controller
 	public function actionCreate()
 	{
 		$model=new Curso;
+                $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+		
+                //  Se obtienen los niveles disponibles primero segundo...
+                $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
+                $niveles = CHtml::listData($para, 'par_id', 'par_descripcion');
+		
+                if ( $temp->temp_ano != 0 ){
+			$ano = $temp->temp_ano;
+		} else {
+			$ano = $par->par_descripcion;
+		}
+                
+                // Tipo  de periodo disponible
+                $tperiodo = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'tperiodo')));
+                $tp = CHtml::listData($tperiodo, 'par_id', 'par_descripcion');
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+                // Se obtienen las jornadas 
+                $jor = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'jornada')));
+                $jornada = CHtml::listData($jor, 'par_id', 'par_descripcion');
+                
+                //  Se obtienen las letras para los cursos
+                $l = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'letra')));
+                $letra = CHtml::listData($l, 'par_id', 'par_descripcion');
+                
+                
 		if(isset($_POST['Curso']))
 		{
 			$model->attributes=$_POST['Curso'];
+                        $model->cur_ano = (int)$ano;
+                        var_dump($model->cur_ano);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->cur_id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+                        'niveles' => $niveles,
+                        'ano' => $ano,
+                        'tp' => $tp,
+                        'jornada' => $jornada,
+                        'letra'  => $letra,
 		));
 	}
 
@@ -125,6 +154,8 @@ class CursoController extends Controller
 		$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
 		
+                
+                // La variable es array por que criteria lo pide.
 		if ( $temp->temp_ano != 0 ){
 			$ano = array($temp->temp_ano);
 		} else {

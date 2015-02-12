@@ -37,10 +37,10 @@ $tempid = $temp->temp_id;
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
-
+                 
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
+        
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
 
@@ -60,7 +60,7 @@ $tempid = $temp->temp_id;
                                                 'id'=>'dropitem',
                                                 'ajax' =>
                                                     array('type'=>'POST',
-                                                        'url'=>$this->createUrl('recieveValue'), // write in controller this action
+                                                        'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
                                                         'update'=>'#anio',
                                                         'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
                                                         'success'=> 'function(){location.reload();}'
