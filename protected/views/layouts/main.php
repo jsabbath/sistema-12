@@ -86,12 +86,12 @@ $tempid = $temp->temp_id;
                             'items' => array(
                                 array('label' => 'Inicio', 'icon' => 'home', 'url' => array('/site/index')),
                                 array('label' => 'Admision', 'items' => array(
-                                        array('label' => 'Ingreso Matricula', 'url' => '#',
+                                        array('label' => 'Ingreso Matricula', 'url' => array('matricula/create'),
                                         ),
                                         array('label' => 'Modificar Matricula', 'url' => '#'),
                                         array('label' => 'Bajar Matricula', 'url' => array('/matricula/admin')),)),
                                 array('label' => 'Academico', 'items' => array(
-                                        array('label' => 'Administracion de Cursos', 'url' => '#'),
+                                        array('label' => 'Administracion de Cursos', 'url' => array('curso/admin')),
                                         array('label' => 'Another action', 'url' => '#'),
                                         array('label' => 'Something else here', 'url' => '#'),)),
                                 array('label' => 'Calificaciones y Conducta', 'items' => array(

@@ -80,20 +80,20 @@ class Alumno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'alum_id' => 'Alum',
-			'alum_rut' => 'Alum Rut',
-			'alum_nombres' => 'Alum Nombres',
-			'alum_apepat' => 'Alum Apepat',
-			'alum_apemat' => 'Alum Apemat',
-			'alum_f_nac' => 'Alum F Nac',
-			'alum_direccion' => 'Alum Direccion',
-			'alum_region' => 'Alum Region',
-			'alum_ciudad' => 'Alum Ciudad',
-			'alum_comuna' => 'Alum Comuna',
-			'alum_genero' => 'Alum Genero',
-			'alum_salud' => 'Alum Salud',
-			'alum_obs' => 'Alum Obs',
-			'alum_estado' => 'Alum Estado',
+			'alum_id' => 'ID',
+			'alum_rut' => 'Rut',
+			'alum_nombres' => 'Nombres',
+			'alum_apepat' => 'Apellido paterno',
+			'alum_apemat' => 'Apellido materno',
+			'alum_f_nac' => 'Fecha de nacimiento',
+			'alum_direccion' => 'Direccion',
+			'alum_region' => 'Region',
+			'alum_ciudad' => 'Ciudad',
+			'alum_comuna' => 'Comuna',
+			'alum_genero' => 'Genero',
+			'alum_salud' => 'Salud',
+			'alum_obs' => 'Observacion',
+			'alum_estado' => 'Estado',
 		);
 	}
 

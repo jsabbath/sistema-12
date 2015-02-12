@@ -64,13 +64,25 @@ class MatriculaController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Matricula'])) {
-            $model->attributes = $_POST['Matricula'];
-            $model->mat_fingreso = date('d-m-Y');
-            if ($model->save()){
-                $alumno->save();
-                $this->redirect(array('view', 'id' => $model->mat_id));
+        if (isset($_POST['Matricula'], $_POST['Alumno'])) {
 
+            $model->attributes = $_POST['Matricula'];
+            $alumno->attributes = $_POST['Alumno'];
+
+            $model->mat_alu_id = 1;
+            $model->mat_ano = date('Y');
+            $model->mat_fingreso = date('Y-m-d');
+
+            $valid = $model->validate();
+            $valid = $alumno->validate() && $valid;
+
+            if ($valid){
+                if($alumno->save()){
+                    $model->mat_alu_id = $alumno->alum_id;
+                    if ($model->save()) {
+                        $this->redirect(array('view', 'id' => $model->mat_id));       
+                    }
+                }
             }
         }
 

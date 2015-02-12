@@ -64,14 +64,14 @@ class Matricula extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'mat_id' => 'Mat',
-			'mat_ano' => 'Mat Ano',
-			'mat_cur' => 'Mat Cur',
-			'mat_alu_id' => 'Mat Alu',
-			'mat_fingreso' => 'Mat Fingreso',
-			'mat_fretiro' => 'Mat Fretiro',
-			'mat_fcambio' => 'Mat Fcambio',
-			'mat_numero' => 'Mat Numero',
+			'mat_id' => 'ID',
+			'mat_ano' => 'Ano',
+			'mat_cur' => 'Curso',
+			'mat_alu_id' => 'Alumno',
+			'mat_fingreso' => 'Fecha de ingreso',
+			'mat_fretiro' => 'Fecha de retiro',
+			'mat_fcambio' => 'Fecha de cambio',
+			'mat_numero' => 'Numero',
 		);
 	}
 
