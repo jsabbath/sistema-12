@@ -18,4 +18,10 @@ $this->menu=array(
 
 <h1>Update Curso <?php echo $model->cur_id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,
+                                            'niveles' => $niveles,
+                                            'ano' => $ano,
+                                            'tp' => $tp,
+                                            'jornada' => $jornada,
+                                            'letra' => $letra,
+    )); ?>

@@ -28,15 +28,15 @@ class AAsignaturaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','Buscar_asignatura'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','Buscar_asignatura'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','Buscar_asignatura'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -170,4 +170,62 @@ class AAsignaturaController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionBuscar_prof()
+        {
+            $criterio = new CDbCriteria;
+            $cdtns = array();
+            $resultado = array();
+
+            if(empty($_GET['term'])) return $resultado;
+
+            $cdtns[] = "LOWER(usu_nombre1) like LOWER(:busq)";
+
+            $criterio->condition = implode(' OR ', $cdtns);
+            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+            $criterio->limit = 10;
+
+            $data = Usuario::model()->findAll($criterio);
+            
+            foreach($data as $item) {  
+                $resultado[] = array (
+                    'id' => $item->usu_id,
+                    'nombre'    => $item->usu_nombre1,
+                    'apellido' => $item->usu_apepat,
+                    'nombre2' => $item->usu_nombre2,
+                    'apellido2' => $item->usu_apemat,
+                );
+            }
+
+            echo CJSON::encode($resultado);
+        }
+        
+        
+        public function actionBuscar_asignatura()
+        {
+            $criterio = new CDbCriteria;
+            $cdtns = array();
+            $resultado = array();
+
+            if(empty($_GET['term'])) return $resultado;
+
+            $cdtns[] = "LOWER(asi_descripcion) like LOWER(:busq)";
+
+            $criterio->condition = implode(' OR ', $cdtns);
+            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+            $criterio->limit = 10;
+
+            $data = Asignatura::model()->findAll($criterio);
+            
+            foreach($data as $item) {  
+                $resultado[] = array (
+                    'id' => $item->asi_id,
+                    'nombre'    => $item->asi_descripcion,
+                    'corto' => $item->asi_nombrecorto,
+                    'codigo' => $item->asi_codigo,
+                );
+            }
+
+            echo CJSON::encode($resultado);
+        }
 }

@@ -117,8 +117,31 @@ class CursoController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+                             $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+		
+                //  Se obtienen los niveles disponibles primero segundo...
+                $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
+                $niveles = CHtml::listData($para, 'par_id', 'par_descripcion');
+		
+                if ( $temp->temp_ano != 0 ){
+			$ano = $temp->temp_ano;
+		} else {
+			$ano = $par->par_descripcion;
+		}
+                
+                // Tipo  de periodo disponible
+                $tperiodo = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'tperiodo')));
+                $tp = CHtml::listData($tperiodo, 'par_id', 'par_descripcion');
+
+                // Se obtienen las jornadas 
+                $jor = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'jornada')));
+                $jornada = CHtml::listData($jor, 'par_id', 'par_descripcion');
+                
+                //  Se obtienen las letras para los cursos
+                $l = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'letra')));
+                $letra = CHtml::listData($l, 'par_id', 'par_descripcion');
+                
 
 		if(isset($_POST['Curso']))
 		{
@@ -128,7 +151,12 @@ class CursoController extends Controller
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+                                'model'=>$model,
+                                'niveles' => $niveles,
+                                'ano' => $ano,
+                                'tp' => $tp,
+                                'jornada' => $jornada,
+                                'letra'  => $letra,
 		));
 	}
 
@@ -230,7 +258,7 @@ class CursoController extends Controller
             $cdtns = array();
             $resultado = array();
 
-            //if(empty($_GET['term'])) return $resultado;
+            if(empty($_GET['term'])) return $resultado;
 
             $cdtns[] = "LOWER(usu_nombre1) like LOWER(:busq)";
 

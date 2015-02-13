@@ -18,4 +18,5 @@ $this->menu=array(
 
 <h1>Update Matricula <?php echo $model->mat_id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'alumno'=>$alumno,
+	'region'=>$region)); ?>

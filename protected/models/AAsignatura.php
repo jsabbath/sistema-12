@@ -33,6 +33,7 @@ class AAsignatura extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('aa_curso, aa_asignatura, aa_docente', 'required'),
 			array('aa_curso, aa_asignatura, aa_docente', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -61,10 +62,10 @@ class AAsignatura extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'aa_id' => 'Aa',
-			'aa_curso' => 'Aa Curso',
-			'aa_asignatura' => 'Aa Asignatura',
-			'aa_docente' => 'Aa Docente',
+			'aa_id' => 'Asignar id',
+			'aa_curso' => 'Asignar Curso',
+			'aa_asignatura' => 'Asignar Asignatura',
+			'aa_docente' => 'Asignar Docente',
 		);
 	}
 
