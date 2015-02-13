@@ -100,18 +100,37 @@ class MatriculaController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $alumno = new Alumno;
+        $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Matricula'])) {
+        if (isset($_POST['Matricula'],$_POST['Alumno'])) {
+
             $model->attributes = $_POST['Matricula'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->mat_id));
+            $alumno->attributes = $_POST['Alumno'];
+
+            $model->mat_alu_id = 1;
+            $model->mat_ano = date('Y');
+            $model->mat_fingreso = date('Y-m-d');
+
+            $valid = $model->validate();
+            $valid = $alumno->validate() && $valid;
+            if ($valid){
+                if($alumno->save()){
+                    $model->mat_alu_id = $alumno->alum_id;
+                    if ($model->save()) {
+                        $this->redirect(array('view', 'id' => $model->mat_id));       
+                    }
+                }
+            }
         }
 
         $this->render('update', array(
             'model' => $model,
+            'alumno' => $alumno,
+            'region'=>$region,
         ));
     }
 

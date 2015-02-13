@@ -181,7 +181,6 @@ class CursoController extends Controller
 	{
 		$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-		
                 
                 // La variable es array por que criteria lo pide.
 		if ( $temp->temp_ano != 0 ){

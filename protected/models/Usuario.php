@@ -163,5 +163,7 @@ class Usuario extends CActiveRecord
             $this->addError($attribute, 'Rut ya existe y esta siendo ocupado');
     }
 
-
+    public function getNombreCorto(){ 
+		return $this->usu_nombre1.' '.$this->usu_apepat; 
+	}
 }

@@ -138,9 +138,10 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'mat_fingreso'); ?>
-		<?php echo $form->textField($model,'mat_fingreso',array('placeholder'=>date('d-m-Y'),'disabled'=>'true')); ?>
+		<?php echo $form->dateField($model,'mat_fingreso'); ?>
 		<?php echo $form->error($model,'mat_fingreso'); ?>
 	</div>
+
 	<?php
 	if(!$model->isNewRecord){
 	?>
@@ -158,6 +159,7 @@
 	<?php
 	}
 	?>
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'mat_numero'); ?>
 		<?php echo $form->textField($model,'mat_numero'); ?>
