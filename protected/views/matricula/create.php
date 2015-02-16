@@ -15,5 +15,9 @@ $this->menu=array(
 
 <h1>Create Matricula</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model,'alumno'=>$alumno,
-	'region'=>$region)); ?>
+<?php $this->renderPartial('_form', array(
+	'model'=>$model,
+	'alumno'=>$alumno,
+	'region'=>$region,
+	'cur_actual'=>$cur_actual,
+	)); ?>

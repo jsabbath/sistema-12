@@ -61,6 +61,16 @@ class MatriculaController extends Controller {
         //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
 
+        //Cursos del año actual
+        $anio = implode(CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ano_activo"')),'par_item','par_descripcion'));
+        $curso_lista = Curso::model()->findAll(array('condition'=>'cur_ano="'.$anio.'"'));
+        $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+        $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+        for($i=0;$i<count($curso_lista);$i++){
+            $cur_actual[$curso_lista[$i]->cur_id] = "".$nivel[$curso_lista[$i]->cur_nivel]." ".$letra[$curso_lista[$i]->cur_letra];
+        }
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -90,6 +100,7 @@ class MatriculaController extends Controller {
             'model' => $model,
             'alumno' => $alumno,
             'region'=>$region,
+            'cur_actual'=>$cur_actual,
         ));
     }
 

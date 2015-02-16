@@ -26,7 +26,9 @@
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 ));
-//var_dump($ciudad);
+
+//var_dump($cur_actual);
+
 ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -61,7 +63,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($alumno,'alum_f_nac'); ?>
-		<?php echo $form->textField($alumno,'alum_f_nac'); ?>
+		<?php echo $form->dateField($alumno,'alum_f_nac'); ?>
 		<?php echo $form->error($alumno,'alum_f_nac'); ?>
 	</div>
 
@@ -132,7 +134,7 @@
 	<h3>Datos matricula</h3>
 	<div class="row">
 		<?php echo $form->labelEx($model,'mat_cur'); ?>
-		<?php echo $form->textField($model,'mat_cur'); ?>
+		<?php echo $form->dropDownList($model,'mat_cur',$cur_actual); ?>
 		<?php echo $form->error($model,'mat_cur'); ?>
 	</div>
 
@@ -147,13 +149,13 @@
 	?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'mat_fretiro'); ?>
-		<?php echo $form->textField($model,'mat_fretiro'); ?>
+		<?php echo $form->dateField($model,'mat_fretiro'); ?>
 		<?php echo $form->error($model,'mat_fretiro'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'mat_fcambio'); ?>
-		<?php echo $form->textField($model,'mat_fcambio'); ?>
+		<?php echo $form->dateField($model,'mat_fcambio'); ?>
 		<?php echo $form->error($model,'mat_fcambio'); ?>
 	</div>
 	<?php
