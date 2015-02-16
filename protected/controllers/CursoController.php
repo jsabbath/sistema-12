@@ -28,15 +28,15 @@ class CursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','recieveValue','buscar_prof'),
+				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','recieveValue','buscar_prof'),
+				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','recieveValue','buscar_prof'),
+				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -188,14 +188,13 @@ class CursoController extends Controller
 		} else {
 			$ano = array($par->par_descripcion);
 		}
-			$criteria = new CDbCriteria();
-			$criteria->addInCondition('cur_ano', $ano, 'or');
-			$dataProvider=new CActiveDataProvider('Curso', array(
-			'criteria' => $criteria
-		));
-			$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+                
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition('cur_ano', $ano, 'or');
+                $dataProvider=new CActiveDataProvider('Curso', array('criteria' => $criteria));
+			
+                $this->render('index',array('dataProvider'=>$dataProvider,));
+                
 	}
 
 	/**
@@ -269,6 +268,7 @@ class CursoController extends Controller
             
             foreach($data as $item) {  
                 $resultado[] = array (
+                    'id_cruge' => $item->usu_iduser,
                     'id' => $item->usu_id,
                     'nombre'    => $item->usu_nombre1,
                     'apellido' => $item->usu_apepat,
@@ -278,6 +278,19 @@ class CursoController extends Controller
             }
 
             echo CJSON::encode($resultado);
+        }
+        
+        // BUSCAR CURSOS POR NOMBRE
+        public function actionBcxn(){
+           /*  if(empty($_GET['id'])){
+                 echo "Ingrese un Nombre";
+                 return;
+             }*/
+            echo "Cursos de:";
+            
+            $a = $_POST['nombre'];
+             var_dump($a);
+             
         }
 }
 

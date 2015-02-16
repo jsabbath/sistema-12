@@ -1,3 +1,5 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
@@ -45,12 +47,45 @@
 		<?php echo $form->error($model,'cur_letra'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'cur_pjefe'); ?>
-		<?php echo $form->textField($model,'cur_pjefe'); ?>
-		<?php echo $form->error($model,'cur_pjefe'); ?>
-	</div>
+        
+        <?php  if( !$model->isNewRecord ){  ?>
+                <div class="row">
+                        <?php echo $form->labelEx($model,'cur_pjefe'); ?>
+                        <?php echo $form->textField($model,'cur_pjefe'); ?>
+                        <?php echo $form->error($model,'cur_pjefe'); ?>
+                </div>
+        
+        <?php } else{ ?>
+                <div class="row">
+                        <?php echo $form->labelEx($model,'cur_pjefe'); ?>
+                        <?php echo $form->hiddenField($model,'cur_pjefe',array('id' => 'id_pjefe')); ?>
+                        <?php echo $form->error($model,'cur_pjefe'); ?>
+                </div>
+                
+                <?php echo CHtml::textField('Text', '',array('id'=>'pn',
+                                                        'placeholder' => 'Ingrese nombre Profesor',))?>
 
+                
+                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
+    
+                <div>
+                    <?php echo CHtml::textField('Text', '',
+                        array('id'=>'nombre',
+                            'placeholder' => 'Nombres',
+                            'disabled'=>'disabled',))?>
+
+
+                    <?php echo CHtml::textField('Text', '',
+                        array('id'=>'apellido',
+                            'placeholder' => 'Apellidos',
+                            'disabled'=>'disabled',
+                             ))?>
+                </div>     
+        
+        
+        <?php } ?>
+        
+        
 	<div class="row">
 		<?php echo $form->labelEx($model,'cur_infd'); ?>
 		<?php echo $form->textField($model,'cur_infd'); ?>
@@ -76,3 +111,44 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<?php if ( $model->isNewRecord ){  ?>
+    <script>
+            $(function(){
+            $('#pn').autocomplete({
+                     source : function( request, response ) {
+                     $.ajax({
+                        url: '<?php echo $this->createUrl('curso/Buscar_prof'); ?>',
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function(data) {
+                                    response($.map(data, function(item) {
+                                                return {
+                                                        label: item.nombre +'/' + item.apellido,
+                                                        apellido: item.apellido + ' ' + item.apellido2,
+                                                        nombre: item.nombre + ' ' + item.nombre2,
+                                                        id: item.id_cruge, 
+                                                        }
+                                            }))
+                                }
+                            })
+                        },
+                        select: function(event, ui) {
+                            $("#nombre").val(ui.item.nombre)
+                            $("#apellido").val(ui.item.apellido)
+                            $("#id_pjefe").val(ui.item.id)
+                        },
+
+                    })
+             });
+    </script>   
+
+    
+    <script>
+        $("#limpiar").on('click', function() {
+                        $("#nombre").val(""),
+                        $("#apellido").val(""),
+                        $("#pn").val("")
+                    });
+    </script>
+<?php }  ?>

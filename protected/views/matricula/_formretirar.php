@@ -43,7 +43,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'mat_fretiro'); ?>
-		<?php echo $form->textField($model,'mat_fretiro',array()); ?>
+		<?php echo $form->dateField($model,'mat_fretiro',array()); ?>
 		<?php echo $form->error($model,'mat_fretiro'); ?>
 	</div>
 

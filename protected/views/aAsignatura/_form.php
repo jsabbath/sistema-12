@@ -35,7 +35,13 @@
 		<?php echo $form->error($model,'aa_asignatura'); ?>
             
                 <?php echo CHtml::textField('Text', '',array('id'=>'asignatura_auto','placeholder' => 'Ingrese nombre Asignatura',))?>
-                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar_asi','icon' => 'remove-sign' ))?>
+                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+                                                    'id' =>'limpiar_asi', 
+                                                    'icon' => 'remove',
+                                                    'data-toggle'=>'tooltip', 
+                                                    'data-placement'=>'top', 
+                                                    'title'=>'Limpiar',
+                                                    'style' => 'margin-bottom: 8.5px', ))?>
 	</div>
             
   
@@ -53,7 +59,13 @@
             
                 <?php echo CHtml::textField('Text', '',array('id'=>'docente_auto','placeholder' => 'Ingrese nombre Profesor',))?>
             
-                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar_doc','icon' => 'remove-sign' ))?>
+                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+                                                    'id' =>'limpiar_doc',
+                                                    'icon' => 'remove',
+                                                    'data-toggle'=>'tooltip', 
+                                                    'data-placement'=>'top', 
+                                                    'title'=>'Limpiar',
+                                                    'style' => 'margin-bottom: 8.5px', ))?>
         </div>
         
                 <?php echo CHtml::textField('Text', '',array('id'=>'nombre_doc','placeholder' => 'Nombres',
@@ -148,6 +160,10 @@
                         $("#asignatura_auto").val(""),
                         $("#codigo_asi").val("")
                     });
+</script>
+
+<script type="text/javascript">
+$(function () { $("[data-toggle='tooltip']").tooltip(); });
 </script>
 
 </div><!-- form -->

@@ -125,11 +125,12 @@ $tempid = $temp->temp_id;
                                     'class' => 'bootstrap.widgets.TbNav',
                                     'htmlOptions' => array('class' => 'pull-right'),
                                     'items' => array(
-                                        array('label' => 'Salir (' . $nombre . ')'
-                                            , 'url' => Yii::app()->user->ui->logoutUrl
-                                            , 'icon' => 'user'
-                                            , 'visible' => !Yii::app()->user->isGuest),
-                                    )
+                                        array('label' =>$nombre, 'icon' => 'user', 'items' => array(
+                                                array('label' => 'Cambiar Contraseña', 'url' => '#' ,'icon' => 'wrench'  ),
+                                                array('label' => 'Salir', 'url' => '#', 'icon' => 'off', 'visible' => !Yii::app()->user->isGuest, 'data-toggle' => 'modal','data-target' => '#myModal',),
+                                                )
+                                        ),
+                                    ),
                                 ),
                             ),
                         ));
@@ -138,6 +139,9 @@ $tempid = $temp->temp_id;
                 </div>
             </div>
 
+            
+          
+            
 
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
@@ -152,11 +156,25 @@ $tempid = $temp->temp_id;
             <div class="clear"></div>
 
         </div><!-- page -->
-<?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
+    <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 
+        
+    <?php $this->widget('bootstrap.widgets.TbModal', array(
+            'id' => 'myModal',
+            'header' => 'Esta Seguro?',
+            'content' => '<p>Usted esta abandonando el sistema </p>',
+            'htmlOptions' => array ('url' => Yii::app()->user->ui->logoutUrl),
+            'footer' => array(
+                    TbHtml::linkButton('Salir',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
+                    TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
+            ),
+    )); ?>
 
 <script type="text/javascript">
 $(function () { $("[data-toggle='tooltip']").tooltip(); });
+
+
+
 </script>
     </body>
 </html>

@@ -38,26 +38,48 @@ $('.search-form form').submit(function(){
         'placeholder' => 'Ingrese nombre Profesor',))?>
 
 
-<?php echo TbHtml::button('Limpiar',array('color'=> TbHtml::ALERT_COLOR_SUCCESS, 'id' =>'limpiar','style'=>'margin-bottom:10px' ))?>
-    
-<div>
-    
-    <?php echo CHtml::textField('Text', '',
-        array('id'=>'nombre',
-            'placeholder' => 'Nombres',
-            'disabled'=>'disabled',))?>
-    
-   
-    <?php echo CHtml::textField('Text', '',
-        array('id'=>'apellido',
-            'placeholder' => 'Apellidos',
-            'disabled'=>'disabled',
-             ))?>
+<?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
+<div class="form">  
+    <?php echo TbHtml::beginFormTb(); ?>
+    <div>
+
+        <?php echo TbHtml::textField('Text', '',
+            array('id'=>'nombre',
+                'placeholder' => 'Nombres',
+                'disabled'=>'disabled',))?>
+        
+        <?php echo Tbhtml::hiddenField('Text','',array('id' => 'id_cruge',)); ?>
+
+
+        <?php echo TbHtml::textField('Text', '',
+            array('id'=>'apellido',
+                'placeholder' => 'Apellidos',
+                'disabled'=>'disabled',
+                 ))?>
+
+    </div>
+
+    <?php echo TbHtml::submitButton('Ver cursos',array(
+                                    'color'=> TbHtml::ALERT_COLOR_WARNING, 
+                                    'id' =>'buscar',
+                                    'ajax' =>
+                                        array('type'=>'POST',
+                                            'url'=>$this->createUrl('curso/bcxn'), // Buscar cursos por nombre
+                                            'update'=>'#ajax_op',
+                                            'data'=>array('id'=>'#id_cruge','nombre'=>'#nombre'),
+                                            //'success'=> 'function(){location.reload();}'
+                                        )
+        ))?>
+
+<?php echo TbHtml::endForm(); ?>
+</div>
+
+
+<div id ="ajax_op">
+    los cursos van  aka
     
 </div>
 
-<?php echo TbHtml::button('Ver cursos',array('color'=> TbHtml::ALERT_COLOR_INFO, 'id' =>'buscar'))?>
-   
 
 <div class="search-form" style="display:none">    
 </div><!-- search-form -->
@@ -99,7 +121,8 @@ $('.search-form form').submit(function(){
                                                     label: item.nombre +'/' + item.apellido,
                                                     apellido: item.apellido + ' ' + item.apellido2,
                                                     nombre: item.nombre + ' ' + item.nombre2,
-                                                    id: item.id, 
+                                                    id: item.id,
+                                                    id_cruge: item.id_cruge,
                                                     }
                                         }))
                             }
@@ -108,10 +131,11 @@ $('.search-form form').submit(function(){
                     select: function(event, ui) {
                         $("#nombre").val(ui.item.nombre)
                         $("#apellido").val(ui.item.apellido)
-                      //  $("#buscar").removeAttr('disabled')
-                    },
-                   
-                })
+                        $("#id_cruge").val(ui.item.id_cruge) 
+                       
+                        
+                        
+                    }});
     	 });
 </script>    
     
@@ -120,18 +144,8 @@ $('.search-form form').submit(function(){
      $("#limpiar").on('click', function() {
                         $("#nombre").val(""),
                         $("#apellido").val(""),
-                        $("#pn").val("")
+                        $("#pn").val(""),
+                        $("#id_cruge").val("")
+                        $("#ajax_op").replaceWith(" <div id='ajax_op'>  se vacio la listax </div> ")
                     });
 </script>
-
-<script>
-     $("#buscar").on('click', function() {
-                       var a = $("#buscar")
-                        window.alert(a);
-
-    
-    });
-</script>
-
-
-
