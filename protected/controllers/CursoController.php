@@ -282,15 +282,31 @@ class CursoController extends Controller
         
         // BUSCAR CURSOS POR NOMBRE
         public function actionBcxn(){
-           /*  if(empty($_GET['id'])){
-                 echo "Ingrese un Nombre";
-                 return;
-             }*/
-            echo "Cursos de:";
+            if( !isset($_POST['nombre']) ) {
+                echo "Ingrese un nombre";
+                return;
+            }
+                $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+		if ( $temp->temp_ano != 0 ){
+			$ano = array($temp->temp_ano);
+		} else {
+			$ano = array($par->par_descripcion);
+		}
+                          
+            echo "<h4>Cursos de: " . $_POST['nombre']."</h4>";
+            echo "<br><br>";
             
-            $a = $_POST['nombre'];
-             var_dump($a);
-             
+            $id_cruge = array($_POST['id']); 
+            
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition('cur_ano', $ano, 'AND');
+                $criteria->addInCondition('cur_pjefe', $id_cruge, 'AND' );
+                $dataProvider=new CActiveDataProvider('Curso', array('criteria' => $criteria));
+			
+            $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));   
         }
 }
 

@@ -40,13 +40,14 @@ $('.search-form form').submit(function(){
 
 <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
 <div class="form">  
-    <?php echo TbHtml::beginFormTb(); ?>
+   
     <div>
 
         <?php echo TbHtml::textField('Text', '',
             array('id'=>'nombre',
                 'placeholder' => 'Nombres',
-                'disabled'=>'disabled',))?>
+                'disabled'=>'disabled',
+                ))?>
         
         <?php echo Tbhtml::hiddenField('Text','',array('id' => 'id_cruge',)); ?>
 
@@ -59,23 +60,24 @@ $('.search-form form').submit(function(){
 
     </div>
 
-    <?php echo TbHtml::submitButton('Ver cursos',array(
+    <?php echo TbHtml::button('Ver cursos',array(
                                     'color'=> TbHtml::ALERT_COLOR_WARNING, 
                                     'id' =>'buscar',
                                     'ajax' =>
                                         array('type'=>'POST',
                                             'url'=>$this->createUrl('curso/bcxn'), // Buscar cursos por nombre
                                             'update'=>'#ajax_op',
-                                            'data'=>array('id'=>'#id_cruge','nombre'=>'#nombre'),
+                                            'data'=>array('id'=>'js:getId','nombre'=>'js:getNombre()'),
                                             //'success'=> 'function(){location.reload();}'
                                         )
         ))?>
 
-<?php echo TbHtml::endForm(); ?>
-</div>
 
+</div>
+<br>
 
 <div id ="ajax_op">
+    
     los cursos van  aka
     
 </div>
@@ -148,4 +150,17 @@ $('.search-form form').submit(function(){
                         $("#id_cruge").val("")
                         $("#ajax_op").replaceWith(" <div id='ajax_op'>  se vacio la listax </div> ")
                     });
+                    
+                    
+    function getNombre(){ 
+        var value= $("#nombre").val();
+        if( value != "")
+            return value;
+    }
+    
+    function getId(){ 
+        var value= $("#id_cruge").val();
+        if( value != "")
+            return value;
+    }
 </script>
