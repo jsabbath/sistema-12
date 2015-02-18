@@ -30,7 +30,7 @@ class Area extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('are_descripcion', 'required'),
+			array('are_infd', 'required'),
 			array('are_infd', 'numerical', 'integerOnly'=>true),
 			array('are_descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().

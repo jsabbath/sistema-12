@@ -1,7 +1,9 @@
 <?php
 /* @var $this InformeDesarrolloController */
 /* @var $model InformeDesarrollo */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Informe Desarrollos'=>array('index'),
 	'Create',

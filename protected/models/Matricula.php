@@ -5,17 +5,16 @@
  *
  * The followings are the available columns in table 'matricula':
  * @property integer $mat_id
- * @property string $mat_ano
- * @property integer $mat_cur
- * @property integer $mat_alu_id
+ * @property integer $mat_ano
+ * @property integer $mat_numero
  * @property string $mat_fingreso
  * @property string $mat_fretiro
  * @property string $mat_fcambio
- * @property integer $mat_numero
+ * @property integer $mat_alu_id
  *
  * The followings are the available model relations:
- * @property Curso $matCur
  * @property Alumno $matAlu
+ * @property Notas[] $notases
  */
 class Matricula extends CActiveRecord
 {
@@ -35,13 +34,11 @@ class Matricula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('mat_ano', 'required'),
-			array('mat_cur, mat_alu_id, mat_numero', 'numerical', 'integerOnly'=>true),
-			array('mat_ano', 'length', 'max'=>4),
+			array('mat_ano, mat_numero, mat_alu_id', 'numerical', 'integerOnly'=>true),
 			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('mat_id, mat_ano, mat_cur, mat_alu_id, mat_fingreso, mat_fretiro, mat_fcambio, mat_numero', 'safe', 'on'=>'search'),
+			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_alu_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,8 +50,8 @@ class Matricula extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'matCur' => array(self::BELONGS_TO, 'Curso', 'mat_cur'),
 			'matAlu' => array(self::BELONGS_TO, 'Alumno', 'mat_alu_id'),
+			'notases' => array(self::HAS_MANY, 'Notas', 'not_mat'),
 		);
 	}
 
@@ -64,14 +61,13 @@ class Matricula extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'mat_id' => 'ID',
-			'mat_ano' => 'Ano',
-			'mat_cur' => 'Curso',
-			'mat_alu_id' => 'Alumno',
-			'mat_fingreso' => 'Fecha de ingreso',
-			'mat_fretiro' => 'Fecha de retiro',
-			'mat_fcambio' => 'Fecha de cambio',
-			'mat_numero' => 'Numero',
+			'mat_id' => 'Mat',
+			'mat_ano' => 'Mat Ano',
+			'mat_numero' => 'Mat Numero',
+			'mat_fingreso' => 'Mat Fingreso',
+			'mat_fretiro' => 'Mat Fretiro',
+			'mat_fcambio' => 'Mat Fcambio',
+			'mat_alu_id' => 'Mat Alu',
 		);
 	}
 
@@ -94,13 +90,12 @@ class Matricula extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('mat_id',$this->mat_id);
-		$criteria->compare('mat_ano',$this->mat_ano,true);
-		$criteria->compare('mat_cur',$this->mat_cur);
-		$criteria->compare('mat_alu_id',$this->mat_alu_id);
+		$criteria->compare('mat_ano',$this->mat_ano);
+		$criteria->compare('mat_numero',$this->mat_numero);
 		$criteria->compare('mat_fingreso',$this->mat_fingreso,true);
 		$criteria->compare('mat_fretiro',$this->mat_fretiro,true);
 		$criteria->compare('mat_fcambio',$this->mat_fcambio,true);
-		$criteria->compare('mat_numero',$this->mat_numero);
+		$criteria->compare('mat_alu_id',$this->mat_alu_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

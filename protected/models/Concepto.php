@@ -30,7 +30,7 @@ class Concepto extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('con_descripcion', 'required'),
+			array('con_area', 'required'),
 			array('con_area', 'numerical', 'integerOnly'=>true),
 			array('con_descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().

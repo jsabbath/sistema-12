@@ -1,7 +1,9 @@
 <?php
 /* @var $this InformeDesarrolloController */
 /* @var $model InformeDesarrollo */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Informe Desarrollos'=>array('index'),
 	$model->id_id,
@@ -18,9 +20,12 @@ $this->menu=array(
 
 <h1>View InformeDesarrollo #<?php echo $model->id_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView',array(
+    'htmlOptions' => array(
+        'class' => 'table table-striped table-condensed table-hover',
+    ),
+    'data'=>$model,
+    'attributes'=>array(
 		'id_id',
 		'id_descripcion',
 	),

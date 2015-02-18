@@ -5,24 +5,22 @@
  *
  * The followings are the available columns in table 'curso':
  * @property integer $cur_id
- * @property string $cur_ano
- * @property integer $cur_nivel
- * @property integer $cur_jornada
- * @property integer $cur_letra
- * @property integer $cur_pjefe
- * @property integer $cur_infd
- * @property integer $cur_tperiodo
+ * @property integer $cur_ano
  * @property integer $cur_notas_periodo
+ * @property integer $cur_nivel
+ * @property integer $cur_letra
+ * @property integer $cur_jornada
+ * @property integer $cur_pjefe
+ * @property integer $cur_tperiodo
+ * @property integer $cur_infd
  *
  * The followings are the available model relations:
- * @property AAsignatura[] $aAsignaturas
  * @property Parametro $curNivel
- * @property Parametro $curJornada
  * @property Parametro $curLetra
- * @property CrugeUser $curPjefe
- * @property InformeDesarrollo $curInfd
+ * @property Parametro $curJornada
+ * @property Usuario $curPjefe
  * @property Parametro $curTperiodo
- * @property Matricula[] $matriculas
+ * @property InformeDesarrollo $curInfd
  */
 class Curso extends CActiveRecord
 {
@@ -42,12 +40,10 @@ class Curso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_tperiodo', 'required'),
-			array('cur_nivel, cur_jornada, cur_letra, cur_pjefe, cur_infd, cur_tperiodo, cur_notas_periodo', 'numerical', 'integerOnly'=>true),
-			array('cur_ano', 'length', 'max'=>4),
+			array('cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo, cur_infd', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('cur_id, cur_ano, cur_nivel, cur_jornada, cur_letra, cur_pjefe, cur_infd, cur_tperiodo, cur_notas_periodo', 'safe', 'on'=>'search'),
+			array('cur_id, cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo, cur_infd', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,14 +55,12 @@ class Curso extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'aAsignaturas' => array(self::HAS_MANY, 'AAsignatura', 'aa_curso'),
 			'curNivel' => array(self::BELONGS_TO, 'Parametro', 'cur_nivel'),
-			'curJornada' => array(self::BELONGS_TO, 'Parametro', 'cur_jornada'),
 			'curLetra' => array(self::BELONGS_TO, 'Parametro', 'cur_letra'),
-			'curPjefe' => array(self::BELONGS_TO, 'CrugeUser', 'cur_pjefe'),
-			'curInfd' => array(self::BELONGS_TO, 'InformeDesarrollo', 'cur_infd'),
+			'curJornada' => array(self::BELONGS_TO, 'Parametro', 'cur_jornada'),
+			'curPjefe' => array(self::BELONGS_TO, 'Usuario', 'cur_pjefe'),
 			'curTperiodo' => array(self::BELONGS_TO, 'Parametro', 'cur_tperiodo'),
-			'matriculas' => array(self::HAS_MANY, 'Matricula', 'mat_cur'),
+			'curInfd' => array(self::BELONGS_TO, 'InformeDesarrollo', 'cur_infd'),
 		);
 	}
 
@@ -76,15 +70,15 @@ class Curso extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cur_id' => 'Curso',
-			'cur_ano' => 'Año',
-			'cur_nivel' => 'Nivel',
-			'cur_jornada' => 'Jornada',
-			'cur_letra' => 'Letra',
-			'cur_pjefe' => 'profesor jefe',
-			'cur_infd' => 'Informe Desarrollo',
-			'cur_tperiodo' => 'Tipo Periodo',
-			'cur_notas_periodo' => 'Notas Periodo',
+			'cur_id' => 'Cur',
+			'cur_ano' => 'Cur Ano',
+			'cur_notas_periodo' => 'Cur Notas Periodo',
+			'cur_nivel' => 'Cur Nivel',
+			'cur_letra' => 'Cur Letra',
+			'cur_jornada' => 'Cur Jornada',
+			'cur_pjefe' => 'Cur Pjefe',
+			'cur_tperiodo' => 'Cur Tperiodo',
+			'cur_infd' => 'Cur Infd',
 		);
 	}
 
@@ -107,14 +101,14 @@ class Curso extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('cur_id',$this->cur_id);
-		$criteria->compare('cur_ano',$this->cur_ano,true);
-		$criteria->compare('cur_nivel',$this->cur_nivel);
-		$criteria->compare('cur_jornada',$this->cur_jornada);
-		$criteria->compare('cur_letra',$this->cur_letra);
-		$criteria->compare('cur_pjefe',$this->cur_pjefe);
-		$criteria->compare('cur_infd',$this->cur_infd);
-		$criteria->compare('cur_tperiodo',$this->cur_tperiodo);
+		$criteria->compare('cur_ano',$this->cur_ano);
 		$criteria->compare('cur_notas_periodo',$this->cur_notas_periodo);
+		$criteria->compare('cur_nivel',$this->cur_nivel);
+		$criteria->compare('cur_letra',$this->cur_letra);
+		$criteria->compare('cur_jornada',$this->cur_jornada);
+		$criteria->compare('cur_pjefe',$this->cur_pjefe);
+		$criteria->compare('cur_tperiodo',$this->cur_tperiodo);
+		$criteria->compare('cur_infd',$this->cur_infd);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

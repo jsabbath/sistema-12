@@ -27,13 +27,13 @@
 	</div>
 
 
-        <div class="row">
+    <div class="row">
 		<?php echo $form->labelEx($model,'Apellido Paterno'); ?>
 		<?php echo $form->textField($model,'mat_cur',array('placeholder'=> $apepat,'disabled'=> 'true')); ?>
 		
 	</div>
         
-         <div class="row">
+    <div class="row">
 		<?php echo $form->labelEx($model,'Apellido Materno'); ?>
 		<?php echo $form->textField($model,'mat_cur',array('placeholder'=> $apemat,'disabled'=> 'true')); ?>
 		

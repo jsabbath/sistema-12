@@ -92,8 +92,8 @@ class CursoController extends Controller
 		if(isset($_POST['Curso']))
 		{
 			$model->attributes=$_POST['Curso'];
-                        $model->cur_ano = (int)$ano;
-                        var_dump($model->cur_ano);
+            $model->cur_ano = (int)$ano;
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->cur_id));
 		}
@@ -250,64 +250,64 @@ class CursoController extends Controller
 	}
         
                 
-        public function actionBuscar_prof()
-        {
-            $criterio = new CDbCriteria;
-            $cdtns = array();
-            $resultado = array();
+    public function actionBuscar_prof()
+    {
+        $criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
 
-            if(empty($_GET['term'])) return $resultado;
+        if(empty($_GET['term'])) return $resultado;
 
-            $cdtns[] = "LOWER(usu_nombre1) like LOWER(:busq)";
+        $cdtns[] = "LOWER(usu_nombre1) like LOWER(:busq)";
 
-            $criterio->condition = implode(' OR ', $cdtns);
-            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
-            $criterio->limit = 10;
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
 
-            $data = Usuario::model()->findAll($criterio);
-            
-            foreach($data as $item) {  
-                $resultado[] = array (
-                    'id_cruge' => $item->usu_iduser,
-                    'id' => $item->usu_id,
-                    'nombre'    => $item->usu_nombre1,
-                    'apellido' => $item->usu_apepat,
-                    'nombre2' => $item->usu_nombre2,
-                    'apellido2' => $item->usu_apemat,
-                );
-            }
-
-            echo CJSON::encode($resultado);
+        $data = Usuario::model()->findAll($criterio);
+        
+        foreach($data as $item) {  
+            $resultado[] = array (
+                'id_cruge' => $item->usu_iduser,
+                'id' => $item->usu_id,
+                'nombre'    => $item->usu_nombre1,
+                'apellido' => $item->usu_apepat,
+                'nombre2' => $item->usu_nombre2,
+                'apellido2' => $item->usu_apemat,
+            );
         }
+
+        echo CJSON::encode($resultado);
+    }
         
         // BUSCAR CURSOS POR NOMBRE
-        public function actionBcxn(){
-            if( !isset($_POST['nombre']) ) {
-                echo "Ingrese un nombre";
-                return;
-            }
-                $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
-		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
-                // La variable es array por que criteria lo pide.
-		if ( $temp->temp_ano != 0 ){
-			$ano = array($temp->temp_ano);
-		} else {
-			$ano = array($par->par_descripcion);
-		}
-                          
-            echo "<h4>Cursos de: " . $_POST['nombre']."</h4>";
-            echo "<br><br>";
-            
-            $id_cruge = array($_POST['id']); 
-            
-                $criteria = new CDbCriteria();
-                $criteria->addInCondition('cur_ano', $ano, 'AND');
-                $criteria->addInCondition('cur_pjefe', $id_cruge, 'AND' );
-                $dataProvider=new CActiveDataProvider('Curso', array('criteria' => $criteria));
-			
-            $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));   
+    public function actionBcxn(){
+        if( !isset($_POST['nombre']) ) {
+            echo "Ingrese un nombre";
+            return;
         }
+            $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+	$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+            
+            // La variable es array por que criteria lo pide.
+	if ( $temp->temp_ano != 0 ){
+		$ano = array($temp->temp_ano);
+	} else {
+		$ano = array($par->par_descripcion);
+	}
+                      
+        echo "<h4>Cursos de: " . $_POST['nombre']."</h4>";
+        echo "<br><br>";
+        
+        $id_cruge = array($_POST['id']); 
+        
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('cur_ano', $ano, 'AND');
+            $criteria->addInCondition('cur_pjefe', $id_cruge, 'AND' );
+            $dataProvider=new CActiveDataProvider('Curso', array('criteria' => $criteria));
+		
+        $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));   
+    }
 }
 
 

@@ -5,8 +5,8 @@
  *
  * The followings are the available columns in table 'escala':
  * @property integer $esc_id
- * @property integer $esc_concepto
  * @property string $esc_descripcion
+ * @property integer $esc_concepto
  *
  * The followings are the available model relations:
  * @property Concepto $escConcepto
@@ -29,12 +29,12 @@ class Escala extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('esc_descripcion', 'required'),
+			array('esc_concepto', 'required'),
 			array('esc_concepto', 'numerical', 'integerOnly'=>true),
-			array('esc_descripcion', 'length', 'max'=>100),
+			array('esc_descripcion', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('esc_id, esc_concepto, esc_descripcion', 'safe', 'on'=>'search'),
+			array('esc_id, esc_descripcion, esc_concepto', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,8 +57,8 @@ class Escala extends CActiveRecord
 	{
 		return array(
 			'esc_id' => 'Esc',
-			'esc_concepto' => 'Esc Concepto',
 			'esc_descripcion' => 'Esc Descripcion',
+			'esc_concepto' => 'Esc Concepto',
 		);
 	}
 
@@ -81,8 +81,8 @@ class Escala extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('esc_id',$this->esc_id);
-		$criteria->compare('esc_concepto',$this->esc_concepto);
 		$criteria->compare('esc_descripcion',$this->esc_descripcion,true);
+		$criteria->compare('esc_concepto',$this->esc_concepto);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

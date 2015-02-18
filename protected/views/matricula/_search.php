@@ -6,55 +6,29 @@
 
 <div class="wide form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_id'); ?>
-		<?php echo $form->textField($model,'mat_id'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_id',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_ano'); ?>
-		<?php echo $form->textField($model,'mat_ano',array('size'=>4,'maxlength'=>4)); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_ano',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_cur'); ?>
-		<?php echo $form->textField($model,'mat_cur'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_numero',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_alu_id'); ?>
-		<?php echo $form->textField($model,'mat_alu_id'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_fingreso',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_fingreso'); ?>
-		<?php echo $form->textField($model,'mat_fingreso'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_fretiro',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_fretiro'); ?>
-		<?php echo $form->textField($model,'mat_fretiro'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_fcambio',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_fcambio'); ?>
-		<?php echo $form->textField($model,'mat_fcambio'); ?>
-	</div>
+                    <?php echo $form->textFieldControlGroup($model,'mat_alu_id',array('span'=>5)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'mat_numero'); ?>
-		<?php echo $form->textField($model,'mat_numero'); ?>
-	</div>
+        <div class="form-actions">
+        <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>
+    </div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->

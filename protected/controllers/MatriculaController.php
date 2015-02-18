@@ -1,91 +1,83 @@
 <?php
 
-class MatriculaController extends Controller {
+class MatriculaController extends Controller
+{
+	/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/column2';
 
-    /**
-     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-     * using two-column layout. See 'protected/views/layouts/column2.php'.
-     */
-    public $layout = '//layouts/column2';
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
 
-    /**
-     * @return array action filters
-     */
-    public function filters() {
-        return array(array('CrugeAccessControlFilter'));
-    }
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view','retirar'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update','retirar'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete','retirar'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
-    public function accessRules() {
-        return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
-                'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
-        );
-    }
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionView($id)
+	{
+		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
 
-    /**
-     * Displays a particular model.
-     * @param integer $id the ID of the model to be displayed
-     */
-    public function actionView($id) {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
-        ));
-    }
-
-    /**
-     * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     */
-    public function actionCreate() {
-        $model = new Matricula;
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionCreate()
+	{
+		$model = new Matricula;
         $alumno = new Alumno;
         
         //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
-
-        //Cursos del año actual
-        $anio = implode(CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ano_activo"')),'par_item','par_descripcion'));
-        $curso_lista = Curso::model()->findAll(array('condition'=>'cur_ano="'.$anio.'"'));
-        $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
-        $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
-
-        for($i=0;$i<count($curso_lista);$i++){
-            $cur_actual[$curso_lista[$i]->cur_id] = "".$nivel[$curso_lista[$i]->cur_nivel]." ".$letra[$curso_lista[$i]->cur_letra];
-        }
-
+        
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
-
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
-
             $model->mat_alu_id = 1;
             $model->mat_ano = date('Y');
             $model->mat_fingreso = date('Y-m-d');
-
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
-
             if ($valid){
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id;
@@ -95,37 +87,31 @@ class MatriculaController extends Controller {
                 }
             }
         }
-
         $this->render('create', array(
             'model' => $model,
             'alumno' => $alumno,
             'region'=>$region,
-            'cur_actual'=>$cur_actual,
         ));
-    }
+	}
 
-    /**
-     * Updates a particular model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id the ID of the model to be updated
-     */
-    public function actionUpdate($id) {
-        $model = $this->loadModel($id);
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+		$model = $this->loadModel($id);
         $alumno = new Alumno;
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
-
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if (isset($_POST['Matricula'],$_POST['Alumno'])) {
-
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
-
             $model->mat_alu_id = 1;
             $model->mat_ano = date('Y');
             $model->mat_fingreso = date('Y-m-d');
-
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
@@ -137,43 +123,37 @@ class MatriculaController extends Controller {
                 }
             }
         }
-
         $this->render('update', array(
             'model' => $model,
             'alumno' => $alumno,
             'region'=>$region,
         ));
-    }
+	}
 
-    /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
-     * @param integer $id the ID of the model to be deleted
-     */
-    public function actionDelete($id) {
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDelete($id) {
         $this->loadModel($id)->delete();
-
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
-
     public function actionRetirar($id) {
             // FALTA CAMBIAR EL ESTADO  A RETIRADO; AUN NO SE DEFINEN LOS ESTADOS Y SUS NUMEROS.
         $model = $this->loadModel($id);
-
         $alumno = Alumno::model()->findBypk($id);       
             $nombre = $alumno['alum_nombres'];
             $apepat = $alumno['alum_apepat'];
             $apemat = $alumno['alum_apemat'];
-
        
         if (isset($_POST['Matricula'])) {
             $model->attributes = $_POST['Matricula'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->mat_id));
         }
-
         $this->render('retirar', array(
             'model' => $model,
             'nombre' => $nombre,
@@ -182,7 +162,6 @@ class MatriculaController extends Controller {
         
         ));
     }
-
     /**
      * Lists all models.
      */
@@ -192,7 +171,6 @@ class MatriculaController extends Controller {
             'dataProvider' => $dataProvider,
         ));
     }
-
     /**
      * Manages all models.
      */
@@ -201,12 +179,10 @@ class MatriculaController extends Controller {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Matricula']))
             $model->attributes = $_GET['Matricula'];
-
         $this->render('admin', array(
             'model' => $model,
         ));
     }
-
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
@@ -220,7 +196,6 @@ class MatriculaController extends Controller {
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
-
     /**
      * Performs the AJAX validation.
      * @param Matricula $model the model to be validated
@@ -231,5 +206,4 @@ class MatriculaController extends Controller {
             Yii::app()->end();
         }
     }
-
 }

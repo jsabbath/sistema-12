@@ -1,7 +1,9 @@
 <?php
 /* @var $this MatriculaController */
 /* @var $model Matricula */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Matriculas'=>array('index'),
 	$model->mat_id,
@@ -18,16 +20,18 @@ $this->menu=array(
 
 <h1>View Matricula #<?php echo $model->mat_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView',array(
+    'htmlOptions' => array(
+        'class' => 'table table-striped table-condensed table-hover',
+    ),
+    'data'=>$model,
+    'attributes'=>array(
 		'mat_id',
 		'mat_ano',
-		'mat_cur',
-		'mat_alu_id',
+		'mat_numero',
 		'mat_fingreso',
 		'mat_fretiro',
 		'mat_fcambio',
-		'mat_numero',
+		'mat_alu_id',
 	),
 )); ?>

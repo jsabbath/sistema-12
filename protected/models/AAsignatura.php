@@ -5,15 +5,14 @@
  *
  * The followings are the available columns in table 'a_asignatura':
  * @property integer $aa_id
+ * @property integer $aa_docente
  * @property integer $aa_curso
  * @property integer $aa_asignatura
- * @property integer $aa_docente
  *
  * The followings are the available model relations:
+ * @property Usuario $aaDocente
  * @property Curso $aaCurso
  * @property Asignatura $aaAsignatura
- * @property Usuario $aaDocente
- * @property Notas[] $notases
  */
 class AAsignatura extends CActiveRecord
 {
@@ -33,11 +32,10 @@ class AAsignatura extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('aa_curso, aa_asignatura, aa_docente', 'required'),
-			array('aa_curso, aa_asignatura, aa_docente', 'numerical', 'integerOnly'=>true),
+			array('aa_docente, aa_curso, aa_asignatura', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('aa_id, aa_curso, aa_asignatura, aa_docente', 'safe', 'on'=>'search'),
+			array('aa_id, aa_docente, aa_curso, aa_asignatura', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,10 +47,9 @@ class AAsignatura extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'aaDocente' => array(self::BELONGS_TO, 'Usuario', 'aa_docente'),
 			'aaCurso' => array(self::BELONGS_TO, 'Curso', 'aa_curso'),
 			'aaAsignatura' => array(self::BELONGS_TO, 'Asignatura', 'aa_asignatura'),
-			'aaDocente' => array(self::BELONGS_TO, 'Usuario', 'aa_docente'),
-			'notases' => array(self::HAS_MANY, 'Notas', 'not_aa'),
 		);
 	}
 
@@ -62,10 +59,10 @@ class AAsignatura extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'aa_id' => 'Asignar id',
-			'aa_curso' => 'Asignar Curso',
-			'aa_asignatura' => 'Asignar Asignatura',
-			'aa_docente' => 'Asignar Docente',
+			'aa_id' => 'Aa',
+			'aa_docente' => 'Aa Docente',
+			'aa_curso' => 'Aa Curso',
+			'aa_asignatura' => 'Aa Asignatura',
 		);
 	}
 
@@ -88,9 +85,9 @@ class AAsignatura extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('aa_id',$this->aa_id);
+		$criteria->compare('aa_docente',$this->aa_docente);
 		$criteria->compare('aa_curso',$this->aa_curso);
 		$criteria->compare('aa_asignatura',$this->aa_asignatura);
-		$criteria->compare('aa_docente',$this->aa_docente);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
