@@ -270,12 +270,13 @@ class UiController extends Controller
                     if ($boolIsUserManagement == true) {
                         $this->redirect(array('usermanagementadmin'));
                     } else {
-                        $this->redirect(array('usersaved', 'layout' => $this->layout));
+                        //$this->redirect(array('usersaved', 'layout' => $this->layout));
+                        $this->redirect(array('/site/index'));
                     }
                 }
             }
         }
-        $this->render(
+        $this->renderPartial(
             "usermanagementupdate",
             array(
                 'model' => $model

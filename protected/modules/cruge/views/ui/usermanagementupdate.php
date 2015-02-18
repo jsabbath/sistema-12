@@ -8,8 +8,10 @@
 	*/
 ?>
 <h1><?php echo ucwords(CrugeTranslator::t(	
-	$boolIsUserManagement ? "editando usuario" : "editando tu perfil"
+	$boolIsUserManagement ? "Cambiando Contraseña" : "Cambiando Contraseña"
 ));?></h1>
+
+
 <div class="form">
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id'=>'crugestoreduser-form',
@@ -22,13 +24,13 @@
 
 		<h6><?php echo ucfirst(CrugeTranslator::t("datos de la cuenta"));?></h6>
 		<div class='col'>
-			<?php echo $form->labelEx($model,'username'); ?>
-			<?php echo $form->textField($model,'username'); ?>
+			
+			<?php echo $form->hiddenField($model,'username'); ?>
 			<?php echo $form->error($model,'username'); ?>
 		</div>
 		<div class='col'>
-			<?php echo $form->labelEx($model,'email'); ?>
-			<?php echo $form->textField($model,'email'); ?>
+			
+			<?php echo $form->hiddenField($model,'email'); ?>
 			<?php echo $form->error($model,'email'); ?>
 		</div>
 		<div class='col'>
@@ -43,12 +45,13 @@
 					alert("error: "+e.responseText);
 				}
 			</script>
-			<?php echo CHtml::ajaxbutton(
+			<!-- <?php/* echo CHtml::ajaxbutton(
 				CrugeTranslator::t("Generar una nueva clave")
 				,Yii::app()->user->ui->ajaxGenerateNewPasswordUrl
 				,array('success'=>new CJavaScriptExpression('fnSuccess'),
 					'error'=>new CJavaScriptExpression('fnError'))
-			); ?>
+			); */?>
+                              !-->
 		</div>
 	</div>
 	

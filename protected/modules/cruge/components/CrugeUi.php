@@ -270,6 +270,11 @@ class CrugeUi extends CComponent
 
         actualmente este metodo se invoca desde /cruge/layouts/ui.php
     */
+    public function getProfileUrl(){
+        return $this->getEditProfileUrl();
+    }
+    
+    
     public function getAdminItems()
     {
         return array(

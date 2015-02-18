@@ -126,9 +126,15 @@ $tempid = $temp->temp_id;
                                     'htmlOptions' => array('class' => 'pull-right'),
                                     'items' => array(
                                         array('label' =>$nombre, 'icon' => 'user', 'items' => array(
-                                                array('label' => 'Cambiar Contraseña', 'url' => '#' ,'icon' => 'wrench'  ),
+                                                array('label' => 'Cambiar Contraseña','url' => '#',
+                                                                                    'icon' => 'wrench', 
+                                                                                    'data-toggle' => 'modal',
+                                                                                    'data-target' => '#cambio_modal',
+                                                                                    'id' => 'contraseña',
+                                                    ),
+                                            
                                                 array('label' => 'Salir', 'url' => '#', 'icon' => 'off', 'visible' => !Yii::app()->user->isGuest, 'data-toggle' => 'modal','data-target' => '#myModal',),
-                                                )
+                                            )
                                         ),
                                     ),
                                 ),
@@ -139,7 +145,7 @@ $tempid = $temp->temp_id;
                 </div>
             </div>
 
-            
+
           
             
 
@@ -158,7 +164,7 @@ $tempid = $temp->temp_id;
         </div><!-- page -->
     <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 
-        
+        <!-- DESLOGEAR !-->
     <?php $this->widget('bootstrap.widgets.TbModal', array(
             'id' => 'myModal',
             'header' => 'Esta Seguro?',
@@ -169,12 +175,35 @@ $tempid = $temp->temp_id;
                     TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
             ),
     )); ?>
+                
+         
+         
+          <!-- CAMBIAR CONTRASEÑA !-->
+     <?php $this->widget('bootstrap.widgets.TbModal', array(
+            'id' => 'cambio_modal',
+            'header' => '<h4>Cambiando Contraseña</h4>',
+            'content' => '<div id="cambio">  </div>',
+            'htmlOptions' => array ('url' => Yii::app()->user->ui->getProfileUrl()),
+            'footer' => array(
+                 //   TbHtml::linkButton('Salir',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
+                    TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
+            ),
+    )); ?>    
+        
+  
 
 <script type="text/javascript">
 $(function () { $("[data-toggle='tooltip']").tooltip(); });
 
 
-
+$("#contraseña").click(function(){
+            $.ajax({
+                type:  'post',
+                url: "<?php echo Yii::app()->user->ui->getProfileUrl() ?>" ,
+                success: function(result){ 
+                    $("#cambio").html(result)}
+            });
+})
 </script>
     </body>
 </html>
