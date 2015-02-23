@@ -1,3 +1,5 @@
+
+
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
@@ -97,7 +99,6 @@ $asignatura = Asignatura::model()->findAll();
 $("#agregar").click(function(){
             $.ajax({
                 type:  'post',
-                async: true,
                 url: "<?php echo Yii::app()->createUrl('//aasignatura/create'); ?>" ,
                 success: function(result){ 
                     $("#cambio").html(result)}

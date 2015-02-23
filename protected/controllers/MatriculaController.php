@@ -251,8 +251,6 @@ class MatriculaController extends Controller
     }
 
      public function actionRetirar() {
-        // FALTA CAMBIAR EL ESTADO  A RETIRADO; AUN NO SE DEFINEN LOS ESTADOS Y SUS NUMEROS.
-            
             $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
             $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
             
@@ -266,21 +264,25 @@ class MatriculaController extends Controller
         if(isset($_POST['fecha'])){
             $fecha_retiro = $_POST['fecha'];
             $id_alum = $_POST['id'];
-           // $estado = $_POST['estado'];
-            //CVarDumper::dump($fecha_retiro);
+
+            // se obtiene matricula del alumno
             $matricula = Matricula::model()->findByAttributes(array('mat_alu_id' => $id_alum, 'mat_ano' => $ano));
-            //$matricula = Matricula::model()->findAllByAttributes(array('condition' => 'mat_id=:x AND mat_ano=:j' , 'params' => array(':x' => $id_alum, ':j' => $ano )));
-            $matricula->mat_fretiro = $fecha_retiro;
-            //CVarDumper::dump($matricula);
-           
-           if($matricula->save()){
-                 $alumno = Alumno::model()->findByAttributes(array('alum_id' => $id_alum ));
-                // CVarDumper::dump($alumno);
-                 $alumno->alum_estado = 0;//RETIRADO
-                 if($alumno->save()){
-                   CVarDumper::dump("disco disco good good");
+
+            if($matricula){
+                $matricula->mat_fretiro = $fecha_retiro;
+                if($matricula->save()){
+                    $alumno = Alumno::model()->findByAttributes(array('alum_id' => $id_alum ));
+                    $alumno->alum_estado = 0;//RETIRADO
+                    if($alumno->save()){
+                         Yii::app()->user->setFlash('success', "Alumno Retirado con Exito!");
+                    }
                 }
+            }else{
+                Yii::app()->user->setFlash('error', "El alumno esta matriculado  en otro año!");
             }
+
+        }else{
+            Yii::app()->user->setFlash('notice', "Ingrese Fecha de retiro!");
         }      
     }
     

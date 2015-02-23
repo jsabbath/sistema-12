@@ -77,9 +77,7 @@ $('.search-form form').submit(function(){
 <br>
 
 <div id ="ajax_op">
-    
-    los cursos van  aka
-    
+
 </div>
 
 

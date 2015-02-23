@@ -27,6 +27,7 @@ $this->menu=array(
 	array('label'=>'Create Matricula', 'url'=>array('create')),
 );
 
+
 ?>
 
 <h1>Retirar Alumno</h1>
@@ -47,10 +48,11 @@ $this->menu=array(
 
 <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
 
-   
  
-    <div  id="hiddenpls">
+    <div  id="hiddenpls" style="display: none">
 
+        
+   <hr>
         <div>
             <!--  Se muestra al buscar    !-->
             <?php echo TbHtml::textField('Text', '',
@@ -231,10 +233,4 @@ $this->menu=array(
         if( value != "") 
             return value;
     }   */       
-</script>
-
-<script>
-    if(!$('#pn').val()){
-        $('#hiddenpls').hide();
-    }
 </script>

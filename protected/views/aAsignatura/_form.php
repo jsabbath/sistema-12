@@ -128,6 +128,10 @@
        		 $.ajax({
                     url: '<?php echo $this->createUrl('aAsignatura/Buscar_asignatura'); ?>',
                     dataType: "json",
+                    appendTo: "#asignatura_auto",    // <-- do this
+                    close: function (event, ui){
+                        $(this).autocomplete("option","appendTo","#asignatura_auto");  // <-- and do this  
+                    },
                     data: { term: request.term },
                     success: function(data) {
                                 response($.map(data, function(item) {

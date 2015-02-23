@@ -146,8 +146,18 @@ $tempid = $temp->temp_id;
             </div>
 
 
-          
-            
+           <div class='info' style='text-aling:left;'>
+                <?php
+                $flashMessages = Yii::app()->user->getFlashes();
+                if ($flashMessages) {
+                    echo '<ul class="flashes">';
+                    foreach ($flashMessages as $key => $message) {
+                        echo '<li><div class="flash-' . $key . '">' . $message . "</div></li>\n";
+                    }
+                    echo '</ul>';
+                }
+                ?>
+            </div>
 
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
@@ -157,9 +167,14 @@ $tempid = $temp->temp_id;
                 ?><!-- breadcrumbs -->
             <?php endif ?>
 
+            
+
             <?php echo $content; ?>
 
             <div class="clear"></div>
+
+
+
 
         </div><!-- page -->
     <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
@@ -207,3 +222,11 @@ $("#contraseña").click(function(){
 </script>
     </body>
 </html>
+
+<?php
+if (strcmp("" . Yii::app()->request->url, Yii::app()->baseUrl . "/index.php/site/index") <> 0 and strcmp("" . Yii::app()->request->url, Yii::app()->baseUrl . "/index.php") <> 0 and strcmp("" . Yii::app()->request->url, Yii::app()->baseUrl . "/") <> 0) {
+    Yii::app()->clientScript->registerScript(
+            'myHideEffect', '$(".info").animate({opacity: 1.0}, 10000).slideUp("slow");', CClientScript::POS_READY
+    );
+}
+?>
