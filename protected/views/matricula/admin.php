@@ -1,3 +1,17 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/rut.js" type="text/javascript"></script> 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#rut_button').Rut({
+            format_on: 'keyup',
+ 
+        });
+    })
+    
+</script>
+
 <?php
 /* @var $this MatriculaController */
 /* @var $model Matricula */
@@ -13,71 +27,214 @@ $this->menu=array(
 	array('label'=>'Create Matricula', 'url'=>array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#matricula-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
-<h1>Manage Matriculas</h1>
+<h1>Retirar Alumno</h1>
+  
+<h5>Ingrese el NOMBRE o el RUT del alumno</h5>
 
-<p>
-    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
-        &lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+ <?php echo CHtml::textField('Text', '',
+    array('id'=>'pn',
+        'placeholder' => 'Ingrese nombre Alumno',))?>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
 
-<?php $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'matricula-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'mat_id',
-		'mat_ano',
-		'mat_numero',
-		'mat_fingreso',
-		'mat_fretiro',
-		'mat_fcambio',
-		/*
-		'mat_alu_id',
-		*/
-		array('class' => 'CButtonColumn',
-            'template' => '{update} {view} {retirar}',
-            'buttons' => array(
-                'update' => array(
-                    'label' => '',
-                    'imageUrl' => '',
-                    'options' => array('class' => 'icon-edit'),
-                ),
-                'view' => array(
-                    'label' => '',
-                    'imageUrl' => '',
-                    'options' => array('class' => 'icon-search'),
-                ),
-                'retirar' => array(
-                    'label' => 'Retirar alumno',
-                    'imageUrl' => '',
-                    // $data trae todo los atributos del modelo por la xuxa
-                    'url' => 'Yii::app()->createUrl("matricula/retirar", array("id"=>$data->mat_id))', 
-                    //'click'=>'function(){$this->render(matricula/retirar )}',
-                    'options' => array('class' => 'icon-remove'),
-                ),
+
+ <?php echo CHtml::textField('Text', '',
+    array('id'=>'rut_button',
+        'placeholder' => 'Ingrese Rut Alumno',))?>
+
+
+
+<?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
+
+   
+ 
+    <div  id="hiddenpls">
+
+        <div>
+            <!--  Se muestra al buscar    !-->
+            <?php echo TbHtml::textField('Text', '',
+                array('id'=>'nombres',
+                    'placeholder' => 'Nombres',
+                    'disabled'=>'disabled',
+
+                    ))?>
+            
+            <?php echo Tbhtml::hiddenField('Text','',array('id' => 'id',)); ?>
+
+            <!--  Se muestra al buscar    !-->
+            <?php echo TbHtml::textField('Text', '',
+                array('id'=>'apellido',
+                    'placeholder' => 'Apellidos',
+                    'disabled'=>'disabled',
+                     ))?>
+            
+            <!--  Se muestra al buscar    !-->
+            <?php echo TbHtml::textField('Text', '',
+              array('id'=>'rut_',
+                  'placeholder' => 'RUT',
+                  'disabled'=>'disabled',
+                  ))?>
+        
+        </div>
+
+
+           <h5> Ingrese la Fecha de retiro</h5>
+
+
+        <?php echo CHtml::dateField('Text', '',array('id'=>'fecha','placeholder' => 'fecha',))?>
+        <!-- <?php //echo CHtml::textField('Text', '',array('id' =>'estado','placeholder' => 'Estado'))?> !-->
+
+
+         <!--  Se muestra al buscar    !-->
+        <?php echo TbHtml::button('',array(
+                                        'color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+                                        'id' =>'retirar',
+                                        'style'=>'margin-bottom:10px',
+                                        'icon' => 'remove',
+                                       //'style' => 'float: right',
+                                       // 'data-toggle' => 'modal',
+                                        //'data-target' => '#cambio_modal',
+                                        'ajax' =>
+                                            array('type'=>'POST',
+                                                'url'=>$this->createUrl('retirar'), // Buscar cursos por nombre
+                                                'update'=>'#fecha_retirar',
+                                                'data'=>array('id'=>'js:getId()','fecha'=>'js:getFecha()',/*'estado'=>'js:getEstado()',*/),
+                                                'success'=> 'function(){location.reload();}'
+                                            )
+                                        )
+            )?>
+    
+
+
+
+      
+    </div>
+
+
+
+     
+
+
+ <!-- Asignar Asignatura 
+     <?php /*$this->widget('bootstrap.widgets.TbModal', array(
+            'id' => 'cambio_modal',
+            'header' => '<h4>Asignar Asignatura</h4>',
+            'content' => '<div id="cambio">  </div>',
+            'htmlOptions' => array ('url' => Yii::app()->user->ui->getProfileUrl()),
+            'footer' => array(
+                  //  TbHtml::linkButton('Retirar',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
+                    TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
             ),
-        ),
-	),
-)); ?>
+    ));*/ ?>    
+        
+!-->
+
+<script>
+	$(function(){
+        $('#pn').autocomplete({
+       		 source : function( request, response ) {
+       		 $.ajax({
+                    url: "<?php echo $this->createUrl('matricula/Buscar_alum'); ?>",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function(data) {
+                                response($.map(data, function(item) {
+                                            return {
+                                                    label: item.nombres +'/' + item.apellido,
+                                                    apellido: item.apellido + ' ' + item.apellido2,
+                                                    nombres: item.nombres,
+                                                    id: item.id,
+                                                    rut: item.rut,
+                                                    }
+                                        }))
+                               
+                            }
+
+                        })
+    		    },
+                    select: function(event, ui) {
+                        $("#nombres").val(ui.item.nombres)
+                        $("#apellido").val(ui.item.apellido)
+                        $("#id").val(ui.item.id)   
+                        $("#rut_").val(ui.item.rut)
+                        if( $('#pn').val() ) {
+                            $('#hiddenpls').show();
+                        }
+                    }});
+    	 });
+</script>    
+    
+
+<script>
+     $("#limpiar").on('click', function() {
+                        $("#nombres").val(""),
+                        $("#apellido").val(""),
+                        $("#pn").val(""),
+                        $("#id").val(""),
+                        $("#rut_").val("")
+                        $("#rut_button").val("")
+                        $("#fecha_retirar").replaceWith(" <div id='fecha_retirar'>  </div> ")
+                        $('#hiddenpls').hide()
+                    });
+</script>
+
+<script>
+	$(function(){
+        $('#rut_button').autocomplete({
+       		 source : function( request, response ) {
+       		 $.ajax({
+                    url: '<?php echo $this->createUrl('matricula/Buscar_rut'); ?>',
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function(data) {
+                                response($.map(data, function(item) {
+                                            return {
+                                                    label: item.rut,
+                                                    apellido: item.apellido + ' ' + item.apellido2,
+                                                    nombres: item.nombres,
+                                                    id: item.id,
+                                                    rut: item.rut,
+                                                    }
+                                        }))
+                            }
+                        })
+	              },
+                    select: function(event, ui) {
+                        $("#nombres").val(ui.item.nombres)
+                        $("#apellido").val(ui.item.apellido)
+                        $("#id").val(ui.item.id)   
+                        $("#rut_").val(ui.item.rut)
+                        if( $('#rut_button').val() ) {
+                            $('#hiddenpls').show();
+                        }
+                    }});
+    	 });
+</script>
+
+
+<script>
+    function getId(){ 
+        var value= $("#id").val();
+        if( value != "") 
+            return value;
+    }         
+
+    function getFecha(){ 
+        var value= $("#fecha").val();
+        if( value != "") 
+            return value;
+    } 
+
+  /*  function getEstado(){ 
+        var value= $("#estado").val();
+        if( value != "") 
+            return value;
+    }   */       
+</script>
+
+<script>
+    if(!$('#pn').val()){
+        $('#hiddenpls').hide();
+    }
+</script>

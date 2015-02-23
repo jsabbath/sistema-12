@@ -7,9 +7,7 @@
 			true o false.  si es true indica que esta operandose bajo el action de adminstracion de usuarios, si es false indica que se esta operando bajo 'editar tu perfil'
 	*/
 ?>
-<h1><?php echo ucwords(CrugeTranslator::t(	
-	$boolIsUserManagement ? "Cambiando Contraseña" : "Cambiando Contraseña"
-));?></h1>
+
 
 
 <div class="form">

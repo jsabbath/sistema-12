@@ -74,7 +74,7 @@ class AAsignaturaController extends Controller
 				$this->redirect(array('view','id'=>$model->aa_id));
 		}
 
-		$this->render('create',array(
+		$this->renderPartial('create',array(
 			'model'=>$model,
 		));
 	}

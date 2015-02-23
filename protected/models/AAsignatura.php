@@ -60,9 +60,9 @@ class AAsignatura extends CActiveRecord
 	{
 		return array(
 			'aa_id' => 'Aa',
-			'aa_docente' => 'Aa Docente',
-			'aa_curso' => 'Aa Curso',
-			'aa_asignatura' => 'Aa Asignatura',
+			'aa_docente' => 'Docente',
+			'aa_curso' => 'Curso',
+			'aa_asignatura' => 'Asignatura',
 		);
 	}
 

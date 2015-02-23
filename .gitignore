@@ -6,3 +6,5 @@ themes/classic/views/
 protected/config/*.php
 /*.php
 /nbproject/private/
+protected/config/database.php
+protected/runtime/application.log

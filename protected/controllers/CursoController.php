@@ -51,8 +51,22 @@ class CursoController extends Controller
 	 */
 	public function actionView($id)
 	{
+            $id_asig = array();
+         
+            $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id )));
+            
+            foreach ( $asignadas as $p ){
+                $id_asig[] = $p->aa_asignatura;
+                //array_push($id_asig, $p->aa_asignatura);
+            }
+            
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('asi_id', $id_asig, 'OR');
+            $asignaturas=new CActiveDataProvider('Asignatura', array('criteria' => $criteria));
+	                
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+                        'asig' => $asignaturas,
 		));
 	}
 
@@ -309,5 +323,4 @@ class CursoController extends Controller
         $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));   
     }
 }
-
 

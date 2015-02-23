@@ -148,7 +148,7 @@ $('.search-form form').submit(function(){
                         $("#apellido").val(""),
                         $("#pn").val(""),
                         $("#id_cruge").val("")
-                        $("#ajax_op").replaceWith(" <div id='ajax_op'>  se vacio la listax </div> ")
+                        $("#ajax_op").replaceWith(" <div id='ajax_op'>  </div> ")
                     });
                     
                     

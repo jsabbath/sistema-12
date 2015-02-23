@@ -28,15 +28,15 @@ class MatriculaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -141,27 +141,7 @@ class MatriculaController extends Controller
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
-    public function actionRetirar($id) {
-            // FALTA CAMBIAR EL ESTADO  A RETIRADO; AUN NO SE DEFINEN LOS ESTADOS Y SUS NUMEROS.
-        $model = $this->loadModel($id);
-        $alumno = Alumno::model()->findBypk($id);       
-            $nombre = $alumno['alum_nombres'];
-            $apepat = $alumno['alum_apepat'];
-            $apemat = $alumno['alum_apemat'];
-       
-        if (isset($_POST['Matricula'])) {
-            $model->attributes = $_POST['Matricula'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->mat_id));
-        }
-        $this->render('retirar', array(
-            'model' => $model,
-            'nombre' => $nombre,
-            'apepat' => $apepat,
-            'apemat' => $apemat,
-        
-        ));
-    }
+
     /**
      * Lists all models.
      */
@@ -206,4 +186,102 @@ class MatriculaController extends Controller
             Yii::app()->end();
         }
     }
+    
+    
+    public function actionBuscar_Alum()
+    {
+        $criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+        
+        $cdtns[] = "LOWER(alum_nombres) like LOWER(:busq)";
+        
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
+
+        $data = Alumno::model()->findAll($criterio);
+        
+                
+        foreach($data as $item) {  
+            $resultado[] = array (
+                //'id_cruge' => $item->usu_iduser,
+                'id'        => $item->alum_id,
+                'nombres'   => $item->alum_nombres,
+                'apellido'  => $item->alum_apepat,
+                'rut'       => $item->alum_rut,
+                'apellido2' => $item->alum_apemat,
+            );
+        }
+
+        echo CJSON::encode($resultado);
+    }
+    
+        public function actionBuscar_rut()
+    {
+        $criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+        
+        $cdtns[] = "LOWER(alum_rut) like LOWER(:busq)";
+        
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
+
+        $data = Alumno::model()->findAll($criterio);
+        
+                
+        foreach($data as $item) {  
+            $resultado[] = array (
+                //'id_cruge' => $item->usu_iduser,
+                'id'        => $item->alum_id,
+                'nombres'   => $item->alum_nombres,
+                'apellido'  => $item->alum_apepat,
+                'rut'       => $item->alum_rut,
+                'apellido2' => $item->alum_apemat,
+            );
+        }
+
+        echo CJSON::encode($resultado);
+    }
+
+     public function actionRetirar() {
+        // FALTA CAMBIAR EL ESTADO  A RETIRADO; AUN NO SE DEFINEN LOS ESTADOS Y SUS NUMEROS.
+            
+            $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+            $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+            
+            if ( $temp->temp_ano != 0 ){
+                $ano = $temp->temp_ano;
+            } else {
+                $ano = $par->par_descripcion;
+            }
+
+        // ID DEL ALUMNO
+        if(isset($_POST['fecha'])){
+            $fecha_retiro = $_POST['fecha'];
+            $id_alum = $_POST['id'];
+           // $estado = $_POST['estado'];
+            //CVarDumper::dump($fecha_retiro);
+            $matricula = Matricula::model()->findByAttributes(array('mat_alu_id' => $id_alum, 'mat_ano' => $ano));
+            //$matricula = Matricula::model()->findAllByAttributes(array('condition' => 'mat_id=:x AND mat_ano=:j' , 'params' => array(':x' => $id_alum, ':j' => $ano )));
+            $matricula->mat_fretiro = $fecha_retiro;
+            //CVarDumper::dump($matricula);
+           
+           if($matricula->save()){
+                 $alumno = Alumno::model()->findByAttributes(array('alum_id' => $id_alum ));
+                // CVarDumper::dump($alumno);
+                 $alumno->alum_estado = 0;//RETIRADO
+                 if($alumno->save()){
+                   CVarDumper::dump("disco disco good good");
+                }
+            }
+        }      
+    }
+    
 }
