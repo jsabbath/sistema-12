@@ -63,18 +63,23 @@ class AAsignaturaController extends Controller
 	public function actionCreate()
 	{
 		$model=new AAsignatura;
-
+		if ( isset($_POST['id_curso']) ){ 
+			
+			$id_curso = $_POST['id_curso'];
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		 //$this->performAjaxValidation($model);
 
-		if(isset($_POST['AAsignatura']))
-		{
-			$model->attributes=$_POST['AAsignatura'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->aa_id));
+			if(isset($_POST['AAsignatura']))
+			{
+				$model->attributes=$_POST['AAsignatura'];
+				$model->aa_curso = $id_curso;
+				if($model->save())
+					$this->redirect(array('//curso/view','id'=>2));
+			}
 		}
 
 		$this->renderPartial('create',array(
+			'id_curso' => $id_curso,
 			'model'=>$model,
 		));
 	}

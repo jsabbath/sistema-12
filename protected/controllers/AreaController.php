@@ -68,9 +68,11 @@ class AreaController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['Area'])) {
+			$id_curso = $_POST['id'];
+
 			$model->attributes=$_POST['Area'];
 			if ($model->save()) {
-				$this->redirect(array('view','id'=>$model->are_id));
+				//$this->redirect(array('view','id'=>$model->are_id));
 			}
 		}
 
