@@ -322,5 +322,23 @@ class CursoController extends Controller
 		
         $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));   
     }
+
+    public function actionCursoAnoActual(){
+    	/*
+		La funcion devuelve un array con la ID y el nombre completo de los cursos
+		ejemplo: array('1'=>'PRIMERO A')
+    	*/
+
+    	$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
+		$curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
+		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+		for ($i=0; $i < count($curso); $i++) { 
+			$cursos_actuales[$i] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
+		}
+
+		return $cursos_actuales;
+    }
 }
 
