@@ -51,7 +51,7 @@ $this->menu=array(
  
     <div  id="hiddenpls" style="display: none">
 
-        
+
    <hr>
         <div>
             <!--  Se muestra al buscar    !-->

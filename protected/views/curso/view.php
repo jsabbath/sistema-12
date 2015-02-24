@@ -82,6 +82,7 @@ $asignatura = Asignatura::model()->findAll();
 )); ?>
 
 
+
      <!-- Asignar Asignatura !-->
      <?php $this->widget('bootstrap.widgets.TbModal', array(
             'id' => 'cambio_modal',
@@ -89,8 +90,9 @@ $asignatura = Asignatura::model()->findAll();
             'content' => '<div id="cambio">  </div>',
             'htmlOptions' => array ('url' => Yii::app()->user->ui->getProfileUrl()),
             'footer' => array(
-                 //   TbHtml::linkButton('Salir',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
+                    TbHtml::linkButton('Asignar',  array('data-dismiss' => 'modal', 'color' => TbHtml::BUTTON_COLOR_SUCCESS, 'url' =>'#','onclick' => '$("#aasignatura-form").submit()')),
                     TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
+
             ),
     )); ?>    
         
@@ -98,8 +100,9 @@ $asignatura = Asignatura::model()->findAll();
 <script >
 $("#agregar").click(function(){
             $.ajax({
-                type:  'post',
+                type:  'POST',
                 url: "<?php echo Yii::app()->createUrl('//aasignatura/create'); ?>" ,
+                data: { 'id_curso': <?php echo $model->cur_id ?> },
                 success: function(result){ 
                     $("#cambio").html(result)}
             });

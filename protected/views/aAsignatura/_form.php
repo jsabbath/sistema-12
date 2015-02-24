@@ -24,9 +24,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'aa_curso'); ?>
-		<?php echo $form->textField($model,'aa_curso'); ?>
-		<?php echo $form->error($model,'aa_curso'); ?>
+	
+		<?php echo $form->textField($model,'aa_curso',array( 'value'=> $id_curso,'disabled'=>'disabled',)); ?>
+
 	</div>
 
 	<div class="row">
@@ -76,9 +76,6 @@
         
         
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
 
 <?php $this->endWidget(); ?>
 

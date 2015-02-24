@@ -70,8 +70,8 @@ class AsignaturaController extends Controller
 		if(isset($_POST['Asignatura']))
 		{
 			$model->attributes=$_POST['Asignatura'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->asi_id));
+			//if($model->save())
+				//$this->redirect(array('view','id'=>$model->asi_id));
 		}
 
 		$this->render('create',array(
