@@ -116,9 +116,7 @@ $tempid = $temp->temp_id;
                                                 array('label' => 'Asignacion de Roles', 'url' => '#'),
                                                 array('label' => 'Asignacion de Roles', 'url' => '#'),
                                                 array('label' => 'Asignacion de Perfiles', 'url' => '#'),)),
-                                        array('label' => 'Parametros', 'items' => array(
-                                                array('label' => 'Calificaciones Parciales', 'url' => '#'),
-                                                array('label' => 'Informe de Personalidad', 'url' => '#'),)),
+                                        array('label' => 'Parametros', 'url'=>array('parametro/index')),
                                     ),
                                 ),
                                 array(

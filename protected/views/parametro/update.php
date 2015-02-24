@@ -1,7 +1,9 @@
 <?php
 /* @var $this ParametroController */
 /* @var $model Parametro */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Parametros'=>array('index'),
 	$model->par_id=>array('view','id'=>$model->par_id),
@@ -16,6 +18,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Parametro <?php echo $model->par_id; ?></h1>
+    <h1>Update Parametro <?php echo $model->par_id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

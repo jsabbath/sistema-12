@@ -1,7 +1,9 @@
 <?php
 /* @var $this ParametroController */
 /* @var $model Parametro */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Parametros'=>array('index'),
 	$model->par_id,
@@ -18,9 +20,12 @@ $this->menu=array(
 
 <h1>View Parametro #<?php echo $model->par_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView',array(
+    'htmlOptions' => array(
+        'class' => 'table table-striped table-condensed table-hover',
+    ),
+    'data'=>$model,
+    'attributes'=>array(
 		'par_id',
 		'par_item',
 		'par_descripcion',
