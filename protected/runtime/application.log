@@ -1435,3 +1435,66 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/sistema/index.php?r=gui
 ---
+2015/02/27 17:29:47 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/02/27 17:29:47 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/02/27 17:29:47 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/02/27 17:36:15 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/02/27 17:36:15 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/02/27 17:36:15 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/02/27 17:36:25 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/02/27 17:36:25 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/02/27 17:36:25 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)

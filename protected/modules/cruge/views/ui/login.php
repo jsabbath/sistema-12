@@ -35,7 +35,7 @@
                     if ($form->error($model, 'username') || $form->error($model, 'password')) {
                         //echo TbHtml::alert(TbHtml::ALERT_COLOR_ERROR, '<strong>ERROR!</strong> Ingrese datos nuevamente.');
                         echo '<script type="text/javascript">'
-                           , 'sweetAlert("Oops un error!!", "Escriba sus datos nuevamente", "error");'
+                           , 'sweetAlert("¡SE PRODUJO UN ERROR!", "Alguno de los datos ingresados no es correcto.", "error");'
                            , '</script>'
                         ;
 
