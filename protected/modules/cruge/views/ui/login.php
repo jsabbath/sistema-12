@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
 <?php if (Yii::app()->user->hasFlash('loginflash')): ?>
     <div class="flash-error">
@@ -31,10 +33,9 @@
                    
                     <?php
                     if ($form->error($model, 'username') || $form->error($model, 'password')) {
-                        echo "<br>";
                         //echo TbHtml::alert(TbHtml::ALERT_COLOR_ERROR, '<strong>ERROR!</strong> Ingrese datos nuevamente.');
                         echo '<script type="text/javascript">'
-                           , 'window.alert("Ingrese datos nuevamente");'
+                           , 'sweetAlert("Oops un error!!", "Escriba sus datos nuevamente", "error");'
                            , '</script>'
                         ;
 

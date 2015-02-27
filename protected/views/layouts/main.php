@@ -46,9 +46,9 @@ $tempid = $temp->temp_id;
 
     <body>
 
-        <div class="container" id="page">    
+        <div class="container" id="pagina">    
            
-            <div class="header">
+            <header>
                 <div class="container">
                 <div class="row">
                     <div class="span3">
@@ -62,7 +62,7 @@ $tempid = $temp->temp_id;
                     </div>
                 </div>
                 </div> 
-            </div>
+            </header>
             <div class="row">
             <div class="span12">
                 <div style="text-align: center">
@@ -84,9 +84,9 @@ $tempid = $temp->temp_id;
                 </button> 
                 </div>
             </div>
-        </div>
+            </div>
             <div class="row">
-                <div class="span12">
+            <div class="span12">
                     <?php
                     if (!Yii::app()->user->isGuest) {
                         $this->widget('bootstrap.widgets.TbNavbar', array(
@@ -142,8 +142,6 @@ $tempid = $temp->temp_id;
                     ?>
                 </div>
             </div>
-
-
            <div class='info' style='text-aling:left;'>
                 <?php
                 $flashMessages = Yii::app()->user->getFlashes();
@@ -166,8 +164,9 @@ $tempid = $temp->temp_id;
             <?php endif ?>
 
             
-
-            <?php echo $content; ?>
+            <div class="row">
+                <?php echo $content; ?>
+            </div>
 
             <div class="clear"></div>
 
