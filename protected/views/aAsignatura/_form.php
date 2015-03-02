@@ -25,7 +25,7 @@
 
 	<div class="row">
 	
-		<?php echo $form->textField($model,'aa_curso',array( 'value'=> $id_curso,'disabled'=>'disabled',)); ?>
+		<?php echo $form->hiddenField($model,'aa_curso',array( 'value'=> $id_curso,'disabled'=>'disabled',)); ?>
 
 	</div>
 
