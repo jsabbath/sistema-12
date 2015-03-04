@@ -14,4 +14,4 @@ $this->menu=array(
 ?>
 
 
-<?php $this->renderPartial('_form', array('model'=>$model, 'id_curso' => $id_curso)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,/* 'id_curso' => $id_curso*/)); ?>
