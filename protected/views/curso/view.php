@@ -21,9 +21,16 @@ $this->menu=array(
 
 $asignatura = Asignatura::model()->findAll();
 ?>
+
+<?php
+    
+
+?>
+
+
 <div class="row">
     <div class="span12">
-        <h1>Ver Curso #<?php echo $model->cur_nivel ," ", $model->cur_letra; ?></h1>
+        <h1><?php echo $niv ," ", $letra ?></h1>
     </div>
 </div>
 <div class="row">
