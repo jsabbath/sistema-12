@@ -72,7 +72,8 @@ class InformeDesarrolloController extends Controller
 			$model->attributes=$_POST['InformeDesarrollo'];
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->id_id));
-				$this->redirect(array('//area/nuevo','id'=>$model->id_id));
+				$id_informe = $model->id_id;
+				$this->redirect(array('//area/nuevo','id'=>$id_informe));
 		}
 
 		$this->render('create',array(

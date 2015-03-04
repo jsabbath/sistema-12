@@ -171,7 +171,7 @@ class AreaController extends Controller
 		}
 	}
 
-	public function actionNuevo(){
+	public function actionNuevo($id){
 		$model=new Area;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -186,6 +186,7 @@ class AreaController extends Controller
 
 		$this->render('nuevo',array(
 			'model'=>$model,
+			'id'=>$id,
 		));
 	}
 }
