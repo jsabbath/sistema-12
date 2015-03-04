@@ -32,6 +32,7 @@ class AAsignatura extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('aa_docente, aa_asignatura','required'),
 			array('aa_docente, aa_curso, aa_asignatura', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

@@ -28,15 +28,15 @@ class AAsignaturaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Buscar_asignatura'),
+				'actions'=>array('index','view','Buscar_asignatura','CursoAnoActual'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','Buscar_asignatura'),
+				'actions'=>array('create','update','Buscar_asignatura','CursoAnoActual'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','Buscar_asignatura'),
+				'actions'=>array('admin','delete','Buscar_asignatura','CursoAnoActual'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -62,24 +62,19 @@ class AAsignaturaController extends Controller
 	 */
 	public function actionCreate()
 	{
+
 		$model=new AAsignatura;
-		if ( isset($_POST['id_curso']) ){ 
-			
-			$id_curso = $_POST['id_curso'];
-		// Uncomment the following line if AJAX validation is needed
-		 //$this->performAjaxValidation($model);
+		$cursos = $this->actionCursoanoactual();
+		//if(isset($_POST['id_curso'])) $id_curso = $_POST['id_curso'];
 
-			if(isset($_POST['AAsignatura']))
-			{
-				$model->attributes=$_POST['AAsignatura'];
-				$model->aa_curso = $id_curso;
-				if($model->save())
-					$this->redirect(array('//curso/view','id'=>2));
-			}
+		if(isset($_POST['AAsignatura']))
+		{
+			$model->attributes=$_POST['AAsignatura'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->aa_id));
 		}
-
-		$this->renderPartial('create',array(
-			'id_curso' => $id_curso,
+		$this->renderPartial('_form',array(
+			'cursos' => $cursos,
 			'model'=>$model,
 		));
 	}
@@ -233,4 +228,30 @@ class AAsignaturaController extends Controller
 
             echo CJSON::encode($resultado);
         }
+    public function actionCursoAnoActual(){
+    	/*
+		La funcion devuelve un array con la ID y el nombre completo de los cursos
+		ejemplo: array('1'=>'PRIMERO A')
+    	*/
+    	 $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+	            
+	            // La variable es array por que criteria lo pide.
+		if ( $temp->temp_ano != 0 ){
+			$ano = $temp->temp_ano;
+		} else {
+			$ano = $par->par_descripcion;
+		}
+
+    	//$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
+		$curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
+		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+		for ($i=0; $i < count($curso); $i++) { 
+			$cursos_actuales[$i] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
+		}
+
+		return $cursos_actuales;
+    }
 }

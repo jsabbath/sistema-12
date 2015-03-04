@@ -1,3 +1,4 @@
+ 
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
      
@@ -11,28 +12,27 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'aasignatura-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+    'id'=>'aasignatura-form',
+    // Please note: When you enable ajax validation, make sure the corresponding
+    // controller action is handling ajax validation correctly.
+    // There is a call to performAjaxValidation() commented in generated controller code.
+    // See class documentation of CActiveForm for details on this.
+    'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-	
-		<?php echo $form->textField($model,'aa_curso',array( 'value'=> $id_curso,'disabled'=>'disabled',)); ?>
+    <div class="row">
+        <?php echo $form->DropdownList($model,'aa_curso',$cursos); ?>
+    </div>
 
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'aa_asignatura'); ?>
-		<?php echo $form->hiddenField($model,'aa_asignatura',array('id' => 'id_asignatura')); ?>
-		<?php echo $form->error($model,'aa_asignatura'); ?>
+    <div class="row">
+        <?php echo $form->labelEx($model,'aa_asignatura'); ?>
+        <?php echo $form->hiddenField($model,'aa_asignatura',array('id' => 'id_asignatura')); ?>
+        <?php echo $form->error($model,'aa_asignatura'); ?>
             
                 <?php echo CHtml::textField('Text', '',array('id'=>'asignatura_auto','placeholder' => 'Ingrese nombre Asignatura',))?>
                 <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
@@ -42,7 +42,7 @@
                                                     'data-placement'=>'top', 
                                                     'title'=>'Limpiar',
                                                     'style' => 'margin-bottom: 8.5px', ))?>
-	</div>
+    </div>
             
   
             <?php echo CHtml::textField('Text', '',array('id'=>'corto_asi','placeholder' => 'Nombre Corto',
@@ -52,10 +52,10 @@
                                                                             'disabled'=>'disabled',))?>
 
         
-	<div class="row">
-		<?php echo $form->labelEx($model,'aa_docente'); ?>
-		<?php echo $form->hiddenField($model,'aa_docente',array('id' => 'id_docente')); ?>
-		<?php echo $form->error($model,'aa_docente'); ?>
+    <div class="row">
+        <?php echo $form->labelEx($model,'aa_docente'); ?>
+        <?php echo $form->hiddenField($model,'aa_docente',array('id' => 'id_docente')); ?>
+        <?php echo $form->error($model,'aa_docente'); ?>
             
                 <?php echo CHtml::textField('Text', '',array('id'=>'docente_auto','placeholder' => 'Ingrese nombre Profesor',))?>
             
@@ -72,18 +72,17 @@
                                                                                 'disabled'=>'disabled',))?>
                 <?php echo CHtml::textField('Text', '',array('id'=>'apellido_doc','placeholder' => 'Apellidos',
                                                                                 'disabled'=>'disabled',))?>
-	
+    
         
         
-
 
 <?php $this->endWidget(); ?>
 
 <script>
-	$(function(){
+    $(function(){
         $('#docente_auto').autocomplete({
-       		 source : function( request, response ) {
-       		 $.ajax({
+             source : function( request, response ) {
+             $.ajax({
                     url: '<?php echo $this->createUrl('curso/Buscar_prof'); ?>',
                     dataType: "json",
                     data: { term: request.term },
@@ -98,7 +97,7 @@
                                         }))
                             }
                         })
-    		    },
+                },
                     select: function(event, ui) {
                         $("#nombre_doc").val(ui.item.nombre_doc)
                         $("#apellido_doc").val(ui.item.apellido_doc)
@@ -106,7 +105,7 @@
                     },
                    
                 })
-    	 });
+         });
 </script>            
         
 <script>
@@ -119,16 +118,16 @@
               
         
 <script>
-	$(function(){
+    $(function(){
         $('#asignatura_auto').autocomplete({
-       		 source : function( request, response ) {
-       		 $.ajax({
+             source : function( request, response ) {
+             $.ajax({
                     url: '<?php echo $this->createUrl('aAsignatura/Buscar_asignatura'); ?>',
                     dataType: "json",
-                    appendTo: "#asignatura_auto",    // <-- do this
+                    /*appendTo: "#asignatura_auto",    // <-- do this
                     close: function (event, ui){
                         $(this).autocomplete("option","appendTo","#asignatura_auto");  // <-- and do this  
-                    },
+                    },*/
                     data: { term: request.term },
                     success: function(data) {
                                 response($.map(data, function(item) {
@@ -142,7 +141,7 @@
                                         }))
                             }
                         })
-    		    },
+                },
                     select: function(event, ui) {
                         $("#nombre_asi").val(ui.item.nombre)
                         $("#corto_asi").val(ui.item.corto)
@@ -151,7 +150,7 @@
                     },
                    
                 })
-    	 });
+         });
 </script>   
 
 <script>
