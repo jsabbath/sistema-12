@@ -58,9 +58,9 @@ class Area extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'are_id' => 'Are',
-			'are_descripcion' => 'Are Descripcion',
-			'are_infd' => 'Are Infd',
+			'are_id' => 'ID',
+			'are_descripcion' => 'Area',
+			'are_infd' => 'Informe de desarrollo',
 		);
 	}
 

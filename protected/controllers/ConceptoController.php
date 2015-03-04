@@ -67,11 +67,11 @@ class ConceptoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Concepto'])) {
+		if(isset($_POST['Concepto']))
+		{
 			$model->attributes=$_POST['Concepto'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->con_id));
-			}
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class ConceptoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Concepto'])) {
+		if(isset($_POST['Concepto']))
+		{
 			$model->attributes=$_POST['Concepto'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->con_id));
-			}
 		}
 
 		$this->render('update',array(
@@ -110,17 +110,11 @@ class ConceptoController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if (Yii::app()->request->isPostRequest) {
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if (!isset($_GET['ajax'])) {
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-			}
-		} else {
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		}
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -141,9 +135,8 @@ class ConceptoController extends Controller
 	{
 		$model=new Concepto('search');
 		$model->unsetAttributes();  // clear any default values
-		if (isset($_GET['Concepto'])) {
+		if(isset($_GET['Concepto']))
 			$model->attributes=$_GET['Concepto'];
-		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -160,9 +153,8 @@ class ConceptoController extends Controller
 	public function loadModel($id)
 	{
 		$model=Concepto::model()->findByPk($id);
-		if ($model===null) {
+		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		}
 		return $model;
 	}
 
@@ -172,7 +164,8 @@ class ConceptoController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if (isset($_POST['ajax']) && $_POST['ajax']==='concepto-form') {
+		if(isset($_POST['ajax']) && $_POST['ajax']==='concepto-form')
+		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

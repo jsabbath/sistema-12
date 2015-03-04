@@ -1,9 +1,7 @@
 <?php
 /* @var $this ConceptoController */
 /* @var $model Concepto */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Conceptos'=>array('index'),
 	'Create',

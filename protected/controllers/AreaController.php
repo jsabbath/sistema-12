@@ -28,15 +28,15 @@ class AreaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','nuevo'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','nuevo'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','nuevo'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -67,13 +67,11 @@ class AreaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Area'])) {
-			$id_curso = $_POST['id'];
-
+		if(isset($_POST['Area']))
+		{
 			$model->attributes=$_POST['Area'];
-			if ($model->save()) {
-				//$this->redirect(array('view','id'=>$model->are_id));
-			}
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->are_id));
 		}
 
 		$this->render('create',array(
@@ -93,11 +91,11 @@ class AreaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Area'])) {
+		if(isset($_POST['Area']))
+		{
 			$model->attributes=$_POST['Area'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->are_id));
-			}
 		}
 
 		$this->render('update',array(
@@ -112,17 +110,11 @@ class AreaController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if (Yii::app()->request->isPostRequest) {
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if (!isset($_GET['ajax'])) {
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-			}
-		} else {
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		}
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -143,9 +135,8 @@ class AreaController extends Controller
 	{
 		$model=new Area('search');
 		$model->unsetAttributes();  // clear any default values
-		if (isset($_GET['Area'])) {
+		if(isset($_GET['Area']))
 			$model->attributes=$_GET['Area'];
-		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -162,9 +153,8 @@ class AreaController extends Controller
 	public function loadModel($id)
 	{
 		$model=Area::model()->findByPk($id);
-		if ($model===null) {
+		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		}
 		return $model;
 	}
 
@@ -174,9 +164,28 @@ class AreaController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if (isset($_POST['ajax']) && $_POST['ajax']==='area-form') {
+		if(isset($_POST['ajax']) && $_POST['ajax']==='area-form')
+		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionNuevo(){
+		$model=new Area;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Area']))
+		{
+			$model->attributes=$_POST['Area'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->are_id));
+		}
+
+		$this->render('nuevo',array(
+			'model'=>$model,
+		));
 	}
 }

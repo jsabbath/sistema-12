@@ -79,7 +79,7 @@ $tempid = $temp->temp_id;
                         )
                 ));  
                 ?>
-                <button class="btn btn-info disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
+                <button class="btn btn-inverse disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
                     <?php echo $ano_selec ?>
                 </button> 
                 </div>
@@ -109,7 +109,7 @@ $tempid = $temp->temp_id;
                                                 array('label' => 'Something else here', 'url' => '#'),)),
                                         array('label' => 'Calificaciones y Conducta', 'items' => array(
                                                 array('label' => 'Calificaciones Parciales', 'url' => '#'),
-                                                array('label' => 'Informe de Personalidad', 'url' => '#'),)),
+                                                array('label' => 'Informe de Personalidad', 'url' => array('informeDesarrollo/index')),)),
                                         array('label' => 'Administrar', 'items' => array(
                                                 array('label' => 'Perfil Establecimiento', 'url' => '#'),
                                                 array('label' => 'Administrar Usuarios', 'icon' => 'pencil', 'url' => Yii::app()->user->ui->userManagementAdminUrl, 'visible' => !Yii::app()->user->isGuest),

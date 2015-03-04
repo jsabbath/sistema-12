@@ -1,9 +1,7 @@
 <?php
 /* @var $this ConceptoController */
 /* @var $model Concepto */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Conceptos'=>array('index'),
 	$model->con_id,
@@ -20,12 +18,9 @@ $this->menu=array(
 
 <h1>View Concepto #<?php echo $model->con_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView',array(
-    'htmlOptions' => array(
-        'class' => 'table table-striped table-condensed table-hover',
-    ),
-    'data'=>$model,
-    'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model,
+	'attributes'=>array(
 		'con_id',
 		'con_descripcion',
 		'con_area',

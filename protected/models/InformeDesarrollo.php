@@ -30,6 +30,7 @@ class InformeDesarrollo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_descripcion', 'length', 'max'=>20),
+			array('id_descripcion','required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_id, id_descripcion', 'safe', 'on'=>'search'),
@@ -56,7 +57,7 @@ class InformeDesarrollo extends CActiveRecord
 	{
 		return array(
 			'id_id' => 'ID',
-			'id_descripcion' => 'Id Descripcion',
+			'id_descripcion' => 'Nombre de informe',
 		);
 	}
 

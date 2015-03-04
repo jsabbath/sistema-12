@@ -1,12 +1,12 @@
 <?php
 /* @var $this ConceptoController */
 /* @var $model Concepto */
-/* @var $form TbActiveForm */
+/* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
-    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+<?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'concepto-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -15,21 +15,26 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-    <p class="help-block">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-    <?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model); ?>
 
-            <?php echo $form->textFieldControlGroup($model,'con_descripcion',array('span'=>5,'maxlength'=>100)); ?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'con_descripcion'); ?>
+		<?php echo $form->textField($model,'con_descripcion',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'con_descripcion'); ?>
+	</div>
 
-            <?php echo $form->textFieldControlGroup($model,'con_area',array('span'=>5)); ?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'con_area'); ?>
+		<?php echo $form->textField($model,'con_area'); ?>
+		<?php echo $form->error($model,'con_area'); ?>
+	</div>
 
-        <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array(
-		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
-		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
-		)); ?>
-    </div>
+	<div class="row buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	</div>
 
-    <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 
 </div><!-- form -->

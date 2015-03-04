@@ -1,9 +1,7 @@
 <?php
 /* @var $this InformeDesarrolloController */
 /* @var $model InformeDesarrollo */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Informe Desarrollos'=>array('index'),
 	$model->id_id=>array('view','id'=>$model->id_id),
@@ -18,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-    <h1>Update InformeDesarrollo <?php echo $model->id_id; ?></h1>
+<h1>Update InformeDesarrollo <?php echo $model->id_id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

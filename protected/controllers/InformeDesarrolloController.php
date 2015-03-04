@@ -28,15 +28,15 @@ class InformeDesarrolloController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','listaConcepto'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','listaConcepto'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','listaConcepto'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -62,16 +62,17 @@ class InformeDesarrolloController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new InformeDesarrollo;
+		$model = new InformeDesarrollo;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['InformeDesarrollo'])) {
+		if(isset($_POST['InformeDesarrollo']))
+		{
 			$model->attributes=$_POST['InformeDesarrollo'];
-			if ($model->save()) {
-				$this->redirect(array('view','id'=>$model->id_id));
-			}
+			if($model->save())
+				//$this->redirect(array('view','id'=>$model->id_id));
+				$this->redirect(array('//area/nuevo','id'=>$model->id_id));
 		}
 
 		$this->render('create',array(
@@ -91,11 +92,11 @@ class InformeDesarrolloController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['InformeDesarrollo'])) {
+		if(isset($_POST['InformeDesarrollo']))
+		{
 			$model->attributes=$_POST['InformeDesarrollo'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_id));
-			}
 		}
 
 		$this->render('update',array(
@@ -110,17 +111,11 @@ class InformeDesarrolloController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if (Yii::app()->request->isPostRequest) {
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if (!isset($_GET['ajax'])) {
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-			}
-		} else {
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		}
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -141,9 +136,8 @@ class InformeDesarrolloController extends Controller
 	{
 		$model=new InformeDesarrollo('search');
 		$model->unsetAttributes();  // clear any default values
-		if (isset($_GET['InformeDesarrollo'])) {
+		if(isset($_GET['InformeDesarrollo']))
 			$model->attributes=$_GET['InformeDesarrollo'];
-		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -160,9 +154,8 @@ class InformeDesarrolloController extends Controller
 	public function loadModel($id)
 	{
 		$model=InformeDesarrollo::model()->findByPk($id);
-		if ($model===null) {
+		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		}
 		return $model;
 	}
 
@@ -172,9 +165,23 @@ class InformeDesarrolloController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if (isset($_POST['ajax']) && $_POST['ajax']==='informe-desarrollo-form') {
+		if(isset($_POST['ajax']) && $_POST['ajax']==='informe-desarrollo-form')
+		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+
+	public function actionListaConcepto(){
+		$con = new Concepto;
+
+		if(isset($_POST['id'])){
+			$id_area = $_POST['id'];
+			$concepto = CHtml::listData(Concepto::model()->findAll(array('condition'=>'con_area="'.$id_area.'"')),'con_id','con_descripcion');
+			
+			$this->renderPartial('conceptos',array('concepto'=>$concepto,'con'=>$con));
+		}else{
+			throw new CHttpException(404,'La consulta no existe.');
 		}
 	}
 }

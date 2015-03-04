@@ -1,13 +1,6 @@
 <?php
 /* @var $this InformeDesarrolloController */
 /* @var $model InformeDesarrollo */
-?>
-
-<?php
-$this->breadcrumbs=array(
-	'Informe Desarrollos'=>array('index'),
-	'Create',
-);
 
 $this->menu=array(
 	array('label'=>'List InformeDesarrollo', 'url'=>array('index')),
@@ -15,6 +8,15 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create InformeDesarrollo</h1>
+<div class="container">
+	<div class="row">
+		<div class="span12" style="text-align: center">
+		<div class="ribbon both_ribbon">
+			<h2>Informe de desarrollo</h2><br/>
+		</div>
+		</div>
+		<?php $this->renderPartial('_form', array('model'=>$model,
+		)); ?>
+	</div>	
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+</div>

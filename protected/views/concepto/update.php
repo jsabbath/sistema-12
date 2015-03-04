@@ -1,9 +1,7 @@
 <?php
 /* @var $this ConceptoController */
 /* @var $model Concepto */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Conceptos'=>array('index'),
 	$model->con_id=>array('view','id'=>$model->con_id),
@@ -18,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-    <h1>Update Concepto <?php echo $model->con_id; ?></h1>
+<h1>Update Concepto <?php echo $model->con_id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

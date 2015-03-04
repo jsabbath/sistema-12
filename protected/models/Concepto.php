@@ -58,9 +58,9 @@ class Concepto extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'con_id' => 'Con',
-			'con_descripcion' => 'Con Descripcion',
-			'con_area' => 'Con Area',
+			'con_id' => 'ID',
+			'con_descripcion' => 'Concepto',
+			'con_area' => 'Area',
 		);
 	}
 
