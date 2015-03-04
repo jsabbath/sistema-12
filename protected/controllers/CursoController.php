@@ -52,7 +52,8 @@ class CursoController extends Controller
 	public function actionView($id)
 	{
             $id_asig = array();
-         
+         	$cur = $this->loadModel($id);
+
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id )));
             
             foreach ( $asignadas as $p ){
@@ -64,9 +65,16 @@ class CursoController extends Controller
             $criteria->addInCondition('asi_id', $id_asig, 'OR');
             $asignaturas=new CActiveDataProvider('Asignatura', array('criteria' => $criteria));
 	                
+
+        	$niv = Parametro::model()->findByAttributes(array('par_id'=>$cur->cur_nivel));
+    		$letra = Parametro::model()->findByAttributes(array('par_id'=>$cur->cur_letra));
+
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-                        'asig' => $asignaturas,
+			'model'=>$cur,
+            'asig' => $asignaturas,
+            'niv' => $niv->par_descripcion,
+            'letra' => $letra->par_descripcion,
 		));
 	}
 
