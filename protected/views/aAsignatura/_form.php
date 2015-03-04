@@ -25,7 +25,9 @@
     <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
-        <?php echo $form->DropdownList($model,'aa_curso',$cursos); ?>
+        <?php echo $form->labelEx($model,'aa_curso'); ?>
+        <?php echo $form->DropdownList($model,'aa_curso',$cursos,array('empty' => '-Seleccione Curso-')); ?>
+        <?php echo $form->error($model,'aa_curso'); ?>
     </div>
 
 

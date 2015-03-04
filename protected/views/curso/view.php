@@ -1,4 +1,5 @@
-
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
 <?php
 /* @var $this CursoController */
@@ -73,11 +74,11 @@ $asignatura = Asignatura::model()->findAll();
        //'filter' => $model,
        'template' => "{items}",
        'columns' => array(
-            array(
+           /* array(
                 'name' => 'asi_id',
                 'header' => '#',
                 'htmlOptions' => array('color' =>'width: 60px'),
-            ),
+            ),*/
             array(
                 'name' => 'asi_descripcion',
                 'header' => 'Nombre Asignatura',
@@ -85,6 +86,30 @@ $asignatura = Asignatura::model()->findAll();
             array(
                 'name' => 'asi_nombrecorto',
                 'header' => 'Nombre Corto',
+            ),
+            array('class' => 'CButtonColumn',
+            'template' => '{retirar}',
+            'buttons' => array(
+               /* 'update' => array(
+                    'label' => '',
+                    'imageUrl' => '',
+                    'options' => array('class' => 'icon-edit'),
+                ),
+                'view' => array(
+                    'label' => '',
+                    'imageUrl' => '',
+                    'options' => array('class' => 'icon-search'),
+                ),*/
+                'retirar' => array(
+                    'label' => 'Eliminar Asignatura',
+                    'imageUrl' => '',
+                    // $data trae todo los atributos del modelo por la xuxa
+                   // 'url' => 'Yii::app()->createUrl("aasignatura/delete", array("id"=>))', 
+                    //'click'=>'function(){$this->render(matricula/retirar )}',
+                    //'click' =>  'sweetAlert("¡SE PRODUJO UN ERROR!", "Alguno de los datos ingresados no es correcto.", "error")',
+                    'options' => array('class' => 'icon-remove', 'id' => 'elim'),
+                ),
+            ),
             ),
         ),
     )); ?>
@@ -116,4 +141,19 @@ $("#agregar").click(function(){
             });
 })
 
+</script>
+
+<script>
+    $("#elim").click(function(){
+        swal({  title: "Estas seguro?",   
+                text: "Estas Borrando una asignatura!",  
+                type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Si, Borrar!",   closeOnConfirm: false }, 
+                function(){   swal("Deleted!", "Se a eliminado  la asignatura", "success");
+                                window.location.href = '<?php echo Yii::app()->createUrl("//aasignatura/delete", array("id"=>67)); ?>'; });
+              
+
+    }
+
+        )
 </script>

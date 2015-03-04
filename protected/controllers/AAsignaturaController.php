@@ -71,7 +71,7 @@ class AAsignaturaController extends Controller
 		{
 			$model->attributes=$_POST['AAsignatura'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->aa_id));
+				$this->redirect(array('//curso/view','id'=>$model->aa_curso));
 		}
 		$this->renderPartial('_form',array(
 			'cursos' => $cursos,
@@ -249,7 +249,7 @@ class AAsignaturaController extends Controller
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
 		for ($i=0; $i < count($curso); $i++) { 
-			$cursos_actuales[$i] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
+			$cursos_actuales[$curso[$i]->cur_id] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
 		}
 
 		return $cursos_actuales;
