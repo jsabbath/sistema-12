@@ -24,17 +24,6 @@
 		<?php echo $form->errorSummary($model); ?><br/>
 </div>
 
-<div class="span2"></div>
-<div class="span8">
-	<div class="text-center">
-		<p>Progreso</p>
-		<div class="progress progress-success progress-striped active">
-  			<div class="bar" style="width: 10%;"></div>
-		</div>
-	</div>
-</div>
-<div class="span2"></div>
-
 <div class="span3"></div>
 <div class="span6">
 	<div class="text-center">

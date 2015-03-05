@@ -1,3 +1,6 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
+
 <?php
 /* @var $this AreaController */
 /* @var $model Area */
@@ -13,7 +16,10 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
-)); ?>
+
+)); 
+
+?>
 
 <div class="span12">
 	<div class="text-center">
@@ -25,17 +31,6 @@
 	<?php echo $form->errorSummary($model); ?>
 </div>
 
-<div class="span2"></div>
-<div class="span8">
-	<div class="text-center">
-		<p>Progreso</p>
-		<div class="progress progress-success progress-striped active">
-  			<div class="bar" style="width: 50%;"></div>
-		</div>
-	</div>
-</div>
-<div class="span2"></div>
-
 <div class="span3"></div>
 <div class="span6">
 	<br/><p class="text-info">Se debe agregar un <strong>Area</strong>
@@ -44,39 +39,43 @@
 <div class="span3"></div>
 
 <div class="span12">
-	<?php echo $form->labelEx($model,'are_descripcion'); ?>
-	<?php echo $form->dropDownList($model,'are_descripcion',array(),array('prompt'=>'Seleccione area',
-		'id'=>'lista_area',
-		'ajax'=>array(
-			'type'=>'POST',
-			'url'=>CController::createUrl('informeDesarrollo/listaConcepto'),
-			'data'=>array('id'=>'js:getNombre'),
-			'update'=>'#lista_concepto',
-		),
-	)); ?>
-	<?php echo $form->error($model,'are_descripcion'); ?>
+	<div class="text-center">
+		<?php echo $form->labelEx($model,'are_descripcion'); ?>
+		<?php echo $form->textField($model,'are_descripcion',array('class'=>'input-xlarge','id'=>'areare','placeholder'=>'Area')); ?>
+		<?php echo $form->error($model,'are_descripcion'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Agregar' : 'Save',array('class'=>'btn btn-warning','id'=>'agregar')); ?>
+	</div>
 </div>
 
 <div id="lista_concepto">
 	
 </div>
 
-<div class="span12">
-	<?php echo $form->labelEx($model,'are_descripcion'); ?>
-	<?php echo $form->textField($model,'are_descripcion',array('size'=>60,'maxlength'=>100)); ?>
-	<?php echo $form->error($model,'are_descripcion'); ?>
-</div>
-
-<div class="span12">
-	<?php echo $form->labelEx($model,'are_infd'); ?>
-	<?php echo $form->textField($model,'are_infd'); ?>
-	<?php echo $form->error($model,'are_infd'); ?>
-</div>
-
-<div class="span12">
-	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-</div>
-
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script type="text/javascript">
+$(function(){
+    $('#areare').autocomplete({
+		source : function( request, response ) {
+		$.ajax({
+	        url: '<?php echo $this->createUrl('area/Buscar_area'); ?>',
+	        dataType: "json",
+	        data: { term: request.term },
+	        success: function(data) {
+                response($.map(data, function(item) {
+                    return {
+                        label: item.nombre,
+                        id: item.id,
+                        nombre: item.nombre,
+                        }
+                	}))
+	            }
+	        })
+		},
+        select: function(event, ui) {
+            $("#areare").val(ui.item.nombre)
+	}});
+});
+</script>

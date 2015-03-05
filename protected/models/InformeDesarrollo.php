@@ -30,7 +30,7 @@ class InformeDesarrollo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_descripcion', 'length', 'max'=>20),
-			array('id_descripcion','required'),
+			array('id_descripcion','required','message'=>'Debe ingresar un nombre'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_id, id_descripcion', 'safe', 'on'=>'search'),

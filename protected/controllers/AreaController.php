@@ -28,15 +28,15 @@ class AreaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','nuevo'),
+				'actions'=>array('index','view','nuevo','buscar_area'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','nuevo'),
+				'actions'=>array('create','update','nuevo','buscar_area'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','nuevo'),
+				'actions'=>array('admin','delete','nuevo','buscar_area'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -180,6 +180,7 @@ class AreaController extends Controller
 		if(isset($_POST['Area']))
 		{
 			$model->attributes=$_POST['Area'];
+			$model->are_infd=$id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->are_id));
 		}
@@ -188,5 +189,33 @@ class AreaController extends Controller
 			'model'=>$model,
 			'id'=>$id,
 		));
+	}
+
+	public function actionBuscar_area(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(are_descripcion) like LOWER(:busq)";
+
+        $criterio->distinct = true;
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->select = 'are_descripcion';
+        $criterio->limit = 10;
+
+        $data = Area::model()->findAll($criterio);
+        
+        foreach($data as $item) {  
+            $resultado[] = array (
+                'id' => $item->are_id,
+                'nombre'=>$item->are_descripcion,
+            );
+        }
+
+        //if(empty($resultado)) $resultado[] = array('id'=>'0','nombre'=>'no hay niuna wea');
+        echo CJSON::encode($resultado);
 	}
 }

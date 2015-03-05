@@ -33,6 +33,7 @@ class Area extends CActiveRecord
 			array('are_infd', 'required'),
 			array('are_infd', 'numerical', 'integerOnly'=>true),
 			array('are_descripcion', 'length', 'max'=>100),
+			array('are_descripcion','required','message'=>'Debe ingresar un Area'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('are_id, are_descripcion, are_infd', 'safe', 'on'=>'search'),
