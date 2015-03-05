@@ -52,19 +52,29 @@ class CursoController extends Controller
 	public function actionView($id)
 	{
             $id_asig = array();
+            $id_prof = array();
          	$cur = $this->loadModel($id);
 
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id )));
             
             foreach ( $asignadas as $p ){
                 $id_asig[] = $p->aa_asignatura;
+                $id_prof[] = $p->aa_docente;
                 //array_push($id_asig, $p->aa_asignatura);
             }
             
             $criteria = new CDbCriteria();
             $criteria->addInCondition('asi_id', $id_asig, 'OR');
-            $asignaturas=new CActiveDataProvider('Asignatura', array('criteria' => $criteria));
-	                
+            $asig = CHtml::listData(Asignatura::model()->findAll($criteria),'asi_id','asi_descripcion');
+
+            //$asignaturas=new CActiveDataProvider('Asignatura', array('criteria' => $criteria));//  hay  q borrarlo
+
+            $criteria_doc = new CDbCriteria();
+            $criteria_doc->addInCondition('usu_id', $id_prof, 'OR');
+            $profesores = CHtml::listData(Usuario::model()->findAll($criteria_doc),'usu_id','Nombrecorto');
+	       	
+
+   
 
         	$niv = Parametro::model()->findByAttributes(array('par_id'=>$cur->cur_nivel));
     		$letra = Parametro::model()->findByAttributes(array('par_id'=>$cur->cur_letra));
@@ -72,7 +82,10 @@ class CursoController extends Controller
 
 		$this->render('view',array(
 			'model'=>$cur,
-            'asig' => $asignaturas,
+            //'asig' => $asignaturas,
+            'asignacion' => $asignadas,
+            'asignatura' => $asig,
+            'prof' => $profesores,
             'niv' => $niv->par_descripcion,
             'letra' => $letra->par_descripcion,
 		));

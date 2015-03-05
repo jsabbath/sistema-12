@@ -18,13 +18,6 @@ $this->menu=array(
 	array('label'=>'Manage Curso', 'url'=>array('admin')),
 );
 
-
-$asignatura = Asignatura::model()->findAll();
-?>
-
-<?php
-    
-
 ?>
 
 
@@ -75,53 +68,6 @@ $asignatura = Asignatura::model()->findAll();
 </div>
 <div class="row">
     <div class="span12">
-    <?php $this->widget('bootstrap.widgets.TbGridView', array(
-        'type' => TbHtml::GRID_TYPE_CONDENSED,
-       'dataProvider' => $asig,
-       //'filter' => $model,
-       'template' => "{items}",
-       'columns' => array(
-           /* array(
-                'name' => 'asi_id',
-                'header' => '#',
-                'htmlOptions' => array('color' =>'width: 60px'),
-            ),*/
-            array(
-                'name' => 'asi_descripcion',
-                'header' => 'Nombre Asignatura',
-            ),
-            array(
-                'name' => 'asi_nombrecorto',
-                'header' => 'Nombre Corto',
-            ),
-            array('class' => 'CButtonColumn',
-            'template' => '{retirar}',
-            'buttons' => array(
-               /* 'update' => array(
-                    'label' => '',
-                    'imageUrl' => '',
-                    'options' => array('class' => 'icon-edit'),
-                ),
-                'view' => array(
-                    'label' => '',
-                    'imageUrl' => '',
-                    'options' => array('class' => 'icon-search'),
-                ),*/
-                'retirar' => array(
-                    'label' => 'Eliminar Asignatura',
-                    'imageUrl' => '',
-                    // $data trae todo los atributos del modelo por la xuxa
-                   // 'url' => 'Yii::app()->createUrl("aasignatura/delete", array("id"=>))', 
-                    //'click'=>'function(){$this->render(matricula/retirar )}',
-                    //'click' =>  'sweetAlert("¡SE PRODUJO UN ERROR!", "Alguno de los datos ingresados no es correcto.", "error")',
-                    'options' => array('class' => 'icon-remove', 'id' => 'elim'),
-                ),
-            ),
-            ),
-        ),
-    )); ?>
-
-
 
          <!-- Asignar Asignatura !-->
          <?php $this->widget('bootstrap.widgets.TbModal', array(
@@ -134,9 +80,40 @@ $asignatura = Asignatura::model()->findAll();
                         TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
 
                 ),
-        )); ?>    
+        )); ?> 
+
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Docente</th>
+          <th>Asignatura</th>
+          <th>  </th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php for ($i=0; $i <count($asignacion) ; $i++) { 
+                    $nombre_doc = $prof[$asignacion[$i]->aa_docente];
+                    $nombre_asi = $asignatura[$asignacion[$i]->aa_asignatura];
+                    $id_asignacion = $asignacion[$i]->aa_id; 
+        ?>
+            <tr>
+              <td><?php echo $id_asignacion;?> </td>
+              <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)));?> </td>
+              <td><?php echo $nombre_asi;?> </td>
+              <td>  <i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i>  </td>
+            </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+
+
+
     </div>     
 </div>
+
 <script >
 $("#agregar").click(function(){
             $.ajax({
@@ -151,16 +128,25 @@ $("#agregar").click(function(){
 </script>
 
 <script>
-    $("#elim").click(function(){
+
+    function asd(id_a){
+        a = '<?php echo Yii::app()->createUrl("//aasignatura/delete", array("id"=>'CK' )); ?>';
+        url_delete = a.replace("CK",id_a);
         swal({  title: "Estas seguro?",   
                 text: "Estas Borrando una asignatura!",  
                 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
                 confirmButtonText: "Si, Borrar!",   closeOnConfirm: false }, 
-                function(){   swal("Deleted!", "Se a eliminado  la asignatura", "success");
-                                window.location.href = '<?php echo Yii::app()->createUrl("//aasignatura/delete", array("id"=>67)); ?>'; });
-              
-
+                function(){ 
+                        $.ajax({
+                            type:'POST',
+                            url: url_delete,
+                            success: function(){
+                               location.reload();
+                            } 
+                        });  
+                }
+            );
     }
+    
 
-        )
 </script>
