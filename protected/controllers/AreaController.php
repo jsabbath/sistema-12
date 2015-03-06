@@ -28,15 +28,15 @@ class AreaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','nuevo','buscar_area'),
+				'actions'=>array('index','view','nuevo','buscar_area','conceptos'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','nuevo','buscar_area'),
+				'actions'=>array('create','update','nuevo','buscar_area','conceptos'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','nuevo','buscar_area'),
+				'actions'=>array('admin','delete','nuevo','buscar_area','conceptos'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -181,8 +181,7 @@ class AreaController extends Controller
 		{
 			$model->attributes=$_POST['Area'];
 			$model->are_infd=$id;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->are_id));
+			//if($model->save()) $this->redirect(array('view','id'=>$model->are_id));
 		}
 
 		$this->render('nuevo',array(
@@ -215,7 +214,21 @@ class AreaController extends Controller
             );
         }
 
-        //if(empty($resultado)) $resultado[] = array('id'=>'0','nombre'=>'no hay niuna wea');
         echo CJSON::encode($resultado);
+	}
+
+	public function actionConceptos(){
+		if(isset($_POST['inf_d'])){
+			$id_inf = $_POST['inf_d'];
+			$area = Area::model()->findAll(array('condition'=>'are_infd="'.$id_inf.'"'));
+
+			$con = Concepto::model()->findAll();
+
+			$this->renderPartial('conceptos',array(
+				'area'=>$area,
+				'con'=>$con,
+			));
+			
+		}else throw new CHttpException(404,'The requested page does not exist.');
 	}
 }

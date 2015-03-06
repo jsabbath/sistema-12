@@ -52,28 +52,6 @@
 
 </div><!-- form -->
 
-<?php /*
-<div class="span12">
-	<?php echo $form->labelEx($area,'are_descripcion'); ?>
-	<?php echo $form->dropDownList($area,'are_descripcion',$area_list,array('prompt'=>'Seleccione area',
-		'id'=>'lista_area',
-		'ajax'=>array(
-			'type'=>'POST',
-			'url'=>CController::createUrl('informeDesarrollo/listaConcepto'),
-			'data'=>array('id'=>'js:getNombre'),
-			'update'=>'#lista_concepto',
-		),
-	)); ?>
-	<?php echo $form->error($area,'are_descripcion'); ?>
-</div>
-
-<div id="lista_concepto">
-	
-</div>
-*/
-?>
-
-
 <script type="text/javascript">
 function getNombre(){ 
     var value= $("#lista_area").val();
