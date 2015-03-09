@@ -43,12 +43,23 @@
 		<?php echo $form->labelEx($model,'are_descripcion'); ?>
 		<?php echo $form->textField($model,'are_descripcion',array('class'=>'input-xlarge','id'=>'areare','placeholder'=>'Area')); ?>
 		<?php echo $form->error($model,'are_descripcion'); ?>
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Agregar' : 'Save',array('class'=>'btn btn-warning','id'=>'agregar')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Agregar' : 'Save',array(
+			'class'=>'btn btn-warning',
+			'id'=>'agregar',
+			'ajax'=>array(
+				'type'=>'POST',
+				'url'=>$this->createUrl('area/conceptos'),
+				'update'=>'#lista_area',
+				'data'=>array('inf_d'=>$id),
+				),
+		)); ?>
 	</div>
 </div>
 
-<div id="lista_concepto">
+<div class="span12">
+	<div id="lista_area">
 	
+	</div>
 </div>
 
 <?php $this->endWidget(); ?>
