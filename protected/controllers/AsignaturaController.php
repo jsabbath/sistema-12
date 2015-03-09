@@ -70,8 +70,11 @@ class AsignaturaController extends Controller
 		if(isset($_POST['Asignatura']))
 		{
 			$model->attributes=$_POST['Asignatura'];
-			//if($model->save())
-				//$this->redirect(array('view','id'=>$model->asi_id));
+			$model->asi_ano = $this->actionAnoactual();
+			if($model->save()){
+
+				$this->redirect(array('view','id'=>$model->asi_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -170,4 +173,19 @@ class AsignaturaController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	 public function actionAnoactual(){
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+        if ( $temp->temp_ano != 0 ){
+            $ano = $temp->temp_ano;
+        } else {
+            $ano = $par->par_descripcion;
+        }
+
+        return $ano;
+    }
+
 }

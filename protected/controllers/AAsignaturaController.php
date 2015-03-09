@@ -206,13 +206,14 @@ class AAsignaturaController extends Controller
             $criterio = new CDbCriteria;
             $cdtns = array();
             $resultado = array();
+			$ano = $this->actionAnoactual();
 
             if(empty($_GET['term'])) return $resultado;
 
-            $cdtns[] = "LOWER(asi_descripcion) like LOWER(:busq)";
+            $cdtns[] = "LOWER(asi_descripcion) like LOWER(:busq) AND asi_ano = :ano";
 
             $criterio->condition = implode(' OR ', $cdtns);
-            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%', ':ano' => $ano);
             $criterio->limit = 10;
 
             $data = Asignatura::model()->findAll($criterio);
@@ -228,20 +229,13 @@ class AAsignaturaController extends Controller
 
             echo CJSON::encode($resultado);
         }
+        
     public function actionCursoAnoActual(){
     	/*
 		La funcion devuelve un array con la ID y el nombre completo de los cursos
 		ejemplo: array('1'=>'PRIMERO A')
     	*/
-    	 $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
-		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-	            
-	            // La variable es array por que criteria lo pide.
-		if ( $temp->temp_ano != 0 ){
-			$ano = $temp->temp_ano;
-		} else {
-			$ano = $par->par_descripcion;
-		}
+    	$ano = $this->actionAnoactual();
 
     	//$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
 		$curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
@@ -253,5 +247,19 @@ class AAsignaturaController extends Controller
 		}
 
 		return $cursos_actuales;
+    }
+
+    public function actionAnoactual(){
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+        if ( $temp->temp_ano != 0 ){
+            $ano = $temp->temp_ano;
+        } else {
+            $ano = $par->par_descripcion;
+        }
+
+        return $ano;
     }
 }

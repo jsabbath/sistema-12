@@ -59,6 +59,7 @@ class Notas extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('not_aa', 'numerical', 'integerOnly'=>true),
+			array('not_ano', 'length', 'max'=>4),
 			array('not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_13, not_14, not_15, not_16, not_17, not_18, not_19, not_20, not_21, not_22, not_23, not_24, not_25, not_26, not_27, not_28, not_29, not_30', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -86,6 +87,7 @@ class Notas extends CActiveRecord
 		return array(
 			'not_id' => 'Not',
 			'not_aa' => 'Not Aa',
+			'not_ano' => 'Not Ano',
 			'not_01' => 'Not 01',
 			'not_02' => 'Not 02',
 			'not_03' => 'Not 03',
@@ -139,6 +141,7 @@ class Notas extends CActiveRecord
 
 		$criteria->compare('not_id',$this->not_id);
 		$criteria->compare('not_aa',$this->not_aa);
+		$criteria->compare('not_ano',$this->not_ano);
 		$criteria->compare('not_01',$this->not_01);
 		$criteria->compare('not_02',$this->not_02);
 		$criteria->compare('not_03',$this->not_03);

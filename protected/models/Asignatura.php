@@ -34,6 +34,7 @@ class Asignatura extends CActiveRecord
 			array('asi_descripcion', 'length', 'max'=>100),
 			array('asi_codigo', 'length', 'max'=>10),
 			array('asi_nombrecorto', 'length', 'max'=>5),
+			array('asi_ano', 'length', 'max'=>4),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('asi_id, asi_descripcion, asi_codigo, asi_nombrecorto', 'safe', 'on'=>'search'),
@@ -62,6 +63,7 @@ class Asignatura extends CActiveRecord
 			'asi_descripcion' => 'Asi Descripcion',
 			'asi_codigo' => 'Asi Codigo',
 			'asi_nombrecorto' => 'Asi Nombrecorto',
+			'asi_ano' => 'Asi Ano',
 		);
 	}
 
@@ -87,6 +89,8 @@ class Asignatura extends CActiveRecord
 		$criteria->compare('asi_descripcion',$this->asi_descripcion,true);
 		$criteria->compare('asi_codigo',$this->asi_codigo,true);
 		$criteria->compare('asi_nombrecorto',$this->asi_nombrecorto,true);
+		$criteria->compare('asi_ano',$this->asi_ano,true);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

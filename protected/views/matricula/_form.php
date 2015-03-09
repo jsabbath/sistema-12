@@ -26,6 +26,10 @@
     'enableAjaxValidation'=>false,
 ));
 //var_dump($cur_actual);
+
+$random1 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
+$random2 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
+$rand = "X".$random1.$random2;
 ?>
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -106,7 +110,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model,'alum_genero'); ?>
-        <?php echo $form->dropDownList($alumno,'alum_genero',array('47'=>'MASCULINO','48'=>'FEMENINO'),array('promp'=>'Seleccione genero')); ?>
+        <?php echo $form->dropDownList($alumno,'alum_genero',array('47'=>'MASCULINO','48'=>'FEMENINO'),array('prompt'=>'Seleccione genero')); ?>
         <?php echo $form->error($model,'alum_genero'); ?>
     </div>
 
@@ -129,6 +133,7 @@
     </div>
 
     <h3>Datos matricula</h3>
+
 
     <div class="row">
         <?php echo $form->labelEx($model,'mat_fingreso'); ?>
@@ -156,12 +161,12 @@
 
     <div class="row">
         <?php echo $form->labelEx($model,'mat_numero'); ?>
-        <?php echo $form->textField($model,'mat_numero'); ?>
+        <?php echo $form->textField($model,'mat_numero',array('id'=>'nm','value' => $rand)); ?>
         <?php echo $form->error($model,'mat_numero'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
+        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
     </div>
 
 <?php $this->endWidget(); ?>

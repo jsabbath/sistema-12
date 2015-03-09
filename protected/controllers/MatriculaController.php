@@ -28,15 +28,15 @@ class MatriculaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -64,10 +64,11 @@ class MatriculaController extends Controller
 	{
 		$model = new Matricula;
         $alumno = new Alumno;
+
         
         //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
-        
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
@@ -82,11 +83,13 @@ class MatriculaController extends Controller
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id;
                     if ($model->save()) {
-                        $this->redirect(array('view', 'id' => $model->mat_id));       
+                        $this->redirect(array('addcurso', 'id' => $model->mat_id));  
                     }
                 }
+            } else {   
+                Yii::app()->user->setFlash('error', "error!");
             }
-        }
+        } 
         $this->render('create', array(
             'model' => $model,
             'alumno' => $alumno,
@@ -118,7 +121,8 @@ class MatriculaController extends Controller
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id;
                     if ($model->save()) {
-                        $this->redirect(array('view', 'id' => $model->mat_id));       
+                        $this->redirect(array('view', 'id' => $model->mat_id));
+
                     }
                 }
             }
@@ -219,7 +223,7 @@ class MatriculaController extends Controller
         echo CJSON::encode($resultado);
     }
     
-        public function actionBuscar_rut()
+    public function actionBuscar_rut()
     {
         $criterio = new CDbCriteria;
         $cdtns = array();
@@ -251,14 +255,7 @@ class MatriculaController extends Controller
     }
 
      public function actionRetirar() {
-            $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
-            $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-            
-            if ( $temp->temp_ano != 0 ){
-                $ano = $temp->temp_ano;
-            } else {
-                $ano = $par->par_descripcion;
-            }
+        $ano = $this->actionAnoactual();
 
         // ID DEL ALUMNO
         if(isset($_POST['fecha'])){
@@ -286,4 +283,71 @@ class MatriculaController extends Controller
         }      
     }
     
+
+
+  public function actionCursoAnoActual(){
+        /*
+        La funcion devuelve un array con la ID y el nombre completo de los cursos
+        ejemplo: array('1'=>'PRIMERO A')
+        */
+        $ano = $this->actionAnoactual();
+        //$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
+        $curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
+        $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+        $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+        for ($i=0; $i < count($curso); $i++) { 
+            $cursos_actuales[$curso[$i]->cur_id] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
+        }
+
+        return $cursos_actuales;
+    }
+
+
+    public function actionAddcurso($id){
+        //echo "asd";
+        $cur = $this->actionCursoAnoActual();
+        $ano = $this->actionAnoactual();
+
+      if(isset($_POST['id_curso'])){
+            $id_curso = $_POST['id_curso'];
+
+            // busca todas las asignaturas asignadas al curso
+            $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
+            if($asignadas){
+               foreach ( $asignadas as $p ){
+                    $nota = new Notas;
+                    $nota->not_asig = $p->aa_asignatura;
+                    $nota->not_mat = $id;
+                    $nota->not_ano = $ano;
+                    $nota->insert();
+                }    
+            } else {
+                Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
+                $this->refresh();
+            }
+
+            $this->redirect(array('view', 'id' => $id));  
+        }
+
+
+       $this->render('cur_link', array(
+            'cur' => $cur,
+        ));
+    }
+
+    public function actionAnoactual(){
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+        if ( $temp->temp_ano != 0 ){
+            $ano = $temp->temp_ano;
+        } else {
+            $ano = $par->par_descripcion;
+        }
+
+        return $ano;
+    }
+
 }

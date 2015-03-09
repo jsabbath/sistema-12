@@ -34,8 +34,9 @@ class Matricula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('mat_ano, mat_numero, mat_alu_id', 'numerical', 'integerOnly'=>true),
+			array('mat_ano, mat_alu_id', 'numerical', 'integerOnly'=>true),
 			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
+			array('mat_numero', 'length', 'max'=>12),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_alu_id', 'safe', 'on'=>'search'),
