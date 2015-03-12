@@ -28,15 +28,15 @@ class ConceptoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','conceptos'),
+				'actions'=>array('index','view','conceptos','nuevo','buscar_concepto'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','conceptos'),
+				'actions'=>array('create','update','conceptos','nuevo','buscar_concepto'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','conceptos'),
+				'actions'=>array('admin','delete','conceptos','nuevo','buscar_concepto'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -169,5 +169,59 @@ class ConceptoController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionNuevo($id)
+	{
+		$model=new Concepto;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+		$inf = Area::model()->findAll(array('select'=>'are_infd','condition'=>'are_id="'.$id.'"'));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'con_area="'.$id.'"';
+		$concepto = new CActiveDataProvider('Concepto',array('criteria'=>$criteria));
+
+		if(isset($_POST['Concepto']))
+		{
+			$model->attributes=$_POST['Concepto'];
+			$model->con_area = $id;
+			if($model->save())
+				$this->refresh();
+		}
+
+		$this->render('nuevo',array(
+			'model'=>$model,
+			'concepto'=>$concepto,
+			'inf'=>$inf,
+		));
+	}
+
+	public function actionBuscar_concepto(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(con_descripcion) like LOWER(:busq)";
+
+        $criterio->distinct = true;
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->select = 'con_descripcion';
+        $criterio->limit = 10;
+
+        $data = Concepto::model()->findAll($criterio);
+        
+        foreach($data as $item) {  
+            $resultado[] = array (
+                'id' => $item->con_id,
+                'nombre'=>$item->con_descripcion,
+            );
+        }
+
+        echo CJSON::encode($resultado);
 	}
 }

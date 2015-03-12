@@ -9,8 +9,7 @@ $this->menu=array(
 ?>
 
 
-<div class="container">
-	<div class="row">
-		<?php $this->renderPartial('_form2', array('model'=>$model,'id'=>$id)); ?>
-	</div>
+
+<div class="row">
+	<?php $this->renderPartial('_form2', array('model'=>$model,'id'=>$id,'area'=>$area)); ?>
 </div>

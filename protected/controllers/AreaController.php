@@ -28,15 +28,15 @@ class AreaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','nuevo','buscar_area','conceptos'),
+				'actions'=>array('index','view','nuevo','buscar_area','conceptos','buscar_concepto'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','nuevo','buscar_area','conceptos'),
+				'actions'=>array('create','update','nuevo','buscar_area','conceptos','buscar_concepto'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','nuevo','buscar_area','conceptos'),
+				'actions'=>array('admin','delete','nuevo','buscar_area','conceptos','buscar_concepto'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -173,20 +173,25 @@ class AreaController extends Controller
 
 	public function actionNuevo($id){
 		$model=new Area;
-
+		// $area = Area::model()->findAll(array('condition'=>'are_infd="'.$id.'"'));
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'are_infd="'.$id.'"';
+		$area = new CActiveDataProvider('Area',array('criteria'=>$criteria));
 
 		if(isset($_POST['Area']))
 		{
 			$model->attributes=$_POST['Area'];
 			$model->are_infd=$id;
-			//if($model->save()) $this->redirect(array('view','id'=>$model->are_id));
+			if($model->save()) $this->refresh();
 		}
 
 		$this->render('nuevo',array(
 			'model'=>$model,
 			'id'=>$id,
+			'area'=>$area,
 		));
 	}
 
@@ -215,20 +220,5 @@ class AreaController extends Controller
         }
 
         echo CJSON::encode($resultado);
-	}
-
-	public function actionConceptos(){
-		if(isset($_POST['inf_d'])){
-			$id_inf = $_POST['inf_d'];
-			$area = Area::model()->findAll(array('condition'=>'are_infd="'.$id_inf.'"'));
-
-			$con = Concepto::model()->findAll();
-
-			$this->renderPartial('conceptos',array(
-				'area'=>$area,
-				'con'=>$con,
-			));
-			
-		}else throw new CHttpException(404,'The requested page does not exist.');
 	}
 }

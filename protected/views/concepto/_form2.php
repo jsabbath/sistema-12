@@ -1,55 +1,46 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
 <?php
-/* @var $this AreaController */
-/* @var $model Area */
+/* @var $this ConceptoController */
+/* @var $model Concepto */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'area-form',
+	'id'=>'concepto-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
-
-)); 
-//var_dump($area);
-
+));
+//var_dump($inf);
 ?>
 
 <div class="span12">
 	<div class="text-center">
-		<h2>Agregar Area</h2><br/>
+		<h2>Agregar Concepto</h2>
 	</div>
-</div>
-
-<div class="span12">
-	<?php echo $form->errorSummary($model); ?>
 </div>
 
 <div class="span3"></div>
 <div class="span6">
-	<br/><p class="text-info">Se debe agregar un <strong>Area</strong>
-	 y luego seleccionar los <strong>conceptos</strong> que desea tener</p>
+	<br/><p class="text-info">Se debe agregar los <strong>Conceptos</strong>
+	 que desea tener en el <strong>Area</strong> seleccionada</p><br/>
 </div>
 <div class="span3"></div>
 
 <div class="span12">
 	<div class="text-center">
-		<?php echo $form->labelEx($model,'are_descripcion'); ?>
-		<?php echo $form->textField($model,'are_descripcion',array('class'=>'input-xlarge','id'=>'areare','placeholder'=>'Area')); ?>
-		<?php echo $form->error($model,'are_descripcion'); ?>
+		<?php echo $form->labelEx($model,'con_descripcion'); ?>
+		<?php echo $form->textField($model,'con_descripcion',array('class'=>'input-xlarge','id'=>'concon','placeholder'=>'Concepto')); ?>
+		<?php echo $form->error($model,'con_descripcion'); ?>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Agregar' : 'Save',array(
 			'class'=>'btn btn-info',
 			'id'=>'agregar',
-
 		)); ?>
 	</div>
 </div>
@@ -57,37 +48,26 @@
 <div class="span12">
 	<?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'area-grid',
-	'dataProvider'=>$area,
+	'dataProvider'=>$concepto,
 	'columns'=>array(
-		//'are_id',
-		'are_descripcion',
-		//'are_infd',
+		//'con_id',
+		'con_descripcion',
+		//'con_area',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template'=>'{conceptos}{delete}',
-			'buttons'=>array(
-				'conceptos'=>array(
-					'label'=>'<i class="icon-plus"></i>',
-					'url'=>'Yii::app()->createUrl("concepto/nuevo",array("id"=>$data->are_id))',
-					'options'=>array(
-						'class'=>'btn btn-info',
-						'data-toggle'=>'tooltip',
-						'title'=>'Agregar conceptos',
-					),
-				),
-				'delete'=>array(
-					'label'=>'<i class="icon-minus"></i>',
-					'options'=>array(
-						'class'=>'btn btn-danger',
-						'data-toggle'=>'tooltip',
-						'title'=>'Eliminar area',
-					),
-				),
-			),
 		),
 	),
 )); ?>
 </div>
+
+<div class="span3"></div>
+<div class="span6">
+	<div class="text-right">
+		<?php echo CHtml::link("Regresar" , array("/area/nuevo","id"=>$inf[0]->are_infd) , array('class' => 'btn btn-warning')); ?>
+	</div>
+</div>
+<div class="span3"></div>
+<div class="span12">#</div>
 
 <?php $this->endWidget(); ?>
 
@@ -97,10 +77,10 @@
 $(function () { $("[data-toggle='tooltip']").tooltip(); });
 
 $(function(){
-    $('#areare').autocomplete({
+    $('#concon').autocomplete({
 		source : function( request, response ) {
 		$.ajax({
-	        url: '<?php echo $this->createUrl('area/Buscar_area'); ?>',
+	        url: '<?php echo $this->createUrl('concepto/Buscar_concepto'); ?>',
 	        dataType: "json",
 	        data: { term: request.term },
 	        success: function(data) {
@@ -115,7 +95,7 @@ $(function(){
 	        })
 		},
         select: function(event, ui) {
-            $("#areare").val(ui.item.nombre)
+            $("#concon").val(ui.item.nombre)
 	}});
 });
 </script>
