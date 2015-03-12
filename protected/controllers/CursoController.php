@@ -28,15 +28,15 @@ class CursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn'),
+				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn'),
+				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn'),
+				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -55,8 +55,9 @@ class CursoController extends Controller
             $id_prof = array();
          	$cur = $this->loadModel($id);
 
-            $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id )));
-            
+ 	    	$asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id )));
+
+         
             foreach ( $asignadas as $p ){
                 $id_asig[] = $p->aa_asignatura;
                 $id_prof[] = $p->aa_docente;
@@ -349,17 +350,113 @@ class CursoController extends Controller
 		La funcion devuelve un array con la ID y el nombre completo de los cursos
 		ejemplo: array('1'=>'PRIMERO A')
     	*/
-
-    	$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
+		$ano = $this->actionAnoactual();
+    	//$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
 		$curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
 		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
 		for ($i=0; $i < count($curso); $i++) { 
-			$cursos_actuales[$i] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
+			$cursos_actuales[$curso[$i]->cur_id] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
 		}
 
 		return $cursos_actuales;
     }
+
+    // id de cruge 
+    public function actionBuscar_notas($id){
+    	$id_asig = array();
+    	$cursos = array();
+    	$id_cur = array();
+    	$invalid = false;
+
+    	$es_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => $id ));
+
+    	if(empty($es_usuario)){
+    		echo "usted es el admin";
+    	}else {
+    		$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:x', 'params' => array(':x' => $es_usuario->usu_id )));
+		    
+	    	if(empty($tiene_asignaturas)){
+	    		    echo "<br> usted no dicta asignaturas <br>";
+	    	}else {
+			  	foreach ( $tiene_asignaturas as $p ){
+	                $id_cur[] = $p->aa_curso;
+	                //array_push($id_asig, $p->aa_asignatura);
+	            }
+
+	    		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+	         	$criteria = new CDbCriteria();
+	            $criteria->addInCondition('cur_id', $id_cur, 'OR');
+	            $cur = Curso::model()->findAll($criteria);
+	 			$ano = $this->actionAnoActual();
+
+	 			// se filtran los cursos por el año  seleccionado
+	 			for ($i=0; $i < count($cur); $i++) { 
+	 				if($cur[$i]->cur_ano == $ano ){
+						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+					}
+				}
+
+				if(empty($cursos)) $invalid = true;
+		    		$this->render('buscar_notas',array(
+		    			//'asig' => $asig,
+		    			'cur' 			=> $cursos,
+		    			'invalid_ano' 	=> $invalid,
+		    			'asignacion' 	=> $tiene_asignaturas,
+		    			'usuario'		=> $es_usuario->usu_id,
+		    			));
+	    		
+	    	}
+
+		}
+    	
+    }
+
+    public function actionAnoactual(){
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+        if ( $temp->temp_ano != 0 ){
+            $ano = $temp->temp_ano;
+        } else {
+            $ano = $par->par_descripcion;
+        }
+
+        return $ano;
+    }
+
+    public function actionReload_asi(){
+		if(isset($_POST['dropdown'])){
+			$id_curso 	= $_POST['dropdown'];
+			$docente    = $_POST['usuario'];
+
+ 			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y', 
+ 																'params' => array(':x' => $id_curso, ':y' => $docente)));
+		    
+		    $curso  = Curso::model()->findByPk($id_curso);
+			$tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+
+
+		  	foreach ( $asignacion as $p ){
+                $id_asig[] = $p->aa_asignatura;
+            }
+
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('asi_id', $id_asig, 'OR');
+            $asig = Asignatura::model()->findAll($criteria);
+
+
+    		$this->renderPartial('asign_notas',array(
+    			'asig' 		=> $asig,
+    			'doc'  		=> $docente,
+    			'periodo' 	=> $tipo_periodo->par_descripcion,
+    		));
+    	}
+    }
+
 }
 

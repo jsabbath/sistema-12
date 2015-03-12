@@ -8,6 +8,9 @@ $this->pageTitle=Yii::app()->name;
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/mindmup-editabletable.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/numeric-input-example.js"></script>
 
+<div class="alert alert-error hide">
+			That would cost too much
+		</div>
 
 <table id="mainTable" class="table table-hover">
             <thead>

@@ -105,7 +105,7 @@ $tempid = $temp->temp_id;
                                                 array('label' => 'Another action', 'url' => '#'),
                                                 array('label' => 'Something else here', 'url' => '#'),)),
                                         array('label' => 'Calificaciones y Conducta', 'items' => array(
-                                                array('label' => 'Calificaciones Parciales', 'url' => '#'),
+                                                array('label' => 'Calificaciones Parciales', 'url' => array('/curso/buscar_notas','id'=> Yii::app()->user->id)),
                                                 array('label' => 'Informe de Personalidad', 'url' => array('informeDesarrollo/index')),)),
                                         array('label' => 'Administrar', 'items' => array(
                                                 array('label' => 'Perfil Establecimiento', 'url' => '#'),
