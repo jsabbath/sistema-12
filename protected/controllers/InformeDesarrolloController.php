@@ -28,15 +28,15 @@ class InformeDesarrolloController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','listaConcepto'),
+				'actions'=>array('index','view','listaConcepto','inf_d','view_inf'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','listaConcepto'),
+				'actions'=>array('create','update','listaConcepto','inf_d','view_inf'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','listaConcepto'),
+				'actions'=>array('admin','delete','listaConcepto','inf_d','view_inf'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -75,6 +75,7 @@ class InformeDesarrolloController extends Controller
 				if(isset($model->id_id)){
 					$id_informe = $model->id_id;
 					$this->redirect(array('//area/nuevo','id'=>$id_informe));
+
 				}else throw new CHttpException(404,'The requested page does not exist.');
 				
 		}
@@ -187,5 +188,20 @@ class InformeDesarrolloController extends Controller
 		}else{
 			throw new CHttpException(404,'La consulta no existe.');
 		}
+	}
+
+	public function actionInf_d(){
+		$model=new InformeDesarrollo;
+
+		$this->render('inf_d',array('model'=>$model));
+	}
+
+	public function actionView_inf($id){
+		$informe = implode(CHtml::listData(InformeDesarrollo::model()->findAll(array('condition'=>'id_id="'.$id.'"')),'id_id','id_descripcion'));
+
+		$area = CHtml::listData(Area::model()->findAll(array('condition'=>'are_infd="'.$id.'"')),'are_id','are_descripcion');
+		$concepto = Concepto::model()->findAll();
+
+		$this->render('view_inf',array('id'=>$id,'area'=>$area,'concepto'=>$concepto,'informe'=>$informe));
 	}
 }

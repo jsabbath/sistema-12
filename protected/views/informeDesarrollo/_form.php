@@ -43,9 +43,8 @@
 
 <div class="span8"></div>
 <div class="span4">
-	<br/><br/><?php echo CHtml::submitButton(
-	$model->isNewRecord ? 'Siguiente' : 'Save',
-	array('class'=>'btn btn-primary')); ?>
+	<br/><br/>
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Siguiente' : 'Save',array('class'=>'btn btn-primary')); ?>
 </div>
 
 <?php $this->endWidget(); ?>

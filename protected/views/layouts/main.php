@@ -106,7 +106,10 @@ $tempid = $temp->temp_id;
                                                 array('label' => 'Something else here', 'url' => '#'),)),
                                         array('label' => 'Calificaciones y Conducta', 'items' => array(
                                                 array('label' => 'Calificaciones Parciales', 'url' => array('/curso/buscar_notas','id'=> Yii::app()->user->id)),
-                                                array('label' => 'Informe de Personalidad', 'url' => array('informeDesarrollo/index')),)),
+                                                array('label' => 'Informe de desarrollo', 'url' => array('informeDesarrollo/inf_d')),
+                                                array('label' => 'Crear informe de desarrollo', 'url' => array('informeDesarrollo/create'))
+                                                ,)
+                                        ),
                                         array('label' => 'Administrar', 'items' => array(
                                                 array('label' => 'Perfil Establecimiento', 'url' => '#'),
                                                 array('label' => 'Administrar Usuarios', 'icon' => 'pencil', 'url' => Yii::app()->user->ui->userManagementAdminUrl, 'visible' => !Yii::app()->user->isGuest),

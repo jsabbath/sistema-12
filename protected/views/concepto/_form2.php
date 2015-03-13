@@ -28,8 +28,10 @@
 
 <div class="span3"></div>
 <div class="span6">
-	<br/><p class="text-info">Se debe agregar los <strong>Conceptos</strong>
-	 que desea tener en el <strong>Area</strong> seleccionada</p><br/>
+	<div class="text-center">
+		<br/><p class="text-info">Se debe agregar los <strong>Conceptos</strong>
+	 	que desea tener en el <strong>Area</strong> seleccionada</p><br/>
+	</div>
 </div>
 <div class="span3"></div>
 
@@ -41,6 +43,8 @@
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Agregar' : 'Save',array(
 			'class'=>'btn btn-info',
 			'id'=>'agregar',
+			'data-toggle'=>'tooltip',
+			'title'=>'Agregar concepto',
 		)); ?>
 	</div>
 </div>
@@ -55,6 +59,17 @@
 		//'con_area',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{delete}',
+			'buttons'=>array(
+				'delete'=>array(
+					'label'=>'<i class="icon-minus"></i>',
+					'options'=>array(
+						'class'=>'btn btn-danger',
+						'data-toggle'=>'tooltip',
+						'title'=>'Eliminar concepto',
+					),
+				),
+			),
 		),
 	),
 )); ?>
@@ -66,9 +81,7 @@
 		<?php echo CHtml::link("Regresar" , array("/area/nuevo","id"=>$inf[0]->are_infd) , array('class' => 'btn btn-warning')); ?>
 	</div>
 </div>
-<div class="span3"></div>
-<div class="span12">#</div>
-
+<div class="span3"></div><br/>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->

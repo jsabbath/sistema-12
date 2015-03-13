@@ -30,10 +30,8 @@ class Area extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('are_infd', 'required'),
 			array('are_infd', 'numerical', 'integerOnly'=>true),
 			array('are_descripcion', 'length', 'max'=>100),
-			array('are_descripcion','required','message'=>'Debe ingresar un Area'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('are_id, are_descripcion, are_infd', 'safe', 'on'=>'search'),
@@ -61,7 +59,7 @@ class Area extends CActiveRecord
 		return array(
 			'are_id' => 'ID',
 			'are_descripcion' => 'Area',
-			'are_infd' => 'Informe de desarrollo',
+			'are_infd' => 'Informe',
 		);
 	}
 

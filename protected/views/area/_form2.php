@@ -49,7 +49,8 @@
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Agregar' : 'Save',array(
 			'class'=>'btn btn-info',
 			'id'=>'agregar',
-
+			'data-toggle'=>'tooltip',
+			'title'=>'Agregar area',
 		)); ?>
 	</div>
 </div>
@@ -88,6 +89,13 @@
 	),
 )); ?>
 </div>
+<div class="span3"></div>
+<div class="span6">
+	<div class="text-right">
+		<?php echo CHtml::link("Guardar" , array("/site/index") , array('class' => 'btn btn-warning')); ?>
+	</div>
+</div>
+<div class="span3"></div>
 
 <?php $this->endWidget(); ?>
 

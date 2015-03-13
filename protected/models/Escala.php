@@ -29,7 +29,6 @@ class Escala extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('esc_concepto', 'required'),
 			array('esc_concepto', 'numerical', 'integerOnly'=>true),
 			array('esc_descripcion', 'length', 'max'=>50),
 			// The following rule is used by search().
@@ -56,9 +55,9 @@ class Escala extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'esc_id' => 'Esc',
-			'esc_descripcion' => 'Esc Descripcion',
-			'esc_concepto' => 'Esc Concepto',
+			'esc_id' => 'ID',
+			'esc_descripcion' => 'Escala',
+			'esc_concepto' => 'Concepto',
 		);
 	}
 
