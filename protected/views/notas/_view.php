@@ -5,12 +5,24 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('not_id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->not_id), array('view', 'id'=>$data->not_id)); ?>
+    	<b><?php echo CHtml::encode($data->getAttributeLabel('not_id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->not_id),array('view','id'=>$data->not_id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('not_aa')); ?>:</b>
-	<?php echo CHtml::encode($data->not_aa); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('not_periodo')); ?>:</b>
+	<?php echo CHtml::encode($data->not_periodo); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('not_ano')); ?>:</b>
+	<?php echo CHtml::encode($data->not_ano); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('not_mat')); ?>:</b>
+	<?php echo CHtml::encode($data->not_mat); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('not_asig')); ?>:</b>
+	<?php echo CHtml::encode($data->not_asig); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('not_01')); ?>:</b>
@@ -21,6 +33,7 @@
 	<?php echo CHtml::encode($data->not_02); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('not_03')); ?>:</b>
 	<?php echo CHtml::encode($data->not_03); ?>
 	<br />
@@ -33,7 +46,6 @@
 	<?php echo CHtml::encode($data->not_05); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('not_06')); ?>:</b>
 	<?php echo CHtml::encode($data->not_06); ?>
 	<br />

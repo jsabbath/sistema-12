@@ -143,4 +143,8 @@ class Alumno extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getNombre_completo(){
+		return $this->alum_nombres." ".$this->alum_apepat;
+	}
 }

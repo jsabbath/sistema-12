@@ -28,15 +28,15 @@ class CursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi'),
+				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi','poner_notas'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi'),
+				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi','poner_notas'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi'),
+				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi','poner_notas'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -363,7 +363,7 @@ class CursoController extends Controller
 		return $cursos_actuales;
     }
 
-    // id de cruge 
+    // id de cruge para buscar los cursos del profesor
     public function actionBuscar_notas($id){
     	$id_asig = array();
     	$cursos = array();
@@ -372,13 +372,18 @@ class CursoController extends Controller
 
     	$es_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => $id ));
 
+    	// se verifica que exista en la tabla usuario, donde estan los profes etc
     	if(empty($es_usuario)){
-    		echo "usted es el admin";
+    		Yii::app()->user->setFlash('error', "usted es el admin, no tiene cursos!");
+    		throw new CHttpException(404,'The requested page does not exist.');
+
     	}else {
     		$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:x', 'params' => array(':x' => $es_usuario->usu_id )));
 		    
 	    	if(empty($tiene_asignaturas)){
-	    		    echo "<br> usted no dicta asignaturas <br>";
+    			Yii::app()->user->setFlash('error', "Usted no dicta asignaturas!");
+	    		throw new CHttpException(404,'The requested page does not exist.');
+
 	    	}else {
 			  	foreach ( $tiene_asignaturas as $p ){
 	                $id_cur[] = $p->aa_curso;
@@ -429,11 +434,13 @@ class CursoController extends Controller
         return $ano;
     }
 
+    // se buscan las asignaturas del cursos seleccionado, pero solo las que dicta el profesor que las busca
     public function actionReload_asi(){
 		if(isset($_POST['dropdown'])){
 			$id_curso 	= $_POST['dropdown'];
 			$docente    = $_POST['usuario'];
 
+			
  			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y', 
  																'params' => array(':x' => $id_curso, ':y' => $docente)));
 		    
@@ -454,9 +461,54 @@ class CursoController extends Controller
     			'asig' 		=> $asig,
     			'doc'  		=> $docente,
     			'periodo' 	=> $tipo_periodo->par_descripcion,
+    			'cur_id'    => $curso->cur_id,
     		));
     	}
     }
+
+    // carga la tabla con la lista de alumnos de la asignatura seleccionada para ponerles notas
+    public function actionPoner_notas($a,$b,$c){
+
+    	$id_asig = $a;
+    	$tipo_periodo = $b;
+    	$alumnos = array();
+
+    	// se cargan todas las notas de la asigntura por periodo
+		$notas = Notas::model()->findAll(array('condition' => 'not_asig=:x AND not_periodo=:y', 
+												'params' => array(':x' => $id_asig, ':y' => $tipo_periodo )));
+
+		$asignatura = Asignatura::model()->findByPk($id_asig);
+		//para verificar que el profesor que edite las notas sea el que dicta la asignatura
+		$asig = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $id_asig, 'aa_curso' => $c));
+
+		// se recorren todas las notas encontradas, y se busca al alumno al  que les pertenecen
+        foreach ($notas as $key => $n) {
+        	$mat  = Matricula::model()->findByPk($n->not_mat);
+        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
+
+        	$alumnos[] = array(
+    			'mat_id' => $mat->mat_id,
+    			'nombre' =>  $alum->getNombre_completo(),
+        	);
+        }
+
+		$curso  = Curso::model()->findByPk($c);
+		$notas_periodo = $curso->cur_notas_periodo;
+		$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+		$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+
+
+		$this->render('editar',array(
+						'nombre_asignatura' => $asignatura->asi_descripcion,
+						'periodo'           => $tipo_periodo,
+						'notas'             => $notas,
+						'curso'   			=> $curso,
+						'nombre_curso'      =>$nivel." ".$letra,
+						'notas_p' 			=> $notas_periodo,
+						'alumnos' 			=> $alumnos,
+		 ));
+
+	}
 
 }
 

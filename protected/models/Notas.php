@@ -5,7 +5,10 @@
  *
  * The followings are the available columns in table 'notas':
  * @property integer $not_id
- * @property integer $not_aa
+ * @property integer $not_periodo
+ * @property integer $not_ano
+ * @property integer $not_mat
+ * @property integer $not_asig
  * @property double $not_01
  * @property double $not_02
  * @property double $not_03
@@ -38,7 +41,8 @@
  * @property double $not_30
  *
  * The followings are the available model relations:
- * @property AAsignatura $notAa
+ * @property Matricula $notMat
+ * @property Asignatura $notAsig
  */
 class Notas extends CActiveRecord
 {
@@ -58,12 +62,12 @@ class Notas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('not_aa, not_periodo', 'numerical', 'integerOnly'=>true),
-			array('not_ano', 'length', 'max'=>4),
+			array('not_periodo, not_ano', 'required'),
+			array('not_periodo, not_ano, not_mat, not_asig', 'numerical', 'integerOnly'=>true),
 			array('not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_13, not_14, not_15, not_16, not_17, not_18, not_19, not_20, not_21, not_22, not_23, not_24, not_25, not_26, not_27, not_28, not_29, not_30', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('not_id, not_aa, not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_13, not_14, not_15, not_16, not_17, not_18, not_19, not_20, not_21, not_22, not_23, not_24, not_25, not_26, not_27, not_28, not_29, not_30', 'safe', 'on'=>'search'),
+			array('not_id, not_periodo, not_ano, not_mat, not_asig, not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_13, not_14, not_15, not_16, not_17, not_18, not_19, not_20, not_21, not_22, not_23, not_24, not_25, not_26, not_27, not_28, not_29, not_30', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +79,8 @@ class Notas extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'notAa' => array(self::BELONGS_TO, 'AAsignatura', 'not_aa'),
+			'notMat' => array(self::BELONGS_TO, 'Matricula', 'not_mat'),
+			'notAsig' => array(self::BELONGS_TO, 'Asignatura', 'not_asig'),
 		);
 	}
 
@@ -86,9 +91,10 @@ class Notas extends CActiveRecord
 	{
 		return array(
 			'not_id' => 'Not',
-			'not_aa' => 'Not Aa',
-			'not_ano' => 'Not Ano',
 			'not_periodo' => 'Not Periodo',
+			'not_ano' => 'Not Ano',
+			'not_mat' => 'Not Mat',
+			'not_asig' => 'Not Asig',
 			'not_01' => 'Not 01',
 			'not_02' => 'Not 02',
 			'not_03' => 'Not 03',
@@ -141,9 +147,10 @@ class Notas extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('not_id',$this->not_id);
-		$criteria->compare('not_periodo',$this->not_periodo);		
-		$criteria->compare('not_aa',$this->not_aa);
+		$criteria->compare('not_periodo',$this->not_periodo);
 		$criteria->compare('not_ano',$this->not_ano);
+		$criteria->compare('not_mat',$this->not_mat);
+		$criteria->compare('not_asig',$this->not_asig);
 		$criteria->compare('not_01',$this->not_01);
 		$criteria->compare('not_02',$this->not_02);
 		$criteria->compare('not_03',$this->not_03);
@@ -189,5 +196,42 @@ class Notas extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getNotas(){
+		$notas = array();
+
+		$notas[1] = $this->not_01;
+		$notas[2] = $this->not_02;
+		$notas[3] = $this->not_03;
+		$notas[4] = $this->not_04;
+		$notas[5] = $this->not_05;
+		$notas[6] = $this->not_06;
+		$notas[7] = $this->not_07;
+		$notas[8] = $this->not_08;
+		$notas[9] = $this->not_09;
+		$notas[10] = $this->not_10;
+		$notas[11] = $this->not_11;
+		$notas[12] = $this->not_12;
+		$notas[13] = $this->not_13;
+		$notas[14] = $this->not_14;
+		$notas[15] = $this->not_15;
+		$notas[16] = $this->not_16;
+		$notas[17] = $this->not_17;
+		$notas[18] = $this->not_18;
+		$notas[19] = $this->not_19;
+		$notas[20] = $this->not_20;
+		$notas[21] = $this->not_21;
+		$notas[22] = $this->not_22;
+		$notas[23] = $this->not_23;
+		$notas[24] = $this->not_24;
+		$notas[25] = $this->not_25;
+		$notas[26] = $this->not_26;
+		$notas[27] = $this->not_27;
+		$notas[28] = $this->not_28;
+		$notas[29] = $this->not_29;
+		$notas[30] = $this->not_30;
+
+		return $notas;
 	}
 }

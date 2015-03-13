@@ -2,6 +2,7 @@
 /* @var $this NotasController */
 /* @var $model Notas */
 
+
 $this->breadcrumbs=array(
 	'Notases'=>array('index'),
 	'Manage',
@@ -29,29 +30,33 @@ $('.search-form form').submit(function(){
 <h1>Manage Notases</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
+        &lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'notas-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'not_id',
-		'not_aa',
+		'not_periodo',
+		'not_ano',
+		'not_mat',
+		'not_asig',
 		'not_01',
+		/*
 		'not_02',
 		'not_03',
 		'not_04',
-		/*
 		'not_05',
 		'not_06',
 		'not_07',
@@ -80,7 +85,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'not_30',
 		*/
 		array(
-			'class'=>'CButtonColumn',
+			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
 	),
 )); ?>

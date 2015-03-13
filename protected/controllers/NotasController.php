@@ -67,11 +67,11 @@ class NotasController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Notas']))
-		{
+		if (isset($_POST['Notas'])) {
 			$model->attributes=$_POST['Notas'];
-			if($model->save())
+			if ($model->save()) {
 				$this->redirect(array('view','id'=>$model->not_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class NotasController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Notas']))
-		{
+		if (isset($_POST['Notas'])) {
 			$model->attributes=$_POST['Notas'];
-			if($model->save())
+			if ($model->save()) {
 				$this->redirect(array('view','id'=>$model->not_id));
+			}
 		}
 
 		$this->render('update',array(
@@ -110,11 +110,17 @@ class NotasController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if (Yii::app()->request->isPostRequest) {
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if (!isset($_GET['ajax'])) {
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			}
+		} else {
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		}
 	}
 
 	/**
@@ -135,8 +141,9 @@ class NotasController extends Controller
 	{
 		$model=new Notas('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Notas']))
+		if (isset($_GET['Notas'])) {
 			$model->attributes=$_GET['Notas'];
+		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -153,8 +160,9 @@ class NotasController extends Controller
 	public function loadModel($id)
 	{
 		$model=Notas::model()->findByPk($id);
-		if($model===null)
+		if ($model===null) {
 			throw new CHttpException(404,'The requested page does not exist.');
+		}
 		return $model;
 	}
 
@@ -164,8 +172,7 @@ class NotasController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='notas-form')
-		{
+		if (isset($_POST['ajax']) && $_POST['ajax']==='notas-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

@@ -1,7 +1,9 @@
 <?php
 /* @var $this NotasController */
 /* @var $model Notas */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Notases'=>array('index'),
 	'Create',

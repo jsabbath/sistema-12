@@ -1,4 +1,4 @@
-<h1>Buscar Asignatura</h1>
+<h1>Buscar Cursos</h1>
 <div class="span12">
     <?php if($invalid_ano) echo "NO TIENE CURSOS EN ESTE AÑO";  ?>
 

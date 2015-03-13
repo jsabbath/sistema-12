@@ -1,7 +1,9 @@
 <?php
 /* @var $this NotasController */
 /* @var $model Notas */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Notases'=>array('index'),
 	$model->not_id=>array('view','id'=>$model->not_id),
@@ -16,6 +18,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Notas <?php echo $model->not_id; ?></h1>
+    <h1>Update Notas <?php echo $model->not_id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

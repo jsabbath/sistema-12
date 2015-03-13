@@ -1,7 +1,9 @@
 <?php
 /* @var $this NotasController */
 /* @var $model Notas */
+?>
 
+<?php
 $this->breadcrumbs=array(
 	'Notases'=>array('index'),
 	$model->not_id,
@@ -18,11 +20,17 @@ $this->menu=array(
 
 <h1>View Notas #<?php echo $model->not_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+<?php $this->widget('zii.widgets.CDetailView',array(
+    'htmlOptions' => array(
+        'class' => 'table table-striped table-condensed table-hover',
+    ),
+    'data'=>$model,
+    'attributes'=>array(
 		'not_id',
-		'not_aa',
+		'not_periodo',
+		'not_ano',
+		'not_mat',
+		'not_asig',
 		'not_01',
 		'not_02',
 		'not_03',
