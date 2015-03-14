@@ -19,28 +19,32 @@
 <div class="span12">
 	<div class="accordion" id="accordion2">
 	  	<div class="accordion-group">
-	  	<?php for($i = 0;$i < count($area);$i++){ ?>
+	  	<?php
+	  	$i=0; 
+	  	foreach ($area as $key => $value) { ?>
 	    	<div class="accordion-heading">
 	      		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#acc<?php echo $i; ?>">
-	        		<span class="label label-success"><i class="icon-search"></i><?php echo " ".$area[$i+1]; ?></span>
+	        		<span class="label label-success"><i class="icon-search"></i><?php echo " ".$value->are_descripcion; ?></span>
 	      		</a>
 	    	</div>
 	    	<div id="acc<?php echo $i; ?>" class="accordion-body collapse">
 	    		<?php 
-	        	foreach ($concepto as $key => $value): 
-	        		if($value->con_area==$i+1){
+	        	foreach ($concepto as $key => $valor): 
+	        		if($valor->con_area==$value->are_id){
 	        	?>
 	      		<div class="accordion-inner">
 	      			<i class="icon-share"></i>
 	        		<?php
-	    			echo $value->con_descripcion;
+	    			echo $valor->con_descripcion;
 	    			?>
 	      		</div>
 	      		<?php 
 	      		}
 	      		endforeach ?>
 	    	</div>
-	    	<?php } ?>
+	    	<?php
+	    	$i++;
+	    	 } ?>
 	  	</div>
 	</div>
 </div>

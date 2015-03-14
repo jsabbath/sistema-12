@@ -199,7 +199,7 @@ class InformeDesarrolloController extends Controller
 	public function actionView_inf($id){
 		$informe = implode(CHtml::listData(InformeDesarrollo::model()->findAll(array('condition'=>'id_id="'.$id.'"')),'id_id','id_descripcion'));
 
-		$area = CHtml::listData(Area::model()->findAll(array('condition'=>'are_infd="'.$id.'"')),'are_id','are_descripcion');
+		$area = Area::model()->findAll(array('condition'=>'are_infd="'.$id.'"'));
 		$concepto = Concepto::model()->findAll();
 
 		$this->render('view_inf',array('id'=>$id,'area'=>$area,'concepto'=>$concepto,'informe'=>$informe));
