@@ -110,7 +110,7 @@ $.fn.editableTableWidget = function (options) {
 			}
 		});
 
-	element.find("td:not([data-editable='false'])").prop('tabindex', 1);
+		element.find("td:not([data-editable='false'])").prop('tabindex', 1);
 
 		$(window).on('resize', function () {
 			if (editor.is(':visible')) {
