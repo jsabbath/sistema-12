@@ -6,10 +6,9 @@
  * The followings are the available columns in table 'escala':
  * @property integer $esc_id
  * @property string $esc_descripcion
- * @property integer $esc_concepto
  *
  * The followings are the available model relations:
- * @property Concepto $escConcepto
+ * @property Evaluacion[] $evaluacions
  */
 class Escala extends CActiveRecord
 {
@@ -29,11 +28,10 @@ class Escala extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('esc_concepto', 'numerical', 'integerOnly'=>true),
 			array('esc_descripcion', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('esc_id, esc_descripcion, esc_concepto', 'safe', 'on'=>'search'),
+			array('esc_id, esc_descripcion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,7 +43,7 @@ class Escala extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'escConcepto' => array(self::BELONGS_TO, 'Concepto', 'esc_concepto'),
+			'evaluacions' => array(self::HAS_MANY, 'Evaluacion', 'eva_escala'),
 		);
 	}
 
@@ -55,9 +53,8 @@ class Escala extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'esc_id' => 'ID',
-			'esc_descripcion' => 'Escala',
-			'esc_concepto' => 'Concepto',
+			'esc_id' => 'Esc',
+			'esc_descripcion' => 'Esc Descripcion',
 		);
 	}
 
@@ -81,7 +78,6 @@ class Escala extends CActiveRecord
 
 		$criteria->compare('esc_id',$this->esc_id);
 		$criteria->compare('esc_descripcion',$this->esc_descripcion,true);
-		$criteria->compare('esc_concepto',$this->esc_concepto);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

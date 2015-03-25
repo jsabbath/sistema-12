@@ -92,7 +92,8 @@
 <div class="span3"></div>
 <div class="span6">
 	<div class="text-right">
-		<?php echo CHtml::link("Guardar" , array("/site/index") , array('class' => 'btn btn-warning')); ?>
+		<a class="btn btn-warning" id="alarma">Guardar</a>
+		<?php //echo CHtml::link("Guardar" , array("/site/index") , array('class' => 'btn btn-warning')); ?>
 	</div>
 </div>
 <div class="span3"></div>
@@ -126,4 +127,22 @@ $(function(){
             $("#areare").val(ui.item.nombre)
 	}});
 });
+$(function() {
+	$("#alarma").click( 
+		function()
+		{
+			swal({   title: "Está seguro?",   
+			text: "Usted está finalizando la creación de un informe de desarrollo!",   
+			type: "warning",   showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Si, Guardar!",   
+			closeOnConfirm: false 
+		}, 
+			function(){
+				window.location.href = "<?php echo Yii::app()->createUrl('site/index'); ?>";
+			});
+		}
+	);
+});
+
 </script>

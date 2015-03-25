@@ -1,12 +1,12 @@
 <?php
 /* @var $this EscalaController */
 /* @var $model Escala */
-/* @var $form TbActiveForm */
+/* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
-    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+<?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'escala-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -15,21 +15,20 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-    <p class="help-block">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-    <?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model); ?>
 
-            <?php echo $form->textFieldControlGroup($model,'esc_descripcion',array('span'=>5,'maxlength'=>50)); ?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'esc_descripcion'); ?>
+		<?php echo $form->textField($model,'esc_descripcion',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'esc_descripcion'); ?>
+	</div>
 
-            <?php echo $form->textFieldControlGroup($model,'esc_concepto',array('span'=>5)); ?>
+	<div class="row buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	</div>
 
-        <div class="form-actions">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array(
-		    'color'=>TbHtml::BUTTON_COLOR_PRIMARY,
-		    'size'=>TbHtml::BUTTON_SIZE_LARGE,
-		)); ?>
-    </div>
-
-    <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 
 </div><!-- form -->

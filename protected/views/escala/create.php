@@ -1,9 +1,7 @@
 <?php
 /* @var $this EscalaController */
 /* @var $model Escala */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Escalas'=>array('index'),
 	'Create',

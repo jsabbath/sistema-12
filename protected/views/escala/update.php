@@ -1,9 +1,7 @@
 <?php
 /* @var $this EscalaController */
 /* @var $model Escala */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Escalas'=>array('index'),
 	$model->esc_id=>array('view','id'=>$model->esc_id),
@@ -18,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-    <h1>Update Escala <?php echo $model->esc_id; ?></h1>
+<h1>Update Escala <?php echo $model->esc_id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
