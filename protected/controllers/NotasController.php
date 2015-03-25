@@ -28,15 +28,15 @@ class NotasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','subir_notas','guardarnotas'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','subir_notas','guardarnotas'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','subir_notas','guardarnotas'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -177,4 +177,64 @@ class NotasController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionSubir_notas(){
+		if(isset($_POST['curso_notas'])){
+			$notas_curso = $_POST['curso_notas'];
+			$alu_notas = array();
+
+			foreach($notas_curso as $key => $alumno){ //  se recorre cada alumno 
+				$id_notas = $alumno[0];
+				$model=$this->loadModel($id_notas);
+				$notas = $alumno[1];
+
+				$this->Guardarnotas($model,$notas);
+			}
+		}
+	}
+
+	public function Guardarnotas($model, $notas){
+
+		while (count($notas) < 30 ) {
+			array_push($notas,"0");
+		}
+		
+		$model->not_01 = $notas[0]; 
+		$model->not_02 = $notas[1]; 
+		$model->not_03 = $notas[2]; 
+		$model->not_04 = $notas[3]; 
+		$model->not_05 = $notas[4]; 
+		$model->not_06 = $notas[5]; 
+		$model->not_07 = $notas[6]; 
+		$model->not_08 = $notas[7]; 
+		$model->not_09 = $notas[8]; 
+		$model->not_10 = $notas[9]; 
+		$model->not_11 = $notas[10]; 
+		$model->not_12 = $notas[11]; 
+		$model->not_13 = $notas[12]; 
+		$model->not_14 = $notas[13]; 
+		$model->not_15 = $notas[14]; 
+		$model->not_16 = $notas[15]; 
+		$model->not_17 = $notas[16]; 
+		$model->not_18 = $notas[17]; 
+		$model->not_19 = $notas[18]; 
+		$model->not_20 = $notas[19]; 
+		$model->not_21 = $notas[20]; 
+		$model->not_22 = $notas[21]; 
+		$model->not_23 = $notas[22]; 
+		$model->not_24 = $notas[23]; 
+		$model->not_25 = $notas[24]; 
+		$model->not_26 = $notas[25]; 
+		$model->not_27 = $notas[26]; 
+		$model->not_28 = $notas[27]; 
+		$model->not_29 = $notas[28]; 
+		$model->not_30 = $notas[29]; 
+
+		if( $model->save() ){
+			return true;
+		}
+
+		return false;
+	}
+
 }

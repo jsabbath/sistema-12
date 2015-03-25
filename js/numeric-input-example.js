@@ -11,11 +11,15 @@ $.fn.numericInputExample = function () {
 			dataRows.each(function () {
 				total = 0;
 				var row = $(this);	// row = fila actual
-				for (column = 1; column < row.children().size()-1; column++) {  // size()-1 para no cantar el ultimo
+				for (column = 2; column < row.children().size()-1; column++) {  // size()-1 para no contar el ultimo y  parte del 2 por el nombre y  id de notas de alumno
 						total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
 						 // console.log("numero c " + column);
 				};
-				row.children().eq(column).text(total/(column-1)); // se guarda el promedio en la ultima columna de la fila
+				total = total/(column-2); // -2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
+				if(isNaN(total)){ 
+					total = " " 
+				}
+				row.children().eq(column).text(total); // se guarda el promedio en la ultima columna de la fila
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
 		};
@@ -31,17 +35,20 @@ $.fn.numericInputExample = function () {
 			row = $(this);
 			total = 0;
 
-			for (column = 1; column < row.children().size()-1; column++) {  // size()-1 para no cantar el ultimo
+			for (column = 2; column < row.children().size()-1; column++) {  // size()-1 para no cantar el ultimo
 					total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
 			};
 
-			total = total/(column-1);
+			total = total/(column-2);
 
 			if (total > 7.0) {  // aka esta el total permitido
 				 $('.alert').show();
-				 return false; // changes can be rejected
+				 return false;  // changes can be rejected
 			} else {
 				$('.alert').hide();
+					if(isNaN(total)){
+					total = " ";
+			}
 				row.children().eq(column).text(total); 
 			}
 		});
@@ -55,10 +62,8 @@ $.fn.numericInputExample = function () {
 				if( value <= 7.0 && value >= 1){  // antes de preguntar su valor, me aseguro  que es un numero
 					return true;
 				}else{  
-					console.log(value);
 					return false;}
 			} else {
-				console.log(value);
 				return false; } 
 		}
 	});

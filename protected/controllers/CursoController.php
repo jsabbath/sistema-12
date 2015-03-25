@@ -375,7 +375,7 @@ class CursoController extends Controller
     	// se verifica que exista en la tabla usuario, donde estan los profes etc
     	if(empty($es_usuario)){
     		Yii::app()->user->setFlash('error', "usted es el admin, no tiene cursos!");
-    		throw new CHttpException(404,'The requested page does not exist.');
+    		throw new CHttpException(404,'NO ERIS NA VIEJA'); //  redireccion  a pagina de error momentania.
 
     	}else {
     		$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:x', 'params' => array(':x' => $es_usuario->usu_id )));
@@ -467,6 +467,7 @@ class CursoController extends Controller
     }
 
     // carga la tabla con la lista de alumnos de la asignatura seleccionada para ponerles notas
+    // [id_asignatura;tipo_periodo;id_curso]
     public function actionPoner_notas($a,$b,$c){
 
     	$id_asig = $a;
@@ -483,12 +484,14 @@ class CursoController extends Controller
 
 		// se recorren todas las notas encontradas, y se busca al alumno al  que les pertenecen
         foreach ($notas as $key => $n) {
-        	$mat  = Matricula::model()->findByPk($n->not_mat);
+        	$mat  = Matricula::model()->findByPk($n->not_mat); 
         	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 
         	$alumnos[] = array(
-    			'mat_id' => $mat->mat_id,
-    			'nombre' =>  $alum->getNombre_completo(),
+    			//'mat_id' => $mat->mat_id, // id de la matricula del alumno
+    			'not_id' => $n->not_id, //  id de la tabla notas
+    			'nombre' => $alum->getNombre_completo(),
+    			'notas'  => $n->notas, // array con todas las notas
         	);
         }
 
@@ -497,18 +500,16 @@ class CursoController extends Controller
 		$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
 		$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
 
-
 		$this->render('editar',array(
 						'nombre_asignatura' => $asignatura->asi_descripcion,
 						'periodo'           => $tipo_periodo,
-						'notas'             => $notas,
-						'curso'   			=> $curso,
-						'nombre_curso'      =>$nivel." ".$letra,
+						'nombre_curso'      => $nivel." ".$letra,
 						'notas_p' 			=> $notas_periodo,
 						'alumnos' 			=> $alumnos,
 		 ));
 
 	}
+
 
 }
 

@@ -63,14 +63,22 @@ $.fn.editableTableWidget = function (options) {
 				active.focus();
 				e.preventDefault();
 				e.stopPropagation();
+				var possibleMove = movement(active,ARROW_DOWN);
+				if (possibleMove.length > 0) {
+					possibleMove.focus();
+					e.preventDefault();
+					e.stopPropagation();
+				}
 			} else if (e.which === ESC) {
 				editor.val(active.text());
+				active.focus();
 				e.preventDefault();
 				e.stopPropagation();
 				editor.hide();
-				active.focus();
+				
 			} else if (e.which === TAB) {
 				active.focus();
+			
 			} else if (this.selectionEnd - this.selectionStart === this.value.length) {
 				var possibleMove = movement(active, e.which);
 				if (possibleMove.length > 0) {
