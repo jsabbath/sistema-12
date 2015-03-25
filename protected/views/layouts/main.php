@@ -159,9 +159,7 @@ $tempid = $temp->temp_id;
             <?php endif ?>
 
             
-            <div class="row">
-                <?php echo $content; ?>
-            </div>
+            <?php echo $content; ?>
 
             <div class="clear"></div>
 
