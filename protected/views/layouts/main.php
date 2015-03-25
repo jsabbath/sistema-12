@@ -48,14 +48,9 @@ $tempid = $temp->temp_id;
             <header>
                 <div class="container">
                 <div class="row">
-                    <div class="span3">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png">
-                    </div>
-                    <div class="span6">
-                        <div id="logo"> Sistema de Administracion Academica</div>
-                    </div>
-                    <div class="span3">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo2.png" >
+
+                    <div class="span12">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner.png" >
                     </div>
                 </div>
                 </div> 

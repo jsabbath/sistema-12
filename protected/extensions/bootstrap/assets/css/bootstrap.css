@@ -227,7 +227,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background: url('../img/fondo.jpg') no-repeat center center fixed;
+  background: #F7BE81;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
