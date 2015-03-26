@@ -11,7 +11,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/char.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/char.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -32,7 +34,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/eevee.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/eevee.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -53,7 +57,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/leaf.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/grow.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -77,7 +83,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/lugia.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/jiggly.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -98,7 +106,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/jiggly.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/leaf.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -119,7 +129,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/vaporeon.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/link.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -143,7 +155,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pika.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/pika.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -164,7 +178,9 @@ $this->pageTitle=Yii::app()->name;
 			<div class="span4" style="background-color: #eafadd">
 				<div class="row">
 					<div class="span1 text-center">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/grow.gif" class="img-polaroid">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/vaporeon.gif"); ?>
+						</div>
 					</div>
 					<div class="span3">
 						<div class="row">
@@ -183,4 +199,5 @@ $this->pageTitle=Yii::app()->name;
 		</a>
 		</div>
 	</diw>
-</div>							
+</div>			
+			
