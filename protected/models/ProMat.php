@@ -1,29 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "matricula".
+ * This is the model class for table "pro_mat".
  *
- * The followings are the available columns in table 'matricula':
- * @property integer $mat_id
- * @property integer $mat_ano
- * @property integer $mat_numero
- * @property string $mat_fingreso
- * @property string $mat_fretiro
- * @property string $mat_fcambio
- * @property integer $mat_alu_id
+ * The followings are the available columns in table 'pro_mat':
+ * @property integer $PRO_MAT_ID
+ * @property integer $PRO_MAT_ANUAL
+ * @property integer $PRO_MATRI
  *
  * The followings are the available model relations:
- * @property Alumno $matAlu
- * @property Notas[] $notases
+ * @property PromedioAnual $pROMATANUAL
+ * @property Matricula $pROMATRI
  */
-class Matricula extends CActiveRecord
+class ProMat extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'matricula';
+		return 'pro_mat';
 	}
 
 	/**
@@ -34,12 +30,10 @@ class Matricula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('mat_ano, mat_alu_id, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3', 'numerical', 'integerOnly'=>true),
-			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
-			array('mat_numero', 'length', 'max'=>12),
+			array('PRO_MAT_ANUAL, PRO_MATRI', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_alu_id', 'safe', 'on'=>'search'),
+			array('PRO_MAT_ID, PRO_MAT_ANUAL, PRO_MATRI', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,8 +45,8 @@ class Matricula extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'matAlu' => array(self::BELONGS_TO, 'Alumno', 'mat_alu_id'),
-			'notases' => array(self::HAS_MANY, 'Notas', 'not_mat'),
+			'pROMATANUAL' => array(self::BELONGS_TO, 'PromedioAnual', 'PRO_MAT_ANUAL'),
+			'pROMATRI' => array(self::BELONGS_TO, 'Matricula', 'PRO_MATRI'),
 		);
 	}
 
@@ -62,16 +56,9 @@ class Matricula extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'mat_id' => 'Mat',
-			'mat_ano' => 'Mat Ano',
-			'mat_numero' => 'Mat Numero',
-			'mat_fingreso' => 'Mat Fingreso',
-			'mat_fretiro' => 'Mat Fretiro',
-			'mat_fcambio' => 'Mat Fcambio',
-			'mat_alu_id' => 'Mat Alu',
-			'mat_asistencia_1' => 'asistencia 1',
-			'mat_asistencia_2' => 'asistencia 2',
-			'mat_asistencia_3' => 'asistencia 3',
+			'PRO_MAT_ID' => 'Pro Mat',
+			'PRO_MAT_ANUAL' => 'Pro Mat Anual',
+			'PRO_MATRI' => 'Pro Matri',
 		);
 	}
 
@@ -93,13 +80,9 @@ class Matricula extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('mat_id',$this->mat_id);
-		$criteria->compare('mat_ano',$this->mat_ano);
-		$criteria->compare('mat_numero',$this->mat_numero);
-		$criteria->compare('mat_fingreso',$this->mat_fingreso,true);
-		$criteria->compare('mat_fretiro',$this->mat_fretiro,true);
-		$criteria->compare('mat_fcambio',$this->mat_fcambio,true);
-		$criteria->compare('mat_alu_id',$this->mat_alu_id);
+		$criteria->compare('PRO_MAT_ID',$this->PRO_MAT_ID);
+		$criteria->compare('PRO_MAT_ANUAL',$this->PRO_MAT_ANUAL);
+		$criteria->compare('PRO_MATRI',$this->PRO_MATRI);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -110,7 +93,7 @@ class Matricula extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Matricula the static model class
+	 * @return ProMat the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -3,11 +3,16 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/mindmup-editabletable.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/numeric-input-example.js"></script>
 
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
+
 
 
 
 <div class="row">
 
+
+<div class="span12">
 <h1><?php echo $nombre_curso.", ".$nombre_asignatura." ".$periodo ?></h1>
 
 
@@ -18,9 +23,7 @@
 
 		<table id="notasTable" class="table table-bordered">
 		    <thead>
-
 		    	<tr>
-
 		    		<?php  for ($i=0; $i <= $notas_p ; $i++) { 
 		    			if( $i == 0 ) { ?>
 		        			<th>Alumno/Notas</th>
@@ -28,18 +31,18 @@
 		        			<th><?php echo "N".$i; ?></th>
 		    		<?php }} ?>
 
-		    		<th>Prom</th>
+		    				<th>Prom</th>
 		    	</tr>
 		    </thead>
 
 		    <tbody>
 			    <?php  foreach ($alumnos as $key => $alum) { ?><tr>
 						<td id="notas_id" style="display:none;"><?php echo $alum['not_id'];  ?></td>
-						<td data-editable= 'false'> <?php echo strtoupper($alum['nombre']); ?></td>	
+						<td data-editable= 'false' > <?php echo strtoupper($alum['nombre']); ?></td>	
 
 						<?php $nota_alu = $alum['notas']; ?> <!--  ['notas'] = array de las 30 notas -->
 						<?php  for ($i=1; $i <= $notas_p ; $i++) { ?>	
-								<td class="nota"><?php
+								<td class="nota"  tabindex="1"><?php
 										if(empty($nota_alu[$i])) {
 											//echo 1;
 										} else if ( $nota_alu[$i] != 0 ){
@@ -54,23 +57,25 @@
 										}
 										?></td>
 						<?php } ?>	
-						<td data-editable= 'false' class="nota" style="background-color: #eee"> </td>
+						<td data-editable= 'false' class="nota" style="background-color: #EEEEEE"></td>
 
 				</tr>
 				<?php } ?>
 				   
 		    </tbody>
-
-
 		</table>
 	</div>
 
 
 	<!-- BOTON DE CARGA -->
-	<button id="bt_subir_notas" class="btn btn-primary">
+	<button id="bt_subir_notas" class="btn btn-primary" style="display:none">
 				<div id="btext">Subir Notas</div>
 				<div id="loader" >SUBIENDO...</div>
 	</button>
+
+	<button id="unlock" class="btn btn-info"><i id="lock_icon" class="icon-lock"></i></button>
+
+</div>
 
 
 </div>
@@ -80,15 +85,48 @@
 
 
 <script>
-  $('#textAreaEditor').editableTableWidget({editor: $('<textarea>')});
+	$('#notasTable').numericInputExample().find('td:first').next().next().focus();
+	$('#unlock').on('click',function(){ 
 
-  $('#notasTable').editableTableWidget().numericInputExample().find('td:first').next().next().focus();
-</script>
+		swal({      
+			title: "Ingrese su Password!",   
+			type: "input",
+			inputType: "password",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top" 
+		}, 
+		function(inputValue){ 
 
+			$.ajax({
+                url: '<?php echo $this->createUrl('notas/validar_edicion'); ?>',
+                type: 'POST',
+                 dataType: "JSON",
+                data: { pass: inputValue },
+                success: function(response) {
+                	if(!response){
+                		swal.showInputError("Ingrese datos nuevamente");     
+						return false   
+                	}
+                	swal({   
+                		title: "Correcto!",     
+                		timer: 600,
+                		type: "success",   
+                		showConfirmButton: false 
+                	});
+
+					$('#bt_subir_notas').show();
+					$('#lock_icon').addClass("icon-ok").removeClass("icon-lock");
+					$('#notasTable').editableTableWidget();
+					$('#notasTable').numericInputExample().find('td:first').next().next().focus();
+					$('#unlock').prop("disabled",true);
+                }               
+            })	
+		});
+	});
 
  
-<!-- subir las notas ajax -->
-<script>
+// subir las notas ajax
 	$("#bt_subir_notas").on('click',function(){
 		var tabla = document.getElementById('notasTable');
 		var rowLength = tabla.rows.length;
@@ -121,11 +159,10 @@
 			data: {curso_notas: curso_notas},
 		})
 	})
-</script>
 
 
-<!-- LOAD BUTTON -->
-<script>
+// LOAD BUTTON
+
 	var $loading = $('#loader').hide();
 	var $btext = $('#btext');
 	$(document)
@@ -137,12 +174,12 @@
 	    $loading.hide();
 	    $btext.show();
 	  });
-</script>
 
-<script>
 
 	$('.nota').each(function(i, n) {
    		if($(n).text() < 4) $(n).css('color', 'red');
+   		parseFloat($(n).text()).toFixed(2);
+   		
 	});
 
 	$('#notasTable').on('change',function(){
@@ -150,9 +187,11 @@
 		$('.nota').each(function(i, n) {
 	   		if($(n).text() < 4) $(n).css('color', 'red');
 	   		if($(n).text() >= 4) $(n).css('color', 'black');
+	   		
 		});
 
 	})
+
 
 </script>
 

@@ -50,25 +50,45 @@ $.fn.editableTableWidget = function (options) {
 					return element.parent().prev().children().eq(element.index());
 				} else if (keycode === ARROW_DOWN) {
 					return element.parent().next().children().eq(element.index());
+				} else if(keycode === "inicio"){
+					return element.parent().next().children().eq(2);
+				} else if(keycode === "inicio_arriba"){
+					var index = element.index();
+					console.log(" " +index );
+					return element.parent().siblings(":first").children().eq(index +1 );
 				}
+
 				return [];
 			};
 		editor.blur(function () {
 			setActiveText();
 			editor.hide();
 		}).keydown(function (e) {
+			var numero_cells = active.parent().children().length-2; 
+			var numero_rows = active.parent().parent().children().length;
+
 			if (e.which === ENTER) {
+				var index = active.parent().index();
 				setActiveText();
 				editor.hide();
 				active.focus();
 				e.preventDefault();
 				e.stopPropagation();
 				var possibleMove = movement(active,ARROW_DOWN);
-				if (possibleMove.length > 0) {
-					possibleMove.focus();
-					e.preventDefault();
-					e.stopPropagation();
-				}
+				var index = possibleMove.parent().index();
+				
+					if(index  == -1){ // pregunto  si es el ultimo en lA FILA
+						console.log("hehe");
+						movement(active,"inicio_arriba").focus();
+					}else{
+						possibleMove.focus();
+						e.preventDefault();
+						e.stopPropagation();
+					}
+
+					// console.log("row: " + index);
+					// console.log(numero_rows);
+				
 			} else if (e.which === ESC) {
 				editor.val(active.text());
 				active.focus();
@@ -77,7 +97,23 @@ $.fn.editableTableWidget = function (options) {
 				editor.hide();
 				
 			} else if (e.which === TAB) {
+		
+				setActiveText();
+				editor.show();
 				active.focus();
+				var possibleMove = movement(active,ARROW_RIGHT);
+				if (possibleMove.length > 0) {
+					if(active.index() == numero_cells){ // pregunto  si es el ultimo en lA FILA
+						movement(active,"inicio").focus();
+					}else{
+						possibleMove.focus();
+					}
+					
+					console.log("row: " + active.parent().index());
+					console.log( "cell: " + active.index());
+					console.log(active.parent().parent().children().length);
+				}
+
 			
 			} else if (this.selectionEnd - this.selectionStart === this.value.length) {
 				var possibleMove = movement(active, e.which);
@@ -86,7 +122,12 @@ $.fn.editableTableWidget = function (options) {
 					e.preventDefault();
 					e.stopPropagation();
 				}
+			} else if (e.which === ARROW_RIGHT) {
+					var possibleMove = movement(active,ARROW_RIGHT);
 			}
+
+
+
 		})
 		.on('input paste', function () {
 			var evt = $.Event('validate');
@@ -118,7 +159,7 @@ $.fn.editableTableWidget = function (options) {
 			}
 		});
 
-		element.find("td:not([data-editable='false'])").prop('tabindex', 1);
+		//element.find("td:not([data-editable='false'])").prop('tabindex', 1);
 
 		$(window).on('resize', function () {
 			if (editor.is(':visible')) {

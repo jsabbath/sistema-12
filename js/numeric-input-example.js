@@ -17,9 +17,11 @@ $.fn.numericInputExample = function () {
 				};
 				total = total/(column-2); // -2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
 				if(isNaN(total)){ 
-					total = " " 
+					total = " "; 
+					row.children().eq(column).text(total);
+				} else{
+					row.children().eq(column).text(total.toPrecision(3)); // se guarda el promedio en la ultima columna de la fila
 				}
-				row.children().eq(column).text(total); // se guarda el promedio en la ultima columna de la fila
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
 		};
@@ -46,10 +48,13 @@ $.fn.numericInputExample = function () {
 				 return false;  // changes can be rejected
 			} else {
 				$('.alert').hide();
-					if(isNaN(total)){
+				if(isNaN(total)){
 					total = " ";
-			}
-				row.children().eq(column).text(total); 
+					row.children().eq(column).text(total); 
+				} else{
+					row.children().eq(column).text(total.toPrecision(3)); 
+				}
+				
 			}
 		});
 	}).on('validate', function (evt, value) {

@@ -28,15 +28,15 @@ class NotasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','subir_notas','guardarnotas'),
+				'actions'=>array('index','view','subir_notas','guardarnotas','validar_edicion'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','subir_notas','guardarnotas'),
+				'actions'=>array('create','update','subir_notas','guardarnotas','validar_edicion'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','subir_notas','guardarnotas'),
+				'actions'=>array('admin','delete','subir_notas','guardarnotas','validar_edicion'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -235,6 +235,20 @@ class NotasController extends Controller
 		}
 
 		return false;
+	}
+
+
+	public function actionValidar_Edicion(){
+
+		if(isset($_POST['pass'])){
+			$p = $_POST['pass'];
+		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
+		 	if( $usuario->password == $p ){
+		 		echo json_encode(1);
+			}else{
+		 		echo json_encode(0);
+		 	}
+		}
 	}
 
 }

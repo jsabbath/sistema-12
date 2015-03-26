@@ -1,29 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "matricula".
+ * This is the model class for table "promedio_anual".
  *
- * The followings are the available columns in table 'matricula':
- * @property integer $mat_id
- * @property integer $mat_ano
- * @property integer $mat_numero
- * @property string $mat_fingreso
- * @property string $mat_fretiro
- * @property string $mat_fcambio
- * @property integer $mat_alu_id
+ * The followings are the available columns in table 'promedio_anual':
+ * @property integer $PRO_ID
+ * @property integer $PRO_PROM_1
+ * @property integer $PRO_PROM_2
+ * @property integer $PRO_PROM_3
+ * @property string $PRO_NOMBRE_ASIGNATURA
  *
  * The followings are the available model relations:
- * @property Alumno $matAlu
- * @property Notas[] $notases
+ * @property ProMat[] $proMats
  */
-class Matricula extends CActiveRecord
+class PromedioAnual extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'matricula';
+		return 'promedio_anual';
 	}
 
 	/**
@@ -34,12 +31,11 @@ class Matricula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('mat_ano, mat_alu_id, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3', 'numerical', 'integerOnly'=>true),
-			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
-			array('mat_numero', 'length', 'max'=>12),
+			array('PRO_PROM_1, PRO_PROM_2, PRO_PROM_3', 'numerical', 'integerOnly'=>true),
+			array('PRO_NOMBRE_ASIGNATURA', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_alu_id', 'safe', 'on'=>'search'),
+			array('PRO_ID, PRO_PROM_1, PRO_PROM_2, PRO_PROM_3, PRO_NOMBRE_ASIGNATURA', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,8 +47,7 @@ class Matricula extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'matAlu' => array(self::BELONGS_TO, 'Alumno', 'mat_alu_id'),
-			'notases' => array(self::HAS_MANY, 'Notas', 'not_mat'),
+			'proMats' => array(self::HAS_MANY, 'ProMat', 'PRO_MAT_ANUAL'),
 		);
 	}
 
@@ -62,16 +57,11 @@ class Matricula extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'mat_id' => 'Mat',
-			'mat_ano' => 'Mat Ano',
-			'mat_numero' => 'Mat Numero',
-			'mat_fingreso' => 'Mat Fingreso',
-			'mat_fretiro' => 'Mat Fretiro',
-			'mat_fcambio' => 'Mat Fcambio',
-			'mat_alu_id' => 'Mat Alu',
-			'mat_asistencia_1' => 'asistencia 1',
-			'mat_asistencia_2' => 'asistencia 2',
-			'mat_asistencia_3' => 'asistencia 3',
+			'PRO_ID' => 'Pro',
+			'PRO_PROM_1' => 'Pro Prom 1',
+			'PRO_PROM_2' => 'Pro Prom 2',
+			'PRO_PROM_3' => 'Pro Prom 3',
+			'PRO_NOMBRE_ASIGNATURA' => 'Pro Nombre Asignatura',
 		);
 	}
 
@@ -93,13 +83,11 @@ class Matricula extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('mat_id',$this->mat_id);
-		$criteria->compare('mat_ano',$this->mat_ano);
-		$criteria->compare('mat_numero',$this->mat_numero);
-		$criteria->compare('mat_fingreso',$this->mat_fingreso,true);
-		$criteria->compare('mat_fretiro',$this->mat_fretiro,true);
-		$criteria->compare('mat_fcambio',$this->mat_fcambio,true);
-		$criteria->compare('mat_alu_id',$this->mat_alu_id);
+		$criteria->compare('PRO_ID',$this->PRO_ID);
+		$criteria->compare('PRO_PROM_1',$this->PRO_PROM_1);
+		$criteria->compare('PRO_PROM_2',$this->PRO_PROM_2);
+		$criteria->compare('PRO_PROM_3',$this->PRO_PROM_3);
+		$criteria->compare('PRO_NOMBRE_ASIGNATURA',$this->PRO_NOMBRE_ASIGNATURA,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -110,7 +98,7 @@ class Matricula extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Matricula the static model class
+	 * @return PromedioAnual the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
