@@ -12,7 +12,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/char.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/eevee.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -35,7 +35,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/eevee.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/jolteon.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -58,7 +58,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/grow.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/vaporeon.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -84,7 +84,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/jiggly.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/flareon.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -107,7 +107,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/leaf.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/umbreon.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -130,7 +130,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/link.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/espeon.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -156,7 +156,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/pika.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/leaf.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -179,7 +179,7 @@ $this->pageTitle=Yii::app()->name;
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/vaporeon.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/glaceon.gif"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -200,4 +200,3 @@ $this->pageTitle=Yii::app()->name;
 		</div>
 	</diw>
 </div>			
-			

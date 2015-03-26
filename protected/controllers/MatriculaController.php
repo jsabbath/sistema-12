@@ -28,15 +28,15 @@ class MatriculaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -220,7 +220,7 @@ class MatriculaController extends Controller
             );
         }
 
-        echo CJSON::encode($resultado);
+        
     }
     
     public function actionBuscar_rut()
@@ -309,7 +309,10 @@ class MatriculaController extends Controller
         $cur = $this->actionCursoAnoActual();
         $ano = $this->actionAnoactual();
 
-      if(isset($_POST['id_curso'])){
+        $evaluacion = new Evaluacion;
+        $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+
+        if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
 
             // busca todas las asignaturas asignadas al curso
@@ -344,6 +347,10 @@ class MatriculaController extends Controller
                     }
                 }
 
+            $evaluacion->eva_infd = $curso->cur_infd;
+            $evaluacion->eva_matricula = $id;
+            $evaluacion->eva_ano = $curso->cur_ano;
+            $evaluacion->save();
 
             } else {
                 Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
@@ -353,9 +360,9 @@ class MatriculaController extends Controller
             $this->redirect(array('view', 'id' => $id));  
         }
 
-
-       $this->render('cur_link', array(
+        $this->render('cur_link', array(
             'cur' => $cur,
+            'informe' => $informe,
         ));
     }
 
@@ -371,6 +378,30 @@ class MatriculaController extends Controller
         }
 
         return $ano;
+    }
+
+    public function actionInfoCurso(){
+        if(isset($_POST['id_curso'])){
+            $idcurso = $_POST['id_curso'];
+
+            $curso = Curso::model()->findAll(array('condition'=>'cur_id="2"'));
+            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+            $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+            $profesor = CHtml::listData(Usuario::model()->findAll(),'usu_iduser','NombreCorto');
+            $infd = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+
+            $informacion = array();
+            $informacion['nivel'] = $nivel[$curso[0]->cur_nivel];
+            $informacion['letra'] = $letra[$curso[0]->cur_letra];
+            $informacion['profesor'] = $profesor[$curso[0]->cur_pjefe];
+            $informacion['informe'] = $infd[$curso[0]->cur_infd];
+
+            $this->renderPartial('info_curso', array('informacion' => $informacion));
+
+        }else{
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+
     }
 
 }
