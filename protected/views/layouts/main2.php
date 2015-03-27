@@ -49,7 +49,7 @@ $tempid = $temp->temp_id;
                 <div class="container">
                 <div class="row">
 
-                    <div class="span12" align="center">
+                    <div class="span12">
                         <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner.png" >
                     </div>
                 </div>
@@ -57,7 +57,7 @@ $tempid = $temp->temp_id;
             </header>
             <div class="row">
             <div class="span12">
-                <div style="text-align: right">
+                <div style="text-align: center">
                 <?php echo CHtml::dropDownList(
                     'anos', $cursos, $anos,array(
                     'prompt'=>'Seleccione año',
@@ -79,7 +79,63 @@ $tempid = $temp->temp_id;
             </div>
             <div class="row">
             <div class="span12">
-            </div>
+                    <?php
+                    if (!Yii::app()->user->isGuest) {
+                        $this->widget('bootstrap.widgets.TbNavbar', array(
+                            'brandLabel' => 'AMSYS',
+                            'collapse' => true,
+                            'display' => null, // default is static to top
+                            'items' => array(
+                                array(
+                                    'class' => 'bootstrap.widgets.TbNav',
+                                    'items' => array(
+                                        array('label' => 'Inicio', 'icon' => 'home', 'url' => array('/site/index')),
+                                        array('label' => 'Admision', 'items' => array(
+                                                array('label' => 'Ingreso Matricula', 'url' => array('matricula/create'),
+                                                ),
+                                                array('label' => 'Modificar Matricula', 'url' => '#'),
+                                                array('label' => 'Bajar Matricula', 'url' => array('/matricula/admin')),)),
+                                        array('label' => 'Academico', 'items' => array(
+                                                array('label' => 'Administracion de Cursos', 'url' => array('curso/admin')),
+                                                array('label' => 'Another action', 'url' => '#'),
+                                                array('label' => 'Something else here', 'url' => '#'),)),
+                                        array('label' => 'Calificaciones y Conducta', 'items' => array(
+                                                array('label' => 'Calificaciones Parciales', 'url' => array('/curso/buscar_notas','id'=> Yii::app()->user->id)),
+                                                array('label' => 'Informe de desarrollo', 'url' => array('informeDesarrollo/inf_d')),
+                                                array('label' => 'Crear informe de desarrollo', 'url' => array('informeDesarrollo/create'))
+                                                ,)
+                                        ),
+                                        array('label' => 'Administrar', 'items' => array(
+                                                array('label' => 'Perfil Establecimiento', 'url' => '#'),
+                                                array('label' => 'Administrar Usuarios', 'icon' => 'pencil', 'url' => Yii::app()->user->ui->userManagementAdminUrl, 'visible' => !Yii::app()->user->isGuest),
+                                                array('label' => 'Asignacion de Roles', 'url' => '#'),
+                                                array('label' => 'Asignacion de Roles', 'url' => '#'),
+                                                array('label' => 'Asignacion de Perfiles', 'url' => '#'),)),
+                                        array('label' => 'Parametros', 'url'=>array('parametro/index')),
+                                    ),
+                                ),
+                                array(
+                                    'class' => 'bootstrap.widgets.TbNav',
+                                    'htmlOptions' => array('class' => 'pull-right'),
+                                    'items' => array(
+                                        array('label' =>$nombre, 'icon' => 'user', 'items' => array(
+                                                array('label' => 'Cambiar Contraseña','url' => '#',
+                                                                                    'icon' => 'wrench', 
+                                                                                    'data-toggle' => 'modal',
+                                                                                    'data-target' => '#cambio_modal',
+                                                                                    'id' => 'contraseña',
+                                                    ),
+                                            
+                                                array('label' => 'Salir', 'url' => '#', 'icon' => 'off', 'visible' => !Yii::app()->user->isGuest, 'data-toggle' => 'modal','data-target' => '#myModal',),
+                                            )
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ));
+                    }
+                    ?>
+                </div>
             </div>
            <div class='info' style='text-aling:left;'>
                 <?php
@@ -143,8 +199,6 @@ $tempid = $temp->temp_id;
 
 <script type="text/javascript">
 $(function () { $("[data-toggle='tooltip']").tooltip(); });
-
-
 $("#contraseña").click(function(){
             $.ajax({
                 type:  'post',

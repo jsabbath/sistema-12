@@ -5,7 +5,7 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <div class="row">
-	<diw class="span12">
+	<div class="span12">
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
 			<div class="span4" style="background-color: #eafadd">
@@ -18,7 +18,7 @@ $this->pageTitle=Yii::app()->name;
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Administrar curso</strong>
+								<strong>Generacion curso</strong>
 							</div>
 						</div>
 						<div class="row">
