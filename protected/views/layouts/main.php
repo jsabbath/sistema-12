@@ -44,20 +44,26 @@ $tempid = $temp->temp_id;
     <body>
 
         <div class="container" id="pagina">    
-           
             <header>
                 <div class="container">
                 <div class="row">
 
-                    <div class="span12" align="center">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner.png" >
+                    <div class="span12">
+						<table width=100%>
+							<td>
+								<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
+							</td>
+							<td>
+									<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner.png" >
+							</td>
+						</table
                     </div>
                 </div>
                 </div> 
             </header>
             <div class="row">
             <div class="span12">
-                <div style="text-align: right">
+                <div style="text-align: center">
                 <?php echo CHtml::dropDownList(
                     'anos', $cursos, $anos,array(
                     'prompt'=>'Seleccione año',
