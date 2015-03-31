@@ -318,40 +318,46 @@ class MatriculaController extends Controller
             // busca todas las asignaturas asignadas al curso
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
             if($asignadas){
-                $curso = Curso::model()->findByPk($id_curso);
-                $tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+                $esta_matriculado = Notas::model()->findAll(array('condition' => 'not_mat=:x', 'params' => array(':x' => $id )));
 
-                // SEMESTRE (SACADO  DE LA TABLA PARAMETRO NO CAMBIAR) ;
-                if( $tipo_periodo->par_descripcion == 'SEMESTRE' ){
-                    for ($i=1; $i <= 2 ; $i++) {
-                        foreach ( $asignadas as $p ){
-                            $nota = new Notas;
-                            $nota->not_asig = $p->aa_asignatura;
-                            $nota->not_mat = $id;
-                            $nota->not_ano = $ano;
-                            $nota->not_periodo = $i;
-                            $nota->insert();
+                if( !$esta_matriculado ){
+                    $curso = Curso::model()->findByPk($id_curso);
+                    $tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+
+                    // SEMESTRE (SACADO  DE LA TABLA PARAMETRO NO CAMBIAR) ;
+                    if( $tipo_periodo->par_descripcion == 'SEMESTRE' ){
+                        for ($i=1; $i <= 2 ; $i++) {
+                            foreach ( $asignadas as $p ){
+                                $nota = new Notas;
+                                $nota->not_asig = $p->aa_asignatura;
+                                $nota->not_mat = $id;
+                                $nota->not_ano = $ano;
+                                $nota->not_periodo = $i;
+                                $nota->insert();
+                            }
+                        }
+                        // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
+                    } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
+                        for ($i=1; $i <= 3; $i++) { 
+                            foreach ( $asignadas as $p ){
+                                $nota = new Notas;
+                                $nota->not_asig = $p->aa_asignatura;
+                                $nota->not_mat = $id;
+                                $nota->not_ano = $ano;
+                                $nota->not_periodo = $i;
+                                $nota->insert();
+                            }
                         }
                     }
-                    // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
-                } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
-                    for ($i=1; $i <= 3; $i++) { 
-                        foreach ( $asignadas as $p ){
-                            $nota = new Notas;
-                            $nota->not_asig = $p->aa_asignatura;
-                            $nota->not_mat = $id;
-                            $nota->not_ano = $ano;
-                            $nota->not_periodo = $i;
-                            $nota->insert();
-                        }
-                    }
+
+                    $evaluacion->eva_infd = $curso->cur_infd;
+                    $evaluacion->eva_matricula = $id;
+                    $evaluacion->eva_ano = $curso->cur_ano;
+                    $evaluacion->save();
+                }else{
+                    Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
+                    $this->refresh();
                 }
-
-            $evaluacion->eva_infd = $curso->cur_infd;
-            $evaluacion->eva_matricula = $id;
-            $evaluacion->eva_ano = $curso->cur_ano;
-            $evaluacion->save();
-
             } else {
                 Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
                 $this->refresh();
