@@ -15,15 +15,23 @@
 
 		<div class="row">
 			<div class="span12 text-center">
-				<?php echo CHtml::dropDownList('id_curso','id_curso',$cur ,array(
+				<br>
+				<?php 
+				echo CHtml::dropDownList('id_curso','id_curso',$cur ,array(
 				'empty' => '-Seleccione Curso-',
 				'id'=> 'id_curso',
 				'ajax' => array(
 	                'type' => 'POST',
 	                'url' => CController::createUrl('matricula/infoCurso'),
 	                'update' => '#info',
-                ),
-				)); ?>
+                ),)); 
+				?>
+				
+				<?php 
+				echo CHtml::dropDownList('id_id', 'id_id', $informe, array(
+	            	'prompt' => '-Seleccione Informe-',
+	            ));
+				?>
 			</div>
 			<div id="info" class="span8 offset2">
 				
