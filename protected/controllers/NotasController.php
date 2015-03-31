@@ -240,15 +240,60 @@ class NotasController extends Controller
 
 	public function actionValidar_Edicion(){
 
-		if(isset($_POST['pass'])){
+		if(isset($_POST['pass']) && isset($_POST['id_asi'])){
 			$p = $_POST['pass'];
+			$id_asi = $_POST['id_asi'];
+			$curso = $_POST['cur'];
+
+			//  se obtienen todos los datos del usuario  de yii
 		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
-		 	if( $usuario->password == $p ){
-		 		echo json_encode(1);
-			}else{
-		 		echo json_encode(0);
-		 	}
-		}
+
+		 	// se ve si  es admin
+		 	if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    			Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+			 	if($usuario->password == $p){
+			 		 echo json_encode(1);
+			 		 return;
+			 	} else {
+			 		echo json_encode(0);
+			 		return;
+			 	}
+			}
+
+			// si  es jefe utp o director o evaluador pueden  cambiar notas tambien 	
+
+		 	// se busca si existe la asignatura
+		 	$existe = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $id_asi, 'aa_curso' => $curso ));
+		 	
+		 	// existe la asignatura
+		 	if( $existe ){
+		 		// si el profesor es el que hace la aignatura
+		 		if( Yii::app()->user->id == $existe['aa_docente'] ){
+			 		if( $usuario->password == $p){
+			 			echo json_encode(1);
+			 			return;
+					}else {
+				 		echo json_encode(0);
+				 		return;
+				 	}
+			 	}
+				// si no  es el profesor que hace la asignatura se ve si es el profe jefe del curso
+		 		$curso = Curso::model()->findByPk($existe['aa_curso']);
+
+		 		if( $curso->cur_pjefe == Yii::app()->user->id ){
+		 			
+		 			if( $usuario->password == $p){
+				 		echo json_encode(1);
+				 		return;
+			 		}else{
+			 			echo json_encode(0);
+			 			return;
+			 		}
+		 		}
+			}
+			echo json_encode(2);
+			return;	
+		}	
 	}
 
 }

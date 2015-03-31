@@ -363,62 +363,71 @@ class CursoController extends Controller
 		return $cursos_actuales;
     }
 
-    // id de cruge para buscar los cursos del profesor
-    public function actionBuscar_notas($id){
-    	$id_asig = array();
-    	$cursos = array();
-    	$id_cur = array();
-    	$invalid = false;
+      // id de cruge para buscar los cursos del profesor
+    public function actionBuscar_notas(){
 
-    	$es_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => $id ));
+		// check acces jefe_utp + evaluador + director
+    	if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    		Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
 
-    	// se verifica que exista en la tabla usuario, donde estan los profes etc
-    	if(empty($es_usuario)){
-    		Yii::app()->user->setFlash('error', "usted es el admin, no tiene cursos!");
-    		throw new CHttpException(404,'NO ERIS NA VIEJA'); //  redireccion  a pagina de error momentania.
+    		$cursos = $this->actionCursoAnoActual();
 
-    	}else {
-    		$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:x', 'params' => array(':x' => $es_usuario->usu_id )));
-		    
-	    	if(empty($tiene_asignaturas)){
-    			Yii::app()->user->setFlash('error', "Usted no dicta asignaturas!");
-	    		throw new CHttpException(404,'The requested page does not exist.');
+    		$this->render('buscar_notas',array(
+	    			'cur' => $cursos,
+   			));
 
-	    	}else {
-			  	foreach ( $tiene_asignaturas as $p ){
+    	} else if( Yii::app()->user->checkAccess('profesor') ){
+    		$ano = $this->actionAnoActual();
+    		$profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$id_profe = $profe['usu_id'];
+
+
+ 			$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:y','params' => array(':y' => $id_profe)));
+    		
+    		$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
+    														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
+    		
+    		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
+    		
+    		if( $tiene_asignaturas ){
+    			foreach ( $tiene_asignaturas as $p ){
 	                $id_cur[] = $p->aa_curso;
-	                //array_push($id_asig, $p->aa_asignatura);
 	            }
+	        }
+	        if( $es_profe_jefe ){
+    			// se agregan cursos si  es q es profe jefe
+    			foreach ( $es_profe_jefe as $c ){
+	                $id_cur[] = $c->cur_id;
+	            }
+    		}
 
-	    		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+	            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
 				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
-	         	$criteria = new CDbCriteria();
+				$criteria = new CDbCriteria();
 	            $criteria->addInCondition('cur_id', $id_cur, 'OR');
 	            $cur = Curso::model()->findAll($criteria);
-	 			$ano = $this->actionAnoActual();
-
 	 			// se filtran los cursos por el año  seleccionado
+	 			$cursos = array();
 	 			for ($i=0; $i < count($cur); $i++) { 
 	 				if($cur[$i]->cur_ano == $ano ){
 						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
 					}
 				}
 
-				if(empty($cursos)) $invalid = true;
-		    		$this->render('buscar_notas',array(
-		    			//'asig' => $asig,
-		    			'cur' 			=> $cursos,
-		    			'invalid_ano' 	=> $invalid,
-		    			'asignacion' 	=> $tiene_asignaturas,
-		    			'usuario'		=> $es_usuario->usu_id,
-		    			));
-	    		
-	    	}
+				$this->render('buscar_notas',array(
+	    			'cur' => $cursos,
+	    			'usu' => $id_profe,
+	    			'nombre' => $profe['Nombrecorto'],
+   				));
 
-		}
-    	
+
+    	} 
+    		
     }
+
+ 	
+    
 
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
@@ -436,14 +445,33 @@ class CursoController extends Controller
 
     // se buscan las asignaturas del cursos seleccionado, pero solo las que dicta el profesor que las busca
     public function actionReload_asi(){
+    	$id_asig = array();
+
 		if(isset($_POST['dropdown'])){
 			$id_curso 	= $_POST['dropdown'];
-			$docente    = $_POST['usuario'];
 
-			
- 			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y', 
- 																'params' => array(':x' => $id_curso, ':y' => $docente)));
-		    
+			//  se ve si  tiene alguno de los roles que pueden  acceder a todas las asignaturas
+			if( Yii::app()->user->checkAccess('admin') || Yii::app()->user->checkAccess('jefe_utp') ||
+				Yii::app()->user->checkAccess('evaluador') || Yii::app()->user->checkAccess('director')){  
+
+				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 
+	 																'params' => array(':x' => $id_curso)));
+
+			}else if( Yii::app()->user->checkAccess('profesor') ){ // se pregunta si  es profesor para cargar solo sus asignaturas
+				$docente    = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+	
+	 			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y', 
+	 																'params' => array(':x' => $id_curso, ':y' => $docente['usu_id'])));
+
+	 			// si el profesor no hace clases en niuna asignatura, entonces es el profesor jefe del curso 
+	 			// por lo  que puede ver todas las asignaturas
+	 			if( empty($asignacion) ){ 
+	 				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 
+	 																'params' => array(':x' => $id_curso)));
+	 			}    
+			}
+
+
 		    $curso  = Curso::model()->findByPk($id_curso);
 			$tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
 
@@ -459,7 +487,6 @@ class CursoController extends Controller
 
     		$this->renderPartial('asign_notas',array(
     			'asig' 		=> $asig,
-    			'doc'  		=> $docente,
     			'periodo' 	=> $tipo_periodo->par_descripcion,
     			'cur_id'    => $curso->cur_id,
     		));
@@ -481,32 +508,38 @@ class CursoController extends Controller
 		$asignatura = Asignatura::model()->findByPk($id_asig);
 		//para verificar que el profesor que edite las notas sea el que dicta la asignatura
 		$asig = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $id_asig, 'aa_curso' => $c));
+		//$usuario = Usuario::model()->findByAttributes(array('usu_iduser' => yii::app()->user->id));
 
-		// se recorren todas las notas encontradas, y se busca al alumno al  que les pertenecen
-        foreach ($notas as $key => $n) {
-        	$mat  = Matricula::model()->findByPk($n->not_mat); 
-        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 
-        	$alumnos[] = array(
-    			//'mat_id' => $mat->mat_id, // id de la matricula del alumno
-    			'not_id' => $n->not_id, //  id de la tabla notas
-    			'nombre' => $alum->getNombre_completo(),
-    			'notas'  => $n->notas, // array con todas las notas
-        	);
-        }
 
-		$curso  = Curso::model()->findByPk($c);
-		$notas_periodo = $curso->cur_notas_periodo;
-		$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
-		$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+			// se recorren todas las notas encontradas, y se busca al alumno al  que les pertenecen
+	        foreach ($notas as $key => $n) {
+	        	$mat  = Matricula::model()->findByPk($n->not_mat); 
+	        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 
-		$this->render('editar',array(
-						'nombre_asignatura' => $asignatura->asi_descripcion,
-						'periodo'           => $tipo_periodo,
-						'nombre_curso'      => $nivel." ".$letra,
-						'notas_p' 			=> $notas_periodo,
-						'alumnos' 			=> $alumnos,
-		 ));
+	        	$alumnos[] = array(
+	    			//'mat_id' => $mat->mat_id, // id de la matricula del alumno
+	    			'not_id' => $n->not_id, //  id de la tabla notas
+	    			'nombre' => $alum->getNombre_completo(),
+	    			'notas'  => $n->notas, // array con todas las notas
+	        	);
+	        }
+
+			$curso  = Curso::model()->findByPk($c);
+			$notas_periodo = $curso->cur_notas_periodo;
+			$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+			$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+
+			$this->render('editar',array(
+							'nombre_asignatura' => $asignatura->asi_descripcion,
+							'asi_id'			=> $asignatura->asi_id,
+							'cur_id'			=> $curso->cur_id,
+							'periodo'           => $tipo_periodo,
+							'nombre_curso'      => $nivel." ".$letra,
+							'notas_p' 			=> $notas_periodo,
+							'alumnos' 			=> $alumnos,
+			 ));
+		
 
 	}
 

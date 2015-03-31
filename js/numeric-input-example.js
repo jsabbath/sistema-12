@@ -6,17 +6,20 @@ $.fn.numericInputExample = function () {
 		footer = element.find('tfoot tr'),
 		dataRows = element.find('tbody tr'),
 		initialTotal = function () {
-			var column, total, a;
+			var column, total, a,count;
 			// se recorren todas las filas
 			dataRows.each(function () {
 				total = 0;
+				count = 0;
 				var row = $(this);	// row = fila actual
 				for (column = 2; column < row.children().size()-1; column++) {  // size()-1 para no contar el ultimo y  parte del 2 por el nombre y  id de notas de alumno
-						total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
-						 // console.log("numero c " + column);
+						if( !isNaN(parseFloat(row.children().eq(column).text()))){
+							total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
+							count++;
+						}
 				};
-				total = total/(column-2); // -2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
-				if(isNaN(total)){ 
+				total = total/(count); // total-2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
+				if(isNaN(total) || total == 0){ 
 					total = " "; 
 					row.children().eq(column).text(total);
 				} else{
@@ -29,26 +32,31 @@ $.fn.numericInputExample = function () {
 		var cell = $(this),
 			column = cell.index(),
 			row,
-			total = 0;
+			total = 0,
+			count = 0;
 		if (column === 0) {
 			return;
 		}
 		element.find('tbody tr').each(function () {
 			row = $(this);
 			total = 0;
+			count = 0;
 
 			for (column = 2; column < row.children().size()-1; column++) {  // size()-1 para no cantar el ultimo
-					total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
+					if( !isNaN(parseFloat(row.children().eq(column).text()))){
+						total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
+						count++;
+					}
 			};
 
-			total = total/(column-2);
+			total = total/(count);
 
 			if (total > 7.0) {  // aka esta el total permitido
 				 $('.alert').show();
 				 return false;  // changes can be rejected
 			} else {
 				$('.alert').hide();
-				if(isNaN(total)){
+				if(isNaN(total) || total == 0){
 					total = " ";
 					row.children().eq(column).text(total); 
 				} else{
@@ -64,7 +72,7 @@ $.fn.numericInputExample = function () {
 			return !!value && value.trim().length > 0;
 		} else {
 			if(!isNaN(parseFloat(value)) && isFinite(value)){
-				if( value <= 7.0 && value >= 1){  // antes de preguntar su valor, me aseguro  que es un numero
+				if( value <= 7.0 && value >= 2.0){  // antes de preguntar su valor, me aseguro  que es un numero
 					return true;
 				}else{  
 					return false;}

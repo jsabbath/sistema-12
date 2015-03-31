@@ -54,7 +54,6 @@ $.fn.editableTableWidget = function (options) {
 					return element.parent().next().children().eq(2);
 				} else if(keycode === "inicio_arriba"){
 					var index = element.index();
-					console.log(" " +index );
 					return element.parent().siblings(":first").children().eq(index +1 );
 				}
 
@@ -78,7 +77,6 @@ $.fn.editableTableWidget = function (options) {
 				var index = possibleMove.parent().index();
 				
 					if(index  == -1){ // pregunto  si es el ultimo en lA FILA
-						console.log("hehe");
 						movement(active,"inicio_arriba").focus();
 					}else{
 						possibleMove.focus();
@@ -109,9 +107,9 @@ $.fn.editableTableWidget = function (options) {
 						possibleMove.focus();
 					}
 					
-					console.log("row: " + active.parent().index());
-					console.log( "cell: " + active.index());
-					console.log(active.parent().parent().children().length);
+					// console.log("row: " + active.parent().index());
+					// console.log( "cell: " + active.index());
+					// console.log(active.parent().parent().children().length);
 				}
 
 			

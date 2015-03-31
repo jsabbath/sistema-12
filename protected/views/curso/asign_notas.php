@@ -1,4 +1,8 @@
 
+<?php if( empty($asig) ){ 
+        echo "Este curso no  tiene asignaturas."; 
+}else{ ?>
+
 <div class="accordion" id="accordion2">
     <?php foreach ($asig as $key=>$a) { ?>
         <div class="accordion-group">
@@ -47,3 +51,4 @@
         window.location.href = c;    
     }
 </script>
+<?php } ?>

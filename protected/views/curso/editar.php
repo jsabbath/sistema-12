@@ -11,7 +11,6 @@
 
 <div class="row">
 
-
 <div class="span12">
 <h1><?php echo $nombre_curso.", ".$nombre_asignatura." ".$periodo ?></h1>
 
@@ -86,6 +85,8 @@
 
 <script>
 	$('#notasTable').numericInputExample().find('td:first').next().next().focus();
+
+	// dar permisos
 	$('#unlock').on('click',function(){ 
 
 		swal({      
@@ -102,12 +103,16 @@
                 url: '<?php echo $this->createUrl('notas/validar_edicion'); ?>',
                 type: 'POST',
                  dataType: "JSON",
-                data: { pass: inputValue },
+                data: { pass: inputValue, id_asi: <?php echo $asi_id; ?>, cur: <?php echo $cur_id; ?> },
                 success: function(response) {
                 	if(!response){
                 		swal.showInputError("Ingrese datos nuevamente");     
-						return false   
+						return false;   
                 	}
+                	if( response == 2 ){
+                		swal.showInputError("usted no  tiene permisos para editar notas de este curso");
+                		return false;
+                	} 
                 	swal({   
                 		title: "Correcto!",     
                 		timer: 600,
@@ -157,6 +162,9 @@
 			url: '<?php echo CController::createUrl("notas/subir_notas")?>',
 			type: 'POST',
 			data: {curso_notas: curso_notas},
+			success: function(data){
+				location.reload();
+			}
 		})
 	})
 
@@ -187,7 +195,7 @@
 		$('.nota').each(function(i, n) {
 	   		if($(n).text() < 4) $(n).css('color', 'red');
 	   		if($(n).text() >= 4) $(n).css('color', 'black');
-	   		
+
 		});
 
 	})

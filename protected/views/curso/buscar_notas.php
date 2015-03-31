@@ -1,15 +1,23 @@
-<h1>Buscar Cursos</h1>
-<div class="span12">
-    <?php if($invalid_ano) echo "NO TIENE CURSOS EN ESTE AÑO";  ?>
+<div class="row">
+  <div class="span12">
 
-        <div class="row">
-            <?php  echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-','id'=> 'drop_curso','name' => 'drop_curso')); ?>
+<?php if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
+   <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
 
-           
+
+
+            <?php  if(empty( $cur )){
+                echo "Usted no tiene cursos ni asignaturas en  este año.";
+            } else{
+                echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-',
+                                                                        'id'=> 'drop_curso',
+                                                                        'name' => 'drop_curso')); 
+            }?>
+
       
-   <div id="asignaturas">
-       
-   </div>
+         <div id="asignaturas">
+             
+         </div>
 
    </div>
 </div>
@@ -21,7 +29,7 @@
             $.ajax({
                     url: '<?php echo CController::createUrl("curso/reload_asi") ?>',
                     type: "POST", 
-                    data: {dropdown: $(this).val(), usuario: <?php echo $usuario ?> },
+                    data: {dropdown: $(this).val() },
                     success: function(response) { 
                        $('#asignaturas').html(response); 
                     }
@@ -29,3 +37,4 @@
         })
     });
 </script>
+ 

@@ -261,7 +261,7 @@ $this->pageTitle=Yii::app()->name;
 				</div>
 			</div>
 		</a>
-		<a href="<?php echo Yii::app()->createUrl('curso/buscar_notas&id=11'); ?>">
+		<a href="<?php echo Yii::app()->createUrl('curso/buscar_notas'); ?>">
 			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5)">
 				<div class="row">
 					<div class="span1 text-center">
