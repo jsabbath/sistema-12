@@ -6,21 +6,30 @@
 
 <div class="wide form">
 
-    <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+<?php $form=$this->beginWidget('CActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'par_id',array('span'=>5)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'par_id'); ?>
+		<?php echo $form->textField($model,'par_id'); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'par_item',array('span'=>5,'maxlength'=>50)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'par_item'); ?>
+		<?php echo $form->textField($model,'par_item',array('size'=>50,'maxlength'=>50)); ?>
+	</div>
 
-                    <?php echo $form->textFieldControlGroup($model,'par_descripcion',array('span'=>5,'maxlength'=>50)); ?>
+	<div class="row">
+		<?php echo $form->label($model,'par_descripcion'); ?>
+		<?php echo $form->textField($model,'par_descripcion',array('size'=>50,'maxlength'=>50)); ?>
+	</div>
 
-        <div class="form-actions">
-        <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>
-    </div>
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Search'); ?>
+	</div>
 
-    <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 
 </div><!-- search-form -->

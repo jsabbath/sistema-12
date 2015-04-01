@@ -17,4 +17,5 @@ $this->menu=array(
 	'model'=>$model,
 	'alumno'=>$alumno,
 	'region'=>$region,
+	'genero'=>$genero,
 	)); ?>

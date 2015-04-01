@@ -28,15 +28,15 @@ class MatriculaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -107,6 +107,7 @@ class MatriculaController extends Controller
 		$model = $this->loadModel($id);
         $alumno = new Alumno;
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
+        $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         if (isset($_POST['Matricula'],$_POST['Alumno'])) {
@@ -131,6 +132,7 @@ class MatriculaController extends Controller
             'model' => $model,
             'alumno' => $alumno,
             'region'=>$region,
+            'genero'=>$genero,
         ));
 	}
 
@@ -408,6 +410,27 @@ class MatriculaController extends Controller
             throw new CHttpException(404, 'The requested page does not exist.');
         }
 
+    }
+
+    public function actionListaCompleta(){
+        $model = new Alumno('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Alumno']))
+            $model->attributes = $_GET['Alumno'];
+        $this->render('lista', array(
+            'model' => $model,
+        ));
+    }
+
+    public function gridEstado($data,$row){
+        $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="estado"')),'par_id','par_descripcion');
+        $ano = Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"'));
+        $alumno = Matricula::model()->findAll(array('condition'=>'mat_alu_id="'.$data->alum_id.'" AND mat_ano="'.$ano[0]->par_descripcion.'"'));
+        if($estado[$alumno[0]->mat_estado]=='activo') return "<label class=\"label label-success\">".$estado[$alumno[0]->mat_estado]."</label>";
+        elseif($estado[$alumno[0]->mat_estado]=='retirado') return "<label class=\"label label-important\">".$estado[$alumno[0]->mat_estado]."</label>";
+        elseif($estado[$alumno[0]->mat_estado]=='promovido') return "<label class=\"label\">".$estado[$alumno[0]->mat_estado]."</label>";
+        elseif($estado[$alumno[0]->mat_estado]=='repitente') return "<label class=\"label label-warning\">".$estado[$alumno[0]->mat_estado]."</label>";
+        else return "<label class=\"label label-info\">".$estado[$alumno[0]->mat_estado]."</label>";
     }
 
 }

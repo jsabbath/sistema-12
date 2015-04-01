@@ -67,11 +67,11 @@ class ParametroController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Parametro'])) {
+		if(isset($_POST['Parametro']))
+		{
 			$model->attributes=$_POST['Parametro'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->par_id));
-			}
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class ParametroController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['Parametro'])) {
+		if(isset($_POST['Parametro']))
+		{
 			$model->attributes=$_POST['Parametro'];
-			if ($model->save()) {
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->par_id));
-			}
 		}
 
 		$this->render('update',array(
@@ -110,17 +110,11 @@ class ParametroController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if (Yii::app()->request->isPostRequest) {
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if (!isset($_GET['ajax'])) {
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-			}
-		} else {
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		}
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -141,9 +135,8 @@ class ParametroController extends Controller
 	{
 		$model=new Parametro('search');
 		$model->unsetAttributes();  // clear any default values
-		if (isset($_GET['Parametro'])) {
+		if(isset($_GET['Parametro']))
 			$model->attributes=$_GET['Parametro'];
-		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -160,9 +153,8 @@ class ParametroController extends Controller
 	public function loadModel($id)
 	{
 		$model=Parametro::model()->findByPk($id);
-		if ($model===null) {
+		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		}
 		return $model;
 	}
 
@@ -172,7 +164,8 @@ class ParametroController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if (isset($_POST['ajax']) && $_POST['ajax']==='parametro-form') {
+		if(isset($_POST['ajax']) && $_POST['ajax']==='parametro-form')
+		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

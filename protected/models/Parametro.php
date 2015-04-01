@@ -10,12 +10,11 @@
  *
  * The followings are the available model relations:
  * @property Alumno[] $alumnos
- * @property Alumno[] $alumnos1
- * @property Alumno[] $alumnos2
  * @property Curso[] $cursos
  * @property Curso[] $cursos1
  * @property Curso[] $cursos2
  * @property Curso[] $cursos3
+ * @property Matricula[] $matriculas
  */
 class Parametro extends CActiveRecord
 {
@@ -35,9 +34,7 @@ class Parametro extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('par_id, par_item, par_descripcion', 'required'),
-			array('par_id', 'numerical', 'integerOnly'=>true),
-			array('par_item, par_descripcion', 'length', 'max'=>20),
+			array('par_item, par_descripcion', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('par_id, par_item, par_descripcion', 'safe', 'on'=>'search'),
@@ -53,12 +50,11 @@ class Parametro extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'alumnos' => array(self::HAS_MANY, 'Alumno', 'alum_genero'),
-			'alumnos1' => array(self::HAS_MANY, 'Alumno', 'alum_salud'),
-			'alumnos2' => array(self::HAS_MANY, 'Alumno', 'alum_estado'),
 			'cursos' => array(self::HAS_MANY, 'Curso', 'cur_nivel'),
-			'cursos1' => array(self::HAS_MANY, 'Curso', 'cur_jornada'),
-			'cursos2' => array(self::HAS_MANY, 'Curso', 'cur_letra'),
+			'cursos1' => array(self::HAS_MANY, 'Curso', 'cur_letra'),
+			'cursos2' => array(self::HAS_MANY, 'Curso', 'cur_jornada'),
 			'cursos3' => array(self::HAS_MANY, 'Curso', 'cur_tperiodo'),
+			'matriculas' => array(self::HAS_MANY, 'Matricula', 'mat_estado'),
 		);
 	}
 

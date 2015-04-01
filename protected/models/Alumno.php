@@ -17,7 +17,6 @@
  * @property string $alum_f_nac
  * @property string $alum_salud
  * @property string $alum_obs
- * @property integer $alum_estado
  *
  * The followings are the available model relations:
  * @property Comuna $alumComuna
@@ -44,7 +43,7 @@ class Alumno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('alum_comuna, alum_ciudad, alum_region, alum_genero, alum_estado', 'numerical', 'integerOnly'=>true),
+			array('alum_comuna, alum_ciudad, alum_region, alum_genero', 'numerical', 'integerOnly'=>true),
 			array('alum_rut', 'length', 'max'=>12),
 			array('alum_nombres', 'length', 'max'=>100),
 			array('alum_apepat, alum_apemat', 'length', 'max'=>20),
@@ -52,7 +51,7 @@ class Alumno extends CActiveRecord
 			array('alum_f_nac, alum_salud, alum_obs', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_direccion, alum_comuna, alum_ciudad, alum_region, alum_genero, alum_f_nac, alum_salud, alum_obs, alum_estado', 'safe', 'on'=>'search'),
+			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_direccion, alum_comuna, alum_ciudad, alum_region, alum_genero, alum_f_nac, alum_salud, alum_obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,20 +77,19 @@ class Alumno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'alum_id' => 'Alum',
-			'alum_rut' => 'Alum Rut',
-			'alum_nombres' => 'Alum Nombres',
-			'alum_apepat' => 'Alum Apepat',
-			'alum_apemat' => 'Alum Apemat',
-			'alum_direccion' => 'Alum Direccion',
-			'alum_comuna' => 'Alum Comuna',
-			'alum_ciudad' => 'Alum Ciudad',
-			'alum_region' => 'Alum Region',
-			'alum_genero' => 'Alum Genero',
-			'alum_f_nac' => 'Alum F Nac',
-			'alum_salud' => 'Alum Salud',
-			'alum_obs' => 'Alum Obs',
-			'alum_estado' => 'Alum Estado',
+			'alum_id' => 'ID',
+			'alum_rut' => 'Rut',
+			'alum_nombres' => 'Nombres',
+			'alum_apepat' => 'Apellido Paterno',
+			'alum_apemat' => 'Apellido Materno',
+			'alum_direccion' => 'Direccion',
+			'alum_comuna' => 'Comuna',
+			'alum_ciudad' => 'Ciudad',
+			'alum_region' => 'Region',
+			'alum_genero' => 'Genero',
+			'alum_f_nac' => 'Fecha Nacimiento',
+			'alum_salud' => 'Salud',
+			'alum_obs' => 'Observacion',
 		);
 	}
 
@@ -126,7 +124,6 @@ class Alumno extends CActiveRecord
 		$criteria->compare('alum_f_nac',$this->alum_f_nac,true);
 		$criteria->compare('alum_salud',$this->alum_salud,true);
 		$criteria->compare('alum_obs',$this->alum_obs,true);
-		$criteria->compare('alum_estado',$this->alum_estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

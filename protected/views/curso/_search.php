@@ -42,11 +42,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'cur_infd'); ?>
-		<?php echo $form->textField($model,'cur_infd'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'cur_tperiodo'); ?>
 		<?php echo $form->textField($model,'cur_tperiodo'); ?>
 	</div>

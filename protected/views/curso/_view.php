@@ -29,10 +29,6 @@ $profesor_jefe = CHtml::listData(Usuario::model()->findall(),'usu_iduser','nombr
 	<?php echo CHtml::encode($profesor_jefe[$data->cur_pjefe]); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('cur_infd')); ?>:</b>
-	<?php echo CHtml::encode($data->cur_infd); ?>
-	<br />
-
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cur_tperiodo')); ?>:</b>
 	<?php echo CHtml::encode($data->cur_tperiodo); ?>

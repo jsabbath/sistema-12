@@ -1,9 +1,7 @@
 <?php
 /* @var $this ParametroController */
 /* @var $model Parametro */
-?>
 
-<?php
 $this->breadcrumbs=array(
 	'Parametros'=>array('index'),
 	'Create',

@@ -110,7 +110,7 @@ $rand = "X".$random1.$random2;
 
     <div class="row">
         <?php echo $form->labelEx($model,'alum_genero'); ?>
-        <?php echo $form->dropDownList($alumno,'alum_genero',array('47'=>'MASCULINO','48'=>'FEMENINO'),array('prompt'=>'Seleccione genero')); ?>
+        <?php echo $form->dropDownList($alumno,'alum_genero',$genero,array('prompt'=>'Seleccione genero')); ?>
         <?php echo $form->error($model,'alum_genero'); ?>
     </div>
 
@@ -124,12 +124,6 @@ $rand = "X".$random1.$random2;
         <?php echo $form->labelEx($alumno,'alum_obs'); ?>
         <?php echo $form->textArea($alumno,'alum_obs'); ?>
         <?php echo $form->error($alumno,'alum_obs'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($alumno,'alum_estado'); ?>
-        <?php echo $form->textField($alumno,'alum_estado'); ?>
-        <?php echo $form->error($alumno,'alum_estado'); ?>
     </div>
 
     <h3>Datos matricula</h3>
