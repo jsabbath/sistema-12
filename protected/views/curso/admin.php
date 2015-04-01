@@ -84,24 +84,39 @@ $('.search-form form').submit(function(){
 <div class="search-form" style="display:none">    
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'curso-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'cur_id',
 		//'cur_ano',
-		'cur_nivel',
-		'cur_jornada',
-		'cur_letra',
+		//'cur_nivel',
+		//'cur_jornada',
+		//'cur_letra',
 		//'cur_pjefe',
 		/*
 		'cur_infd',
 		'cur_tperiodo',
 		'cur_notas_periodo',
 		*/
+        array(
+            'name'=>'cur_nivel',
+            'type'=>'raw',
+            'value'=>'$data->curNivel->par_descripcion'
+        ),
+        array(
+            'name'=>'cur_letra',
+            'type'=>'raw',
+            'value'=>'$data->curLetra->par_descripcion',
+        ),
+        array(
+            'name'=>'cur_jornada',
+            'type'=>'raw',
+            'value'=>'$data->curJornada->par_descripcion',
+        ),
 		array(
-			'class'=>'CButtonColumn',
+			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
 	),
 )); ?>

@@ -70,15 +70,14 @@ class Curso extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cur_id' => 'Cur',
-			'cur_ano' => 'Cur Ano',
-			'cur_notas_periodo' => 'Cur Notas Periodo',
-			'cur_nivel' => 'Cur Nivel',
-			'cur_letra' => 'Cur Letra',
-			'cur_jornada' => 'Cur Jornada',
-			'cur_pjefe' => 'Cur Pjefe',
-			'cur_tperiodo' => 'Cur Tperiodo',
-			'cur_infd' => 'Cur Infd',
+			'cur_id' => 'ID',
+			'cur_ano' => 'Ano',
+			'cur_notas_periodo' => 'Notas Periodo',
+			'cur_nivel' => 'Nivel',
+			'cur_letra' => 'Letra',
+			'cur_jornada' => 'Jornada',
+			'cur_pjefe' => 'Profesor Jefe',
+			'cur_tperiodo' => 'Tipo Periodo',
 		);
 	}
 
