@@ -68,6 +68,7 @@ class MatriculaController extends Controller
         
         //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
+        $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -94,6 +95,7 @@ class MatriculaController extends Controller
             'model' => $model,
             'alumno' => $alumno,
             'region'=>$region,
+            'genero'=>$genero,
         ));
 	}
 
@@ -110,7 +112,7 @@ class MatriculaController extends Controller
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-        if (isset($_POST['Matricula'],$_POST['Alumno'])) {
+        if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
             $model->mat_alu_id = 1;
@@ -122,12 +124,13 @@ class MatriculaController extends Controller
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id;
                     if ($model->save()) {
-                        $this->redirect(array('view', 'id' => $model->mat_id));
-
+                        $this->redirect(array('addcurso', 'id' => $model->mat_id));  
                     }
                 }
+            } else {   
+                Yii::app()->user->setFlash('error', "error!");
             }
-        }
+        } 
         $this->render('update', array(
             'model' => $model,
             'alumno' => $alumno,
@@ -413,19 +416,32 @@ class MatriculaController extends Controller
     }
 
     public function actionListaCompleta(){
-        $model = new Alumno('search');
-        $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Alumno']))
-            $model->attributes = $_GET['Alumno'];
+
+        $criterio = new CDbCriteria;
+        $criterio->join = 'LEFT JOIN matricula as m on(m.mat_alu_id=t.alum_id)';
+        $criterio->condition = 'mat_ano=:ano';
+        $criterio->params = array(':ano'=>$this->actionAnoactual());
+        $model = Alumno::model()->find($criterio);
+        //$mat = Matricula::model()->findAllByAttributes(array('mat_ano'=>$this->actionAnoactual()));
+
+        //$model = new Alumno('search');
+        //$model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Alumno'])) $model->attributes = $_GET['Alumno'];
         $this->render('lista', array(
             'model' => $model,
+            //'mat'=>$mat,
         ));
     }
 
+    //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)
     public function gridEstado($data,$row){
+        /*
+        esta funcion solo se puede ejecutar dentro de un CGridview con alumnos
+        */
         $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="estado"')),'par_id','par_descripcion');
-        $ano = Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"'));
-        $alumno = Matricula::model()->findAll(array('condition'=>'mat_alu_id="'.$data->alum_id.'" AND mat_ano="'.$ano[0]->par_descripcion.'"'));
+        $ano = $this->actionAnoactual();
+        $alumno = Matricula::model()->findAll(array('condition'=>'mat_alu_id="'.$data->alum_id.'" AND mat_ano="'.$ano.'"'));
+
         if($estado[$alumno[0]->mat_estado]=='activo') return "<label class=\"label label-success\">".$estado[$alumno[0]->mat_estado]."</label>";
         elseif($estado[$alumno[0]->mat_estado]=='retirado') return "<label class=\"label label-important\">".$estado[$alumno[0]->mat_estado]."</label>";
         elseif($estado[$alumno[0]->mat_estado]=='promovido') return "<label class=\"label\">".$estado[$alumno[0]->mat_estado]."</label>";
