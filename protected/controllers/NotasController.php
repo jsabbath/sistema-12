@@ -248,9 +248,8 @@ class NotasController extends Controller
 			//  se obtienen todos los datos del usuario  de yii
 		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
 
-		 	// se ve si  es admin
-		 	if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
-    			Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+		 	// se ve si  es admin o director para editar
+		 	if (Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
 			 	if($usuario->password == $p){
 			 		 echo json_encode(1);
 			 		 return;

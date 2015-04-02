@@ -28,15 +28,18 @@ class CursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi','poner_notas'),
+				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas',
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi','poner_notas'),
+				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas',
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas','reload_asi','poner_notas'),
+				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas',
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -348,7 +351,7 @@ class CursoController extends Controller
     public function actionCursoAnoActual(){
     	/*
 		La funcion devuelve un array con la ID y el nombre completo de los cursos
-		ejemplo: array('1'=>'PRIMERO A')
+		ejemplo: array('id_curso'=>'PRIMERO A')
     	*/
 		$ano = $this->actionAnoactual();
     	//$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
@@ -366,13 +369,21 @@ class CursoController extends Controller
       // id de cruge para buscar los cursos del profesor
     public function actionBuscar_notas(){
 
-		// check acces jefe_utp + evaluador + director
-    	if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
-    		Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+    	if(Yii::app()->user->checkAccess('admin')){
+			$cursos = $this->actionCursoAnoActual();
 
+    		$this->render('buscar_notas',array(
+	    			'cur' => $cursos,
+   			));
+    	
+    	} else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    				Yii::app()->user->checkAccess('director') ){
+
+    		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
     		$cursos = $this->actionCursoAnoActual();
 
     		$this->render('buscar_notas',array(
+    				'nombre' => $usuario['Nombrecorto'],
 	    			'cur' => $cursos,
    			));
 
@@ -541,6 +552,155 @@ class CursoController extends Controller
 			 ));
 		
 
+	}
+
+	// se le entrega id_curso y devuelve una lista con todos los alumnos + id_matricula
+	public function actionListar_alumnos($id){
+		$tiene_asignatura = AAsignatura::model()->findByAttributes(array('aa_curso' => $id ));
+
+		if( $tiene_asignatura ){
+
+			$ano = $this->actionAnoactual();
+            $notas = Notas::model()->findall(array( 'condition' => 'not_asig=:x AND not_ano=:y', 
+            										'params' => array(':x' => $tiene_asignatura['aa_asignatura'], ':y' => $ano )));
+           	if( $notas ){
+	            $mat_id = array();
+	            foreach ($notas as $key => $nota) { // se obtienen todas las id de los alumnos de una asignatura
+	            	$mat_id[] = $nota->not_mat;
+	            }
+
+	            $criteria = new CDbCriteria();
+	            $criteria->addInCondition('mat_id', $mat_id, 'OR');
+	            $matriculas = Matricula::model()->findAll($criteria);
+
+	            $lista_alumnos = array();
+            	$curso = Curso::model()->findByPk($id);
+            	$tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+
+
+            	if($tipo_periodo->par_descripcion == 'SEMESTRE' ){
+	            	foreach ($matriculas as $key => $alumno) { // se recorre cada matricula y  se obtiene el nombre del alumno
+	            		$mat_id = $alumno['mat_alu_id'];
+	            		$alumno = Alumno::model()->findByPk($mat_id);
+	            		$matri 	= Matricula::model()->findByPk($mat_id);
+	            		
+	            		$lista_alumnos[] = array(
+	            					'mat_id'	=> $mat_id,
+	            					'nombre'	=> $alumno->getNombre_completo(),
+	            					'asi_1'		=> $matri['mat_asistencia_1'],
+	            					'asi_2'		=> $matri['mat_asistencia_2'],
+	            				);
+	            		
+	            	}
+	            }else if($tipo_periodo->par_descripcion == 'TRIMESTRE' ){
+	            	foreach ($matriculas as $key => $alumno) { // se recorre cada matricula y  se obtiene el nombre del alumno
+	            		$mat_id = $alumno['mat_alu_id'];
+	            		$alumno = Alumno::model()->findByPk($mat_id);
+	            		$matri 	= Matricula::model()->findByPk($mat_id);
+
+	            		$lista_alumnos[] = array(
+	            					'mat_id'	=> $mat_id,
+	            					'nombre'	=> $alumno->getNombre_completo(),
+	            					'asi_1'		=> $matri->mat_asistencia_1,
+	            					'asi_2'		=> $matri->mat_asistencia_2,
+	            					'asi_3'		=> $matri->mat_asistencia_3,
+	            				);
+	            		
+	            	}
+	            }
+            	//echo CJSON::encode($lista_alumnos);
+            	return $lista_alumnos; // se retorna la lista
+	            
+			}else{
+				//echo "no tiene alumnos";
+				return 0;
+			}
+
+		} else{
+			//echo "no tiene asignaturas";
+			return null; //  si  el curso no  tiene asignaturas se retorna -1
+		}
+
+	}
+
+	//  el profesor jefe puede ver todos sus cursos, 
+	// selecciona uno y entra a la seccion  donde se pone la asistencia
+	public function actionBuscar_asistencia(){
+    	if(Yii::app()->user->checkAccess('admin') ){
+			$cursos = $this->actionCursoAnoActual();
+
+    		$this->render('buscar_asistencia',array(
+	    			'cur' => $cursos,
+   			));
+    	
+    	} else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    				Yii::app()->user->checkAccess('director') ){
+
+    		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$cursos = $this->actionCursoAnoActual();
+
+    		$this->render('buscar_asistencia',array(
+    				'nombre' => $usuario['Nombrecorto'],
+	    			'cur' => $cursos,
+   			));
+
+    	} else if( Yii::app()->user->checkAccess('profesor')){
+    		$id_cur = array();
+    		$ano = $this->actionAnoActual();
+
+			$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
+    														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
+		
+
+			if( $es_profe_jefe ){
+    			// se agregan cursos si  es q es profe jefe
+    			foreach ( $es_profe_jefe as $c ){
+	                $id_cur[] = $c->cur_id;
+	            }
+    		}
+
+			$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+			$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+			$criteria = new CDbCriteria();
+            $criteria->addInCondition('cur_id', $id_cur, 'OR');
+            $cur = Curso::model()->findAll($criteria);
+ 			// se filtran los cursos por el año  seleccionado
+ 			$cursos = array();
+ 			for ($i=0; $i < count($cur); $i++) { 
+ 				if($cur[$i]->cur_ano == $ano ){
+					$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+				}
+			}
+
+			$this->render('buscar_asistencia',array(
+	    			'cur' => $cursos,
+	    			'usu' => $id_profe,
+	    			'nombre' => $profe['Nombrecorto'],
+   				));
+
+		}
+	}
+
+	// llega la id del curso  al  que se le quiere poner la asistencia
+	public function actionPoner_asistencia(){
+		
+		if( isset($_POST['id_cur'] )){
+			$id = $_POST['id_cur'];
+		
+		$lista = $this->actionListar_alumnos($id); // se obtiene la lista de alumnos
+
+		$curso = Curso::model()->findByPk($id);
+        $tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+        
+
+
+		$this->renderPartial('editar_asistencia',array(
+					'lista' 	=> $lista,
+					'id_c'		=> $id,
+					'tperiodo'	=> $tipo_periodo->par_descripcion,
+				));
+		}
 	}
 
 
