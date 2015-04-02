@@ -647,7 +647,7 @@ class CursoController extends Controller
     	} else if( Yii::app()->user->checkAccess('profesor')){
     		$id_cur = array();
     		$ano = $this->actionAnoActual();
-
+    		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
 			$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
     														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
 		
@@ -657,28 +657,29 @@ class CursoController extends Controller
     			foreach ( $es_profe_jefe as $c ){
 	                $id_cur[] = $c->cur_id;
 	            }
-    		}
+    		
+				$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
-			$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
-			$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
-
-			$criteria = new CDbCriteria();
-            $criteria->addInCondition('cur_id', $id_cur, 'OR');
-            $cur = Curso::model()->findAll($criteria);
- 			// se filtran los cursos por el año  seleccionado
- 			$cursos = array();
- 			for ($i=0; $i < count($cur); $i++) { 
- 				if($cur[$i]->cur_ano == $ano ){
-					$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+				$criteria = new CDbCriteria();
+	            $criteria->addInCondition('cur_id', $id_cur, 'OR');
+	            $cur = Curso::model()->findAll($criteria);
+	 			// se filtran los cursos por el año  seleccionado
+	 			$cursos = array();
+	 			for ($i=0; $i < count($cur); $i++) { 
+	 				if($cur[$i]->cur_ano == $ano ){
+						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+					}
 				}
+
+				$this->render('buscar_asistencia',array(
+		    			'cur' => $cursos,
+		    			//'usu' => $id_profe,
+		    			'nombre' => $usuario['Nombrecorto'],
+	   				));
+			} else {
+				echo "usted no es profe jefe de nadie";
 			}
-
-			$this->render('buscar_asistencia',array(
-	    			'cur' => $cursos,
-	    			'usu' => $id_profe,
-	    			'nombre' => $profe['Nombrecorto'],
-   				));
-
 		}
 	}
 
