@@ -5,12 +5,13 @@
  *
  * The followings are the available columns in table 'evaluacion':
  * @property integer $eva_id
- * @property integer $eva_infd
+ * @property integer $eva_concepto
  * @property integer $eva_matricula
  * @property integer $eva_ano
+ * @property string $eva_nota
  *
  * The followings are the available model relations:
- * @property InformeDesarrollo $evaInfd
+ * @property Concepto $evaConcepto
  * @property Matricula $evaMatricula
  */
 class Evaluacion extends CActiveRecord
@@ -31,10 +32,12 @@ class Evaluacion extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('eva_infd, eva_matricula, eva_ano', 'numerical', 'integerOnly'=>true),
+			array('eva_nota', 'required'),
+			array('eva_concepto, eva_matricula, eva_ano', 'numerical', 'integerOnly'=>true),
+			array('eva_nota', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('eva_id, eva_infd, eva_matricula, eva_ano', 'safe', 'on'=>'search'),
+			array('eva_id, eva_concepto, eva_matricula, eva_ano, eva_nota', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +49,7 @@ class Evaluacion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'evaInfd' => array(self::BELONGS_TO, 'InformeDesarrollo', 'eva_infd'),
+			'evaConcepto' => array(self::BELONGS_TO, 'Concepto', 'eva_concepto'),
 			'evaMatricula' => array(self::BELONGS_TO, 'Matricula', 'eva_matricula'),
 		);
 	}
@@ -58,9 +61,10 @@ class Evaluacion extends CActiveRecord
 	{
 		return array(
 			'eva_id' => 'Eva',
-			'eva_infd' => 'Eva Infd',
+			'eva_concepto' => 'Eva Concepto',
 			'eva_matricula' => 'Eva Matricula',
 			'eva_ano' => 'Eva Ano',
+			'eva_nota' => 'Eva Nota',
 		);
 	}
 
@@ -83,9 +87,10 @@ class Evaluacion extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('eva_id',$this->eva_id);
-		$criteria->compare('eva_infd',$this->eva_infd);
+		$criteria->compare('eva_concepto',$this->eva_concepto);
 		$criteria->compare('eva_matricula',$this->eva_matricula);
 		$criteria->compare('eva_ano',$this->eva_ano);
+		$criteria->compare('eva_nota',$this->eva_nota,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

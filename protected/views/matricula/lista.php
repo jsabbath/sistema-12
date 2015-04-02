@@ -16,44 +16,47 @@
 <div class="row">
 	<div class="span12">
 		<?php 
-		//var_dump($mat);
-		$this->widget('bootstrap.widgets.TbGridView',array(
-			'id'=>'alumno-grid',
+
+		$this->widget('bootstrap.widgets.TbGridView', array(
+			'id'=>'matricula-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,
 			'columns'=>array(
-				//'alum_id',
-				'alum_rut',
-				'alum_nombres',
-				'alum_apepat',
-				'alum_apemat',
-				'alum_f_nac',
-				//'alum_direccion',
-				//'alum_region',
-				//'alum_ciudad',
-				//'alum_comuna',
-				//'alum_genero',
-				//'alum_salud',
-				//'alum_obs',
-				//'alum_estado',
+				//'mat_id',
+				//'mat_ano',
+				//'mat_numero',
+				//'mat_fingreso',
+				//'mat_fretiro',
+				//'mat_fcambio',
+				/*
+				'mat_asistencia_1',
+				'mat_asistencia_2',
+				'mat_asistencia_3',
+				'mat_alu_id',
+				'mat_estado',
+				*/
 				array(
-					'header'=>'Estado',
-					'type'=>'raw',
-					'value'=>array($this,'gridEstado'),
-					'htmlOptions'=>array('style'=>'text-align: center'),
+					'name'=>'matAlu.alum_rut',
+				),
+				array(
+					'name'=>'matAlu.alum_nombres',
+					'filter' => CHtml::activeTextField($model, 'alumno_nombres'),
+				),
+				array(
+					'name'=>'matAlu.alum_apepat',
+					'filter' => CHtml::activeTextField($model, 'alumno_apepat'),
+				),
+				array(
+					'name'=>'matAlu.alum_apemat',
+					'filter' => CHtml::activeTextField($model, 'alumno_apemat'),
+				),
+				array(
+					'name'=>'mat_estado',
+					'value'=>'$data->matEstado->par_descripcion',
+					'filter' => CHtml::activeTextField($model, 'estado'),
 				),
 				array(
 					'class'=>'bootstrap.widgets.TbButtonColumn',
-					'template'=>'{update}',
-					'buttons'=>array(
-						'update'=>array(
-							'label'=>'Actualizar',
-							'url'=>'Yii::app()->createUrl("matricula/update",array("id"=>$data->matriculas->mat_id))',
-							'options'=>array(
-								'class'=>'btn btn-info',
-							),
-						),
-					),
 				),
 			),
 		)); 

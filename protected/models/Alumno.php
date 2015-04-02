@@ -67,7 +67,7 @@ class Alumno extends CActiveRecord
 			'alumCiudad' => array(self::BELONGS_TO, 'Ciudad', 'alum_ciudad'),
 			'alumRegion' => array(self::BELONGS_TO, 'Region', 'alum_region'),
 			'alumGenero' => array(self::BELONGS_TO, 'Parametro', 'alum_genero'),
-			'matriculas' => array(self::HAS_MANY, 'Matricula', 'mat_alu_id'),
+			'matriculas' => array(self::HAS_ONE, 'Matricula', 'mat_alu_id'),
 		);
 	}
 

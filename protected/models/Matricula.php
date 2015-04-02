@@ -36,6 +36,12 @@ class Matricula extends CActiveRecord
 	/**
 	 * @return array validation rules for model attributes.
 	 */
+	public $alumno_nombres;
+	public $alumno_apepat;
+	public $alumno_apemat;
+	public $estado;
+
+
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
@@ -44,6 +50,10 @@ class Matricula extends CActiveRecord
 			array('mat_ano, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'numerical', 'integerOnly'=>true),
 			array('mat_numero', 'length', 'max'=>11),
 			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
+			array('alumno_nombres','safe'),
+			array('alumno_apepat','safe'),
+			array('alumno_apemat','safe'),
+			array('estado','safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'safe', 'on'=>'search'),
@@ -115,6 +125,11 @@ class Matricula extends CActiveRecord
 		$criteria->compare('mat_asistencia_3',$this->mat_asistencia_3);
 		$criteria->compare('mat_alu_id',$this->mat_alu_id);
 		$criteria->compare('mat_estado',$this->mat_estado);
+		$criteria->with = array('matAlu','matEstado');
+        $criteria->addSearchCondition('matAlu.alum_nombres', $this->alumno_nombres);
+        $criteria->addSearchCondition('matAlu.alum_apepat', $this->alumno_apepat);
+        $criteria->addSearchCondition('matAlu.alum_apemat', $this->alumno_apemat);
+        $criteria->addSearchCondition('matEstado.par_descripcion', $this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -417,30 +417,21 @@ class MatriculaController extends Controller
 
     public function actionListaCompleta(){
 
-        $criterio = new CDbCriteria;
-        $criterio->join = 'LEFT JOIN matricula as m on(m.mat_alu_id=t.alum_id)';
-        $criterio->condition = 'mat_ano=:ano';
-        $criterio->params = array(':ano'=>$this->actionAnoactual());
-        $model = Alumno::model()->find($criterio);
-        //$mat = Matricula::model()->findAllByAttributes(array('mat_ano'=>$this->actionAnoactual()));
-
-        //$model = new Alumno('search');
-        //$model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Alumno'])) $model->attributes = $_GET['Alumno'];
+        $model = new Matricula('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('lista', array(
             'model' => $model,
-            //'mat'=>$mat,
         ));
     }
 
     //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)
+    /*
     public function gridEstado($data,$row){
-        /*
-        esta funcion solo se puede ejecutar dentro de un CGridview con alumnos
-        */
+        
         $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="estado"')),'par_id','par_descripcion');
         $ano = $this->actionAnoactual();
-        $alumno = Matricula::model()->findAll(array('condition'=>'mat_alu_id="'.$data->alum_id.'" AND mat_ano="'.$ano.'"'));
+        $alumno = Alumno::model()->findAll(array('condition'=>'alum_id="'.$data->mat_alu_id.'" AND mat_ano="'.$ano.'"'));
 
         if($estado[$alumno[0]->mat_estado]=='activo') return "<label class=\"label label-success\">".$estado[$alumno[0]->mat_estado]."</label>";
         elseif($estado[$alumno[0]->mat_estado]=='retirado') return "<label class=\"label label-important\">".$estado[$alumno[0]->mat_estado]."</label>";
@@ -448,5 +439,5 @@ class MatriculaController extends Controller
         elseif($estado[$alumno[0]->mat_estado]=='repitente') return "<label class=\"label label-warning\">".$estado[$alumno[0]->mat_estado]."</label>";
         else return "<label class=\"label label-info\">".$estado[$alumno[0]->mat_estado]."</label>";
     }
-
+    */
 }
