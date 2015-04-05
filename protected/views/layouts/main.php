@@ -49,14 +49,15 @@ $tempid = $temp->temp_id;
                 <div class="row">
 
                     <div class="span12">
-						<table width=100%>
-							<td>
+						<table width=100%  border="0" cellspacing="0" cellpadding="0">
+							<td width=10%></td>
+							<td width=20% align="right">
 								<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
 							</td>
-							<td>
+							<td width=70%>
 									<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner.png" >
 							</td>
-						</table
+						</table>
                     </div>
                 </div>
                 </div> 
@@ -99,6 +100,8 @@ $tempid = $temp->temp_id;
                 }
                 ?>
             </div>
+			
+			
 
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
