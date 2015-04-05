@@ -136,6 +136,35 @@ class Matricula extends CActiveRecord
 		));
 	}
 
+	public function buscar($ano)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('mat_ano',$ano);
+		$criteria->compare('mat_id',$this->mat_id);
+		$criteria->compare('mat_ano',$this->mat_ano);
+		$criteria->compare('mat_numero',$this->mat_numero,true);
+		$criteria->compare('mat_fingreso',$this->mat_fingreso,true);
+		$criteria->compare('mat_fretiro',$this->mat_fretiro,true);
+		$criteria->compare('mat_fcambio',$this->mat_fcambio,true);
+		$criteria->compare('mat_asistencia_1',$this->mat_asistencia_1);
+		$criteria->compare('mat_asistencia_2',$this->mat_asistencia_2);
+		$criteria->compare('mat_asistencia_3',$this->mat_asistencia_3);
+		$criteria->compare('mat_alu_id',$this->mat_alu_id);
+		$criteria->compare('mat_estado',$this->mat_estado);
+		$criteria->with = array('matAlu','matEstado');
+        $criteria->addSearchCondition('matAlu.alum_nombres', $this->alumno_nombres);
+        $criteria->addSearchCondition('matAlu.alum_apepat', $this->alumno_apepat);
+        $criteria->addSearchCondition('matAlu.alum_apemat', $this->alumno_apemat);
+        $criteria->addSearchCondition('matEstado.par_descripcion', $this->estado);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

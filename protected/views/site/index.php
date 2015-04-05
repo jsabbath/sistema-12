@@ -35,7 +35,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<div class="visible-phone"><br/></div>
-		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/create'); ?>">
+		<a href="<?php echo Yii::app()->createUrl('matricula/listaCompleta'); ?>">
 			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5)">
 				<div class="row">
 					<div class="span1 text-center">

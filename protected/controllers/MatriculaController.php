@@ -416,7 +416,7 @@ class MatriculaController extends Controller
     }
 
     public function actionListaCompleta(){
-
+        
         $model = new Matricula('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
@@ -426,18 +426,16 @@ class MatriculaController extends Controller
     }
 
     //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)
-    /*
+    
     public function gridEstado($data,$row){
         
-        $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="estado"')),'par_id','par_descripcion');
-        $ano = $this->actionAnoactual();
-        $alumno = Alumno::model()->findAll(array('condition'=>'alum_id="'.$data->mat_alu_id.'" AND mat_ano="'.$ano.'"'));
+        $estado = $data->matEstado->par_descripcion;
 
-        if($estado[$alumno[0]->mat_estado]=='activo') return "<label class=\"label label-success\">".$estado[$alumno[0]->mat_estado]."</label>";
-        elseif($estado[$alumno[0]->mat_estado]=='retirado') return "<label class=\"label label-important\">".$estado[$alumno[0]->mat_estado]."</label>";
-        elseif($estado[$alumno[0]->mat_estado]=='promovido') return "<label class=\"label\">".$estado[$alumno[0]->mat_estado]."</label>";
-        elseif($estado[$alumno[0]->mat_estado]=='repitente') return "<label class=\"label label-warning\">".$estado[$alumno[0]->mat_estado]."</label>";
-        else return "<label class=\"label label-info\">".$estado[$alumno[0]->mat_estado]."</label>";
+        if($estado=='activo') return "<label class=\"label label-success\">".$estado."</label>";
+        elseif($estado=='retirado') return "<label class=\"label label-important\">".$estado."</label>";
+        elseif($estado=='promovido') return "<label class=\"label\">".$estado."</label>";
+        elseif($estado=='repitente') return "<label class=\"label label-warning\">".$estado."</label>";
+        else return "<label class=\"label label-info\">".$estado."</label>";
     }
-    */
+
 }
