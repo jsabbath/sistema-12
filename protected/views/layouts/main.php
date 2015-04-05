@@ -163,6 +163,9 @@ $("#contraseña").click(function(){
             });
 })
 </script>
+<div align="center" class="text-center">
+	<pre>Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+</div>
     </body>
 </html>
 

@@ -5,10 +5,10 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <div class="row" id="academico">
-	<div class="span12" style="border-top: 3px solid #F7BE81;border-bottom: 3px solid #F7BE81;">
+	<div class="span12" style="border-top: 3px solid #F7BE81;border-bottom: 3px solid #F7BE81; -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 25px;">
 	<div style="padding-left: 10px;">
 	</br>
-	<h2>Academico</h2>
+	<h2><font face="papyrus">Academico</font></h2>
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
@@ -140,7 +140,7 @@ $this->pageTitle=Yii::app()->name;
 	<div class="span12" style="border-top: 3px solid #F7BE81;border-bottom: 3px solid #F7BE81;">
 	<div style="padding-left: 10px;">
 	</br>
-	<h2>Gestion Cursos</h2>
+	<h2><font face="papyrus">Gestion Cursos</font></h2>
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
@@ -341,7 +341,7 @@ $this->pageTitle=Yii::app()->name;
 	<div class="span12"  style="border-top: 3px solid #F7BE81;border-bottom: 3px solid #F7BE81;">
 	<div style="padding-left: 10px;">
 	</br>
-	<h2>Certificados e Informes</h2>
+	<h2><font face="papyrus">Certificados e Informes</font></h2>
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
@@ -542,7 +542,7 @@ $this->pageTitle=Yii::app()->name;
 	<div class="span12" style="border-top: 3px solid #F7BE81;border-bottom: 3px solid #F7BE81;">
 	<div style="padding-left: 10px;">
 	</br>
-	<h2>Administracion</h2>
+	<h2><font face="papyrus">Administracion</font></h2>
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
@@ -737,4 +737,4 @@ $this->pageTitle=Yii::app()->name;
 		</a>
 		</div>
 	</div>
-</div>			
+</div>
