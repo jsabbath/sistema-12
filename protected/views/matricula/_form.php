@@ -14,8 +14,17 @@
 /* @var $model Matricula */
 /* @var $form CActiveForm */
 ?>
+<div class="row">
+    <div class="span12 text-center">
+        <p class="text-info">Los campos con <span class="required">*</span> son obligtorios.</p>
+    </div>
+</div>
 
-<div class="form">
+<div class="row">
+<div class="span12 offset2">
+    <h3>Datos alumno:</h3>
+</div>
+<div class="span5 offset1">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
     'id'=>'matricula-form',
@@ -30,13 +39,12 @@
 $random1 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
 $random2 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
 $rand = "X".$random1.$random2;
+
 ?>
 
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+    
 
     <?php echo $form->errorSummary(array($model,$alumno)); ?>
-
-    <h3>Datos alumno</h3>
 
     <div class="row">
         <?php echo $form->labelEx($alumno,'alum_rut'); ?>
@@ -73,6 +81,9 @@ $rand = "X".$random1.$random2;
         <?php echo $form->textField($alumno,'alum_direccion'); ?>
         <?php echo $form->error($alumno,'alum_direccion'); ?>
     </div>
+
+</div>
+<div class="span5 offset1">
 
     <div class="row">
         <?php echo $form->labelEx($alumno,'alum_region'); ?>
@@ -125,42 +136,48 @@ $rand = "X".$random1.$random2;
         <?php echo $form->textArea($alumno,'alum_obs'); ?>
         <?php echo $form->error($alumno,'alum_obs'); ?>
     </div>
-
-    <h3>Datos matricula</h3>
-
-
-    <div class="row">
-        <?php echo $form->labelEx($model,'mat_fingreso'); ?>
-        <?php echo $form->dateField($model,'mat_fingreso'); ?>
-        <?php echo $form->error($model,'mat_fingreso'); ?>
+</div>
+</div>
+<div class="row">
+    <div class="span8 offset2">
+        <h3>Datos matricula</h3>
     </div>
 
-    <?php
-    if(!$model->isNewRecord){
-    ?>
-    <div class="row">
-        <?php echo $form->labelEx($model,'mat_fretiro'); ?>
-        <?php echo $form->dateField($model,'mat_fretiro'); ?>
-        <?php echo $form->error($model,'mat_fretiro'); ?>
+    <div class="span5 offset1">
+        <div class="row">
+            <?php echo $form->labelEx($model,'mat_fingreso'); ?>
+            <?php echo $form->dateField($model,'mat_fingreso'); ?>
+            <?php echo $form->error($model,'mat_fingreso'); ?>
+        </div>
+
+        <div class="row">
+            <?php echo $form->labelEx($model,'mat_numero'); ?>
+            <?php echo $form->textField($model,'mat_numero',array('id'=>'nm','value' => $rand)); ?>
+            <?php echo $form->error($model,'mat_numero'); ?>
+        </div>
+    </div>
+    <div class="span5 offset1">
+        <?php
+        if(!$model->isNewRecord){
+        ?>
+        <div class="row">
+            <?php echo $form->labelEx($model,'mat_fretiro'); ?>
+            <?php echo $form->dateField($model,'mat_fretiro'); ?>
+            <?php echo $form->error($model,'mat_fretiro'); ?>
+        </div>
+
+        <div class="row">
+            <?php echo $form->labelEx($model,'mat_fcambio'); ?>
+            <?php echo $form->dateField($model,'mat_fcambio'); ?>
+            <?php echo $form->error($model,'mat_fcambio'); ?>
+        </div>
+        <?php
+        }
+        ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'mat_fcambio'); ?>
-        <?php echo $form->dateField($model,'mat_fcambio'); ?>
-        <?php echo $form->error($model,'mat_fcambio'); ?>
-    </div>
-    <?php
-    }
-    ?>
-
-    <div class="row">
-        <?php echo $form->labelEx($model,'mat_numero'); ?>
-        <?php echo $form->textField($model,'mat_numero',array('id'=>'nm','value' => $rand)); ?>
-        <?php echo $form->error($model,'mat_numero'); ?>
-    </div>
-
-    <div class="row buttons">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
+    <div class="span12 text-right">
+        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
     </div>
 
 <?php $this->endWidget(); ?>
