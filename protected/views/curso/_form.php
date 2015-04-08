@@ -5,7 +5,6 @@
 /* @var $model Curso */
 /* @var $form CActiveForm */
 ?>
-
 <?php $form=$this->beginWidget('CActiveForm', array(
     'id'=>'curso-form',
     // Please note: When you enable ajax validation, make sure the corresponding

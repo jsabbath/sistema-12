@@ -32,7 +32,7 @@
 
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('usu_estado')); ?>:</b>
-	<?php echo CHtml::encode($data->usu_estado); ?>
+	<?php echo CHtml::encode($data->usuEstado->par_descripcion); ?>
 	<br />
 
 

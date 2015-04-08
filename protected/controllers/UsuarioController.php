@@ -64,12 +64,14 @@ class UsuarioController extends Controller
 	{
 		$model=new Usuario;
 		$temporal = new Temp;
+		$estado = implode(CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_descripcion="ACTIVO"')),'par_id','par_id'));
 		// Uncomment the following line if AJAX validation is needed
 		//$this->performAjaxValidation($model);
 
 		if(isset($_POST['Usuario']))
 		{
 			$model->attributes=$_POST['Usuario'];
+			$model->usu_estado = $estado;
 			if($model->save()){
 				$this->registroCruge($model);
 				$temporal->temp_iduser = $model->usu_iduser;

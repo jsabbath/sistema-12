@@ -5,16 +5,18 @@
  *
  * The followings are the available columns in table 'usuario':
  * @property integer $usu_id
+ * @property string $usu_rut
  * @property string $usu_nombre1
  * @property string $usu_nombre2
  * @property string $usu_apepat
  * @property string $usu_apemat
- * @property string $usu_rut
  * @property integer $usu_estado
  * @property integer $usu_iduser
  *
  * The followings are the available model relations:
  * @property AAsignatura[] $aAsignaturas
+ * @property Curso[] $cursos
+ * @property Parametro $usuEstado
  * @property CrugeUser $usuIduser
  */
 class Usuario extends CActiveRecord
@@ -35,19 +37,12 @@ class Usuario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_rut, usu_estado', 'required'),
 			array('usu_estado, usu_iduser', 'numerical', 'integerOnly'=>true),
-			array('usu_nombre1', 'length', 'max'=>20),
-			array('usu_nombre2', 'length', 'max'=>50),
-			array('usu_apepat, usu_apemat', 'length', 'max'=>30),
 			array('usu_rut', 'length', 'max'=>12),
-                        array('usu_rut','validateRut' ),
-                        array('usu_rut','unique','message' => 'Este Rut ya esta registrado'),
-                        array('usu_rut','validaRutCaracter'),
-                        array('usu_rut', 'validaRutUnico'),
+			array('usu_nombre1, usu_nombre2, usu_apepat, usu_apemat', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('usu_id, usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_rut, usu_estado, usu_iduser', 'safe', 'on'=>'search'),
+			array('usu_id, usu_rut, usu_nombre1, usu_nombre2, usu_apepat, usu_apemat, usu_estado, usu_iduser', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +55,8 @@ class Usuario extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'aAsignaturas' => array(self::HAS_MANY, 'AAsignatura', 'aa_docente'),
+			'cursos' => array(self::HAS_MANY, 'Curso', 'cur_pjefe'),
+			'usuEstado' => array(self::BELONGS_TO, 'Parametro', 'usu_estado'),
 			'usuIduser' => array(self::BELONGS_TO, 'CrugeUser', 'usu_iduser'),
 		);
 	}
@@ -70,14 +67,14 @@ class Usuario extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'usu_id' => 'Usu',
-			'usu_nombre1' => 'Usu Nombre1',
-			'usu_nombre2' => 'Usu Nombre2',
-			'usu_apepat' => 'Usu Apepat',
-			'usu_apemat' => 'Usu Apemat',
-			'usu_rut' => 'Usu Rut',
-			'usu_estado' => 'Usu Estado',
-			'usu_iduser' => 'Usu Iduser',
+			'usu_id' => 'ID',
+			'usu_rut' => 'Rut',
+			'usu_nombre1' => 'Primer Nombre',
+			'usu_nombre2' => 'Segundo Nombre',
+			'usu_apepat' => 'Apellido Paterno',
+			'usu_apemat' => 'Apellido Materno',
+			'usu_estado' => 'Estado',
+			'usu_iduser' => 'Iduser',
 		);
 	}
 
@@ -100,11 +97,11 @@ class Usuario extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('usu_id',$this->usu_id);
+		$criteria->compare('usu_rut',$this->usu_rut,true);
 		$criteria->compare('usu_nombre1',$this->usu_nombre1,true);
 		$criteria->compare('usu_nombre2',$this->usu_nombre2,true);
 		$criteria->compare('usu_apepat',$this->usu_apepat,true);
 		$criteria->compare('usu_apemat',$this->usu_apemat,true);
-		$criteria->compare('usu_rut',$this->usu_rut,true);
 		$criteria->compare('usu_estado',$this->usu_estado);
 		$criteria->compare('usu_iduser',$this->usu_iduser);
 
@@ -123,47 +120,8 @@ class Usuario extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
-        public function validateRut($attribute, $params) {
-        if (strpos($this->$attribute, "-") == false) {
-            $data[0] = substr($this->$attribute, 0, -1);
-            $data[1] = substr($this->$attribute, -1);
-        } else {
-            $data = explode('-', $this->$attribute);
-        }
-        $evaluate = strrev(str_replace(".", "", trim($data[0])));
-        $multiply = 2;
-        $store = 0;
-        for ($i = 0; $i < strlen($evaluate); $i++) {
-            $store += $evaluate[$i] * $multiply;
-            $multiply++;
-            if ($multiply > 7)
-                $multiply = 2;
-        }
-        isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
-        $result = 11 - ($store % 11);
-        if ($result == 10)
-            $result = 'k';
-        if ($result == 11)
-            $result = 0;
-        if ($verifyCode != $result)
-            $this->addError($attribute, 'El Rut no es válido');
-    }
-    
-    
-     public function validaRutCaracter($attribute, $params) {
-        $pattern = '/^([0-9.]+\-+[0-9kK]{1}+)$/';
-        $pattern2 = '/^([0-9.]{1}+\-+[0-9kK]{1}+)$/';
-        $pattern3 = '/^([0.]+\-+[0-9kK]{1}+)$/';
-        if (!preg_match($pattern, $this->$attribute) OR preg_match($pattern2, $this->$attribute) OR preg_match($pattern3, $this->$attribute))
-            $this->addError($attribute, 'el rut deve ser: 11.111.111-1');
-    }
-    public function validaRutUnico($attribute, $params) {
-        if (Yii::app()->user->um->loadUser($this->$attribute))
-            $this->addError($attribute, 'Rut ya existe y esta siendo ocupado');
-    }
 
-    public function getNombreCorto(){ 
-		return $this->usu_nombre1.' '.$this->usu_apepat; 
+	public function getNombreCorto(){
+		return $this->usu_nombre1." ".$this->usu_apepat;
 	}
 }

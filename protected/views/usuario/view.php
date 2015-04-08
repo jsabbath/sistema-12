@@ -16,17 +16,21 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Usuario #<?php echo $model->usu_id; ?></h1>
+<h2><?php echo $model->getNombreCorto(); ?></h2>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'usu_id',
+		//'usu_id',
 		'usu_nombre1',
-                'usu_nombre2',
+        'usu_nombre2',
 		'usu_apepat',
 		'usu_apemat',
 		'usu_rut',
-		'usu_estado',
+		//'usu_estado',
+		array(
+			'name'=>'usu_estado',
+			'value'=>$model->usuEstado->par_descripcion,
+		),
 	),
 )); ?>
