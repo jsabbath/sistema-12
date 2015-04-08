@@ -51,7 +51,7 @@ $.fn.editableTableWidget = function (options) {
 				} else if (keycode === ARROW_DOWN) {
 					return element.parent().next().children().eq(element.index());
 				} else if(keycode === "inicio"){
-					return element.parent().next().children().eq(2);
+					return element.parent().next().children().eq(1);
 				} else if(keycode === "inicio_arriba"){
 					var index = element.index();
 					return element.parent().siblings(":first").children().eq(index +1 );
@@ -63,7 +63,7 @@ $.fn.editableTableWidget = function (options) {
 			setActiveText();
 			editor.hide();
 		}).keydown(function (e) {
-			var numero_cells = active.parent().children().length-2; 
+			var numero_cells = active.parent().children().length-3; 
 			var numero_rows = active.parent().parent().children().length;
 
 			if (e.which === ENTER) {
@@ -94,23 +94,7 @@ $.fn.editableTableWidget = function (options) {
 				e.stopPropagation();
 				editor.hide();
 				
-			} else if (e.which === TAB) {
-		
-				setActiveText();
-				editor.show();
-				active.focus();
-				var possibleMove = movement(active,ARROW_RIGHT);
-				if (possibleMove.length > 0) {
-
-					if(active.index() == numero_cells){ // pregunto  si es el ultimo en lA FILA
-						movement(active,"inicio").focus();
-					}else{
-						possibleMove.focus();
-					}		
-				}
-
-			
-			} else if (this.selectionEnd - this.selectionStart === this.value.length) {
+			}else if (this.selectionEnd - this.selectionStart === this.value.length) {
 				var possibleMove = movement(active, e.which);
 				if (possibleMove.length > 0) {
 					possibleMove.focus();

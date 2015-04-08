@@ -2,8 +2,8 @@
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/edi-table.css">             
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/mindmup-editabletable.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/numeric-input-example.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/mindmup-editar_asistencia.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/numeric-input-asistencia.js"></script>
 
 
 
@@ -31,6 +31,7 @@
 	</div>
      
 
+
 	</div>
 </div>
 
@@ -46,11 +47,13 @@
                     success: function(response) { 
                        $('#alumnos').html(response); 
                        $('#alumnos').show();
+
+
+                       
                     }
             })
         })
     });
- $('#asd').editableTableWidget();
- $('#asd').numericInputExample().find('td:first').focus();
+ 
 
 </script>

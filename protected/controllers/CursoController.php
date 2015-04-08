@@ -28,18 +28,18 @@ class CursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas',
-									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia'),
+				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia',
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia','guardar_asistencia'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas',
-									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia'),
+				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia',
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia','guardar_asistencia'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas',
-									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia'),
+				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia',
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia','guardar_asistencia'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -680,6 +680,8 @@ class CursoController extends Controller
 			} else {
 				echo "usted no es profe jefe de nadie";
 			}
+		} else {
+			$this->render('/cruge/ui/login');
 		}
 	}
 
@@ -698,11 +700,77 @@ class CursoController extends Controller
 
 		$this->renderPartial('editar_asistencia',array(
 					'lista' 	=> $lista,
-					'id_c'		=> $id,
+					'id_curso'	=> $id,
 					'tperiodo'	=> $tipo_periodo->par_descripcion,
 				));
 		}
 	}
+
+	public function actionGuardar_asistencia(){
+		if(isset($_POST['curso_asi'])){
+			$curso_asi= $_POST['curso_asi'];
+			$asistencia_alumno = array();
+
+			foreach($curso_asi as $key => $alumno){ //  se recorre cada alumno 
+				$id_matricula = $alumno[0];
+				
+				
+				$model = Matricula::model()->findByPk($id_matricula);
+				$asistencia = $alumno[1];
+
+				while (count($asistencia) < 3 ) {
+				 	array_push($asistencia,"0");
+				}
+				if( !empty($asistencia[0]) && !empty($asistencia[0]) && !empty($asistencia[0]) ){
+					$model->mat_asistencia_1 = $asistencia[0];
+					$model->mat_asistencia_2 = $asistencia[1];
+					$model->mat_asistencia_3 = $asistencia[2];
+					$model->update();
+				}
+			}
+		}
+	}
+
+	public function actionValidar_asistencia(){
+		if(isset($_POST['pass']) && isset($_POST['curso'])){
+			$p = $_POST['pass'];
+			$curso = $_POST['curso'];
+
+			//  se obtienen todos los datos del usuario  de yii
+		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
+
+			if (Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+				 	if($usuario->password == $p){
+				 		 echo json_encode(1);
+				 		 return;
+				 	} else {
+				 		echo json_encode(0);
+				 		return;
+				 	}
+			}
+			
+			if( Yii::app()->user->checkAccess('profesor')  ){
+				// si no  es el profesor que hace la asignatura se ve si es el profe jefe del curso
+		 		$curso = Curso::model()->findByPk($curso);
+
+		 		if( $curso->cur_pjefe == Yii::app()->user->id ){
+		 			
+		 			if( $usuario->password == $p){
+				 		echo json_encode(1);
+				 		return;
+			 		}else{
+			 			echo json_encode(0);
+			 			return;
+			 		}
+		 		}
+			}
+
+			echo json_encode(2);
+			return;	
+
+		}
+	}
+
 
 
 }

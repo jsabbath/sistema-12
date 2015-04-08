@@ -51,7 +51,7 @@ $.fn.numericInputExample = function () {
 
 			total = total/(count);
 
-			if (total > 7.0) {  // aka esta el total permitido
+			if (total > 100) {  // aka esta el total permitido
 				 $('.alert').show();
 				 return false;  // changes can be rejected
 			} else {
@@ -74,7 +74,7 @@ $.fn.numericInputExample = function () {
 			if( value == "" ) return true;
 			if(!isNaN(parseFloat(value)) && isFinite(value)){
 
-				if( value <= 7.0 && value >= 2.0){  // antes de preguntar su valor, me aseguro  que es un numero
+				if( value <= 100 && value >= 0){  // antes de preguntar su valor, me aseguro  que es un numero
 					return true;
 				}else{  
 					return false;}

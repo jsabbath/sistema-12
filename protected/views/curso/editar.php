@@ -16,9 +16,6 @@
 
 
 	<div><!-- TABLA  -->
-		<div class="alert alert-error hide">
-					That would cost too much
-		</div>
 
 		<table id="notasTable" class="table table-bordered">
 		    <thead>
@@ -102,7 +99,7 @@
 			$.ajax({
                 url: '<?php echo $this->createUrl('notas/validar_edicion'); ?>',
                 type: 'POST',
-                 dataType: "JSON",
+                dataType: "JSON",
                 data: { pass: inputValue, id_asi: <?php echo $asi_id; ?>, cur: <?php echo $cur_id; ?> },
                 success: function(response) {
                 	if(!response){
@@ -125,13 +122,16 @@
 					$('#notasTable').editableTableWidget();
 					$('#notasTable').numericInputExample().find('td:first').next().next().focus();
 					$('#unlock').prop("disabled",true);
+					window.onbeforeunload = function() {
+				        return "";
+				    }
                 }               
             })	
 		});
 	});
 
  
-// subir las notas ajax
+// subir las asistencias ajax
 	$("#bt_subir_notas").on('click',function(){
 		var tabla = document.getElementById('notasTable');
 		var rowLength = tabla.rows.length;
@@ -202,4 +202,3 @@
 
 
 </script>
-
