@@ -12,15 +12,14 @@
  * @property integer $cur_jornada
  * @property integer $cur_pjefe
  * @property integer $cur_tperiodo
- * @property integer $cur_infd
  *
  * The followings are the available model relations:
+ * @property AAsignatura[] $aAsignaturas
  * @property Parametro $curNivel
  * @property Parametro $curLetra
  * @property Parametro $curJornada
  * @property Usuario $curPjefe
  * @property Parametro $curTperiodo
- * @property InformeDesarrollo $curInfd
  */
 class Curso extends CActiveRecord
 {
@@ -40,10 +39,10 @@ class Curso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo, cur_infd', 'numerical', 'integerOnly'=>true),
+			array('cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('cur_id, cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo, cur_infd', 'safe', 'on'=>'search'),
+			array('cur_id, cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,12 +54,12 @@ class Curso extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'aAsignaturas' => array(self::HAS_MANY, 'AAsignatura', 'aa_curso'),
 			'curNivel' => array(self::BELONGS_TO, 'Parametro', 'cur_nivel'),
 			'curLetra' => array(self::BELONGS_TO, 'Parametro', 'cur_letra'),
 			'curJornada' => array(self::BELONGS_TO, 'Parametro', 'cur_jornada'),
 			'curPjefe' => array(self::BELONGS_TO, 'Usuario', 'cur_pjefe'),
 			'curTperiodo' => array(self::BELONGS_TO, 'Parametro', 'cur_tperiodo'),
-			'curInfd' => array(self::BELONGS_TO, 'InformeDesarrollo', 'cur_infd'),
 		);
 	}
 
@@ -107,7 +106,6 @@ class Curso extends CActiveRecord
 		$criteria->compare('cur_jornada',$this->cur_jornada);
 		$criteria->compare('cur_pjefe',$this->cur_pjefe);
 		$criteria->compare('cur_tperiodo',$this->cur_tperiodo);
-		$criteria->compare('cur_infd',$this->cur_infd);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

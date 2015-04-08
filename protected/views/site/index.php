@@ -12,7 +12,7 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -36,7 +36,7 @@ $this->pageTitle=Yii::app()->name;
 		</a>
 		<div class="visible-phone"><br/></div>
 		<a href="<?php echo Yii::app()->createUrl('matricula/listaCompleta'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -60,7 +60,7 @@ $this->pageTitle=Yii::app()->name;
 		</a>
 		<div class="visible-phone"><br/></div>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/inf_d'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -86,7 +86,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -109,7 +109,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('matricula/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -144,7 +144,7 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -167,7 +167,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -190,7 +190,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/inf_d'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -216,7 +216,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -239,7 +239,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('matricula/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -262,7 +262,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('curso/buscar_notas'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -288,7 +288,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('cruge/ui/usermanagementadmin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -311,7 +311,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('parametro/index'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -345,7 +345,7 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -368,7 +368,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -391,7 +391,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/inf_d'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -417,7 +417,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -440,7 +440,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('matricula/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -463,7 +463,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('curso/buscar_notas&id=11'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -489,7 +489,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('cruge/ui/usermanagementadmin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -512,7 +512,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('parametro/index'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -546,7 +546,7 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 	<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -569,7 +569,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -592,7 +592,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/inf_d'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -618,7 +618,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -641,7 +641,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('matricula/admin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -664,7 +664,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('curso/buscar_notas&id=11'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -690,7 +690,7 @@ $this->pageTitle=Yii::app()->name;
 		<br/>
 		<div class="row">
 		<a href="<?php echo Yii::app()->createUrl('cruge/ui/usermanagementadmin'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
@@ -713,7 +713,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<a href="<?php echo Yii::app()->createUrl('parametro/index'); ?>">
-			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;"">
+			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">

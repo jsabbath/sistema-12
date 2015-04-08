@@ -5,7 +5,7 @@
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
-
+/*
 $this->breadcrumbs=array(
 	'Cursos'=>array('index'),
 	'Manage',
@@ -15,7 +15,7 @@ $this->menu=array(
 	array('label'=>'List Curso', 'url'=>array('index')),
 	array('label'=>'Create Curso', 'url'=>array('create')),
 );
-
+*/
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -29,98 +29,64 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Buscar Cursos</h1>
-
-
-<?php echo CHtml::textField('Text', '',
-    array('id'=>'pn',
-        'placeholder' => 'Ingrese nombre Profesor',))?>
-
-
-<?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
-<div class="form">  
-   
-    <div>
-
-        <?php echo TbHtml::textField('Text', '',
-            array('id'=>'nombre',
-                'placeholder' => 'Nombres',
-                'disabled'=>'disabled',
-                ))?>
-        
-        <?php echo Tbhtml::hiddenField('Text','',array('id' => 'id_cruge',)); ?>
-
-
-        <?php echo TbHtml::textField('Text', '',
-            array('id'=>'apellido',
-                'placeholder' => 'Apellidos',
-                'disabled'=>'disabled',
-                 ))?>
-
+<div class="row">
+    <div class="span12 text-center">
+        <h2>Buscar Cursos</h2>
     </div>
+</div>
+<div class="row">
+    <div class="span6 offset3">
+        <div class="row">
+            <div class="span6">
+                <?php echo CHtml::textField('Text', '',array('id'=>'pn','placeholder' => 'Ingrese nombre Profesor',))?>
+                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="span6">
+            <?php echo TbHtml::textField('Text', '',
+                array('id'=>'nombre',
+                    'placeholder' => 'Nombres',
+                    'disabled'=>'disabled',
+                    ))?>
+            
+            <?php echo Tbhtml::hiddenField('Text','',array('id' => 'id_cruge',)); ?>
 
-    <?php echo TbHtml::button('Ver cursos',array(
-                                    'color'=> TbHtml::ALERT_COLOR_WARNING, 
-                                    'id' =>'buscar',
-                                    'ajax' =>
-                                        array('type'=>'POST',
-                                            'url'=>$this->createUrl('curso/bcxn'), // Buscar cursos por nombre
-                                            'update'=>'#ajax_op',
-                                            'data'=>array('id'=>'js:getId','nombre'=>'js:getNombre()'),
-                                            //'success'=> 'function(){location.reload();}'
-                                        )
-        ))?>
 
-
+            <?php echo TbHtml::textField('Text', '',
+                array('id'=>'apellido',
+                    'placeholder' => 'Apellidos',
+                    'disabled'=>'disabled',
+                     ))?>
+            <?php echo TbHtml::button('Ver cursos',array(
+                'color'=> TbHtml::ALERT_COLOR_WARNING, 
+                'id' =>'buscar',
+                'style'=>'margin-bottom:10px',
+                'ajax' =>
+                    array('type'=>'POST',
+                        'url'=>$this->createUrl('curso/bcxn'), // Buscar cursos por nombre
+                        'update'=>'#ajax_op',
+                        'data'=>array('id'=>'js:getId','nombre'=>'js:getNombre()'),
+                        //'success'=> 'function(){location.reload();}'
+                    )
+            ))?>
+            </div>
+        </div>
+    </div>
 </div>
 <br>
 
-<div id ="ajax_op">
-
+<div class="row">
+    <div class="span8 offset2">
+        <div id ="ajax_op">
+        </div>
+    </div>
 </div>
 
 
 <div class="search-form" style="display:none">    
 </div><!-- search-form -->
-
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
-	'id'=>'curso-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'cur_id',
-		//'cur_ano',
-		//'cur_nivel',
-		//'cur_jornada',
-		//'cur_letra',
-		//'cur_pjefe',
-		/*
-		'cur_infd',
-		'cur_tperiodo',
-		'cur_notas_periodo',
-		*/
-        array(
-            'name'=>'cur_nivel',
-            'type'=>'raw',
-            'value'=>'$data->curNivel->par_descripcion'
-        ),
-        array(
-            'name'=>'cur_letra',
-            'type'=>'raw',
-            'value'=>'$data->curLetra->par_descripcion',
-        ),
-        array(
-            'name'=>'cur_jornada',
-            'type'=>'raw',
-            'value'=>'$data->curJornada->par_descripcion',
-        ),
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),
-	),
-)); ?>
-
 
 <script>
 	$(function(){
