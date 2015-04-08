@@ -107,7 +107,7 @@ class MatriculaController extends Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->loadModel($id);
-        $alumno = new Alumno;
+        $alumno = Alumno::model()->findByPk($model->mat_alu_id);
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         // Uncomment the following line if AJAX validation is needed
@@ -115,9 +115,6 @@ class MatriculaController extends Controller
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
-            $model->mat_alu_id = 1;
-            $model->mat_ano = date('Y');
-            $model->mat_fingreso = date('Y-m-d');
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
@@ -225,7 +222,7 @@ class MatriculaController extends Controller
             );
         }
 
-        
+        echo CJSON::encode($resultado);
     }
     
     public function actionBuscar_rut()

@@ -18,6 +18,7 @@
 		<?php 
 		$this->widget('bootstrap.widgets.TbGridView', array(
 			'id'=>'matricula-grid',
+			'type' => TbHtml::GRID_TYPE_BORDERED,
 			'dataProvider'=>$model->buscar($this->actionAnoactual()),
 			'filter'=>$model,
 			'columns'=>array(

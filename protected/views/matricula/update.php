@@ -12,7 +12,10 @@ $this->breadcrumbs=array(
 );
 */
 ?>
-
-<h1>Update Matricula <?php echo $model->mat_id; ?></h1>
+<div class="row">
+	<div class="span12 text-center">
+		<h2>Actualizando a : <?php echo $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat; ?></h2>
+	</div>	
+</div>
 
 <?php $this->renderPartial('_form', array('model'=>$model,'alumno'=>$alumno,'region'=>$region,'genero'=>$genero)); ?>
