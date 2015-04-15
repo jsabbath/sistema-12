@@ -59,7 +59,7 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 		</a>
 		<div class="visible-phone"><br/></div>
-		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/inf_d'); ?>">
+		<a href="<?php echo Yii::app()->createUrl('matricula/admin'); ?>">
 			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -545,7 +545,7 @@ $this->pageTitle=Yii::app()->name;
 	<h2><font face="papyrus">Administracion</font></h2>
 	</div>
 	<div class="row">
-		<a href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
+		<a href="<?php echo Yii::app()->createUrl('usuario/create'); ?>">
 			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -556,19 +556,19 @@ $this->pageTitle=Yii::app()->name;
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Generacion curso</strong>
+								<strong>Ingresar Usuario</strong>
 							</div>
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede administrar los cursos del colegio</p>
+								<p>En este item se pueden ingresar nuevos usuarios al sistema</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</a>
-		<a href="<?php echo Yii::app()->createUrl('informedesarrollo/create'); ?>">
+		<a href="<?php echo Yii::app()->createUrl('usuario/admin'); ?>">
 			<div class="span4" style="background-color:  rgba(247, 190, 129, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -579,12 +579,12 @@ $this->pageTitle=Yii::app()->name;
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Crear Informe Desarrollo</strong>
+								<strong>Administrar usuarios</strong>
 							</div>
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede crear un informe de desarrollo para el colegio</p>
+								<p>En este item se puede modificar o eliminar un usuario</p>
 							</div>
 						</div>
 					</div>

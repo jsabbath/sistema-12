@@ -305,9 +305,9 @@ class MatriculaController extends Controller
         return $cursos_actuales;
     }
 
-
+    //funcion para asignar un alumno a un curso y ademas asignarle las notas y las asignaturas asociadas al curso
     public function actionAddcurso($id){
-        //echo "asd";
+
         $cur = $this->actionCursoAnoActual();
         $ano = $this->actionAnoactual();
 
@@ -374,6 +374,7 @@ class MatriculaController extends Controller
         ));
     }
 
+    //funcion para determinar el año sobre el que se trabaja
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
         $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
@@ -388,23 +389,18 @@ class MatriculaController extends Controller
         return $ano;
     }
 
+
+    //funcion para buscar informacion de un curso cuando se matricula un alumno
     public function actionInfoCurso(){
         if(isset($_POST['id_curso'])){
             $idcurso = $_POST['id_curso'];
+            
+            $criteria = new CDbCriteria();
+            $criteria->condition = 'cur_id=:id';
+            $criteria->params = array(':id'=>$idcurso);
+            $model = Curso::model()->find($criteria);
 
-            $curso = Curso::model()->findAll(array('condition'=>'cur_id="2"'));
-            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
-            $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
-            $profesor = CHtml::listData(Usuario::model()->findAll(),'usu_iduser','NombreCorto');
-            $infd = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
-
-            $informacion = array();
-            $informacion['nivel'] = $nivel[$curso[0]->cur_nivel];
-            $informacion['letra'] = $letra[$curso[0]->cur_letra];
-            $informacion['profesor'] = $profesor[$curso[0]->cur_pjefe];
-            $informacion['informe'] = $infd[$curso[0]->cur_infd];
-
-            $this->renderPartial('info_curso', array('informacion' => $informacion));
+            $this->renderPartial('info_curso', array('model' => $model));
 
         }else{
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -428,10 +424,10 @@ class MatriculaController extends Controller
         
         $estado = $data->matEstado->par_descripcion;
 
-        if($estado=='activo') return "<label class=\"label label-success\">".$estado."</label>";
-        elseif($estado=='retirado') return "<label class=\"label label-important\">".$estado."</label>";
-        elseif($estado=='promovido') return "<label class=\"label\">".$estado."</label>";
-        elseif($estado=='repitente') return "<label class=\"label label-warning\">".$estado."</label>";
+        if($estado=='ACTIVO') return "<label class=\"label label-success\">".$estado."</label>";
+        elseif($estado=='RETIRADO') return "<label class=\"label label-important\">".$estado."</label>";
+        elseif($estado=='PROMOVIDO') return "<label class=\"label\">".$estado."</label>";
+        elseif($estado=='REPITENTE') return "<label class=\"label label-warning\">".$estado."</label>";
         else return "<label class=\"label label-info\">".$estado."</label>";
     }
 

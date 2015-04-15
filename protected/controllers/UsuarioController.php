@@ -28,15 +28,15 @@ class UsuarioController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','gridEstado'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','gridEstado'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','gridEstado'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -206,4 +206,15 @@ class UsuarioController extends Controller
             echo "no se pudo crear el usuario: ".$errores;
          }
       }
+
+    public function gridEstado($data,$row){
+        
+        $estado = $data->usuEstado->par_descripcion;
+
+        if($estado=='ACTIVO') return "<label class=\"label label-success\">".$estado."</label>";
+        elseif($estado=='RETIRADO') return "<label class=\"label label-important\">".$estado."</label>";
+        elseif($estado=='PROMOVIDO') return "<label class=\"label\">".$estado."</label>";
+        elseif($estado=='REPITENTE') return "<label class=\"label label-warning\">".$estado."</label>";
+        else return "<label class=\"label label-info\">".$estado."</label>";
+    }
 }

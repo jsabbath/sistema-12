@@ -1,7 +1,7 @@
 <?php
 /* @var $this UsuarioController */
 /* @var $model Usuario */
-
+/*
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
 	$model->usu_id=>array('view','id'=>$model->usu_id),
@@ -14,8 +14,12 @@ $this->menu=array(
 	array('label'=>'View Usuario', 'url'=>array('view', 'id'=>$model->usu_id)),
 	array('label'=>'Manage Usuario', 'url'=>array('admin')),
 );
+*/
 ?>
-
-<h1>Modificar Usuario <?php echo $model->usu_id; ?></h1>
+<div class="row">
+	<div class="span12 text-center">
+		<h2>Modificar a <?php echo $model->getNombrecorto(); ?></h2>
+	</div>
+</div>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

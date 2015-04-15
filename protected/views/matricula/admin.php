@@ -52,7 +52,7 @@ $this->menu=array(
     <div  id="hiddenpls" style="display: none">
 
 
-   <hr>
+    <hr>
         <div>
             <!--  Se muestra al buscar    !-->
             <?php echo TbHtml::textField('Text', '',

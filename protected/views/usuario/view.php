@@ -1,7 +1,7 @@
 <?php
 /* @var $this UsuarioController */
 /* @var $model Usuario */
-
+/*
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
 	$model->usu_id,
@@ -14,9 +14,13 @@ $this->menu=array(
 	array('label'=>'Delete Usuario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->usu_id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Usuario', 'url'=>array('admin')),
 );
+*/
 ?>
-
-<h2><?php echo $model->getNombreCorto(); ?></h2>
+<div class="row">
+	<div class="span12 text-center">
+		<h2><?php echo $model->getNombreCorto(); ?></h2>	
+	</div>
+</div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

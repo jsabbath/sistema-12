@@ -122,4 +122,8 @@ class Curso extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getCurso(){
+		return $this->curNivel->par_descripcion." ".$this->curLetra->par_descripcion;
+	}
 }
