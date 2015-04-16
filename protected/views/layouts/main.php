@@ -55,7 +55,7 @@ $tempid = $temp->temp_id;
 								<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
 							</td>
 							<td width=70%>
-									<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner.png" >
+									<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner2.png" >
 							</td>
 						</table>
                     </div>
