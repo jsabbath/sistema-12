@@ -62,9 +62,9 @@ $tempid = $temp->temp_id;
                 </div>
                 </div> 
             </header>
+
             <div class="row">
-            <div class="span12">
-                <div style="text-align: center">
+            <div class="span12 text-center">
                 <?php echo CHtml::dropDownList(
                     'anos', $cursos, $anos,array(
                     'prompt'=>'Seleccione año',
@@ -81,9 +81,9 @@ $tempid = $temp->temp_id;
                 <button class="btn btn-inverse disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
                     <?php echo $ano_selec ?>
                 </button> 
-                </div>
             </div>
             </div>
+
             <div class="row">
             <div class="span12">
             </div>
@@ -164,7 +164,7 @@ $("#contraseña").click(function(){
 })
 </script>
 <div align="center" class="text-center">
-	<pre>Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
 </div>
     </body>
 </html>
