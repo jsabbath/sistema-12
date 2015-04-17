@@ -112,6 +112,27 @@ class Curso extends CActiveRecord
 		));
 	}
 
+	public function buscar($ano)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('cur_ano',$ano);
+		$criteria->compare('cur_id',$this->cur_id);
+		$criteria->compare('cur_ano',$this->cur_ano);
+		$criteria->compare('cur_notas_periodo',$this->cur_notas_periodo);
+		$criteria->compare('cur_nivel',$this->cur_nivel);
+		$criteria->compare('cur_letra',$this->cur_letra);
+		$criteria->compare('cur_jornada',$this->cur_jornada);
+		$criteria->compare('cur_pjefe',$this->cur_pjefe);
+		$criteria->compare('cur_tperiodo',$this->cur_tperiodo);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

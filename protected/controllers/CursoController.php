@@ -29,17 +29,20 @@ class CursoController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia',
-									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia','guardar_asistencia'),
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia',
+									'guardar_asistencia','lista_cursos'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia',
-									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia','guardar_asistencia'),
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia',
+									'guardar_asistencia','lista_cursos'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia',
-									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia','guardar_asistencia'),
+									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia',
+									'guardar_asistencia','lista_cursos'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -771,7 +774,23 @@ class CursoController extends Controller
 		}
 	}
 
+	//Funcion para ver la lista completa de los cursos del año
+	public function actionLista_cursos(){
+		$model = new Curso('search');
+		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="NIVEL"')),'par_id','par_descripcion');
+		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
+		$jorn = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
 
+		$model->unsetAttributes();
+		if(isset($_GET['Curso']))
+			$model->attributes=$_GET['Curso'];
 
+		$this->render('lista',array(
+			'model'=>$model,
+			'nivel'=>$nivel,
+			'letra'=>$letra,
+			'jorn'=>$jorn,
+		));
+	}
 }
 

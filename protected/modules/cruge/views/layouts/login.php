@@ -21,13 +21,17 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body>
+<body style="background-color: rgba(360,100,37,0.47)">
 
-<?php if(isset($this->breadcrumbs)):?>
+<?php 
+/*
+if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
 		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+	<?php endif
+*/
+?>
 
 	<?php echo $content;?>
 
