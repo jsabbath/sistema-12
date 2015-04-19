@@ -18,7 +18,7 @@
 
 
 <div class="container">
-	<div class="span-19">
+	<div class="span10 offset1">
 		<div id="content">
 			<?php echo $content; ?>
 		</div><!-- content -->

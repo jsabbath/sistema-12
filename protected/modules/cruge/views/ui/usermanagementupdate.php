@@ -55,7 +55,7 @@
 	
 	<div class='field-group'>
 	
-		<div class='col textfield-readonly'>
+		<div class='col textfield-readonly' hidden>
 			<?php echo $form->labelEx($model,'regdate'); ?>
 			<?php echo $form->textField($model,'regdate'
 					,array(
@@ -64,7 +64,7 @@
 					)
 			); ?>
 		</div>
-		<div class='col textfield-readonly'>
+		<div class='col textfield-readonly' hidden>
 			<?php echo $form->labelEx($model,'actdate'); ?>
 			<?php echo $form->textField($model,'actdate'
 					,array(
@@ -73,7 +73,7 @@
 					)
 				); ?>
 		</div>
-		<div class='col textfield-readonly'>
+		<div class='col textfield-readonly' hidden>
 			<?php echo $form->labelEx($model,'logondate'); ?>
 			<?php echo $form->textField($model,'logondate'
 					,array(

@@ -1,8 +1,9 @@
+
 <?php Yii::app()->bootstrap->register(); ?>
 
 <?php
 /* @var $this Controller */
-$nombre = 'default';
+$nombre = 'admin';
 $modelo_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
 if ($modelo_usuario) {
     $nombre = "" . $modelo_usuario->usu_nombre1 . " " . $modelo_usuario->usu_apepat;
@@ -38,6 +39,10 @@ $tempid = $temp->temp_id;
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
 
+
+  <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
+
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
 
@@ -64,30 +69,47 @@ $tempid = $temp->temp_id;
             </header>
 
             <div class="row">
-            <div class="span12 text-center">
-                <?php echo CHtml::dropDownList(
-                    'anos', $cursos, $anos,array(
-                    'prompt'=>'Seleccione año',
-                    'id'=>'dropitem',
-                    'ajax' =>
-                        array('type'=>'POST',
-                            'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
-                            'update'=>'#anio',
-                            'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
-                            'success'=> 'function(){location.reload();}'
-                        )
-                ));  
-                ?>
-                <button class="btn btn-inverse disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
-                    <?php echo $ano_selec ?>
-                </button> 
-            </div>
+                <div class="span6 offset3 text-center">
+                    <?php echo CHtml::dropDownList(
+                        'anos', $cursos, $anos,array(
+                        'prompt'=>'Seleccione año',
+                        'id'=>'dropitem',
+                        'ajax' =>
+                            array('type'=>'POST',
+                                'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
+                                'update'=>'#anio',
+                                'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
+                                'success'=> 'function(){location.reload();}'
+                            )
+                    ));  
+                    ?>
+                    <button class="btn btn-inverse disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
+                        <?php echo $ano_selec ?>
+                    </button> 
+                </div>
+
+                 <div class="span3 text-center">
+                    <div class="btn-group">
+                      <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+                        <?php echo $nombre; ?>
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <!-- dropdown menu links -->
+                           <li><a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >
+                                Cambiar Contraseña
+                            </a></li>
+
+                            <li><a href="#"  id="salir" onclick="logout()">
+                                Salir
+                            </a></li>
+                      </ul>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="row">
-            <div class="span12">
-            </div>
-            </div>
+
            <div class='info' style='text-aling:left;'>
                 <?php
                 $flashMessages = Yii::app()->user->getFlashes();
@@ -123,16 +145,7 @@ $tempid = $temp->temp_id;
     <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 
         <!-- DESLOGEAR !-->
-    <?php $this->widget('bootstrap.widgets.TbModal', array(
-            'id' => 'myModal',
-            'header' => 'Esta Seguro?',
-            'content' => '<p>Usted esta abandonando el sistema </p>',
-            'htmlOptions' => array ('url' => Yii::app()->user->ui->logoutUrl),
-            'footer' => array(
-                    TbHtml::linkButton('Salir',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
-                    TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
-            ),
-    )); ?>
+  
                 
          
          
@@ -149,20 +162,6 @@ $tempid = $temp->temp_id;
     )); ?>    
         
   
-
-<script type="text/javascript">
-$(function () { $("[data-toggle='tooltip']").tooltip(); });
-
-
-$("#contraseña").click(function(){
-            $.ajax({
-                type:  'post',
-                url: "<?php echo Yii::app()->user->ui->getProfileUrl() ?>" ,
-                success: function(result){ 
-                    $("#cambio").html(result)}
-            });
-})
-</script>
 <div align="center" class="text-center">
 	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
 </div>
@@ -176,3 +175,35 @@ if (strcmp("" . Yii::app()->request->url, Yii::app()->baseUrl . "/index.php/site
     );
 }
 ?>
+
+
+
+<script>
+$(function () { $("[data-toggle='tooltip']").tooltip(); });
+
+function logout(){
+    swal({  
+        title: "Estas seguro?",   
+        text: "Usted esta abandonando el sistema!",  
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Salir!",   
+        closeOnConfirm: false, 
+    },
+    function(){
+        window.location = "<?php echo Yii::app()->user->ui->logoutUrl ?>";
+    });
+}
+
+
+
+$("#contraseña").click(function(){
+            $.ajax({
+                type:  'post',
+                url: "<?php echo Yii::app()->user->ui->getProfileUrl() ?>" ,
+                success: function(result){ 
+                    $("#cambio").html(result)}
+            });
+})
+</script>
