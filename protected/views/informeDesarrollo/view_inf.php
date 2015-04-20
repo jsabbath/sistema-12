@@ -16,6 +16,7 @@
 </div>
 
 <?php if ($area) { ?>
+<div class="row">
 <div class="span12">
 	<div class="accordion" id="accordion2">
 	  	<div class="accordion-group">
@@ -47,6 +48,7 @@
 	    	 } ?>
 	  	</div>
 	</div>
+</div>
 </div>
 <?php 
 }else{

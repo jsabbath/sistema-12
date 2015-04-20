@@ -18,12 +18,13 @@
 
 
 <div class="container">
-	<div class="span10 offset1">
-		<div id="content">
-			<?php echo $content; ?>
-		</div><!-- content -->
-	</div>
-	<?php if(Yii::app()->user->checkAccess('admin')) { ?>	
+	
+	<?php echo $content; ?>
+	
+
+	<?php 
+	/*
+	if(Yii::app()->user->checkAccess('admin')) { ?>	
 	<div class="span-5 last">
 		<div id="sidebar">
 		<?php
@@ -38,7 +39,9 @@
 		?>
 		</div><!-- sidebar -->
 	</div>
-	<?php } ?>
+	<?php } 
+	*/
+	?>
 	
 </div>
 <?php $this->endContent(); ?>

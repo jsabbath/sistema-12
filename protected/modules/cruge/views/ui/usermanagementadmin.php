@@ -1,5 +1,14 @@
-<div class="form">
-<h1><?php echo ucwords(CrugeTranslator::t('admin', 'Manage Users'));?></h1>
+
+
+<div class="row">
+	<div class="span12 text-center">
+		<h2><?php echo ucwords("Cuentas de Usuario");?></h2>
+	</div>
+	<div class="span12">
+		<p class="text-center text-info">Aqui se puede cambiar clave, activar y desactivar las distintas cuentas de usuario</p>
+	</div>
+</div>
+
 <?php 
 /*
 	para darle los atributos al CGridView de forma de ser consistente con el sistema Cruge
@@ -25,28 +34,29 @@ foreach(Yii::app()->user->um->getSortFieldNamesForICrugeStoredUser() as $key=>$f
 }
 	
 $cols[] = array(
-	'class'=>'CButtonColumn',
+	'class'=>'bootstrap.widgets.TbButtonColumn',
 	
-	'template' => '{update} {eliminar}',
+	'template' => '{update}',
 	'deleteConfirmation'=>CrugeTranslator::t('admin', 'Are you sure you want to delete this user'),
 	'buttons' => array(
 			'update'=>array(
 				'label'=>CrugeTranslator::t('admin', 'Update User'),
-				'url'=>'array("usermanagementupdate","id"=>$data->getPrimaryKey())'
+				'url'=>'array("usermanagementupdate","id"=>$data->getPrimaryKey())',
+				'options'=>array(
+					'class'=>'btn btn-info',
+				),
 			),
-			'eliminar'=>array(
-				'label'=>CrugeTranslator::t('admin', 'Delete User'),
-				'imageUrl'=>Yii::app()->user->ui->getResource("delete.png"),
+			'delete'=>array(
 				'url'=>'array("usermanagementdelete","id"=>$data->getPrimaryKey())',
-				'options' => array('class' => 'delete')
 			),
 		),	
 );
-$this->widget(Yii::app()->user->ui->CGridViewClass, 
-	array(
-    'dataProvider'=>$dataProvider,
+
+$this->widget('bootstrap.widgets.TbGridView', array(
+	'id'=>'usuario-grid',
+	'type' => TbHtml::GRID_TYPE_BORDERED,
+	'dataProvider'=>$dataProvider,
     'columns'=>$cols,
 	'filter'=>$model,
-));
-?>
+)); ?>
 </div>
