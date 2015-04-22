@@ -93,22 +93,20 @@ $tempid = $temp->temp_id;
                             </a>
                         </td>
                         <td>
-                            <div class="span2 text-center">
-                                <div class="btn-group">
-                                    <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
-                                        <?php echo $nombre; ?>
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <!-- dropdown menu links -->
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >Cambiar Contraseña</a>
-                                        </li>
-                                        <li><a href="#"  id="salir" onclick="logout()">
-                                            Salir
-                                        </a></li>
-                                    </ul>
-                                </div>
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+                                    <?php echo $nombre; ?>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- dropdown menu links -->
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >Cambiar Contraseña</a>
+                                    </li>
+                                    <li><a href="#"  id="salir" onclick="logout()">
+                                        Salir
+                                    </a></li>
+                                </ul>
                             </div>
                         </td>
                     </table>
