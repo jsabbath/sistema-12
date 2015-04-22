@@ -51,51 +51,62 @@ $tempid = $temp->temp_id;
         <div class="container" id="pagina">    
             <header>
                 <div class="row">
-                    <div class="span1 hidden-phone">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
-                    </div>
-                    <div class="span5 visible-desktop">
-                        <h3>Sistema de Administracion Academica</h3>
-                    </div>
-                    <div class="span5 hidden-desktop">
-                        <h3>Amsys</h3>
-                    </div>
-                    <div class="span1">
-                        <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/icono maestros.png">
-                        </a>
-                    </div>
-                    <div class="span1">
-                        <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/curso.png">
-                        </a>
-                    </div>
-                    <div class="span1">
-                        <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/i.png">
-                        </a>
-                    </div>
-                    <div class="span1">
-                        <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/parametros.png">
-                        </a>
-                    </div>
-                    <div class="span2 text-center">
-                    <div class="btn-group">
-                        <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
-                            <?php echo $nombre; ?>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- dropdown menu links -->
-                            <li>
-                                <a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >Cambiar Contraseña</a>
-                            </li>
-                            <li><a href="#"  id="salir" onclick="logout()">
-                                Salir
-                            </a></li>
-                        </ul>
+                 
+                <div class="span12">
+                    <table width=100%  border="0" cellspacing="0" cellpadding="0">
+                   
+                        <td width=9% align="left" class="hidden-phone">    
+                             <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
+                        </td>
+                     
+                        <td class="visible-desktop">
+                            <h3>Colegio Alborada</h3>
+                        </td>
+                       
+                         <div class="hidden-desktop">
+                            <h3>Colegio Alborada</h3>
                         </div>
+                  
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/icono maestros.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/curso.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/i.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/parametros.png">
+                            </a>
+                        </td>
+                        <td>
+                            <div class="span2 text-center">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+                                        <?php echo $nombre; ?>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- dropdown menu links -->
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >Cambiar Contraseña</a>
+                                        </li>
+                                        <li><a href="#"  id="salir" onclick="logout()">
+                                            Salir
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </table>
                     </div>
                 </div>
             </header>
