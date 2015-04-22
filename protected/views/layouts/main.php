@@ -51,27 +51,74 @@ $tempid = $temp->temp_id;
 
         <div class="container" id="pagina">    
             <header>
-                <div class="container">
                 <div class="row">
-
-                    <div class="span12">
-						<table width=100%  border="0" cellspacing="0" cellpadding="0">
-							<td width=10%></td>
-							<td width=20% align="right">
-								<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
-							</td>
-							<td width=70%>
-									<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/baner2.png" >
-							</td>
-						</table>
+                 
+                <div class="span12">
+                    <table width=100%  border="0" cellspacing="0" cellpadding="0">
+                   
+                        <td width=9% align="left" class="hidden-phone">    
+                             <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
+                        </td>
+                     
+                        <td class="visible-desktop">
+                            <h3>Colegio Alborada</h3>
+                        </td>
+                       
+                         <div class="hidden-desktop">
+                            <h3>Colegio Alborada</h3>
+                        </div>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" data-toggle="tooltip" title="Inicio">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/home.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>" data-toggle="tooltip" title="Academico">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/icono maestros.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>" data-toggle="tooltip" title="Cursos">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/curso.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>" data-toggle="tooltip" title="Informe">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/i.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/create'); ?>" data-toggle="tooltip" title="Administracion">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/parametros.png">
+                            </a>
+                        </td>
+                        <td>
+                            <div class="span2 text-center">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+                                        <?php echo $nombre; ?>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- dropdown menu links -->
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >Cambiar Contraseña</a>
+                                        </li>
+                                        <li><a href="#"  id="salir" onclick="logout()">
+                                            Salir
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </table>
                     </div>
                 </div>
-                </div> 
             </header>
 
             <div class="row">
                 <div class="span6 offset3 text-center">
-                   <?php echo CHtml::dropDownList(
+                    <?php echo CHtml::dropDownList(
                         'anos', null, $anos,array(
                         'prompt'=>$ano_selec,
                         'id'=>'dropitem',
@@ -87,25 +134,6 @@ $tempid = $temp->temp_id;
                     <button class="btn btn-inverse disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
                         <?php echo $ano_selec ?>
                     </button> 
-                </div>
-
-                 <div class="span3 text-center">
-                    <div class="btn-group">
-                      <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
-                        <?php echo $nombre; ?>
-                        <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <!-- dropdown menu links -->
-                           <li><a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >
-                                Cambiar Contraseña
-                            </a></li>
-
-                            <li><a href="#"  id="salir" onclick="logout()">
-                                Salir
-                            </a></li>
-                      </ul>
-                    </div>
                 </div>
 
             </div>
