@@ -8,17 +8,18 @@ $modelo_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::
 if ($modelo_usuario) {
     $nombre = "" . $modelo_usuario->usu_nombre1 . " " . $modelo_usuario->usu_apepat;
 }
-$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
-$cursos = Curso::model()->findAll();
-$anos = CHtml::listData(Curso::model()->findAll(), 'cur_ano', 'cur_ano');
 $temp = Temp::model()->findByAttributes(
                      array('temp_iduser'=>Yii::app()->user->id)
                  ); 
+$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 if( $temp->temp_ano != 0 ){
     $ano_selec = $temp->temp_ano;
 } else {
     $ano_selec = $par->par_descripcion;
 }
+$anos = CHtml::listData(Curso::model()->findAll(array('condition' => 'cur_ano!=:x', 'params' => array(':x' => $ano_selec ))), 'cur_ano', 'cur_ano');
+
+
 $tempid = $temp->temp_id;
 ?>
 <!DOCTYPE html>
@@ -114,8 +115,8 @@ $tempid = $temp->temp_id;
             <div class="row">
                 <div class="span6 offset3 text-center">
                     <?php echo CHtml::dropDownList(
-                        'anos', $cursos, $anos,array(
-                        'prompt'=>'Seleccione año',
+                        'anos', null, $anos,array(
+                        'prompt'=>$ano_selec,
                         'id'=>'dropitem',
                         'ajax' =>
                             array('type'=>'POST',
