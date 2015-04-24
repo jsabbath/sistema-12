@@ -28,15 +28,15 @@ class InformeDesarrolloController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','listaConcepto','inf_d','view_inf'),
+				'actions'=>array('index','view','listaConcepto','inf_d','view_inf', 'menu'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','listaConcepto','inf_d','view_inf'),
+				'actions'=>array('create','update','listaConcepto','inf_d','view_inf', 'menu'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','listaConcepto','inf_d','view_inf'),
+				'actions'=>array('admin','delete','listaConcepto','inf_d','view_inf', 'menu'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -55,6 +55,11 @@ class InformeDesarrolloController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+
+	public function actionMenu(){
+        $this->render('menu');
+    }
+
 
 	/**
 	 * Creates a new model.
