@@ -33,6 +33,7 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+
 		if(!YII::app()->user->isGuest) $this->render('index');
 		else $this->redirect(array('cruge/ui/login'));
 	}
@@ -110,5 +111,12 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionVer(){
+		$dataProvider=new CActiveDataProvider('Noticia');
+		$this->renderPartial('ver',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 }

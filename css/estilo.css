@@ -58,3 +58,22 @@
 .link-negro:hover{
 	color:#000;
 }
+
+.noticiaborde{
+	border-color: #ff0000 #0000ff;
+	border-bottom:solid;
+	border-width:1px;
+}
+.noticiatitulo{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #B2E0FF;
+}
+.noticiafecha{
+
+}
+.noticiatexto{
+	font-style: oblique;
+	background-color: #E6F5FF;
+}

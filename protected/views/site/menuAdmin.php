@@ -144,7 +144,61 @@
 	</div>
 	<br>
 
+	<div class="row">
+		<div class="visible-phone"><br/></div>
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('noticia/create'); ?>">
+			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
+				<div class="row">
+					<div class="span1 text-center">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/umbreon.gif"); ?>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="row">
+							<div class="span3">
+								<strong>Ingresar Noticia</strong>
+							</div>
+						</div>
+						<div class="row">
+							<div class="span3">
+								<p>En este item se puede asignar el  rol de cada usuario</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<br>
 
+	<div class="row">
+		<div class="visible-phone"><br/></div>
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('noticia/admin'); ?>">
+			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
+				<div class="row">
+					<div class="span1 text-center">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/espeon.gif"); ?>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="row">
+							<div class="span3">
+								<strong>Administrar Noticias</strong>
+							</div>
+						</div>
+						<div class="row">
+							<div class="span3">
+								<p>En este item se puede asignar el  rol de cada usuario</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<br>
 
 
 </div>		
