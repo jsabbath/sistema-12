@@ -32,7 +32,6 @@ class Evaluacion extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('eva_nota', 'required'),
 			array('eva_concepto, eva_matricula, eva_ano', 'numerical', 'integerOnly'=>true),
 			array('eva_nota', 'length', 'max'=>50),
 			// The following rule is used by search().

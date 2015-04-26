@@ -315,11 +315,11 @@ class MatriculaController extends Controller
         $cur = $this->actionCursoAnoActual();
         $ano = $this->actionAnoactual();
 
-        $evaluacion = new Evaluacion;
         $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
+            $id_inf = $_POST['id_id'];
 
             // busca todas las asignaturas asignadas al curso
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
@@ -356,10 +356,20 @@ class MatriculaController extends Controller
                         }
                     }
 
-                    $evaluacion->eva_infd = $curso->cur_infd;
-                    $evaluacion->eva_matricula = $id;
-                    $evaluacion->eva_ano = $curso->cur_ano;
-                    $evaluacion->save();
+                    //asignar informe de desarrollo
+                    $criteria = new CDbCriteria();
+                    $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';
+                    $criteria->condition = 'area.are_infd=:value';
+                    $criteria->params = array(":value"=>$id_inf);
+                    $con = Concepto::model()->findAll($criteria);
+                    foreach ($con as $n) {
+                        $evaluacion = new Evaluacion;
+                        $evaluacion->eva_concepto = $n->con_id;
+                        $evaluacion->eva_matricula = $id;
+                        $evaluacion->eva_ano = $curso->cur_ano;
+                        $evaluacion->save();
+                    }
+                    
                 }else{
                     Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
                     $this->refresh();
