@@ -172,4 +172,13 @@ class NoticiaController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function getPublicador($data,$row){
+		if($data->not_user==1){
+			return "Administrador";
+		}else{
+			$usuario = Usuario::model()->findAll(array('condition'=>'usu_iduser="'.$data->not_user.'"'));
+			return $usuario->usu_nombre1." ".$usuario->usu_apepat;
+		}
+	}
 }

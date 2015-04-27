@@ -40,7 +40,11 @@ $('.search-form form').submit(function(){
 	'filter'=>$model,
 	'columns'=>array(
 		//'not_id',
-		'not_user',
+		//'not_user',
+		array(
+			'name'=>'not_user',
+			'value'=>array($this,'getPublicador'),
+		),
 		'not_fecha',
 		'not_titulo',
 		'not_texto',
