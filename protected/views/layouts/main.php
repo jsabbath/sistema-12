@@ -53,7 +53,7 @@ $tempid = $temp->temp_id;
             <header>
                 <div class="row">
                  
-                <div class="span12">
+                <div class="span12" style="background-color: #292929">
                     <table width=100%  border="0" cellspacing="0" cellpadding="0">
                    
                         <td width=9% align="left" class="hidden-phone">    
@@ -61,7 +61,7 @@ $tempid = $temp->temp_id;
                         </td>
                      
                         <td class="visible-desktop">
-                            <h3>Colegio Alborada</h3>
+                            <h3 style="color:#FFF6B0">Colegio Alborada</h3>
                         </td>
                        
                          <div class="hidden-desktop">
@@ -69,27 +69,27 @@ $tempid = $temp->temp_id;
                         </div>
                         <td >
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" data-toggle="tooltip" title="Inicio">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/home.png">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/casa.png">
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" data-toggle="tooltip" title="Academico">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/icono maestros.png">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/usu.png">
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" data-toggle="tooltip" title="Cursos">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/curso.png">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/cur.png">
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" data-toggle="tooltip" title="Informe">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/i.png">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/inf.png">
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" data-toggle="tooltip" title="Administracion">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/parametros.png">
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/par.png">
                             </a>
                         </td>
                          <td>
@@ -122,7 +122,7 @@ $tempid = $temp->temp_id;
             </header>
 
             <div class="row">
-                <div class="span6 offset3 text-center">
+                <div class="span12 text-center" style="background-color: #292929">
                     <?php echo CHtml::dropDownList(
                         'anos', null, $anos,array(
                         'prompt'=>$ano_selec,
@@ -136,9 +136,6 @@ $tempid = $temp->temp_id;
                             )
                     ));  
                     ?>
-                    <button class="btn btn-inverse disabled" style="margin-bottom:10px" id="anio" data-toggle="tooltip" data-placement="top" title="Año actual">
-                        <?php echo $ano_selec ?>
-                    </button> 
                 </div>
 
             </div>

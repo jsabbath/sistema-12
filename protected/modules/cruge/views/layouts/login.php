@@ -21,7 +21,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body style="background-color: rgba(360,100,37,0.47)">
+<body style="background-color: white">
 
 <?php 
 /*
