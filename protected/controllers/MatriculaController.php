@@ -356,6 +356,17 @@ class MatriculaController extends Controller
                         }
                     }
 
+
+
+                    //  se cuenta el numero de alumnos que tiene el curso
+                    $numero_alumnos = ListaCurso::model()->countByAttributes(array('list_curso_id' => $id_curso));
+
+                    $lista_alumnos = new ListaCurso;
+                    $lista_alumnos->list_curso_id = $id_curso;
+                    $lista_alumnos->list_mat_id = $id;
+                    $lista_alumnos->list_posicion = $numero_alumnos + 1;
+                    $lista_alumnos->insert();
+
                     //asignar informe de desarrollo
                     $criteria = new CDbCriteria();
                     $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';

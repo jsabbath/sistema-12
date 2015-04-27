@@ -631,8 +631,10 @@ class CursoController extends Controller
 
 	}
 
-	//  el profesor jefe puede ver todos sus cursos, 
-	// selecciona uno y entra a la seccion  donde se pone la asistencia
+	/**
+	el profesor jefe puede ver todos sus cursos, 
+	selecciona uno y entra a la seccion  donde se pone la asistencia
+	*/
 	public function actionBuscar_asistencia(){
     	if(Yii::app()->user->checkAccess('admin') ){
 			$cursos = $this->actionCursoAnoActual();
