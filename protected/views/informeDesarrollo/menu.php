@@ -1,5 +1,8 @@
 <div class="row">
-	<div class="span6 offset3" style="border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 25px;">
+<div class="span12" style="border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 25px;">
+
+<div class="row">
+	<div class="span6 offset3">
 	<div style="padding-left: 10px;">
 		<br>
 		<h2 class="text-center"><font face="papyrus">Certificados e Informes</font></h2>
@@ -86,11 +89,9 @@
 		</a>
 	</div>
 	<br>
-
-
-
-
-
 </div>		
 <br>
+</div>
+
+</div>
 </div>

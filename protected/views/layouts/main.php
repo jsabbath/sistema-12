@@ -53,7 +53,7 @@ $tempid = $temp->temp_id;
             <header>
                 <div class="row">
                  
-                <div class="span12" style="background-color: #292929">
+                <div class="span12">
                     <table width=100%  border="0" cellspacing="0" cellpadding="0">
                    
                         <td width=9% align="left" class="hidden-phone">    
@@ -65,31 +65,31 @@ $tempid = $temp->temp_id;
                         </td>
                        
                          <div class="hidden-desktop">
-                            <h3>Colegio Alborada</h3>
+                            <h3 style="color:#FFF6B0">Colegio Alborada</h3>
                         </div>
                         <td >
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" data-toggle="tooltip" title="Inicio">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/casa.png">
+                            <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" data-toggle="tooltip" title="Inicio">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/casa.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" data-toggle="tooltip" title="Academico">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/usu.png">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/usu.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" data-toggle="tooltip" title="Cursos">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/cur.png">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/cur.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" data-toggle="tooltip" title="Informe">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/inf.png">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/inf.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" data-toggle="tooltip" title="Administracion">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/par.png">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/par.png"></div>
                             </a>
                         </td>
                          <td>
@@ -118,11 +118,7 @@ $tempid = $temp->temp_id;
                         </td>
                     </table>
                     </div>
-                </div>
-            </header>
-
-            <div class="row">
-                <div class="span12 text-center" style="background-color: #292929">
+                    <div class="span12 text-center" style="background-color: #292929">
                     <?php echo CHtml::dropDownList(
                         'anos', null, $anos,array(
                         'prompt'=>$ano_selec,
@@ -137,9 +133,8 @@ $tempid = $temp->temp_id;
                     ));  
                     ?>
                 </div>
-
-            </div>
-
+                </div>
+            </header>
 
            <div class='info' style='text-aling:left;'>
                 <?php
@@ -164,9 +159,9 @@ $tempid = $temp->temp_id;
                 ?><!-- breadcrumbs -->
             <?php endif ?>
 
-            
+            <div style="background-color: white">
             <?php echo $content; ?>
-
+            </div>
             <div class="clear"></div>
 
 
@@ -236,5 +231,5 @@ $("#contraseña").click(function(){
                 success: function(result){ 
                     $("#cambio").html(result)}
             });
-})
+});
 </script>

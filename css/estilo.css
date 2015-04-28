@@ -50,7 +50,7 @@
 	top:1px;
 }
 #pagina{
-	background-color: white;
+	background-color: #292929;
 }
 .link-negro{
 	color:#444;
@@ -60,20 +60,21 @@
 }
 
 .noticiaborde{
-	border-color: #ff0000 #0000ff;
-	border-bottom:solid;
+	border-radius: 20px 20px 20px 20px;
 	border-width:1px;
+	background-color: #E79825;
 }
 .noticiatitulo{
-	font-family: "Times New Roman", Times, serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 20px;
 	font-weight: bold;
-	background-color: #B2E0FF;
+	text-indent: 1em;
 }
 .noticiafecha{
 
 }
 .noticiatexto{
 	font-style: oblique;
-	background-color: #E6F5FF;
+	background-color: #FFF6B0;
+	text-indent: 0.5em;
 }
