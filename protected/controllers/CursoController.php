@@ -520,27 +520,26 @@ class CursoController extends Controller
     	$tipo_periodo = $b;
     	$alumnos = array();
 
-    	// se cargan todas las notas de la asigntura por periodo
-		$notas = Notas::model()->findAll(array('condition' => 'not_asig=:x AND not_periodo=:y', 
-												'params' => array(':x' => $id_asig, ':y' => $tipo_periodo )));
 
 		$asignatura = Asignatura::model()->findByPk($id_asig);
-		//para verificar que el profesor que edite las notas sea el que dicta la asignatura
-		$asig = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $id_asig, 'aa_curso' => $c));
-		//$usuario = Usuario::model()->findByAttributes(array('usu_iduser' => yii::app()->user->id));
 
+		$lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion', 
+														'condition' => 'list_curso_id=:x', 'params' => array(':x' => $c )));
 
+		// se recorre la lista del curso
+		 foreach ($lista_curso as $key => $lista) {
+		 		// se cargan las notas  para el alumno 
+	        	$notas = Notas::model()->find(array('condition' => 'not_asig=:x AND not_periodo=:y AND not_mat=:z', 
+												'params' => array(':x' => $id_asig, ':y' => $tipo_periodo, ':z' => $lista->list_mat_id )));
 
-			// se recorren todas las notas encontradas, y se busca al alumno al  que les pertenecen
-	        foreach ($notas as $key => $n) {
-	        	$mat  = Matricula::model()->findByPk($n->not_mat); 
+	        	$mat  = Matricula::model()->findByPk($lista->list_mat_id); 
 	        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 
 	        	$alumnos[] = array(
 	    			//'mat_id' => $mat->mat_id, // id de la matricula del alumno
-	    			'not_id' => $n->not_id, //  id de la tabla notas
+	    			'not_id' => $notas->not_id, //  id de la tabla notas
 	    			'nombre' => $alum->getNombre_completo(),
-	    			'notas'  => $n->notas, // array con todas las notas
+	    			'notas'  => $notas->notas, // array con todas las notas
 	        	);
 	        }
 
@@ -563,6 +562,7 @@ class CursoController extends Controller
 	}
 
 	// se le entrega id_curso y devuelve una lista con todos los alumnos + id_matricula
+	// id = id_curso
 	public function actionListar_alumnos($id){
 		$tiene_asignatura = AAsignatura::model()->findByAttributes(array('aa_curso' => $id ));
 
@@ -573,42 +573,54 @@ class CursoController extends Controller
             										'params' => array(':x' => $tiene_asignatura['aa_asignatura'], ':y' => $ano )));
            	if( $notas ){
 	            $mat_id = array();
-	            foreach ($notas as $key => $nota) { // se obtienen todas las id de los alumnos de una asignatura
-	            	$mat_id[] = $nota->not_mat;
-	            }
 
-	            $criteria = new CDbCriteria();
-	            $criteria->addInCondition('mat_id', $mat_id, 'OR');
-	            $matriculas = Matricula::model()->findAll($criteria);
+
+	            $lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion', 
+													'condition' => 'list_curso_id=:x', 'params' => array(':x' => $id )));
+
+	            // se recorre la lista del curso
+				// foreach ($lista_curso as $key => $lista) {
+			 //        	$mat_id[]  = $lista->list_mat_id;	
+			 //    }
+
+
+
+	            // foreach ($notas as $key => $nota) { // se obtienen todas las id de los alumnos de una asignatura
+	            // 	$mat_id[] = $nota->not_mat;
+	            // }
+
+	            // $criteria = new CDbCriteria();
+	            // $criteria->addInCondition('mat_id', $mat_id, 'OR');
+	            // $matriculas = Matricula::model()->findAll($criteria);
 
 	            $lista_alumnos = array();
             	$curso = Curso::model()->findByPk($id);
             	$tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
 
-
             	if($tipo_periodo->par_descripcion == 'SEMESTRE' ){
-	            	foreach ($matriculas as $key => $alumno) { // se recorre cada matricula y  se obtiene el nombre del alumno
-	            		$mat_id = $alumno['mat_alu_id'];
-	            		$alumno = Alumno::model()->findByPk($mat_id);
-	            		$matri 	= Matricula::model()->findByPk($mat_id);
+	            	foreach ($lista_curso as $key => $alumno) { // se recorre cada matricula y  se obtiene el nombre del alumno
+	            		//$mat_id = $alumno['mat_alu_id'];
+
+	            		$matri = Matricula::model()->findByPk($alumno->list_mat_id);
+	            		$alu = Alumno::model()->findByPk($matri->mat_alu_id);
+	            		// $matri 	= Matricula::model()->findByPk($mat_id);
 	            		
 	            		$lista_alumnos[] = array(
-	            					'mat_id'	=> $mat_id,
-	            					'nombre'	=> $alumno->getNombre_completo(),
-	            					'asi_1'		=> $matri['mat_asistencia_1'],
-	            					'asi_2'		=> $matri['mat_asistencia_2'],
+	            					'mat_id'	=> $alumno->list_mat_id,
+	            					'nombre'	=> $alu->getNombre_completo(),
+	            					'asi_1'		=> $matri->mat_asistencia_1,
+	            					'asi_2'		=> $matri->mat_asistencia_2,
 	            				);
 	            		
 	            	}
 	            }else if($tipo_periodo->par_descripcion == 'TRIMESTRE' ){
-	            	foreach ($matriculas as $key => $alumno) { // se recorre cada matricula y  se obtiene el nombre del alumno
-	            		$mat_id = $alumno['mat_alu_id'];
-	            		$alumno = Alumno::model()->findByPk($mat_id);
-	            		$matri 	= Matricula::model()->findByPk($mat_id);
+	            	foreach ($lista_curso as $key => $alumno) {  // se recorre cada matricula y  se obtiene el nombre del alumno
+	            		$matri = Matricula::model()->findByPk($alumno->list_mat_id);
+	            		$alu = Alumno::model()->findByPk($matri->mat_alu_id);
 
 	            		$lista_alumnos[] = array(
-	            					'mat_id'	=> $mat_id,
-	            					'nombre'	=> $alumno->getNombre_completo(),
+	            					'mat_id'	=> $alumno->list_mat_id,
+	            					'nombre'	=> $alu->getNombre_completo(),
 	            					'asi_1'		=> $matri->mat_asistencia_1,
 	            					'asi_2'		=> $matri->mat_asistencia_2,
 	            					'asi_3'		=> $matri->mat_asistencia_3,
