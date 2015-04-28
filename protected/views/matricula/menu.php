@@ -13,7 +13,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/matricula_add.png"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/exam_pass.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -41,7 +41,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/matricula_update.png"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/edit.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -69,7 +69,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/matricula_delete.png"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/exam_fail.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -96,7 +96,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/calificaciones.png"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/admissions.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -125,7 +125,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/desarrollo.png"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/checkmark.png"); ?>
 						</div>
 					</div>
 					<div class="span3">

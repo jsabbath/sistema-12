@@ -13,7 +13,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/eevee.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/exam_pass.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -41,7 +41,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/jolteon.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/zoom.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -69,7 +69,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 						<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/vaporeon.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/file.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -96,7 +96,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 							<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/flareon.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/attendance_list.png"); ?>
 						</div>
 					</div>
 					<div class="span3">
@@ -122,7 +122,7 @@
 				<div class="row">
 					<div class="span1 text-center">
 							<div class="hidden-phone">
-							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/flareon.gif"); ?>
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/clipboard.png"); ?>
 						</div>
 					</div>
 					<div class="span3">

@@ -68,32 +68,32 @@ $tempid = $temp->temp_id;
                             <h3 style="color:#FFF6B0">Colegio Alborada</h3>
                         </div>
                         <td >
-                            <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" data-toggle="tooltip" title="Inicio">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/casa.png"></div>
+                            <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" title="Inicio">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/casa.png"></div>
                             </a>
                         </td>
                         <td>
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" data-toggle="tooltip" title="Academico">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/usu.png"></div>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" title="Academico">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/study.png"></div>
                             </a>
                         </td>
                         <td>
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" data-toggle="tooltip" title="Cursos">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/cur.png"></div>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" title="Cursos">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/blackboard.png"></div>
                             </a>
                         </td>
                         <td>
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" data-toggle="tooltip" title="Informe">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/inf.png"></div>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" title="Informe">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/papers.png"></div>
                             </a>
                         </td>
                         <td>
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" data-toggle="tooltip" title="Administracion">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/par.png"></div>
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" title="Administracion">
+                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
                             </a>
                         </td>
                          <td>
-                            <a class="link-negro" href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir">
+                            <a class="link-negro" href="#"  id="salir" onclick="logout()" title="Salir">
                             <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png">
                             </a>
                         </td>
