@@ -164,6 +164,9 @@
 			data: {curso_notas: curso_notas},
 			success: function(data){
 				location.reload();
+				window.onbeforeunload = function() {
+				       
+				    }
 			}
 		})
 	})
