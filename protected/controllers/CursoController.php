@@ -135,6 +135,8 @@ class CursoController extends Controller
                 $l = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'letra')));
                 $letra = CHtml::listData($l, 'par_id', 'par_descripcion');
                 
+                $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+
                 
 		if(isset($_POST['Curso']))
 		{
@@ -146,12 +148,13 @@ class CursoController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
-                        'niveles' => $niveles,
-                        'ano' => $ano,
-                        'tp' => $tp,
-                        'jornada' => $jornada,
-                        'letra'  => $letra,
+					'model'=>$model,
+                    'niveles' => $niveles,
+                    'ano' => $ano,
+                    'tp' => $tp,
+                    'jornada' => $jornada,
+                    'letra'  => $letra,
+                    'informe' => $informe,
 		));
 	}
 
@@ -187,8 +190,10 @@ class CursoController extends Controller
                 
                 //  Se obtienen las letras para los cursos
                 $l = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'letra')));
-                $letra = CHtml::listData($l, 'par_id', 'par_descripcion');
-                
+                $letra = CHtml::listData($l, 'par_id', 'par_descripcion'); 
+
+                $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+
 
 		if(isset($_POST['Curso']))
 		{
@@ -204,6 +209,7 @@ class CursoController extends Controller
                                 'tp' => $tp,
                                 'jornada' => $jornada,
                                 'letra'  => $letra,
+                                'informe' => $informe,
 		));
 	}
 

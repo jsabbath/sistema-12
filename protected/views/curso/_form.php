@@ -89,6 +89,12 @@
             <?php echo $form->textField($model,'cur_notas_periodo',array('size'=>2,'maxlength'=>2)); ?>
             <?php echo $form->error($model,'cur_notas_periodo'); ?>
         </div>
+  
+        <div class="row">
+            <?php echo $form->labelEx($model,'cur_infd'); ?>
+            <?php echo $form->dropDownList($model,'cur_infd', $informe, array('prompt' => '-Seleccione Informe-',));?>
+        </div>
+
 
         <div class="row buttons">
             <?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar',array('class'=>'btn btn-primary')); ?>
