@@ -89,13 +89,14 @@ $rand = "X".$random1.$random2;
         <?php echo $form->labelEx($alumno,'alum_region'); ?>
         <?php
         echo $form->dropDownList($alumno, 'alum_region', $region, array(
-            'prompt' => 'Seleccione region',
+            'empty' => 'Seleccione region',
             'ajax' => array(
-                'type' => 'POST',
-                'url' => CController::createUrl('alumno/regiones'),
-                'update' => '#Alumno_alum_ciudad',
-                )
-            ));
+                'type'=>'POST', //request type
+                'url'=>CController::createUrl('Alumno/regiones'), //url to call.
+                'update'=>'#drop_ciudad', //selector to update
+                'data'=>array('id_region' => 'js:this.value'), 
+            ),
+        ));
         ?>
         <?php echo $form->error($alumno,'alum_region'); ?>
     </div>
@@ -103,19 +104,25 @@ $rand = "X".$random1.$random2;
     <div class="row">
         <?php echo $form->labelEx($alumno,'alum_ciudad'); ?>
         <?php echo $form->dropDownList($alumno, 'alum_ciudad', array(),array(
-            'prompt' => 'Seleccione ciudad',
+            'empty' => 'Seleccione ciudad',
+            'id'=>'drop_ciudad',
             'ajax' => array(
-                'type' => 'POST',
-                'url' => CController::createUrl('alumno/ciudades'),
-                'update' => '#Alumno_alum_comuna',
-            )));
+                'type'=>'POST', //request type
+                'url'=>CController::createUrl('Alumno/ciudades'), //url to call.
+                'update'=>'#drop_comuna', //selector to update
+                'data'=>array('id_ciudad' => 'js:this.value'), 
+            ),
+        ));
 ?>
         <?php echo $form->error($alumno,'alum_ciudad'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($alumno,'alum_comuna'); ?>
-        <?php echo $form->dropDownList($alumno, 'alum_comuna', array()); ?>
+        <?php echo $form->dropDownList($alumno, 'alum_comuna', array(),array(
+            'empty'=>'Seleccione comuna',
+            'id'=>'drop_comuna',
+        ));?>
         <?php echo $form->error($alumno,'alum_comuna'); ?>
     </div>
 

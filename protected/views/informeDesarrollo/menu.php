@@ -8,7 +8,7 @@
 		<h2 class="text-center"><font face="papyrus">Certificados e Informes</font></h2>
 	</div>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/create'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/lista_cursos'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">

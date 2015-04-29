@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
+
+
 <?php if (Yii::app()->user->hasFlash('loginflash')): ?>
     <div class="flash-error">
         <?php echo Yii::app()->user->getFlash('loginflash'); ?>
@@ -19,9 +21,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="span3" ></div>
-        <div class="span6" id="login">
-
+        <div class="span6 offset3" id="login">
             <div id="caja">
                 <?php echo "<img src=\"images/logo2.png\"> <br>"; ?> 
                 <?php echo "<br>"; ?> 
@@ -42,9 +42,9 @@
                         } ?>
                 <?php echo "<br><br>"; ?>
                 <input type="submit" class="botonSubmit" value="Ingresar">
+                <br><br>
             </div>
         </div>
-        <div class="span3"></div>
 </div>
 
 
