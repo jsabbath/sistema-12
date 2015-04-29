@@ -261,7 +261,8 @@ class ListaCursoController extends Controller
 		if( isset($_POST['id']) ){
 			$id = $_POST['id'];
 
-			$lista_curso = Listacurso::model()->findAll(array('condition' => 'list_curso_id=:x', 'params' => array(':x' => $id )));
+			// trae lista del curso ordenada
+			$lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x', 'params' => array(':x' => $id )));
 			$lista = array();
 
 			if( !empty($lista_curso) ){

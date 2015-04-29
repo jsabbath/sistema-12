@@ -329,7 +329,7 @@ class MatriculaController extends Controller
 
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
-            $id_inf = $_POST['id_id'];
+           
 
             // busca todas las asignaturas asignadas al curso
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
@@ -339,6 +339,7 @@ class MatriculaController extends Controller
                 if( !$esta_matriculado ){
                     $curso = Curso::model()->findByPk($id_curso);
                     $tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+                    $id_inf = $curso->cur_infd;
 
                     // SEMESTRE (SACADO  DE LA TABLA PARAMETRO NO CAMBIAR) ;
                     if( $tipo_periodo->par_descripcion == 'SEMESTRE' ){
@@ -434,8 +435,9 @@ class MatriculaController extends Controller
             $criteria->condition = 'cur_id=:id';
             $criteria->params = array(':id'=>$idcurso);
             $model = Curso::model()->find($criteria);
+            $numero_alumnos = ListaCurso::model()->countByAttributes(array('list_curso_id' => $idcurso));
 
-            $this->renderPartial('info_curso', array('model' => $model));
+            $this->renderPartial('info_curso', array('model' => $model, 'numero' => $numero_alumnos));
 
         }else{
             throw new CHttpException(404, 'The requested page does not exist.');
