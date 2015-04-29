@@ -40,14 +40,14 @@ $tempid = $temp->temp_id;
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
 
+     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    </head>
+
 
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-    </head>
-
-
+   
 
     <body>
 
