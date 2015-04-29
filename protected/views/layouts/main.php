@@ -41,7 +41,7 @@ $tempid = $temp->temp_id;
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
 
 
-  <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -49,8 +49,8 @@ $tempid = $temp->temp_id;
 
     <body>
 
-        <div class="container" id="pagina">    
-            <header>
+        <div class="container" >    
+            <header style="background-color: #292929; border-top: 3px solid #772000;border-bottom: 3px solid #772000; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">
                 <div class="row">
                  
                 <div class="span12">
@@ -118,7 +118,7 @@ $tempid = $temp->temp_id;
                         </td>
                     </table>
                     </div>
-                    <div class="span12 text-center" style="background-color: #292929">
+                    <div class="span12 text-center" >
                     <?php echo CHtml::dropDownList(
                         'anos', null, $anos,array(
                         'prompt'=>$ano_selec,
@@ -135,6 +135,10 @@ $tempid = $temp->temp_id;
                 </div>
                 </div>
             </header>
+
+        </div>
+
+            <div class="container" style="background-color: white; border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; -moz-border-radius: 24px; border-radius: 25px;">  
 
            <div class='info' style='text-aling:left;'>
                 <?php
@@ -159,7 +163,7 @@ $tempid = $temp->temp_id;
                 ?><!-- breadcrumbs -->
             <?php endif ?>
 
-            <div style="background-color: white">
+            <div>
             <?php echo $content; ?>
             </div>
             <div class="clear"></div>
