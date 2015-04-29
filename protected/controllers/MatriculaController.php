@@ -73,20 +73,22 @@ class MatriculaController extends Controller
         //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
+        $estado = Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="ACTIVO"'));
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
-            $model->mat_alu_id = 1;
+            $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
             $model->mat_fingreso = date('Y-m-d');
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
                 if($alumno->save()){
-                    $model->mat_alu_id = $alumno->alum_id;
+                    $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
+                    $model->mat_estado = $estado[0]->par_id;
                     if ($model->save()) {
                         $this->redirect(array('addcurso', 'id' => $model->mat_id));  
                     }
@@ -114,6 +116,7 @@ class MatriculaController extends Controller
         $alumno = Alumno::model()->findByPk($model->mat_alu_id);
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
+        $estado = Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="ACTIVO"'));
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
@@ -124,6 +127,7 @@ class MatriculaController extends Controller
             if ($valid){
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id;
+                    $model->mat_estado = $estado[0]->par_id;
                     if ($model->save()) {
                         $this->redirect(array('addcurso', 'id' => $model->mat_id));  
                     }
