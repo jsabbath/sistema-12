@@ -47,6 +47,8 @@ $tempid = $temp->temp_id;
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
 
+
+
     <body>
 
         <div class="container" >    
@@ -67,34 +69,34 @@ $tempid = $temp->temp_id;
                          <div class="hidden-desktop">
                             <h3 style="color:#FFF6B0">Colegio Alborada</h3>
                         </div>
-                        <td >
+                        <td>
                             <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" title="Inicio">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/casa.png"></div>
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/casa.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" title="Academico">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/study.png"></div>
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/study.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" title="Cursos">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/blackboard.png"></div>
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/blackboard.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" title="Informe">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/papers.png"></div>
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/papers.png"></div>
                             </a>
                         </td>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" title="Administracion">
-                            <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
                             </a>
                         </td>
                          <td>
                             <a class="link-negro" href="#"  id="salir" onclick="logout()" title="Salir">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png"></div>
                             </a>
                         </td>
              
