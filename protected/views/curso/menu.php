@@ -117,7 +117,7 @@
 	</div>
 <br>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/listaCompleta'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('listacurso'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -128,7 +128,7 @@
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Lista de alumnos</strong>
+								<strong>Editar lista de alumnos</strong>
 							</div>
 						</div>
 						<div class="row">
