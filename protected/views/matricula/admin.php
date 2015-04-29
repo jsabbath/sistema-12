@@ -81,7 +81,7 @@ $this->menu=array(
         </div>
 
 
-           <h5> Ingrese la Fecha de retiro</h5>
+           <h5> Ingrese la Fecha de retiro, Default: (HOY)<?php echo date("Y-m-d"); ?> </h5>
 
 
         <?php echo CHtml::dateField('Text', '',array('id'=>'fecha','placeholder' => 'fecha',))?>

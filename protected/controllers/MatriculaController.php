@@ -268,21 +268,27 @@ class MatriculaController extends Controller
         $ano = $this->actionAnoactual();
 
         // ID DEL ALUMNO
-        if(isset($_POST['fecha'])){
-            $fecha_retiro = $_POST['fecha'];
+        if(isset($_POST['id'])){
+
+            if( !isset($_POST['fecha']) ){
+                $fecha_retiro = date("Y-m-d");
+            }else{
+                $fecha_retiro = $_POST['fecha'];
+            }
+           
             $id_alum = $_POST['id'];
 
             // se obtiene matricula del alumno
             $matricula = Matricula::model()->findByAttributes(array('mat_alu_id' => $id_alum, 'mat_ano' => $ano));
+            $estado = Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO"'));
 
             if($matricula){
                 $matricula->mat_fretiro = $fecha_retiro;
+                $matricula->mat_estado = $estado[0]->par_id;
+
                 if($matricula->save()){
-                    $alumno = Alumno::model()->findByAttributes(array('alum_id' => $id_alum ));
-                    $alumno->alum_estado = 0;//RETIRADO
-                    if($alumno->save()){
-                         Yii::app()->user->setFlash('success', "Alumno Retirado con Exito!");
-                    }
+                    Yii::app()->user->setFlash('success', "Alumno Retirado con Exito!");
+                    
                 }
             }else{
                 Yii::app()->user->setFlash('error', "El alumno esta matriculado  en otro año!");
