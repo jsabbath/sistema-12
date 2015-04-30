@@ -140,9 +140,8 @@ $tempid = $temp->temp_id;
 
         </div>
 
-            <div class="container" style="background-color: white; border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; -moz-border-radius: 24px; border-radius: 25px;">  
 
-           <div class='info' style='text-aling:left;'>
+          <div class='info container' style='text-aling:left;'>
                 <?php
                 $flashMessages = Yii::app()->user->getFlashes();
                 if ($flashMessages) {
@@ -154,7 +153,11 @@ $tempid = $temp->temp_id;
                 }
                 ?>
             </div>
-			
+            
+
+            <div class="container" style="background-color: white; border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; -moz-border-radius: 24px; border-radius: 25px;">  
+
+         
 			
 
             <?php if (isset($this->breadcrumbs)): ?>
