@@ -282,9 +282,9 @@ class EvaluacionController extends Controller
 			$lista = array();
 			$inf = array();
 			$are = array();
-			$con = array();
-
+			
 			foreach ($areas as $key => $a) {
+				$con = array();
 				$conceptos = Concepto::model()->findAll(array('condition' => 'con_area=:x', 'params' => array(':x' => $a->are_id)));
 
 				foreach ($conceptos as $key => $c) {
