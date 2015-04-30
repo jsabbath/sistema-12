@@ -21,8 +21,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="span6 offset3" id="login">
-            <div id="caja">
+        <div class="span4 offset4"  id="login">
+            <div id="caja" style='background-color: rgba(204,229,255,0.5);border-radius: 25px 25px 25px 25px; -moz-border-radius: 25px 25px 25px 25px; -webkit-border-radius: 25px 25px 25px 25px; border: 0px solid #000000;'>
                 <?php echo "<img src=\"images/logo2.png\"> <br>"; ?> 
                 <?php echo "<br>"; ?> 
                 <?php echo $form->textField($model, 'username', array('placeholder' => 'Usuario')); ?>

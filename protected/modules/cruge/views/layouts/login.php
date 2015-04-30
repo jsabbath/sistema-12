@@ -21,7 +21,10 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body style="background-color: #777777">
+<body style='background-image: url("<?php echo Yii::app()->request->baseUrl; ?>/images/fondo3.jpg");background-repeat: no-repeat; background-attachment:fixed; background-size:cover-webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover;         /* Generic*/'>
 
 <?php 
 /*
@@ -34,8 +37,9 @@ if(isset($this->breadcrumbs)):?>
 ?>
 
 	<?php echo $content;?>
-
 	<div class="clear"></div>
+	<footer>todo para julito</footer>
+	
 
 </div><!-- page -->
 <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>

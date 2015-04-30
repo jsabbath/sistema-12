@@ -8,3 +8,4 @@ protected/config/*.php
 /nbproject/private/
 protected/config/database.php
 protected/runtime/application.log
+protected/runtime/application.log
