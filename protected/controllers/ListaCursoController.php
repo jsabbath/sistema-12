@@ -12,12 +12,9 @@ class ListaCursoController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+   {
+      return array(array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -132,6 +129,7 @@ class ListaCursoController extends Controller
 
 		$this->render('ordenar_lista',array(
     			'cur' => $cursos,
+    			'nombre'=>'papa',
 			));
     	
 	}
