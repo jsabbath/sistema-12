@@ -34,6 +34,8 @@ class Parametro extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('par_item','required'),
+			array('par_descripcion','required'),
 			array('par_item, par_descripcion', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -64,9 +66,9 @@ class Parametro extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'par_id' => 'Par',
-			'par_item' => 'Par Item',
-			'par_descripcion' => 'Par Descripcion',
+			'par_id' => 'ID',
+			'par_item' => 'Item',
+			'par_descripcion' => 'Descripcion',
 		);
 	}
 

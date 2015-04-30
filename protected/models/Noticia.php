@@ -34,6 +34,7 @@ class Noticia extends CActiveRecord
 			array('not_titulo', 'required'),
 			array('not_user', 'numerical', 'integerOnly'=>true),
 			array('not_titulo', 'length', 'max'=>50),
+			array('not_texto','required'),
 			array('not_fecha, not_texto', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
