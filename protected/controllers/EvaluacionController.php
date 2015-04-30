@@ -331,8 +331,11 @@ class EvaluacionController extends Controller
 			//echo json_encode($lista);
 			
 
+			$escala = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="EVA_ESCALA"')),'par_id','par_descripcion');
+			
 			$this->renderPartial('evaluar_conceptos',array(
-				'lista'=>$lista,
+				'lista'		=> $lista,
+				'escala' 	=> $escala,
 			));
 		}
 

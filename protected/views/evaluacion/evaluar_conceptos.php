@@ -7,6 +7,7 @@
         $informe = $lista[0]['informe'];
         $alumnos = $lista[0]['alumnos'];
         $titulo = $informe[0]['titulo'];
+
      ?>
 
     <div class="text-center">
@@ -22,6 +23,7 @@
             <?php foreach ($i['areas'] as $key => $a) { ?>
                 <li <?php if( $key == 0 ){ ?>class="active" <?php } ?>><a href="#tab<?php echo $a['are_id'] ?>" data-toggle="tab"><?php echo $a['texto'] ?></a></li>
             <?php } ?>
+            <li><a><button class="btn btn-success">GUARDAR</button></a></li>
         </ul>
 
         <div class="tab-content">
@@ -37,13 +39,17 @@
 
                     <?php } ?>
 
-                        <table class="table table-condensed">
+                        <table class="table table-striped">
                           <thead>
                             <tr>
                                 <th>nombre</th>
                                 <?php foreach ($conce as $key => $c) { ?>
                         
-                                    <th><?php echo "C".$key; ?></th>
+                                    <th>
+                                        <?php echo "C".$key; ?>
+
+
+                                    </th>
 
                                 <?php } ?>
                             </tr>
@@ -55,15 +61,27 @@
                                         
                                     ?>
                                     <tr>
-                                        <td data-editable= 'false' hidden> <?php echo strtoupper($alum['mat_id']); ?></td>    
-                                        <td data-editable= 'false' > <?php echo strtoupper($alum['nombre']); ?></td>    
+                                        <td hidden> <?php echo strtoupper($alum['mat_id']); ?></td>    
+                                        <td> <?php echo strtoupper($alum['nombre']); ?></td>    
 
 
                                         <?php foreach ($conce as $key => $c) { 
                                             $posicion = array_search($c['con_id'], array_column($notas, 'id_con'));
+                                              $not = $notas[$posicion]['eva_nota'];
                                         ?>
                                 
-                                            <td><?php echo $notas[$posicion]['eva_nota']; ?></td>
+                                            <td>
+                                                <!-- <?php echo $alum['mat_id'] . $c['con_id']; ?>  -->
+                                                    <form>
+                                                        <?php foreach ($escala as $key => $e) { ?>
+                                                            <label class="radio">
+                                                                <input type="radio" name="optionsRadios" id="optionsRadios<?php echo $key . $alum['mat_id'] . $c['con_id']; ?>" 
+                                                                        value="option<?php echo $key. $alum['mat_id'] . $c['con_id']; ?>" <?php if($e == $not ){ ?>checked <?php } ?> >
+                                                                    <?php echo $e; ?>
+                                                                </label>
+                                                        <?php } ?>
+                                                    </form>
+                                            </td>
 
                                         <?php } ?>
 
@@ -79,6 +97,8 @@
     </div>
 
   <?php } ?>
+
+
 
  
 <?php } ?>
