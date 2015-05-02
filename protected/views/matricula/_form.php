@@ -178,6 +178,12 @@ $rand = "X".$random1.$random2;
             <?php echo $form->dateField($model,'mat_fcambio'); ?>
             <?php echo $form->error($model,'mat_fcambio'); ?>
         </div>
+
+        <div class="row">
+            <?php echo $form->labelEx($model,'mat_estado'); ?>
+            <?php echo $form->dropDownList($model,'mat_estado',$estado); ?>
+            <?php echo $form->error($model,'mat_estado'); ?>
+        </div>
         <?php
         }
         ?>

@@ -113,7 +113,7 @@ class MatriculaController extends Controller
         $alumno = Alumno::model()->findByPk($model->mat_alu_id);
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
-        $estado = Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="ACTIVO"'));
+        $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ESTADO"')),'par_id','par_descripcion');
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
@@ -123,8 +123,6 @@ class MatriculaController extends Controller
             $valid = $alumno->validate() && $valid;
             if ($valid){
                 if($alumno->save()){
-                    $model->mat_alu_id = $alumno->alum_id;
-                    $model->mat_estado = $estado[0]->par_id;
                     if ($model->save()) {
                         $this->redirect(array('addcurso', 'id' => $model->mat_id));  
                     }
@@ -138,6 +136,7 @@ class MatriculaController extends Controller
             'alumno' => $alumno,
             'region'=>$region,
             'genero'=>$genero,
+            'estado'=>$estado,
         ));
 	}
 
