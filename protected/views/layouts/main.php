@@ -48,7 +48,15 @@ $tempid = $temp->temp_id;
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
    
-
+<?php 
+//aqui empieza el control de usuarios
+if(!Yii::app()->user->checkAccess('PROFESOR') OR
+    !Yii::app()->user->checkAccess('EVALUADOR') OR
+    !Yii::app()->user->checkAccess('JEFEUTP') OR
+    !Yii::app()->user->checkAccess('DIRECTOR') OR
+    Yii::app()->user->isSuperAdmin
+    ){
+?>
     <body>
 
         <div class="container" >    
@@ -169,7 +177,14 @@ $tempid = $temp->temp_id;
             <?php endif ?>
 
             <div>
+<?php } ?>
+
             <?php echo $content; ?>
+
+<?php 
+//aqui empieza el control de usuarios
+if(Yii::app()->user->checkAccess('PROFESOR')){
+?>
             </div>
             <div class="clear"></div>
 
@@ -200,7 +215,11 @@ $tempid = $temp->temp_id;
 <div align="center" class="text-center">
 	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
 </div>
-    </body>
+</body>
+<?php }
+// aqui termina el control de usuario
+?>
+
 </html>
 
 <?php
