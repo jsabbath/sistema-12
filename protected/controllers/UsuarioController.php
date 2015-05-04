@@ -214,4 +214,27 @@ class UsuarioController extends Controller
         elseif($estado=='REPITENTE') return "<label class=\"label label-warning\">".$estado."</label>";
         else return "<label class=\"label label-info\">".$estado."</label>";
     }
+
+    //Esta funcion sirve para ver los usuarios online en la vista usuario/online
+    public function actionOnline(){
+    	$online_user = array(); //array con la lista de los usuarios online
+		$aux = array(); // array auxiliar para ingresar datos
+		$user = Yii::app()->user->um->listUsers(); //lista de los usuarios
+		unset($user[0]); // eliminando administrador
+		unset($user[1]); // eliminando invitado
+
+		foreach ($user as $u) {
+			$email = Yii::app()->user->um->loadUser($u->email); //cargando los datos de un usuario online
+			//agregando informacion de los usuarios online
+			if(Yii::app()->user->um->findSession($email)!=NULL){
+				$usuario = Usuario::model()->find('usu_iduser='.$u->iduser);
+				$aux['nombre'] = $usuario->usu_nombre1." ".$usuario->usu_apepat;
+				$aux['rut'] = $usuario->usu_rut;
+				$aux['email'] = $u->email;
+				array_push($online_user,$aux);
+			}
+		}
+		//renderizando vista con la informacion
+		$this->render('online',array('online_user'=>$online_user));
+    }
 }

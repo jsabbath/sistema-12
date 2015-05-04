@@ -214,6 +214,40 @@ if(
 }
  
 if(
+    Yii::app()->user->isSuperAdmin
+){ 
+?>					
+		<div class="row">
+		<div class="visible-phone"><br/></div>
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('usuario/online'); ?>">
+			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
+				<div class="row">
+					<div class="span1 text-center">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/user_awake.png"); ?>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="row">
+							<div class="span3">
+								<strong>Usuarios Online</strong>
+							</div>
+						</div>
+						<div class="row">
+							<div class="span3">
+								<p>En este item se puede ver los usuarios que estan usando el sistema</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<br>
+<?php
+}
+ 
+if(
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director')
 ){ 
