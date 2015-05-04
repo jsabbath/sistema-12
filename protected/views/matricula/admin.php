@@ -15,7 +15,7 @@
 <?php
 /* @var $this MatriculaController */
 /* @var $model Matricula */
-
+/*
 
 $this->breadcrumbs=array(
 	'Matriculas'=>array('index'),
@@ -27,96 +27,78 @@ $this->menu=array(
 	array('label'=>'Create Matricula', 'url'=>array('create')),
 );
 
-
+*/
 ?>
-
-<h1>Retirar Alumno</h1>
-  
-<h5>Ingrese el NOMBRE o el RUT del alumno</h5>
-
- <?php echo CHtml::textField('Text', '',
-    array('id'=>'pn',
+<div class="row">
+    <div class="span12 text-center">
+        <h2>Retirar Alumno</h2>  
+    </div>
+    <div class="span12 text-center">
+        <p class="text-info">Aqui se puede cambiar el estado de un <strong>alumno</strong> a <strong>retirado</strong></p>
+    </div>
+</div>
+<div class="row">
+    <div class="span6 offset2">
+        <h5>Ingrese el NOMBRE o el RUT del alumno</h5>    
+    </div>
+</div>
+<div class="row">
+    <div class="span12 text-center">
+        <?php echo CHtml::textField('Text', '',
+        array('id'=>'pn',
         'placeholder' => 'Ingrese nombre Alumno',))?>
 
 
 
- <?php echo CHtml::textField('Text', '',
-    array('id'=>'rut_button',
+        <?php echo CHtml::textField('Text', '',
+        array('id'=>'rut_button',
         'placeholder' => 'Ingrese Rut Alumno',))?>
 
-
-
-<?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
-
- 
-    <div  id="hiddenpls" style="display: none">
-
-
-    <hr>
-        <div>
-            <!--  Se muestra al buscar    !-->
-            <?php echo TbHtml::textField('Text', '',
-                array('id'=>'nombres',
-                    'placeholder' => 'Nombres',
-                    'disabled'=>'disabled',
-
-                    ))?>
-            
-            <?php echo Tbhtml::hiddenField('Text','',array('id' => 'id',)); ?>
-
-            <!--  Se muestra al buscar    !-->
-            <?php echo TbHtml::textField('Text', '',
-                array('id'=>'apellido',
-                    'placeholder' => 'Apellidos',
-                    'disabled'=>'disabled',
-                     ))?>
-            
-            <!--  Se muestra al buscar    !-->
-            <?php echo TbHtml::textField('Text', '',
-              array('id'=>'rut_',
-                  'placeholder' => 'RUT',
-                  'disabled'=>'disabled',
-                  ))?>
-        
-        </div>
-
-
-           <h5> Ingrese la Fecha de retiro, Default: (HOY)<?php echo date("Y-m-d"); ?> </h5>
-
-
-        <?php echo CHtml::dateField('Text', '',array('id'=>'fecha','placeholder' => 'fecha',))?>
-        <!-- <?php //echo CHtml::textField('Text', '',array('id' =>'estado','placeholder' => 'Estado'))?> !-->
-
-
-         <!--  Se muestra al buscar    !-->
-        <?php echo TbHtml::button('',array(
-                                        'color'=> TbHtml::ALERT_COLOR_DEFAULT, 
-                                        'id' =>'retirar',
-                                        'style'=>'margin-bottom:10px',
-                                        'icon' => 'remove',
-                                       //'style' => 'float: right',
-                                       // 'data-toggle' => 'modal',
-                                        //'data-target' => '#cambio_modal',
-                                        'ajax' =>
-                                            array('type'=>'POST',
-                                                'url'=>$this->createUrl('retirar'), // Buscar cursos por nombre
-                                                'update'=>'#fecha_retirar',
-                                                'data'=>array('id'=>'js:getId()','fecha'=>'js:getFecha()',/*'estado'=>'js:getEstado()',*/),
-                                                'success'=> 'function(){location.reload();}'
-                                            )
-                                        )
-            )?>
-    
-
-
-
-      
+        <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
     </div>
+</div>
 
+<div class="span12 text-center" id="hiddenpls" style="display: none">
+<div>
 
+    <!--  Se muestra al buscar    !-->
+    <?php 
+    echo TbHtml::textField('Text', '',array('id'=>'nombres','placeholder' => 'Nombres','disabled'=>'disabled',));
+    
+    echo Tbhtml::hiddenField('Text','',array('id' => 'id',));
 
-     
+    echo TbHtml::textField('Text', '',array('id'=>'apellido','placeholder' => 'Apellidos','disabled'=>'disabled',));
+    
+    echo TbHtml::textField('Text', '',array('id'=>'rut_','placeholder' => 'RUT','disabled'=>'disabled',))
 
+    ?>
+</div>
+
+<br>
+<h5> Ingrese la Fecha de retiro, Default: (HOY) <?php echo date("d-m-Y"); ?> </h5>
+
+<?php echo CHtml::dateField('Text', '',array('id'=>'fecha','placeholder' => 'fecha',))?>
+<!-- <?php //echo CHtml::textField('Text', '',array('id' =>'estado','placeholder' => 'Estado'))?> !-->
+
+<!--  Se muestra al buscar    !-->
+<?php echo TbHtml::button('',array(
+    'color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+    'id' =>'retirar',
+    'style'=>'margin-bottom:10px',
+    'icon' => 'remove',
+    //'style' => 'float: right',
+    // 'data-toggle' => 'modal',
+    //'data-target' => '#cambio_modal',
+    'ajax' =>
+        array('type'=>'POST',
+            'url'=>$this->createUrl('retirar'), // Buscar cursos por nombre
+            'update'=>'#fecha_retirar',
+            'data'=>array('id'=>'js:getId()','fecha'=>'js:getFecha()',/*'estado'=>'js:getEstado()',*/),
+            'success'=> 'function(){location.reload();}'
+        )
+    )
+)?>      
+</div>
 
  <!-- Asignar Asignatura 
      <?php /*$this->widget('bootstrap.widgets.TbModal', array(

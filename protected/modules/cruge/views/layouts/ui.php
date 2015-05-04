@@ -23,7 +23,7 @@
 	
 
 	<?php 
-	/*
+	
 	if(Yii::app()->user->checkAccess('admin')) { ?>	
 	<div class="span-5 last">
 		<div id="sidebar">
@@ -40,7 +40,7 @@
 		</div><!-- sidebar -->
 	</div>
 	<?php } 
-	*/
+	
 	?>
 	
 </div>

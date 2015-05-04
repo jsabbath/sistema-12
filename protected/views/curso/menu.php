@@ -7,6 +7,12 @@
 		<br>
 		<h2 class="text-center"><font face="papyrus">Gestion Cursos</font></h2>
 	</div>
+<?php 
+if(
+    Yii::app()->user->isSuperAdmin OR 
+    Yii::app()->user->checkAccess('director')
+){ 
+?>
 	<div class="row">
 		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/create'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
@@ -31,9 +37,17 @@
 				</div>
 			</div>
 		</a>
-
 		</div>
 		<br>
+<?php
+}
+
+if(
+    Yii::app()->user->isSuperAdmin OR 
+    Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('jefe_utp')
+){ 
+?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
 		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
@@ -59,9 +73,17 @@
 				</div>
 			</div>
 		</a>
-
 		</div>
-				<br>
+		<br>
+<?php
+}
+ 
+if(
+    Yii::app()->user->isSuperAdmin OR 
+    Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('jefe_utp')
+){ 
+?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
 		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/lista_cursos'); ?>">
@@ -89,7 +111,17 @@
 		</a>
 	</div>
 	<br>
-
+<?php
+}
+ 
+if(
+    Yii::app()->user->isSuperAdmin OR 
+    Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('evaluador') OR
+    Yii::app()->user->checkAccess('jefe_utp') OR
+    Yii::app()->user->checkAccess('profesor')
+){ 
+?>
 	<div class="row">
 		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/buscar_asistencia'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
@@ -115,7 +147,18 @@
 			</div>
 		</a>
 	</div>
-<br>
+	<br>
+<?php
+}
+ 
+if(
+    Yii::app()->user->isSuperAdmin OR 
+    Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('evaluador') OR
+    Yii::app()->user->checkAccess('jefe_utp') OR
+    Yii::app()->user->checkAccess('profesor')
+){ 
+?>
 	<div class="row">
 		<a class="link-negro" href="<?php echo Yii::app()->createUrl('listacurso'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
@@ -142,6 +185,10 @@
 		</a>
 	</div>
 	<br>
+<?php
+}
+ 
+?>
 </div>		
 <br>
 </div>

@@ -82,26 +82,63 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/casa.png"></div>
                             </a>
                         </td>
+                        <?php 
+                        if(
+                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        ?>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" title="Academico">
-                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/study.png"></div>
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/book.png"></div>
                             </a>
                         </td>
+                        <?php
+                        }
+
+                        if(
+                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        ?>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" title="Cursos">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/blackboard.png"></div>
                             </a>
                         </td>
+                        <?php
+                        }
+
+                        if(
+                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp')
+                        ){ 
+                        ?>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" title="Informe">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/papers.png"></div>
                             </a>
                         </td>
+                        <?php } ?>
+                        <?php 
+                        if(
+                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->checkAccess('director')
+                        ){ 
+                        ?>
                         <td>
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" title="Administracion">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
                             </a>
                         </td>
+                        <?php } ?>
                          <td>
                             <a class="link-negro" href="#"  id="salir" onclick="logout()" title="Salir">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png"></div>
