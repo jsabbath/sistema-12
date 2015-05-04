@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-touch.js"></script>
 
 
 <div class="row">
@@ -14,7 +15,7 @@
 <?php  
     
     if(empty( $cur )){
-        echo "Usted no tiene cursos en  este año.";
+        echo "Usted no es profesor jefe de cursos en este año.";
     }else{
         echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-',
                                                                 'id'=> 'drop_curso',

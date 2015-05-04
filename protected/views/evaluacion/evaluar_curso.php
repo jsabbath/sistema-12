@@ -15,14 +15,11 @@
                                                                'name' => 'drop_curso')); 
     }?>
 
-	<div class="row">
-		<div class="span8 offset2">
+
 		  	<div id="lista" hidden>
 
 		  	</div>
-		</div>
-	</div>
-    
+	
 
     </div>
 </div>

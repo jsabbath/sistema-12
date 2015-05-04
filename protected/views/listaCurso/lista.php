@@ -12,13 +12,16 @@
     </style>
 
   <script>
-    $(function() {
-      $( "#sortable" ).sortable();
-      $( "#sortable" ).disableSelection();
-    });
+  
   </script>
 
-   <button class="btn btn-primary" id="save_lista">GUARDAR</button> 
+   <button class="btn btn-primary" id="save_lista" style="display:none">
+                <div id="btext">Guardar</div>
+                <div id="loader" >SUBIENDO...</div>
+    </button> 
+
+
+    <button id="unlock" class="btn btn-info"><i id="lock_icon" class="icon-lock"></i></button>
 
 
     <ul id="sortable">
@@ -28,14 +31,15 @@
                 <div class="mat_id" id="<?php echo $l['list_id'] ?>" hidden><?php echo $l['mat_id'] ?></div> 
                 <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
                 <?php echo $l['posicion']. " - "; ?> 
-                <span3><?php echo  strtoupper($l['nombre']); ?> </span>
-                
+                <span3><?php echo  strtoupper($l['nombre']); ?> </span>     
             </li>
        
         <?php } ?>
     <ul>
 
     <script>
+
+        //  guardar lista 
         $("#save_lista").on('click',function(){
             var lista = [];
 
@@ -62,14 +66,91 @@
                 type: 'POST',
                 data: {curso_lista: lista, curso: <?php echo $curso; ?>},
                 success: function(response){
-                    console.log(response);
-                    // location.reload();
-                    // window.onbeforeunload = function() {
+                   
+                  
+                     window.onbeforeunload = function() {
                            
-                    //     }
+                        }
+                      location.reload();
                 }
             })
         })
+
+        // carga de ajax
+        var $loading = $('#loader').hide();
+        var $btext = $('#btext');
+        $(document).ajaxStart(function () {
+                $btext.hide();
+                $loading.show();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+                $btext.show();
+        });
+
+
+    // dar permisos
+    $('#unlock').on('click',function(){ 
+
+        swal({      
+            title: "Ingrese su Password!",   
+            type: "input",
+            inputType: "password",   
+            showCancelButton: true,   
+            closeOnConfirm: false,   
+            animation: "slide-from-top" 
+        }, 
+        function(inputValue){ 
+
+            $.ajax({
+                url: '<?php echo $this->createUrl('listacurso/validar_edicion'); ?>',
+                type: 'POST',
+                dataType: "JSON",
+                data: { pass: inputValue, cur: <?php echo $curso; ?> },
+                success: function(response) {
+                    if(!response){
+                        swal.showInputError("Ingrese datos nuevamente");     
+                        return false;   
+                    }
+                    if( response == 2 ){
+                        swal.showInputError("usted no  tiene permisos para editar notas de este curso");
+                        return false;
+                    } 
+                    swal({   
+                        title: "Correcto!",     
+                        timer: 600,
+                        type: "success",   
+                        showConfirmButton: false 
+                    });
+
+                    $('#save_lista').show();
+                    $('#lock_icon').addClass("icon-ok").removeClass("icon-lock");
+                    $(function() {
+                      $( "#sortable" ).sortable();
+                      $( "#sortable" ).disableSelection();
+                    });
+
+                    $('#unlock').prop("disabled",true);
+                    window.onbeforeunload = function() {
+                        return "";
+                    }
+                }               
+            })  
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 
 

@@ -125,12 +125,70 @@ class ListaCursoController extends Controller
 	 */
 	public function actionIndex(){
 
-		$cursos = $this->actionCursoAnoActual();
+		if(Yii::app()->user->checkAccess('admin')){
+			$cursos = $this->actionCursoAnoActual();
 
-		$this->render('ordenar_lista',array(
-    			'cur' => $cursos,
-    			'nombre'=>'papa',
-			));
+    		$this->render('ordenar_lista',array(
+	    			'cur' => $cursos,
+   			));
+    	
+    	} else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    				Yii::app()->user->checkAccess('director') ){
+
+    		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$cursos = $this->actionCursoAnoActual();
+
+    		$this->render('ordenar_lista',array(
+    				'nombre' => $usuario['Nombrecorto'],
+	    			'cur' => $cursos,
+   			));
+
+    	} else if( Yii::app()->user->checkAccess('profesor') ){
+    		$ano = $this->actionAnoActual();
+    		$profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$id_profe = $profe['usu_id'];
+
+
+			$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
+    														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
+    		    		
+    		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
+    		
+    		if( $es_profe_jefe ){
+    			// se agregan cursos si  es q es profe jefe
+    			foreach ( $es_profe_jefe as $c ){
+	                $id_cur[] = $c->cur_id;
+	            }
+    		} else{
+    			$cursos = array(); //  array vacio para decir que no  es profesor jefe de niun curso
+    			$this->render('ordenar_lista',array(
+    					'cur' => $cursos,
+    					'nombre' => $usuario['Nombrecorto'],
+    				));
+    		}
+
+	            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+				$criteria = new CDbCriteria();
+	            $criteria->addInCondition('cur_id', $id_cur, 'OR');
+	            $cur = Curso::model()->findAll($criteria);
+	 			// se filtran los cursos por el año  seleccionado
+	 			$cursos = array();
+	 			for ($i=0; $i < count($cur); $i++) { 
+	 				if($cur[$i]->cur_ano == $ano ){
+						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+					}
+				}
+
+				$this->render('ordenar_lista',array(
+	    			'cur' => $cursos,
+	    			'usu' => $id_profe,
+	    			'nombre' => $profe['Nombrecorto'],
+   				));
+
+
+    	} 
     	
 	}
 
@@ -310,6 +368,49 @@ class ListaCursoController extends Controller
 			}
 			
 		}
+	}
+
+	public function actionValidar_edicion(){
+		if(isset($_POST['pass']) ){
+			$p = $_POST['pass'];
+			$curso = $_POST['cur'];
+
+			//  se obtienen todos los datos del usuario  de yii
+		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
+
+		 	// se ve si  es admin o director para editar
+		 	if (Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+			 	if($usuario->password == $p){
+			 		 echo json_encode(1);
+			 		 return;
+			 	} else {
+			 		echo json_encode(0);
+			 		return;
+			 	}
+			}
+
+			// si  es jefe utp o director o evaluador pueden  cambiar notas tambien 	
+
+			if( Yii::app()->user->checkAccess('profesor')  ){
+
+				// si no  es el profesor que hace la asignatura se ve si es el profe jefe del curso
+		 		$curso = Curso::model()->findByPk($curso);
+
+		 		if( $curso->cur_pjefe == Yii::app()->user->id ){
+		 			
+		 			if( $usuario->password == $p){
+				 		echo json_encode(1);
+				 		return;
+			 		}else{
+			 			echo json_encode(0);
+			 			return;
+			 		}
+		 		}	
+			}
+			echo json_encode(2);
+			return;	
+		}	
+
 	}
 
 
