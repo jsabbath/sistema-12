@@ -23,7 +23,7 @@
             <?php foreach ($i['areas'] as $key => $a) { ?>
                 <li <?php if( $key == 0 ){ ?>class="active" <?php } ?>><a href="#tab<?php echo $a['are_id'] ?>" data-toggle="tab"><?php echo $a['texto'] ?></a></li>
             <?php } ?>
-            <li><a><button class="btn btn-success">GUARDAR</button></a></li>
+            <li><a><button class="btn btn-success" id="guardar_eva">GUARDAR</button></a></li>
         </ul>
 
         <div class="tab-content">
@@ -39,6 +39,7 @@
 
                     <?php } ?>
 
+                    <br>
                         <table class="table table-striped">
                           <thead>
                             <tr>
@@ -73,9 +74,10 @@
                                             <td>
                                                 <!-- <?php echo $alum['mat_id'] . $c['con_id']; ?>  -->
                                                     <form>
-                                                        <?php foreach ($escala as $key => $e) { ?>
+                                                        <?php foreach ($escala as $key => $e) { /*echo "mat_id:".$alum['mat_id'] .",con_id:". $c['con_id'];*/?>
                                                             <label class="radio">
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios<?php echo $key . $alum['mat_id'] . $c['con_id']; ?>" 
+                                                                <input id="<?php echo 'mat_id:'.$alum['mat_id'] .',con_id:'. $c['con_id']; ?>" 
+                                                                        type="radio" name="optionsRadios" id="optionsRadios<?php echo $key . $alum['mat_id'] . $c['con_id']; ?>" 
                                                                         value="option<?php echo $key. $alum['mat_id'] . $c['con_id']; ?>" <?php if($e == $not ){ ?>checked <?php } ?> >
                                                                     <?php echo $e; ?>
                                                                 </label>

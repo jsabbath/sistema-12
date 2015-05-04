@@ -40,6 +40,10 @@
                        $('#lista').html(response); 
                        $('#lista').show();
 
+                        // $('#guardar_eva').on( "click", function(){
+                        //     var n = $( "input:checked" ).length;
+                        //     console.log($( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" ));
+                        // } );
 
                        
                     }
@@ -49,3 +53,4 @@
  
 
 </script>
+

@@ -25,15 +25,15 @@ class ListaCursoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'lista_curso', 'actualizar_lista'),
+				'actions'=>array('index','view', 'lista_curso', 'actualizar_lista','subir_orden'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'lista_curso', 'actualizar_lista'),
+				'actions'=>array('create','update', 'lista_curso', 'actualizar_lista','subir_orden'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'lista_curso', 'actualizar_lista'),
+				'actions'=>array('admin','delete', 'lista_curso', 'actualizar_lista','subir_orden'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -273,6 +273,7 @@ class ListaCursoController extends Controller
 							'nombre'	=> $alum->Nombre_completo,
 							'mat_id' 	=> $alumno['list_mat_id'],
 							'posicion' 	=> $alumno['list_posicion'],
+							'list_id'	=> $alumno['list_id'],
 					);
 				}
 
@@ -280,6 +281,7 @@ class ListaCursoController extends Controller
 				//var_dump($lista);
 				$this->renderPartial('lista',array(
 					'lista'	=> $lista,
+					'curso' => $id,
 				));
 
 			} else{
@@ -289,6 +291,24 @@ class ListaCursoController extends Controller
 					'mensaje' 	=> "no tiene alumnos en la lista"
 				));
 			}
+		}
+	}
+
+	public function actionSubir_orden(){
+		if(isset($_POST['curso_lista'])){
+			$lista = $_POST['curso_lista'];
+			$id_curso = $_POST['curso'];
+
+			foreach ($lista as $key => $alum) {
+				$nu_po = $key + 1;
+				$lista_curso = $this->loadModel($alum['id_list']);
+				if( $lista_curso->list_posicion != $nu_po ){
+					$lista_curso->list_posicion = $nu_po;
+					$lista_curso->update();
+
+				}
+			}
+			
 		}
 	}
 

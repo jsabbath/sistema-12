@@ -1,3 +1,9 @@
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js"></script>
+
+
 <div class="row">
   <div class="span12">
 
@@ -16,7 +22,7 @@
     }?>
 
 	<div class="row">
-		<div class="span8 offset2">
+		<div class="span10 offset3">
 		  	<div id="lista" hidden>
 
 		  	</div>
