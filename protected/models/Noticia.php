@@ -31,10 +31,10 @@ class Noticia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('not_titulo', 'required'),
+			array('not_titulo', 'required','message'=>'Debe ingresar un titulo'),
 			array('not_user', 'numerical', 'integerOnly'=>true),
 			array('not_titulo', 'length', 'max'=>50),
-			array('not_texto','required'),
+			array('not_texto','required','message'=>'Debe ingresar un texto para la noticia'),
 			array('not_fecha, not_texto', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

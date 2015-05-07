@@ -32,6 +32,8 @@ class Ciudad extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('ciu_reg', 'numerical', 'integerOnly'=>true),
+			array('ciu_descripcion','required','message'=>'Debe ingresar una ciudad'),
+			array('ciu_descripcion','validateText','message'=>'Ingrese una ciudad valida'),
 			array('ciu_descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -101,5 +103,13 @@ class Ciudad extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function validateText($attribute, $params) {
+    $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
+        if($this->$attribute!=""){	
+	        if (!preg_match($pattern, $this->$attribute))
+	            $this->addError($attribute,$params['message']);
+    	}
 	}
 }

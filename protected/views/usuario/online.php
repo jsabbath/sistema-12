@@ -11,7 +11,7 @@
 	</div>
 </div>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Rut</th>

@@ -31,6 +31,8 @@ class Comuna extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('com_ciu', 'numerical', 'integerOnly'=>true),
+			array('com_descripcion','required','message'=>'Debe ingresar una comuna'),
+			array('com_descripcion','validateText','message'=>'Ingrese una comuna valida'),
 			array('com_descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -99,5 +101,13 @@ class Comuna extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function validateText($attribute, $params) {
+    $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
+        if($this->$attribute!=""){	
+	        if (!preg_match($pattern, $this->$attribute))
+	            $this->addError($attribute,$params['message']);
+    	}
 	}
 }
