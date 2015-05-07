@@ -451,8 +451,7 @@ class MatriculaController extends Controller
         ));
     }
 
-    //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)
-    
+    //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)    
     public function gridEstado($data,$row){
         
         $estado = $data->matEstado->par_descripcion;
@@ -464,4 +463,67 @@ class MatriculaController extends Controller
         else return "<label class=\"label label-info\">".$estado."</label>";
     }
 
+    public function obtenerCurso($data,$row){
+        $curso = ListaCurso::model()->findAll(array('condition'=>'list_mat_id="'.$data->mat_id.'"'));
+        if($curso != NULL){
+            $nombre = Curso::model()->findByAttributes(array('cur_id'=>$curso[0]->list_curso_id));
+            return $nombre->getCurso();
+        }else return "SIN CURSO";
+    }
+
+    public function actionInforme(){
+        $lista = CHtml::listData(ListaCurso::model()->findAll(),'list_mat_id','list_curso_id');
+        $matricula = new Matricula('search');
+
+        $this->render('informe', array(
+            'matricula' => $matricula,
+            'lista' => $lista,
+        ));
+    }
+
+    public function actionCertificado($id){
+        $model = $this->loadModel($id);
+
+        # mPDF
+        $mPDF1 = Yii::app()->ePdf->mpdf();
+
+        # You can easily override default constructor's params
+        $mPDF1 = Yii::app()->ePdf->mpdf('', 'A5');
+
+        # render (full page)
+        //$mPDF1->WriteHTML($this->render('certificado', array('model'=>$model), true));
+
+        # Load a stylesheet
+        //$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/main.css');
+        $mPDF1->WriteHTML($stylesheet, 1);
+
+        # renderPartial (only 'view' of current controller)
+        $mPDF1->WriteHTML($this->renderPartial('certificado', array('model'=>$model), true));
+
+        # Renders image
+        //$mPDF1->WriteHTML(CHtml::image(Yii::getPathOfAlias('webroot.css') . '/bg.gif' ));
+
+        # Outputs ready PDF
+        $mPDF1->Output();
+
+        ////////////////////////////////////////////////////////////////////////////////////
+
+        # HTML2PDF has very similar syntax
+        //$html2pdf = Yii::app()->ePdf->HTML2PDF();
+        //$html2pdf->WriteHTML($this->renderPartial('certificado', array('model'=>$model), true));
+        //$html2pdf->Output();
+
+        ////////////////////////////////////////////////////////////////////////////////////
+
+        # Example from HTML2PDF wiki: Send PDF by email
+        //$content_PDF = $html2pdf->Output('', EYiiPdf::OUTPUT_TO_STRING);
+        //require_once(dirname(__FILE__).'/pjmail/pjmail.class.php');
+        //$mail = new PJmail();
+        //$mail->setAllFrom('webmaster@my_site.net', "My personal site");
+        //$mail->addrecipient('mail_user@my_site.net');
+        //$mail->addsubject("Example sending PDF");
+        //$mail->text = "This is an example of sending a PDF file";
+        //$mail->addbinattachement("my_document.pdf", $content_PDF);
+        //$res = $mail->sendmail();
+    }
 }
