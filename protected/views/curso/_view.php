@@ -5,12 +5,13 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('cur_ano')); ?>:</b>
-	<?php echo CHtml::encode($data->cur_ano); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('Curso')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->curNivel->par_descripcion)." ".CHtml::encode($data->curLetra->par_descripcion),
+		array('//curso/view','id'=>$data->cur_id) ); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('Curso')); ?>:</b>
-	<?php echo CHtml::encode($data->curNivel->par_descripcion)." ".CHtml::encode($data->curLetra->par_descripcion); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('cur_ano')); ?>:</b>
+	<?php echo CHtml::encode($data->cur_ano); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cur_jornada')); ?>:</b>

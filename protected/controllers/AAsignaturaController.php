@@ -70,7 +70,7 @@ class AAsignaturaController extends Controller
 			if($model->save())
 				$this->redirect(array('//curso/view','id'=>$model->aa_curso));
 		}
-		$this->renderPartial('_form',array(
+		$this->render('create',array(
 			'cursos' => $cursos,
 			'model'=>$model,
 		));

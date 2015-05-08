@@ -48,40 +48,10 @@ $this->menu=array(
     <div class="span10">
         <h4>Asignaturas Inscritas</h4>
     </div>
-    <div class="span2">
-        <?php echo TbHtml::button('Agregar',array(
-                                        'color'=> TbHtml::ALERT_COLOR_SUCCESS, 
-                                        'style' => 'float: right',
-                                        'id' =>'agregar',
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#cambio_modal',
-                                        /*'ajax' =>
-                                            array('type'=>'POST',
-                                                'url'=>$this->createUrl('curso/bcxn'),
-                                                //'update'=>'#ajax_op',
-                                                'data'=>array('id'=>'js:getId','nombre'=>'js:getNombre()'),
-                                                //'success'=> 'function(){location.reload();}'
-                                            )*/
-            ))?>
-
-    </div>
+   
 </div>
 <div class="row">
     <div class="span12">
-
-         <!-- Asignar Asignatura !-->
-         <?php $this->widget('bootstrap.widgets.TbModal', array(
-                'id' => 'cambio_modal',
-                'header' => '<h4>Asignar Asignatura</h4>',
-                'content' => '<div id="cambio">  </div>',
-                'htmlOptions' => array ('url' => Yii::app()->user->ui->getProfileUrl()),
-                'footer' => array(
-                        TbHtml::linkButton('Asignar',  array('data-dismiss' => 'modal', 'color' => TbHtml::BUTTON_COLOR_SUCCESS, 'url' =>'#','onclick' => '$("#aasignatura-form").submit()')),
-                        TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
-
-                ),
-        )); ?> 
-
 
 
     <table class="table table-striped">
@@ -114,18 +84,7 @@ $this->menu=array(
     </div>     
 </div>
 
-<script >
-$("#agregar").click(function(){
-            $.ajax({
-                type:  'POST',
-                url: "<?php echo Yii::app()->createUrl('//aasignatura/create'); ?>" ,
-                data: { 'id_curso': <?php echo $model->cur_id ?> },
-                success: function(result){ 
-                    $("#cambio").html(result)}
-            });
-})
 
-</script>
 
 <script>
 

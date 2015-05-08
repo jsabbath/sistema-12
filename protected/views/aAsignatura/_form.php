@@ -9,76 +9,108 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'aasignatura-form',
-    // Please note: When you enable ajax validation, make sure the corresponding
-    // controller action is handling ajax validation correctly.
-    // There is a call to performAjaxValidation() commented in generated controller code.
-    // See class documentation of CActiveForm for details on this.
-    'enableAjaxValidation'=>false,
-)); ?>
-
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
-
-    <?php echo $form->errorSummary($model); ?>
+<div class="row">
 
     <div class="row">
-        <?php echo $form->labelEx($model,'aa_curso'); ?>
-        <?php echo $form->DropdownList($model,'aa_curso',$cursos,array('empty' => '-Seleccione Curso-')); ?>
-        <?php echo $form->error($model,'aa_curso'); ?>
-    </div>
-
-
-    <div class="row">
-        <?php echo $form->labelEx($model,'aa_asignatura'); ?>
-        <?php echo $form->hiddenField($model,'aa_asignatura',array('id' => 'id_asignatura')); ?>
-        <?php echo $form->error($model,'aa_asignatura'); ?>
-            
-                <?php echo CHtml::textField('Text', '',array('id'=>'asignatura_auto','placeholder' => 'Ingrese nombre Asignatura',))?>
-                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
-                                                    'id' =>'limpiar_asi', 
-                                                    'icon' => 'remove',
-                                                    'data-toggle'=>'tooltip', 
-                                                    'data-placement'=>'top', 
-                                                    'title'=>'Limpiar',
-                                                    'style' => 'margin-bottom: 8.5px', ))?>
-    </div>
-            
-  
-            <?php echo CHtml::textField('Text', '',array('id'=>'corto_asi','placeholder' => 'Nombre Corto',
-                                                                            'disabled'=>'disabled',))?>
-                                                                                
-            <?php echo CHtml::textField('Text', '',array('id'=>'codigo_asi','placeholder' => 'Codigo',
-                                                                            'disabled'=>'disabled',))?>
-
-        
-    <div class="row">
-        <?php echo $form->labelEx($model,'aa_docente'); ?>
-        <?php echo $form->hiddenField($model,'aa_docente',array('id' => 'id_docente')); ?>
-        <?php echo $form->error($model,'aa_docente'); ?>
-            
-                <?php echo CHtml::textField('Text', '',array('id'=>'docente_auto','placeholder' => 'Ingrese nombre Profesor',))?>
-            
-                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
-                                                    'id' =>'limpiar_doc',
-                                                    'icon' => 'remove',
-                                                    'data-toggle'=>'tooltip', 
-                                                    'data-placement'=>'top', 
-                                                    'title'=>'Limpiar',
-                                                    'style' => 'margin-bottom: 8.5px', ))?>
+        <div class="span12 text-center">
+            <p class="text-info">Los campos con <span class="required">*</span> son obligtorios.</p>
         </div>
-        
-                <?php echo CHtml::textField('Text', '',array('id'=>'nombre_doc','placeholder' => 'Nombres',
-                                                                                'disabled'=>'disabled',))?>
-                <?php echo CHtml::textField('Text', '',array('id'=>'apellido_doc','placeholder' => 'Apellidos',
-                                                                                'disabled'=>'disabled',))?>
-    
-        
-        
+    </div>
 
-<?php $this->endWidget(); ?>
+    <div class="span12 offset1">
+
+        <?php $form=$this->beginWidget('CActiveForm', array(
+            'id'=>'aasignatura-form',
+            // Please note: When you enable ajax validation, make sure the corresponding
+            // controller action is handling ajax validation correctly.
+            // There is a call to performAjaxValidation() commented in generated controller code.
+            // See class documentation of CActiveForm for details on this.
+            'enableAjaxValidation'=>false,
+        )); ?>
+
+      
+            <div class="row">
+                <div class="span5">
+                    <div class="form">
+                        <?php echo $form->errorSummary($model); ?>
+                    </div>
+                </div>
+            </div>
+
+      
+        <div class="row">
+            <div class="span5">
+            <h4>Curso</h4>
+            <?php echo $form->DropdownList($model,'aa_curso',$cursos,array('empty' => '-Seleccione Curso-')); ?>
+            </div>
+        </div>
+       
+
+
+        <div class="row">
+            <div class="span12">
+                <div class="span5">
+                    <div class="row">
+                         <h4>Asignatura</h4>
+                        <?php echo $form->hiddenField($model,'aa_asignatura',array('id' => 'id_asignatura')); ?>
+                       
+                        <?php echo CHtml::textField('Text', '',array('id'=>'asignatura_auto','placeholder' => 'Ingrese nombre Asignatura',))?>
+                        <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+                                                            'id' =>'limpiar_asi', 
+                                                            'icon' => 'remove',
+                                                            'data-toggle'=>'tooltip', 
+                                                            'data-placement'=>'top', 
+                                                            'title'=>'Limpiar',
+                                                            'style' => 'margin-bottom: 8.5px', ))?>
+                  
+                    </div>
+                    <div class="row">
+                        <?php echo CHtml::textField('Text', '',array('id'=>'corto_asi','placeholder' => 'Nombre Corto',
+                                                                                        'disabled'=>'disabled',))?>                                                                    
+                        <?php echo CHtml::textField('Text', '',array('id'=>'codigo_asi','placeholder' => 'Codigo',
+                                                                                        'disabled'=>'disabled',))?>
+                    </div>
+                </div>
+
+                <div class="span5">
+                    <div class="row">
+                        <h4>Docente</h4>
+                        <?php echo $form->hiddenField($model,'aa_docente',array('id' => 'id_docente')); ?>
+                   
+                        <?php echo CHtml::textField('Text', '',array('id'=>'docente_auto','placeholder' => 'Ingrese nombre Profesor',))?>
+                        <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+                                                            'id' =>'limpiar_doc',
+                                                            'icon' => 'remove',
+                                                            'data-toggle'=>'tooltip', 
+                                                            'data-placement'=>'top', 
+                                                            'title'=>'Limpiar',
+                                                            'style' => 'margin-bottom: 8.5px', ))?>
+
+                    </div>
+                    <div class="row">
+                        <?php echo CHtml::textField('Text', '',array('id'=>'nombre_doc','placeholder' => 'Nombres',
+                                                                                        'disabled'=>'disabled',))?>
+                        <?php echo CHtml::textField('Text', '',array('id'=>'apellido_doc','placeholder' => 'Apellidos',
+                                                                                        'disabled'=>'disabled',))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     <div class="row">
+        <div class="span5">
+            <?php echo TbHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
+        </div>
+    </div>
+
+    </div>
+
+       
+</div>
+
+
+    <?php $this->endWidget(); ?>
+
 
 <script>
     $(function(){
