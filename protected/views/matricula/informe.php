@@ -12,24 +12,31 @@
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'usuario-grid',
 	'type' => TbHtml::GRID_TYPE_BORDERED,
-	'dataProvider'=>$matricula->search(),
-	'filter'=>$matricula,
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
 	'columns'=>array(
 		array(
-			'header'=>'Rut',
+			'name'=>'matAlu.alum_rut',
+			'type'=>'raw',
 			'value'=>'$data->matAlu->alum_rut',
 		),
 		array(
-			'header'=>'Nombres',
+			'name'=>'matAlu.alum_nombres',
+			'type'=>'raw',
 			'value'=>'$data->matAlu->alum_nombres',
+			'filter'=>CHtml::activeTextField($model,'alumno_nombres'),
 		),
 		array(
-			'header'=>'Apellido Paterno',
+			'name'=>'matAlu.alum_apepat',
+			'type'=>'raw',
 			'value'=>'$data->matAlu->alum_apepat',
+			'filter'=>CHtml::activeTextField($model,'alumno_apepat'),
 		),
 		array(
-			'header'=>'Apellido Materno',
+			'name'=>'matAlu.alum_apemat',
+			'type'=>'raw',
 			'value'=>'$data->matAlu->alum_apemat',
+			'filter'=>CHtml::activeTextField($model,'alumno_apemat'),
 		),
 		array(
 			'header'=>'Curso',
