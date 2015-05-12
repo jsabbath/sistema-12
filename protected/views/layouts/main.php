@@ -64,7 +64,7 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                 <div class="row">
                  
                 <div class="span12">
-                    <table width=100%  border="0" cellspacing="0" cellpadding="0">
+                    <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
                     
                         <td width=9% align="left" class="hidden-phone">    
                              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
