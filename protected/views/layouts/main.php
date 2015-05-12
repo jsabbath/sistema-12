@@ -58,24 +58,54 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
     ){
 ?>
     <body>
-
-        <div class="container" >    
+   
+        <div class="container">    
             <header style="background-color: #292929; border-top: 3px solid #772000;border-bottom: 3px solid #772000; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">
                 <div class="row">
                  
                 <div class="span12">
                     <table width=100%  border="0" cellspacing="0" cellpadding="0">
-                   
+                    
                         <td width=9% align="left" class="hidden-phone">    
                              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
                         </td>
                      
                         <td class="visible-desktop">
                             <h3 style="color:#FFF6B0">Colegio Alborada</h3>
+                            <div  >
+                                <?php echo CHtml::dropDownList(
+                                    'anos', null, $anos,array(
+                                    'prompt'=>$ano_selec,
+                                    'id'=>'dropitem',
+                                    'ajax' =>
+                                        array('type'=>'POST',
+                                            'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
+                                            'update'=>'#anio',
+                                            'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
+                                            'success'=> 'function(){location.reload();}'
+                                        )
+                                ));  
+                                ?>
+                            </div>
                         </td>
                        
-                         <div class="hidden-desktop">
+                         <div class="hidden-desktop text-center">
                             <h3 style="color:#FFF6B0">Colegio Alborada</h3>
+                             <div  >
+                                <?php echo CHtml::dropDownList(
+                                    'anos', null, $anos,array(
+                                    'prompt'=>$ano_selec,
+                                    'id'=>'dropitem',
+                                    'ajax' =>
+                                        array('type'=>'POST',
+                                            'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
+                                            'update'=>'#anio',
+                                            'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
+                                            'success'=> 'function(){location.reload();}'
+                                        )
+                                ));  
+                                ?>
+                            </div>
                         </div>
                         <td>
                             <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" title="Inicio">
@@ -164,27 +194,12 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                             </div>
                         </td>
                     </table>
-                    </div>
-                    <div class="span12 text-center" >
-                    <?php echo CHtml::dropDownList(
-                        'anos', null, $anos,array(
-                        'prompt'=>$ano_selec,
-                        'id'=>'dropitem',
-                        'ajax' =>
-                            array('type'=>'POST',
-                                'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
-                                'update'=>'#anio',
-                                'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
-                                'success'=> 'function(){location.reload();}'
-                            )
-                    ));  
-                    ?>
                 </div>
-                </div>
-            </header>
+            </div>   
+        </header>
 
-        </div>
-
+       
+</div>
 
           <div class='info container' style='text-aling:left;'>
                 <?php
