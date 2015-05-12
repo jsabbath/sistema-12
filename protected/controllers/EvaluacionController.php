@@ -25,15 +25,15 @@ class EvaluacionController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','curso_lista','evalua_manual'),
+				'actions'=>array('index','view','curso_lista','evalua_manual','subir_eva'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','curso_lista','evalua_manual'),
+				'actions'=>array('create','update','curso_lista','evalua_manual','subir_eva'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','curso_lista','evalua_manual'),
+				'actions'=>array('admin','delete','curso_lista','evalua_manual','subir_eva'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -310,6 +310,7 @@ class EvaluacionController extends Controller
 				foreach ($evalu as $key => $e) {
 					$notas[] = array(
 							'eva_nota' 	=> $e->eva_nota,
+							'eva_id' 	=> $e->eva_id,
 							'id_con'	=> $e->eva_concepto,   
 						);
 				}
@@ -336,6 +337,7 @@ class EvaluacionController extends Controller
 			$this->renderPartial('evaluar_conceptos',array(
 				'lista'		=> $lista,
 				'escala' 	=> $escala,
+				'cur'		=> $id_curso,
 			));
 		}
 
@@ -375,4 +377,54 @@ class EvaluacionController extends Controller
         }
 
 	}
+
+	public function actionValidar_edicion(){
+		if(isset($_POST['pass']) ){
+			$p = $_POST['pass'];
+			$curso = $_POST['cur'];
+
+			//  se obtienen todos los datos del usuario  de yii
+		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
+
+		 	// se ve si  es admin o director para editar
+		 	if (Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+			 	if($usuario->password == $p){
+			 		 echo json_encode(1);
+			 		 return;
+			 	} else {
+			 		echo json_encode(0);
+			 		return;
+			 	}
+			}
+
+
+			if( Yii::app()->user->checkAccess('profesor')  ){
+				$curso = Curso::model()->findByPk($curso);
+			 		if( $curso->cur_pjefe == Yii::app()->user->id ){
+			 			
+			 			if( $usuario->password == $p){
+					 		echo json_encode(1);
+					 		return;
+				 		}else{
+				 			echo json_encode(0);
+				 			return;
+				 		}
+			 		}
+			}
+		}
+		echo json_encode(2);
+		return;	
+	}
+
+	public function actionSubir_eva(){
+		if(isset($_POST['notas'])){
+			$notas = $_POST['notas'];
+			foreach ($notas as $key => $n) {
+				$model = Evaluacion::model()->findByPk($n['eva_id']);
+				$model->eva_nota = $n['nota'];
+				$model->save();
+			}
+		}	
+	}
+
 }
