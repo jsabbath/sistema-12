@@ -114,7 +114,11 @@ class SiteController extends Controller
 	}
 
 	public function actionVer(){
-		$dataProvider=new CActiveDataProvider('Noticia');
+		$dataProvider=new CActiveDataProvider('Noticia',
+			array(
+			'sort'=>array('defaultOrder'=>'not_id DESC'),
+			)
+  		);
 		$this->renderPartial('ver',array(
 			'dataProvider'=>$dataProvider,
 		));

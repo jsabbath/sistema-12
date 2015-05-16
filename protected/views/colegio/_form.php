@@ -13,6 +13,7 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 	<div class="span12 text-center">
 		<p class="text-info">Los campos con <span class="required">*</span> son requeridos.</p>
@@ -22,7 +23,7 @@
 		<?php echo $form->errorSummary($model); ?>
 	</div>
 
-	<div class="span6">
+	<div class="span5 offset1">
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_rolRBD'); ?>
@@ -58,7 +59,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_ano'); ?>
-				<?php echo $form->textField($model,'col_ano'); ?>
+				<?php echo $form->dropDownList($model,'col_ano',$anos,array('prompt'=>'seleccione año')); ?>
 				<?php echo $form->error($model,'col_ano'); ?>
 			</div>
 		</div>
@@ -66,7 +67,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_periodo'); ?>
-				<?php echo $form->textField($model,'col_periodo'); ?>
+				<?php echo $form->dropDownList($model,'col_periodo',$periodo,array('prompt'=>'seleccione tipo periodo')); ?>
 				<?php echo $form->error($model,'col_periodo'); ?>
 			</div>
 		</div>
@@ -98,7 +99,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_resol_rec_ofic'); ?>
-				<?php echo $form->textField($model,'col_fecha_resol_rec_ofic'); ?>
+				<?php echo $form->dateField($model,'col_fecha_resol_rec_ofic'); ?>
 				<?php echo $form->error($model,'col_fecha_resol_rec_ofic'); ?>
 			</div>
 		</div>
@@ -136,11 +137,11 @@
 		</div>
 	</div>
 
-	<div class="span6">
+	<div class="span5 offset1">
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_area'); ?>
-				<?php echo $form->textField($model,'col_area',array('size'=>20,'maxlength'=>20)); ?>
+				<?php echo $form->dropDownList($model,'col_area',array('URBANA','RURAL'),array('prompt'=>'seleccione tipo area')); ?>
 				<?php echo $form->error($model,'col_area'); ?>
 			</div>
 		</div>
@@ -148,7 +149,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_regimen'); ?>
-				<?php echo $form->textField($model,'col_regimen',array('size'=>20,'maxlength'=>20)); ?>
+				<?php echo $form->dropDownList($model,'col_regimen',array('DIURNO','VESPERTINO'),array('prompt'=>'seleccione tipo regimen')); ?>
 				<?php echo $form->error($model,'col_regimen'); ?>
 			</div>
 		</div>
@@ -156,7 +157,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_logo'); ?>
-				<?php echo $form->textField($model,'col_logo',array('size'=>60,'maxlength'=>1024)); ?>
+				<?php echo $form->fileField($model,'col_logo'); ?>
 				<?php echo $form->error($model,'col_logo'); ?>
 			</div>
 		</div>
@@ -180,7 +181,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_primer'); ?>
-				<?php echo $form->textField($model,'col_fecha_primer'); ?>
+				<?php echo $form->dateField($model,'col_fecha_primer'); ?>
 				<?php echo $form->error($model,'col_fecha_primer'); ?>
 			</div>
 		</div>
@@ -188,7 +189,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_segundo'); ?>
-				<?php echo $form->textField($model,'col_fecha_segundo'); ?>
+				<?php echo $form->dateField($model,'col_fecha_segundo'); ?>
 				<?php echo $form->error($model,'col_fecha_segundo'); ?>
 			</div>	
 		</div>
@@ -196,7 +197,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_tercer'); ?>
-				<?php echo $form->textField($model,'col_fecha_tercer'); ?>
+				<?php echo $form->dateField($model,'col_fecha_tercer'); ?>
 				<?php echo $form->error($model,'col_fecha_tercer'); ?>
 			</div>
 		</div>
@@ -211,17 +212,17 @@
 
 		<div class="row">
 			<div class="span6">
-				<?php echo $form->labelEx($model,'col_comuna'); ?>
-				<?php echo $form->textField($model,'col_comuna',array('size'=>50,'maxlength'=>50)); ?>
-				<?php echo $form->error($model,'col_comuna'); ?>
+				<?php echo $form->labelEx($model,'col_ciudad'); ?>
+				<?php echo $form->textField($model,'col_ciudad',array('size'=>50,'maxlength'=>50)); ?>
+				<?php echo $form->error($model,'col_ciudad'); ?>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="span6">
-				<?php echo $form->labelEx($model,'col_ciudad'); ?>
-				<?php echo $form->textField($model,'col_ciudad',array('size'=>50,'maxlength'=>50)); ?>
-				<?php echo $form->error($model,'col_ciudad'); ?>
+				<?php echo $form->labelEx($model,'col_comuna'); ?>
+				<?php echo $form->textField($model,'col_comuna',array('size'=>50,'maxlength'=>50)); ?>
+				<?php echo $form->error($model,'col_comuna'); ?>
 			</div>
 		</div>
 
@@ -268,7 +269,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_aproximacion'); ?>
-				<?php echo $form->textField($model,'col_aproximacion'); ?>
+				<?php echo $form->dropDownList($model,'col_aproximacion',array('APROXIMAR','TRUNCAR'),array('prompt'=>'seleccione tipo promedio')); ?>
 				<?php echo $form->error($model,'col_aproximacion'); ?>
 			</div>
 		</div>
@@ -282,3 +283,4 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<br>

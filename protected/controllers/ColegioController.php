@@ -60,6 +60,11 @@ class ColegioController extends Controller
 	public function actionCreate()
 	{
 		$model=new Colegio;
+		$actual = date('Y');
+		for($i=$actual;$i>=($actual-100);$i--){
+			$anos[$i] = $i; 
+		}
+		$periodo = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="tperiodo"')),'par_id','par_descripcion');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -67,12 +72,20 @@ class ColegioController extends Controller
 		if(isset($_POST['Colegio']))
 		{
 			$model->attributes=$_POST['Colegio'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->col_id));
+			$images_path = realpath(Yii::app()->basePath . '/../images');
+            $model->col_logo=CUploadedFile::getInstance($model,'col_logo');
+            if($model->save())
+            {
+                $model->col_logo->saveAs($images_path . '/' .$model->col_logo);
+                $this->redirect(array('admin'));
+            }
+            var_dump($model);
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'anos' => $anos,
+			'periodo' => $periodo,
 		));
 	}
 

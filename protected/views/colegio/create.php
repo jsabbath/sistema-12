@@ -19,4 +19,8 @@ $this->menu=array(
 	</div>
 </div>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array(
+	'model'=>$model,
+	'anos' => $anos,
+	'periodo' => $periodo,
+)); ?>

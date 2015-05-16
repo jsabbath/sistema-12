@@ -60,7 +60,7 @@ class Colegio extends CActiveRecord
 			array('col_nombre_colegio, col_comuna, col_ciudad', 'length', 'max'=>50),
 			array('col_letra', 'length', 'max'=>1),
 			array('col_nombre_director, col_director_email, col_encargado_actas, col_razon_social, col_direccion, col_colegio_email', 'length', 'max'=>255),
-			array('col_logo', 'length', 'max'=>1024),
+			array('col_logo', 'file', 'types'=>'jpg, gif, png'),
 			array('col_lema, col_mision, col_vision, col_fecha_primer, col_fecha_segundo, col_fecha_tercer', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -105,9 +105,9 @@ class Colegio extends CActiveRecord
 			'col_logo' => 'Logo',
 			'col_razon_social' => 'Razon Social',
 			'col_rut_razon_social' => 'Rut Razon Social',
-			'col_fecha_primer' => 'Fecha Primer',
-			'col_fecha_segundo' => 'Fecha Segundo',
-			'col_fecha_tercer' => 'Fecha Tercer',
+			'col_fecha_primer' => 'Fecha Primera Actividad Escolar',
+			'col_fecha_segundo' => 'Fecha Segunda Actividad Escolar',
+			'col_fecha_tercer' => 'Fecha Tercera Actividd Escolar',
 			'col_direccion' => 'Direccion',
 			'col_comuna' => 'Comuna',
 			'col_ciudad' => 'Ciudad',
@@ -116,7 +116,7 @@ class Colegio extends CActiveRecord
 			'col_nota_minima' => 'Nota Minima',
 			'col_nota_maxima' => 'Nota Maxima',
 			'col_nota_aprovacion' => 'Nota Aprovacion',
-			'col_aproximacion' => 'Aproximacion',
+			'col_aproximacion' => 'Tipo Promedio',
 		);
 	}
 

@@ -44,13 +44,6 @@
 			'value'=>array($this,'obtenerCurso'),
 		),
 		array(
-			'name'=>'mat_estado',
-			'type'=>'raw',
-			'value'=>array($this,'gridEstado'),
-			'filter'=>CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ESTADO"')),'par_id','par_descripcion'),
-			'htmlOptions'=>array('style'=>'text-align:center'),
-		),
-		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{certificado}',
 			'buttons'=>array(

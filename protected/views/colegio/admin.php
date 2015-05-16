@@ -34,8 +34,6 @@ $('.search-form form').submit(function(){
 	</div>
 </div>
 
-</div><!-- search-form -->
-
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'colegio-grid',
 	'dataProvider'=>$model->search(),
@@ -80,3 +78,10 @@ $('.search-form form').submit(function(){
 		),
 	),
 )); ?>
+
+<div class="row">
+	<div class="span12 text-center">
+		<?php echo CHtml::link('Ingresar Nuevo',array('Colegio/create'),array('class'=>'btn btn-warning')); ?>
+	</div>
+</div>
+<br>

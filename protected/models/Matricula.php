@@ -47,6 +47,7 @@ class Matricula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('mat_fingreso','required','message'=>'Debe registrar una fecha de ingreso'),
 			array('mat_ano, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'numerical', 'integerOnly'=>true),
 			array('mat_numero', 'length', 'max'=>11),
 			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
@@ -154,6 +155,35 @@ class Matricula extends CActiveRecord
 		$criteria->compare('mat_asistencia_3',$this->mat_asistencia_3);
 		$criteria->compare('mat_alu_id',$this->mat_alu_id);
 		$criteria->compare('mat_estado',$this->mat_estado);
+		$criteria->with = array('matAlu','matEstado');
+        $criteria->addSearchCondition('matAlu.alum_nombres', $this->alumno_nombres);
+        $criteria->addSearchCondition('matAlu.alum_apepat', $this->alumno_apepat);
+        $criteria->addSearchCondition('matAlu.alum_apemat', $this->alumno_apemat);
+        $criteria->addSearchCondition('matEstado.par_descripcion', $this->estado);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	public function activo($estado,$ano)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('mat_ano',$ano);
+		$criteria->compare('mat_id',$this->mat_id);
+		$criteria->compare('mat_ano',$this->mat_ano);
+		$criteria->compare('mat_numero',$this->mat_numero,true);
+		$criteria->compare('mat_fingreso',$this->mat_fingreso,true);
+		$criteria->compare('mat_fretiro',$this->mat_fretiro,true);
+		$criteria->compare('mat_fcambio',$this->mat_fcambio,true);
+		$criteria->compare('mat_asistencia_1',$this->mat_asistencia_1);
+		$criteria->compare('mat_asistencia_2',$this->mat_asistencia_2);
+		$criteria->compare('mat_asistencia_3',$this->mat_asistencia_3);
+		$criteria->compare('mat_alu_id',$this->mat_alu_id);
+		$criteria->compare('mat_estado',$estado);
 		$criteria->with = array('matAlu','matEstado');
         $criteria->addSearchCondition('matAlu.alum_nombres', $this->alumno_nombres);
         $criteria->addSearchCondition('matAlu.alum_apepat', $this->alumno_apepat);

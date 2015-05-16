@@ -2,6 +2,7 @@
   <div class="span12">
 
 <?php if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
+    <br>
    <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
 
 
@@ -18,7 +19,7 @@
          <div id="asignaturas">
              
          </div>
-
+<br>
    </div>
 </div>
 

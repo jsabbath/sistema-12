@@ -21,6 +21,7 @@ if($data->not_fecha==date('Y-m-d')){
 		</div>
 		<div class="row">
 			<div class="span8 noticiatexto">
+				<br>
 				<?php echo CHtml::encode($data->not_texto); ?>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
-
+/*
 $this->breadcrumbs=array(
 	'Cursos'=>array('index'),
 	$model->cur_id,
@@ -17,33 +17,50 @@ $this->menu=array(
 	array('label'=>'Delete Curso', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->cur_id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Curso', 'url'=>array('admin')),
 );
-
+*/
 ?>
 
 
 <div class="row">
-    <div class="span12">
-        <h1><?php echo $niv ," ", $letra ?></h1>
+    <div class="span12 text-center">
+        <h2><?php echo $niv ," ", $letra ?></h2>
     </div>
 </div>
 <div class="row">
-    <div class="span12">
-    <?php $this->widget('zii.widgets.CDetailView', array(
-    	'data'=>$model,
-    	'attributes'=>array(
-    		'cur_id',
-    		'cur_ano',
-    		'cur_nivel',
-    		'cur_jornada',
-    		'cur_letra',
-    		'cur_pjefe',
-    		'cur_infd',
-    		'cur_tperiodo',
-    		'cur_notas_periodo',
-    	),
-    )); ?>
+    <div class="span12 text-center">
+    <table class="table table-bordered table-hover" width="100%">
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Nivel</strong></p></td>
+            <td width="50%"><p><?php echo $model->curNivel->par_descripcion;?></p></td>
+        </tr>
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Letra</strong></p></td>
+            <td width="50%"><p><?php echo $model->curLetra->par_descripcion;?></p></td>
+        </tr>
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Jornada</strong></p></td>
+            <td width="50%"><p><?php echo $model->curJornada->par_descripcion;?></p></td>
+        </tr>
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Profesor Jefe</strong></p></td>
+            <td width="50%"><p><?php echo $model->curPjefe->getNombrecorto();?></p></td>
+        </tr>
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Informe de Desarrollo</strong></p></td>
+            <td width="50%"><p><?php echo $model->curInfd->id_descripcion;?></p></td>
+        </tr>
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Tipo de Periodo</strong></p></td>
+            <td width="50%"><p><?php echo $model->curTperiodo->par_descripcion;?></p></td>
+        </tr>
+        <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Notas por Periodo</strong></p></td>
+            <td width="50%"><p><?php echo $model->cur_notas_periodo?></p></td>
+        </tr>
+    </table>
     </div>
 </div>
+
 <div class="row">
     <div class="span10">
         <h4>Asignaturas Inscritas</h4>
@@ -57,7 +74,7 @@ $this->menu=array(
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>id</th>
+          <th></th>
           <th>Docente</th>
           <th>Asignatura</th>
           <th>  </th>
@@ -70,10 +87,10 @@ $this->menu=array(
                     $id_asignacion = $asignacion[$i]->aa_id; 
         ?>
             <tr>
-              <td><?php echo $id_asignacion;?> </td>
-              <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)));?> </td>
+              <td><i class="icon-book"></i></td>
+              <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)),array('class'=>'link-negro'));?> </td>
               <td><?php echo $nombre_asi;?> </td>
-              <td>  <i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i>  </td>
+              <td><button class="btn btn-danger" data-toggle="tooltip" title="Eliminar"><i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i></button></td>
             </tr>
         <?php } ?>
       </tbody>

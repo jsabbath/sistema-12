@@ -67,7 +67,7 @@
 
 <div class="row">
   <div class="span12">
-
+    <br>
 	<?php 
     if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
         <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
@@ -87,13 +87,12 @@
     <div class="row">
         <div class="span8 offset2">
 		  	<div id="lista" hidden>
-
 		  	</div>
 	</div>
     </div>
 
  
-
+<br>
 
     </div>
 </div>

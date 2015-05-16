@@ -1,15 +1,22 @@
 <?php
 /* @var $this SiteController */
 /* @var $error array */
-/*
 $this->pageTitle=Yii::app()->name . ' - Error';
 $this->breadcrumbs=array(
 	'Error',
 );
-*/
+?>
+
+<h2>Error <?php echo $code; ?></h2>
+
+<div class="error">
+<?php echo CHtml::encode($message); ?>
+</div>
+
+
 ?>
 <?php 
-
+/*
 if($code==401){
 ?>
 <div class="container" style="background-color: white; border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; -moz-border-radius: 24px; border-radius: 25px;">
@@ -67,5 +74,5 @@ if($code==401){
 }else{
 	Yii::app()->redirect('site/index');
 }
-
+*/
 ?>

@@ -1,3 +1,20 @@
+<?php
+
+function fecha(){
+	$dias = array('1'=>'Lunes','2'=>'Martes','3'=>'Miercoles','4'=>'Jueves','5'=>'Viernes','6'=>'Sabado','7'=>'Domingo');
+	$meses = array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto',
+		'9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
+	$dia = $dias[date('N')];
+	$dia_numero = date('d');
+	$mes = $meses[date('n')];
+	$anio = date('Y');
+	$fecha_actual = $dia.", ".$dia_numero." de ".$mes.". ".$anio;
+
+	return $fecha_actual;
+}
+
+?>
+
 <table width="100%">
 	<tr>
 		<td width="20%"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png"></td>

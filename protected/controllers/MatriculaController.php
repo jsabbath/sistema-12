@@ -90,8 +90,6 @@ class MatriculaController extends Controller
                         $this->redirect(array('addcurso', 'id' => $model->mat_id));  
                     }
                 }
-            } else {   
-                Yii::app()->user->setFlash('error', "error!");
             }
         } 
         $this->render('create', array(
@@ -472,7 +470,9 @@ class MatriculaController extends Controller
     }
 
     public function actionInforme(){
+        $estado = Parametro::model()->findAll(array('condition'=>'par_descripcion="ACTIVO"'));
         $lista = CHtml::listData(ListaCurso::model()->findAll(),'list_mat_id','list_curso_id');
+        $ano = $this->actionAnoactual();
         $model = new Matricula('search');
         $model->unsetAttributes();  // clear any default values
         
@@ -480,6 +480,8 @@ class MatriculaController extends Controller
         $this->render('informe', array(
             'model' => $model,
             'lista' => $lista,
+            'estado' => $estado,
+            'ano' => $ano,
         ));
     }
 
@@ -490,7 +492,7 @@ class MatriculaController extends Controller
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
         $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
-        $mPDF1->WriteHTML($stylesheet, 1);
+        $mPDF1->WriteHTML($stylesheet, 2);
         $mPDF1->WriteHTML($this->renderPartial('certificado', array('model'=>$model), true));
         $mPDF1->Output();
     }

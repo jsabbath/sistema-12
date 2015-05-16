@@ -58,7 +58,12 @@ class Alumno extends CActiveRecord
 			array('alum_direccion','required','message'=>'Debe ingresar una direccion'),
 			array('alum_direccion', 'length', 'max'=>255),
 			array('alum_f_nac','validateFechaNacimiento'),
+			array('alum_f_nac','required','message'=>'Debe ingresar una fecha de nacimiento'),
 			array('alum_f_nac, alum_salud, alum_obs', 'safe'),
+			array('alum_comuna','required','message'=>'Debe seleccionar una comuna'),
+			array('alum_region','required','message'=>'Debe seleccionar una region'),
+			array('alum_ciudad','required','message'=>'Debe seleccionar una ciudad'),
+			array('alum_genero','required','message'=>'Debe seleccionar un genero'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_direccion, alum_comuna, alum_ciudad, alum_region, alum_genero, alum_f_nac, alum_salud, alum_obs', 'safe', 'on'=>'search'),

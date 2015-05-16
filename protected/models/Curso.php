@@ -39,6 +39,15 @@ class Curso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('cur_jornada','required','message'=>'Debe seleccionar una jornada'),
+			array('cur_nivel','required','message'=>'Debe seleccionar un nivel'),
+			array('cur_letra','required','message'=>'Debe seleccionar una letra'),
+			array('cur_pjefe','required','message'=>'Debe seleccionar un profesor'),
+			array('cur_tperiodo','required','message'=>'Debe seleccionar un tipo de periodo'),
+			array('cur_notas_periodo','required','message'=>'Debe especificar el numero de notas'),
+			array('cur_infd','required','message'=>'Debe seleccionar un informe de desarrollo'),
+
+			array('cur_notas_periodo','numerical'),
 			array('cur_ano,cur_infd, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
