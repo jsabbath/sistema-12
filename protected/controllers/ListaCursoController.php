@@ -163,8 +163,9 @@ class ListaCursoController extends Controller
     			$cursos = array(); //  array vacio para decir que no  es profesor jefe de niun curso
     			$this->render('ordenar_lista',array(
     					'cur' => $cursos,
-    					'nombre' => $usuario['Nombrecorto'],
+    					'nombre' => $profe['Nombrecorto'],
     				));
+    			return;
     		}
 
 	            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');

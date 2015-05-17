@@ -722,7 +722,11 @@ class CursoController extends Controller
 		    			'nombre' => $usuario['Nombrecorto'],
 	   				));
 			} else {
-				echo "usted no es profe jefe de nadie";
+				$this->render('buscar_asistencia',array(
+		    			'cur' => $cursos = "",
+		    			//'usu' => $id_profe,
+		    			'nombre' => $usuario['Nombrecorto'],
+	   				));
 			}
 		} else {
 			$this->render('/cruge/ui/login');
