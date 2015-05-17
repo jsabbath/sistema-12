@@ -38,7 +38,7 @@ $this->menu=array(
     </div>
 </div>
 <div class="row">
-    <div class="span6 offset2">
+    <div class="span12 text-center">
         <h5>Ingrese el NOMBRE o el RUT del alumno</h5>    
     </div>
 </div>
@@ -82,10 +82,10 @@ $this->menu=array(
 
 <!--  Se muestra al buscar    !-->
 <?php echo TbHtml::button('',array(
-    'color'=> TbHtml::ALERT_COLOR_DEFAULT, 
+    'color'=> TbHtml::ALERT_COLOR_SUCCESS, 
     'id' =>'retirar',
     'style'=>'margin-bottom:10px',
-    'icon' => 'remove',
+    'icon' => 'icon-ok',
     //'style' => 'float: right',
     // 'data-toggle' => 'modal',
     //'data-target' => '#cambio_modal',
