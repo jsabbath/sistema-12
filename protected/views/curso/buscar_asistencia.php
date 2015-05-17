@@ -9,8 +9,9 @@
 
 
 <div class="row">
-  <div class="span12">
-    <br>
+  <div class="span12 text-center">
+    <h2>Poner Asistencia</h2>
+    
 	<?php 
     if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
         <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>

@@ -1,6 +1,16 @@
 
 <?php if( !empty($lista) ){ ?>
 
+<div>
+	<button id="bt_subir_asistencia" class="btn btn-primary" style="display:none">
+				<div id="btext">Guardar</div>
+				<div id="loader" >SUBIENDO...</div>
+	</button>
+
+	<button id="unlock" class="btn btn-success">Editar <i id="lock_icon" class="icon-lock"></i></button>
+</div>
+
+<br>
 	<table class="table table-hover" id="table_asi">
 	  	<thead>
 		    <tr>
@@ -33,13 +43,6 @@
 	   
 	  	</tbody>
 	</table>
-
-	<button id="bt_subir_asistencia" class="btn btn-primary" style="display:none">
-				<div id="btext">Guardar</div>
-				<div id="loader" >SUBIENDO...</div>
-	</button>
-
-	<button id="unlock" class="btn btn-info"><i id="lock_icon" class="icon-lock"></i></button>
 
 
 
@@ -91,7 +94,8 @@
 
 					$('#table_asi').editableTableWidget();
 					$('#table_asi').numericInputExample().find('td:first').next().next().focus();
-
+					$('#lock_icon').addClass("icon-ok").removeClass("icon-lock");
+					$('#unlock').prop("disabled",true);
 
 					$('#bt_subir_asistencia').show();
 					}
