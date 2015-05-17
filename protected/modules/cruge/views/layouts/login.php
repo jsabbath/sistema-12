@@ -38,10 +38,23 @@ if(isset($this->breadcrumbs)):?>
 
 	<?php echo $content;?>
 	<div class="clear"></div>
-	<footer>todo para julito</footer>
-	
+
+
+	  
+<div align="center" class="navbar navbar-fixed-bottom visible-desktop">
+	<pre style="color:black">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+</div>
+
+<div align="center" class="navbar navbar-static-bottom hidden-desktop">
+	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+</div>
+
 
 </div><!-- page -->
+
+
+
 <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 </body>
 </html>
+

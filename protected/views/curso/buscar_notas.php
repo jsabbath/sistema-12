@@ -1,21 +1,24 @@
 <div class="row">
-  <div class="span12">
+  <div class="span6 offset3">
 
 <?php if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
     <br>
-   <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
+
+    <div class="text-center"> 
+          <h3>Ingreso Calificaciones</h3>
+
+          <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
 
 
+          <?php  if(empty( $cur )){
+              echo "Usted no tiene cursos ni asignaturas en  este año.";
+          } else{
+              echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-',
+                                                                      'id'=> 'drop_curso',
+                                                                      'name' => 'drop_curso')); 
+          }?>
 
-            <?php  if(empty( $cur )){
-                echo "Usted no tiene cursos ni asignaturas en  este año.";
-            } else{
-                echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-',
-                                                                        'id'=> 'drop_curso',
-                                                                        'name' => 'drop_curso')); 
-            }?>
-
-      
+      </div>
          <div id="asignaturas">
              
          </div>

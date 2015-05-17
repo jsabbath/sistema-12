@@ -12,9 +12,62 @@
 <div class="row">
 
 <div class="span12">
-<h1><?php echo $nombre_curso.", ".$nombre_asignatura." ".$periodo ?></h1>
 
+<div class="row">
+	<div class="span7 text-center">
+		<h1><?php echo $nombre_curso.": ".$nombre_asignatura.", ".$periodo ?></h1>
+	</div>
 
+<?php 
+	$tp = $t_peri + 1;
+	$tb = $t_peri -1;
+ ?>
+	<!-- Navegacion Periodos -->
+	<div class="span5">
+		<table style="margin-bottom: 0.1em">
+			<!-- <td class="text-center">
+
+				<a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" title="Editar">
+		              <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/schedule.png"></div>
+		        </a>
+		        <strong>editar</strong>
+			</td> -->
+			<td>
+				<!-- BOTON DE CARGA -->
+				<div class="text-center">
+					<button id="bt_subir_notas" class="btn btn-primary" style="display:none">
+								<div id="btext">Subir Notas</div>
+								<div id="loader" >SUBIENDO...</div>
+					</button>
+
+					<button id="unlock" class="btn btn-success"><i id="lock_icon" class="icon-lock"></i> Editar</button>
+				</div>
+			</td>
+
+			<?php if( $t_peri > 1 ){ ?>
+				<td class="text-center">
+					<a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('curso/poner_notas',array('a' => $asi_id, 'b' => $tb, 'c' => $cur_id )); ?>" title="Periodo Anterior">
+			              <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/left.png"></div>
+			        </a>
+			        <strong>Periodo Anterior</strong>
+				</td>
+			<?php } ?>
+
+			<?php if( $t_peri < $max_per ) {?>
+			<td class="text-center">
+				<a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('curso/poner_notas',array('a' => $asi_id, 'b' => $tp, 'c' => $cur_id )); ?>" title="Siguiente Periodo">
+		              <div><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/right.png"></div>
+		        </a>
+		         <strong>Siguiente Periodo</strong>
+		    </td>
+		    <?php } ?>
+        </table>
+	</div>
+</div>
+
+	
+
+<br>
 	<div><!-- TABLA  -->
 
 		<table id="notasTable" class="table table-bordered">
@@ -63,13 +116,7 @@
 	</div>
 
 
-	<!-- BOTON DE CARGA -->
-	<button id="bt_subir_notas" class="btn btn-primary" style="display:none">
-				<div id="btext">Subir Notas</div>
-				<div id="loader" >SUBIENDO...</div>
-	</button>
 
-	<button id="unlock" class="btn btn-info"><i id="lock_icon" class="icon-lock"></i></button>
 
 </div>
 

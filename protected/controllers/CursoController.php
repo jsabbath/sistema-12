@@ -551,14 +551,33 @@ class CursoController extends Controller
 			$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
 			$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
 
+			$per = "";
+			if( $tipo_periodo == 1 ){
+				$per = "Primer Periodo";
+			} else if( $tipo_periodo == 2 ){
+				$per = "Segundo Periodo";
+			} else if( $tipo_periodo == 3){
+				$per = "Tercer Periodo";
+			}
+
+			$tipo_per = Parametro::model()->findByPk($curso->cur_tperiodo);
+			$max = 0;
+			if(	$tipo_per->par_descripcion == "SEMESTRE"){
+				$max = 2;
+			} else if ( $tipo_per->par_descripcion == "TRIMESTRE" ){
+				$max = 3;
+			}
+
 			$this->render('editar',array(
-							'nombre_asignatura' => $asignatura->asi_descripcion,
+							'nombre_asignatura' => $asignatura->asi_nombrecorto,
 							'asi_id'			=> $asignatura->asi_id,
 							'cur_id'			=> $curso->cur_id,
-							'periodo'           => $tipo_periodo,
+							'periodo'           => $per,
 							'nombre_curso'      => $nivel." ".$letra,
 							'notas_p' 			=> $notas_periodo,
 							'alumnos' 			=> $alumnos,
+							't_peri'			=> $b,
+							'max_per'			=> $max,
 			 ));
 		
 
