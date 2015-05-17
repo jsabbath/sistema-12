@@ -16,7 +16,6 @@ $this->menu=array(
 <div class="row">
 	<div class="span12 text-center">
 		<h2>Asignacion de Asignaturas</h2>
-		
 	</div>
 </div>
 

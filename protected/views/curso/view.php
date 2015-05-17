@@ -90,7 +90,7 @@ $this->menu=array(
               <td><i class="icon-book"></i></td>
               <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)),array('class'=>'link-negro'));?> </td>
               <td><?php echo $nombre_asi;?> </td>
-              <td><button class="btn btn-danger" data-toggle="tooltip" title="Eliminar"><i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i></button></td>
+              <td><div class="text-center"><button class="btn btn-danger" data-toggle="tooltip" title="Eliminar"><i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i></button></div></td>
             </tr>
         <?php } ?>
       </tbody>

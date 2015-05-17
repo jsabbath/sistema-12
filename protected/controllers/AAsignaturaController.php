@@ -259,4 +259,13 @@ class AAsignaturaController extends Controller
 
         return $ano;
     }
+
+    public function actionLista_asignaturas(){
+    	$id_curso = $_POST['id_curso'];
+    	$model = AAsignatura::model()->findAll(array('condition'=>'aa_curso="'.$id_curso.'"'));
+
+    	if($model==NULL){
+    		echo '<h4 class="text-center">No tiene Asignaturas</h4>';
+    	}else $this->renderPartial('lista_asignaturas',array('model'=>$model));
+    }
 }
