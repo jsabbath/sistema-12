@@ -69,8 +69,11 @@
   <div class="span12">
     <br>
 	<?php 
-    if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
-        <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
+        if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; 
+    ?>
+
+    <div class="text-center">
+    <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
 
 <?php  
     
@@ -80,8 +83,9 @@
         echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-',
                                                                 'id'=> 'drop_curso',
                                                                'name' => 'drop_curso')); 
-    }?>
-    
+}?>
+    </div>
+
     <div  id="ajaxloader1"></div>
        
     <div class="row">

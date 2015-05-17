@@ -6,36 +6,40 @@
 	} else{ ?>
 
     <style>
-        #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+        #sortable { list-style-type: none; margin: 0; padding: 0; }
         #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; color: #292929}
         #sortable li span { position: absolute; margin-left: -1.3em; }
     </style>
 
-  <script>
+
+    <div>
+       <button class="btn btn-primary" id="save_lista" style="display:none">
+                    <div id="btext">Guardar</div>
+                    <div id="loader" >SUBIENDO...</div>
+        </button> 
   
-  </script>
 
-   <button class="btn btn-primary" id="save_lista" style="display:none">
-                <div id="btext">Guardar</div>
-                <div id="loader" >SUBIENDO...</div>
-    </button> 
+        <button id="unlock" class="btn btn-success">Editar <i id="lock_icon" class="icon-lock"></i></button>
+  
+    </div>
+
+  <br>
+  <div class="text-left" >
+          <ul id="sortable">
+            <?php foreach ($lista as $key => $l) {?>
+
+                <li class="ui-state-default">
+                    <div class="mat_id" id="<?php echo $l['list_id'] ?>" hidden><?php echo $l['mat_id'] ?></div> 
+                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                    <?php echo $l['posicion']. " - "; ?> 
+                    <span3><?php echo  strtoupper($l['nombre']); ?> </span>     
+                </li>
+           
+            <?php } ?>
+        <ul>
+</div>
 
 
-    <button id="unlock" class="btn btn-info"><i id="lock_icon" class="icon-lock"></i></button>
-
-
-    <ul id="sortable">
-        <?php foreach ($lista as $key => $l) {?>
-
-            <li class="ui-state-default">
-                <div class="mat_id" id="<?php echo $l['list_id'] ?>" hidden><?php echo $l['mat_id'] ?></div> 
-                <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                <?php echo $l['posicion']. " - "; ?> 
-                <span3><?php echo  strtoupper($l['nombre']); ?> </span>     
-            </li>
-       
-        <?php } ?>
-    <ul>
 
     <script>
 

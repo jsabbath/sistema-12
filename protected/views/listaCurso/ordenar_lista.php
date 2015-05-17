@@ -6,14 +6,14 @@
 
 
 <div class="row">
-  <div class="span12">
-    <br>
+  <div class="span12 text-center">
+    <h2>Lista de Curso</h2>
 	<?php 
     if( Yii::app()->user->checkAccess('admin')) $nombre = "admin"; ?>
         <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
 
-<?php  
-    
+
+<?php    
     if(empty( $cur )){
         echo "Usted no es profesor jefe de cursos en este año.";
     }else{
@@ -23,7 +23,7 @@
     }?>
 
 	<div class="row">
-		<div class="span10 offset3">
+        <div class="span8 offset2">
 		  	<div id="lista" hidden>
 
 		  	</div>
