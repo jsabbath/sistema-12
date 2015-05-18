@@ -269,9 +269,9 @@ function fecha(){
 
             <?php for ($i=1; $i <= $max_not ; $i++){ 
                 if( $n[$i] < 4 ) { ?>
-                    <td style="color: RED;" ><?php if( $n[$i] != 0 ) echo $n[$i]; ?></td>
+                    <td style="color: RED;" ><strong><?php if( $n[$i] != 0 ) echo $n[$i]; ?></strong></td>
                 <?php }else{ ?>
-                    <td> <?php if( $n[$i] != 0 ) echo $n[$i]; ?> </td>
+                    <td> <strong><?php if( $n[$i] != 0 ) echo $n[$i]; ?></strong> </td>
                 <?php } ?>
             <?php } ?>
             <td></td><!-- final -->

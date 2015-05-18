@@ -78,6 +78,39 @@ if(
 		<br>
 <?php
 }
+
+?>
+		<div class="row">
+		<div class="visible-phone"><br/></div>
+		<a class="link-negro" href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña">
+			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
+				<div class="row">
+					<div class="span1 text-center">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/insert_hyperlink.png"); ?>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="row">
+							<div class="span3">
+								<strong>Cambiar Contraseña</strong>
+							</div>
+						</div>
+						<div class="row">
+							<div class="span3">
+								<p>En este item se puede cambiar la contraseña  de tu cuenta</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+
+		</div>
+		<br>
+<?php
+
+ 
  
 if(
 	Yii::app()->user->checkAccess('administrador') OR
