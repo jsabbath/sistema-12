@@ -53,8 +53,8 @@ class InformeHogar extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ih_id' => 'Ih',
-			'ih_descripcion' => 'Ih Descripcion',
+			'ih_id' => 'ID',
+			'ih_descripcion' => 'Nombre del Informe',
 		);
 	}
 

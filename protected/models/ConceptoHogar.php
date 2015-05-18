@@ -55,9 +55,9 @@ class ConceptoHogar extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ch_id' => 'Ch',
-			'ch_descripcion' => 'Ch Descripcion',
-			'ch_area_hogar' => 'Ch Area Hogar',
+			'ch_id' => 'ID',
+			'ch_descripcion' => 'Concepto',
+			'ch_area_hogar' => 'Area',
 		);
 	}
 

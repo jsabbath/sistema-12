@@ -12,12 +12,9 @@ class InformeHogarController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+   {
+      return array(array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -71,7 +68,11 @@ class InformeHogarController extends Controller
 		{
 			$model->attributes=$_POST['InformeHogar'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ih_id));
+				if(isset($model->ih_id)){
+					$id_informe = $model->ih_id;
+					$this->redirect(array('//areaHogar/nuevo','id'=>$id_informe));
+
+				}else throw new CHttpException(404,'The requested page does not exist.');
 		}
 
 		$this->render('create',array(

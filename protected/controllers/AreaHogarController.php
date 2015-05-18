@@ -12,12 +12,9 @@ class AreaHogarController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+   {
+      return array(array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -169,5 +166,59 @@ class AreaHogarController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionNuevo($id){
+		$model=new AreaHogar;
+		// $area = Area::model()->findAll(array('condition'=>'are_infd="'.$id.'"'));
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'ah_inf_hogar="'.$id.'"';
+		$area = new CActiveDataProvider('AreaHogar',array('criteria'=>$criteria));
+
+		if(isset($_POST['AreaHogar']))
+		{
+			$model->attributes=$_POST['AreaHogar'];
+			$model->ah_inf_hogar=$id;
+			if($model->save()){
+				Yii::app()->user->setFlash('success', "area creada con Exito!");
+				$this->refresh();
+			}
+		}
+
+		$this->render('nuevo',array(
+			'model'=>$model,
+			'id'=>$id,
+			'area'=>$area,
+		));
+	}
+
+	public function actionBuscar_area(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(ah_descripcion) like LOWER(:busq)";
+
+        $criterio->distinct = true;
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->select = 'ah_descripcion';
+        $criterio->limit = 10;
+
+        $data = AreaHogar::model()->findAll($criterio);
+        
+        foreach($data as $item) {  
+            $resultado[] = array (
+                'id' => $item->ah_id,
+                'nombre'=>$item->ah_descripcion,
+            );
+        }
+
+        echo CJSON::encode($resultado);
 	}
 }

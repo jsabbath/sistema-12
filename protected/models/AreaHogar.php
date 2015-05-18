@@ -57,9 +57,9 @@ class AreaHogar extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ah_id' => 'Ah',
-			'ah_descripcion' => 'Ah Descripcion',
-			'ah_inf_hogar' => 'Ah Inf Hogar',
+			'ah_id' => 'ID',
+			'ah_descripcion' => 'Area',
+			'ah_inf_hogar' => 'Informe al Hogar',
 		);
 	}
 

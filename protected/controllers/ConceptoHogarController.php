@@ -12,12 +12,9 @@ class ConceptoHogarController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+   {
+      return array(array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -169,5 +166,61 @@ class ConceptoHogarController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionNuevo($id)
+	{
+		$model=new ConceptoHogar;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+		$inf = AreaHogar::model()->findAll(array('select'=>'ah_inf_hogar','condition'=>'ah_id="'.$id.'"'));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'ch_area_hogar="'.$id.'"';
+		$concepto = new CActiveDataProvider('ConceptoHogar',array('criteria'=>$criteria));
+
+		if(isset($_POST['ConceptoHogar']))
+		{
+			$model->attributes=$_POST['ConceptoHogar'];
+			$model->ch_area_hogar = $id;
+			if($model->save()){
+				Yii::app()->user->setFlash('success', "Concepto creado con Exito!");
+				$this->refresh();
+			}
+		}
+
+		$this->render('nuevo',array(
+			'model'=>$model,
+			'concepto'=>$concepto,
+			'inf'=>$inf,
+		));
+	}
+
+	public function actionBuscar_concepto(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(ch_descripcion) like LOWER(:busq)";
+
+        $criterio->distinct = true;
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->select = 'ch_descripcion';
+        $criterio->limit = 10;
+
+        $data = Concepto::model()->findAll($criterio);
+        
+        foreach($data as $item) {  
+            $resultado[] = array (
+                'id' => $item->ch_id,
+                'nombre'=>$item->ch_descripcion,
+            );
+        }
+
+        echo CJSON::encode($resultado);
 	}
 }
