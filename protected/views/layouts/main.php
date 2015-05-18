@@ -54,6 +54,7 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
     !Yii::app()->user->checkAccess('EVALUADOR') OR
     !Yii::app()->user->checkAccess('JEFEUTP') OR
     !Yii::app()->user->checkAccess('DIRECTOR') OR
+    !Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
     ){
 ?>
@@ -114,7 +115,8 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                         </td>
                         <?php 
                         if(
-                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
                             Yii::app()->user->checkAccess('profesor')
@@ -129,7 +131,8 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                         }
 
                         if(
-                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
@@ -145,7 +148,8 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                         }
 
                         if(
-                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp')
@@ -159,7 +163,8 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                         <?php } ?>
                         <?php 
                         if(
-                            Yii::app()->user->isSuperAdmin OR 
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
                             Yii::app()->user->checkAccess('director')
                         ){ 
                         ?>

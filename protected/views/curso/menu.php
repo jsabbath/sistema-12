@@ -9,6 +9,7 @@
 	</div>
 <?php 
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director')
 ){ 
@@ -43,6 +44,7 @@ if(
 }
 
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('jefe_utp')
@@ -79,6 +81,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('jefe_utp')
@@ -115,6 +118,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('evaluador') OR
@@ -152,6 +156,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('evaluador') OR
@@ -191,6 +196,7 @@ if(
 ?>
 <?php 
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('evaluador') OR

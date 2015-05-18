@@ -9,6 +9,7 @@
 	</div>
 <?php 
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>
@@ -43,6 +44,7 @@ if(
 }
 
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>
@@ -78,6 +80,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>
@@ -112,6 +115,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>
@@ -146,6 +150,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>				
@@ -180,6 +185,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>					
@@ -214,6 +220,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
 ){ 
 ?>					
@@ -248,6 +255,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director')
 ){ 
@@ -283,6 +291,7 @@ if(
 }
  
 if(
+	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director')
 ){ 
