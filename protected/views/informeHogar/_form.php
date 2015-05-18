@@ -15,20 +15,34 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<div class="row">
+	<div class="span12 text-center">
+		<br/><p class="text-info">Para crear un <strong>Informe al Hogar</strong> primero se debe ingresar un nombre que lo identifique.
+		posteriormente se agregan las areas y conceptos.</p>
+	</div>
+</div>
 
-	<?php echo $form->errorSummary($model); ?>
+<div class="row">
 
-	<div class="row">
+</div>
+	<div class="span12">
+		<?php echo $form->errorSummary($model); ?>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span12 text-center">
 		<?php echo $form->labelEx($model,'ih_descripcion'); ?>
-		<?php echo $form->textField($model,'ih_descripcion',array('size'=>60,'maxlength'=>512)); ?>
-		<?php echo $form->error($model,'ih_descripcion'); ?>
+		<?php echo $form->textField($model,'ih_descripcion',array('size'=>60,'maxlength'=>512,'class'=>'input-xlarge')); ?>
 	</div>
+</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+<div class="row">
+	<div class="span2 offset8">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar',array('class'=>'btn btn-primary')); ?>
 	</div>
+</div>
 
 <?php $this->endWidget(); ?>
-
+<br>
 </div><!-- form -->

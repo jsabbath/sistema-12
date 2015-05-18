@@ -50,10 +50,10 @@ $tempid = $temp->temp_id;
    
 <?php 
 //aqui empieza el control de usuarios
-if(!Yii::app()->user->checkAccess('PROFESOR') OR
-    !Yii::app()->user->checkAccess('EVALUADOR') OR
-    !Yii::app()->user->checkAccess('JEFEUTP') OR
-    !Yii::app()->user->checkAccess('DIRECTOR') OR
+if(!Yii::app()->user->checkAccess('profesor') OR
+    !Yii::app()->user->checkAccess('evaluador') OR
+    !Yii::app()->user->checkAccess('jefeutp') OR
+    !Yii::app()->user->checkAccess('director') OR
     !Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
     ){
