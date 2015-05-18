@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="span12 text-center">
-		<h2>Certificado de Alumno Regular</h2>
+		<h2>Informe Notas Parciales</h2>
 	</div>
 	<div class="span12 text-center">
-		<p class="text-info">Aqui se puede generar un <strong>Certificado de Alumno Regular</strong> para cualquier <strong>Alumno</strong> seleccionado</p>
+		<p class="text-info">Aqui se puede generar un <strong>Informe con las notas paricales</strong> para cualquier <strong>Alumno</strong> seleccionado</p>
 		<br>
 	</div>
 </div>
@@ -45,18 +45,27 @@
 		),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template'=>'{certificado}',
+			'template'=>'{periodo1} {periodo2}',
 			'buttons'=>array(
-				'certificado'=>array(
+				'periodo1'=>array(
 					'label'=>'<i class="icon-list-alt"></i>',
-					'url'=>'Yii::app()->createUrl("Matricula/certificado",array("id"=>$data->mat_id))',
+					'url'=>'Yii::app()->createUrl("Matricula/certificado_nota_par",array("id"=>$data->mat_id,"p" => 1))',
 					'options'=>array(
-						'class'=>"btn btn-info",
+						'class'=>"btn btn-success",
 						'data-toggle'=>'tooltip',
-						'title'=>'Certificado',
-
+						'title'=>'Periodo 1',
 					),
 				),
+				'periodo2'=>array(
+					'label'=>'<i class="icon-list-alt"></i>',
+					'url'=>'Yii::app()->createUrl("Matricula/certificado_nota_par",array("id"=>$data->mat_id,"p" => 2))',
+					'options'=>array(
+						'class'=>"btn btn-success",
+						'data-toggle'=>'tooltip',
+						'title'=>'Periodo 2',
+					),
+				),
+				
 			),
 		),
 	),

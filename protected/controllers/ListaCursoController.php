@@ -289,6 +289,7 @@ class ListaCursoController extends Controller
 				}
 			}
 
+			// sirve para sacar los ctm repetios
 			$alumnos = array_unique($alumnos, SORT_REGULAR);
 			echo json_encode($alumnos);
 

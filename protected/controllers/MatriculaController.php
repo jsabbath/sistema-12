@@ -498,11 +498,11 @@ class MatriculaController extends Controller
     }
 
 
-    public function actionCertificado_nota_par($id){
+    public function actionCertificado_nota_par($id, $p){
         $model = $this->loadModel($id);
         $notas = array();
 
-        $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x','params' =>  array( ':x' => $id )));
+        $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => $p )));
 
         foreach ($evaluaciones as $key => $alum) {
 
@@ -514,6 +514,15 @@ class MatriculaController extends Controller
                 );
 
         }
+        $alumnos = array_unique($notas, SORT_REGULAR);
+
+        $c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
+        $ano = $evaluaciones[0]['not_ano'];
+        $curso  = Curso::model()->findByPk($c['aa_curso']);
+        $profe = Usuario::model()->findByPk($c['aa_docente']);
+        $notas_periodo = $curso->cur_notas_periodo;
+        $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
 
 
         $mPDF1 = Yii::app()->ePdf->mpdf();
@@ -521,8 +530,32 @@ class MatriculaController extends Controller
 
         $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
         $mPDF1->WriteHTML($stylesheet, 1);
-        $mPDF1->WriteHTML($this->renderPartial('inf_not_par', array('model'=>$model,'notas' => $notas), true));
+        $mPDF1->WriteHTML($this->renderPartial('inf_not_par', array(
+                                                                'model'         => $model,
+                                                                'notas'         => $alumnos,
+                                                                'curso_nombre'  => $nivel. " ". $letra,
+                                                                'max_not'       => $notas_periodo,
+                                                                'periodo'       => $p,
+                                                                'profe'         => $profe->NombreCompleto,
+                                                                'ano'           => $ano,
+                        ), true));
         $mPDF1->Output();        
 
+    }
+
+    public function actionInforme_notas_par(){
+        $estado = Parametro::model()->findAll(array('condition'=>'par_descripcion="ACTIVO"'));
+        $lista = CHtml::listData(ListaCurso::model()->findAll(),'list_mat_id','list_curso_id');
+        $ano = $this->actionAnoactual();
+        $model = new Matricula('search');
+        $model->unsetAttributes();  // clear any default values
+        
+        if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
+        $this->render('informe_not_par', array(
+            'model' => $model,
+            'lista' => $lista,
+            'estado' => $estado,
+            'ano' => $ano,
+        ));
     }
 }

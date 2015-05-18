@@ -202,43 +202,92 @@ function fecha(){
 		 <strong>: <?php echo $model->matAlu->alum_rut;?></strong>
 		 </td>
 	</tr>
+    <tr style="border: 0;">
+        <td style="border: 0;"> 
+            <p>Año Academico </p>
+        </td>
+        <td>
+         <strong>: <?php echo $ano;?></strong>
+         </td>
+    </tr>
+    <tr style="border: 0;">
+        <td style="border: 0;"> 
+            <p>Curso </p>
+        </td>
+        <td>
+         <strong>: <?php echo $curso_nombre;?></strong>
+         </td>
+    </tr>
+        <tr style="border: 0;">
+        <td style="border: 0;"> 
+            <p>Profesor Jefe </p>
+        </td>
+        <td>
+         <strong>: <?php echo $profe;?></strong>
+         </td>
+    </tr>
+    <tr style="border: 0;">
+        <td style="border: 0;"> 
+            <p>Periodo </p>
+        </td>
+        <td>
+         <strong>: <?php echo $periodo;?></strong>
+         </td>
+    </tr>
+
 </table>
 
 <br>
 
 <?php foreach ($notas as $key => $a) {
-	var_dump($a['nom_asi']);
+	// var_dump($a);
+ //    echo '<br><br>';
 } ?>
 
 
 <table width="100%" style="border: 1;">
 	
 	<tr>
-		<td><strong>Asignatura</strong></td>
-		<td>n1</td>
-		<td>n2</td>
-		<td>n3</td>
-		<td>n4</td>
-		<td>n5</td>
-		<td>n6</td>
-	</tr>	
 	
-	<tr>
-		<td><p><strong>Matematicas</strong></p></td>
-		<td><p>7.0</p></td>
-		<td><p>7.0</p></td>
-		<td><p>5.5</p></td>
-		<td><p>7.0</p></td>
-		<td><p>7.0</p></td>
-		<td><p>7.0</p></td>
-	</tr>
+            <?php  for ($i=0; $i <= $max_not ; $i++) { 
+                        if( $i == 0 ) { ?>
+                            <td><strong>Asignatura</strong></td>
+                        <?php }else { ?>    
+                            <td><?php echo "N".$i; ?></td>
+            <?php }} ?>
+            <td>FINAL</td>
+	
+	</tr>	
+
+
+	<?php 
+        foreach ($notas as $key => $a) { 
+                $n = $a['nota'];
+    ?>
+        <tr>
+            <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
+
+            <?php for ($i=1; $i <= $max_not ; $i++){ 
+                if( $n[$i] < 4 ) { ?>
+                    <td style="color: RED;" ><?php if( $n[$i] != 0 ) echo $n[$i]; ?></td>
+                <?php }else{ ?>
+                    <td> <?php if( $n[$i] != 0 ) echo $n[$i]; ?> </td>
+                <?php } ?>
+            <?php } ?>
+            <td></td><!-- final -->
+        </tr>
+
+       <?php }?>
+	
 	
 </table>
 <br>
 <br>
 <div>
-	<p>Asiste regularmente a este establecimiento educacional, cursando actualmente :</p>
-	<h4><?php echo "Inserte su curso aqui"; ?></h4>
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 500; $i++) { 
+        echo "_";
+    } ?></p>
+	
 </div>
 <br>
 <br>
