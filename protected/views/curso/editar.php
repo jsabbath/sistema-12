@@ -95,8 +95,8 @@
 										if(empty($nota_alu[$i])) {
 											//echo 1;
 										} else if ( $nota_alu[$i] != 0 ){
-											if ( $nota_alu[$i] < 4 ){
-												echo  ''.$nota_alu[$i];
+											if ( strlen($nota_alu[$i]) == 1 ){
+												echo  ''.$nota_alu[$i] . '.0';
 											} else {
 												echo "".$nota_alu[$i];
 											}

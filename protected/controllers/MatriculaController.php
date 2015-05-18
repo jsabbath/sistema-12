@@ -496,4 +496,33 @@ class MatriculaController extends Controller
         $mPDF1->WriteHTML($this->renderPartial('certificado', array('model'=>$model), true));
         $mPDF1->Output();
     }
+
+
+    public function actionCertificado_nota_par($id){
+        $model = $this->loadModel($id);
+        $notas = array();
+
+        $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x','params' =>  array( ':x' => $id )));
+
+        foreach ($evaluaciones as $key => $alum) {
+
+            $asi = Asignatura::model()->findByPk($alum->not_asig);
+
+            $notas[] = array(
+                  'nota'    => $alum->notas,
+                  'nom_asi' => $asi->asi_descripcion,
+                );
+
+        }
+
+
+        $mPDF1 = Yii::app()->ePdf->mpdf();
+        $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+        $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+        $mPDF1->WriteHTML($stylesheet, 1);
+        $mPDF1->WriteHTML($this->renderPartial('inf_not_par', array('model'=>$model,'notas' => $notas), true));
+        $mPDF1->Output();        
+
+    }
 }

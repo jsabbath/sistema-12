@@ -108,10 +108,11 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                                 ?>
                             </div>
                         </div>
-                        <td>
+                        <td class="text-center">
                             <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" title="Inicio">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/casa.png"></div>
                             </a>
+                            <strong style="color: white">Inicio</strong>
                         </td>
                         <?php 
                         if(
@@ -122,10 +123,11 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                             Yii::app()->user->checkAccess('profesor')
                         ){ 
                         ?>
-                        <td>
+                        <td class="text-center">
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" title="Academico">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/book.png"></div>
                             </a>
+                            <strong style="color: white">Academico</strong>
                         </td>
                         <?php
                         }
@@ -139,10 +141,11 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                             Yii::app()->user->checkAccess('profesor')
                         ){ 
                         ?>
-                        <td>
+                        <td class="text-center">
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" title="Cursos">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/blackboard.png"></div>
                             </a>
+                            <strong style="color: white">Cursos</strong>
                         </td>
                         <?php
                         }
@@ -155,10 +158,11 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                             Yii::app()->user->checkAccess('jefe_utp')
                         ){ 
                         ?>
-                        <td>
+                        <td class="text-center">
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" title="Informe">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/papers.png"></div>
                             </a>
+                            <strong style="color: white">Documentos</strong>
                         </td>
                         <?php } ?>
                         <?php 
@@ -168,16 +172,18 @@ if(!Yii::app()->user->checkAccess('PROFESOR') OR
                             Yii::app()->user->checkAccess('director')
                         ){ 
                         ?>
-                        <td>
+                        <td class="text-center">
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" title="Administracion">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
                             </a>
+                            <strong style="color: white">Administracion</strong>
                         </td>
                         <?php } ?>
-                         <td>
+                         <td class="text-center">
                             <a class="link-negro" href="#"  id="salir" onclick="logout()" title="Salir">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png"></div>
                             </a>
+                            <strong style="color: white">Salir</strong>
                         </td>
              
 
