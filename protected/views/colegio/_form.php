@@ -212,17 +212,17 @@
 
 		<div class="row">
 			<div class="span6">
-				<?php echo $form->labelEx($model,'col_ciudad'); ?>
-				<?php echo $form->textField($model,'col_ciudad',array('size'=>50,'maxlength'=>50)); ?>
-				<?php echo $form->error($model,'col_ciudad'); ?>
+				<?php echo $form->labelEx($model,'col_region'); ?>
+				<?php echo $form->textField($model,'col_region',array('size'=>50,'maxlength'=>50)); ?>
+				<?php echo $form->error($model,'col_region'); ?>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="span6">
-				<?php echo $form->labelEx($model,'col_comuna'); ?>
-				<?php echo $form->textField($model,'col_comuna',array('size'=>50,'maxlength'=>50)); ?>
-				<?php echo $form->error($model,'col_comuna'); ?>
+				<?php echo $form->labelEx($model,'col_ciudad'); ?>
+				<?php echo $form->textField($model,'col_ciudad',array('size'=>50,'maxlength'=>50)); ?>
+				<?php echo $form->error($model,'col_ciudad'); ?>
 			</div>
 		</div>
 
@@ -273,8 +273,39 @@
 				<?php echo $form->error($model,'col_aproximacion'); ?>
 			</div>
 		</div>
-	</div>
 
+		<div class="row">
+			<div class="span6">
+				<?php echo $form->labelEx($model,'ano_plan_programa'); ?>
+				<?php echo $form->textField($model,'ano_plan_programa'); ?>
+				<?php echo $form->error($model,'ano_plan_programa'); ?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span6">
+				<?php echo $form->labelEx($model,'numero_plan_programa'); ?>
+				<?php echo $form->textField($model,'numero_plan_programa'); ?>
+				<?php echo $form->error($model,'numero_plan_programa'); ?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span6">
+				<?php echo $form->labelEx($model,'numero_decreto_supremo'); ?>
+				<?php echo $form->textField($model,'numero_decreto_supremo'); ?>
+				<?php echo $form->error($model,'numero_decreto_supremo'); ?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span6">
+				<?php echo $form->labelEx($model,'ano_decreto_supremo'); ?>
+				<?php echo $form->textField($model,'ano_decreto_supremo'); ?>
+				<?php echo $form->error($model,'ano_decreto_supremo'); ?>
+			</div>	
+		</div>
+	</div>
 
 	<div class="span2 offset8">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Guardar',array('class'=>'btn btn-primary')); ?>

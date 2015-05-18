@@ -28,7 +28,7 @@
  * @property string $col_fecha_segundo
  * @property string $col_fecha_tercer
  * @property string $col_direccion
- * @property string $col_comuna
+ * @property string $col_region
  * @property string $col_ciudad
  * @property string $col_colegio_email
  * @property integer $col_telefono
@@ -36,6 +36,12 @@
  * @property integer $col_nota_maxima
  * @property integer $col_nota_aprovacion
  * @property integer $col_aproximacion
+ * @property integer $ano_promocion_evaluacion
+ * @property integer $numero_promocion_evaluacion
+ * @property integer $numero_plan_programa
+ * @property integer $ano_plan_programa
+ * @property integer $numero_decreto_supremo
+ * @property integer $ano_decreto_supremo
  */
 class Colegio extends CActiveRecord
 {
@@ -55,16 +61,17 @@ class Colegio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('col_numero, col_ano, col_periodo, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_telefono, col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion', 'numerical', 'integerOnly'=>true),
+			array('ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'required'),
+			array('col_numero, col_ano, col_periodo, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_telefono, col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'numerical', 'integerOnly'=>true),
 			array('col_rolRBD, col_area, col_regimen, col_rut_razon_social', 'length', 'max'=>20),
-			array('col_nombre_colegio, col_comuna, col_ciudad', 'length', 'max'=>50),
+			array('col_nombre_colegio, col_region, col_ciudad', 'length', 'max'=>50),
 			array('col_letra', 'length', 'max'=>1),
 			array('col_nombre_director, col_director_email, col_encargado_actas, col_razon_social, col_direccion, col_colegio_email', 'length', 'max'=>255),
-			array('col_logo', 'file', 'types'=>'jpg, gif, png'),
+			array('col_logo', 'length', 'max'=>1024),
 			array('col_lema, col_mision, col_vision, col_fecha_primer, col_fecha_segundo, col_fecha_tercer', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('col_id, col_rolRBD, col_nombre_colegio, col_letra, col_numero, col_ano, col_periodo, col_nombre_director, col_director_email, col_encargado_actas, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_lema, col_mision, col_vision, col_area, col_regimen, col_logo, col_razon_social, col_rut_razon_social, col_fecha_primer, col_fecha_segundo, col_fecha_tercer, col_direccion, col_comuna, col_ciudad, col_colegio_email, col_telefono, col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion', 'safe', 'on'=>'search'),
+			array('col_id, col_rolRBD, col_nombre_colegio, col_letra, col_numero, col_ano, col_periodo, col_nombre_director, col_director_email, col_encargado_actas, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_lema, col_mision, col_vision, col_area, col_regimen, col_logo, col_razon_social, col_rut_razon_social, col_fecha_primer, col_fecha_segundo, col_fecha_tercer, col_direccion, col_region, col_ciudad, col_colegio_email, col_telefono, col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,38 +92,44 @@ class Colegio extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'col_id' => 'ID',
-			'col_rolRBD' => 'Rol RBD',
-			'col_nombre_colegio' => 'Nombre Colegio',
-			'col_letra' => 'Letra',
-			'col_numero' => 'Numero',
-			'col_ano' => 'Ano',
-			'col_periodo' => 'Periodo',
-			'col_nombre_director' => 'Nombre Director',
-			'col_director_email' => 'Email Director',
-			'col_encargado_actas' => 'Encargado Actas',
-			'col_fecha_resol_rec_ofic' => 'Fecha Resol. Rec. Ofic.',
-			'col_numero_resol_rec_ofic' => 'Numero Resol. Rec. Ofic.',
-			'col_lema' => 'Lema',
-			'col_mision' => 'Mision',
-			'col_vision' => 'Vision',
-			'col_area' => 'Area',
-			'col_regimen' => 'Regimen',
-			'col_logo' => 'Logo',
-			'col_razon_social' => 'Razon Social',
-			'col_rut_razon_social' => 'Rut Razon Social',
-			'col_fecha_primer' => 'Fecha Primera Actividad Escolar',
-			'col_fecha_segundo' => 'Fecha Segunda Actividad Escolar',
-			'col_fecha_tercer' => 'Fecha Tercera Actividd Escolar',
-			'col_direccion' => 'Direccion',
-			'col_comuna' => 'Comuna',
-			'col_ciudad' => 'Ciudad',
-			'col_colegio_email' => 'Email Colegio',
-			'col_telefono' => 'Telefono',
-			'col_nota_minima' => 'Nota Minima',
-			'col_nota_maxima' => 'Nota Maxima',
-			'col_nota_aprovacion' => 'Nota Aprovacion',
-			'col_aproximacion' => 'Tipo Promedio',
+			'col_id' => 'Col',
+			'col_rolRBD' => 'Col Rol Rbd',
+			'col_nombre_colegio' => 'Col Nombre Colegio',
+			'col_letra' => 'Col Letra',
+			'col_numero' => 'Col Numero',
+			'col_ano' => 'Col Ano',
+			'col_periodo' => 'Col Periodo',
+			'col_nombre_director' => 'Col Nombre Director',
+			'col_director_email' => 'Col Director Email',
+			'col_encargado_actas' => 'Col Encargado Actas',
+			'col_fecha_resol_rec_ofic' => 'Col Fecha Resol Rec Ofic',
+			'col_numero_resol_rec_ofic' => 'Col Numero Resol Rec Ofic',
+			'col_lema' => 'Col Lema',
+			'col_mision' => 'Col Mision',
+			'col_vision' => 'Col Vision',
+			'col_area' => 'Col Area',
+			'col_regimen' => 'Col Regimen',
+			'col_logo' => 'Col Logo',
+			'col_razon_social' => 'Col Razon Social',
+			'col_rut_razon_social' => 'Col Rut Razon Social',
+			'col_fecha_primer' => 'Col Fecha Primer',
+			'col_fecha_segundo' => 'Col Fecha Segundo',
+			'col_fecha_tercer' => 'Col Fecha Tercer',
+			'col_direccion' => 'Col Direccion',
+			'col_region' => 'Col Region',
+			'col_ciudad' => 'Col Ciudad',
+			'col_colegio_email' => 'Col Colegio Email',
+			'col_telefono' => 'Col Telefono',
+			'col_nota_minima' => 'Col Nota Minima',
+			'col_nota_maxima' => 'Col Nota Maxima',
+			'col_nota_aprovacion' => 'Col Nota Aprovacion',
+			'col_aproximacion' => 'Col Aproximacion',
+			'ano_promocion_evaluacion' => 'Ano Reglamento de Evaluacion y Promocion Escolar',
+			'numero_promocion_evaluacion' => 'Numero Reglamento de Evaluacion y Promocion Escolar',
+			'numero_plan_programa' => 'Numero Plan y Programa de Estudios',
+			'ano_plan_programa' => 'Ano Plan y Programa de Estudios',
+			'numero_decreto_supremo' => 'Numero Documento que lo Declara Reconocido Oficialmente',
+			'ano_decreto_supremo' => 'Ano Documento que lo Declara Reconocido Oficialmente',
 		);
 	}
 
@@ -162,7 +175,7 @@ class Colegio extends CActiveRecord
 		$criteria->compare('col_fecha_segundo',$this->col_fecha_segundo,true);
 		$criteria->compare('col_fecha_tercer',$this->col_fecha_tercer,true);
 		$criteria->compare('col_direccion',$this->col_direccion,true);
-		$criteria->compare('col_comuna',$this->col_comuna,true);
+		$criteria->compare('col_region',$this->col_region,true);
 		$criteria->compare('col_ciudad',$this->col_ciudad,true);
 		$criteria->compare('col_colegio_email',$this->col_colegio_email,true);
 		$criteria->compare('col_telefono',$this->col_telefono);
@@ -170,6 +183,12 @@ class Colegio extends CActiveRecord
 		$criteria->compare('col_nota_maxima',$this->col_nota_maxima);
 		$criteria->compare('col_nota_aprovacion',$this->col_nota_aprovacion);
 		$criteria->compare('col_aproximacion',$this->col_aproximacion);
+		$criteria->compare('ano_promocion_evaluacion',$this->ano_promocion_evaluacion);
+		$criteria->compare('numero_promocion_evaluacion',$this->numero_promocion_evaluacion);
+		$criteria->compare('numero_plan_programa',$this->numero_plan_programa);
+		$criteria->compare('ano_plan_programa',$this->ano_plan_programa);
+		$criteria->compare('numero_decreto_supremo',$this->numero_decreto_supremo);
+		$criteria->compare('ano_decreto_supremo',$this->ano_decreto_supremo);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -116,8 +116,12 @@ class SiteController extends Controller
 	public function actionVer(){
 		$dataProvider=new CActiveDataProvider('Noticia',
 			array(
-			'sort'=>array('defaultOrder'=>'not_id DESC'),
-			)
+                'criteria' => array(
+                'limit' => 5,
+                'order' => 'not_fecha DESC',
+                ),
+            	'pagination' => false,
+        	)
   		);
 		$this->renderPartial('ver',array(
 			'dataProvider'=>$dataProvider,
