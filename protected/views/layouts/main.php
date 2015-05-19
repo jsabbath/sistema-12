@@ -17,7 +17,13 @@ if( $temp->temp_ano != 0 ){
 } else {
     $ano_selec = $par->par_descripcion;
 }
-$anos = CHtml::listData(Curso::model()->findAll(array('condition' => 'cur_ano!=:x', 'params' => array(':x' => $ano_selec ))), 'cur_ano', 'cur_ano');
+
+$anos = CHtml::listData(Curso::model()->findAll(array('condition' => 'cur_ano!=:x', 'params' => array(':x' => $ano_selec ))), 'cur_ano', 'cur_ano', $par->par_descripcion);
+
+if( $ano_selec != $par->par_descripcion ){
+    //  si el año actual  no es el seleccionado ( por que no tiene cursos aun) se agrega al array
+   $anos[$par->par_descripcion] = $par->par_descripcion;
+}
 
 
 $tempid = $temp->temp_id;
@@ -187,25 +193,6 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             </a>
                             <strong style="color: white">Salir</strong>
                         </td>
-             
-
-                        <td hidden>
-                            <div class="btn-group">
-                                <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
-                                    <?php echo $nombre; ?>
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- dropdown menu links -->
-                                    <li>
-                                        <a href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña" >Cambiar Contraseña</a>
-                                    </li>
-                                    <li><a href="#"  id="salir" onclick="logout()">
-                                        Salir
-                                    </a></li>
-                                </ul>
-                            </div>
-                        </td>
                     </table>
                 </div>
             </div>   
@@ -259,24 +246,9 @@ if(Yii::app()->user->checkAccess('PROFESOR')){
         </div><!-- page -->
     <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 
-        <!-- DESLOGEAR !-->
-  
-                
          
          
-          <!-- CAMBIAR CONTRASEÑA !-->
-     <?php $this->widget('bootstrap.widgets.TbModal', array(
-            'id' => 'cambio_modal',
-            'header' => '<h4>Cambiando Contraseña</h4>',
-            'content' => '<div id="cambio">  </div>',
-            'htmlOptions' => array ('url' => Yii::app()->user->ui->getProfileUrl()),
-            'footer' => array(
-                 //   TbHtml::linkButton('Salir',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
-                    TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
-            ),
-    )); ?>    
-        
-  
+
 <div align="center" class="text-center">
 	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
 </div>

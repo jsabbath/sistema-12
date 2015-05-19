@@ -242,7 +242,9 @@ class UiController extends Controller
     {
         $this->_editUserProfile(Yii::app()->user->um->loadUserById($id), true);
     }
-
+/**
+CAMBIO CONTRASEÑAX
+*/
     public function _editUserProfile(ICrugeStoredUser $model, $boolIsUserManagement)
     {
         // carga los campos definidos por el administrador
@@ -276,7 +278,7 @@ class UiController extends Controller
                 }
             }
         }
-        $this->renderPartial(
+        $this->render(
             "usermanagementupdate",
             array(
                 'model' => $model

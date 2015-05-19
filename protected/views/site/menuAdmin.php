@@ -82,7 +82,7 @@ if(
 ?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
-		<a class="link-negro" href="#" data-toggle="modal" data-target ="#cambio_modal" id="contraseña">
+		<a class="link-negro" href="<?php echo Yii::app()->user->ui->getProfileUrl()?>" >
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
