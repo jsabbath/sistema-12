@@ -242,8 +242,8 @@ class Matricula extends CActiveRecord
 			    $date1 = new DateTime(date('Y-m-d'));
 				$date2 = new DateTime($this->$attribute);
 				$interval = $date1->diff($date2);
-				if(($interval->y) < 18){
-				    $this->addError($attribute,'Fecha de Nacimiento: Solo se pueden ingresar Donantes Mayores de 18 Años');
+				if(($interval->y) < 3){
+				    $this->addError($attribute,'Fecha de Nacimiento: Solo se pueden ingresar mayores de 3 Años');
 				}
 			}else{
 				$this->addError($attribute,'Fecha de Nacimiento: Ingrese una fecha valida');

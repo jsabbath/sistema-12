@@ -99,7 +99,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_resol_rec_ofic'); ?>
-				<?php echo $form->dateField($model,'col_fecha_resol_rec_ofic'); ?>
+				<?php echo $form->textField($model,'col_fecha_resol_rec_ofic',array('class'=>'datepicker')); ?>
 				<?php echo $form->error($model,'col_fecha_resol_rec_ofic'); ?>
 			</div>
 		</div>
@@ -181,7 +181,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_primer'); ?>
-				<?php echo $form->dateField($model,'col_fecha_primer'); ?>
+				<?php echo $form->textField($model,'col_fecha_primer',array('class'=>'datepicker')); ?>
 				<?php echo $form->error($model,'col_fecha_primer'); ?>
 			</div>
 		</div>
@@ -189,7 +189,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_segundo'); ?>
-				<?php echo $form->dateField($model,'col_fecha_segundo'); ?>
+				<?php echo $form->textField($model,'col_fecha_segundo',array('class'=>'datepicker')); ?>
 				<?php echo $form->error($model,'col_fecha_segundo'); ?>
 			</div>	
 		</div>
@@ -197,7 +197,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_tercer'); ?>
-				<?php echo $form->dateField($model,'col_fecha_tercer'); ?>
+				<?php echo $form->textField($model,'col_fecha_tercer',array('class'=>'datepicker')); ?>
 				<?php echo $form->error($model,'col_fecha_tercer'); ?>
 			</div>
 		</div>
@@ -276,17 +276,17 @@
 
 		<div class="row">
 			<div class="span6">
-				<?php echo $form->labelEx($model,'ano_plan_programa'); ?>
-				<?php echo $form->textField($model,'ano_plan_programa'); ?>
-				<?php echo $form->error($model,'ano_plan_programa'); ?>
+				<?php echo $form->labelEx($model,'numero_plan_programa'); ?>
+				<?php echo $form->textField($model,'numero_plan_programa'); ?>
+				<?php echo $form->error($model,'numero_plan_programa'); ?>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="span6">
-				<?php echo $form->labelEx($model,'numero_plan_programa'); ?>
-				<?php echo $form->textField($model,'numero_plan_programa'); ?>
-				<?php echo $form->error($model,'numero_plan_programa'); ?>
+				<?php echo $form->labelEx($model,'ano_plan_programa'); ?>
+				<?php echo $form->dropDownList($model,'ano_plan_programa',$anos,array('prompt'=>'Seleccione año')); ?>
+				<?php echo $form->error($model,'ano_plan_programa'); ?>
 			</div>
 		</div>
 
@@ -301,7 +301,7 @@
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'ano_decreto_supremo'); ?>
-				<?php echo $form->textField($model,'ano_decreto_supremo'); ?>
+				<?php echo $form->dropDownList($model,'ano_decreto_supremo',$anos,array('prompt'=>'Seleccione año')); ?>
 				<?php echo $form->error($model,'ano_decreto_supremo'); ?>
 			</div>	
 		</div>
@@ -315,3 +315,9 @@
 
 </div><!-- form -->
 <br>
+
+<script type="text/javascript">
+	
+$('.datepicker').datepicker();
+
+</script>

@@ -69,7 +69,7 @@ $rand = "X".$random1.$random2;
 
     <div class="row">
         <?php echo $form->labelEx($alumno,'alum_f_nac'); ?>
-        <?php echo $form->dateField($alumno,'alum_f_nac'); ?>
+        <?php echo $form->textField($alumno,'alum_f_nac',array('class'=>'datepicker')); ?>
     </div>
 
     <div class="row">
@@ -143,7 +143,7 @@ $rand = "X".$random1.$random2;
     <div class="span5 offset1">
         <div class="row">
             <?php echo $form->labelEx($model,'mat_fingreso'); ?>
-            <?php echo $form->dateField($model,'mat_fingreso'); ?>
+            <?php echo $form->textField($model,'mat_fingreso',array('class'=>'datepicker')); ?>
         </div>
 
         <div class="row">
@@ -157,12 +157,12 @@ $rand = "X".$random1.$random2;
         ?>
         <div class="row">
             <?php echo $form->labelEx($model,'mat_fretiro'); ?>
-            <?php echo $form->dateField($model,'mat_fretiro'); ?>
+            <?php echo $form->textField($model,'mat_fretiro',array('class'=>'datepicker')); ?>
         </div>
 
         <div class="row">
             <?php echo $form->labelEx($model,'mat_fcambio'); ?>
-            <?php echo $form->dateField($model,'mat_fcambio'); ?>
+            <?php echo $form->textField($model,'mat_fcambio',array('class'=>'datepicker')); ?>
         </div>
 
         <div class="row">
@@ -181,3 +181,9 @@ $rand = "X".$random1.$random2;
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script type="text/javascript">
+    
+$('.datepicker').datepicker()
+
+</script>
