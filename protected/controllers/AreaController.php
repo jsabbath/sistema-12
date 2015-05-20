@@ -182,6 +182,7 @@ class AreaController extends Controller
 		{
 			$model->attributes=$_POST['Area'];
 			$model->are_infd=$id;
+			$model->are_descripcion = strtoupper($model->are_descripcion);
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "area creada con Exito!");
 				$this->refresh();

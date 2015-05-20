@@ -69,6 +69,13 @@ class UsuarioController extends Controller
 		{
 			$model->attributes=$_POST['Usuario'];
 			$model->usu_estado = $estado;
+
+			//todos los textos en mayuscula
+			$model->usu_nombre1 = strtoupper($model->usu_nombre1);
+			$model->usu_nombre2 = strtoupper($model->usu_nombre2);
+			$model->usu_apepat = strtoupper($model->usu_apepat);
+			$model->usu_apemat = strtoupper($model->usu_apemat);
+
 			if($model->save()){
 				$this->registroCruge($model);
 				$temporal->temp_iduser = $model->usu_iduser;

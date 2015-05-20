@@ -184,6 +184,7 @@ class ConceptoController extends Controller
 		{
 			$model->attributes=$_POST['Concepto'];
 			$model->con_area = $id;
+			$model->con_descripcion = strtoupper($model->con_descripcion);
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Concepto creado con Exito!");
 				$this->refresh();

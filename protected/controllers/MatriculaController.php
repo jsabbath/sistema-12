@@ -83,6 +83,14 @@ class MatriculaController extends Controller
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
+
+                //todo los textos a mayuscula
+                $alumno->alum_nombres = strtoupper($alumno->alum_nombres);
+                $alumno->alum_apepat = strtoupper($alumno->alum_apepat);
+                $alumno->alum_apemat = strtoupper($alumno->alum_apemat);
+                $alumno->alum_direccion = strtoupper($alumno->alum_direccion);
+                $alumno->alum_salud = strtoupper($alumno->alum_salud);
+
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
                     $model->mat_estado = $estado[0]->par_id;
@@ -394,8 +402,8 @@ class MatriculaController extends Controller
                 Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
                 $this->refresh();
             }
-
-            $this->redirect(array('view', 'id' => $id));  
+            Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
+            $this->redirect(array('Site/index'));  
         }
 
         $this->render('cur_link', array(

@@ -67,12 +67,13 @@ class InformeHogarController extends Controller
 		if(isset($_POST['InformeHogar']))
 		{
 			$model->attributes=$_POST['InformeHogar'];
-			if($model->save())
+			$model->ih_descripcion = strtoupper($model->ih_descripcion);
+			if($model->save()){
 				if(isset($model->ih_id)){
 					$id_informe = $model->ih_id;
 					$this->redirect(array('//areaHogar/nuevo','id'=>$id_informe));
-
 				}else throw new CHttpException(404,'The requested page does not exist.');
+			}
 		}
 
 		$this->render('create',array(

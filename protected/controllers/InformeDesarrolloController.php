@@ -72,14 +72,15 @@ class InformeDesarrolloController extends Controller
 		if(isset($_POST['InformeDesarrollo']))
 		{
 			$model->attributes=$_POST['InformeDesarrollo'];
-			if($model->save())
+			$model->id_descripcion = strtoupper($model->id_descripcion);
+			if($model->save()){
 				//$this->redirect(array('view','id'=>$model->id_id));
 				if(isset($model->id_id)){
 					$id_informe = $model->id_id;
 					$this->redirect(array('//area/nuevo','id'=>$id_informe));
 
 				}else throw new CHttpException(404,'The requested page does not exist.');
-				
+			}
 		}
 
 		$this->render('create',array(

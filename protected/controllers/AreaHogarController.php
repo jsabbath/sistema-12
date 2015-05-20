@@ -182,6 +182,7 @@ class AreaHogarController extends Controller
 		{
 			$model->attributes=$_POST['AreaHogar'];
 			$model->ah_inf_hogar=$id;
+			$model->ah_descripcion = strtoupper($model->ah_descripcion);
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "area creada con Exito!");
 				$this->refresh();

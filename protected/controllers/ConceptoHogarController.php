@@ -184,6 +184,7 @@ class ConceptoHogarController extends Controller
 		{
 			$model->attributes=$_POST['ConceptoHogar'];
 			$model->ch_area_hogar = $id;
+			$model->ch_descripcion = strtoupper($model->ch_descripcion);
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Concepto creado con Exito!");
 				$this->refresh();
