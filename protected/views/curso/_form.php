@@ -14,8 +14,11 @@
     'enableAjaxValidation'=>false,
 )); ?>
 
-<?php echo $form->errorSummary($model); ?>
-
+<div class="span8 offset2">
+    <div class="form">
+    <?php echo $form->errorSummary($model,'','',array('class'=>'alert alert-error')); ?>
+    </div>
+</div>
 <div class="row">
     <div class="span5 offset1">
         <div class="row"> 
@@ -78,16 +81,11 @@
         
         <?php } ?>
 
-        <div class="row">
-            <?php echo $form->labelEx($model,'cur_tperiodo'); ?>
-            <?php echo $form->dropDownList($model,'cur_tperiodo',$tp,array('promp'=>'Seleccione Tipo periodo')); ?>
-            <?php echo $form->error($model,'cur_tperiodo'); ?>
-        </div>
-
+       
         <div class="row">
             <?php echo $form->labelEx($model,'cur_notas_periodo'); ?>
             <?php echo $form->textField($model,'cur_notas_periodo',array('size'=>2,'maxlength'=>2)); ?>
-            <?php echo $form->error($model,'cur_notas_periodo'); ?>
+           
         </div>
   
         <div class="row">

@@ -61,17 +61,28 @@ class Colegio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'required'),
-			array('col_numero, col_ano, col_periodo, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_telefono, col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'numerical', 'integerOnly'=>true),
+			array('ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, 
+				numero_decreto_supremo, ano_decreto_supremo, col_fecha_resol_rec_ofic', 'required'),
+			array('col_numero, col_ano, col_periodo, col_numero_resol_rec_ofic, col_telefono, col_nota_minima, 
+					col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, numero_promocion_evaluacion,
+					 numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'numerical',
+					  'integerOnly'=>true),
 			array('col_rolRBD, col_area, col_regimen, col_rut_razon_social', 'length', 'max'=>20),
 			array('col_nombre_colegio, col_region, col_ciudad', 'length', 'max'=>50),
 			array('col_letra', 'length', 'max'=>1),
-			array('col_nombre_director, col_director_email, col_encargado_actas, col_razon_social, col_direccion, col_colegio_email', 'length', 'max'=>255),
+			array('col_nombre_director, col_director_email, col_encargado_actas, col_razon_social, col_direccion, col_colegio_email',
+				 'length', 'max'=>255),
 			array('col_logo', 'length', 'max'=>1024),
 			array('col_lema, col_mision, col_vision, col_fecha_primer, col_fecha_segundo, col_fecha_tercer', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('col_id, col_rolRBD, col_nombre_colegio, col_letra, col_numero, col_ano, col_periodo, col_nombre_director, col_director_email, col_encargado_actas, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_lema, col_mision, col_vision, col_area, col_regimen, col_logo, col_razon_social, col_rut_razon_social, col_fecha_primer, col_fecha_segundo, col_fecha_tercer, col_direccion, col_region, col_ciudad, col_colegio_email, col_telefono, col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'safe', 'on'=>'search'),
+			array('col_id, col_rolRBD, col_nombre_colegio, col_letra, col_numero, col_ano, col_periodo, col_nombre_director,
+				 col_director_email, col_encargado_actas, col_fecha_resol_rec_ofic, col_numero_resol_rec_ofic, col_lema, 
+				 col_mision, col_vision, col_area, col_regimen, col_logo, col_razon_social, col_rut_razon_social, col_fecha_primer, 
+				 col_fecha_segundo, col_fecha_tercer, col_direccion, col_region, col_ciudad, col_colegio_email, col_telefono, 
+				 col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, 
+				 numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo',
+				  'safe', 'on'=>'search'),
 		);
 	}
 

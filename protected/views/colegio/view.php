@@ -49,7 +49,6 @@ $this->menu=array(
 		'col_fecha_segundo',
 		'col_fecha_tercer',
 		'col_direccion',
-		'col_comuna',
 		'col_ciudad',
 		'col_colegio_email',
 		'col_telefono',

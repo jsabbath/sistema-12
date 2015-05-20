@@ -36,7 +36,7 @@ $rand = "X".$random1.$random2;
 
 ?>
 <div class="row">
-    <div class="span12">
+    <div class="span8 offset2">
         <?php echo $form->errorSummary(array($model,$alumno),'','',array('class'=>'alert alert-error')); ?>
     </div>
 </div>
@@ -45,6 +45,11 @@ $rand = "X".$random1.$random2;
 <div class="span12 offset2">
     <h3>Datos alumno:</h3>
 </div>
+
+
+      
+
+
 <div class="span5 offset1">
 
     <div class="row">
@@ -172,10 +177,10 @@ $rand = "X".$random1.$random2;
         <?php
         }
         ?>
-    </div>
 
-    <div class="span12 text-right">
-        <?php echo TbHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY)); ?>
+       <div class="text-left">
+            <?php echo TbHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('color'=>TbHtml::BUTTON_COLOR_PRIMARY, 'size' => TbHtml::BUTTON_SIZE_LARGE)); ?> 
+       </div>
     </div>
 
 <?php $this->endWidget(); ?>

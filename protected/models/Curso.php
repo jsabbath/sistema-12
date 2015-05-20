@@ -43,15 +43,15 @@ class Curso extends CActiveRecord
 			array('cur_nivel','required','message'=>'Debe seleccionar un nivel'),
 			array('cur_letra','required','message'=>'Debe seleccionar una letra'),
 			array('cur_pjefe','required','message'=>'Debe seleccionar un profesor'),
-			array('cur_tperiodo','required','message'=>'Debe seleccionar un tipo de periodo'),
+			//array('cur_tperiodo','required','message'=>'Debe seleccionar un tipo de periodo'),
 			array('cur_notas_periodo','required','message'=>'Debe especificar el numero de notas'),
 			array('cur_infd','required','message'=>'Debe seleccionar un informe de desarrollo'),
 
 			array('cur_notas_periodo','numerical'),
-			array('cur_ano,cur_infd, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo', 'numerical', 'integerOnly'=>true),
+			array('cur_ano,cur_infd, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('cur_id, cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe, cur_tperiodo', 'safe', 'on'=>'search'),
+			array('cur_id, cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,7 +68,6 @@ class Curso extends CActiveRecord
 			'curLetra' => array(self::BELONGS_TO, 'Parametro', 'cur_letra'),
 			'curJornada' => array(self::BELONGS_TO, 'Parametro', 'cur_jornada'),
 			'curPjefe' => array(self::BELONGS_TO, 'Usuario', 'cur_pjefe'),
-			'curTperiodo' => array(self::BELONGS_TO, 'Parametro', 'cur_tperiodo'),
 			'curInfd' => array(self::BELONGS_TO, 'informeDesarrollo', 'cur_infd'),
 		);
 	}
@@ -86,7 +85,6 @@ class Curso extends CActiveRecord
 			'cur_letra' => 'Letra',
 			'cur_jornada' => 'Jornada',
 			'cur_pjefe' => 'Profesor Jefe',
-			'cur_tperiodo' => 'Tipo Periodo',
 			'cur_infd' => 'Informe Desarrollo',
 		);
 	}
@@ -116,7 +114,6 @@ class Curso extends CActiveRecord
 		$criteria->compare('cur_letra',$this->cur_letra);
 		$criteria->compare('cur_jornada',$this->cur_jornada);
 		$criteria->compare('cur_pjefe',$this->cur_pjefe);
-		$criteria->compare('cur_tperiodo',$this->cur_tperiodo);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -137,7 +134,6 @@ class Curso extends CActiveRecord
 		$criteria->compare('cur_letra',$this->cur_letra);
 		$criteria->compare('cur_jornada',$this->cur_jornada);
 		$criteria->compare('cur_pjefe',$this->cur_pjefe);
-		$criteria->compare('cur_tperiodo',$this->cur_tperiodo);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

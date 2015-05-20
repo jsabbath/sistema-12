@@ -24,8 +24,8 @@
 )); ?>
 
 <dov class="row">
-    <div class="span12">
-        <?php echo $form->errorSummary($model); ?>
+    <div class="span8 offset2">
+        <?php echo $form->errorSummary($model,'','',array('class'=>'alert alert-error')); ?>
     </div>
 </dov>
 

@@ -79,7 +79,7 @@ class ColegioController extends Controller
                 $model->col_logo->saveAs($images_path . '/' .$model->col_logo);
                 $this->redirect(array('admin'));
             }
-            var_dump($model);
+           // var_dump($model);
 		}
 
 		$this->render('create',array(
@@ -98,6 +98,12 @@ class ColegioController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		$actual = date('Y');
+		for($i=$actual;$i>=($actual-100);$i--){
+			$anos[$i] = $i; 
+		}
+		$periodo = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="tperiodo"')),'par_id','par_descripcion');
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -110,6 +116,8 @@ class ColegioController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'anos' => $anos,
+			'periodo' => $periodo,
 		));
 	}
 

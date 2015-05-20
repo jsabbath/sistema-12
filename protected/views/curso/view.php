@@ -49,10 +49,7 @@ $this->menu=array(
             <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Informe de Desarrollo</strong></p></td>
             <td width="50%"><p><?php echo $model->curInfd->id_descripcion;?></p></td>
         </tr>
-        <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Tipo de Periodo</strong></p></td>
-            <td width="50%"><p><?php echo $model->curTperiodo->par_descripcion;?></p></td>
-        </tr>
+     
         <tr>
             <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Notas por Periodo</strong></p></td>
             <td width="50%"><p><?php echo $model->cur_notas_periodo?></p></td>
