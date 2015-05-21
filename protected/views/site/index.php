@@ -26,3 +26,10 @@ $(window).load(function()
     $('input').glDatePicker();
 });
 </script>
+
+
+<?php 
+  $cole = Colegio::model()->find();
+   $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
+   echo $tipo_periodo->par_descripcion;
+ ?>

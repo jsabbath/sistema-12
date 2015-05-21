@@ -495,7 +495,8 @@ class CursoController extends Controller
 
 
 		    $curso  = Curso::model()->findByPk($id_curso);
-			$tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+			$cole = Colegio::model()->find();
+            $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
 
 
 		  	foreach ( $asignacion as $p ){
@@ -560,7 +561,8 @@ class CursoController extends Controller
 				$per = "Tercer Periodo";
 			}
 
-			$tipo_per = Parametro::model()->findByPk($curso->cur_tperiodo);
+			$cole = Colegio::model()->find();
+			$tipo_per = Parametro::model()->findByPk($cole->col_periodo);
 			$max = 0;
 			if(	$tipo_per->par_descripcion == "SEMESTRE"){
 				$max = 2;
@@ -617,7 +619,8 @@ class CursoController extends Controller
 
 	            $lista_alumnos = array();
             	$curso = Curso::model()->findByPk($id);
-            	$tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+            	$cole = Colegio::model()->find();
+                $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
 
             	if($tipo_periodo->par_descripcion == 'SEMESTRE' ){
 	            	foreach ($lista_curso as $key => $alumno) { // se recorre cada matricula y  se obtiene el nombre del alumno
@@ -742,7 +745,9 @@ class CursoController extends Controller
 		$lista = $this->actionListar_alumnos($id); // se obtiene la lista de alumnos
 
 		$curso = Curso::model()->findByPk($id);
-        $tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+		$cole = Colegio::model()->find();
+        $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
+        
         
 
 

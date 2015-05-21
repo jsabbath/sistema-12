@@ -340,7 +340,8 @@ class MatriculaController extends Controller
 
                 if( !$esta_matriculado ){
                     $curso = Curso::model()->findByPk($id_curso);
-                    $tipo_periodo = Parametro::model()->findByPk($curso->cur_tperiodo);
+                    $cole = Colegio::model()->find();
+                    $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
                     $id_inf = $curso->cur_infd;
 
                     // SEMESTRE (SACADO  DE LA TABLA PARAMETRO NO CAMBIAR) ;
