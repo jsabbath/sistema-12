@@ -382,14 +382,14 @@ class CursoController extends Controller
       // id de cruge para buscar los cursos del profesor
     public function actionBuscar_notas(){
 
-    	if(Yii::app()->user->checkAccess('admin')){
+    	if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
 			$cursos = $this->actionCursoAnoActual();
 
     		$this->render('buscar_notas',array(
 	    			'cur' => $cursos,
    			));
     	
-    	} else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
     		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
@@ -475,8 +475,8 @@ class CursoController extends Controller
 			$id_curso 	= $_POST['dropdown'];
 
 			//  se ve si  tiene alguno de los roles que pueden  acceder a todas las asignaturas
-			if( Yii::app()->user->checkAccess('admin') || Yii::app()->user->checkAccess('jefe_utp') ||
-				Yii::app()->user->checkAccess('evaluador') || Yii::app()->user->checkAccess('director')){  
+			if( Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin OR Yii::app()->user->checkAccess('jefe_utp') OR
+				Yii::app()->user->checkAccess('evaluador') OR Yii::app()->user->checkAccess('director')){  
 
 				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 
 	 																'params' => array(':x' => $id_curso)));
@@ -675,14 +675,14 @@ class CursoController extends Controller
 	selecciona uno y entra a la seccion  donde se pone la asistencia
 	*/
 	public function actionBuscar_asistencia(){
-    	if(Yii::app()->user->checkAccess('admin') ){
+    	if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
 			$cursos = $this->actionCursoAnoActual();
 
     		$this->render('buscar_asistencia',array(
 	    			'cur' => $cursos,
    			));
     	
-    	} else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+    	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
     		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
@@ -794,7 +794,7 @@ class CursoController extends Controller
 			//  se obtienen todos los datos del usuario  de yii
 		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
 
-			if (Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+			if (Yii::app()->user->checkAccess('director') OR Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
 				 	if($usuario->password == $p){
 				 		 echo json_encode(1);
 				 		 return;

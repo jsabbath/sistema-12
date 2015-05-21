@@ -330,13 +330,13 @@ class MatriculaController extends Controller
         $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
 
-        if(Yii::app()->user->checkAccess('admin')){
+        if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
              $this->render('cur_link', array(
                     'cur' => $cursos,
                     'informe' => $informe,
             ));
 
-        } else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+        } else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
                     Yii::app()->user->checkAccess('director') ){
 
             $usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));

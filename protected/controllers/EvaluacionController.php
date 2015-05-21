@@ -121,12 +121,12 @@ class EvaluacionController extends Controller
 	{
 		$cursos = $this->actionCursoAnoActual();
 
-		if(Yii::app()->user->checkAccess('admin')){
+		if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
 			$this->render('evaluar_curso',array(
 	    			'cur' => $cursos,
 				));
 
-		} else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+		} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
     		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
@@ -387,7 +387,7 @@ class EvaluacionController extends Controller
 		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
 
 		 	// se ve si  es admin o director para editar
-		 	if (Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin') ){
+		 	if (Yii::app()->user->checkAccess('director') OR Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
 			 	if($usuario->password == $p){
 			 		 echo json_encode(1);
 			 		 return;
@@ -411,9 +411,10 @@ class EvaluacionController extends Controller
 				 		}
 			 		}
 			}
-		}
 		echo json_encode(2);
 		return;	
+		}
+		
 	}
 
 	public function actionSubir_eva(){
