@@ -30,32 +30,32 @@ $this->menu=array(
     <div class="span12 text-center">
     <table class="table table-bordered table-hover" width="100%">
         <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Nivel</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Nivel</strong></p></td>
             <td width="50%"><p><?php echo $model->curNivel->par_descripcion;?></p></td>
         </tr>
         <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Letra</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Letra</strong></p></td>
             <td width="50%"><p><?php echo $model->curLetra->par_descripcion;?></p></td>
         </tr>
         <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Jornada</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Jornada</strong></p></td>
             <td width="50%"><p><?php echo $model->curJornada->par_descripcion;?></p></td>
         </tr>
         <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Profesor Jefe</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Profesor Jefe</strong></p></td>
             <td width="50%"><p><?php echo $model->curPjefe->getNombrecorto();?></p></td>
         </tr>
         <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Informe de Desarrollo</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Informe de Desarrollo</strong></p></td>
             <td width="50%"><p><?php echo $model->curInfd->id_descripcion;?></p></td>
         </tr>
      
         <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Notas por Periodo</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Notas por Periodo</strong></p></td>
             <td width="50%"><p><?php echo $model->cur_notas_periodo?></p></td>
         </tr>
           <tr>
-            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Numero Alumnos</strong></p></td>
+            <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Numero Alumnos</strong></p></td>
             <td width="50%"><p><?php echo $num?></p></td>
         </tr>
     </table>
@@ -76,8 +76,8 @@ $this->menu=array(
       <thead>
         <tr>
           <th></th>
-          <th>Docente</th>
           <th>Asignatura</th>
+          <th>Docente</th>
           <th>  </th>
         </tr>
       </thead>
@@ -89,8 +89,8 @@ $this->menu=array(
         ?>
             <tr>
               <td><i class="icon-book"></i></td>
-              <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)),array('class'=>'link-negro'));?> </td>
               <td><?php echo $nombre_asi;?> </td>
+              <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)),array('class'=>'link-negro'));?> </td>
               <?php if( $num == 0 ){ ?>
               <td><div class="text-center"><button class="btn btn-danger" data-toggle="tooltip" title="Eliminar"><i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i></button></div></td>
                 <?php } ?>

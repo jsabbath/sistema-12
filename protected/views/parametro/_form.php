@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+<div class="row">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'parametro-form',
@@ -14,27 +14,28 @@
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
+<div class="span12 text-center">
+	<p class="text-info">Los campos con <span class="required">*</span> son obligatorios.</p>
+</div>
+<div class="span12">
 	<?php echo $form->errorSummary($model); ?>
+</div>
+	
+<div class="span4 offset4">
+	<?php echo $form->labelEx($model,'par_item'); ?>
+	<?php echo $form->textField($model,'par_item',array('size'=>50,'maxlength'=>50)); ?>
+</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'par_item'); ?>
-		<?php echo $form->textField($model,'par_item',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'par_item'); ?>
-	</div>
+<div class="span4 offset4">
+	<?php echo $form->labelEx($model,'par_descripcion'); ?>
+	<?php echo $form->textField($model,'par_descripcion',array('size'=>50,'maxlength'=>50)); ?>
+</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'par_descripcion'); ?>
-		<?php echo $form->textField($model,'par_descripcion',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'par_descripcion'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<div class="span2 offset8">
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('class'=>'btn btn-primary')); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<br>

@@ -65,7 +65,7 @@ class ColegioController extends Controller
 			$anos[$i] = $i; 
 		}
 		$periodo = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="tperiodo"')),'par_id','par_descripcion');
-
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -73,6 +73,8 @@ class ColegioController extends Controller
 		{
 			$model->attributes=$_POST['Colegio'];
 			$images_path = realpath(Yii::app()->basePath . '/../images');
+			$model->col_nombre_director = strtoupper($model->col_nombre_director);
+			
             $model->col_logo=CUploadedFile::getInstance($model,'col_logo');
             if($model->save())
             {
@@ -110,8 +112,12 @@ class ColegioController extends Controller
 		if(isset($_POST['Colegio']))
 		{
 			$model->attributes=$_POST['Colegio'];
-			if($model->save())
+			$images_path = realpath(Yii::app()->basePath . '/../images');
+            $model->col_logo=CUploadedFile::getInstance($model,'col_logo');
+			if($model->save()){
+				$model->col_logo->saveAs($images_path . '/' .$model->col_logo);
 				$this->redirect(array('view','id'=>$model->col_id));
+			}
 		}
 
 		$this->render('update',array(

@@ -56,7 +56,9 @@ $tempid = $temp->temp_id;
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-datepicker.js"></script>
 
    
-<?php 
+<?php
+$logo = Colegio::model()->findAll(array('condition'=>'col_nombre_colegio="COLEGIO ALBORADA"'));
+
 //aqui empieza el control de usuarios
 if(!Yii::app()->user->checkAccess('profesor') OR
     !Yii::app()->user->checkAccess('evaluador') OR
@@ -76,7 +78,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                     <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
                     
                         <td width=9% align="left" class="hidden-phone">    
-                             <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png" >
+                             <img src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo[0]->col_logo; ?>">
                         </td>
                      
                         <td class="visible-desktop">

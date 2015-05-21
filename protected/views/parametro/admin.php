@@ -53,3 +53,10 @@ $('.search-form form').submit(function(){
 		),
 	),
 )); ?>
+
+<div class="row">
+	<div class="span12 text-center">
+		<?php echo CHtml::link('Nuevo Parametro',array('Parametro/create'),array('class'=>'btn btn-warning')); ?>
+	</div>
+</div>
+<br>

@@ -67,6 +67,9 @@ class ParametroController extends Controller
 		if(isset($_POST['Parametro']))
 		{
 			$model->attributes=$_POST['Parametro'];
+			$model->par_item = strtoupper($model->par_item);
+			$model->par_descripcion = strtoupper($model->par_descripcion);
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->par_id));
 		}
@@ -91,6 +94,9 @@ class ParametroController extends Controller
 		if(isset($_POST['Parametro']))
 		{
 			$model->attributes=$_POST['Parametro'];
+			$model->par_item = strtoupper($model->par_item);
+			$model->par_descripcion = strtoupper($model->par_descripcion);
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->par_id));
 		}
