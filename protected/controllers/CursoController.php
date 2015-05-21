@@ -83,7 +83,8 @@ class CursoController extends Controller
             $profesores = CHtml::listData(Usuario::model()->findAll($criteria_doc),'usu_id','Nombrecorto');
 	       	
 
-   
+   			$numero_alumnos = ListaCurso::model()->countByAttributes(array('list_curso_id' => $id));
+
 
         	$niv = Parametro::model()->findByAttributes(array('par_id'=>$cur->cur_nivel));
     		$letra = Parametro::model()->findByAttributes(array('par_id'=>$cur->cur_letra));
@@ -95,6 +96,7 @@ class CursoController extends Controller
             'asignacion' => $asignadas,
             'asignatura' => $asig,
             'prof' => $profesores,
+            'num'	=> $numero_alumnos,
             'niv' => $niv->par_descripcion,
             'letra' => $letra->par_descripcion,
 		));

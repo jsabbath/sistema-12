@@ -54,6 +54,10 @@ $this->menu=array(
             <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Notas por Periodo</strong></p></td>
             <td width="50%"><p><?php echo $model->cur_notas_periodo?></p></td>
         </tr>
+          <tr>
+            <td width="50%" style="background-color: #CCE6FF"><p class="text-right"><strong>Numero Alumnos</strong></p></td>
+            <td width="50%"><p><?php echo $num?></p></td>
+        </tr>
     </table>
     </div>
 </div>
@@ -87,7 +91,9 @@ $this->menu=array(
               <td><i class="icon-book"></i></td>
               <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)),array('class'=>'link-negro'));?> </td>
               <td><?php echo $nombre_asi;?> </td>
+              <?php if( $num == 0 ){ ?>
               <td><div class="text-center"><button class="btn btn-danger" data-toggle="tooltip" title="Eliminar"><i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i></button></div></td>
+                <?php } ?>
             </tr>
         <?php } ?>
       </tbody>

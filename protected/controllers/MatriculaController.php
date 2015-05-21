@@ -324,10 +324,71 @@ class MatriculaController extends Controller
     //funcion para asignar un alumno a un curso y ademas asignarle las notas y las asignaturas asociadas al curso
     public function actionAddcurso($id){
 
-        $cur = $this->actionCursoAnoActual();
         $ano = $this->actionAnoactual();
+        $cursos = $this->actionCursoAnoActual();
 
         $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+
+
+        if(Yii::app()->user->checkAccess('admin')){
+             $this->render('cur_link', array(
+                    'cur' => $cursos,
+                    'informe' => $informe,
+            ));
+
+        } else if (Yii::app()->user->checkAccess('jefe_utp') || Yii::app()->user->checkAccess('evaluador') ||
+                    Yii::app()->user->checkAccess('director') ){
+
+            $usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+
+
+              $this->render('cur_link', array(
+                    //'nombre' => $usuario['Nombrecorto'],
+                    'cur' => $cursos,
+                    'informe' => $informe,
+                ));
+
+        } else if( Yii::app()->user->checkAccess('profesor') ){
+            $profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+            $id_profe = $profe['usu_id'];
+
+            $es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
+                                                            'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
+
+            $id_cur = array(); //  se arma un array con  los cursos que tiene el profe
+
+             if( $es_profe_jefe ){
+                // se agregan cursos si  es q es profe jefe
+                foreach ( $es_profe_jefe as $c ){
+                    $id_cur[] = $c->cur_id;
+                }
+            } else {
+                throw new CHttpException(404,'Usted no tiene Cursos.');
+                return;
+            }
+
+                $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+                $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition('cur_id', $id_cur, 'OR');
+                $cur = Curso::model()->findAll($criteria);
+                // se filtran los cursos por el año  seleccionado
+                $cursos = array();
+                for ($i=0; $i < count($cur); $i++) { 
+                    if($cur[$i]->cur_ano == $ano ){
+                        $cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+                    }
+                }
+
+                $this->render('cur_link', array(
+                    'cur' => $cursos,
+                    'informe' => $informe,
+                ));
+        }
+/**
+
+*/
 
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
@@ -406,11 +467,7 @@ class MatriculaController extends Controller
             Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
             $this->redirect(array('Site/index'));  
         }
-
-        $this->render('cur_link', array(
-            'cur' => $cur,
-            'informe' => $informe,
-        ));
+  
     }
 
     //funcion para determinar el año sobre el que se trabaja
