@@ -51,9 +51,25 @@
         <?php  if( !$model->isNewRecord ){  ?>
             <div class="row">
                 <?php echo $form->labelEx($model,'cur_pjefe'); ?>
-                <?php echo $form->textField($model,'cur_pjefe'); ?>
+                <?php echo $form->hiddenField($model,'cur_pjefe',array('id' => 'id_pjefe')); ?>
                 <?php echo $form->error($model,'cur_pjefe'); ?>
+                <?php echo CHtml::textField('Text', '',array('id'=>'pn','placeholder' => 'Ingrese nombre Profesor',))?>
+                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
             </div>
+
+           <div class="row">
+            <?php echo CHtml::textField('Text', '',
+                array('id'=>'nombre',
+                    'placeholder' => $nom_p,
+                    'disabled'=>'disabled',))?>
+
+
+            <?php echo CHtml::textField('Text', '',
+                array('id'=>'apellido',
+                    'placeholder' => $ape_p,
+                    'disabled'=>'disabled',
+                     ))?>
+            </div>     
         
         <?php } else{ ?>
             <div class="row">
@@ -102,7 +118,7 @@
 <?php $this->endWidget(); ?>
 
 
-<?php if ( $model->isNewRecord ){  ?>
+
     <script>
             $(function(){
             $('#pn').autocomplete({
@@ -141,4 +157,3 @@
                         $("#pn").val("")
                     });
     </script>
-<?php }  ?>

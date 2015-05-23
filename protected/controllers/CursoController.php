@@ -193,6 +193,10 @@ class CursoController extends Controller
 
                 $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
+                // nombre profe jefe
+                $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $model->cur_pjefe));
+                $nombres = $profe->usu_nombre1 ." ". $profe->usu_nombre2;
+                $apellidos = $profe->usu_apepat ." ". $profe->usu_apemat;
 
 		if(isset($_POST['Curso']))
 		{
@@ -209,6 +213,8 @@ class CursoController extends Controller
                                 'jornada' => $jornada,
                                 'letra'  => $letra,
                                 'informe' => $informe,
+                                'nom_p' => $nombres,
+                                'ape_p'	=> $apellidos,
 		));
 	}
 

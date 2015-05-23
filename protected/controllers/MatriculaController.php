@@ -588,7 +588,7 @@ class MatriculaController extends Controller
         $c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
         $ano = $evaluaciones[0]['not_ano'];
         $curso  = Curso::model()->findByPk($c['aa_curso']);
-        $profe = Usuario::model()->findByPk($c['aa_docente']);
+        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
         $notas_periodo = $curso->cur_notas_periodo;
         $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
         $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
@@ -608,7 +608,8 @@ class MatriculaController extends Controller
                                                                 'periodo'       => $p,
                                                                 'profe'         => $profe->NombreCompleto,
                                                                 'ano'           => $ano,
-                                                                'nom_director'  => $cole->col_nombre_director
+                                                                'nom_director'  => $cole->col_nombre_director,
+                                                                'firma_profe'   => $profe->usu_firma,
                         ), true));
         $mPDF1->Output();        
 

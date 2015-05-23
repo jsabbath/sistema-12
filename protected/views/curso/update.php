@@ -25,4 +25,6 @@ $this->menu=array(
                                             'jornada' => $jornada,
                                             'letra' => $letra,
                                             'informe' => $informe,
+                                            'nom_p' => $nom_p,
+                                			'ape_p'	=> $ape_p,
     )); ?>
