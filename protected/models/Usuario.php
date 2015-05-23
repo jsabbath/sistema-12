@@ -47,6 +47,7 @@ class Usuario extends CActiveRecord
 			array('usu_rut','validateRut'),
 			array('usu_rut','validateRutCaracter'),
 			array('usu_rut','length','min'=>9),
+			array('usu_firma', 'file', 'types'=>'png'),
 			array('usu_estado, usu_iduser', 'numerical', 'integerOnly'=>true),
 			array('usu_rut', 'length', 'max'=>12),
 			array('usu_nombre1, usu_nombre2, usu_apepat, usu_apemat', 'length', 'max'=>50),
@@ -85,6 +86,7 @@ class Usuario extends CActiveRecord
 			'usu_apemat' => 'Apellido Materno',
 			'usu_estado' => 'Estado',
 			'usu_iduser' => 'Iduser',
+			'usu_firma'	 => 'Firma',
 		);
 	}
 
