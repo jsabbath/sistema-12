@@ -284,7 +284,7 @@ function fecha(){
 <br>
 <br>
 <div>
-	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 500; $i++) { 
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 435; $i++) { 
         echo "_";
     } ?></p>
 	
@@ -292,21 +292,25 @@ function fecha(){
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<div style="text-align:center">
-	<p>el nombre del director</p>
-	<p>DIRECTOR(A)</p>
-</div>
 
+
+      
+                <table class="heading" style="width:100%; border: 0;">
+        <tr>
+                    <td style="width:50%; text-align: center; border: 0;">
+                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firma1.png">
+                        <p><?php echo $profe; ?></p>
+                        <p>PROFESOR(A)</p>
+                    </td>
+                    <td  align="center" style="border: 0;">
+                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firma1.png">
+                        <p><?php echo strtoupper($nom_director); ?></p>
+                        <p>DIRECTOR(A)</p>
+                    </td>
+                    </tr>
+                </table>
+                 
 
      
 </body>

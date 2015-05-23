@@ -570,6 +570,9 @@ class MatriculaController extends Controller
 
         $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => $p )));
 
+        if( empty($evaluaciones) ){
+           throw new CHttpException(404, 'Alumno sin Curso.');
+        }
         foreach ($evaluaciones as $key => $alum) {
 
             $asi = Asignatura::model()->findByPk($alum->not_asig);
@@ -589,6 +592,7 @@ class MatriculaController extends Controller
         $notas_periodo = $curso->cur_notas_periodo;
         $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
         $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        $cole = Colegio::model()->find();
 
 
         $mPDF1 = Yii::app()->ePdf->mpdf();
@@ -604,6 +608,7 @@ class MatriculaController extends Controller
                                                                 'periodo'       => $p,
                                                                 'profe'         => $profe->NombreCompleto,
                                                                 'ano'           => $ano,
+                                                                'nom_director'  => $cole->col_nombre_director
                         ), true));
         $mPDF1->Output();        
 
