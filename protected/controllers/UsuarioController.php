@@ -76,7 +76,21 @@ class UsuarioController extends Controller
 			$model->usu_apepat = strtoupper($model->usu_apepat);
 			$model->usu_apemat = strtoupper($model->usu_apemat);
 
+			// firma usuario
+			$random1 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3);
+			$random2 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3);
+			$rand = $model->usu_id . $random1 . $random2;
+
+			$images_path = realpath(Yii::app()->basePath . '/../firmas/'.$rand);
+            $model->usu_firma=CUploadedFile::getInstance($model,'usu_firma');
+
 			if($model->save()){
+				if( $model->usu_firma != null ){
+					$nombre = $rand ."_". $model->usu_firma;
+					$model->usu_firma->saveAs($images_path . '/'.$rand ."_" .$model->usu_firma);
+					$model->usu_firma = $nombre;
+					$model->save();
+				 }
 				$this->registroCruge($model);
 				$temporal->temp_iduser = $model->usu_iduser;
 				$temporal->save();
@@ -104,8 +118,25 @@ class UsuarioController extends Controller
 		if(isset($_POST['Usuario']))
 		{
 			$model->attributes=$_POST['Usuario'];
-			if($model->save())
+
+			// firma usuario
+			$random1 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3);
+			$random2 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3);
+			$rand = $model->usu_id . $random1 . $random2;
+
+			$images_path = realpath(Yii::app()->basePath . '/../images/firmas');
+            $model->usu_firma=CUploadedFile::getInstance($model,'usu_firma');
+			
+			if($model->save()){
+				if( $model->usu_firma != null ){
+					$nombre = $rand ."_". $model->usu_firma;
+				
+					$model->usu_firma->saveAs($images_path . '/'.$rand ."_" .$model->usu_firma);
+					$model->usu_firma = $nombre;
+					$model->save();
+				 }
 				$this->redirect(array('view','id'=>$model->usu_id));
+			}
 		}
 
 		$this->render('update',array(

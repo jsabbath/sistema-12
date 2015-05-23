@@ -22,6 +22,8 @@ $this->menu=array(
 	</div>
 </div>
 
+
+
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -38,3 +40,7 @@ $this->menu=array(
 		),
 	),
 )); ?>
+<div class="span6 text-center">
+	<h2>Firma:</h2>
+	<img style="width: 37%" src="<?php echo Yii::app()->baseUrl; ?>/images/firmas/<?php echo $model->usu_firma; ?>">
+</div>

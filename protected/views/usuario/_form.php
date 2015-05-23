@@ -27,6 +27,7 @@
 		// There is a call to performAjaxValidation() commented in generated controller code.
 		// See class documentation of CActiveForm for details on this.
 		'enableAjaxValidation'=>false,
+			'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	)); ?>
 	<?php echo $form->errorSummary($model,'','',array('class'=>'alert alert-error')); ?>
 
@@ -55,6 +56,11 @@
 	<div class="row">
 			<?php echo $form->labelEx($model,'usu_apemat'); ?>
 			<?php echo $form->textField($model,'usu_apemat',array('size'=>30,'maxlength'=>30)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'usu_firma'); ?>
+		<?php echo $form->fileField($model,'usu_firma'); ?>
 	</div>
 
 	<div class="form-actions text-right">
