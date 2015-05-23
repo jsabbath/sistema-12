@@ -593,7 +593,7 @@ class MatriculaController extends Controller
         $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
         $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
         $cole = Colegio::model()->find();
-
+        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
         $mPDF1 = Yii::app()->ePdf->mpdf();
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
@@ -608,8 +608,9 @@ class MatriculaController extends Controller
                                                                 'periodo'       => $p,
                                                                 'profe'         => $profe->NombreCompleto,
                                                                 'ano'           => $ano,
-                                                                'nom_director'  => $cole->col_nombre_director,
+                                                                'nom_director'  => $nombre_dir->nombreCompleto,
                                                                 'firma_profe'   => $profe->usu_firma,
+                                                                'firma_dir'     => $nombre_dir->usu_firma,
                         ), true));
         $mPDF1->Output();        
 

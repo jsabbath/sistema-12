@@ -1,7 +1,17 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
 <?php
 /* @var $this ColegioController */
 /* @var $model Colegio */
 /* @var $form CActiveForm */
+
+if ( empty($nom_dir) AND empty($ape_dir) ){
+	$nom_dir = 'nombre';
+	$ape_dir = 'apelldio';
+}
+
+
+
 ?>
 
 <div class="row">
@@ -66,12 +76,58 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="span6">
-				<?php echo $form->labelEx($model,'col_nombre_director'); ?>
-				<?php echo $form->textField($model,'col_nombre_director',array('size'=>60,'maxlength'=>255)); ?>
-			</div>
-		</div>
+	
+
+							 <?php  if( !$model->isNewRecord ){  ?>
+					            <div class="row">
+					               	<?php echo $form->labelEx($model,'col_nombre_director'); ?>
+									<?php echo $form->hiddenField($model,'col_nombre_director',array('id' => 'id_dir')); ?>
+
+					                <?php echo CHtml::textField('Text', '',array('id'=>'pn','placeholder' => 'Ingrese nombre Director',))?>
+					                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
+					            </div>
+
+					           <div class="row">
+					            <?php echo CHtml::textField('Text', '',
+					                array('id'=>'nombre',
+					                    'placeholder' => $nom_dir,
+					                    'disabled'=>'disabled',))?>
+
+
+					            <?php echo CHtml::textField('Text', '',
+					                array('id'=>'apellido',
+					                    'placeholder' => $ape_dir,
+					                    'disabled'=>'disabled',
+					                     ))?>
+					            </div>     
+					        
+					        <?php } else{ ?>
+					            <div class="row">
+					               	<?php echo $form->labelEx($model,'col_nombre_director'); ?>
+									<?php echo $form->hiddenField($model,'col_nombre_director',array('id' => 'id_dir')); ?>
+
+					                <?php echo CHtml::textField('Text', '',array('id'=>'pn','placeholder' => 'Ingrese nombre Director',))?>
+					                <?php echo TbHtml::button('',array('color'=> TbHtml::ALERT_COLOR_DEFAULT, 'id' =>'limpiar','style'=>'margin-bottom:10px', 'icon' => 'remove' ))?>
+					            </div>
+
+
+					            <div class="row">
+					                <?php echo CHtml::textField('Text', '',
+					                    array('id'=>'nombre',
+					                        'placeholder' => 'Nombres',
+					                        'disabled'=>'disabled',))?>
+
+
+					                <?php echo CHtml::textField('Text', '',
+					                    array('id'=>'apellido',
+					                        'placeholder' => 'Apellidos',
+					                        'disabled'=>'disabled',
+					                         ))?>
+					            </div>     
+
+					      
+					        <?php } ?>
+
 
 		<div class="row">
 			<div class="span6">
@@ -302,3 +358,43 @@ $('.datepicker').datepicker({format: 'yyyy/mm/dd',});
 
 
 </script>
+
+
+    <script>
+            $(function(){
+            $('#pn').autocomplete({
+                     source : function( request, response ) {
+                     $.ajax({
+                        url: '<?php echo $this->createUrl('colegio/Buscar_dir'); ?>',
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function(data) {
+                                    response($.map(data, function(item) {
+                                                return {
+                                                        label: item.nombre +'/' + item.apellido,
+                                                        apellido: item.apellido + ' ' + item.apellido2,
+                                                        nombre: item.nombre + ' ' + item.nombre2,
+                                                        id: item.id_usu, 
+                                                        }
+                                            }))
+                                }
+                            })
+                        },
+                        select: function(event, ui) {
+                            $("#nombre").val(ui.item.nombre)
+                            $("#apellido").val(ui.item.apellido)
+                            $("#id_dir").val(ui.item.id)
+                        },
+
+                    })
+             });
+    </script>   
+
+    
+    <script>
+        $("#limpiar").on('click', function() {
+                        $("#nombre").val(""),
+                        $("#apellido").val(""),
+                        $("#pn").val("")
+                    });
+    </script>

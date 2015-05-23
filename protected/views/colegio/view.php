@@ -57,7 +57,7 @@ $this->menu=array(
         </tr>
         <tr>
             <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Nombre de Director</strong></p></td>
-            <td width="50%"><p><?php echo $model->col_nombre_director; ?></p></td>
+            <td width="50%"><p><?php echo $nombre_dir; ?></p></td>
         </tr>
         <tr>
             <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Correo Director</strong></p></td>

@@ -25,15 +25,15 @@ class ColegioController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','buscar_dir'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','buscar_dir'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','buscar_dir'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -48,8 +48,12 @@ class ColegioController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+		$nombre_dir = Usuario::model()->findByPk($model->col_nombre_director);
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'			=> $model,
+			'nombre_dir'	=>	$nombre_dir->nombreCompleto,
 		));
 	}
 
@@ -78,10 +82,12 @@ class ColegioController extends Controller
             $model->col_logo=CUploadedFile::getInstance($model,'col_logo');
             if($model->save())
             {
-                $model->col_logo->saveAs($images_path . '/' .$model->col_logo);
+            	if( $model->col_logo != null ){
+                	$model->col_logo->saveAs($images_path . '/' .$model->col_logo);
+                }
                 $this->redirect(array('admin'));
             }
-           // var_dump($model);
+ 
 		}
 
 		$this->render('create',array(
@@ -115,7 +121,9 @@ class ColegioController extends Controller
 			$images_path = realpath(Yii::app()->basePath . '/../images');
             $model->col_logo=CUploadedFile::getInstance($model,'col_logo');
 			if($model->save()){
-				$model->col_logo->saveAs($images_path . '/' .$model->col_logo);
+				if( $model->col_logo != null ){
+					$model->col_logo->saveAs($images_path . '/' .$model->col_logo);
+				}
 				$this->redirect(array('view','id'=>$model->col_id));
 			}
 		}
@@ -194,4 +202,37 @@ class ColegioController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	 public function actionBuscar_dir()
+    {
+        $criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(usu_nombre1) like LOWER(:busq)";
+
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
+
+        $data = Usuario::model()->findAll($criterio);
+        
+        foreach($data as $item) {  
+            $resultado[] = array (
+                'id_cruge' => $item->usu_iduser,
+                'id_usu' => $item->usu_id,
+                'nombre'    => $item->usu_nombre1,
+                'apellido' => $item->usu_apepat,
+                'nombre2' => $item->usu_nombre2,
+                'apellido2' => $item->usu_apemat,
+            );
+        }
+
+        echo CJSON::encode($resultado);
+    }
+
+
+
 }

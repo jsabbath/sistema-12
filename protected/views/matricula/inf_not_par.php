@@ -299,12 +299,12 @@ function fecha(){
                 <table class="heading" style="width:100%; border: 0;">
         <tr>
                     <td style="width:50%; text-align: center; border: 0;">
-                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firma1.png">
+                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">
                         <p><?php echo $profe; ?></p>
                         <p>PROFESOR(A)</p>
                     </td>
                     <td  align="center" style="border: 0;">
-                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firma1.png">
+                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_dir; ?>">
                         <p><?php echo strtoupper($nom_director); ?></p>
                         <p>DIRECTOR(A)</p>
                     </td>
