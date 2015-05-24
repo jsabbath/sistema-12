@@ -25,15 +25,15 @@ class UsuarioController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','gridEstado'),
+				'actions'=>array('index','view','gridEstado','val_pass'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','gridEstado'),
+				'actions'=>array('create','update','gridEstado','val_pass'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','gridEstado'),
+				'actions'=>array('admin','delete','gridEstado','val_pass'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -275,4 +275,25 @@ class UsuarioController extends Controller
 		//renderizando vista con la informacion
 		$this->render('online',array('online_user'=>$online_user));
     }
+
+    public function actionVal_pass(){
+    	if(isset($_POST['pass'])){
+			$p = $_POST['pass'];
+		
+			//  se obtienen todos los datos del usuario  de yii
+		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
+		 	if( $usuario ){
+			 	if( $usuario->password == $p ){
+			 		echo json_encode(1);
+				 	return;
+			 	} else{
+			 		echo json_encode(0);
+			 		return;
+			 	}
+			}
+		}
+    }
+
+   
+
 }

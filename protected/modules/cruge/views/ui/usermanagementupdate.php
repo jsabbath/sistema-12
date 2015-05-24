@@ -8,7 +8,6 @@
 	*/
 ?>
 
-<div class="form">
 <?php 
 $form = $this->beginWidget('CActiveForm', array(
     'id'=>'crugestoreduser-form',
@@ -16,117 +15,268 @@ $form = $this->beginWidget('CActiveForm', array(
     'enableClientValidation'=>false,
 )); 
 ?>
-<div class="row form-group">
 
-	<div class='field-group'>
-
-		<h6><?php echo ucfirst(CrugeTranslator::t("datos de la cuenta"));?></h6>
-		<div class='col'>
+<div class="row">
+	<div class="span12 text-center">
 			
-			<?php echo $form->hiddenField($model,'username'); ?>
-			<?php echo $form->error($model,'username'); ?>
-		</div>
-		<div class='col'>
+	<?php if(!$boolIsUserManagement){ ?>
 			
-			<?php echo $form->hiddenField($model,'email'); ?>
-			<?php echo $form->error($model,'email'); ?>
+<h4>Cambiar Contraseña</h4>
+		
+
+			<div class="span7">
+				<?php echo $form->errorSummary($model); ?>
+			</div>	
+		
+			 <div class="row">
+		            <div class="span5 offset3" id="pass_ant">
+		            	<p>Ingrese contraseña actual:</p>
+		                <?php echo CHtml::passwordField('Text', '',array(
+		                    'id'=>'pass_ant_inp','placeholder' => 'Contraseña Actual',
+		                    // 'style' => 'border-color: red; background-color: #FEE;'
+		                ))?>                                                                    
+		               <p style="color: red" id="error_pass_ant" hidden>Datos Incorrectos</p>
+		                <p style="color: green" id="success_pass_ant" hidden>Datos Correctos</p>
+		            </div> 
+		            
+	        </div>
+
+	        <div id="nueva_pass" hidden>
+		        <div class="row">
+			            <div class="span5 offset3" id="pass_ant_div1">
+	                      	<p>Ingrese contraseña nueva:</p>                     
+			                <?php echo CHtml::passwordField('Text', '',array(
+			                    'id'=>'pass_n_inp','placeholder' => 'Contraseña Nueva',
+			                  
+			                ))?>
+			                <p style="color: red" id="error_pass1" hidden>La contraseña debe tener 6 o mas caracteres</p>
+		                	<p style="color: green" id="success_pass1" hidden>Correcto</p>
+			            </div>      
+		        </div>
+
+	            <div class="row">
+		            <div class="span5 offset3" id="pass_ant_div2">
+	                  	<p>Verifique contraseña nueva:</p>                     
+		                <?php echo CHtml::passwordField('Text', '',array(
+		                    'id'=>'pass_n2_inp','placeholder' => 'Verificar contraseña nueva',
+		                  
+		                ))?>
+		                <p style="color: red" id="error_pass2" hidden>La contraseña debe conincidir</p>
+		                <p style="color: green" id="success_pass2" hidden> Correcto</p>
+		            </div>      
+		        </div>
+			</div>
+
+			<div class='row' id="div_pass" hidden>
+				<div class="span5">
+					<p>Nueva Contraseña</p>
+					<?php echo $form->textField($model,'newPassword',array('size'=>10, 'id'=> 'pass_final')); ?>
+					<?php echo $form->error($model,'newPassword'); ?>
+					<script>
+						function fnSuccess(data){
+							$('#CrugeStoredUser_newPassword').val(data);
+						}
+						function fnError(e){
+							alert("error: "+e.responseText);
+						}
+					</script>
+				</div>
+			</div>
+
+<?php } else{ ?>
+
+<h4>Cambiar Contraseña de: <?php echo $nombre; ?></h4>
+		
+
+		
+			<div class='row' id="div_pass">
+				<div class="span5">
+					<p>Nueva Contraseña</p>
+					<?php echo $form->textField($model,'newPassword',array('size'=>10, 'id'=> 'pass_final')); ?>
+					<?php echo $form->error($model,'newPassword'); ?>
+					<script>
+						function fnSuccess(data){
+							$('#CrugeStoredUser_newPassword').val(data);
+						}
+						function fnError(e){
+							alert("error: "+e.responseText);
+						}
+					</script>
+				</div>
+			</div>
+
+<?php } ?>
+
+			<div class="form">
+
+			<!-- inicio de opciones avanazadas, solo accesible bajo el rol 'admin' -->
+			<div class="row">
+				<div class="span8">
+				<?php 
+					if($boolIsUserManagement)
+					if(Yii::app()->user->checkAccess('edit-advanced-profile-features'
+						,__FILE__." linea ".__LINE__))
+						$this->renderPartial('_edit-advanced-profile-features'
+							,array('model'=>$model,'form'=>$form),false); 
+				?>
+				</div>
+			</div>
+			<!-- fin de opciones avanazadas, solo accesible bajo el rol 'admin' -->
+
+
+			</div>
+
+
+		<div class="row buttons text-center">
+			<?php Yii::app()->user->ui->tbutton("Guardar Cambios"); ?>
+			
 		</div>
-		<div class='col'>
-			<?php echo $form->labelEx($model,'newPassword'); ?>
-			<?php echo $form->textField($model,'newPassword',array('size'=>10)); ?>
-			<?php echo $form->error($model,'newPassword'); ?>
-			<script>
-				function fnSuccess(data){
-					$('#CrugeStoredUser_newPassword').val(data);
-				}
-				function fnError(e){
-					alert("error: "+e.responseText);
-				}
-			</script>
-			<!-- <?php/* echo CHtml::ajaxbutton(
-				CrugeTranslator::t("Generar una nueva clave")
-				,Yii::app()->user->ui->ajaxGenerateNewPasswordUrl
-				,array('success'=>new CJavaScriptExpression('fnSuccess'),
-					'error'=>new CJavaScriptExpression('fnError'))
-			); */?>
-                              !-->
-		</div>
+
+					
+					<?php $this->endWidget(); ?>
+
 	</div>
-	
-	<div class='field-group'>
-	
-		<div class='col textfield-readonly' hidden>
-			<?php echo $form->labelEx($model,'regdate'); ?>
-			<?php echo $form->textField($model,'regdate'
-					,array(
-						'readonly'=>'readonly',
-						'value'=>Yii::app()->user->ui->formatDate($model->regdate),
-					)
-			); ?>
-		</div>
-		<div class='col textfield-readonly' hidden>
-			<?php echo $form->labelEx($model,'actdate'); ?>
-			<?php echo $form->textField($model,'actdate'
-					,array(
-						'readonly'=>'readonly',
-						'value'=>Yii::app()->user->ui->formatDate($model->actdate),
-					)
-				); ?>
-		</div>
-		<div class='col textfield-readonly' hidden>
-			<?php echo $form->labelEx($model,'logondate'); ?>
-			<?php echo $form->textField($model,'logondate'
-					,array(
-						'readonly'=>'readonly',
-						'value'=>Yii::app()->user->ui->formatDate($model->logondate),
-					)
-				); ?>
-		</div>
-	
-	</div>
 </div>
 
-<!-- inicio de campos extra definidos por el administrador del sistema -->
-<?php 
-	if(count($model->getFields()) > 0){
-		echo "<div class='row form-group'>";
-		echo "<h6>".ucfirst(CrugeTranslator::t("perfil"))."</h6>";
-		foreach($model->getFields() as $f){
-			// aqui $f es una instancia que implementa a: ICrugeField
-			echo "<div class='col'>";
-			echo Yii::app()->user->um->getLabelField($f);
-			echo Yii::app()->user->um->getInputField($model,$f);
-			echo $form->error($model,$f->fieldname);
-			echo "</div>";
-		}
-		echo "</div>";
-	}
-?>
-<!-- fin de campos extra definidos por el administrador del sistema -->
+
+<script>
+	 $("#pass_ant").keyup(function(event) {
+	 	var bla = $('#pass_ant_inp').val();
+	 	var input_ant = $('#pass_ant_inp');
+	 	var error_ant = $('#error_pass_ant');
+
+	 	var div_new = $('#nueva_pass');
+	 	var input_new = $('#pass_n_inp');
+	 	var input_new2 = $('#pass_n2_inp');
 
 
+			$.ajax({
+				url: '<?php echo $this->createUrl('/usuario/val_pass'); ?>',
+                type: 'POST',
+                dataType: "JSON",
+                data: { pass: bla },
+                success: function(response) {
+                	if( response != 1 ){
+                		input_ant.css({
+                			borderColor: 'red',
+                			backgroundColor: '#FEE'
+                		});
+                		error_ant.show();
+                		$('#success_pass_ant').hide();
+                		div_new.hide();
+
+                	} else{ // correcto
+                		input_ant.css({
+                			borderColor: 'green',
+                			 backgroundColor: '#EFE'
+                		});
+                		// input_ant.attr({
+                		// 	disabled: 'disabled',
+                		// });
+                		error_ant.hide();
+                		$('#success_pass_ant').show();
+
+                		div_new.show();
+                		
+                		$("#pass_ant_div1").keyup(function(event) {
+                			var p1 = $('#pass_n_inp').val();
+                			var inp1 = $('#pass_n_inp');
+                			if( p1.length < 6 ){
+                				inp1.css({
+		                			borderColor: 'red',
+		                			backgroundColor: '#FEE'
+		                		});
+		                		$('#error_pass1').show();
+		                		$('#success_pass1').hide();
+		                		var p2 = $('#pass_n2_inp').val();
+                					var inp2 = $('#pass_n2_inp');
+                					if( p2 == p1 && p2.length >= 6 ){
+                						inp2.css({
+				                			borderColor: 'green',
+				                			backgroundColor: '#EFE'
+				                		});
+
+				                		$('#error_pass2').hide();
+				                		$('#success_pass2').show();
+
+				                		$('#pass_final').val(p1);
+
+                					} else{
+                						inp2.css({
+				                			borderColor: 'red',
+				                			backgroundColor: '#FEE'
+				                		});
+				                		$('#error_pass2').show();
+				                		$('#success_pass2').hide();
+				                		$('#pass_final').val("");
+		                			}
+                				
+                			} else{
+								inp1.css({
+		                			borderColor: 'green',
+		                			backgroundColor: '#EFE'
+		                		});
+		                		var p2 = $('#pass_n2_inp').val();
+                					var inp2 = $('#pass_n2_inp');
+                					if( p2 == p1 && p2.length >= 6 ){
+                						inp2.css({
+				                			borderColor: 'green',
+				                			backgroundColor: '#EFE'
+				                		});
+
+				                		$('#error_pass2').hide();
+				                		$('#success_pass2').show();
+
+				                		$('#pass_final').val(p1);
+
+                					} else{
+                						inp2.css({
+				                			borderColor: 'red',
+				                			backgroundColor: '#FEE'
+				                		});
+				                		$('#error_pass2').show();
+				                		$('#success_pass2').hide();
+				                		$('#pass_final').val("");
+		                			}
+		                		$('#error_pass1').hide();
+		                		$('#success_pass1').show();
+
+		                		$("#pass_ant_div2").keyup(function(event) {
+		                			var p1 = $('#pass_n_inp').val();
+		                			var p2 = $('#pass_n2_inp').val();
+                					var inp2 = $('#pass_n2_inp');
+                					if( p2 == p1 && p2.length >= 6 ){
+                						inp2.css({
+				                			borderColor: 'green',
+				                			backgroundColor: '#EFE'
+				                		});
+
+				                		$('#error_pass2').hide();
+				                		$('#success_pass2').show();
+
+				                		$('#pass_final').val(p1);
+
+                					} else{
+                						inp2.css({
+				                			borderColor: 'red',
+				                			backgroundColor: '#FEE'
+				                		});
+				                		$('#error_pass2').show();
+				                		$('#success_pass2').hide();
+				                		$('#pass_final').val("");
+		                			}
+		                		});
 
 
-<!-- inicio de opciones avanazadas, solo accesible bajo el rol 'admin' -->
+                			}
 
-<?php 
-	if($boolIsUserManagement)
-	if(Yii::app()->user->checkAccess('edit-advanced-profile-features'
-		,__FILE__." linea ".__LINE__))
-		$this->renderPartial('_edit-advanced-profile-features'
-			,array('model'=>$model,'form'=>$form),false); 
-?>
-
-<!-- fin de opciones avanazadas, solo accesible bajo el rol 'admin' -->
+                		});
 
 
+                	}
+                }
+			});
+	}); 
 
 
-
-<div class="row buttons">
-	<?php Yii::app()->user->ui->tbutton("Guardar Cambios"); ?>
-	
-</div>
-<?php echo $form->errorSummary($model); ?>
-<?php $this->endWidget(); ?>
-</div>
+</script>

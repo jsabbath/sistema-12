@@ -250,6 +250,10 @@ CAMBIO CONTRASEÑAX
         // carga los campos definidos por el administrador
         // trayendo consigo el atributo "value" accesible mediante $xx->fieldvalue
         Yii::app()->user->um->loadUserFields($model);
+        $usuario = Usuario::model()->findByAttributes(array('usu_iduser' => $model->iduser));
+
+
+
         $this->performAjaxValidation('crugestoreduser-form', $model);
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
@@ -278,14 +282,25 @@ CAMBIO CONTRASEÑAX
                 }
             }
         }
-        $this->render(
-            "usermanagementupdate",
-            array(
-                'model' => $model
-            ,
-                'boolIsUserManagement' => $boolIsUserManagement
-            )
-        );
+        if ( $usuario ){
+            $this->render(
+                "usermanagementupdate",
+                array(
+                    'model' => $model,
+                    'boolIsUserManagement' => $boolIsUserManagement,
+                    'nombre'    => $usuario->nombreCorto,
+                )
+            );
+        } else{
+            $this->render(
+                "usermanagementupdate",
+                array(
+                    'model' => $model,
+                    'boolIsUserManagement' => $boolIsUserManagement,
+                   
+                )
+            );
+        }
     }
 
     /*

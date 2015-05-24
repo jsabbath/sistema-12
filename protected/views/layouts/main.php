@@ -179,8 +179,12 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                         if(
                             Yii::app()->user->isSuperAdmin OR
                             Yii::app()->user->checkAccess('administrador') OR 
-                            Yii::app()->user->checkAccess('director')
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor')
                         ){ 
+                        
                         ?>
                         <td class="text-center">
                             <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" title="Administracion">
