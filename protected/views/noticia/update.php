@@ -17,6 +17,11 @@ $this->menu=array(
 */
 ?>
 
-<h1>Update Noticia <?php echo $model->not_id; ?></h1>
+<div class="row">
+	<div class="span12 text-center">
+		<h2>Actualizar noticia: <?php echo $model->not_titulo; ?></h2>
+	</div>
+</div>
+<br>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -36,6 +36,16 @@
 		<?php echo $form->textArea($model,'not_texto',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'not_programa'); ?>
+		<?php echo $form->textArea($model,'not_programa',array('rows'=>6, 'cols'=>50)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'not_responsable'); ?>
+		<?php echo $form->textArea($model,'not_responsable',array('rows'=>6, 'cols'=>50)); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

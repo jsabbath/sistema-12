@@ -48,6 +48,8 @@ $('.search-form form').submit(function(){
 		'not_fecha',
 		'not_titulo',
 		'not_texto',
+		'not_programa',
+		'not_responsable',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),

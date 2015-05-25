@@ -29,6 +29,18 @@
 		<?php echo $form->error($model,'not_texto'); ?>
 	</div>
 
+	<div class="span4 offset4">
+		<?php echo $form->labelEx($model,'not_programa'); ?>
+		<?php echo $form->textArea($model,'not_programa',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'not_programa'); ?>
+	</div>
+
+	<div class="span4 offset4">
+		<?php echo $form->labelEx($model,'not_responsable'); ?>
+		<?php echo $form->textArea($model,'not_responsable',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'not_responsable'); ?>
+	</div>
+
 	<div class="span2 offset8">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar',array('class'=>'btn btn-primary')); ?>
 	</div>
@@ -36,3 +48,4 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<br>

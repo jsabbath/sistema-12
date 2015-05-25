@@ -9,6 +9,8 @@
  * @property string $not_fecha
  * @property string $not_titulo
  * @property string $not_texto
+ * @property string $not_programa
+ * @property string $not_responsable
  *
  * The followings are the available model relations:
  * @property CrugeUser $notUser
@@ -31,14 +33,13 @@ class Noticia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('not_titulo', 'required','message'=>'Debe ingresar un titulo'),
+			array('not_titulo', 'required'),
 			array('not_user', 'numerical', 'integerOnly'=>true),
 			array('not_titulo', 'length', 'max'=>50),
-			array('not_texto','required','message'=>'Debe ingresar un texto para la noticia'),
-			array('not_fecha, not_texto', 'safe'),
+			array('not_fecha, not_texto, not_programa, not_responsable', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('not_id, not_user, not_fecha, not_titulo, not_texto', 'safe', 'on'=>'search'),
+			array('not_id, not_user, not_fecha, not_titulo, not_texto, not_programa, not_responsable', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,11 +61,13 @@ class Noticia extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'not_id' => 'ID',
-			'not_user' => 'Usuario',
-			'not_fecha' => 'Fecha',
-			'not_titulo' => 'Titulo',
-			'not_texto' => 'Texto',
+			'not_id' => 'Not',
+			'not_user' => 'Not User',
+			'not_fecha' => 'Not Fecha',
+			'not_titulo' => 'Not Titulo',
+			'not_texto' => 'Not Texto',
+			'not_programa' => 'Not Programa',
+			'not_responsable' => 'Not Responsable',
 		);
 	}
 
@@ -91,6 +94,8 @@ class Noticia extends CActiveRecord
 		$criteria->compare('not_fecha',$this->not_fecha,true);
 		$criteria->compare('not_titulo',$this->not_titulo,true);
 		$criteria->compare('not_texto',$this->not_texto,true);
+		$criteria->compare('not_programa',$this->not_programa,true);
+		$criteria->compare('not_responsable',$this->not_responsable,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

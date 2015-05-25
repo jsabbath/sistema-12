@@ -27,5 +27,7 @@ $this->menu=array(
 		'not_fecha',
 		'not_titulo',
 		'not_texto',
+		'not_programa',
+		'not_responsable',
 	),
 )); ?>
