@@ -47,6 +47,7 @@ class Alumno extends CActiveRecord
 			array('alum_rut','required','message'=>'Debe ingresar un Rut'),
 			array('alum_rut','validateRut','message'=>'Ingrese un Rut valido'),
 			array('alum_rut', 'length', 'max'=>12),
+			
 			array('alum_nombres','required','message'=>'Debe ingresar un nombre'),
 			array('alum_nombres','validateText','message'=>'Ingrese un nombre valido'),
 			array('alum_nombres', 'length', 'max'=>100),

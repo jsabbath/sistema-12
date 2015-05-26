@@ -45,7 +45,6 @@ class Usuario extends CActiveRecord
 			array('usu_rut','unique','message'=>'El rut ya esta ingresado'),
 			array('usu_rut','required','message'=>'Debe ingresar un {attribute}'),
 			array('usu_rut','validateRut'),
-			array('usu_rut','validateRutCaracter'),
 			array('usu_rut','length','min'=>9),
 			array('usu_firma', 'file', 'types'=>'png'),
 			array('usu_estado, usu_iduser', 'numerical', 'integerOnly'=>true),
@@ -185,7 +184,7 @@ class Usuario extends CActiveRecord
 			}
 	    }
     }
-    public function validateRut($attribute, $params) {
+     public function validateRut($attribute, $params) {
 	 	$rut = str_split($this->$attribute);
 	 	$array_rut = array();
 	    for($i=0; $i< strlen($this->$attribute); $i++) {
