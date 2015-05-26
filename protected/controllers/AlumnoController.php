@@ -185,14 +185,17 @@ class AlumnoController extends Controller
 	public function actionRegiones() {
         $districts = Ciudad::model()->findAll('ciu_reg=:id', array(':id' => $_POST['id_region']));
         $return = CHtml::listData($districts, 'ciu_id', 'ciu_descripcion');
+        echo CHtml::tag('option', array('value' => 0), CHtml::encode('Seleccione ciudad'), true);
         foreach ($return as $districtId => $districtName) {
-        echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($districtName), true);
+        	echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($districtName), true);
     	}
+
     }
 
     public function actionCiudades() {
         $districts = Comuna::model()->findAll('com_ciu=:id', array(':id' => $_POST['id_ciudad']));
         $return = CHtml::listData($districts, 'com_id', 'com_descripcion');
+        echo CHtml::tag('option', array('value' => 0), CHtml::encode('Seleccione comuna'), true);
         foreach ($return as $districtId => $districtName) {
         echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($districtName), true);
     	}

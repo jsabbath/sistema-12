@@ -25,15 +25,15 @@ class MatriculaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -118,6 +118,10 @@ class MatriculaController extends Controller
 		$model = $this->loadModel($id);
         $alumno = Alumno::model()->findByPk($model->mat_alu_id);
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
+        $ciudad = CHtml::listData(Ciudad::model()->findAll('ciu_reg=:id', array(':id' => $alumno->alum_region)), 'ciu_id', 'ciu_descripcion');
+        $comuna = CHtml::listData(Comuna::model()->findAll('com_ciu=:id', array(':id' => $alumno->alum_ciudad)), 'com_id', 'com_descripcion');
+
+
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ESTADO"')),'par_id','par_descripcion');
         // Uncomment the following line if AJAX validation is needed
@@ -130,7 +134,7 @@ class MatriculaController extends Controller
             if ($valid){
                 if($alumno->save()){
                     if ($model->save()) {
-                        $this->redirect(array('addcurso', 'id' => $model->mat_id));  
+                        $this->redirect(array('listaCompleta'));  
                     }
                 }
             } else {   
@@ -143,6 +147,8 @@ class MatriculaController extends Controller
             'region'=>$region,
             'genero'=>$genero,
             'estado'=>$estado,
+            'comuna'=>$comuna,
+            'ciudad'=>$ciudad,
         ));
 	}
 
@@ -631,4 +637,62 @@ class MatriculaController extends Controller
             'ano' => $ano,
         ));
     }
+
+
+    public function actionSubir_xml(){
+        $this->render('subir_xml');
+
+    }
+
+    public function actionSubir_archivo(){
+         if( isset( $_FILES['xmlfile']) ){
+            $upload = (object) $_FILES['xmlfile'];
+            $xml_string = $upload->error ? NULL : simplexml_load_file($upload->tmp_name);
+            
+            //$xml = simplexml_load_string($xml_string);
+            $json = json_encode($xml_string);
+            $año = json_decode($json,TRUE);
+            
+            //echo $json;
+            foreach ($año as $key => $a) {
+                foreach ($a as $key => $l) {
+                    if( $key == "tipo_ensenanza" ){
+                        foreach ($l as $key => $k) {
+                            foreach ($k as $key => $value) {
+                                if( $key == "curso" ){
+                                    foreach ($value as $key => $curso) {
+                                        $nivel = $curso['@attributes']['grado'];
+                                        $letra = $curso['@attributes']['letra'];
+                                        echo $nivel . $letra. "<br>";
+
+                                        $id_niv = Parametro::model()->findByAttributes(array('par_item' => 'nivel',
+                                                                                            'par_descripcion' => $nivel ));
+                                        $id_let = Parametro::model()->findByAttributes(array('par_item' => 'letra',
+                                                                                            'par_descripcion' => $letra ));
+                                        
+
+                                        $alumnos = $curso['alumno'];
+                                        foreach ($alumnos as $key => $al) {
+                                            // $alu = $al['@attributes'];
+                                            // echo $alu['run']."-". $alu['digito_ve']. "<br>";
+                                            // echo $alu['nombres']." ".$alu['ape_paterno']."<br>";
+
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                 
+               
+            }
+
+            $this->render('menu');
+
+        }
+    }
+
+
 }

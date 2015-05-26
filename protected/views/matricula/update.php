@@ -18,4 +18,11 @@ $this->breadcrumbs=array(
 	</div>	
 </div>
 
-<?php $this->renderPartial('_form', array('model'=>$model,'alumno'=>$alumno,'region'=>$region,'genero'=>$genero,'estado'=>$estado)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,
+											'alumno'=>$alumno,
+											'region'=>$region,
+											'genero'=>$genero,
+											'estado'=>$estado,
+											'ciudad'=>$ciudad,
+											'comuna'=>$comuna,
+											)); ?>

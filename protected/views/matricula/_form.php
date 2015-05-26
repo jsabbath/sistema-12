@@ -76,43 +76,108 @@ $rand = "X".$random1.$random2;
 </div>
 <div class="span5 offset1">
 
-    <div class="row">
-        <?php echo $form->labelEx($alumno,'alum_region'); ?>
-        <?php
-        echo $form->dropDownList($alumno, 'alum_region', $region, array(
-            'empty' => 'Seleccione region',
-            'ajax' => array(
-                'type'=>'POST', //request type
-                'url'=>CController::createUrl('Alumno/regiones'), //url to call.
-                'update'=>'#drop_ciudad', //selector to update
-                'data'=>array('id_region' => 'js:this.value'), 
-            ),
-        ));
-        ?>
-    </div>
+            <?php if( $model->isNewRecord ){ ?> 
+                <div class="row">
+                    <?php echo $form->labelEx($alumno,'alum_region'); ?>
+                    <?php
+                    echo $form->dropDownList($alumno, 'alum_region', $region, array(
+                        'empty' => 'Seleccione region',
+                        'id'    => 'drop_region', 
+                    ));
+                    ?>
+                </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($alumno,'alum_ciudad'); ?>
-        <?php echo $form->dropDownList($alumno, 'alum_ciudad', array(),array(
-            'empty' => 'Seleccione ciudad',
-            'id'=>'drop_ciudad',
-            'ajax' => array(
-                'type'=>'POST', //request type
-                'url'=>CController::createUrl('Alumno/ciudades'), //url to call.
-                'update'=>'#drop_comuna', //selector to update
-                'data'=>array('id_ciudad' => 'js:this.value'), 
-            ),
-        ));
-?>
-    </div>
+                <div class="row">
+                    <?php echo $form->labelEx($alumno,'alum_ciudad'); ?>
+                    <?php echo $form->dropDownList($alumno, 'alum_ciudad', array(),array(
+                        'empty' => 'Seleccione ciudad',
+                        'id'=>'drop_ciudad',
+                        'disabled'=>'disabled',
+                    ));?>
+                </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($alumno,'alum_comuna'); ?>
-        <?php echo $form->dropDownList($alumno, 'alum_comuna', array(),array(
-            'empty'=>'Seleccione comuna',
-            'id'=>'drop_comuna',
-        ));?>
-    </div>
+                <div class="row">
+                    <?php echo $form->labelEx($alumno,'alum_comuna'); ?>
+                    <?php echo $form->dropDownList($alumno, 'alum_comuna', array(),array(
+                        'empty'=>'Seleccione comuna',
+                        'id'=>'drop_comuna',
+                        'disabled'=>'disabled',
+                    ));?>
+                </div>
+
+                <script type="text/javascript">
+                    $('#drop_region').on('change',function(){
+                        $.ajax({
+                            url: '<?php echo CController::createUrl('Alumno/regiones'); ?>',
+                            type: 'POST',
+                            data: {id_region: this.value},
+                        })
+                        .done(function(response) {
+                            $('#drop_ciudad').html(response);
+                            $('#drop_ciudad').prop("disabled", false);
+                            $('#drop_comuna').prop("disabled", true);
+                             $('#drop_comuna').html("<option value=0>Seleccione comuna<option>");
+                        })
+                        
+                    })
+        
+                    $('#drop_ciudad').on('change',function(){
+                        $.ajax({
+                            url: '<?php echo CController::createUrl('Alumno/ciudades'); ?>',
+                            type: 'POST',
+                            data: {id_ciudad: this.value},
+                        })
+                        .done(function(response) {
+                            $('#drop_comuna').html(response);
+                            $('#drop_comuna').prop("disabled", false);
+                        })
+                        
+                    })
+
+                </script>
+
+
+
+            <?php } else{ ?>
+
+                <div class="row">
+                    <?php echo $form->labelEx($alumno,'alum_region'); ?>
+                    <?php
+                    echo $form->dropDownList($alumno, 'alum_region', $region, array(
+                        'default' => $alumno->alum_region,
+                        'ajax' => array(
+                            'type'=>'POST', //request type
+                            'url'=>CController::createUrl('Alumno/regiones'), //url to call.
+                            'update'=>'#drop_ciudad', //selector to update
+                            'data'=>array('id_region' => 'js:this.value'), 
+                        ),
+                    ));
+                    ?>
+                </div>
+
+                <div class="row">
+                    <?php echo $form->labelEx($alumno,'alum_ciudad'); ?>
+                    <?php echo $form->dropDownList($alumno, 'alum_ciudad', $ciudad,array(
+                        'default' => $alumno->alum_ciudad,
+                        'id'=>'drop_ciudad',
+                        'ajax' => array(
+                            'type'=>'POST', //request type
+                            'url'=>CController::createUrl('Alumno/ciudades'), //url to call.
+                            'update'=>'#drop_comuna', //selector to update
+                            'data'=>array('id_ciudad' => 'js:this.value'), 
+                        ),
+                    ));?>
+                </div>
+
+                <div class="row">
+                    <?php echo $form->labelEx($alumno,'alum_comuna'); ?>
+                    <?php echo $form->dropDownList($alumno, 'alum_comuna', $comuna,array(
+                        'default'=>$alumno->alum_comuna,
+                        'id'=>'drop_comuna',
+                    ));?>
+                </div>
+
+            <?php } ?>
 
     <div class="row">
         <?php echo $form->labelEx($model,'alum_genero'); ?>
@@ -180,6 +245,7 @@ $rand = "X".$random1.$random2;
 
 <script type="text/javascript">
     
-$('.datepicker').datepicker()
+$('.datepicker').datepicker({format: 'yyyy/mm/dd',});
+
 
 </script>
