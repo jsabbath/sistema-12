@@ -86,7 +86,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php } else{ ?>
 
 <h4>Cambiar Contraseña de: <?php echo $nombre; ?></h4>
-		
+<h4>Rut: <?php echo $rut; ?></h4>		
 
 		
 			<div class='row' id="div_pass">

@@ -289,6 +289,7 @@ CAMBIO CONTRASEÑAX
                     'model' => $model,
                     'boolIsUserManagement' => $boolIsUserManagement,
                     'nombre'    => $usuario->nombreCorto,
+                    'rut'       => $usuario->usu_rut,
                 )
             );
         } else{

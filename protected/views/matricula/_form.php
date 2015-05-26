@@ -1,13 +1,4 @@
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/rut.js" type="text/javascript"></script> 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#rut').Rut({
-            format_on: 'keyup',
- 
-        });
-    })
-    
-</script>
+
 
 <?php
 /* @var $this MatriculaController */

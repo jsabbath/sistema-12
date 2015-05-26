@@ -1,16 +1,5 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/rut.js" type="text/javascript"></script> 
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#rut_button').Rut({
-            format_on: 'keyup',
- 
-        });
-    })
-    
-</script>
 
 <?php
 /* @var $this MatriculaController */
