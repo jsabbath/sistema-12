@@ -45,7 +45,7 @@ class Usuario extends CActiveRecord
 			array('usu_rut','unique','message'=>'El rut ya esta ingresado'),
 			array('usu_rut','required','message'=>'Debe ingresar un {attribute}'),
 			array('usu_rut','validateRut'),
-			array('usu_rut','length','min'=>9),
+			array('usu_rut','length','min'=>8),
 			array('usu_firma', 'file', 'types'=>'png'),
 			array('usu_estado, usu_iduser', 'numerical', 'integerOnly'=>true),
 			array('usu_rut', 'length', 'max'=>12),

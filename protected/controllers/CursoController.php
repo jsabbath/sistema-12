@@ -198,6 +198,11 @@ class CursoController extends Controller
                 $nombres = $profe->usu_nombre1 ." ". $profe->usu_nombre2;
                 $apellidos = $profe->usu_apepat ." ". $profe->usu_apemat;
 
+
+                //letra y nivel curso
+                $cur_let = Parametro::Model()->findByPk($model->cur_letra);
+                $cur_niv = Parametro::Model()->findByPk($model->cur_nivel);
+
 		if(isset($_POST['Curso']))
 		{
 			$model->attributes=$_POST['Curso'];
@@ -215,6 +220,8 @@ class CursoController extends Controller
                                 'informe' => $informe,
                                 'nom_p' => $nombres,
                                 'ape_p'	=> $apellidos,
+                                'letra_cur'=> $cur_let->par_descripcion,
+                                'nivel_cur'=> $cur_niv->par_descripcion,
 		));
 	}
 
@@ -488,6 +495,8 @@ class CursoController extends Controller
 	 																'params' => array(':x' => $id_curso)));
 
 			}else if( Yii::app()->user->checkAccess('profesor') ){ // se pregunta si  es profesor para cargar solo sus asignaturas
+
+				$curso_asd = Curso::model()->findByPk($id_curso);
 				$docente    = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
 	
 	 			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y', 
@@ -495,7 +504,7 @@ class CursoController extends Controller
 
 	 			// si el profesor no hace clases en niuna asignatura, entonces es el profesor jefe del curso 
 	 			// por lo  que puede ver todas las asignaturas
-	 			if( empty($asignacion) ){ 
+	 			if( $docente->usu_iduser == $curso_asd->cur_pjefe ){ 
 	 				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 
 	 																'params' => array(':x' => $id_curso)));
 	 			}    

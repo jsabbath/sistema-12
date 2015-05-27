@@ -73,6 +73,7 @@
     ?>
 
     <div class="text-center">
+    <h3>Evaluar Informe Desarrollo</h3>
     <h4>Cursos de: <?php if( $nombre )echo $nombre; ?></h4>
 
 <?php  

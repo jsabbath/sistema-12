@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update AAsignatura <?php echo $model->aa_id; ?></h1>
+<h1>Actualizar Asignanicon Asignatura </h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

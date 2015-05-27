@@ -144,7 +144,7 @@ $rand = "X".$random1.$random2;
                     <?php echo $form->labelEx($alumno,'alum_region'); ?>
                     <?php
                     echo $form->dropDownList($alumno, 'alum_region', $region, array(
-                        'default' => $alumno->alum_region,
+                        'prompt'=>'Seleccione region',
                         'ajax' => array(
                             'type'=>'POST', //request type
                             'url'=>CController::createUrl('Alumno/regiones'), //url to call.
@@ -158,7 +158,7 @@ $rand = "X".$random1.$random2;
                 <div class="row">
                     <?php echo $form->labelEx($alumno,'alum_ciudad'); ?>
                     <?php echo $form->dropDownList($alumno, 'alum_ciudad', $ciudad,array(
-                        'default' => $alumno->alum_ciudad,
+                        'prompt'=>'Seleccione ciudad',
                         'id'=>'drop_ciudad',
                         'ajax' => array(
                             'type'=>'POST', //request type
@@ -172,7 +172,7 @@ $rand = "X".$random1.$random2;
                 <div class="row">
                     <?php echo $form->labelEx($alumno,'alum_comuna'); ?>
                     <?php echo $form->dropDownList($alumno, 'alum_comuna', $comuna,array(
-                        'default'=>$alumno->alum_comuna,
+                        'prompt'=>'Seleccione comuna',
                         'id'=>'drop_comuna',
                     ));?>
                 </div>

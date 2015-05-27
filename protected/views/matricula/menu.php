@@ -196,6 +196,7 @@ if(
 	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
+     Yii::app()->user->checkAccess('profesor') OR
     Yii::app()->user->checkAccess('evaluador') OR
     Yii::app()->user->checkAccess('jefe_utp')
 ){ 
@@ -228,13 +229,50 @@ if(
 		<br>
 <?php
 }
+ 
 
 if(
 	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
-    Yii::app()->user->checkAccess('jefe_utp') OR
-    Yii::app()->user->checkAccess('profesor')
+    Yii::app()->user->checkAccess('evaluador') OR
+    Yii::app()->user->checkAccess('jefe_utp')
+){ 
+?>
+	<div class="row">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/subir_xml'); ?>">
+			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
+				<div class="row">
+					<div class="span1 text-center">
+						<div class="hidden-phone">
+							<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/file_format_xml.png"); ?>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="row">
+							<div class="span3">
+								<strong>Importar Alumnos</strong>
+							</div>
+						</div>
+						<div class="row">
+							<div class="span3">
+								<p>Con un archivo XML podra importar los alumnos del sistema.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+		</div>
+		<br>
+<?php
+}
+if(
+	Yii::app()->user->checkAccess('administrador') OR
+    Yii::app()->user->isSuperAdmin OR 
+    Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('jefe_utp')
+
 ){ 
 ?>
 	<div class="row">

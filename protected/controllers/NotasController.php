@@ -261,11 +261,12 @@ class NotasController extends Controller
 			if( Yii::app()->user->checkAccess('profesor')  ){
 			 	// se busca si existe la asignatura
 			 	$existe = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $id_asi, 'aa_curso' => $curso ));
+			 	$usu = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
 			 	
 			 	// existe la asignatura
 			 	if( $existe ){
 			 		// si el profesor es el que hace la aignatura
-			 		if( Yii::app()->user->id == $existe['aa_docente'] ){
+			 		if( $usu->usu_id == $existe['aa_docente'] ){
 				 		if( $usuario->password == $p){
 				 			echo json_encode(1);
 				 			return;

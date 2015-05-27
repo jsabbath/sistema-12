@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Curso <?php echo $model->cur_id; ?></h1>
+<h1> Actualizar: <?php echo $nivel_cur. " " . $letra_cur; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model,
                                             'niveles' => $niveles,
