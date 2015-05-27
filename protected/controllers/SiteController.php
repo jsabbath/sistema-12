@@ -114,9 +114,12 @@ class SiteController extends Controller
 	}
 
 	public function actionVer(){
+		$hoy = date('Y-m-d');
+
 		$dataProvider=new CActiveDataProvider('Noticia',
 			array(
                 'criteria' => array(
+                'condition' => 'not_fecha="'.$hoy.'" OR not_fecha>"'.$hoy.'"',
                 'limit' => 5,
                 'order' => 'not_fecha DESC',
                 ),
