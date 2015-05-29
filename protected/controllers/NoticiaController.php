@@ -68,7 +68,6 @@ class NoticiaController extends Controller
 		{
 			$model->attributes=$_POST['Noticia'];
 			$model->not_user = Yii::app()->user->id;
-			$model->not_fecha = date('Y-m-d');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->not_id));
 		}

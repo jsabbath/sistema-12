@@ -61,13 +61,13 @@ class Noticia extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'not_id' => 'Not',
-			'not_user' => 'Not User',
-			'not_fecha' => 'Not Fecha',
-			'not_titulo' => 'Not Titulo',
-			'not_texto' => 'Not Texto',
-			'not_programa' => 'Not Programa',
-			'not_responsable' => 'Not Responsable',
+			'not_id' => 'ID',
+			'not_user' => 'Usuario',
+			'not_fecha' => 'Fecha',
+			'not_titulo' => 'Titulo',
+			'not_texto' => 'Texto',
+			'not_programa' => 'Programa',
+			'not_responsable' => 'Responsable',
 		);
 	}
 

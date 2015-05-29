@@ -15,7 +15,7 @@ $this->menu=array(
 ?>
 <div class="row">
 	<div class="span12 text-center">
-		<h2>Crear Noticia</h2>
+		<h2>Ingresar Noticia</h2>
 	</div>
 	<div class="span12 text-center">
 		<p class="text-info">Los campos con <span class="required">*</span> son requeridos.</p>
