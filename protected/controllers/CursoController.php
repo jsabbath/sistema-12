@@ -27,19 +27,19 @@ class CursoController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia', 'menu',
 									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia',
-									'guardar_asistencia','lista_cursos'),
+									'guardar_asistencia','lista_cursos','cambiar_cursos'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia', 'menu',
 									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia',
-									'guardar_asistencia','lista_cursos'),
+									'guardar_asistencia','lista_cursos','cambiar_cursos'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','recieveValue','buscar_prof','bcxn','buscar_notas', 'validar_asistencia', 'menu',
 									'reload_asi','poner_notas','listar_alumnos','buscar_asistencia','poner_asistencia',
-									'guardar_asistencia','lista_cursos'),
+									'guardar_asistencia','lista_cursos','cambiar_cursos'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -859,5 +859,168 @@ class CursoController extends Controller
 			'jorn'=>$jorn,
 		));
 	}
+
+	// function para cambiar de curso a un alumno
+	public function actionCambiar_cursos(){
+
+	   	if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
+			$cursos = $this->actionCursoAnoActual();
+
+			$this->render('cambiar_cur',array(
+	    			'cur' => $cursos,
+				));
+    	
+    	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
+    				Yii::app()->user->checkAccess('director') ){
+
+    		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$cursos = $this->actionCursoAnoActual();
+
+    		$this->render('cambiar_cur',array(
+    				'nombre' => $usuario['Nombrecorto'],
+	    			'cur' => $cursos,
+   			));
+
+    	} else if( Yii::app()->user->checkAccess('profesor') ){
+    		$ano = $this->actionAnoActual();
+    		$profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$id_profe = $profe['usu_id'];
+
+
+ 			
+    		
+    		$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
+    														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
+    		
+    		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
+    		$cursos = array();
+
+	        if( $es_profe_jefe ){ //  si no  es profe jefe el array  de cursos quedara null
+    			// se agregan cursos si  es q es profe jefe
+    			foreach ( $es_profe_jefe as $c ){
+	                $id_cur[] = $c->cur_id;
+	            }
+    		
+
+	            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+				$criteria = new CDbCriteria();
+	            $criteria->addInCondition('cur_id', $id_cur, 'OR');
+	            $cur = Curso::model()->findAll($criteria);
+	 			// se filtran los cursos por el año  seleccionado
+	 			
+	 			for ($i=0; $i < count($cur); $i++) { 
+	 				if($cur[$i]->cur_ano == $ano ){
+						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+					}
+				}
+			}
+
+			$this->render('cambiar_cur',array(
+    			'cur' => $cursos,
+    			'usu' => $id_profe,
+    			'nombre' => $profe['Nombrecorto'],
+			));
+
+
+    	} 
+
+
+
+
+	}
+
+	public function actionBuscar_rut_curso(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(alum_rut) like LOWER(:busq)";
+
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
+
+        $data = Alumno::model()->findAll($criterio);
+        $ano = $cursos = $this->actionAnoactual();
+
+
+        foreach($data as $item) {
+        
+        	$mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
+        	$notas = Notas::model()->find(array('not_mat' => $mat->mat_id));
+        	$aa = AAsignatura::model()->find(array('aa_asignatura' => $notas->not_asig));
+        	$curso = Curso::model()->findByPk($aa->aa_curso);
+
+        	$nivel = Parametro::model()->findByPk($curso->cur_nivel);
+        	$letra = Parametro::model()->findByPk($curso->cur_letra);
+
+            $resultado[] = array (
+                'rut' => $item->alum_rut,
+                'id_alum' => $item->alum_id,
+                'nombre'    => $item->alum_nombres,
+                'apellido' => $item->alum_apepat,
+                'apellido2' => $item->alum_apemat,
+                'curso' => $nivel->par_descripcion ." ". $letra->par_descripcion,
+                'cur_id' => $curso->cur_id,
+            );
+        }
+
+        echo CJSON::encode($resultado);
+	}
+
+	public function actionBuscar_alumno_curso(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(alum_nombres) like LOWER(:busq)";
+
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
+
+        $data = Alumno::model()->findAll($criterio);
+        $ano = $cursos = $this->actionAnoactual();
+
+
+        foreach($data as $item) {
+        
+        	$mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
+        	if( $mat){
+	        	$notas = Notas::model()->find(array('not_mat' => $mat->mat_id));
+	        	$aa = AAsignatura::model()->find(array('aa_asignatura' => $notas->not_asig));
+	        	$curso = Curso::model()->findByPk($aa->aa_curso);
+
+	        	$nivel = Parametro::model()->findByPk($curso->cur_nivel);
+	        	$letra = Parametro::model()->findByPk($curso->cur_letra);
+			}
+            $resultado[] = array (
+                'rut' => $item->alum_rut,
+                'id_alum' => $item->alum_id,
+                'nombre'    => $item->alum_nombres,
+                'apellido' => $item->alum_apepat,
+                'apellido2' => $item->alum_apemat,
+                'curso' => $nivel->par_descripcion ." ". $letra->par_descripcion,
+                'cur_id' => $curso->cur_id,
+            );
+        }
+
+        echo CJSON::encode($resultado);
+	}
+
+
+	// function para matricular un alumno manual mente. 
+	// id = id_alumno, cur = id_curso,
+	public function actionMatricular_alumno($id,$cur){
+		
+	}
+
+
 }
 

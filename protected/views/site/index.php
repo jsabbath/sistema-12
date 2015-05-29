@@ -1,28 +1,23 @@
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/glDatePicker.default.css">
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/glDatePicker.js"></script>
 
 <?php
 /* @var $this SiteController */
+$nombre = 'admin';
+$modelo_usuario = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
+if ($modelo_usuario) {
+    $nombre = "" . $modelo_usuario->usu_nombre1 . " " . $modelo_usuario->usu_apepat;
+}
+
 
 $this->pageTitle=Yii::app()->name;
 ?>
 
 <div class="row">
-	<div class="span8">
+	<div class="span8 offset1">
+		<h3 class="text-center">Bienvenido: <?php echo $nombre; ?></h3>
 		<h3 class="text-center">Noticias</h3>
 		<?php $this->actionVer(); ?>
 	</div>
 	<div class="span4 text-center">
-		<input type="text" id="mydate" gldp-id="mydate" />
-	    <div gldp-el="mydate"
-	         style="width:400px; height:300px; position:absolute; top:70px; left:100px;">
-	    </div>
+		
 	</div>
 </div>
-
-<script type="text/javascript">
-$(window).load(function()
-{
-    $('input').glDatePicker();
-});
-</script>

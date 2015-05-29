@@ -17,14 +17,24 @@ function fecha(){
 
 <!DOCTYPE html>
 <html>
+<head>
+<title>HTML Reference</title>
+</head>
 
 <style>
+        @page {
+         margin-top: 0px;
+         margin-bottom: 50;
+         margin-left: 25;
+         margin-right: 25;
+        }
+
         *
         {
             margin:0;
             padding:0;
             font-family:Arial;
-            font-size:10pt;
+            font-size:9pt;
             color:#000;
         }
         body
@@ -176,13 +186,12 @@ function fecha(){
 	</tr>
 </table>
 
-<br>
-<br>
+
 
 <div style="text-align: center">
 	<h2>Informe de Notas Parciales</h2>
 </div>
-<br>
+
 
 <table style="border: 0;">
 	<tr style="border: 0;">
@@ -284,7 +293,7 @@ function fecha(){
 <br>
 <br>
 <div>
-	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 435; $i++) { 
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 229; $i++) { 
         echo "_";
     } ?></p>
 	
@@ -299,12 +308,12 @@ function fecha(){
                 <table class="heading" style="width:100%; border: 0;">
         <tr>
                     <td style="width:50%; text-align: center; border: 0;">
-                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">
+                        <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">
                         <p><?php echo $profe; ?></p>
                         <p>PROFESOR(A)</p>
                     </td>
                     <td  align="center" style="border: 0;">
-                        <img style="width: 37%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_dir; ?>">
+                        <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_dir; ?>">
                         <p><?php echo strtoupper($nom_director); ?></p>
                         <p>DIRECTOR(A)</p>
                     </td>
