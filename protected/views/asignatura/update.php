@@ -1,7 +1,7 @@
 <?php
 /* @var $this AsignaturaController */
 /* @var $model Asignatura */
-
+/*
 $this->breadcrumbs=array(
 	'Asignaturas'=>array('index'),
 	$model->asi_id=>array('view','id'=>$model->asi_id),
@@ -14,8 +14,13 @@ $this->menu=array(
 	array('label'=>'View Asignatura', 'url'=>array('view', 'id'=>$model->asi_id)),
 	array('label'=>'Manage Asignatura', 'url'=>array('admin')),
 );
+*/
 ?>
 
-<h1>Update Asignatura <?php echo $model->asi_id; ?></h1>
+<div class="row">
+	<div class="span12">
+		<h2>Modificar <?php echo $model->asi_descripcion; ?></h2>
+	</div>
+</div>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

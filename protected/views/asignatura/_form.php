@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+<div class="row">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'asignatura-form',
@@ -15,32 +15,35 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<div class="span12 text-center">
+	<p class="text-info">Los campos con <span class="required">*</span> son obligatorios.</p>
+</div>
 
-	<?php echo $form->errorSummary($model); ?>
+<div class="span12">
+	<?php echo $form->errorSummary($model,'','',array('class'=>'alert alert-error')); ?>
+</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'asi_descripcion'); ?>
-		<?php echo $form->textField($model,'asi_descripcion',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'asi_descripcion'); ?>
-	</div>
+<div class="span4 offset5">
+	<?php echo $form->labelEx($model,'asi_descripcion'); ?>
+	<?php echo $form->textField($model,'asi_descripcion',array('size'=>60,'maxlength'=>100)); ?>
+</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'asi_codigo'); ?>
-		<?php echo $form->textField($model,'asi_codigo',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'asi_codigo'); ?>
-	</div>
+<div class="span4 offset5">
+	<?php echo $form->labelEx($model,'asi_nombrecorto'); ?>
+	<?php echo $form->textField($model,'asi_nombrecorto',array('size'=>5,'maxlength'=>5)); ?>
+</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'asi_nombrecorto'); ?>
-		<?php echo $form->textField($model,'asi_nombrecorto',array('size'=>5,'maxlength'=>5)); ?>
-		<?php echo $form->error($model,'asi_nombrecorto'); ?>
-	</div>
+<div class="span4 offset5">
+	<?php echo $form->labelEx($model,'asi_codigo'); ?>
+	<?php echo $form->textField($model,'asi_codigo',array('size'=>10,'maxlength'=>10)); ?>
+</div>
+<br>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<div class="span2 offset8">
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('class'=>'btn btn-primary')); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<br>

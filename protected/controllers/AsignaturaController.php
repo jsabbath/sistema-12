@@ -69,7 +69,7 @@ class AsignaturaController extends Controller
 			$model->attributes=$_POST['Asignatura'];
 			$model->asi_ano = $this->actionAnoactual();
 			if($model->save()){
-
+				Yii::app()->user->setFlash('success', "asignatura creada con Exito!");
 				$this->redirect(array('view','id'=>$model->asi_id));
 			}
 		}
@@ -94,8 +94,10 @@ class AsignaturaController extends Controller
 		if(isset($_POST['Asignatura']))
 		{
 			$model->attributes=$_POST['Asignatura'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success', "asignatura modificada con Exito!");
 				$this->redirect(array('view','id'=>$model->asi_id));
+			}
 		}
 
 		$this->render('update',array(
