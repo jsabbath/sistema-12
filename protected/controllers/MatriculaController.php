@@ -335,66 +335,9 @@ class MatriculaController extends Controller
 
         $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
-
-        if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
-             $this->render('cur_link', array(
-                    'cur' => $cursos,
-                    'informe' => $informe,
-            ));
-
-        } else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
-                    Yii::app()->user->checkAccess('director') ){
-
-            $usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+       
 
 
-              $this->render('cur_link', array(
-                    //'nombre' => $usuario['Nombrecorto'],
-                    'cur' => $cursos,
-                    'informe' => $informe,
-                ));
-
-        } else if( Yii::app()->user->checkAccess('profesor') ){
-            $profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
-            $id_profe = $profe['usu_id'];
-
-            $es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
-                                                            'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
-
-            $id_cur = array(); //  se arma un array con  los cursos que tiene el profe
-
-             if( $es_profe_jefe ){
-                // se agregan cursos si  es q es profe jefe
-                foreach ( $es_profe_jefe as $c ){
-                    $id_cur[] = $c->cur_id;
-                }
-            } else {
-                throw new CHttpException(404,'Usted no tiene Cursos.');
-                return;
-            }
-
-                $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
-                $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
-
-                $criteria = new CDbCriteria();
-                $criteria->addInCondition('cur_id', $id_cur, 'OR');
-                $cur = Curso::model()->findAll($criteria);
-                // se filtran los cursos por el año  seleccionado
-                $cursos = array();
-                for ($i=0; $i < count($cur); $i++) { 
-                    if($cur[$i]->cur_ano == $ano ){
-                        $cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
-                    }
-                }
-
-                $this->render('cur_link', array(
-                    'cur' => $cursos,
-                    'informe' => $informe,
-                ));
-        }
-/**
-
-*/
 
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
@@ -461,19 +404,85 @@ class MatriculaController extends Controller
                         $evaluacion->eva_ano = $curso->cur_ano;
                         $evaluacion->save();
                     }
+
+                    Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
                     
                 }else{
                     Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
-                    $this->refresh();
                 }
             } else {
                 Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
-                $this->refresh();
             }
-            Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
-            $this->redirect(array('Site/index'));  
+          
         }
-  
+        
+
+
+
+
+        /**
+
+        */
+
+
+        if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
+             $this->render('cur_link', array(
+                    'cur' => $cursos,
+                    'informe' => $informe,
+            ));
+
+        } else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
+                    Yii::app()->user->checkAccess('director') ){
+
+            $usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+
+
+              $this->render('cur_link', array(
+                    //'nombre' => $usuario['Nombrecorto'],
+                    'cur' => $cursos,
+                    'informe' => $informe,
+                ));
+
+        } else if( Yii::app()->user->checkAccess('profesor') ){
+            $profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+            $id_profe = $profe['usu_id'];
+
+            $es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
+                                                            'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
+
+            $id_cur = array(); //  se arma un array con  los cursos que tiene el profe
+
+             if( $es_profe_jefe ){
+                // se agregan cursos si  es q es profe jefe
+                foreach ( $es_profe_jefe as $c ){
+                    $id_cur[] = $c->cur_id;
+                }
+            } else {
+                throw new CHttpException(404,'Usted no tiene Cursos.');
+                return;
+            }
+
+                $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+                $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition('cur_id', $id_cur, 'OR');
+                $cur = Curso::model()->findAll($criteria);
+                // se filtran los cursos por el año  seleccionado
+                $cursos = array();
+                for ($i=0; $i < count($cur); $i++) { 
+                    if($cur[$i]->cur_ano == $ano ){
+                        $cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+                    }
+                }
+
+                $this->render('cur_link', array(
+                    'cur' => $cursos,
+                    'informe' => $informe,
+                ));
+        }
+
+
     }
 
     //funcion para determinar el año sobre el que se trabaja
@@ -660,38 +669,39 @@ class MatriculaController extends Controller
                 foreach ($a as $key => $l) {
                 if( $key == "tipo_ensenanza" ){
                     foreach ($l as $key => $k) {
-                        foreach ($k as $key => $value) {
-                        if( $key == "curso" ){
+                    foreach ($k as $key => $value) { // todos los cursos
+                        if( $key != "codigo" OR $key == "0"){
+                            $nivel = $value['@attributes']['grado'];
+                            $letra = $value['@attributes']['letra'];
+
                             foreach ($value as $key => $curso) {
-                                  echo "jejej";
-                                $nivel = $curso['@attributes']['grado'];
-                                $letra = $curso['@attributes']['letra'];
-                              
-                                $niv = $this->nivelCurso($nivel);
+                            if( $key == 'alumno' ){
+                                foreach ($curso as $key => $alumno) {
+                                    $alu = $alumno['@attributes'];
+                                    $niv = $this->nivelCurso($nivel);
+
+                            
+                                    $id_niv = Parametro::model()->findByAttributes(array('par_item' => 'nivel',
+                                                                                        'par_descripcion' => $niv ));
+                                    $id_let = Parametro::model()->findByAttributes(array('par_item' => 'letra',
+                                                                                        'par_descripcion' => $letra ));
+                                    
+
+                                    $cu = Curso::model()->findByAttributes(array('cur_nivel'=> $id_niv->par_id,
+                                                                                 'cur_letra'=> $id_let->par_id));
 
                                 
-                                $id_niv = Parametro::model()->findByAttributes(array('par_item' => 'nivel',
-                                                                                    'par_descripcion' => $niv ));
-                                $id_let = Parametro::model()->findByAttributes(array('par_item' => 'letra',
-                                                                                    'par_descripcion' => $letra ));
-                                
-
-                                $cu = Curso::model()->findByAttributes(array('cur_nivel'=> $id_niv->par_id,
-                                                                             'cur_letra'=> $id_let->par_id));
-
-                                $alumnos = $curso['alumno'];
-                                foreach ($alumnos as $key => $al) {
                                     if( $alu['genero'] = "M" ){
                                         $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="MASCULINO"'));
                                     } else{
                                         $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="FEMENINO"'));
                                     }
-                                    $alu = $al['@attributes'];
+                                    
                                     $rut =  $alu['run']."-". $alu['digito_ve'];
 
 
                                     $existe_alumno = Alumno::model()->findByAttributes(array('alum_rut' => $rut));
-                                    if($existe_alumno){
+                                    if(!$existe_alumno){
                                         
                                         $id_curso = $cu->cur_id;
                                        
@@ -708,12 +718,15 @@ class MatriculaController extends Controller
                                                                         $genero,$ape_pa,$ape_mat,$dir,
                                                                         $f_naci,$f_incri,$comuna);
                                     } else{
-                                        echo "alumno ya en sistema";
+                                        echo "-alumno ya en sistema<br>";
                                     }
-                                    
-                                }
-                            }
-                            }
+                                            
+                                       
+                                
+                            }}}}
+                               
+
+                           
                         }
                     }
                     }
