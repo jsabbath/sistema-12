@@ -78,7 +78,6 @@
 
 .noticiaborde{
 	border-radius: 20px 20px 20px 20px;
-	border-width:1px;
 	background-color: #E79825;
 }
 .noticiatitulo{
@@ -86,9 +85,6 @@
 	font-size: 20px;
 	font-weight: bold;
 	text-indent: 1em;
-}
-.noticiafecha{
-
 }
 .noticiatexto{
 	font-style: oblique;

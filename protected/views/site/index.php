@@ -13,11 +13,10 @@ $this->pageTitle=Yii::app()->name;
 
 <div class="row">
 	<div class="span8 offset1">
-		<h3 class="text-center">Bienvenido: <?php echo $nombre; ?></h3>
 		<h3 class="text-center">Noticias</h3>
 		<?php $this->actionVer(); ?>
 	</div>
-	<div class="span4 text-center">
-		
+	<div class="span3 text-center">
+		<h3 class="text-center">Bienvenido: <?php echo $nombre; ?></h3>
 	</div>
 </div>
