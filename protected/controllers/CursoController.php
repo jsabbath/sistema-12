@@ -616,7 +616,7 @@ class CursoController extends Controller
 	            $mat_id = array();
 
 
-	            $lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion', 
+	            $lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion', 
 													'condition' => 'list_curso_id=:x', 'params' => array(':x' => $id )));
 
 	            // se recorre la lista del curso
