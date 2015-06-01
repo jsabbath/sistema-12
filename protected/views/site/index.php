@@ -17,6 +17,7 @@ $this->pageTitle=Yii::app()->name;
 		<?php $this->actionVer(); ?>
 	</div>
 	<div class="span3 text-center">
-		<h3 class="text-center">Bienvenido: <?php echo $nombre; ?></h3>
+		<br>
+		<button class="btn btn-default btn-block disabled"><strong><?php echo $nombre; ?></strong></button>
 	</div>
 </div>

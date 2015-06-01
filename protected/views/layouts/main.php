@@ -211,11 +211,9 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                 <?php
                 $flashMessages = Yii::app()->user->getFlashes();
                 if ($flashMessages) {
-                    echo '<ul class="flashes">';
                     foreach ($flashMessages as $key => $message) {
-                        echo '<li><div class="flash-' . $key . '">' . $message . "</div></li>\n";
+                        echo '<div class="alert alert-' . $key . '" style="margin-bottom:0; border-radius: 20px 20px 20px 20px; margin-left:10px; margin-right:10px;">' . $message . "</div>";
                     }
-                    echo '</ul>';
                 }
                 ?>
             </div>
