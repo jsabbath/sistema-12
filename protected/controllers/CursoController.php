@@ -544,7 +544,7 @@ class CursoController extends Controller
 
 		$asignatura = Asignatura::model()->findByPk($id_asig);
 
-		$lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion', 
+		$lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion', 
 														'condition' => 'list_curso_id=:x', 'params' => array(':x' => $c )));
 
 		// se recorre la lista del curso
