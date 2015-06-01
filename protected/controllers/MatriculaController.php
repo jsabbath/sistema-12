@@ -406,12 +406,15 @@ class MatriculaController extends Controller
                     }
 
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
+                    $this->refresh(); 
                     
                 }else{
                     Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
+                  $this->refresh(); 
                 }
             } else {
                 Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
+               $this->refresh(); 
             }
           
         }
