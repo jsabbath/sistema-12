@@ -8,7 +8,7 @@
 
 <div class="row">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'noticia-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -47,7 +47,14 @@
 
 			<div class="span5 offset1">
 				<?php echo $form->labelEx($model,'not_programa'); ?>
-				<?php echo $form->textArea($model,'not_programa',array('rows'=>6, 'cols'=>50)); ?>
+				<?php 
+				echo $form->checkBoxList($model, 'not_programa', array(
+					'ACTIVIDAD'=>'ACTIVIDAD',
+					'ACTO'=>'ACTO',
+					'DIARIO MURAL'=>'DIARIO MURAL',
+					'OTRO'=>'OTRO',
+				));
+			    ?>
 				<?php echo $form->error($model,'not_programa'); ?>
 			</div>
 
