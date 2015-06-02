@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.2.11
 -- http://www.phpmyadmin.net
 --
@@ -2934,7 +2934,7 @@ INSERT INTO `cruge_user` (`iduser`, `regdate`, `actdate`, `logondate`, `username
 (42, 1431984276, 1431984276, NULL, '79472387', 'ELENA_GARRIDO@gmail.com', '79472387', NULL, 1, 0, 0),
 (43, 1431984312, 1431984312, NULL, '75088272', 'JORGE_PANTOJA@gmail.com', '75088272', NULL, 1, 0, 0),
 (44, 1431984962, 1431984962, 1432602122, '151543936', 'MARIO_SANMARTIN@gmail.com', '151543936', NULL, 1, 0, 0),
-(45, NULL, NULL, 1432762430, '88648625', 'SONIA_BURGOS@gmail.com', '88648625', NULL, 1, 0, 0);
+(45, NULL, NULL, 1432762430, '70929287', 'SONIA_BURGOS@gmail.com', '70929287', NULL, 1, 0, 0);
 
 -- --------------------------------------------------------
 
