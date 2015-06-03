@@ -10,6 +10,7 @@
  *
  * The followings are the available model relations:
  * @property Area $conArea
+ * @property Evaluacion[] $evaluacions
  */
 class Concepto extends CActiveRecord
 {
@@ -30,7 +31,7 @@ class Concepto extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('con_area', 'numerical', 'integerOnly'=>true),
-			array('con_descripcion', 'length', 'max'=>100),
+			array('con_descripcion', 'length', 'max'=>1024),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('con_id, con_descripcion, con_area', 'safe', 'on'=>'search'),
@@ -46,6 +47,7 @@ class Concepto extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'conArea' => array(self::BELONGS_TO, 'Area', 'con_area'),
+			'evaluacions' => array(self::HAS_MANY, 'Evaluacion', 'eva_concepto'),
 		);
 	}
 
@@ -55,8 +57,8 @@ class Concepto extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'con_id' => 'Con',
-			'con_descripcion' => 'Con Descripcion',
+			'con_id' => 'ID',
+			'con_descripcion' => 'Concepto',
 			'con_area' => 'Con Area',
 		);
 	}
