@@ -1,5 +1,5 @@
 
-<?php if( empty($lista[0]['alumnos']) ){
+<?php if( empty($lista[0]['alumnos']) OR empty($lista[0]['informe']) ){
 	echo "no tiene alumnos";
 	} else{ ?>
 
@@ -52,7 +52,7 @@
                     <?php } ?>
 
                     <br>
-                        <table class="table table-striped" id="notas_inf">
+                        <table class="table table-striped" id="notas_inf" width="100%">
                           <thead>
                             <tr>
                                 <th>nombre</th>

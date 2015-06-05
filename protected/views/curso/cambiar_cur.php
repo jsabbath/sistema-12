@@ -28,7 +28,7 @@ $this->menu=array(
 </div>
 <div class="row">
     <div class="span12 text-center">
-        <h5>1.- Ingrese el NOMBRE o el RUT del alumno:</h5>    
+        <h5>1.- Ingrese el NOMBRE, APELLIDO o el RUT del alumno:</h5>    
     </div>
 </div>
 <div class="row">
@@ -54,7 +54,7 @@ $this->menu=array(
       <?php 
       echo TbHtml::textField('Text', '',array('id'=>'nombres','placeholder' => 'Nombres','disabled'=>'disabled',));
       
-      echo Tbhtml::hiddenField('Text','',array('id' => 'id',));
+      echo Tbhtml::hiddenField('Text','',array('id' => 'id_alum',));
 
       echo TbHtml::textField('Text', '',array('id'=>'apellido','placeholder' => 'Apellidos','disabled'=>'disabled',));
       
@@ -64,35 +64,21 @@ $this->menu=array(
 
       echo TbHtml::hiddenField('Text', '',array('id'=>'id_curso','placeholder' => 'id curso','disabled'=>'disabled'));
 
+       echo TbHtml::hiddenField('Text', '',array('id'=>'mat_id','placeholder' => 'mat id','disabled'=>'disabled'));
       ?>
   </div>
 
   <br>
   <h5>2.- Ingrese El curso al que desea cambiar el alumno:  </h5>
+  <p class="text-info">Cursos del <strong>MISMO NIVEL*</strong></p>
 
-  <?php  echo CHtml::dropDownList('cur_id','cur_id',$cur ,array('empty' => '-Seleccione Curso-',
-                                                                      'id'=> 'drop_curso',
-                                                                      'name' => 'drop_curso')); ?>
+  <?php  echo CHtml::dropDownList('cur_id',array() ,array('empty' => '-Seleccione Curso-',
+                                                                      'id'=> 'cur_id',
+                                                                      )); ?>
   <!-- <?php //echo CHtml::textField('Text', '',array('id' =>'estado','placeholder' => 'Estado'))?> !-->
 
   <!--  Se muestra al buscar    !-->
-  <?php echo TbHtml::button('',array(
-      'color'=> TbHtml::ALERT_COLOR_SUCCESS, 
-      'id' =>'retirar',
-      'style'=>'margin-bottom:10px',
-      'icon' => 'icon-ok',
-      //'style' => 'float: right',
-      // 'data-toggle' => 'modal',
-      //'data-target' => '#cambio_modal',
-      'ajax' =>
-          array('type'=>'POST',
-              'url'=>$this->createUrl('retirar'), // Buscar cursos por nombre
-              'update'=>'#fecha_retirar',
-              'data'=>array('id'=>'js:getId()','fecha'=>'js:getFecha()',/*'estado'=>'js:getEstado()',*/),
-              'success'=> 'function(){location.reload();}'
-          )
-      )
-  )?>      
+  <button class="btn btn-success" id="matricular" disabled="true" style="margin-bottom:10px"><i id="lock_icon" class="icon-ok"></i></button>   
 </div>
 
  <!-- Asignar Asignatura 
@@ -124,13 +110,14 @@ $this->menu=array(
                     success: function(data) {
                                 response($.map(data, function(item) {
                                             return {
-                                                    label: item.nombres +'/' + item.apellido,
+                                                    label: item.nombre +'/' + item.apellido,
                                                     apellido: item.apellido + ' ' + item.apellido2,
-                                                    nombres: item.nombres,
-                                                    id: item.id,
+                                                    nombres: item.nombre,
+                                                    id_alum: item.id_alum,
                                                     rut: item.rut,
                                                     curso: item.curso,
                                                     cur_id: item.cur_id,
+                                                    id_mat: item.id_mat,
                                                     }
                                         }))
                                
@@ -142,30 +129,30 @@ $this->menu=array(
                     select: function(event, ui) {
                         $("#nombres").val(ui.item.nombres)
                         $("#apellido").val(ui.item.apellido)
-                         $("#curso").val(ui.item.curso)
-                          $("#id_curso").val(ui.item.cur_id)
-                        $("#id").val(ui.item.id)   
+                        $("#curso").val(ui.item.curso)
+                        $("#id_curso").val(ui.item.cur_id)
+                        $("#mat_id").val(ui.item.id_mat)
+                        $("#id_alum").val(ui.item.id_alum)   
                         $("#rut_").val(ui.item.rut)
                         if( $('#pn').val() ) {
                             $('#hiddenpls').show();
+                            $.ajax({
+                              url: "<?php echo $this->createUrl('curso/list_cur_'); ?>",
+                              type: "POST",
+                              data: { idcurso: ui.item.cur_id },
+                              })
+                              .done(function(response) {
+                                    $('#cur_id').html(response); 
+                            }) 
+                            $('#cur_id').on('change', function(){
+                              $('#matricular').attr("disabled", false);      
+                            }); 
+
                         }
                     }});
        });
 </script>    
     
-
-<script>
-     $("#limpiar").on('click', function() {
-                        $("#nombres").val(""),
-                        $("#apellido").val(""),
-                        $("#pn").val(""),
-                        $("#id").val(""),
-                        $("#rut_").val("")
-                        $("#rut_button").val("")
-                        $("#fecha_retirar").replaceWith(" <div id='fecha_retirar'>  </div> ")
-                        $('#hiddenpls').hide()
-                    });
-</script>
 
 <script>
   $(function(){
@@ -178,13 +165,14 @@ $this->menu=array(
                     success: function(data) {
                                 response($.map(data, function(item) {
                                             return {
-                                                    label: item.nombres +'/' + item.apellido,
+                                                    label: item.rut,
                                                     apellido: item.apellido + ' ' + item.apellido2,
-                                                    nombres: item.nombres,
-                                                    id: item.id,
+                                                    nombres: item.nombre,
+                                                    id_alum: item.id_alum,
                                                     rut: item.rut,
                                                     curso: item.curso,
                                                     cur_id: item.cur_id,
+                                                    id_mat: item.id_mat,
                                                     }
                                         }))
                                
@@ -196,12 +184,25 @@ $this->menu=array(
                     select: function(event, ui) {
                         $("#nombres").val(ui.item.nombres)
                         $("#apellido").val(ui.item.apellido)
-                         $("#curso").val(ui.item.curso)
-                          $("#id_curso").val(ui.item.cur_id)
-                        $("#id").val(ui.item.id)   
+                        $("#curso").val(ui.item.curso)
+                        $("#id_curso").val(ui.item.cur_id)
+                        $("#mat_id").val(ui.item.id_mat)
+                        $("#id_alum").val(ui.item.id_alum)   
                         $("#rut_").val(ui.item.rut)
-                        if( $('#pn').val() ) {
+                        if( $('#rut_button').val() ) {
                             $('#hiddenpls').show();
+                            $.ajax({
+                                url: "<?php echo $this->createUrl('curso/list_cur_'); ?>",
+                                type: "POST",
+                                data: { idcurso: ui.item.cur_id },
+                                })
+                                .done(function(response) {
+                                      $('#cur_id').html(response);
+                                });
+                            $('#cur_id').on('change', function(){
+                                $('#matricular').prop("disabled", false);        
+                            })    
+
                         }
                     }});
        });
@@ -226,4 +227,51 @@ $this->menu=array(
         if( value != "") 
             return value;
     }   */       
+</script>
+
+
+<script>
+     $("#limpiar").on('click', function() {
+                        $("#nombres").val(""),
+                        $("#apellido").val(""),
+                        $("#pn").val(""),
+                        $("#id_alum").val(""),
+                        $("#rut_").val("")
+                        $("#rut_button").val("")
+                        $("#fecha_retirar").replaceWith(" <div id='fecha_retirar'>  </div> ")
+                        $('#hiddenpls').hide()
+                        $('#matricular').attr("disabled", true);   
+                    });
+
+
+    $('#matricular').on('click',function(){
+          swal({  
+              title: "Estas seguro?",   
+              text: "Al cambiar el alumno de curso sus notas se asignaran nuevamente y seran duplicadas, y su estado sera RETIRADO!",  
+              type: "warning",   
+              showCancelButton: true,   
+              confirmButtonColor: "#DD6B55",   
+              confirmButtonText: "Cambiar de Curso!",   
+              closeOnConfirm: false, 
+          },function(){
+              $.ajax({
+                url: "<?php echo $this->createUrl('curso/matricular_alumno'); ?>",
+                type: 'POST',
+                data: {id_mat: $("#mat_id").val(), id_curso: $("#id_curso").val(), id_alum: $("#id_alum").val()},
+              })
+              .done(function() {
+                swal({   
+                    title: "Hecho!",     
+                    timer: 600,
+                    type: "success",   
+                    showConfirmButton: false 
+                  });
+              });
+              
+          }
+
+        );
+
+    })
+
 </script>

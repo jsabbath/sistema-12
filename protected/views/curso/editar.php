@@ -87,7 +87,7 @@
 		    <tbody>
 			    <?php  foreach ($alumnos as $key => $alum) { ?><tr>
 						<td id="notas_id" style="display:none;"><?php echo $alum['not_id'];  ?></td>
-						<td data-editable= 'false' > <?php echo strtoupper($alum['nombre']); ?></td>	
+						<td data-editable= 'false' <?php if( $alum['retirado'] ){ ?> style="color: red;" <?php } ?>  > <?php echo strtoupper($alum['nombre']); ?></td>	
 
 						<?php $nota_alu = $alum['notas']; ?> <!--  ['notas'] = array de las 30 notas -->
 						<?php  for ($i=1; $i <= $notas_p ; $i++) { ?>	

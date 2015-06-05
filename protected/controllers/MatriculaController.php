@@ -29,7 +29,7 @@ class MatriculaController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_manual'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -841,6 +841,22 @@ class MatriculaController extends Controller
                     $lista_alumnos->list_mat_id = $matricula->mat_id;
                     $lista_alumnos->list_posicion = $numero_alumnos + 1;
                     $lista_alumnos->insert();
+
+
+                    //asignar informe de desarrollo
+                    $criteria = new CDbCriteria();
+                    $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';
+                    $criteria->condition = 'area.are_infd=:value';
+                    $criteria->params = array(":value"=>$id_inf);
+                    $con = Concepto::model()->findAll($criteria);
+                    foreach ($con as $n) {
+                        $evaluacion = new Evaluacion;
+                        $evaluacion->eva_concepto = $n->con_id;
+                        $evaluacion->eva_matricula = $matricula->mat_id;
+                        $evaluacion->eva_ano = $curso->cur_ano;
+                        $evaluacion->save();
+                    }
+
                     echo "good<br>";
 
                 } else{
@@ -855,30 +871,49 @@ class MatriculaController extends Controller
         } else{
             echo "matricula-invalida <br>";
         }
-
-      
-            /**
-            falta inscribir el informe desarrollo
-            */        
-         
-
-            // //asignar informe de desarrollo
-            // $criteria = new CDbCriteria();
-            // $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';
-            // $criteria->condition = 'area.are_infd=:value';
-            // $criteria->params = array(":value"=>$id_inf);
-            // $con = Concepto::model()->findAll($criteria);
-            // foreach ($con as $n) {
-            //     $evaluacion = new Evaluacion;
-            //     $evaluacion->eva_concepto = $n->con_id;
-            //     $evaluacion->eva_matricula = $id;
-            //     $evaluacion->eva_ano = $curso->cur_ano;
-            //     $evaluacion->save();
-            // }
-                   
-
          
     }
 
+
+    public function actionInforme_manual(){
+        $ano = $this->actionAnoactual();
+        $count = 0;
+        set_time_limit(30);
+
+          $matriculas = Matricula::model()->findAll(array('condition' => 'mat_ano = "'.$ano.'"'));
+          foreach ($matriculas as $key => $m) {
+
+                $tiene_ev = Evaluacion::model()->findByAttributes(array('eva_matricula' => $m->mat_id));
+
+                if( !$tiene_ev ){
+                    $cur_list = ListaCurso::model()->findByAttributes(array('list_mat_id' => $m->mat_id));
+                    //$aa = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $notas->not_asig));
+                    $curso = Curso::model()->findByPk($cur_list->list_curso_id);
+
+                    //asignar informe de desarrollo
+                    $criteria = new CDbCriteria();
+                    $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';
+                    $criteria->condition = 'area.are_infd=:value';
+                    $criteria->params = array(":value"=>$curso->cur_infd);
+                    $con = Concepto::model()->findAll($criteria);
+                    foreach ($con as $n) {
+                        $evaluacion = new Evaluacion;
+                        $evaluacion->eva_concepto = $n->con_id;
+                        $evaluacion->eva_matricula = $m->mat_id;
+                        $evaluacion->eva_ano = $curso->cur_ano;
+                        $evaluacion->save();
+                    }
+                    $count++;
+
+
+                } else{
+                    echo "ya tiene eva";
+                }
+
+          }
+
+            echo $count;  
+
+    }
 
 }

@@ -32,7 +32,10 @@
                     <div class="mat_id" id="<?php echo $l['list_id'] ?>" hidden><?php echo $l['mat_id'] ?></div> 
                     <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
                     <?php echo $l['posicion']. " - "; ?> 
-                    <span3><?php echo  strtoupper($l['nombre']); ?> </span>     
+                    <span3><?php echo  strtoupper($l['nombre']); ?> </span> 
+                    <?php if( $l['estado'] != "" ){ ?>
+                        <span3 style="text-align: right"><?php echo  "<label class=\"label label-important\">".$l['estado']."</label>" ?> </span>  
+                    <?php } ?>       
                 </li>
            
             <?php } ?>

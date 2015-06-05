@@ -161,6 +161,10 @@ class Alumno extends CActiveRecord
 		return $this->alum_nombres." ".$this->alum_apepat;
 	}
 
+	public function getNombre_completo_2(){
+		return $this->alum_apepat." ".$this->alum_apemat.", ". $this->alum_nombres;
+	}
+
 	public function validateText($attribute, $params) {
     $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
         if($this->$attribute!=""){	

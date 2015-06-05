@@ -327,13 +327,19 @@ class ListaCursoController extends Controller
 				foreach($lista_curso as $key => $alumno){
 					$mat = matricula::model()->findByPk($alumno->list_mat_id);
 					$alum = Alumno::model()->findByPk($mat->mat_alu_id);
-
+					$par = Parametro::model()->findByPk($mat->mat_estado);
+					if( $par->par_descripcion == "RETIRADO" ){
+						$kk = $par->par_descripcion;
+					} else{
+						$kk = "";
+					}
 					// falta ordenar la lista por posicion
 					$lista[]=array(
-							'nombre'	=> $alum->Nombre_completo,
+							'nombre'	=> $alum->Nombre_completo_2,
 							'mat_id' 	=> $alumno['list_mat_id'],
 							'posicion' 	=> $alumno['list_posicion'],
 							'list_id'	=> $alumno['list_id'],
+							'estado'	=> $kk,
 					);
 				}
 

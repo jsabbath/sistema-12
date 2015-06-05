@@ -268,7 +268,7 @@ class EvaluacionController extends Controller
 		if( isset($_POST['id']) ){
 			$id_curso = $_POST['id'];
 
-			$lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion', 
+			$lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion', 
 														'condition' => 'list_curso_id=:x', 'params' => array(':x' => $id_curso )));
 			
 			$curso = Curso::model()->findByPk($id_curso);
@@ -319,7 +319,7 @@ class EvaluacionController extends Controller
 	        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 
 				$alumnos[] = array(
-					'nombre' 	=> $alum->getNombre_completo(),
+					'nombre' 	=> $alum->getNombre_completo_2(),
 					'mat_id' 	=> $alumno->list_mat_id,
 					'notas_alu'		=> $notas,
 				);
