@@ -1101,10 +1101,15 @@ class CursoController extends Controller
                     for ($i=1; $i <= 2 ; $i++) {
                         foreach ( $asignadas as $p ){
                             $nota = new Notas;
+
+                            $old_notas = Notas::model()->findByAttributes(array('not_asig' => $p->aa_asignatura, 
+                            													'not_periodo' => $i,
+                            													'not_mat' => $mat->mat_id, // id de matircula vieja
+                            													));
+
+                            $nota->attributes = $old_notas->attributes;
                             $nota->not_asig = $p->aa_asignatura;
-                            $nota->not_mat = $id;
-                            $nota->not_ano = $ano;
-                            $nota->not_periodo = $i;
+                            $nota->not_mat = $id; // se cambia la id de la matricula a la nueva
                             $nota->insert();
                         }
                     }
@@ -1113,10 +1118,14 @@ class CursoController extends Controller
                     for ($i=1; $i <= 3; $i++) { 
                         foreach ( $asignadas as $p ){
                             $nota = new Notas;
+                             $old_notas = Notas::model()->findByAttributes(array('not_asig' => $p->aa_asignatura, 
+                            													'not_periodo' => $i,
+                            													'not_mat' => $mat->mat_id, // id de matircula vieja
+                            													));
+
+                            $nota->attributes = $old_notas->attributes;
                             $nota->not_asig = $p->aa_asignatura;
-                            $nota->not_mat = $id;
-                            $nota->not_ano = $ano;
-                            $nota->not_periodo = $i;
+                            $nota->not_mat = $id; // se cambia la id de la matricula a la nueva
                             $nota->insert();
                         }
                     }
@@ -1143,7 +1152,7 @@ class CursoController extends Controller
                     $evaluacion->eva_concepto = $n->con_id;
                     $evaluacion->eva_matricula = $id;
                     $evaluacion->eva_ano = $curso->cur_ano;
-                    $evaluacion->save();
+                    $evaluacion->insert();
                 }
             }
 		}

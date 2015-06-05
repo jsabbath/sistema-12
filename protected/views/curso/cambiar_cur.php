@@ -257,7 +257,7 @@ $this->menu=array(
               $.ajax({
                 url: "<?php echo $this->createUrl('curso/matricular_alumno'); ?>",
                 type: 'POST',
-                data: {id_mat: $("#mat_id").val(), id_curso: $("#id_curso").val(), id_alum: $("#id_alum").val()},
+                data: {id_mat: $("#mat_id").val(), id_curso: $("#cur_id").val(), id_alum: $("#id_alum").val()},
               })
               .done(function() {
                 swal({   
