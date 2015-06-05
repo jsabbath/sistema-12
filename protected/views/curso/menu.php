@@ -16,7 +16,7 @@ if(
 ){ 
 ?>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/create'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('Curso/create'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -53,7 +53,7 @@ if(
 ?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/admin'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('Curso/admin'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -90,7 +90,7 @@ if(
 ?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('informedesarrollo/create'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('InformeDesarrollo/create'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -127,7 +127,7 @@ if(
 ?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('informehogar/create'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('InformeHogar/create'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -165,7 +165,7 @@ if(
 ?>
 		<div class="row">
 		<div class="visible-phone"><br/></div>
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/lista_cursos'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('Curso/lista_cursos'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -203,7 +203,7 @@ if(
 ){ 
 ?>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/buscar_asistencia'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('Curso/buscar_asistencia'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -241,7 +241,7 @@ if(
 ){ 
 ?>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('listacurso'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('ListaCurso/index'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -278,7 +278,7 @@ if(
 ){ 
 ?>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('asignatura/create'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('Asignatura/create'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
@@ -314,7 +314,7 @@ if(
 ){ 
 ?>
 	<div class="row">
-		<a class="link-negro" href="<?php echo Yii::app()->createUrl('//aasignatura/create'); ?>">
+		<a class="link-negro" href="<?php echo Yii::app()->createUrl('//AAsignatura/create'); ?>">
 			<div class="span4 offset1" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 				<div class="row">
 					<div class="span1 text-center">
