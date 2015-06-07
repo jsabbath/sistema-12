@@ -12,12 +12,9 @@ class PreCursoController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+   {
+      return array('accessControl',array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -26,6 +23,8 @@ class PreCursoController extends Controller
 	 */
 	public function accessRules()
 	{
+		Yii::app()->user->loginUrl = array("/cruge/ui/login");
+		
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
@@ -115,7 +114,7 @@ class PreCursoController extends Controller
 			$model->attributes=$_POST['PreCurso'];
 			$model->pre_ano = $ano;
 			if($model->save()){
-				Yii::app()->user->setFlash('success', "area actualizada con Exito!");
+				Yii::app()->user->setFlash('success', "Curso actualizada con Exito!");
 				$this->redirect(array('admin'));
 			}
 		}

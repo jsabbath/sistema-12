@@ -13,7 +13,7 @@ class MatriculaController extends Controller
 	 */
 	public function filters()
    {
-      return array(array('CrugeAccessControlFilter'));
+      return array('accessControl',array('CrugeAccessControlFilter'));
    }
 
 	/**
@@ -23,6 +23,8 @@ class MatriculaController extends Controller
 	 */
 	public function accessRules()
 	{
+        Yii::app()->user->loginUrl = array("/cruge/ui/login");
+
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo'),
@@ -334,10 +336,6 @@ class MatriculaController extends Controller
         $cursos = $this->actionCursoAnoActual();
 
         $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
-
-       
-
-
 
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
