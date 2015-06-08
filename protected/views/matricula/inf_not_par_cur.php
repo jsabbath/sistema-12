@@ -1,5 +1,7 @@
 <?php
 
+
+
 function fecha(){
 	$dias = array('1'=>'Lunes','2'=>'Martes','3'=>'Miercoles','4'=>'Jueves','5'=>'Viernes','6'=>'Sabado','7'=>'Domingo');
 	$meses = array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto',
@@ -173,7 +175,36 @@ function fecha(){
     </style>
 
 <body>
+<?php 
 
+foreach ($lista_alu as $key => $alu) {
+               
+    $id = $alu['id'];
+
+    $model = Matricula::model()->findByPk($id);
+    $notas = array();
+
+    $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => $periodo )));
+
+    if( empty($evaluaciones) ){
+       throw new CHttpException(404, 'Alumno sin Curso.'.$id);
+    }
+    foreach ($evaluaciones as $key => $alum) {
+
+        $asi = Asignatura::model()->findByPk($alum->not_asig);
+
+        $notas[] = array(
+              'nota'    => $alum->notas,
+              'nom_asi' => $asi->asi_descripcion,
+            );
+
+    }
+    $notas = array_unique($notas, SORT_REGULAR);
+    $ano = $evaluaciones[0]['not_ano'];   
+
+
+
+ ?>
 
 
 <table width="100%" style="border: 0;">
@@ -277,7 +308,7 @@ function fecha(){
             <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
 
             <?php for ($i=1; $i <= $max_not ; $i++){ 
-                               if( $n[$i] < 4 ) { ?>
+                if( $n[$i] < 4 ) { ?>
                     <td style="color: RED;" ><strong><?php if( $n[$i] != 0 ){ 
                         if ( strlen($n[$i]) == 1 ){
                             echo  ''.$n[$i] . '.0';
@@ -332,7 +363,12 @@ function fecha(){
                     </td>
                     </tr>
                 </table>
-                 
+   <?php 
+
+    
+}
+
+ ?>              
 
      
 </body>

@@ -27,15 +27,15 @@ class MatriculaController extends Controller
 
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par','informe'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par','informe','curso_par','cur_not'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_manual','informe_notas_par','informe'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_manual','informe_notas_par','informe','curso_par','cur_not'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par','informe'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par','informe','curso_par','cur_not'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -630,6 +630,90 @@ class MatriculaController extends Controller
                         ), true));
         $mPDF1->Output();        
 
+    }
+
+    public function actionCurso_par(){
+        $curso = $this->actionCursoAnoActual();
+
+        $this->render('cur_per',array(
+                        'cursos' => $curso,
+                    ));
+   
+        
+    }
+
+    // public function actionCur_not(){
+    //     if( isset($_POST['id_cur']) ){
+    //         $id = $_POST['id_cur'];
+    //         $cur = Curso::model()->findByPk($id);
+    //         $col = Colegio::model()->find();
+
+    //         $per = Parametro::model()->findByPk($col->col_periodo);
+    //         $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
+
+
+    //         foreach ($lista as $key => $alum) {
+    //             // $this->actionCertificado_nota_par_cur($alum->list_mat_id, 1);
+    //         }
+    //     }
+    // }
+
+        // id = alumno , p = periodo
+    public function actionCur_not(){
+        if( isset($_POST['id_cur']) ){
+
+            $id = $_POST['id_cur'];
+            $curso = Curso::model()->findByPk($id);
+            $cole = Colegio::model()->find();
+
+            $per = Parametro::model()->findByPk($cole->col_periodo);
+            $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
+
+            $alumnos = array();
+
+             $mPDF1 = Yii::app()->ePdf->mpdf();
+            $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+            foreach ($lista as $key => $alum) {
+                $alumnos[] = array('id' => $alum->list_mat_id);
+                // $mPDF1->AddPage();
+                // $this->actionCertificado_nota_par_cur($alum->list_mat_id, 1);
+            }
+       
+
+
+            //$c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
+            // $ano = $evaluaciones[0]['not_ano'];            
+            $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+            $notas_periodo = $curso->cur_notas_periodo;
+            $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+            $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+           
+            $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+
+            $p = 1;
+           
+
+            $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+            
+            $mPDF1->WriteHTML($stylesheet, 1);
+            $mPDF1->WriteHTML($this->renderPartial('inf_not_par_cur', array(
+                                                                    'lista_alu'     => $alumnos,
+                                                                    //'model'         => $model,
+                                                                    //'notas'         => $alumnos,
+                                                                    'curso_nombre'  => $nivel. " ". $letra,
+                                                                    'max_not'       => $notas_periodo,
+                                                                    'periodo'       => $p,
+                                                                    'profe'         => $profe->NombreCompleto,
+                                                                    // 'ano'           => $ano,
+                                                                    'nom_director'  => $nombre_dir->nombreCompleto,
+                                                                    'firma_profe'   => $profe->usu_firma,
+                                                                    'firma_dir'     => $nombre_dir->usu_firma,
+                            ), true));
+
+            $mPDF1->Output();  
+
+        }
     }
 
     public function actionInforme_notas_par(){
