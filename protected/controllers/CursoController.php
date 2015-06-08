@@ -144,8 +144,10 @@ class CursoController extends Controller
 			$model->attributes=$_POST['Curso'];
             $model->cur_ano = (int)$ano;
 
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->cur_id));
+			if($model->save()){
+				Yii::app()->user->setFlash('success', "Curso creado con exito!");
+				$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('create',array(
@@ -208,8 +210,10 @@ class CursoController extends Controller
 		if(isset($_POST['Curso']))
 		{
 			$model->attributes=$_POST['Curso'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->cur_id));
+			if($model->save()){
+				Yii::app()->user->setFlash('success', "Curso actualizado con exito!");
+				$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('update',array(
