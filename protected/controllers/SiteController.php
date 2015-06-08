@@ -121,7 +121,7 @@ class SiteController extends Controller
                 'criteria' => array(
                 'condition' => 'not_fecha="'.$hoy.'" OR not_fecha>"'.$hoy.'"',
                 'limit' => 5,
-                'order' => 'not_fecha DESC',
+                'order' => 'not_fecha',
                 ),
             	'pagination' => false,
         	)
