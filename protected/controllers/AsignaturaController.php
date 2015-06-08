@@ -13,7 +13,7 @@ class AsignaturaController extends Controller
 	 */
 	public function filters()
    {
-      return array(array('CrugeAccessControlFilter'));
+      return array('accessControl',array('CrugeAccessControlFilter'));
    }
 
 	/**
@@ -23,6 +23,8 @@ class AsignaturaController extends Controller
 	 */
 	public function accessRules()
 	{
+		Yii::app()->user->loginUrl = array("/cruge/ui/login");
+		
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),

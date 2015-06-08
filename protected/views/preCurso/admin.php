@@ -40,7 +40,8 @@ $('.search-form form').submit(function(){
 
 <div class="row">
 	<div class="span12 text-right">
-		<?php echo CHtml::link('Crear Pre-Curso',array('PreCurso/create'),array('class'=>'btn btn-warning')); ?>
+		<?php echo CHtml::link('Crear Pre-Curso',array('PreCurso/create'),array('class'=>'btn btn-success')); ?>
+		<?php echo CHtml::link('Cursos',array('Curso/lista_cursos'),array('class'=>'btn btn-warning')); ?>
 	</div>
 </div>
 <br>

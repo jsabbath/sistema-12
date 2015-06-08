@@ -12,9 +12,9 @@ class PromedioAnualController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		  return array(array('CrugeAccessControlFilter'));
-	}
+   {
+      return array('accessControl',array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -23,6 +23,8 @@ class PromedioAnualController extends Controller
 	 */
 	public function accessRules()
 	{
+		Yii::app()->user->loginUrl = array("/cruge/ui/login");
+		
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','termino_ano'),
