@@ -6636,3 +6636,1125 @@ Stack trace:
 REQUEST_URI=/sistema/index.php?CrugeSession_page=2&ajax=yw0&r=cruge%2Fui%2Fsessionadmin
 HTTP_REFERER=http://localhost/sistema/index.php?r=cruge/ui/sessionadmin
 ---
+2015/06/03 04:56:57 [error] [exception.CrugeException.401] action_matricula_informe_notas_par<br/>401
+REQUEST_URI=/sistema/index.php?r=matricula/informe_notas_par
+HTTP_REFERER=http://calborada.no-ip.org/sistema/index.php?r=informeDesarrollo/menu
+---
+2015/06/03 17:42:10 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\CursoController.php:531)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CursoController->runAction()
+#1 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(265): CursoController->runActionWithFilters()
+#6 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CursoController->run()
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=curso/reload_asi
+in C:\xampp\htdocs\sistema\protected\controllers\CursoController.php (531)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/03 21:07:55 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/03 22:06:47 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/03 23:52:34 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 855247048
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/03 23:52:34 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 855247048
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/03 23:52:34 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 15:54:59 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 18:03:23 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\CursoController.php:507)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CursoController->runAction()
+#1 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(265): CursoController->runActionWithFilters()
+#6 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CursoController->run()
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=curso/reload_asi
+in C:\xampp\htdocs\sistema\protected\controllers\CursoController.php (507)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 18:03:28 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\CursoController.php:507)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CursoController->runAction()
+#1 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(265): CursoController->runActionWithFilters()
+#6 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CursoController->run()
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=curso/reload_asi
+in C:\xampp\htdocs\sistema\protected\controllers\CursoController.php (507)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 18:11:52 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 15154393
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/05 18:11:52 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 15154393
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/05 18:11:52 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 18:12:07 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 15154393
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/05 18:12:07 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 15154393
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/05 18:12:07 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 18:19:52 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 21:01:07 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/05 21:01:07 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/05 21:01:07 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 21:08:41 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:191)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(155): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#27 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#28 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#29 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (191)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (155)
+2015/06/05 21:08:46 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:191)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(155): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#27 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#28 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#29 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (191)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (155)
+2015/06/05 22:54:53 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** admi
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/05 22:54:53 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** admi
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/05 22:54:53 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 22:55:10 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** admi
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/05 22:55:10 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** admi
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/05 22:55:10 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 22:56:55 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\CursoController.php:540)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CursoController->runAction()
+#1 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(265): CursoController->runActionWithFilters()
+#6 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CursoController->run()
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=curso/reload_asi
+in C:\xampp\htdocs\sistema\protected\controllers\CursoController.php (540)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/05 23:20:09 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php:96)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(869): EvaluacionController->renderFile()
+#1 C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php(341): EvaluacionController->renderPartial()
+#2 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): EvaluacionController->actionCurso_lista()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): EvaluacionController->runAction()
+#5 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): EvaluacionController->runActionWithFilters()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): EvaluacionController->run()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=evaluacion/curso_lista
+in C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php (96)
+in C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php (341)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+2015/06/05 23:20:14 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php:96)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(869): EvaluacionController->renderFile()
+#1 C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php(341): EvaluacionController->renderPartial()
+#2 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): EvaluacionController->actionCurso_lista()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): EvaluacionController->runAction()
+#5 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): EvaluacionController->runActionWithFilters()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): EvaluacionController->run()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=evaluacion/curso_lista
+in C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php (96)
+in C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php (341)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+2015/06/05 23:20:15 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php:96)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(869): EvaluacionController->renderFile()
+#1 C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php(341): EvaluacionController->renderPartial()
+#2 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): EvaluacionController->actionCurso_lista()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): EvaluacionController->runAction()
+#5 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): EvaluacionController->runActionWithFilters()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): EvaluacionController->run()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=evaluacion/curso_lista
+in C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php (96)
+in C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php (341)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+2015/06/05 23:30:44 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php:96)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(869): EvaluacionController->renderFile()
+#1 C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php(341): EvaluacionController->renderPartial()
+#2 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): EvaluacionController->actionCurso_lista()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): EvaluacionController->runAction()
+#5 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): EvaluacionController->runActionWithFilters()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): EvaluacionController->run()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=evaluacion/curso_lista
+in C:\xampp\htdocs\sistema\protected\views\evaluacion\evaluar_conceptos.php (96)
+in C:\xampp\htdocs\sistema\protected\controllers\EvaluacionController.php (341)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php (90)
+2015/06/06 00:40:11 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/07 22:58:03 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\ui\CrugeLogon.php (58)
+2015/06/07 22:58:03 [warning] [application] CrugeFactory::getICrugeStoredUser
+ **NO HALLADO** 
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeFactory.php (322)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeUserManager.php (252)
+in C:\xampp\htdocs\sistema\protected\modules\cruge\models\auth\CrugeAuthDefault.php (68)
+2015/06/07 22:58:03 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Nombre de usuario o Email: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (28)
+2015/06/08 03:09:08 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Clave de Acceso: no puede ser nulo.</li>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/08 03:43:59 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 03:49:16 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:07:59 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:08:01 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:08:41 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/08 04:09:11 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('noticia/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+HTTP_REFERER=http://calborada.no-ip.org/sistema/index.php?r=site/menu
+---
+2015/06/08 04:10:22 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('noticia/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+HTTP_REFERER=http://calborada.no-ip.org/sistema/index.php?r=site/menu
+---
+2015/06/08 04:11:11 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/08 04:11:17 [error] [application] UiController
+CrugeUser->validate es false
+<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Usuario o clave invalida</li>
+</ul></div>
+in C:\xampp\htdocs\sistema\protected\modules\cruge\controllers\UiController.php (159)
+in C:\xampp\htdocs\sistema\index.php (13)
+2015/06/08 04:11:33 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('noticia/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+HTTP_REFERER=http://calborada.no-ip.org/sistema/index.php?r=site/menu
+---
+2015/06/08 04:13:24 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:16:32 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:17:04 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:17:04 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:17:04 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:20:05 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 04:20:06 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('noticia/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+HTTP_REFERER=http://calborada.no-ip.org/sistema/index.php?r=site/menu
+---
+2015/06/08 04:26:48 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('usuario/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=usuario/admin
+HTTP_REFERER=http://calborada.no-ip.org/sistema/index.php?r=site/menu
+---
+2015/06/08 05:36:14 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php:193)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(142): TbDataColumn->evaluateExpression()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(231): TbDataColumn->getDataCellContent()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(154): TbDataColumn->renderDataCellContent()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(638): TbDataColumn->renderDataCell()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(622): TbGridView->renderDataCell()
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(578): TbGridView->renderTableRow()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(488): TbGridView->renderTableBody()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(181): TbGridView->renderItems()
+#8 unknown(0): TbGridView->renderSection()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(164): preg_replace_callback()
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(149): TbGridView->renderContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): TbGridView->run()
+#12 C:\xampp\htdocs\sistema\protected\views\noticia\admin.php(57): NoticiaController->widget()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): NoticiaController->renderInternal()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(869): NoticiaController->renderFile()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(782): NoticiaController->renderPartial()
+#17 C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php(157): NoticiaController->render()
+#18 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): NoticiaController->actionAdmin()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): NoticiaController->runAction()
+#21 C:\xampp\htdocs\sistema\protected\modules\cruge\components\CrugeAccessControlFilter.php(90): CFilterChain->run()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CrugeAccessControlFilter->preFilter()
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CrugeAccessControlFilter->filter()
+#24 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#26 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): NoticiaController->filterAccessControl()
+#27 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\xampp\htdocs\yii\framework\web\CController.php(265): NoticiaController->runActionWithFilters()
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): NoticiaController->run()
+#31 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#32 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#33 C:\xampp\htdocs\sistema\index.php(13): CWebApplication->run()
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (193)
+in C:\xampp\htdocs\sistema\protected\views\noticia\admin.php (57)
+in C:\xampp\htdocs\sistema\protected\controllers\NoticiaController.php (157)
+2015/06/08 05:36:34 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=4&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:36:39 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=1&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:36:43 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=1&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:37:03 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('noticia/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=noticia/admin
+HTTP_REFERER=http://localhost/sistema/index.php?r=site/menu
+---
+2015/06/08 05:37:07 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=1&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:38:41 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('parametro/admin')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=parametro/admin
+HTTP_REFERER=http://localhost/sistema/index.php?r=site/menu
+---
+2015/06/08 05:42:04 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=1&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:47:32 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=1&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:47:57 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CrugeWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('certificado_not...')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Matricula/certi...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\sistema\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/sistema/index.php?r=Matricula/certificado_nota_par&id=1&p=1
+HTTP_REFERER=http://localhost/sistema/index.php?r=matricula/informe_notas_par
+---
+2015/06/08 05:48:31 [error] [exception.CrugeException.401] action_matricula_informe_notas_par<br/>401
+REQUEST_URI=/sistema/index.php?r=matricula/informe_notas_par
+HTTP_REFERER=http://localhost/sistema/index.php?r=informeDesarrollo/menu
+---
+2015/06/08 05:48:35 [error] [exception.CrugeException.401] action_matricula_informe_notas_par<br/>401
+REQUEST_URI=/sistema/index.php?r=matricula/informe_notas_par
+HTTP_REFERER=http://localhost/sistema/index.php?r=informeDesarrollo/menu
+---
+2015/06/08 05:48:41 [error] [exception.CrugeException.401] action_matricula_informe_notas_par<br/>401
+REQUEST_URI=/sistema/index.php?r=matricula/informe_notas_par
+HTTP_REFERER=http://localhost/sistema/index.php?r=informeDesarrollo/menu
+---
