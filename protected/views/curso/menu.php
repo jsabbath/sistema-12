@@ -69,7 +69,7 @@ if(
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede buscar cursos por profesor</p>
+								<p>En este item se pueden crear cursos de kinder y prekinder</p>
 							</div>
 						</div>
 					</div>
