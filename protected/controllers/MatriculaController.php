@@ -599,9 +599,11 @@ class MatriculaController extends Controller
         }
         $alumnos = array_unique($notas, SORT_REGULAR);
 
-        $c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
+        //$c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
+        $cur_list = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id));
+
         $ano = $evaluaciones[0]['not_ano'];
-        $curso  = Curso::model()->findByPk($c['aa_curso']);
+        $curso  = Curso::model()->findByPk($cur_list->list_curso_id);
         $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
         $notas_periodo = $curso->cur_notas_periodo;
         $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
@@ -954,7 +956,7 @@ class MatriculaController extends Controller
          
     }
 
-
+    // function para agregar los alumnos al informe de personalidad manualmente
     public function actionInforme_manual(){
         $ano = $this->actionAnoactual();
         $count = 0;
