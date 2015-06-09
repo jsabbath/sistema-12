@@ -239,11 +239,22 @@ class AAsignaturaController extends Controller
 		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
-		for ($i=0; $i < count($curso); $i++) { 
-			$cursos_actuales[$curso[$i]->cur_id] = "".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra];
-		}
+		foreach ($curso as $key => $c) {
+            $cur[] = array(
+                   'cur_nivel' => $nivel[$c->cur_nivel],
+                    'cur_id' => $c->cur_id,
+                    'cur_letra' => $letra[$c->cur_letra],
+                );
+        }
 
-		return $cursos_actuales;
+        sort($cur);
+
+        $cursos_actuales = array();
+        foreach ($cur as $key => $c) {
+            $cursos_actuales[$c['cur_id']] = $c['cur_nivel']." ".$c['cur_letra'];
+        }
+
+        return $cursos_actuales;
     }
 
     public function actionAnoactual(){
