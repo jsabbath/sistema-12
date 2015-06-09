@@ -1,22 +1,3 @@
-<?php
-
-
-
-function fecha(){
-	$dias = array('1'=>'Lunes','2'=>'Martes','3'=>'Miercoles','4'=>'Jueves','5'=>'Viernes','6'=>'Sabado','7'=>'Domingo');
-	$meses = array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto',
-		'9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
-	$dia = $dias[date('N')];
-	$dia_numero = date('d');
-	$mes = $meses[date('n')];
-	$anio = date('Y');
-	$fecha_actual = $dia.", ".$dia_numero." de ".$mes.". ".$anio;
-
-	return $fecha_actual;
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,15 +189,14 @@ foreach ($lista_alu as $key => $alu) {
 
 
 <table width="100%" style="border: 0;">
-	<tr>
-		<td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png"></td>
-		<td width="80%" style="border: 0;">
-			<h2>Colegio Alborada</h2>
-			<p>Ruta 160 N° 3573 - Concepcion, San Pedro de la Paz - F(41) 2278599</p>
-		</td>
-	</tr>
+    <tr>
+        <td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
+        <td width="80%" style="border: 0;">
+            <h2><?php echo $cole->col_nombre_colegio ?></h2>
+            <p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono; ?></p>
+        </td>
+    </tr>
 </table>
-
 
 
 <div style="text-align: center">
@@ -277,12 +257,6 @@ foreach ($lista_alu as $key => $alu) {
 
 </table>
 
-<br>
-
-<?php foreach ($notas as $key => $a) {
-	// var_dump($a);
- //    echo '<br><br>';
-} ?>
 
 
 <table width="100%" style="border: 1;">
@@ -335,15 +309,13 @@ foreach ($lista_alu as $key => $alu) {
 	
 </table>
 <br>
-<br>
+
 <div>
-	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 229; $i++) { 
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 209; $i++) { 
         echo "_";
     } ?></p>
 	
 </div>
-<br>
-<br>
 <br>
 
 

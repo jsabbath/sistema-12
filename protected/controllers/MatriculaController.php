@@ -615,7 +615,7 @@ class MatriculaController extends Controller
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
         $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
-        $mPDF1->WriteHTML($stylesheet, 1);
+        $mPDF1->WriteHTML($stylesheet, 2);
         $mPDF1->WriteHTML($this->renderPartial('inf_not_par', array(
                                                                 'model'         => $model,
                                                                 'notas'         => $alumnos,
@@ -627,6 +627,7 @@ class MatriculaController extends Controller
                                                                 'nom_director'  => $nombre_dir->nombreCompleto,
                                                                 'firma_profe'   => $profe->usu_firma,
                                                                 'firma_dir'     => $nombre_dir->usu_firma,
+                                                                'cole'          => $cole,
                         ), true));
         $mPDF1->Output();        
 
@@ -641,22 +642,6 @@ class MatriculaController extends Controller
    
         
     }
-
-    // public function actionCur_not(){
-    //     if( isset($_POST['id_cur']) ){
-    //         $id = $_POST['id_cur'];
-    //         $cur = Curso::model()->findByPk($id);
-    //         $col = Colegio::model()->find();
-
-    //         $per = Parametro::model()->findByPk($col->col_periodo);
-    //         $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
-
-
-    //         foreach ($lista as $key => $alum) {
-    //             // $this->actionCertificado_nota_par_cur($alum->list_mat_id, 1);
-    //         }
-    //     }
-    // }
 
         // id = alumno , p = periodo
     public function actionCur_not(){
@@ -696,7 +681,7 @@ class MatriculaController extends Controller
 
             $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
             
-            $mPDF1->WriteHTML($stylesheet, 1);
+            $mPDF1->WriteHTML($stylesheet, 2);
             $mPDF1->WriteHTML($this->renderPartial('inf_not_par_cur', array(
                                                                     'lista_alu'     => $alumnos,
                                                                     //'model'         => $model,
@@ -709,6 +694,7 @@ class MatriculaController extends Controller
                                                                     'nom_director'  => $nombre_dir->nombreCompleto,
                                                                     'firma_profe'   => $profe->usu_firma,
                                                                     'firma_dir'     => $nombre_dir->usu_firma,
+                                                                    'cole'          => $cole,
                             ), true));
 
             $mPDF1->Output();  

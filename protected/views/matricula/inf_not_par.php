@@ -1,20 +1,3 @@
-<?php
-
-function fecha(){
-	$dias = array('1'=>'Lunes','2'=>'Martes','3'=>'Miercoles','4'=>'Jueves','5'=>'Viernes','6'=>'Sabado','7'=>'Domingo');
-	$meses = array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto',
-		'9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
-	$dia = $dias[date('N')];
-	$dia_numero = date('d');
-	$mes = $meses[date('n')];
-	$anio = date('Y');
-	$fecha_actual = $dia.", ".$dia_numero." de ".$mes.". ".$anio;
-
-	return $fecha_actual;
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,11 +5,12 @@ function fecha(){
 </head>
 
 <style>
-        @page {
-         margin-top: 0px;
-         margin-bottom: 50;
-         margin-left: 25;
-         margin-right: 25;
+        @page 
+        {
+            margin-top: 10;
+            margin-bottom: 50;
+            margin-left: 25;
+            margin-right: 25;
         }
 
         *
@@ -178,10 +162,10 @@ function fecha(){
 
 <table width="100%" style="border: 0;">
 	<tr>
-		<td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png"></td>
+		<td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
 		<td width="80%" style="border: 0;">
-			<h2>Colegio Alborada</h2>
-			<p>Ruta 160 N° 3573 - Concepcion, San Pedro de la Paz - F(41) 2278599</p>
+			<h2><?php echo $cole->col_nombre_colegio ?></h2>
+			<p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono; ?></p>
 		</td>
 	</tr>
 </table>
@@ -246,13 +230,6 @@ function fecha(){
 
 </table>
 
-<br>
-
-<?php foreach ($notas as $key => $a) {
-	// var_dump($a);
- //    echo '<br><br>';
-} ?>
-
 
 <table width="100%" style="border: 1;">
 	
@@ -304,35 +281,30 @@ function fecha(){
 	
 </table>
 <br>
-<br>
 <div>
-	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 229; $i++) { 
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 209; $i++) { 
         echo "_";
     } ?></p>
 	
 </div>
 <br>
-<br>
-<br>
-
-
 
       
-                <table class="heading" style="width:100%; border: 0;">
+    <table class="heading" style="width:100%; border: 0;">
         <tr>
-                    <td style="width:50%; text-align: center; border: 0;">
-                        <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">
-                        <p><?php echo $profe; ?></p>
-                        <p>PROFESOR(A)</p>
-                    </td>
-                    <td  align="center" style="border: 0;">
-                        <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_dir; ?>">
-                        <p><?php echo strtoupper($nom_director); ?></p>
-                        <p>DIRECTOR(A)</p>
-                    </td>
-                    </tr>
-                </table>
-                 
+            <td style="width:50%; text-align: center; border: 0;">
+                <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">
+                <p><?php echo $profe; ?></p>
+                <p>PROFESOR(A)</p>
+            </td>
+            <td  align="center" style="border: 0;">
+                <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_dir; ?>">
+                <p><?php echo strtoupper($nom_director); ?></p>
+                <p>DIRECTOR(A)</p>
+            </td>
+        </tr>
+    </table>
+         
 
      
 </body>
