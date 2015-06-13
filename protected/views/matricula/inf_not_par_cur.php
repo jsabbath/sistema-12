@@ -281,27 +281,95 @@ foreach ($lista_alu as $key => $alu) {
         <tr>
             <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
 
-            <?php for ($i=1; $i <= $max_not ; $i++){ 
-                if( $n[$i] < 4 ) { ?>
-                    <td style="color: RED;" ><strong><?php if( $n[$i] != 0 ){ 
-                        if ( strlen($n[$i]) == 1 ){
-                            echo  ''.$n[$i] . '.0';
-                        } else{
-                            echo $n[$i]; 
-                        }
-                    }?></strong></td>
-                <?php }else{ ?>
-                    <td> <strong><?php if( $n[$i] != 0 ){ 
-                        if ( strlen($n[$i]) == 1 ){
-                            echo  ''.$n[$i] . '.0';
-                        } else{
-                            echo $n[$i]; 
-                        }
+            <?php if( $a['nom_asi'] == "RELIGION" ){ 
+                $final = 0;
+                $count = 0;
+            ?>
 
-                        }?></strong> </td>
-                <?php } ?>
-            <?php } ?>
-            <td></td><!-- final -->
+                <?php for ($i=1; $i <= $max_not ; $i++){ ?>
+
+                    <td class="text-center">
+                        <?php if( $n[$i] != "" ){ 
+                            $count ++;
+                            $final += $n[$i];
+                        ?>
+                            <?php if( $n[$i] > 6  ) { ?>
+                                <strong>MB </strong>
+                            <?php }else if( $n[$i] < 6 AND $n[$i] >= 5  ){ ?>
+                                <strong>B </strong>
+                            <?php }else if( $n[$i] < 5 AND $n[$i] >= 4 ){ ?>
+                                <strong>S </strong>
+                            <?php }else if( $n[$i] < 4 ){ ?>
+                                 <strong>I </strong>
+                            <?php }
+                        } ?>
+                    </td>
+
+                <?php } 
+                     if( $count != 0 ) $prom = $final/$count;
+                ?>
+
+                <td class="text-center"?> <strong><?php 
+                    if( $count !=0 ){
+                        if( $prom > 6  ) {
+                            echo "MB"; 
+                        }else if( $prom < 6 AND $prom >= 5  ){
+                            echo "B"; 
+                        }else if( $prom < 5 AND $prom >= 4 ){ 
+                            echo "S"; 
+                        }else if( $prom < 4 ){
+                            echo "I"; 
+                        }
+                    }   
+
+                ?></strong></td><!-- final -->
+
+            <?php } else{ 
+                $final = 0;
+                $count = 0;
+            ?> <!-- fin if religion -->
+
+                <?php for ($i=1; $i <= $max_not ; $i++){ 
+                    if( $n[$i] < 4 ) { 
+                       
+                    ?>
+                        <td style="color: RED;" ><strong><?php if( $n[$i] != 0 ){ 
+                            $count++;
+                            $final += $n[$i];
+
+                            if ( strlen($n[$i]) == 1 ){
+                                echo  ''.$n[$i] . '.0';
+                            } else{
+                                echo $n[$i]; 
+                            }
+                        }?></strong></td>
+                    <?php }else{ 
+                       
+                    ?>
+                        <td> <strong><?php if( $n[$i] != 0 ){
+                            $count++;
+                            $final += $n[$i]; 
+                            if ( strlen($n[$i]) == 1 ){
+                                echo  ''.$n[$i] . '.0';
+                            } else{
+                                echo $n[$i]; 
+                            }
+
+                            }?></strong> </td>
+                    <?php } ?>
+                <?php } 
+                    if( $count != 0 ) $prom = $final/$count;
+
+                    if( strlen($prom) == 1 ){
+                        $prom = $prom .".0";
+                    }else{
+                        $precision = 2;
+                        $prom = number_format((float) $prom, $precision, '.', '');
+                    }
+                ?>
+                <td  <?php if( $prom < 4 ){ ?>style="color: RED;" <?php } ?>><strong><?php  if( $count != 0 ) echo $prom; ?></strong></td><!-- final -->
+
+            <?php } ?><!-- fin else religion -->
         </tr>
 
        <?php }?>
