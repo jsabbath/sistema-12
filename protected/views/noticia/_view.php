@@ -9,28 +9,30 @@ if($data->not_fecha==date('Y-m-d')){
 
 ?>
 
-<div class="row">
-	<div class="span8 noticiaborde">
-		<div class="row">
-			<div class="span6 noticiatitulo">
-				<?php echo CHtml::encode($data->not_titulo); ?>
-			</div>
-			<div class="span2 noticiafecha">
-				<p style="font-weight: bold"><?php echo CHtml::encode($fecha); ?></p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span5 noticiatexto">
-				<br>
-				<?php echo CHtml::encode($data->not_texto); ?>
-			</div>
-			<div class="span1">
-				<?php echo CHtml::encode($data->not_programa); ?>
-			</div>
-			<div class="span1">
-				<?php echo CHtml::encode($data->not_responsable); ?>
-			</div>
-		</div>
-	</div>
-</div>
-<br>
+<style type="text/css">
+
+.titulo{
+	background-color:#43ADCB;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-family: sans-serif;
+	font-variant: small-caps;
+}
+
+.otro{
+	background-color: #D2FAF8;
+}
+
+</style>
+
+<table class="table table-bordered" width=100%>
+  <tr>
+    <th class="otro" width=25%><p class="margen" style="font-weight: bold"><?php echo CHtml::encode($fecha); ?></p></th>
+    <th class="titulo" width=50%><p class="margen"><?php echo CHtml::encode($data->not_titulo); ?></p> </th>
+    <th class="otro" width=25%><p class="margen"><?php echo CHtml::encode($data->not_responsable); ?></p></th>
+  </tr>
+  <tr>
+    <td class="" width=25%><p class="margen"><?php echo CHtml::encode($data->not_programa); ?></p></td>
+    <td class="" colspan="2" width=75%><p class="margen"><?php echo CHtml::encode($data->not_texto); ?></p></td>
+  </tr>
+</table>
