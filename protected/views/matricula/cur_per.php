@@ -22,6 +22,15 @@
 									)); 
 					?>
 				</div>
+				<?php if( $per == "SEMESTRE" ){ ?>
+					<div class="span3 offset4">
+						<?php echo TbHtml::radioButtonList('id_p','id_p', array(1=>'Primer periodo', 2=>'Segundo periodo'), array('separator'=>"" )); ?>
+					</div>
+				<?php }else{ ?>
+					<div class="span3 offset4">
+						<?php echo TbHtml::radioButtonList('id_p','id_p', array(1=>'Primer periodo', 2=>'Segundo periodo',3=>'Tercer Periodo'), array('separator'=>"" )); ?>
+					</div>
+				<?php } ?>
 			</div>
 				<div class="row">
 				<div class="span1 offset6">

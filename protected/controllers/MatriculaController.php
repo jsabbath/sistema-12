@@ -650,8 +650,13 @@ class MatriculaController extends Controller
     public function actionCurso_par(){
         $curso = $this->actionCursoAnoActual();
 
+        $cole = Colegio::model()->find();
+        $per = Parametro::model()->findByPk($cole->col_periodo);
+
+
         $this->render('cur_per',array(
                         'cursos' => $curso,
+                        'per' => $per->par_descripcion,
                     ));
    
         
@@ -659,13 +664,14 @@ class MatriculaController extends Controller
 
         // id = alumno , p = periodo
     public function actionCur_not(){
-        if( isset($_POST['id_cur']) ){
+        if( isset($_POST['id_cur'],$_POST['id_p']) ){
 
             $id = $_POST['id_cur'];
+            $p = $_POST['id_p'];
             $curso = Curso::model()->findByPk($id);
             $cole = Colegio::model()->find();
 
-            $per = Parametro::model()->findByPk($cole->col_periodo);
+           
             $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
 
             $alumnos = array();
@@ -690,9 +696,6 @@ class MatriculaController extends Controller
            
             $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
-            $p = 1;
-           
-
             $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
             
             $mPDF1->WriteHTML($stylesheet, 2);
@@ -713,6 +716,13 @@ class MatriculaController extends Controller
 
             $mPDF1->Output();  
 
+        }else{
+        	 Yii::app()->user->setFlash('error', "seleccion un Periodo!");
+
+        	  $curso = $this->actionCursoAnoActual();
+        	  $this->render('cur_per',array(
+                        'cursos' => $curso,
+                    ));
         }
     }
 
@@ -722,12 +732,16 @@ class MatriculaController extends Controller
         $ano = $this->actionAnoactual();
         $model = new Matricula('search');
         $model->unsetAttributes();  // clear any default values
+
+     	$cole = Colegio::model()->find();
+        $per = Parametro::model()->findByPk($cole->col_periodo);
         
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('informe_not_par', array(
             'model' => $model,
             'lista' => $lista,
             'estado' => $estado,
+            'p'	=> $per->par_descripcion,
             'ano' => $ano,
         ));
     }

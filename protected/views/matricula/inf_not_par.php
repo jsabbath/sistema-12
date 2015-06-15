@@ -279,7 +279,7 @@
                     </td>
 
                 <?php } 
-                    $prom = $final/$count;
+                    if( $count != 0 ) $prom = $final/$count;
                 ?>
 
                 <td class="text-center"?> <strong><?php 
