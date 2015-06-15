@@ -27,11 +27,6 @@
                 ),)); 
 				?>
 				
-			<!-- 	<?php 
-				echo CHtml::dropDownList('id_id', 'id_id', $informe, array(
-	            	'prompt' => '-Seleccione Informe-',
-	            ));
-				?> -->
 			</div>
 			<div id="info" class="span8 offset2">
 				

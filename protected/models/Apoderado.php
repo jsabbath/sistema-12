@@ -1,39 +1,34 @@
 <?php
 
 /**
- * This is the model class for table "alumno".
+ * This is the model class for table "apoderado".
  *
- * The followings are the available columns in table 'alumno':
- * @property integer $alum_id
- * @property string $alum_rut
- * @property string $alum_nombres
- * @property string $alum_apepat
- * @property string $alum_apemat
- * @property string $alum_direccion
- * @property integer $alum_comuna
- * @property integer $alum_ciudad
- * @property integer $alum_region
- * @property integer $alum_genero
- * @property string $alum_f_nac
- * @property string $alum_salud
- * @property string $alum_obs
+ * The followings are the available columns in table 'apoderado':
+ * @property integer $apo_id
+ * @property string $apo_nombre1
+ * @property string $apo_nombre2
+ * @property string $apo_apepat
+ * @property string $apo_apemat
+ * @property string $apo_rut
+ * @property integer $apo_ano
+ * @property integer $apo_hijo
  *
  * The followings are the available model relations:
- * @property Comuna $alumComuna
- * @property Ciudad $alumCiudad
- * @property Region $alumRegion
- * @property Parametro $alumGenero
- * @property Matricula[] $matriculas
+ * @property Matricula $apoHijo
  */
-class Alumno extends CActiveRecord
+class Apoderado extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'alumno';
+		return 'apoderado';
 	}
+
+	public $alumno_nombres;
+	public $alumno_apepat;
+	public $alumno_apemat;
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -43,31 +38,24 @@ class Alumno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('alum_comuna, alum_ciudad, alum_region, alum_genero', 'numerical', 'integerOnly'=>true),
-			array('alum_rut','required','message'=>'Debe ingresar un Rut'),
-			array('alum_rut','validateRut','message'=>'Ingrese un Rut valido'),
-			array('alum_rut', 'length', 'max'=>12),
-			
-			array('alum_nombres','required','message'=>'Debe ingresar un nombre'),
-			array('alum_nombres','validateText','message'=>'Ingrese un nombre valido'),
-			array('alum_nombres', 'length', 'max'=>100),
-			array('alum_apepat','required','message'=>'Debe ingresar un apellido paterno'),
-			array('alum_apepat','validateText','message'=>'Debe ingresar un apellido paterno valido'),
-			array('alum_apemat','required','message'=>'Debe ingresar un apellido materno'),
-			array('alum_apemat','validateText','message'=>'Debe ingresar un apellido materno valido'),
-			array('alum_apepat, alum_apemat', 'length', 'max'=>20),
-			array('alum_direccion','required','message'=>'Debe ingresar una direccion'),
-			array('alum_direccion', 'length', 'max'=>255),
-			array('alum_f_nac','validateFechaNacimiento'),
-			array('alum_f_nac','required','message'=>'Debe ingresar una fecha de nacimiento'),
-			array('alum_f_nac, alum_salud, alum_obs', 'safe'),
-			array('alum_comuna','required','message'=>'Debe seleccionar una comuna'),
-			array('alum_region','required','message'=>'Debe seleccionar una region'),
-			array('alum_ciudad','required','message'=>'Debe seleccionar una ciudad'),
-			array('alum_genero','required','message'=>'Debe seleccionar un genero'),
+			array('apo_rut','required','message'=>'Debe ingresar un Rut'),
+			array('apo_nombre1','required','message'=>'Debe ingresar Primer Nombre'),
+			array('apo_nombre2','required','message'=>'Debe ingresar Segundo Nombre'),
+			array('apo_apepat','required','message'=>'Debe ingresar Apellido Paterno'),
+			array('apo_apemat','required','message'=>'Debe ingresar Apellido Materno'),
+
+			array('apo_rut','validateRut','message'=>'Ingrese un Rut valido'),
+			array('apo_nombre1','validateText','message'=>'Ingrese un Primer Nombre valido'),
+			array('apo_nombre2','validateText','message'=>'Ingrese un Segundo Nombre valido'),
+			array('apo_apepat','validateText','message'=>'Ingrese un Apellido Paterno valido'),
+			array('apo_apemat','validateText','message'=>'Ingrese un Apellido Materno valido'),
+
+			array('apo_ano, apo_hijo', 'numerical', 'integerOnly'=>true),
+			array('apo_nombre1, apo_nombre2, apo_apepat, apo_apemat', 'length', 'max'=>20),
+			array('apo_rut', 'length', 'max'=>12),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_direccion, alum_comuna, alum_ciudad, alum_region, alum_genero, alum_f_nac, alum_salud, alum_obs', 'safe', 'on'=>'search'),
+			array('apo_id, apo_nombre1, apo_nombre2, apo_apepat, apo_apemat, apo_rut, apo_ano, apo_hijo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,11 +67,7 @@ class Alumno extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'alumComuna' => array(self::BELONGS_TO, 'Comuna', 'alum_comuna'),
-			'alumCiudad' => array(self::BELONGS_TO, 'Ciudad', 'alum_ciudad'),
-			'alumRegion' => array(self::BELONGS_TO, 'Region', 'alum_region'),
-			'alumGenero' => array(self::BELONGS_TO, 'Parametro', 'alum_genero'),
-			'matriculas' => array(self::HAS_ONE, 'Matricula', 'mat_alu_id'),
+			'apoHijo' => array(self::BELONGS_TO, 'Matricula', 'apo_hijo'),
 		);
 	}
 
@@ -93,19 +77,14 @@ class Alumno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'alum_id' => 'ID',
-			'alum_rut' => 'Rut',
-			'alum_nombres' => 'Nombres',
-			'alum_apepat' => 'Apellido Paterno',
-			'alum_apemat' => 'Apellido Materno',
-			'alum_direccion' => 'Direccion',
-			'alum_comuna' => 'Comuna',
-			'alum_ciudad' => 'Ciudad',
-			'alum_region' => 'Region',
-			'alum_genero' => 'Genero',
-			'alum_f_nac' => 'Fecha Nacimiento',
-			'alum_salud' => 'Salud',
-			'alum_obs' => 'Observacion',
+			'apo_id' => 'ID',
+			'apo_nombre1' => 'Primer Nombre',
+			'apo_nombre2' => 'Segundo Nombre',
+			'apo_apepat' => 'Apellido Paterno',
+			'apo_apemat' => 'Apellido Materno',
+			'apo_rut' => 'Rut',
+			'apo_ano' => 'Ano',
+			'apo_hijo' => 'Hijo',
 		);
 	}
 
@@ -127,19 +106,40 @@ class Alumno extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('alum_id',$this->alum_id);
-		$criteria->compare('alum_rut',$this->alum_rut,true);
-		$criteria->compare('alum_nombres',$this->alum_nombres,true);
-		$criteria->compare('alum_apepat',$this->alum_apepat,true);
-		$criteria->compare('alum_apemat',$this->alum_apemat,true);
-		$criteria->compare('alum_direccion',$this->alum_direccion,true);
-		$criteria->compare('alum_comuna',$this->alum_comuna);
-		$criteria->compare('alum_ciudad',$this->alum_ciudad);
-		$criteria->compare('alum_region',$this->alum_region);
-		$criteria->compare('alum_genero',$this->alum_genero);
-		$criteria->compare('alum_f_nac',$this->alum_f_nac,true);
-		$criteria->compare('alum_salud',$this->alum_salud,true);
-		$criteria->compare('alum_obs',$this->alum_obs,true);
+		$criteria->compare('apo_id',$this->apo_id);
+		$criteria->compare('apo_nombre1',$this->apo_nombre1,true);
+		$criteria->compare('apo_nombre2',$this->apo_nombre2,true);
+		$criteria->compare('apo_apepat',$this->apo_apepat,true);
+		$criteria->compare('apo_apemat',$this->apo_apemat,true);
+		$criteria->compare('apo_rut',$this->apo_rut,true);
+		$criteria->compare('apo_ano',$this->apo_ano);
+		$criteria->with = array('apoHijo');
+		$criteria->addSearchCondition('apoHijo.matAlu.alum_nombres', $this->alumno_nombres);
+		$criteria->addSearchCondition('apoHijo.matAlu.alum_apepat', $this->alumno_apepat);
+		$criteria->addSearchCondition('apoHijo.matAlu.alum_apemat', $this->alumno_apemat);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	public function buscar($ano)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('apo_id',$this->apo_id);
+		$criteria->compare('apo_nombre1',$this->apo_nombre1,true);
+		$criteria->compare('apo_nombre2',$this->apo_nombre2,true);
+		$criteria->compare('apo_apepat',$this->apo_apepat,true);
+		$criteria->compare('apo_apemat',$this->apo_apemat,true);
+		$criteria->compare('apo_rut',$this->apo_rut,true);
+		$criteria->compare('apo_ano',$ano);
+		$criteria->with = array('apoHijo');
+		$criteria->addSearchCondition('apoHijo.matAlu.alum_nombres', $this->alumno_nombres);
+		$criteria->addSearchCondition('apoHijo.matAlu.alum_apepat', $this->alumno_apepat);
+		$criteria->addSearchCondition('apoHijo.matAlu.alum_apemat', $this->alumno_apemat);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -150,32 +150,20 @@ class Alumno extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Alumno the static model class
+	 * @return Apoderado the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 
-	public function getNombre_completo(){
-		return $this->alum_nombres." ".$this->alum_apepat;
-	}
-
-	public function getNombre_completo_2(){
-		return $this->alum_apepat." ".$this->alum_apemat.", ". $this->alum_nombres;
-	}
-
-	public function getNombre_completo_3(){
-		return $this->alum_nombres." ".$this->alum_apepat." ".$this->alum_apemat;
-	}
-
 	public function validateText($attribute, $params) {
-    $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
-        if($this->$attribute!=""){	
-	        if (!preg_match($pattern, $this->$attribute))
-	            $this->addError($attribute,$params['message']);
+        $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
+	        if($this->$attribute!=""){	
+		        if (!preg_match($pattern, $this->$attribute))
+		            $this->addError($attribute,$params['message']);
+	    	}
     	}
-	}
     
     public function validateText2($attribute, $params) {
         $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú0-9º°\.\,\'\"\)\(\-\@\:\/\+]+([[:space:]]{0,2}[a-zA-ZñÑÁÉÍÓÚáéíóú0-9º°\.\,\'\"\)\(\-\@\:\/\+]+)*)$/';
@@ -205,15 +193,15 @@ class Alumno extends CActiveRecord
 			    $date1 = new DateTime(date('Y-m-d'));
 				$date2 = new DateTime($this->$attribute);
 				$interval = $date1->diff($date2);
-				if(($interval->y) < 3){
-				    $this->addError($attribute,'Fecha de Nacimiento: Solo se pueden ingresar mayores de 3 Años');
+				if(($interval->y) < 18){
+				    $this->addError($attribute,'Fecha de Nacimiento: Solo se pueden ingresar Donantes Mayores de 18 Años');
 				}
 			}else{
 				$this->addError($attribute,'Fecha de Nacimiento: Ingrese una fecha valida');
 			}
 	    }
     }
-    public function validateRut($attribute, $params) {
+     public function validateRut($attribute, $params) {
 	 	$rut = str_split($this->$attribute);
 	 	$array_rut = array();
 	    for($i=0; $i< strlen($this->$attribute); $i++) {
