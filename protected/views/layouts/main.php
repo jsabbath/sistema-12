@@ -19,14 +19,18 @@ if( $temp->temp_ano != 0 ){
     $ano_selec = $par->par_descripcion;
 }
 
-if( $temp->temp_time == NULL ){
+if( $temp->temp_time == 0 ){
     $durationMins = Yii::app()->user->um->getDefaultSystem()->getn('sessionmaxdurationmins');
     $ti = CrugeUtil::makeExpirationDateTime($durationMins);
     $temp->temp_time = $ti;
     $temp->save();
     $exp = $ti;
+    $min_alert = $exp - (3 * 60); // se le restan 3 minutos al tiempo  del logeo, para mostrar un mensaje
 } else{
-      $exp = $temp->temp_time;
+    $exp = $temp->temp_time;
+
+    $min_alert = $exp - (3 * 60); // se le restan 3 minutos al tiempo  del logeo, para mostrar un mensaje
+
 }
 
 
@@ -91,7 +95,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
     <div class="container" style="background-color: #292929">
         <div class="row" >
             <div class="span3" style="color:white"><?php echo $nombre ?></div> 
-             <div  class="span6" style="color:white">termino sesion: <label class="label label-error" style="cursor:default"><?php echo date("H:i:s",$exp); ?></label></div>
+             <div  class="span6" style="color:white">termino sesion: <label class="label label-error" style="cursor:default"><?php echo date("H:i",$exp)/*." alert=>".date("H:i:s",$min_alert)*/; ?></label></div>
              <div class="span1 offset2" style="color:red"><label class="label label-important"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir" style="color: white">SALIR</a></label></div> 
         </div>
     </div>
@@ -303,6 +307,10 @@ if (strcmp("" . Yii::app()->request->url, Yii::app()->baseUrl . "/index.php/site
 
 
 <script>
+
+
+
+
 $(function () { $("[data-toggle='tooltip']").tooltip(); });
 
 function logout(){
@@ -330,4 +338,30 @@ $("#contraseña").click(function(){
                     $("#cambio").html(result)}
             });
 });
+
+
+    var time = <?php echo $min_alert; ?>;
+    var flag = true;   
+  
+    window.setInterval(function(){
+        if( flag ){
+            var d = Math.round(+new Date()/1000);
+
+            if( d >= time){
+                console.log(d +" >= " +  time);
+                flag = false;
+                 swal({  
+                    title: "3 Minutos restantes!",   
+                    text: "Asegurese de guardar todo!",  
+                    type: "warning",   
+                    showCancelButton: false,   
+                    confirmButtonColor: "#DD6B55",   
+                    confirmButtonText: "Ok!",   
+                    closeOnConfirm: false, 
+                });
+            }
+       }
+    }, 5000);
+
+
 </script>
