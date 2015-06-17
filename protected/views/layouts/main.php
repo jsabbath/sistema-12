@@ -12,11 +12,25 @@ $temp = Temp::model()->findByAttributes(
                      array('temp_iduser'=>Yii::app()->user->id)
                  ); 
 $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+
 if( $temp->temp_ano != 0 ){
-    $ano_selec = $temp->temp_ano;
+    $ano_selec = $temp->temp_ano;  
 } else {
     $ano_selec = $par->par_descripcion;
 }
+
+if( $temp->temp_time == NULL ){
+    $durationMins = Yii::app()->user->um->getDefaultSystem()->getn('sessionmaxdurationmins');
+    $ti = CrugeUtil::makeExpirationDateTime($durationMins);
+    $temp->temp_time = $ti;
+    $temp->save();
+    $exp = $ti;
+} else{
+      $exp = $temp->temp_time;
+}
+
+
+
 
 $anos = CHtml::listData(Curso::model()->findAll(array('condition' => 'cur_ano!=:x', 'params' => array(':x' => $ano_selec ))), 'cur_ano', 'cur_ano', $par->par_descripcion);
 
@@ -67,8 +81,23 @@ if(!Yii::app()->user->checkAccess('profesor') OR
     !Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin
     ){
+
+
+    
 ?>
     <body>
+   
+<div class="navbar-fixed-top visible-desktop"  align="center" class="text-center">
+    <div class="container" style="background-color: #292929">
+        <div class="row" >
+            <div class="span3" style="color:white"><?php echo $nombre ?></div> 
+             <div  class="span6" style="color:white">termino sesion: <label class="label label-error" style="cursor:default"><?php echo date("H:i:s",$exp); ?></label></div>
+             <div class="span1 offset2" style="color:red"><label class="label label-important"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir" style="color: white">SALIR</a></label></div> 
+        </div>
+    </div>
+</div>        
+         
+<br class="visible-desktop">
    
         <div class="container">    
             <header style="background-color: #292929; border-top: 3px solid #772000;border-bottom: 3px solid #772000; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">
@@ -194,12 +223,12 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             <strong style="color: white">Administracion</strong>
                         </td>
                         <?php } ?>
-                         <td class="text-center">
+                         <!-- <td class="text-center">
                             <a class="link-negro" href="#"  id="salir" onclick="logout()" title="Salir">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png"></div>
                             </a>
                             <strong style="color: white">Salir</strong>
-                        </td>
+                        </td> -->
                     </table>
                 </div>
             </div>   
@@ -236,7 +265,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
             <div>
 <?php } ?>
 
-            <?php echo $content; ?>
+            <?php echo $content;             ?>
 
 <?php 
 //aqui empieza el control de usuarios
@@ -251,12 +280,11 @@ if(Yii::app()->user->checkAccess('PROFESOR')){
         </div><!-- page -->
     <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
 
-         
-         
-
+ 
+<!-- 
 <div align="center" class="text-center">
 	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
-</div>
+</div> -->
 </body>
 <?php }
 // aqui termina el control de usuario

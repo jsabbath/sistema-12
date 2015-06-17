@@ -54,6 +54,7 @@ class Temp extends CActiveRecord
 			'temp_id' => 'Temp',
 			'temp_iduser' => 'Temp Iduser',
 			'temp_ano' => 'Temp Ano',
+			'temp_time' => 'timepo',
 		);
 	}
 

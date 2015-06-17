@@ -202,6 +202,7 @@ class UiController extends Controller
         $ano = $temp->temp_ano;
         if ( $ano !=0 ){
             $temp->temp_ano = 0;
+            $temp->temp_time = null;
             $temp->save();
         }
         
