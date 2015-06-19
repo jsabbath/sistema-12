@@ -19,19 +19,20 @@ if( $temp->temp_ano != 0 ){
     $ano_selec = $par->par_descripcion;
 }
 
-if( $temp->temp_time == 0 ){
+
     $durationMins = Yii::app()->user->um->getDefaultSystem()->getn('sessionmaxdurationmins');
-    $ti = CrugeUtil::makeExpirationDateTime($durationMins);
-    $temp->temp_time = $ti;
-    $temp->save();
-    $exp = $ti;
-    $min_alert = $exp - (3 * 60); // se le restan 3 minutos al tiempo  del logeo, para mostrar un mensaje
-} else{
-    $exp = $temp->temp_time;
+    $exp = CrugeUtil::makeExpirationDateTime($durationMins);
 
+   
     $min_alert = $exp - (3 * 60); // se le restan 3 minutos al tiempo  del logeo, para mostrar un mensaje
+    $sesion_ = CrugeSession::model()->findLast(Yii::app()->user->id);
 
-}
+    if ($sesion_ != null) {
+        $sesion_->expire = $exp;
+        $sesion_->save();
+    }
+
+
 
 
 
@@ -95,7 +96,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
     <div class="container" style="background-color: #292929">
         <div class="row" >
             <div class="span3" style="color:white"><?php echo $nombre ?></div> 
-             <div  class="span6" style="color:white">termino sesion: <label class="label label-error" style="cursor:default"><?php echo date("H:i",$exp)/*." alert=>".date("H:i:s",$min_alert)*/; ?></label></div>
+             <div  class="span6" style="color:white">termino sesion: <label class="label" id="timer" style="cursor:default; background-color: white; color: black;"><?php echo $durationMins; ?></label></div>
              <div class="span1 offset2" style="color:red"><label class="label label-important"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir" style="color: white">SALIR</a></label></div> 
         </div>
     </div>
@@ -362,6 +363,38 @@ $("#contraseña").click(function(){
             }
        }
     }, 5000);
+
+Minutos = 0;
+Segundos = 59;
+
+CreateTimer(<?php echo $durationMins; ?>);
+
+function CreateTimer( Time) {
+    Timer = document.getElementById("timer");
+    Minutos = Time -1;
+
+    UpdateTimer()
+    window.setTimeout("Tick()", 1000);
+}
+
+function Tick() {
+    Segundos -=1;
+    if(Segundos == 0){
+        Segundos = 60;
+        Minutos -= 1;
+    }
+    UpdateTimer()
+    window.setTimeout("Tick()", 1000);
+}
+
+function UpdateTimer() {
+    if( Segundos < 10  ){
+          Timer.innerHTML = Minutos+ ":0"+ Segundos;
+    } else{
+        Timer.innerHTML = Minutos+ ":"+ Segundos;
+    }
+}
+ 
 
 
 </script>

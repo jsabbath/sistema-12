@@ -202,13 +202,10 @@ class UiController extends Controller
         $ano = $temp->temp_ano;
         if ( $ano !=0 ){
             $temp->temp_ano = 0;
-          
+           $temp->update();
         }
-        if( $temp->temp_time != 0 ){
-               $temp->temp_time = 0;
-          
-        }
-          $temp->update();
+        
+         
         if(Yii::app()->user->logout() == false){
 			// se devuelve a la URL de donde vino
 	        $this->redirect(Yii::app()->user->returnUrl);
