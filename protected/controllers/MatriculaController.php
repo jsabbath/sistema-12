@@ -978,7 +978,7 @@ class MatriculaController extends Controller
 
           $matriculas = Matricula::model()->findAll(array('condition' => 'mat_ano = "'.$ano.'"'));
           foreach ($matriculas as $key => $m) {
-          	 set_time_limit(30);
+          	 //set_time_limit(30);
                 $tiene_ev = Evaluacion::model()->findByAttributes(array('eva_matricula' => $m->mat_id));
 
                 if( !$tiene_ev ){

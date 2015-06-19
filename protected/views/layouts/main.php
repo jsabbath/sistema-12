@@ -92,8 +92,8 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 ?>
     <body>
    
-<div class="navbar-fixed-top visible-desktop"  align="center" class="text-center">
-    <div class="container" style="background-color: #292929">
+<div class="navbar-fixed-top"  align="center" class="text-center" style="margin-bottom: 0">
+    <div class="container" style="background-color: #292929;">
         <div class="row" >
             <div class="span3" style="color:white"><?php echo $nombre ?></div> 
              <div  class="span6" style="color:white">termino sesion: <label class="label" id="timer" style="cursor:default; background-color: white; color: black;"><?php echo $durationMins; ?></label></div>
@@ -105,7 +105,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 <br class="visible-desktop">
    
         <div class="container">    
-            <header style="background-color: #292929; border-top: 3px solid #772000;border-bottom: 3px solid #772000; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">
+            <header style="background-color: #292929; border-bottom: 3px solid #772000; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">
                 <div class="row">
                  
                 <div class="span12">

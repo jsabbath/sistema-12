@@ -10,6 +10,15 @@
 
      ?>
 
+
+     <style type="text/css">
+        .nav-tabs > li, .nav-pills > li {
+            float:none;
+            display:inline-block;
+        }
+     </style>
+
+
     <div class="text-center">
         <h3><?php echo $titulo; ?></h3>
     </div>
@@ -21,7 +30,7 @@
     <div class="tabbable"> <!-- Only required for left/right tabs -->
  
 
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="text-align: center">
             <?php foreach ($i['areas'] as $key => $a) { ?>
                 <li <?php if( $key == 0 ){ ?>class="active" <?php } ?>><a href="#tab<?php echo $a['are_id'] ?>" data-toggle="tab"><?php echo $a['texto'] ?></a></li>
             <?php } ?>
@@ -102,13 +111,16 @@
                                                 <!-- <?php echo $alum['mat_id'] . $c['con_id']; ?>  -->
                                                     <form name="formName" id=" <?php echo $eva_id; ?>">
                                                         <?php foreach ($escala as $key => $e) { /*echo "mat_id:".$alum['mat_id'] .",con_id:". $c['con_id'];*/?>
-                                                            <label class="radio"<?php if($e == $not ){ ?>style="background-color: yellow" <?php } ?>>
+                                                            <label title="<?php echo $e; ?>" class="radio"<?php if($e == $not ){ ?>style="background-color: yellow" <?php } ?>>
                                                                 <input  id="<?php echo 'mat_id:'.$alum['mat_id'] .',con_id:'. $c['con_id']; ?>" 
                                                                         type="radio" name="optionsRadios" 
                                                                         value="option<?php echo $key. $alum['mat_id'] . $c['con_id']; ?>" <?php if($e == $not ){ ?>checked <?php } ?> 
                                                                         disabled
                                                                         >
-                                                                    <?php echo $e; ?>
+                                                                    <?php 
+                                                                        echo $e
+
+                                                                    ?>
                                                                 </label>
                                                         <?php } ?>
                                                     </form>
