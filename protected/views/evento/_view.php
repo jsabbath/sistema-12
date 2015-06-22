@@ -13,10 +13,6 @@
 	<?php echo CHtml::encode($data->eve_descripcion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('eve_fecha')); ?>:</b>
-	<?php echo CHtml::encode($data->eve_fecha); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('eve_inicio')); ?>:</b>
 	<?php echo CHtml::encode($data->eve_inicio); ?>
 	<br />

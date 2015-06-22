@@ -26,12 +26,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'eve_fecha'); ?>
-		<?php echo $form->textField($model,'eve_fecha'); ?>
-		<?php echo $form->error($model,'eve_fecha'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'eve_inicio'); ?>
 		<?php echo $form->textField($model,'eve_inicio'); ?>
 		<?php echo $form->error($model,'eve_inicio'); ?>

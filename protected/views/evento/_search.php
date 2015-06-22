@@ -22,11 +22,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'eve_fecha'); ?>
-		<?php echo $form->textField($model,'eve_fecha'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'eve_inicio'); ?>
 		<?php echo $form->textField($model,'eve_inicio'); ?>
 	</div>

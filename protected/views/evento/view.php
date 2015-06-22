@@ -23,7 +23,6 @@ $this->menu=array(
 	'attributes'=>array(
 		'eve_id',
 		'eve_descripcion',
-		'eve_fecha',
 		'eve_inicio',
 		'eve_fin',
 		'eve_usuario',

@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'evento':
  * @property integer $eve_id
  * @property string $eve_descripcion
- * @property string $eve_fecha
  * @property string $eve_inicio
  * @property string $eve_fin
  * @property integer $eve_usuario
@@ -34,10 +33,10 @@ class Evento extends CActiveRecord
 		return array(
 			array('eve_usuario', 'numerical', 'integerOnly'=>true),
 			array('eve_descripcion', 'length', 'max'=>255),
-			array('eve_fecha, eve_inicio, eve_fin', 'safe'),
+			array('eve_inicio, eve_fin', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('eve_id, eve_descripcion, eve_fecha, eve_inicio, eve_fin, eve_usuario', 'safe', 'on'=>'search'),
+			array('eve_id, eve_descripcion, eve_inicio, eve_fin, eve_usuario', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +60,6 @@ class Evento extends CActiveRecord
 		return array(
 			'eve_id' => 'Eve',
 			'eve_descripcion' => 'Eve Descripcion',
-			'eve_fecha' => 'Eve Fecha',
 			'eve_inicio' => 'Eve Inicio',
 			'eve_fin' => 'Eve Fin',
 			'eve_usuario' => 'Eve Usuario',
@@ -88,7 +86,6 @@ class Evento extends CActiveRecord
 
 		$criteria->compare('eve_id',$this->eve_id);
 		$criteria->compare('eve_descripcion',$this->eve_descripcion,true);
-		$criteria->compare('eve_fecha',$this->eve_fecha,true);
 		$criteria->compare('eve_inicio',$this->eve_inicio,true);
 		$criteria->compare('eve_fin',$this->eve_fin,true);
 		$criteria->compare('eve_usuario',$this->eve_usuario);

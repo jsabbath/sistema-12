@@ -12,12 +12,9 @@ class EventoController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+   {
+      return array(array('CrugeAccessControlFilter'));
+   }
 
 	/**
 	 * Specifies the access control rules.
@@ -169,5 +166,32 @@ class EventoController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionCalendario(){
+		$this->render('calendario');
+	}
+
+	public function actionInsertar(){
+		if(isset($_POST['title']) AND isset($_POST['start']) AND isset($_POST['end'])){
+			$titulo = $_POST['title'];
+			$inicio = $_POST['start'];
+			$fin = $_POST['end'];
+			$usuario  = Usuario::model()->findAll(array('condition'=>'usu_iduser="'.Yii::app()->user->id.'"'));
+			$id_usuario = $usuario[0]->usu_id;
+
+			$model=new Evento;
+			$model->eve_descripcion = $titulo;
+			$model->eve_inicio = $inicio;
+			$model->eve_fin = $fin;
+			$model->eve_usuario = $id_usuario;
+
+			$model->save();
+
+		}else throw new CHttpException(404,'The requested page does not exist.');
+	}
+
+	public function actionEventos(){
+		
 	}
 }

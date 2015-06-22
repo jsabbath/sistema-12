@@ -47,7 +47,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'eve_id',
 		'eve_descripcion',
-		'eve_fecha',
 		'eve_inicio',
 		'eve_fin',
 		'eve_usuario',
