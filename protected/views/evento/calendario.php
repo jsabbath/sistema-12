@@ -66,22 +66,30 @@ $('#calendar').fullCalendar({
 	eventRender: function(event, element) {
         element.append( "<i class='closeon'>Eliminar</i>" );
         element.find(".closeon").click(function() {
-           $('#calendar').fullCalendar('removeEvents',event._id);
+           	$('#calendar').fullCalendar('removeEvents',event._id);
+           	$.ajax({
+				url: '<?php echo $this->createUrl('Evento/eliminar'); ?>',
+	    		dataType: "json",
+	    		type: "POST",
+	    		data: 'title=' + event.title,
+	    		success: function (json) {
+	                alert('Eliminado exitosamente!');
+	            }
+	    	})
         });
         //ajax de eliminacion
     },
-	events: [
-		//ajax de consulta de eventos
-		//{
-		//	title: 'Long Event',
-		//	start: '2015-02-07',
-		//	end: '2015-02-10'
-		//},
-	],
+	events: {
+		url: '<?php echo $this->createUrl('Evento/eventos'); ?>',
+        type: 'POST', // Send post data
+        error: function() {
+            alert('No hay eventos que mostrar.');
+    	}
+	},
 });
 	
 });
-asdasdasd
+
 </script>
 
 <div class="row">
@@ -91,20 +99,3 @@ asdasdasd
 </div>
 
 <div id='calendar'></div>
-
-
-
-<script type="text/javascript">
-	
-function insertar(evento){
-	$.ajax({
-	    url: '<?php echo $this->createUrl('Evento/insertar'); ?>',
-	    dataType: "json",
-	    data: { term: evento },
-	    success: function() {
-            alert("se ha insertado")
-	    }
-	})
-}
-
-</script>

@@ -169,7 +169,14 @@ class EventoController extends Controller
 	}
 
 	public function actionCalendario(){
-		$this->render('calendario');
+		if(Usuario::model()->findAll(array('condition'=>'usu_iduser="'.Yii::app()->user->id.'"'))){
+			$this->render('calendario');
+
+		}else{
+			Yii::app()->user->setFlash('error', "Usted no tiene calendario!");
+			$this->redirect(array('Site/index'));
+		}
+		
 	}
 
 	public function actionInsertar(){
@@ -192,6 +199,32 @@ class EventoController extends Controller
 	}
 
 	public function actionEventos(){
-		
+		$usuario  = Usuario::model()->findAll(array('condition'=>'usu_iduser="'.Yii::app()->user->id.'"'));
+		$id_usuario = $usuario[0]->usu_id;
+
+		$con = Evento::model()->findAll(array('condition'=>'eve_usuario="'.$id_usuario.'"'));
+
+		$evento = array();
+		foreach ($con as $key) {
+			$aux = array();
+			$aux['title'] = $key->eve_descripcion;
+			$aux['start'] = $key->eve_inicio;
+			$aux['end'] = $key->eve_fin;
+
+			array_push($evento, $aux);
+		}
+
+		echo json_encode($evento);
+    	exit();
+	}
+
+	public function actionEliminar(){
+		if(isset($_POST['title'])){
+			$titulo = $_POST['title'];
+			$evento = Evento::model()->findAll(array('condition'=>'eve_descripcion="'.$titulo.'"'));
+			$id_evento = $evento[0]->eve_id;
+			$this->actionDelete($id_evento);
+
+		}else throw new CHttpException(404,'The requested page does not exist.');
 	}
 }
