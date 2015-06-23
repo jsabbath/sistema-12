@@ -591,6 +591,45 @@ class MatriculaController extends Controller
         $mPDF1->Output();
     }
 
+    public function actionPromedio_curso_asig($id_curso,$id_asig,$p){
+        $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>  array( ':x' => $id_curso)));
+        $prom_curso = 0;
+        $prom_count = 0;
+        $final = 0;
+
+        foreach ($lista as $key => $id_alum){
+
+            $n = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => $p ));
+            
+            $not = $n->notas;
+            $count_alu = 0;
+            $prom_alu = 0;
+                foreach ($not as $key => $k) {
+                    if( $k > 0 ){
+                        $count_alu++;
+                        $prom_alu += $k;
+                    }
+                }
+                if( $count_alu != 0 ){
+                    $prom_curso += $prom_alu/$count_alu;
+                    $prom_count++;
+                }
+        }
+
+        if( $prom_count != 0 ){
+            $final = $prom_curso/$prom_count;
+
+            if( strlen($final) == 1 ){
+                $final = $final .".0";
+            }else{
+                $precision = 1;
+                $final = number_format((float) $final, $precision, '.', '');
+            }
+        }
+
+        return $final;
+    }
+
 
     public function actionCertificado_nota_par($id, $p){
         $model = $this->loadModel($id);
@@ -601,23 +640,35 @@ class MatriculaController extends Controller
         if( empty($evaluaciones) ){
            throw new CHttpException(404, 'Alumno sin Curso.');
         }
-        foreach ($evaluaciones as $key => $alum) {
-
-            $asi = Asignatura::model()->findByPk($alum->not_asig);
-
-            $notas[] = array(
-                  'nota'    => $alum->notas,
-                  'nom_asi' => $asi->asi_descripcion,
-                );
-
-        }
-        $alumnos = array_unique($notas, SORT_REGULAR);
 
         //$c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
         $cur_list = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id));
 
         $ano = $evaluaciones[0]['not_ano'];
         $curso  = Curso::model()->findByPk($cur_list->list_curso_id);
+
+        foreach ($evaluaciones as $key => $alum) {
+
+            $asi = Asignatura::model()->findByPk($alum->not_asig);
+            $prom = $this->actionPromedio_curso_asig($curso->cur_id,$asi->asi_id,$p);
+
+            $notas[] = array(
+                  'nota'    => $alum->notas,
+                  'nom_asi' => $asi->asi_descripcion,
+                  'prom_asi'=> $prom,
+                );
+
+        }
+        $alumnos = array_unique($notas, SORT_REGULAR);
+        if( $p == 1 ){
+            $asi_alu = $model->mat_asistencia_1;
+        }else if( $p == 2 ){
+            $asi_alu = $model->mat_asistencia_2;
+        }else if( $p == 3 ){
+            $asi_alu = $model->mat_asistencia_3;
+        }
+
+
         $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
         $notas_periodo = $curso->cur_notas_periodo;
         $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
@@ -627,6 +678,8 @@ class MatriculaController extends Controller
 
         $mPDF1 = Yii::app()->ePdf->mpdf();
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+
 
         $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
         $mPDF1->WriteHTML($stylesheet, 2);
@@ -642,6 +695,7 @@ class MatriculaController extends Controller
                                                                 'firma_profe'   => $profe->usu_firma,
                                                                 'firma_dir'     => $nombre_dir->usu_firma,
                                                                 'cole'          => $cole,
+                                                                'asi_alu'       => $asi_alu,
                         ), true));
         $mPDF1->Output();        
 
@@ -676,7 +730,7 @@ class MatriculaController extends Controller
 
             $alumnos = array();
 
-             $mPDF1 = Yii::app()->ePdf->mpdf();
+            $mPDF1 = Yii::app()->ePdf->mpdf();
             $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
             foreach ($lista as $key => $alum) {
@@ -712,6 +766,7 @@ class MatriculaController extends Controller
                                                                     'firma_profe'   => $profe->usu_firma,
                                                                     'firma_dir'     => $nombre_dir->usu_firma,
                                                                     'cole'          => $cole,
+                                                                    'id_cur'        => $curso->cur_id,
                             ), true));
 
             $mPDF1->Output();  
@@ -1011,5 +1066,8 @@ class MatriculaController extends Controller
             echo $count;  
 
     }
+
+
+   
 
 }

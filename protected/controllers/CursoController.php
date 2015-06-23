@@ -699,7 +699,7 @@ class CursoController extends Controller
 	            		
 	            		$lista_alumnos[] = array(
 	            					'mat_id'	=> $alumno->list_mat_id,
-	            					'nombre'	=> $alu->getNombre_completo(),
+	            					'nombre'	=> $alu->getNombre_completo_2(),
 	            					'asi_1'		=> $matri->mat_asistencia_1,
 	            					'asi_2'		=> $matri->mat_asistencia_2,
 	            				);

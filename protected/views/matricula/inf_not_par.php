@@ -241,8 +241,8 @@
                         <?php }else { ?>    
                             <td><?php echo "N".$i; ?></td>
             <?php }} ?>
-            <td>FINAL</td>
-	
+                <td>FINAL</td>
+	           <td>CURSO</td>          
 	</tr>	
 
 
@@ -253,6 +253,7 @@
     ?>
         <tr>
             <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
+
 
             <?php if( $a['nom_asi'] == "RELIGION" ){ 
                 $final = 0;
@@ -282,7 +283,7 @@
                     if( $count != 0 ) $prom = $final/$count;
                 ?>
 
-                <td class="text-center"?> <strong><?php 
+                <td class="text-center" style="background-color: #EEEEEE"> <strong><?php 
                     if( $count !=0 ){
                         if( $prom > 6  ) {
                             echo "MB"; 
@@ -336,18 +337,44 @@
                     if( strlen($prom) == 1 ){
                         $prom = $prom .".0";
                     }else{
-                        $precision = 2;
+                        $precision = 1;
                         $prom = number_format((float) $prom, $precision, '.', '');
                     }
                 ?>
-                <td  <?php if( $prom < 4 ){ ?>style="color: RED;" <?php } ?>><strong><?php  if( $count != 0 ) echo $prom; ?></strong></td><!-- final -->
+                <td  <?php if( $prom < 4 ){ ?>style="color: RED; background-color: #EEEEEE;" <?php }else{ ?>style="background-color: #EEEEEE" <?php } ?>>
+                                    <strong><?php  if( $count != 0 ) echo $prom; ?></strong>
+                </td><!-- final -->
 
             <?php } ?><!-- fin else religion -->
+
+             <td><p><strong><?php 
+                if( $a['prom_asi'] != 0){ 
+                    if( $a['nom_asi'] == "RELIGION"){
+                        if( $a['prom_asi'] > 6  ) { 
+                            echo "MB";
+                        }else if( $a['prom_asi'] < 6 AND $a['prom_asi'] >= 5 ){ 
+                            echo "B";
+                        }else if( $a['prom_asi'] < 5 AND $a['prom_asi'] >= 4 ){ 
+                            echo "S";
+                        }else if( $a['prom_asi'] < 4 ){ 
+                            echo "I";
+                        }
+                    } else{
+                        echo $a['prom_asi'];
+                    }
+                }?></strong></p></td>
         </tr>
+
 
        <?php }?>
 	
-	
+	  <tr>
+        <td><p><strong>ASITENCIA</strong></p></td>
+            <?php for ($i=1; $i <= $max_not ; $i++){  ?>
+                <td style="border: 0;"></td>
+            <?php } ?>
+            <td style="border: 1; text-align: right;"><strong><?php echo $asi_alu."%"; ?></strong></td>
+      </tr>
 </table>
 <br>
 <div>

@@ -158,12 +158,58 @@
 <body>
 <?php 
 
+function actionPromedio_curso_asig($id_curso,$id_asig,$p){
+        $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>  array( ':x' => $id_curso)));
+        $prom_curso = 0;
+        $prom_count = 0;
+        $final = 0;
+
+        foreach ($lista as $key => $id_alum){
+
+            $n = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => $p ));
+            
+            $not = $n->notas;
+            $count_alu = 0;
+            $prom_alu = 0;
+                foreach ($not as $key => $k) {
+                    if( $k > 0 ){
+                        $count_alu++;
+                        $prom_alu += $k;
+                    }
+                }
+                if( $count_alu != 0 ){
+                    $prom_curso += $prom_alu/$count_alu;
+                    $prom_count++;
+                }
+        }
+
+        if( $prom_count != 0 ){
+            $final = $prom_curso/$prom_count;
+
+            if( strlen($final) == 1 ){
+                $final = $final .".0";
+            }else{
+                $precision = 1;
+                $final = number_format((float) $final, $precision, '.', '');
+            }
+        }
+
+        return $final;
+    }
+
+
+
+
+$prom2 = array();
+$flag = true;
 foreach ($lista_alu as $key => $alu) {
                
     $id = $alu['id'];
 
     $model = Matricula::model()->findByPk($id);
     $notas = array();
+   
+ 
 
     $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => $periodo )));
 
@@ -174,16 +220,30 @@ foreach ($lista_alu as $key => $alu) {
 
         $asi = Asignatura::model()->findByPk($alum->not_asig);
 
+        if( $flag ){
+            $prom_asi = $this->actionPromedio_curso_asig($id_cur,$asi->asi_id,$periodo);
+            $prom2[] = array($prom_asi);
+        }
+
         $notas[] = array(
               'nota'    => $alum->notas,
               'nom_asi' => $asi->asi_descripcion,
             );
 
     }
+     if( $periodo == 1 ){
+            $asi_alu = $model->mat_asistencia_1;
+        }else if( $periodo == 2 ){
+            $asi_alu = $model->mat_asistencia_2;
+        }else if( $periodo == 3 ){
+            $asi_alu = $model->mat_asistencia_3;
+        }
+
+
     $notas = array_unique($notas, SORT_REGULAR);
     $ano = $evaluaciones[0]['not_ano'];   
-
-
+    $flag = false;
+    $count_curso = 0;
 
  ?>
 
@@ -270,13 +330,15 @@ foreach ($lista_alu as $key => $alu) {
                             <td><?php echo "N".$i; ?></td>
             <?php }} ?>
             <td>FINAL</td>
-	
+	        <td>CURSO</td>       
 	</tr>	
 
 
 	<?php 
+        
         foreach ($notas as $key => $a) { 
                 $n = $a['nota'];
+
     ?>
         <tr>
             <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
@@ -309,7 +371,7 @@ foreach ($lista_alu as $key => $alu) {
                      if( $count != 0 ) $prom = $final/$count;
                 ?>
 
-                <td class="text-center"?> <strong><?php 
+                <td class="text-center" style="background-color: #EEEEEE;"> <strong><?php 
                     if( $count !=0 ){
                         if( $prom > 6  ) {
                             echo "MB"; 
@@ -333,7 +395,7 @@ foreach ($lista_alu as $key => $alu) {
                     if( $n[$i] < 4 ) { 
                        
                     ?>
-                        <td style="color: RED;" ><strong><?php if( $n[$i] != 0 ){ 
+                        <td style="color: RED; " ><strong><?php if( $n[$i] != 0 ){ 
                             $count++;
                             $final += $n[$i];
 
@@ -363,23 +425,50 @@ foreach ($lista_alu as $key => $alu) {
                     if( strlen($prom) == 1 ){
                         $prom = $prom .".0";
                     }else{
-                        $precision = 2;
+                        $precision = 1;
                         $prom = number_format((float) $prom, $precision, '.', '');
                     }
                 ?>
-                <td  <?php if( $prom < 4 ){ ?>style="color: RED;" <?php } ?>><strong><?php  if( $count != 0 ) echo $prom; ?></strong></td><!-- final -->
+                    <td  <?php if( $prom < 4 ){ ?>style="color: RED; background-color: #EEEEEE;" <?php }else{ ?>style="background-color: #EEEEEE" <?php } ?>>
+                            <strong><?php  if( $count != 0 ) echo $prom; ?></strong>
+                    </td><!-- final -->
 
             <?php } ?><!-- fin else religion -->
+            <td><p><strong><?php if($prom2[$count_curso][0] != 0){
+                            $pl = $prom2[$count_curso][0]; 
+                            if( $a['nom_asi'] == "RELIGION"){
+                                if( $pl > 6  ) { 
+                                    echo "MB";
+                                }else if( $pl < 6 AND $pl >= 5 ){ 
+                                    echo "B";
+                                }else if( $pl < 5 AND $pl >= 4 ){ 
+                                    echo "S";
+                                }else if( $pl < 4 ){ 
+                                    echo "I";
+                                }
+                            } else{
+                                echo $prom2[$count_curso][0]; 
+                            }
+                            $count_curso++; 
+
+            }?></strong></p></td>
+
         </tr>
 
        <?php }?>
 	
-	
+	 <tr>
+        <td><p><strong>ASITENCIA</strong></p></td>
+            <?php for ($i=1; $i <= $max_not ; $i++){  ?>
+                <td style="border: 0;"></td>
+            <?php } ?>
+            <td style="border: 1; text-align: right;"><strong><?php if( $asi_alu != "" ) echo $asi_alu."%"; ?></strong></td>
+      </tr>
 </table>
 <br>
 
 <div>
-	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 209; $i++) { 
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 209; $i++) {
         echo "_";
     } ?></p>
 	

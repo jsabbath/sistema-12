@@ -11,7 +11,7 @@
 </div>
 
 <br>
-	<table class="table table-hover" id="table_asi">
+	<table class="table table-bordered" id="table_asi">
 	  	<thead>
 		    <tr>
 		    <th style="display:none">id</th>
@@ -32,8 +32,8 @@
 	  	<tbody>
 	      <?php  foreach ($lista as $key => $value) {  ?>
 	       <tr>
-	       		<td id="notas_id" style="display:none;"><?php echo $value['mat_id'];  ?></td>
-	       		 <td data-editable= 'false'><?php  echo strtoupper($value['nombre']);?></td>
+	       		<td id="notas_id" style="display:none; background-color: #EEEEEE;"><?php echo $value['mat_id'];  ?></td>
+	       		 <td data-editable= 'false' ><?php  echo strtoupper($value['nombre']);?></td>
 	       		<td tabindex="1" ><?php echo $value['asi_1'] ?></td>
 	       		<td tabindex="1"><?php echo $value['asi_2'] ?></td>
 	       		<?php if( $tperiodo == "TRIMESTRE" ){ ?><td tabindex="1"><?php echo $value['asi_3'];} ?></td>

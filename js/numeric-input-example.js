@@ -23,7 +23,7 @@ $.fn.numericInputExample = function () {
 					total = " "; 
 					row.children().eq(column).text(total);
 				} else{
-					row.children().eq(column).text(total.toPrecision(3)); // se guarda el promedio en la ultima columna de la fila
+					row.children().eq(column).text(total.toPrecision(2)); // se guarda el promedio en la ultima columna de la fila
 				}
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
@@ -60,7 +60,7 @@ $.fn.numericInputExample = function () {
 					total = " ";
 					row.children().eq(column).text(total); 
 				} else{
-					row.children().eq(column).text(total.toPrecision(3)); 
+					row.children().eq(column).text(total.toPrecision(2)); 
 				}
 				
 			}
