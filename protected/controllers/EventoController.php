@@ -219,11 +219,17 @@ class EventoController extends Controller
 	}
 
 	public function actionEliminar(){
+		$usuario  = Usuario::model()->findAll(array('condition'=>'usu_iduser="'.Yii::app()->user->id.'"'));
+		$id_usuario = $usuario[0]->usu_id;
+
 		if(isset($_POST['title'])){
 			$titulo = $_POST['title'];
-			$evento = Evento::model()->findAll(array('condition'=>'eve_descripcion="'.$titulo.'"'));
-			$id_evento = $evento[0]->eve_id;
-			$this->actionDelete($id_evento);
+			
+			if(Evento::model()->findAll(array('condition'=>'eve_descripcion="'.$titulo.'" AND eve_usuario="'.$id_usuario.'"'))){
+				$evento = Evento::model()->findByAttributes(array('eve_descripcion'=>$titulo,'eve_usuario'=>$id_usuario));
+				$evento->delete();
+
+			}else throw new CHttpException(404,'No puede eliminar este evento.');
 
 		}else throw new CHttpException(404,'The requested page does not exist.');
 	}

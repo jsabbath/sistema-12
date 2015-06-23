@@ -19,7 +19,7 @@ $this->pageTitle=Yii::app()->name;
 	<div class="span3 text-center hidden-phone">
 		<br>
 		<?php  
-		//echo CHtml::link('Mis Eventos',array('Evento/index'),array('class'=>'btn btn-success btn-block'));
+		//echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));
 		?>
 		<br>
 		<div style="text-align:center;width:112px;"><!-- LiveZilla Chat Button Link Code (ALWAYS PLACE IN BODY ELEMENT) --><!-- LiveZilla Tracking Code (ALWAYS PLACE IN BODY ELEMENT) --><div id="livezilla_tracking" style="display:none"></div><script type="text/javascript">
