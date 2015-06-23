@@ -367,13 +367,15 @@
 
 
        <?php }?>
-	
-	  <tr>
+
+     
+
+	  <tr style="border: 1;">
         <td><p><strong>ASITENCIA</strong></p></td>
             <?php for ($i=1; $i <= $max_not ; $i++){  ?>
                 <td style="border: 0;"></td>
             <?php } ?>
-            <td style="border: 1; text-align: right;"><strong><?php echo $asi_alu."%"; ?></strong></td>
+            <td  style="border: 1; text-align: center;"><strong><?php if($asi_alu != "") echo $asi_alu."%"; ?></strong></td>
       </tr>
 </table>
 <br>

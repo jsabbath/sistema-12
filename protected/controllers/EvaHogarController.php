@@ -1,6 +1,6 @@
 <?php
 
-class PreCursoController extends Controller
+class EvaHogarController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -12,9 +12,13 @@ class PreCursoController extends Controller
 	 * @return array action filters
 	 */
 	public function filters()
-   {
-      return array(array('CrugeAccessControlFilter'));
-   }
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -22,7 +26,6 @@ class PreCursoController extends Controller
 	 */
 	public function accessRules()
 	{
-		
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
@@ -59,33 +62,20 @@ class PreCursoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new PreCurso;
-		$ano = date('Y');
-		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="PRENIVEL"')),'par_id','par_descripcion');
-		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
-		$jornada = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
+		$model=new EvaHogar;
 
-		$informe = CHtml::listData(InformeHogar::model()->findAll(),'ih_id','ih_descripcion');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['PreCurso']))
-		{
-			$model->attributes=$_POST['PreCurso'];
-			$model->pre_ano = $ano;
-			if($model->save()){
-				Yii::app()->user->setFlash('success', "Curso creado con Exito!");
-				$this->redirect(array('admin'));
+		if (isset($_POST['EvaHogar'])) {
+			$model->attributes=$_POST['EvaHogar'];
+			if ($model->save()) {
+				$this->redirect(array('view','id'=>$model->eh_id));
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			'informe'=> $informe,
-			'ano'=>$ano,
-			'nivel'=>$nivel,
-			'letra'=>$letra,
-			'jornada'=>$jornada,
 		));
 	}
 
@@ -97,36 +87,19 @@ class PreCursoController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		$ano = date('Y');
-		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="PRENIVEL"')),'par_id','par_descripcion');
-		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
-		$jornada = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
-
-		$profe = Usuario::model()->findByAttributes(array('usu_iduser' => $model->pre_pjefe));
-        $nom_p = $profe->usu_nombre1 ." ". $profe->usu_nombre2;
-        $ape_p = $profe->usu_apepat ." ". $profe->usu_apemat;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['PreCurso']))
-		{
-			$model->attributes=$_POST['PreCurso'];
-			$model->pre_ano = $ano;
-			if($model->save()){
-				Yii::app()->user->setFlash('success', "Curso actualizada con Exito!");
-				$this->redirect(array('admin'));
+		if (isset($_POST['EvaHogar'])) {
+			$model->attributes=$_POST['EvaHogar'];
+			if ($model->save()) {
+				$this->redirect(array('view','id'=>$model->eh_id));
 			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-			'ano'=>$ano,
-			'nivel'=>$nivel,
-			'letra'=>$letra,
-			'jornada'=>$jornada,
-			'nom_p' => $nom_p,
-			'ape_p'	=> $ape_p,
 		));
 	}
 
@@ -137,12 +110,16 @@ class PreCursoController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if (Yii::app()->request->isPostRequest) {
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax'])){
-			Yii::app()->user->setFlash('success', "area eliminada con Exito!");
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if (!isset($_GET['ajax'])) {
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			}
+		} else {
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 		}
 	}
 
@@ -151,7 +128,7 @@ class PreCursoController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('PreCurso');
+		$dataProvider=new CActiveDataProvider('EvaHogar');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -162,10 +139,11 @@ class PreCursoController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new PreCurso('search');
+		$model=new EvaHogar('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['PreCurso']))
-			$model->attributes=$_GET['PreCurso'];
+		if (isset($_GET['EvaHogar'])) {
+			$model->attributes=$_GET['EvaHogar'];
+		}
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -176,32 +154,27 @@ class PreCursoController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return PreCurso the loaded model
+	 * @return EvaHogar the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=PreCurso::model()->findByPk($id);
-		if($model===null)
+		$model=EvaHogar::model()->findByPk($id);
+		if ($model===null) {
 			throw new CHttpException(404,'The requested page does not exist.');
+		}
 		return $model;
 	}
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param PreCurso $model the model to be validated
+	 * @param EvaHogar $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='pre-curso-form')
-		{
+		if (isset($_POST['ajax']) && $_POST['ajax']==='eva-hogar-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-	}
-
-
-	public function actionMatricular_precurso(){
-
 	}
 }

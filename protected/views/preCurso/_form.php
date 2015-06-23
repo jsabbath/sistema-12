@@ -43,6 +43,13 @@
 			<?php echo $form->dropDownList($model,'pre_letra',$letra); ?>
 		</div>
 	</div>	
+
+	<div class="row">
+	 	<div class="span5 offset1">
+            <?php echo $form->labelEx($model,'pre_inf'); ?>
+            <?php echo $form->dropDownList($model,'pre_inf', $informe, array('prompt' => '-Seleccione Informe-',));?>
+        </div>
+    </div>
 </div>
 
 <div class="span6">

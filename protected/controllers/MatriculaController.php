@@ -344,14 +344,14 @@ class MatriculaController extends Controller
     //funcion para asignar un alumno a un curso y ademas asignarle las notas y las asignaturas asociadas al curso
     public function actionAddcurso($id){
 
-        $ano = $this->actionAnoactual();
-        $cursos = $this->actionCursoAnoActual();
-
-        $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
-
+     
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
-           
+            
+            $ano = $this->actionAnoactual();
+            $cursos = $this->actionCursoAnoActual();
+
+            $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
             // busca todas las asignaturas asignadas al curso
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
@@ -437,9 +437,82 @@ class MatriculaController extends Controller
 
         */
 
+        $this->render('link_selec', array(
+            'id_mat' => $id,
+        ));
+        
+
+
+    }
+
+    // muestra la lista de cursos como kinder y pre_kinder
+    public function actionPre_link(){
+        $ano = $this->actionAnoactual();
+        $id = $_POST['id']; //  id de la matricula del alumno
+
+        $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="prenivel"')),'par_id','par_descripcion');
+        $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+        $pre_cursos = PreCurso::model()->findAll(array('condition' => 'pre_ano=:x', 'params' => array(':x' => $ano)));
+
+        $cursos = array();
+
+        foreach ($pre_cursos as $key => $p) {
+            $cursos[$p->pre_id] = $nivel[$p->pre_nivel]." ".$letra[$p->pre_letra];
+        }
+
+      
+
+        $this->renderPartial('pre_link', array(
+                'id' => $id,
+                'cur' => $cursos,
+        ));
+    }
+
+    public function actionPre_agregar_inf($id){
+        $id_curso  = $_POST['id_curso'];
+
+        $pre_curso = PreCurso::model()->findByPk($id_curso);
+
+        $esta = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id));
+        //asignar informe de desarrollo
+        if( !$esta){
+            $criteria = new CDbCriteria();
+            $criteria->join = 'LEFT JOIN area_hogar ON area_hogar.ah_id = t.ch_area_hogar';
+            $criteria->condition = 'area_hogar.ah_inf_hogar=:value';
+            $criteria->params = array(":value"=>$pre_curso->pre_inf);
+            $con = ConceptoHogar::model()->findAll($criteria);
+            foreach ($con as $n) {
+                $evaluacion = new EvaHogar;
+                $evaluacion->eh_concepto = $n->ch_id;
+                $evaluacion->eh_matricula = $id;
+                $evaluacion->eh_curso = $id_curso;
+                $evaluacion->save();
+            }
+
+            Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
+            $this->render('menu');
+        }else{
+            Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
+            $this->render('link_selec', array(
+                'id_mat' => $id,
+            ));
+        }
+    }
+
+
+    // muestra la lista de cursos 1 a 8 disponibles para matricular al alumno.
+    public function actionCur_link(){
+
+        $ano = $this->actionAnoactual();
+        $cursos = $this->actionCursoAnoActual();
+
+        $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+        $id = $_POST['id']; //  id de la matricula del alumno
 
         if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
-             $this->render('cur_link', array(
+             $this->renderPartial('cur_link', array(
+                    'id' => $id,
                     'cur' => $cursos,
                     'informe' => $informe,
             ));
@@ -450,8 +523,9 @@ class MatriculaController extends Controller
             $usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
 
 
-              $this->render('cur_link', array(
+              $this->renderPartial('cur_link', array(
                     //'nombre' => $usuario['Nombrecorto'],
+                    'id' => $id,
                     'cur' => $cursos,
                     'informe' => $informe,
                 ));
@@ -489,14 +563,14 @@ class MatriculaController extends Controller
                     }
                 }
 
-                $this->render('cur_link', array(
+                $this->renderPartial('cur_link', array(
+                    'id' => $id,
                     'cur' => $cursos,
                     'informe' => $informe,
                 ));
         }
-
-
     }
+
 
     //funcion para determinar el año sobre el que se trabaja
     public function actionAnoactual(){
