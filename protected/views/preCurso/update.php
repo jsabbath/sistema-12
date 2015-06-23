@@ -28,6 +28,7 @@ $this->menu=array(
 	'ano'=>$ano,
 	'nivel'=>$nivel,
 	'letra'=>$letra,
+	'informe'=>$informe,
 	'jornada'=>$jornada,
 	'nom_p' => $nom_p,
 	'ape_p'	=> $ape_p,
