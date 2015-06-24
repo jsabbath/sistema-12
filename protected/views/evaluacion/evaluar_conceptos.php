@@ -228,7 +228,7 @@ if (!function_exists('array_column')) {
 
                                         ?>
                                 
-                                            <td id="<?php echo $c['con_id']; ?>">
+                                            <td id="<?php echo $c['con_id']; ?>" width="10%">
                                                 <!-- <?php echo $alum['mat_id'] . $c['con_id']; ?>  -->
                                                     <form name="formName" id=" <?php echo $eva_id; ?>">
                                                         <?php foreach ($escala as $key => $e) { /*echo "mat_id:".$alum['mat_id'] .",con_id:". $c['con_id'];*/?>

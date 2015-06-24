@@ -329,7 +329,7 @@ class MatriculaController extends Controller
                 );
         }
 
-        sort($cur);
+        if( !empty($cur) ) sort($cur);
 
         $cursos_actuales = array();
         foreach ($cur as $key => $c) {
@@ -507,14 +507,14 @@ class MatriculaController extends Controller
         $ano = $this->actionAnoactual();
         $cursos = $this->actionCursoAnoActual();
 
-        $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
+        //$informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
         $id = $_POST['id']; //  id de la matricula del alumno
 
         if(Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin){
              $this->renderPartial('cur_link', array(
                     'id' => $id,
                     'cur' => $cursos,
-                    'informe' => $informe,
+                    //'informe' => $informe,
             ));
 
         } else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
@@ -527,7 +527,7 @@ class MatriculaController extends Controller
                     //'nombre' => $usuario['Nombrecorto'],
                     'id' => $id,
                     'cur' => $cursos,
-                    'informe' => $informe,
+                    //'informe' => $informe,
                 ));
 
         } else if( Yii::app()->user->checkAccess('profesor') ){
@@ -566,7 +566,7 @@ class MatriculaController extends Controller
                 $this->renderPartial('cur_link', array(
                     'id' => $id,
                     'cur' => $cursos,
-                    'informe' => $informe,
+                    //'informe' => $informe,
                 ));
         }
     }
