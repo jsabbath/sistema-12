@@ -62,6 +62,11 @@
 					'htmlOptions'=>array('style'=>'text-align:center'),
 				),
 				array(
+					'header'=>'Curso',
+					'type'=>'raw',
+					'value'=>array($this,'obtenerCurso'),
+				),
+				array(
 					'class'=>'bootstrap.widgets.TbButtonColumn',
 					'template'=>'{update}',
 					'buttons'=>array(

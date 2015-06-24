@@ -1,7 +1,7 @@
 <?php
 /* @var $this CursoController */
 /* @var $model Curso */
-
+/*
 $this->breadcrumbs=array(
 	'Cursos'=>array('index'),
 	$model->cur_id=>array('view','id'=>$model->cur_id),
@@ -14,9 +14,14 @@ $this->menu=array(
 	array('label'=>'View Curso', 'url'=>array('view', 'id'=>$model->cur_id)),
 	array('label'=>'Manage Curso', 'url'=>array('admin')),
 );
+*/
 ?>
 
-<h1> Actualizar: <?php echo $nivel_cur. " " . $letra_cur; ?></h1>
+<div class="row">
+    <div class="span12 text-center">
+        <h2> Actualizar: <?php echo $nivel_cur. " " . $letra_cur; ?></h2>
+    </div>
+</div>
 
 <?php $this->renderPartial('_form', array('model'=>$model,
                                             'niveles' => $niveles,
