@@ -342,31 +342,10 @@ $("#contraseña").click(function(){
 });
 
 
-    var time = <?php echo $min_alert; ?>;
-    var flag = true;   
-  
-    window.setInterval(function(){
-        if( flag ){
-            var d = Math.round(+new Date()/1000);
-
-            if( d >= time){
-                console.log(d +" >= " +  time);
-                flag = false;
-                 swal({  
-                    title: "3 Minutos restantes!",   
-                    text: "Asegurese de guardar todo!",  
-                    type: "warning",   
-                    showCancelButton: false,   
-                    confirmButtonColor: "#DD6B55",   
-                    confirmButtonText: "Ok!",   
-                    closeOnConfirm: false, 
-                });
-            }
-       }
-    }, 5000);
 
 Minutos = 0;
 Segundos = 59;
+var flag = true;   
 
 CreateTimer(<?php echo $durationMins; ?>);
 
@@ -387,6 +366,18 @@ function Tick() {
     if(Minutos == 0){
         window.onbeforeunload = function() {}
         window.location = "<?php  echo Yii::app()->createUrl("/cruge/ui/login"); ?>";
+    }
+    if(Minutos <= 3 && flag){
+        flag = false;
+        swal({  
+            title: "3 Minutos restantes!",   
+            text: "Asegurese de guardar todo!",  
+            type: "warning",   
+            showCancelButton: false,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Ok!",   
+            closeOnConfirm: false, 
+        });
     }
     UpdateTimer()
     window.setTimeout("Tick()", 1000);
