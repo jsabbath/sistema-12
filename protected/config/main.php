@@ -28,7 +28,7 @@ return array(
 		'bootstrap.helpers.TbHtml',
         'bootstrap.helpers.TbArray',
         'bootstrap.behaviors.TbWidget',
-        'bootstrap.Widgets.*'
+        'bootstrap.widgets.*'
 	),
 
 	'modules'=>array(
