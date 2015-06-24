@@ -384,6 +384,10 @@ function Tick() {
         Segundos = 60;
         Minutos -= 1;
     }
+    if(Minutos == 0){
+        window.onbeforeunload = function() {}
+        window.location = "<?php  echo Yii::app()->createUrl("/cruge/ui/login"); ?>";
+    }
     UpdateTimer()
     window.setTimeout("Tick()", 1000);
 }

@@ -3,7 +3,7 @@
 	<div class="span12">
 
 		
-		<form action="<?php echo Yii::app()->createUrl('matricula/addcurso',array('id' => $id)); ?>" 
+		<form action="<?php echo Yii::app()->createUrl('matricula/pre_agregar_inf',array('id' => $id)); ?>" 
 				method="post">
 
 		<div class="row">
@@ -30,17 +30,4 @@
 
 </div><!-- form -->
 
-<script type="text/javascript">
-	$('#id_curso').on('change',function(){
-		$.ajax({
-			url: '<?php echo CController::createUrl('matricula/infoCurso'); ?>',
-			type: 'POST',
-			data: { id_curso: $(this).val() },
-		})
-		.done(function(response) {
-			$('#info').html(response);
-		});
-		
-		
-	});
-</script>
+

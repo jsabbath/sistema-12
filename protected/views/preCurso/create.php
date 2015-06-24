@@ -22,6 +22,7 @@ $this->menu=array(
 
 <?php $this->renderPartial('_form', array(
 	'model'=>$model,
+	'informe'=> $informe,
 	'ano'=>$ano,
 	'nivel'=>$nivel,
 	'letra'=>$letra,

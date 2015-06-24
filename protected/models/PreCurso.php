@@ -71,6 +71,7 @@ class PreCurso extends CActiveRecord
 			'pre_letra' => 'Letra',
 			'pre_jornada' => 'Jornada',
 			'pre_pjefe' => 'Profesor jefe',
+			'pre_inf' => 'Informe Hogar',
 		);
 	}
 

@@ -65,6 +65,7 @@ class PreCursoController extends Controller
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
 		$jornada = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
 
+		$informe = CHtml::listData(InformeHogar::model()->findAll(),'ih_id','ih_descripcion');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -80,6 +81,7 @@ class PreCursoController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'informe'=> $informe,
 			'ano'=>$ano,
 			'nivel'=>$nivel,
 			'letra'=>$letra,
@@ -100,6 +102,7 @@ class PreCursoController extends Controller
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
 		$jornada = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
 
+			$informe = CHtml::listData(InformeHogar::model()->findAll(),'ih_id','ih_descripcion');
 		$profe = Usuario::model()->findByAttributes(array('usu_iduser' => $model->pre_pjefe));
         $nom_p = $profe->usu_nombre1 ." ". $profe->usu_nombre2;
         $ape_p = $profe->usu_apepat ." ". $profe->usu_apemat;
@@ -120,6 +123,7 @@ class PreCursoController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 			'ano'=>$ano,
+			'informe' => $informe,
 			'nivel'=>$nivel,
 			'letra'=>$letra,
 			'jornada'=>$jornada,
@@ -196,5 +200,10 @@ class PreCursoController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+
+	public function actionMatricular_precurso(){
+
 	}
 }

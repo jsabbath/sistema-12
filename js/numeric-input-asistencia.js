@@ -1,6 +1,6 @@
 /* global $ */
 /* this is an example for validation and change events */
-$.fn.numericInputExample = function () {
+$.fn.numericInput = function () {
 	'use strict';
 	var element = $(this),
 		footer = element.find('tfoot tr'),
@@ -29,6 +29,9 @@ $.fn.numericInputExample = function () {
 			});
 		};
 	element.find('td').on('change', function (evt) {
+		 window.onbeforeunload = function() {
+                        return "";
+                    }
 		var cell = $(this),
 			column = cell.index(),
 			row,
@@ -72,7 +75,7 @@ $.fn.numericInputExample = function () {
 			return !!value && value.trim().length > 0;
 		} else {
 			if( value == "" ) return true;
-			if(!isNaN(parseFloat(value)) && isFinite(value)){
+			if(!isNaN(parseFloat(value)) && isFinite(value) && value.length <= 3 && value.indexOf(".")==-1){
 
 				if( value <= 100 && value >= 0){  // antes de preguntar su valor, me aseguro  que es un numero
 					return true;

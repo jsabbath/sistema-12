@@ -1,24 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "escala_hogar".
+ * This is the model class for table "eva_hogar".
  *
- * The followings are the available columns in table 'escala_hogar':
+ * The followings are the available columns in table 'eva_hogar':
  * @property integer $eh_id
- * @property string $eh_descripcion
+ * @property integer $eh_matricula
+ * @property integer $eh_curso
+ * @property integer $eh_concepto
+ * @property integer $eh_eva1
+ * @property integer $eh_eva2
+ * @property integer $eh_eva3
  *
  * The followings are the available model relations:
- * @property EvaHogar[] $evaHogars
- * @property EvaHogar[] $evaHogars1
+ * @property Matricula $ehMatricula
+ * @property PreCurso $ehCurso
+ * @property InfHogar $ehConcepto
  */
-class EscalaHogar extends CActiveRecord
+class EvaHogar extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'escala_hogar';
+		return 'eva_hogar';
 	}
 
 	/**
@@ -29,10 +35,10 @@ class EscalaHogar extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('eh_descripcion', 'length', 'max'=>50),
+			array('eh_matricula, eh_curso, eh_concepto, eh_eva1, eh_eva2, eh_eva3', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('eh_id, eh_descripcion', 'safe', 'on'=>'search'),
+			array('eh_id, eh_matricula, eh_curso, eh_concepto, eh_eva1, eh_eva2, eh_eva3', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,8 +50,9 @@ class EscalaHogar extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'evaHogars' => array(self::HAS_MANY, 'EvaHogar', 'eh_eva1'),
-			'evaHogars1' => array(self::HAS_MANY, 'EvaHogar', 'eh_eva2'),
+			'ehMatricula' => array(self::BELONGS_TO, 'Matricula', 'eh_matricula'),
+			'ehCurso' => array(self::BELONGS_TO, 'PreCurso', 'eh_curso'),
+			'ehConcepto' => array(self::BELONGS_TO, 'InfHogar', 'eh_concepto'),
 		);
 	}
 
@@ -55,8 +62,13 @@ class EscalaHogar extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'eh_id' => 'ID',
-			'eh_descripcion' => 'Descripcion',
+			'eh_id' => 'Eh',
+			'eh_matricula' => 'Eh Matricula',
+			'eh_curso' => 'Eh Curso',
+			'eh_concepto' => 'Eh Concepto',
+			'eh_eva1' => 'Eh Eva1',
+			'eh_eva2' => 'Eh Eva2',
+			'eh_eva3' => 'Eh Eva3',
 		);
 	}
 
@@ -79,7 +91,12 @@ class EscalaHogar extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('eh_id',$this->eh_id);
-		$criteria->compare('eh_descripcion',$this->eh_descripcion,true);
+		$criteria->compare('eh_matricula',$this->eh_matricula);
+		$criteria->compare('eh_curso',$this->eh_curso);
+		$criteria->compare('eh_concepto',$this->eh_concepto);
+		$criteria->compare('eh_eva1',$this->eh_eva1);
+		$criteria->compare('eh_eva2',$this->eh_eva2);
+		$criteria->compare('eh_eva3',$this->eh_eva3);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -90,7 +107,7 @@ class EscalaHogar extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return EscalaHogar the static model class
+	 * @return EvaHogar the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
