@@ -59,7 +59,7 @@
         $('#informe').hide();
 
         $.ajax({
-            url: '<?php echo CController::createUrl('evahogar/lista_alumnos'); ?>',
+            url: '<?php echo CController::createUrl('evaHogar/lista_alumnos'); ?>',
             type: 'POST',
             data: { id_curso: $(this).val() },
         })
@@ -71,7 +71,7 @@
 
 
                 $.ajax({
-                    url: '<?php echo CController::createUrl('evahogar/mostrar_informe'); ?>',
+                    url: '<?php echo CController::createUrl('evaHogar/mostrar_informe'); ?>',
                     type: 'POST',
                     data: {id: $(this).val(), curso: $('#id_curso').val()},
                 })

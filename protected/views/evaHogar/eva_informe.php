@@ -182,7 +182,7 @@
         });
     //    console.log(lista);
         $.ajax({
-            url: '<?php echo CController::createUrl("evahogar/subir_notas")?>',
+            url: '<?php echo CController::createUrl("evaHogar/subir_notas")?>',
             type: 'POST',
             data: {lista: lista, asi: $('#asi').val(), mat: $('#lista').val()},
             success: function(data){
