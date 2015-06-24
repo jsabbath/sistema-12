@@ -50,7 +50,7 @@
 
 
 <script type="text/javascript">
-	$('#table_asi').numericInputExample().find('td:first').next().next().focus();
+	$('#table_asi').numericInput().find('td:first').next().next().focus();
 
 
 
@@ -93,7 +93,7 @@
 	                        }
 
 					$('#table_asi').editableTableWidget();
-					$('#table_asi').numericInputExample().find('td:first').next().next().focus();
+					$('#table_asi').numericInput().find('td:first').next().next().focus();
 					$('#lock_icon').addClass("icon-ok").removeClass("icon-lock");
 					$('#unlock').prop("disabled",true);
 
@@ -108,7 +108,7 @@
 
 
 
-// subir las notas ajax
+	// subir las notas ajax
 	$("#bt_subir_asistencia").on('click',function(){
 		var tabla = document.getElementById('table_asi');
 		var rowLength = tabla.rows.length;
@@ -134,13 +134,21 @@
            	alumno.push(asistencia); //  se guardan la asistencia del alumno
 			curso_asi.push(alumno); //  se agrega el alumno  al curso
 		}
-		console.log(curso_asi);
+		//console.log(curso_asi);
 		$.ajax({
 			url: '<?php echo CController::createUrl("curso/guardar_asistencia")?>',
 			type: 'POST',
 			data: {curso_asi: curso_asi},
 			success: function(data){
-				
+				 swal({   
+                    title: "Guardado!",     
+                    timer: 600,
+                    type: "success",   
+                    showConfirmButton: false 
+                });
+                window.onbeforeunload = function() {
+                       
+                }
 			}
 		})
 	})

@@ -15,7 +15,7 @@ $.fn.editableTableWidget = function (options) {
 			showEditor = function (select) {
 				active = element.find('td:focus');
 				if (active.length) {
-					editor.val(active.text())
+					editor.val(active.text().toUpperCase())
 						.removeClass('error')
 						.show()
 						.offset(active.offset())
@@ -29,7 +29,10 @@ $.fn.editableTableWidget = function (options) {
 				}
 			},
 			setActiveText = function () {
-				var text = editor.val(),
+				if( editor.val().toUpperCase() == "NE" ){
+					editor.val("N/E");
+				}
+				var text = editor.val().toUpperCase(),
 					evt = $.Event('change'),
 					originalContent;
 				if (active.text() === text || editor.hasClass('error')) {
