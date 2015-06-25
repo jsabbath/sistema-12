@@ -25,15 +25,21 @@ class MatriculaController extends Controller
 
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par','informe','curso_par','cur_not'),
+				'actions'=>array('index','view','retirar','buscar_alum','buscar_rut','retirar',
+                                'addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo',
+                                'informe_notas_par','informe','curso_par','cur_not','menu_2'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_manual','informe_notas_par','informe','curso_par','cur_not'),
+				'actions'=>array('create','update','retirar','buscar_alum','buscar_rut','retirar',
+                                'addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo',
+                                'informe_manual','informe_notas_par','informe','curso_par','cur_not','menu_2'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso','infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par','informe','curso_par','cur_not'),
+				'actions'=>array('admin','delete','retirar','buscar_alum','buscar_rut','retirar','addcurso',
+                                'infoCurso','listaCompleta', 'menu','subir_xml','subir_archivo','informe_notas_par',
+                                'informe','curso_par','cur_not','menu_2'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -55,6 +61,9 @@ class MatriculaController extends Controller
 
     public function actionMenu(){
         $this->render('menu');
+    }
+    public function actionMenu_2(){
+        $this->render('menu_2');
     }
 
 	/**
