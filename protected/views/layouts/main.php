@@ -91,13 +91,13 @@ if(!Yii::app()->user->checkAccess('profesor') OR
     
 ?>
     <body>
-   
-<div class="navbar-fixed-top"  align="center" class="text-center" style="margin-bottom: 0">
-    <div class="container" style="background-color: #292929;">
-        <div class="row" >
-            <div class="span3" style="color:white"><?php echo $nombre ?></div> 
-             <div  class="span6" style="color:white">termino sesion: <label class="label" id="timer" style="cursor:default; background-color: white; color: black;"><?php echo $durationMins; ?></label></div>
-             <div class="span1 offset2" style="color:red"><label class="label label-important"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir" style="color: white">SALIR</a></label></div> 
+  
+<div class="navbar-fixed-top"  align="center" class="text-center" style="margin-bottom: 0;">
+   <div class="container" style="background-color: #292929;">  
+        <div class="row text-center" >
+                <div class="span3 offset1 text-left" style="color:white"><?php echo $nombre ?></div> 
+                 <div  class="span4 " style="color:white">termino sesion: <label class="label" id="timer" style="cursor:default; background-color: white; color: black;"><?php echo $durationMins; ?></label></div>
+                 <div class="span3 offset1 text-right" style="color:red"><label class="label label-important"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir" style="color: white">SALIR</a></label></div> 
         </div>
     </div>
 </div>        

@@ -735,14 +735,16 @@ class MatriculaController extends Controller
             $asi = Asignatura::model()->findByPk($alum->not_asig);
             $prom = $this->actionPromedio_curso_asig($curso->cur_id,$asi->asi_id,$p);
 
-            $notas[] = array(
+            $notas[$asi->asi_orden] = array(
                   'nota'    => $alum->notas,
                   'nom_asi' => $asi->asi_descripcion,
                   'prom_asi'=> $prom,
                 );
 
         }
+        ksort($notas);
         $alumnos = array_unique($notas, SORT_REGULAR);
+
         if( $p == 1 ){
             $asi_alu = $model->mat_asistencia_1;
         }else if( $p == 2 ){

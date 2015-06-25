@@ -37,6 +37,11 @@
 	<?php echo $form->labelEx($model,'asi_codigo'); ?>
 	<?php echo $form->textField($model,'asi_codigo',array('size'=>10,'maxlength'=>10)); ?>
 </div>
+
+<div class="span4 offset5">
+	<?php echo $form->labelEx($model,'asi_orden'); ?>
+	<?php echo $form->textField($model,'asi_orden',array('size'=>1,'maxlength'=>2)); ?>
+</div>
 <br>
 
 <div class="span2 offset8">

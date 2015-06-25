@@ -66,6 +66,7 @@ class Asignatura extends CActiveRecord
 			'asi_codigo' => 'Codigo',
 			'asi_nombrecorto' => 'Nombre Corto',
 			'asi_ano' => 'Ano',
+			'asi_orden' => 'Orden',
 		);
 	}
 

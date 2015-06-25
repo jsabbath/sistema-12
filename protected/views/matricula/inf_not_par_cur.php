@@ -225,7 +225,7 @@ foreach ($lista_alu as $key => $alu) {
             $prom2[] = array($prom_asi);
         }
 
-        $notas[] = array(
+        $notas[$asi->asi_orden] = array(
               'nota'    => $alum->notas,
               'nom_asi' => $asi->asi_descripcion,
             );
@@ -239,7 +239,7 @@ foreach ($lista_alu as $key => $alu) {
             $asi_alu = $model->mat_asistencia_3;
         }
 
-
+    ksort($notas);
     $notas = array_unique($notas, SORT_REGULAR);
     $ano = $evaluaciones[0]['not_ano'];   
     $flag = false;

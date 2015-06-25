@@ -559,13 +559,14 @@ class CursoController extends Controller
 			$cole = Colegio::model()->find();
             $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
 
-
-		  	foreach ( $asignacion as $p ){
-                $id_asig[] = $p->aa_asignatura;
+           	foreach ( $asignacion as $p ){
+		  		$id_asig[] =$p->aa_asignatura;	
             }
+
 
             $criteria = new CDbCriteria();
             $criteria->addInCondition('asi_id', $id_asig, 'OR');
+            $criteria->order = 'asi_orden';
             $asig = Asignatura::model()->findAll($criteria);
 
 
