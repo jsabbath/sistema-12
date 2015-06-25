@@ -159,6 +159,25 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             <strong style="color: white">Inicio</strong>
                         </td>
                         <?php 
+                         if(
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        ?>
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu_2'); ?>" title="Cursos">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/history.png"></div>
+                            </a>
+                            <strong style="color: white">Matricula</strong>
+                        </td>
+                        <?php
+                        }
+
+                        
                         if(
                             Yii::app()->user->isSuperAdmin OR
                             Yii::app()->user->checkAccess('administrador') OR 
@@ -176,23 +195,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                         <?php
                         }
 
-                        if(
-                            Yii::app()->user->isSuperAdmin OR
-                            Yii::app()->user->checkAccess('administrador') OR 
-                            Yii::app()->user->checkAccess('director') OR
-                            Yii::app()->user->checkAccess('evaluador') OR
-                            Yii::app()->user->checkAccess('jefe_utp') OR
-                            Yii::app()->user->checkAccess('profesor')
-                        ){ 
-                        ?>
-                        <td class="text-center">
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu_2'); ?>" title="Cursos">
-                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/history.png"></div>
-                            </a>
-                            <strong style="color: white">Matricula</strong>
-                        </td>
-                        <?php
-                        }
+                       
 
                         if(
                             Yii::app()->user->isSuperAdmin OR
