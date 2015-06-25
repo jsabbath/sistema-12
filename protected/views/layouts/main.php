@@ -105,7 +105,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 <br class="visible-desktop">
    
         <div class="container">    
-            <header style="background-color: #292929; border-bottom: 3px solid #772000; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;">
+            <header style="background-color: #292929; border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
                 <div class="row">
                  
                 <div class="span12">
@@ -255,7 +255,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
             </div>
             
 
-            <div class="container" style="background-color: white; border-top: 3px solid #772000;border-bottom: 3px solid #772000; -webkit-border-radius: 25px 5px 1px 4px; -moz-border-radius: 24px; border-radius: 25px;">  
+            <div class="container" style="background-color: white; border-top: 3px;border-bottom: 3px; -webkit-border-radius: 25px 5px 1px 4px; -moz-border-radius: 24px; border-radius: 25px;">  
 
          
 			
