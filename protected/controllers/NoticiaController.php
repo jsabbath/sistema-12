@@ -80,9 +80,6 @@ class NoticiaController extends Controller
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Noticia creada con Exito!");
 				$this->redirect(array('Site/index'));
-			}else{
-				Yii::app()->user->setFlash('error', "<strong>Error</strong> al crear la noticia!");
-				$this->refresh();
 			}
 		}
 
@@ -105,9 +102,24 @@ class NoticiaController extends Controller
 
 		if(isset($_POST['Noticia']))
 		{
+			$programa = "";
 			$model->attributes=$_POST['Noticia'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->not_id));
+			$model->not_user = Yii::app()->user->id;
+			if (!empty($model->not_programa)) {
+					foreach($model->not_programa as $key){
+					$programa = $programa." ".$key;
+				}
+			}else{
+				$model->not_programa = "";
+			}
+			$model->not_programa = $programa;
+			if($model->save()){
+				Yii::app()->user->setFlash('success', "Noticia actualizada con Exito!");
+				$this->redirect(array('Site/index'));
+			}else{
+				Yii::app()->user->setFlash('error', "<strong>Error</strong> al crear la noticia!");
+				$this->refresh();
+			}
 		}
 
 		$this->render('update',array(

@@ -33,7 +33,10 @@ class Noticia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('not_titulo', 'required'),
+			array('not_titulo', 'required','message'=>'Debe ingresar un titulo'),
+			array('not_programa','required','message'=>'Debe seleccionar un programa'),
+			array('not_fecha','required','message'=>'Debe ingresar una fecha'),
+			array('not_responsable','required','message'=>'Debe ingresar un responsable'),
 			array('not_user', 'numerical', 'integerOnly'=>true),
 			array('not_titulo', 'length', 'max'=>50),
 			array('not_fecha, not_texto, not_programa, not_responsable', 'safe'),

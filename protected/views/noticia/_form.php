@@ -17,7 +17,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 <div class="span12">
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'','',array('class'=>'alert alert-error')); ?>
 </div>
 
 <div class="span12">
@@ -27,19 +27,16 @@
 			<div class="span5 offset1">
 				<?php echo $form->labelEx($model,'not_titulo'); ?>
 				<?php echo $form->textField($model,'not_titulo',array('size'=>50,'maxlength'=>50)); ?>
-				<?php echo $form->error($model,'not_titulo'); ?>
 			</div>
 
 			<div class="span5 offset1">
 				<?php echo $form->labelEx($model,'not_fecha'); ?>
 				<?php echo $form->textField($model,'not_fecha',array('size'=>50,'maxlength'=>50,'class'=>'datepicker')); ?>
-				<?php echo $form->error($model,'not_fecha'); ?>
 			</div>
 
 			<div class="span5 offset1">
 				<?php echo $form->labelEx($model,'not_texto'); ?>
 				<?php echo $form->textArea($model,'not_texto',array('rows'=>6, 'cols'=>50)); ?>
-				<?php echo $form->error($model,'not_texto'); ?>
 			</div>
 
 		</div>
@@ -55,13 +52,11 @@
 					'OTRO'=>'OTRO',
 				));
 			    ?>
-				<?php echo $form->error($model,'not_programa'); ?>
 			</div>
 
 			<div class="span5 offset1">
 				<?php echo $form->labelEx($model,'not_responsable'); ?>
 				<?php echo $form->textArea($model,'not_responsable',array('rows'=>6, 'cols'=>50)); ?>
-				<?php echo $form->error($model,'not_responsable'); ?>
 			</div>
 			
 		</div>

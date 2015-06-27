@@ -256,9 +256,18 @@ class ApoderadoController extends Controller
 			$hijo = Apoderado::model()->findAll(array('condition'=>'apo_rut="'.$apo.'"'));
 
 			if($hijo[0]->apoHijo->matAlu->alum_rut == $alum){
+
 				$matricula = $hijo[0]->apoHijo->mat_id;
-				$notas = Notas::model()->findAll(array('condition'=>'not_mat="'.$matricula.'"'));
-				$this->renderPartial('ver',array('notas'=>$notas));
+				$notas_1 = Notas::model()->findAll(array('condition'=>'not_mat="'.$matricula.'" AND not_periodo="1"'));
+				$notas_2 = Notas::model()->findAll(array('condition'=>'not_mat="'.$matricula.'" AND not_periodo="2"'));
+				$curso = ListaCurso::model()->findByAttributes(array('list_mat_id'=>$matricula));
+				$notas_curso = $curso->listCurso->cur_notas_periodo;
+
+				$this->renderPartial('ver',array(
+					'notas_1'=>$notas_1,
+					'notas_2'=>$notas_2,
+					'notas_curso'=>$notas_curso,
+				));
 
 			}else echo '<p class="text-error text-center">Ingrese Rut válido<p>';
 
