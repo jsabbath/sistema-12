@@ -28,15 +28,18 @@ class EvaHogarController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','evaluar','lista_alumnos','mostrar_informe','validar_edicion','subir_notas'),
+				'actions'=>array('index','view','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
+					'subir_notas','informe','render_option','inf_alu','inf_cur'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','evaluar','lista_alumnos','mostrar_informe','validar_edicion','subir_notas'),
+				'actions'=>array('create','update','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
+					'subir_notas','informe','render_option','inf_alu','inf_cur'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','evaluar','lista_alumnos','mostrar_informe','validar_edicion','subir_notas'),
+				'actions'=>array('admin','delete','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
+					'subir_notas','informe','render_option','inf_alu','inf_cur'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -263,18 +266,21 @@ class EvaHogarController extends Controller
     				foreach ($con as $key => $c) {
     					$eva = EvaHogar::model()->findByAttributes(array('eh_concepto' => $c->ch_id, 'eh_matricula' => $id_mat, 'eh_curso' => $id_curso));
 
-    					if( $eva->eh_eva1 != null ){
-    						$nota1 = Parametro::model()->findByPk($eva->eh_eva1)->par_descripcion;
+    					if( $eva->eh_eva1 != NULL ){
+    						$n = Parametro::model()->findByPk($eva->eh_eva1);
+    						$nota1 = $n->par_descripcion;
     					}else{
     						$nota1 = "";
     					}
-    					if( $eva->eh_eva2 != null ){
-    						$nota2 = Parametro::model()->findByPk($eva->eh_eva2)->par_descripcion;
+    					if( $eva->eh_eva2 != NULL ){
+    						$n = Parametro::model()->findByPk($eva->eh_eva2);
+    						$nota2 = $n->par_descripcion;
     					}else{
     						$nota2 = "";
     					}
-    					if( $eva->eh_eva3 != null ){
-    						$nota3 = Parametro::model()->findByPk($eva->eh_eva3)->par_descripcion;
+    					if( $eva->eh_eva3 != NULL ){
+    						$n = Parametro::model()->findByPk($eva->eh_eva3);
+    						$nota3 = $n->par_descripcion;
     					}else{
     						$nota3 = "";
     					}
@@ -345,17 +351,17 @@ class EvaHogarController extends Controller
     		foreach ($lista as $key => $l) {
     			$eva = EvaHogar::model()->findByPk($l['eva_id']);
     			if( $l['nota1'] != "" ){
-    				$eva->eh_eva1 = Parametro::model()->findByAttributes(array('par_descripcion' => $l['nota1']))->par_id;
+    				$eva->eh_eva1 = Parametro::model()->findByAttributes(array('par_descripcion' => $l['nota1'], 'par_item' => 'ESCALA_HOGAR'))->par_id;
     			} else{
     				$eva->eh_eva1 = null;
     			}
     			if( $l['nota2'] != "" ){
-    				$eva->eh_eva2 = Parametro::model()->findByAttributes(array('par_descripcion' => $l['nota2']))->par_id;
+    				$eva->eh_eva2 = Parametro::model()->findByAttributes(array('par_descripcion' => $l['nota2'], 'par_item' => 'ESCALA_HOGAR'))->par_id;
     			} else{
     				$eva->eh_eva2 = null;
     			}
     			if( $l['nota3'] != "" ){
-    				$eva->eh_eva3 = Parametro::model()->findByAttributes(array('par_descripcion' => $l['nota3']))->par_id;
+    				$eva->eh_eva3 = Parametro::model()->findByAttributes(array('par_descripcion' => $l['nota3'], 'par_item' => 'ESCALA_HOGAR'))->par_id;
     			} else{
     				$eva->eh_eva3 = null;
     			}
@@ -363,6 +369,158 @@ class EvaHogarController extends Controller
     		}
 
     	}
+    }
+
+    public function actionInforme(){
+    	$cursos = $this->actionLista_pre_cursos();
+
+    	$this->render('inf_selec',array(
+    							'cursos'	=> $cursos,
+    				));
+    }
+
+    function actionRender_option(){
+    	if( isset($_POST['id_curso']) ){
+    		$this->renderPartial('inf_selec_sub',array(
+    				'id' => $_POST['id_curso'],
+    			));
+    	}
+    }
+
+    function actionInf_alu(){
+    	if( isset($_POST['lista']) ){
+    		$id_mat = $_POST['lista'];
+    		$id_cur = $_POST['id_cur'];
+    		$matricula = Matricula::model()->findByPk($id_mat);
+
+	        $mPDF1 = Yii::app()->ePdf->mpdf();
+	        $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+	        //$mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+	        $mPDF1->WriteHTML($stylesheet, 1);
+
+	        $ano = $this->actionAnoactual();
+	        $curso  = PreCurso::model()->findByPk($id_cur);
+	        $inf = InformeHogar::model()->findByPk($curso->pre_inf);
+	        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->pre_pjefe));
+
+	        $nivel = Parametro::model()->findByPk($curso->pre_nivel)->par_descripcion;
+	        $letra = Parametro::model()->findByPk($curso->pre_letra)->par_descripcion;
+	        $cole = Colegio::model()->find();
+	        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+
+
+
+	        $areas = AreaHogar::model()->findAll(array('condition' => 'ah_inf_hogar=:x', 'params' => array(':x' => $curso->pre_inf)));
+			$are = array();
+			foreach ($areas as $key => $area) {
+
+				$con = ConceptoHogar::model()->findAll(array('condition' => 'ch_area_hogar=:x' , 'params' => array(':x' => $area->ah_id)));
+				$concepto = array();
+				foreach ($con as $key => $c) {
+					$eva = EvaHogar::model()->findByAttributes(array('eh_concepto' => $c->ch_id, 'eh_matricula' => $id_mat, 'eh_curso' => $id_cur));
+
+					if( $eva->eh_eva1 != null ){
+						$nota1 = Parametro::model()->findByPk($eva->eh_eva1)->par_descripcion;
+					}else{
+						$nota1 = "";
+					}
+					if( $eva->eh_eva2 != null ){
+						$nota2 = Parametro::model()->findByPk($eva->eh_eva2)->par_descripcion;
+					}else{
+						$nota2 = "";
+					}
+					if( $eva->eh_eva3 != null ){
+						$nota3 = Parametro::model()->findByPk($eva->eh_eva3)->par_descripcion;
+					}else{
+						$nota3 = "";
+					}
+
+					$concepto[] = array(
+							'nombre_con' 	=> $c->ch_descripcion,
+							'nota1'			=> $nota1,
+							'nota2'			=> $nota2,
+							'nota3'			=> $nota3,
+						);
+				}
+				$are[] = array(
+						'nombre_area' 	=> $area->ah_descripcion,	
+						'area_con'		=> $concepto, 
+					);
+			}
+			$escala = Parametro::model()->findAll(array('condition'=>'par_item="ESCALA_HOGAR"'));
+
+			$mPDF1->WriteHTML($this->renderPartial('inf_alu', array( 
+        														'model'         => $matricula,
+                                                                //'notas'         => $alumnos,
+                                                                'curso_nombre'  => $nivel. " ". $letra,
+                                                               // 'max_not'       => $notas_periodo,
+                                                                'profe'         => $profe->NombreCompleto,
+                                                                'ano'           => $ano,
+                                                                'nom_director'  => $nombre_dir->nombreCompleto,
+                                                                'firma_profe'   => $profe->usu_firma,
+                                                                'firma_dir'     => $nombre_dir->usu_firma,
+                                                                'cole'          => $cole,
+                                                                'areas'			=> $are,
+                                                                'escala'		=> $escala,
+                                                                'nombre_inf'	=> $inf->ih_descripcion,
+                                            ), true));
+        	$mPDF1->Output();
+
+    	}
+    }
+
+    // id = id_precurso
+    function actionInf_cur($id){
+
+    	$eva_cur = EvaHogar::model()->findAll(array('condition' => 'eh_curso=:x', 'params' => array(':x' => $id)));
+    	$id_mat = array();
+    	foreach ($eva_cur as $key => $c) {
+    		$id_mat[] = $c->eh_matricula;
+    	}
+    	$id_mat = array_unique($id_mat, SORT_REGULAR);
+
+		//$matricula = Matricula::model()->findByPk($id_mat);
+
+        $mPDF1 = Yii::app()->ePdf->mpdf();
+        $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+        //$mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+        $mPDF1->WriteHTML($stylesheet, 1);
+
+        $ano = $this->actionAnoactual();
+        $curso  = PreCurso::model()->findByPk($id);
+        $inf = InformeHogar::model()->findByPk($curso->pre_inf);
+        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->pre_pjefe));
+
+        $nivel = Parametro::model()->findByPk($curso->pre_nivel)->par_descripcion;
+        $letra = Parametro::model()->findByPk($curso->pre_letra)->par_descripcion;
+        $cole = Colegio::model()->find();
+        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+
+        $areas = AreaHogar::model()->findAll(array('condition' => 'ah_inf_hogar=:x', 'params' => array(':x' => $curso->pre_inf)));
+
+		$escala = Parametro::model()->findAll(array('condition'=>'par_item="ESCALA_HOGAR"'));
+
+		$mPDF1->WriteHTML($this->renderPartial('inf_cur', array( 
+    														//'model'         => $matricula,
+                                                            'id_cur'         => $id,
+                                                            'curso_nombre'  => $nivel. " ". $letra,
+                                                           // 'max_not'       => $notas_periodo,
+                                                            'profe'         => $profe->NombreCompleto,
+                                                            'ano'           => $ano,
+                                                            'nom_director'  => $nombre_dir->nombreCompleto,
+                                                            'firma_profe'   => $profe->usu_firma,
+                                                            'firma_dir'     => $nombre_dir->usu_firma,
+                                                            'cole'          => $cole,
+                                                            'areas'			=> $areas,
+                                                            'escala'		=> $escala,
+                                                            'nombre_inf'	=> $inf->ih_descripcion,
+                                                            'eva' 			=> $id_mat,
+                                        ), true));
+    	$mPDF1->Output();
+
+	
     }
 
 }
