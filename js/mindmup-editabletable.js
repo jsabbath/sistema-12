@@ -28,7 +28,22 @@ $.fn.editableTableWidget = function (options) {
 					}
 				}
 			},
+			formatText = function() {
+				if( editor.val().indexOf(".") == -1 ){
+					if( editor.val() != "" || editor.val() != 0 ){
+						var v1 = editor.val();
+						if( v1.length == 1 ){
+							v1 = v1 + ".0";
+							editor.val(v1);
+						}
+						else {
+							editor.val(v1/10);
+						}
+					}
+				}
+			},
 			setActiveText = function () {
+				formatText();
 				var text = editor.val().toUpperCase(),
 					evt = $.Event('change'),
 					originalContent;

@@ -65,9 +65,13 @@
 	</div>
 </div>
 
-	
+<div class="row">
+	<div class="span12 text-center">
+		<p class="text-info"> Ingrese notas <strong>SIN PUNTOS,</strong> nota minima <strong>2.0,</strong> nota maxima <strong>7.0</strong></p>
+	</div>
+</div>	
 
-<br>
+
 	<div><!-- TABLA  -->
 
 		<table id="notasTable" class="table table-bordered">

@@ -72,12 +72,21 @@ $.fn.numericInputExample = function () {
 			return !!value && value.trim().length > 0;
 		} else {
 			if( value == "" ) return true;
-			if(!isNaN(parseFloat(value)) && isFinite(value)){
-
-				if( value <= 7.0 && value >= 2.0){  // antes de preguntar su valor, me aseguro  que es un numero
-					return true;
-				}else{  
-					return false;}
+			if(!isNaN(parseFloat(value)) && isFinite(value) && value.length <= 2){
+				if(value.indexOf(".") == -1  ){
+					if( value <= 70 && value >= 2){  // antes de preguntar su valor, me aseguro  que es un numero
+						if( value < 20 && value > 7 ){
+							return false;
+						} else{
+							return true;
+						}
+						
+					}else{  
+						return false;
+					}
+				}else {
+					return false;
+				}
 			} else {
 				return false; } 
 		}
