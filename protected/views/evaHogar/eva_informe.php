@@ -97,7 +97,7 @@
         function(inputValue){ 
 
             $.ajax({
-                url: '<?php echo $this->createUrl('evahogar/validar_edicion'); ?>',
+                url: '<?php echo $this->createUrl('evaHogar/validar_edicion'); ?>',
                 type: 'POST',
                 dataType: "JSON",
                 data: { pass: inputValue, cur:  $('#id_curso').val() },

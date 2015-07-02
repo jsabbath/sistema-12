@@ -482,30 +482,36 @@ class MatriculaController extends Controller
         $id_curso  = $_POST['id_curso'];
 
         $pre_curso = PreCurso::model()->findByPk($id_curso);
+        if( $pre_curso->pre_inf != null  ){
+            $esta = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id));
+            //asignar informe de desarrollo
+            if( !$esta){
+                $criteria = new CDbCriteria();
+                $criteria->join = 'LEFT JOIN area_hogar ON area_hogar.ah_id = t.ch_area_hogar';
+                $criteria->condition = 'area_hogar.ah_inf_hogar=:value';
+                $criteria->params = array(":value"=>$pre_curso->pre_inf);
+                $con = ConceptoHogar::model()->findAll($criteria);
+                foreach ($con as $n) {
+                    $evaluacion = new EvaHogar;
+                    $evaluacion->eh_concepto = $n->ch_id;
+                    $evaluacion->eh_matricula = $id;
+                    $evaluacion->eh_curso = $id_curso;
+                    $evaluacion->save();
+                }
 
-        $esta = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id));
-        //asignar informe de desarrollo
-        if( !$esta){
-            $criteria = new CDbCriteria();
-            $criteria->join = 'LEFT JOIN area_hogar ON area_hogar.ah_id = t.ch_area_hogar';
-            $criteria->condition = 'area_hogar.ah_inf_hogar=:value';
-            $criteria->params = array(":value"=>$pre_curso->pre_inf);
-            $con = ConceptoHogar::model()->findAll($criteria);
-            foreach ($con as $n) {
-                $evaluacion = new EvaHogar;
-                $evaluacion->eh_concepto = $n->ch_id;
-                $evaluacion->eh_matricula = $id;
-                $evaluacion->eh_curso = $id_curso;
-                $evaluacion->save();
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
+                $this->render('menu');
+            }else{
+                Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
+                $this->render('link_selec', array(
+                    'id_mat' => $id,
+                ));
             }
-
-            Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
-            $this->render('menu');
-        }else{
-            Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
-            $this->render('link_selec', array(
-                'id_mat' => $id,
-            ));
+        } else{
+                Yii::app()->user->setFlash('error', "Este curso no tiene informe asignado!");
+                $this->render('link_selec', array(
+                    'id_mat' => $id,
+                ));
         }
     }
 
