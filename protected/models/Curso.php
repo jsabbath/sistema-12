@@ -154,4 +154,45 @@ class Curso extends CActiveRecord
 	public function getCurso(){
 		return $this->curNivel->par_descripcion." ".$this->curLetra->par_descripcion;
 	}
+
+	public function getNombrecurso(){
+		$nivel = $this->curNivel->par_descripcion;
+		switch ($nivel) {
+			case '1º':
+				return 'Primer año '.$this->curLetra->par_descripcion;
+				break;
+
+			case '2º':
+				return 'Segundo año'.$this->curLetra->par_descripcion;
+				break;
+
+			case '3º':
+				return 'Tercer año '.$this->curLetra->par_descripcion;
+				break;
+
+			case '4º':
+				return 'Cuarto año'.$this->curLetra->par_descripcion;
+				break;
+
+			case '5º':
+				return 'Quinto año'.$this->curLetra->par_descripcion;
+				break;
+			
+			case '6º':
+				return 'Sexto año'.$this->curLetra->par_descripcion;
+				break;
+
+			case '7º':
+				return 'Septimo año'.$this->curLetra->par_descripcion;
+				break;
+
+			case '8º':
+				return 'Octavo año'.$this->curLetra->par_descripcion;
+				break;
+
+			default:
+				return 'No tiene curso';
+				break;
+		}
+	}
 }

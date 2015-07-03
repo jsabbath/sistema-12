@@ -245,7 +245,9 @@ $rand = "X".$random1.$random2;
 
 <script type="text/javascript">
     
-$('.datepicker').datepicker({format: 'yyyy/mm/dd',});
+$('.datepicker').datepicker({
+    format: 'yyyy/mm/dd',
+});
 
 
 </script>
