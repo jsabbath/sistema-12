@@ -1,11 +1,10 @@
-
 <?php
 
 //esta clase se puede llamar desde cualquier lugar
 //se llama como cualquier funcion Fecha::funcion();
 class Fecha extends CApplicationComponent {
  	
- 	/**
+ 	/*
 		la funcion devuelve la fecha actual
 		ejemplo: Viernes, 03 de julio. 2015
  	*/
@@ -26,7 +25,7 @@ class Fecha extends CApplicationComponent {
     }
 
 
-    /**
+    /*
         la funcion cambio_formato recibe una fecha con el formato dd-mm-yyyy
         y devuelve la fecha en formato yyyy-mm-dd
     */
