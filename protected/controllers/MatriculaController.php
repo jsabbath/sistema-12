@@ -88,7 +88,7 @@ class MatriculaController extends Controller
             $alumno->attributes = $_POST['Alumno'];
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
-            $model->mat_fingreso = date('Y-m-d');
+            $model->mat_fingreso = Fecha::cambio_formato($model->mat_fingreso);
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
@@ -140,6 +140,9 @@ class MatriculaController extends Controller
             $alumno->attributes = $_POST['Alumno'];
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
+            $model->mat_fretiro = Fecha::cambio_formato($model->mat_fretiro);
+            $model->mat_fcambio = Fecha::cambio_formato($model->mat_fcambio);
+
             if ($valid){
                 if($alumno->save()){
                     if ($model->save()) {

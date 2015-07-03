@@ -66,7 +66,8 @@ $this->menu=array(
 <br>
 <h5> Ingrese la Fecha de retiro, Default: (HOY) <?php echo date("d-m-Y"); ?> </h5>
 
-<?php echo CHtml::textField('Text', '',array('placeholder' => 'fecha','class'=>'datepicker'))?>
+<?php echo CHtml::textField('Text', '',array('placeholder' => 'fecha','class'=>'pick'))?>
+
 <!-- <?php //echo CHtml::textField('Text', '',array('id' =>'estado','placeholder' => 'Estado'))?> !-->
 
 <!--  Se muestra al buscar    !-->
@@ -104,7 +105,9 @@ $this->menu=array(
 !-->
 
 <script type="text/javascript">
-    $('.datepicker').datepicker();
+$( ".pick" ).datepicker({
+    dateFormat: 'dd-mm-yy'
+});
 </script>
 
 <script>
