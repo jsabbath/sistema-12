@@ -69,7 +69,7 @@
             });
 
             $.ajax({
-                url: '<?php echo CController::createUrl("listacurso/subir_orden")?>',
+                url: '<?php echo CController::createUrl("ListaCurso/subir_orden")?>',
                 type: 'POST',
                 data: {curso_lista: lista, curso: <?php echo $curso; ?>},
                 success: function(response){
@@ -110,7 +110,7 @@
         function(inputValue){ 
 
             $.ajax({
-                url: '<?php echo $this->createUrl('listacurso/validar_edicion'); ?>',
+                url: '<?php echo $this->createUrl('ListaCurso/validar_edicion'); ?>',
                 type: 'POST',
                 dataType: "JSON",
                 data: { pass: inputValue, cur: <?php echo $curso; ?> },

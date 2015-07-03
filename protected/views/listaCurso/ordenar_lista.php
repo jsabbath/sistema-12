@@ -40,7 +40,7 @@
         $('#drop_curso').change( function() {
 
             $.ajax({
-                    url: '<?php echo CController::createUrl("listacurso/lista_curso")?>',
+                    url: '<?php echo CController::createUrl("ListaCurso/lista_curso")?>',
                     type: "POST", 
                     data: {id: $(this).val() },
                     success: function(response) { 
