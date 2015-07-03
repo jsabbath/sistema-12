@@ -298,11 +298,9 @@
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES PRIMER SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: left;  border-bottom: 0; font-size: 9pt;"><?php echo $des1; ?></td>
         </tr>
-         <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
-        </tr>
+       
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
                 <img class="firma" style="width: 12%;"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">     
@@ -325,11 +323,9 @@
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES SEGUNDO SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: left;  border-bottom: 0; font-size: 9pt;"><?php echo $des2; ?></td>
         </tr>
-         <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;">POR LO TANTO:<?php  for ($i=0; $i < 215; $i++){ echo "."; }?></td>
-        </tr>
+         
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
                 <img class="firma" style="width: 12%;"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_profe; ?>">     

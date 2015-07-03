@@ -75,13 +75,25 @@
         <?php }}  ?>
         <div>
             <strong>ASISTENCIA PRIMER SEMESTRE:  </strong>
-            <input class="span2" type="number" placeholder="<?php echo $asi1; ?>" id="asi1" min="0" max="100" >
+            <input class="span2 input-mini" type="number" value="<?php echo $asi1; ?>" id="asi1" min="0" max="100" >
         </div>
 
          <div>
             <strong>ASISTENCIA SEGUNDO SEMESTRE:  </strong>
-            <input class="span2" type="number" placeholder="<?php echo $asi2; ?>" id="asi2" min="0" max="100" >
+            <input class="span2 input-mini" type="number" value="<?php echo $asi2; ?>" id="asi2" min="0" max="100" >
         </div>
+        <br><br>
+
+        <div>
+            <p><strong>OBSERVACION PRIMER SEMESTRE: </strong></p>
+            <textarea tabindex="1" id="des1" class="span10" rows="4" maxlength="200"><?php echo $des1; ?></textarea>
+        </div>
+         <div>
+            <p><strong>OBSERVACION SEGUNDO SEMESTRE: </strong></p>
+            <textarea tabindex="1" id="des2" class="span10" rows="4" maxlength="200"><?php echo $des2; ?></textarea>
+        </div>
+        
+        <br><br><br><br>
     </div>
 </div>
 
@@ -113,12 +125,20 @@
         $btext.show();
       });
 
-
+    $('#des1').on('keyup',function(){
+        var v =  $(this).val();
+        $(this).val(v.toUpperCase());
+    });
    
-
+    $('#des2').on('keyup',function(){
+        var v =  $(this).val();
+        $(this).val(v.toUpperCase());
+    });
 
 
     $('#bt_subir_notas').on('click',function(){
+       
+
 
         lista = [];
         $(".eva").each(function(){
@@ -145,11 +165,18 @@
                 }
                 lista.push(notas);  
         });
-    //    console.log(lista);
+
+
         $.ajax({
             url: '<?php echo CController::createUrl("evaHogar/subir_notas")?>',
             type: 'POST',
-            data: {lista: lista, asi1: $('#asi1').val(), mat: $('#lista').val(), asi2: $('#asi2').val()},
+            data: {lista: lista, mat: $('#lista').val(), 
+                                 asi1: $('#asi1').val(), 
+                                 asi2: $('#asi2').val(), 
+                                 des1: $('#des1').val().trim().toUpperCase(), 
+                                 des2: $('#des2').val().trim().toUpperCase(),
+                                 des_id: '<?php echo $des_id ?>',
+                    },
             success: function(data){
                 swal({   
                     title: "Guardado!",     

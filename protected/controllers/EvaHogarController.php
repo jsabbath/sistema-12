@@ -396,12 +396,18 @@ class EvaHogarController extends Controller
     			$escala = Parametro::model()->findAll(array('condition'=>'par_item="ESCALA_HOGAR"'));
     			$mat = Matricula::model()->findByPk($id_mat);
 
+    			// se busca la primera evaluacion  del alumno y en esta se guardan las observaciones del primer y  segundo semestre
+    			$eva = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id_mat, 'eh_curso' => $id_curso)); 
+
     			$this->renderPartial('eva_informe',array(
     												'asi1' 		=> $mat->mat_asistencia_1,
     												'asi2'		=> $mat->mat_asistencia_2,
     												'areas' 	=> $are,
     												'nombre'	=> $inf->ih_descripcion,
     												'escala'	=> $escala,
+    												'des_id'	=> $eva->eh_id,
+    												'des1' 		=> $eva->eh_des1,
+    												'des2' 		=> $eva->eh_des2,
     								));
 
     			
@@ -439,16 +445,15 @@ class EvaHogarController extends Controller
     		
     		$mat = $_POST['mat'];
     		$a = Matricula::model()->findByPk($mat);
-    		
-    		if( $_POST['asi1'] != "" ){
-    			$asi1 = $_POST['asi1'];
-    			$a->mat_asistencia_1 = $asi1;
-    		}
-    		if( $_POST['asi2'] != ""){
-    			$asi2 = $_POST['asi2'];
-    			$a->mat_asistencia_2 = $asi2;
-    		}
+			$a->mat_asistencia_1 = $_POST['asi1'];
+			$a->mat_asistencia_2 = $_POST['asi2'];
     		$a->update();
+
+    		// des_id es la EvaHogar donde se guardaran las observaciones del alumno
+    		$eva = EvaHogar::model()->findByPk($_POST['des_id']);
+			$eva->eh_des1 = $_POST['des1'];
+			$eva->eh_des2 = $_POST['des2'];
+    		$eva->update();
     		
 
     		foreach ($lista as $key => $l) {
@@ -552,6 +557,7 @@ class EvaHogarController extends Controller
 					);
 			}
 			$escala = Parametro::model()->findAll(array('condition'=>'par_item="ESCALA_HOGAR"'));
+			$eva = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id_mat, 'eh_curso' => $id_cur));
 
 			$mPDF1->WriteHTML($this->renderPartial('inf_alu', array( 
         														'model'         => $matricula,
@@ -567,6 +573,8 @@ class EvaHogarController extends Controller
                                                                 'areas'			=> $are,
                                                                 'escala'		=> $escala,
                                                                 'nombre_inf'	=> $inf->ih_descripcion,
+                                                                'des1' 			=> $eva->eh_des1,
+    															'des2' 			=> $eva->eh_des2,
                                             ), true));
         	$mPDF1->Output();
 

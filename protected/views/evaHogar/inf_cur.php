@@ -214,6 +214,9 @@ foreach ($eva as $key => $e) {   /*inicio foreach */
                 );
         }
 
+    $inf_des = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id_mat, 'eh_curso' => $id_cur));
+    $des1 = $inf_des->eh_des1;
+    $des2 = $inf_des->eh_des2;
    
 ?>
 
@@ -346,10 +349,7 @@ foreach ($eva as $key => $e) {   /*inicio foreach */
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES PRIMER SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
-        </tr>
-         <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: left;  border-bottom: 0; font-size: 9pt;"><?php echo $des1; ?></td>
         </tr>
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
@@ -373,10 +373,7 @@ foreach ($eva as $key => $e) {   /*inicio foreach */
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES SEGUNDO SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
-        </tr>
-         <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;">POR LO TANTO:<?php  for ($i=0; $i < 215; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: left;  border-bottom: 0; font-size: 9pt;"><?php echo $des2; ?></td>
         </tr>
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
