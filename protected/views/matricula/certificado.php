@@ -66,6 +66,6 @@ function fecha(){
 <br>
 
 <div style="text-align:center">
-	<p>el nombre del director</p>
+	<p><?php echo $director; ?></p>
 	<p>DIRECTOR(A)</p>
 </div>
