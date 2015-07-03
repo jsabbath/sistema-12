@@ -18,14 +18,14 @@
             margin:0;
             padding:0;
             font-family:Arial;
-            font-size:7.3pt;
+            font-size:8pt;
             color:#000;
         }
         body
         {
             width:100%;
             font-family:Arial;
-            font-size:7.3pt;
+            font-size:8pt;
             margin:0;
             padding:0;
         }
@@ -346,10 +346,10 @@ foreach ($eva as $key => $e) {   /*inicio foreach */
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES PRIMER SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 180; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 180; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
         </tr>
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
@@ -373,10 +373,10 @@ foreach ($eva as $key => $e) {   /*inicio foreach */
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES SEGUNDO SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 180; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 240; $i++){ echo "."; }?></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;">POR LO TANTO:<?php  for ($i=0; $i < 155; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;">POR LO TANTO:<?php  for ($i=0; $i < 215; $i++){ echo "."; }?></td>
         </tr>
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
