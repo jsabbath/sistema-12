@@ -273,7 +273,7 @@ class EvaHogarController extends Controller
 
     // function para agregar a cursos especificos, evaluaciones agregadas despues de matricular alumnos
     public function actionActualizar_informe_hogar_manual(){
-    	$curso1 = EvaHogar::model()->findByAttributes(array('eh_curso' => "3"));
+    	$curso1 = EvaHogar::model()->findAll(array('condition' => 'eh_curso=3'));
     	$lista = array();
     	foreach ($curso1 as $key => $v) {
 
@@ -287,9 +287,10 @@ class EvaHogarController extends Controller
 
 		if( $lista != null ){
 			$alumnos = array_unique($lista, SORT_REGULAR);
-			sort($alumnos);
+
 
 			foreach ($alumnos as $key => $a) {
+					echo "alumno: ". $a['mat']."<br>";
 				 	$evaluacion = new EvaHogar;
                     $evaluacion->eh_concepto = $a['con1'];
                     $evaluacion->eh_matricula = $a['mat'];
@@ -304,7 +305,7 @@ class EvaHogarController extends Controller
 			}
 		}
 
-		$curso2 = EvaHogar::model()->findByAttributes(array('eh_curso' => "4"));
+		$curso2 = EvaHogar::model()->findAll(array('condition' => 'eh_curso=4'));
 		$lista = array();
     	foreach ($curso2 as $key => $v) {
 
@@ -319,9 +320,10 @@ class EvaHogarController extends Controller
 
 		if( $lista != null ){
 			$alumnos = array_unique($lista, SORT_REGULAR);
-			sort($alumnos);
+
 
 			foreach ($alumnos as $key => $a) {
+					echo "alumno: ". $a['mat']."<br>";
 				 	$evaluacion = new EvaHogar;
                     $evaluacion->eh_concepto = $a['con1'];
                     $evaluacion->eh_matricula = $a['mat'];
