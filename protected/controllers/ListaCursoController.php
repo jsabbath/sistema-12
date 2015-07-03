@@ -336,7 +336,7 @@ class ListaCursoController extends Controller
 
 			if( !empty($lista_curso) ){
 				foreach($lista_curso as $key => $alumno){
-					$mat = matricula::model()->findByPk($alumno->list_mat_id);
+					$mat = Matricula::model()->findByPk($alumno->list_mat_id);
 					$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 					$par = Parametro::model()->findByPk($mat->mat_estado);
 					if( $par->par_descripcion == "RETIRADO" ){
