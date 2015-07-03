@@ -260,6 +260,7 @@ class EvaHogarController extends Controller
     		}
     		if( $lista != null ){
 				$alumnos = array_unique($lista, SORT_REGULAR);
+				sort($alumnos);
 
 	    		foreach ($alumnos as $key => $e) {
 	    			echo CHtml::tag('option', array('value' => $e['id']), CHtml::encode($e['nombre']), true);
