@@ -18,14 +18,14 @@
             margin:0;
             padding:0;
             font-family:Arial;
-            font-size:5pt;
+            font-size:7.3pt;
             color:#000;
         }
         body
         {
             width:100%;
             font-family:Arial;
-            font-size:5pt;
+            font-size:7.3pt;
             margin:0;
             padding:0;
         }
@@ -171,7 +171,7 @@
 
 <table width="100%" style="border: 0;">
     <tr>
-        <td width="20%" style="border: 0;"><img style="width: 45px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
+        <td width="20%" style="border: 0;"><img style="width: 65px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
         <td width="80%" style="border: 0;">
             <h2><?php echo $cole->col_nombre_colegio ?></h2>
             <p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono; ?></p>
