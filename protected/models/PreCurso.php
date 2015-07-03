@@ -115,4 +115,8 @@ class PreCurso extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getCurso(){
+		return $this->preNivel->par_descripcion." ".$this->preLetra->par_descripcion;
+	}
 }

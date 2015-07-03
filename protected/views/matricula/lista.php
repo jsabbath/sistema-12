@@ -65,6 +65,7 @@
 					'header'=>'Curso',
 					'type'=>'raw',
 					'value'=>array($this,'obtenerCurso'),
+					//'filter' => CHtml::listData(Curso::model()->findAll(), 'cur_id','cur_id'),
 				),
 				array(
 					'class'=>'bootstrap.widgets.TbButtonColumn',

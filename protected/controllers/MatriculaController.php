@@ -625,9 +625,11 @@ class MatriculaController extends Controller
     public function actionListaCompleta(){
         
         $model = new Matricula('search');
+        $cursos = $this->actionCursoAnoActual();
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('lista', array(
+            'cursos' => $cursos,
             'model' => $model,
         ));
     }
@@ -646,10 +648,16 @@ class MatriculaController extends Controller
 
     public function obtenerCurso($data,$row){
         $curso = ListaCurso::model()->findAll(array('condition'=>'list_mat_id="'.$data->mat_id.'"'));
+        $pre_curso = EvaHogar::model()->findByAttributes(array('eh_matricula' => $data->mat_id));
         if($curso != NULL){
             $nombre = Curso::model()->findByAttributes(array('cur_id'=>$curso[0]->list_curso_id));
             return $nombre->getCurso();
-        }else return "SIN CURSO";
+        }else if( $pre_curso != NULL ){
+            $nombre = PreCurso::model()->findByPk($pre_curso->eh_curso);
+            return $nombre->getCurso();
+        }else{
+            return "SIN CURSO";
+        }
     }
 
     public function actionInforme(){
