@@ -29,17 +29,17 @@ class EvaHogarController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
-					'subir_notas','informe','render_option','inf_alu','inf_cur'),
+					'subir_notas','informe','render_option','inf_alu','inf_cur','actualizar_informe_hogar_manual'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
-					'subir_notas','informe','render_option','inf_alu','inf_cur'),
+					'subir_notas','informe','render_option','inf_alu','inf_cur','actualizar_informe_hogar_manual'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
-					'subir_notas','informe','render_option','inf_alu','inf_cur'),
+					'subir_notas','informe','render_option','inf_alu','inf_cur','actualizar_informe_hogar_manual'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -269,6 +269,73 @@ class EvaHogarController extends Controller
     			echo CHtml::tag('option', array('value' => 0), CHtml::encode('sin alumnos'), true);
     		}
     	}
+    }
+
+    // function para agregar a cursos especificos, evaluaciones agregadas despues de matricular alumnos
+    public function actionActualizar_informe_hogar_manual(){
+    	$curso1 = EvaHogar::model()->findByAttributes(array('eh_curso' => "3"));
+    	$lista = array();
+    	foreach ($curso1 as $key => $v) {
+
+    			$lista[] = array(
+    				'mat' 	=> $v->eh_matricula,
+    				'curso' => "3",
+    				'con1' 	=> "116",
+    				'con2'	=> "117",
+    				);
+    	}
+
+		if( $lista != null ){
+			$alumnos = array_unique($lista, SORT_REGULAR);
+			sort($alumnos);
+
+			foreach ($alumnos as $key => $a) {
+				 	$evaluacion = new EvaHogar;
+                    $evaluacion->eh_concepto = $a['con1'];
+                    $evaluacion->eh_matricula = $a['mat'];
+                    $evaluacion->eh_curso = $a['curso'];
+                    $evaluacion->save();
+
+                    $eva2 = new EvaHogar;
+                    $eva2->eh_concepto = $a['con2'];
+                    $eva2->eh_matricula = $a['mat'];
+                    $eva2->eh_curso = $a['curso'];
+                    $eva2->save();
+			}
+		}
+
+		$curso2 = EvaHogar::model()->findByAttributes(array('eh_curso' => "4"));
+		$lista = array();
+    	foreach ($curso2 as $key => $v) {
+
+
+    			$lista[] = array(
+    				'mat' 	=> $v->eh_matricula,
+    				'curso' => "4",
+    				'con1' 	=> "116",
+    				'con2'	=> "117",
+    				);
+    	}
+
+		if( $lista != null ){
+			$alumnos = array_unique($lista, SORT_REGULAR);
+			sort($alumnos);
+
+			foreach ($alumnos as $key => $a) {
+				 	$evaluacion = new EvaHogar;
+                    $evaluacion->eh_concepto = $a['con1'];
+                    $evaluacion->eh_matricula = $a['mat'];
+                    $evaluacion->eh_curso = $a['curso'];
+                    $evaluacion->save();
+
+                    $eva2 = new EvaHogar;
+                    $eva2->eh_concepto = $a['con2'];
+                    $eva2->eh_matricula = $a['mat'];
+                    $eva2->eh_curso = $a['curso'];
+                    $eva2->save();
+			}
+		}
+
     }
 
     public function actionMostrar_informe(){
