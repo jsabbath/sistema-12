@@ -23,7 +23,11 @@ $.fn.numericInputExample = function () {
 					total = " "; 
 					row.children().eq(column).text(total);
 				} else{
-					row.children().eq(column).text(total.toPrecision(2)); // se guarda el promedio en la ultima columna de la fila
+					var t = Math.round(total*10)/10;
+					if( t.toString().length == "1" ){
+						t = t + ".0";
+					}
+					row.children().eq(column).text(t); // se guarda el promedio en la ultima columna de la fila ////total.toPrecision(3)
 				}
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
@@ -60,7 +64,11 @@ $.fn.numericInputExample = function () {
 					total = " ";
 					row.children().eq(column).text(total); 
 				} else{
-					row.children().eq(column).text(total.toPrecision(2)); 
+					var t = Math.round(total*10)/10;
+					if( t.toString().length == "1" ){
+						t = t + ".0";
+					}
+					row.children().eq(column).text(t);
 				}
 				
 			}
