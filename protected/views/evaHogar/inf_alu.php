@@ -313,7 +313,7 @@
                 <p>DIRECTOR(A)</p>
             </td>
              <td  align="center" style="width: 35%; border-top: 0; border-left: 0; ">
-                 <img class="firma" style="width: 12%;"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/apoderado.png ?>"> 
+                 <img class="firma" style="width: 12%;"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/apoderado.png"> 
                 <p style="vertical-align: buttom">APODERADO</p>
             </td>
         </tr>
@@ -340,7 +340,7 @@
                 <p>DIRECTOR(A)</p>
             </td>
              <td  align="center" style="width: 35%; border-top: 0; border-left: 0; ">
-                 <img class="firma" style="width: 12%;"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/apoderado.png; ?>"> 
+                 <img class="firma" style="width: 12%;"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/apoderado.png"> 
                 <p style="vertical-align: buttom">APODERADO</p>
             </td>
         </tr>
