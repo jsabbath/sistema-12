@@ -670,13 +670,20 @@ class MatriculaController extends Controller
 
     public function actionCertificado($id){
         $model = $this->loadModel($id);
+        $colegio = Colegio::model()->findByAttributes(array('col_nombre_colegio'=>'COLEGIO ALBORADA'));
+        //$director_id = $colegio->col_nombre_director;
+        $usuario = Usuario::model()->findByAttributes(array('usu_id'=>$colegio->col_nombre_director));
+        $director = $usuario->getNombreCompleto();
 
         $mPDF1 = Yii::app()->ePdf->mpdf();
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
         $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
         $mPDF1->WriteHTML($stylesheet, 2);
-        $mPDF1->WriteHTML($this->renderPartial('certificado', array('model'=>$model), true));
+        $mPDF1->WriteHTML($this->renderPartial('certificado', array(
+            'model'=>$model,
+            'director'=>$director,
+            ), true));
         $mPDF1->Output();
     }
 
