@@ -24,6 +24,16 @@ class Fecha extends CApplicationComponent {
 
         return $fecha_actual;
     }
+
+
+    /**
+        la funcion cambio_formato recibe una fecha con el formato dd-mm-yyyy
+        y devuelve la fecha en formato yyyy-mm-dd
+    */
+    public static function cambio_formato($fecha){
+        $nuevafecha = date("Y-m-d", strtotime($fecha));
+        return $nuevafecha;
+    }
  
 }
 ?>
