@@ -1,19 +1,3 @@
-<?php
-
-function fecha(){
-	$dias = array('1'=>'Lunes','2'=>'Martes','3'=>'Miercoles','4'=>'Jueves','5'=>'Viernes','6'=>'Sabado','7'=>'Domingo');
-	$meses = array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto',
-		'9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
-	$dia = $dias[date('N')];
-	$dia_numero = date('d');
-	$mes = $meses[date('n')];
-	$anio = date('Y');
-	$fecha_actual = $dia.", ".$dia_numero." de ".$mes.". ".$anio;
-
-	return $fecha_actual;
-}
-
-?>
 
 <table width="100%">
 	<tr>
@@ -34,7 +18,7 @@ function fecha(){
 <br>
 <br>
 <div>
-	<p>Decreto Cooperador : un numero</p>
+	<p>Decreto Cooperador : </p>
 </div>
 <div>
 	<p>Certifico que el alumno <strong><?php echo $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat
@@ -50,7 +34,7 @@ function fecha(){
 <br>
 <div>
 	<p>Asiste regularmente a este establecimiento educacional, cursando actualmente :</p>
-	<h4><?php echo "Inserte su curso aqui"; ?></h4>
+	<h4><?php echo $curso; ?></h4>
 </div>
 <br>
 <br>
