@@ -31,6 +31,10 @@
              
             </div>
 
+            <div class="span2 offset3">
+                 <button id="unlock" class="btn btn-success"><i id="lock_icon" class="icon-lock"></i> Editar</button>
+            </div>
+
             <div class="span4 offset2 text-center" id="lista_alumnos" hidden>
                 
                 <?php echo CHtml::dropDownList('lista','lista',$cursos ,array(
@@ -54,6 +58,7 @@
 </div><!-- form -->
 
 <script type="text/javascript">
+    $('#unlock').hide();
     $('#id_curso').on('change',function(){
         $('#lista_alumnos').hide();
         $('#informe').hide();
@@ -65,22 +70,67 @@
         })
         .done(function(response) {
             $('#lista').html(response);
-            $('#lista_alumnos').show();
+            //$('#unlock').show();
 
-            $('#lista').on('change',function(){
-
-
-                $.ajax({
-                    url: '<?php echo CController::createUrl('evaHogar/mostrar_informe'); ?>',
-                    type: 'POST',
-                    data: {id: $(this).val(), curso: $('#id_curso').val()},
-                })
-                .done(function(response) {
-                    $('#informe').show();
-                    $('#informe').html(response);
-                });
+                 // dar permisos
                 
-            });
+
+                    swal({      
+                        title: "Ingrese su Password!",   
+                        type: "input",
+                        inputType: "password",   
+                        showCancelButton: true,   
+                        closeOnConfirm: false,   
+                        animation: "slide-from-top" 
+                    }, 
+                    function(inputValue){ 
+
+                        $.ajax({
+                            url: '<?php echo $this->createUrl('evaHogar/validar_edicion'); ?>',
+                            type: 'POST',
+                            dataType: "JSON",
+                            data: { pass: inputValue, cur:  $('#id_curso').val() },
+                            success: function(response) {
+                                if(!response){
+                                    swal.showInputError("Ingrese datos nuevamente");     
+                                    return false;   
+                                }
+                                if( response == 2 ){
+                                    swal.showInputError("usted no  tiene permisos para editar notas de este curso");
+                                    return false;
+                                } 
+                                swal({   
+                                    title: "Correcto!",     
+                                    timer: 600,
+                                    type: "success",   
+                                    showConfirmButton: false 
+                                });
+
+                                $('#lista_alumnos').show();
+
+                                $('#lista').on('change',function(){
+
+                                    $.ajax({
+                                        url: '<?php echo CController::createUrl('evaHogar/mostrar_informe'); ?>',
+                                        type: 'POST',
+                                        data: {id: $(this).val(), curso: $('#id_curso').val()},
+                                    })
+                                    .done(function(response) {
+                                        $('#informe').show();
+                                        $('#informe').html(response);
+                                    });
+                                    
+                                }); 
+                                              
+                                window.onbeforeunload = function() {
+                                    return "";
+                                }
+                            }               
+                        })  
+                    });
+                
+
+                
 
 
         });

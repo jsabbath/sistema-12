@@ -199,17 +199,39 @@ class EvaHogarController extends Controller
 	public function actionLista_pre_cursos(){
         $ano = $this->actionAnoactual();
 
+
+
         $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="prenivel"')),'par_id','par_descripcion');
         $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
         $pre_cursos = PreCurso::model()->findAll(array('condition' => 'pre_ano=:x', 'params' => array(':x' => $ano)));
 
-        $cursos = array();
-        if( $pre_cursos ){
-	        foreach ($pre_cursos as $key => $p) {
-	            $cursos[$p->pre_id] = $nivel[$p->pre_nivel]." ".$letra[$p->pre_letra];
-	        }
-    	}
+	    $cursos = array();
+
+	    if( Yii::app()->user->checkAccess('profesor') AND  !Yii::app()->user->isSuperAdmin){
+	    	$user = Yii::app()->user->id;
+	    	
+	    	if( $pre_cursos ){
+		        foreach ($pre_cursos as $key => $p) {
+		        	if( $p->pre_pjefe == $user ){
+		            	$cursos[$p->pre_id] = $nivel[$p->pre_nivel]." ".$letra[$p->pre_letra];
+		        	}
+		        }
+	    	}
+
+
+	    } else{
+	        if( $pre_cursos ){
+		        foreach ($pre_cursos as $key => $p) {
+		            $cursos[$p->pre_id] = $nivel[$p->pre_nivel]." ".$letra[$p->pre_letra];
+		        }
+	    	}
+		}
+
+		if( $cursos == null ){
+			return $cursos[0] = "usted no tiene cursos";
+		}
+
         return $cursos;
     }
 
@@ -324,7 +346,7 @@ class EvaHogarController extends Controller
 		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
 
 		 	// se ve si  es admin o director para editar
-		 	if (Yii::app()->user->checkAccess('director') OR Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
+		 	if (Yii::app()->user->checkAccess('profesor') OR Yii::app()->user->checkAccess('director') OR Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
 			 	if($usuario->password == $p){
 			 		 echo json_encode(1);
 			 		 return;

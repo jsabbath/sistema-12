@@ -10,7 +10,7 @@
                                     <div id="loader" >SUBIENDO...</div>
             </button>
 
-            <button id="unlock" class="btn btn-success"><i id="lock_icon" class="icon-lock"></i> Editar</button>
+           
         </div>
         </br>
 
@@ -82,58 +82,18 @@
 
 <script type="text/javascript">
 
+    $('#bt_subir_notas').show();
+    $('#lock_icon').addClass("icon-ok").removeClass("icon-lock");
 
-    // dar permisos
-    $('#unlock').on('click',function(){ 
-
-        swal({      
-            title: "Ingrese su Password!",   
-            type: "input",
-            inputType: "password",   
-            showCancelButton: true,   
-            closeOnConfirm: false,   
-            animation: "slide-from-top" 
-        }, 
-        function(inputValue){ 
-
-            $.ajax({
-                url: '<?php echo $this->createUrl('evaHogar/validar_edicion'); ?>',
-                type: 'POST',
-                dataType: "JSON",
-                data: { pass: inputValue, cur:  $('#id_curso').val() },
-                success: function(response) {
-                    if(!response){
-                        swal.showInputError("Ingrese datos nuevamente");     
-                        return false;   
-                    }
-                    if( response == 2 ){
-                        swal.showInputError("usted no  tiene permisos para editar notas de este curso");
-                        return false;
-                    } 
-                    swal({   
-                        title: "Correcto!",     
-                        timer: 600,
-                        type: "success",   
-                        showConfirmButton: false 
-                    });
-
-                    $('#bt_subir_notas').show();
-                    $('#lock_icon').addClass("icon-ok").removeClass("icon-lock");
-
-                        $('.table').each(function() {
-                            $(this).editableTableWidget();
-                            $(this).numericInputExample();
-                        });
-
-                    $('#unlock').prop("disabled",true);
-                    $('#asi').prop("disabled",false);
-                    window.onbeforeunload = function() {
-                        return "";
-                    }
-                }               
-            })  
+        $('.table').each(function() {
+            $(this).editableTableWidget();
+            $(this).numericInputExample();
         });
-    });
+
+   
+    $('#asi').prop("disabled",false);
+
+   
 
     // load button
     var $loading = $('#loader').hide();
