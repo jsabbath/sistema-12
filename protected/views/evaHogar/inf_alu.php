@@ -171,7 +171,7 @@
 
 <table width="100%" style="border: 0;">
     <tr>
-        <td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
+        <td width="20%" style="border: 0;"><img style="width: 45px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
         <td width="80%" style="border: 0;">
             <h2><?php echo $cole->col_nombre_colegio ?></h2>
             <p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono; ?></p>
@@ -298,10 +298,10 @@
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES PRIMER SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 180; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 380; $i++){ echo "."; }?></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 180; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 380; $i++){ echo "."; }?></td>
         </tr>
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">
@@ -325,10 +325,10 @@
             <td colspan="3" style="text-align: center"><strong>OBSERVACIONES SEGUNDO SEMESTRE</strong></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 180; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;"><?php  for ($i=0; $i < 380; $i++){ echo "."; }?></td>
         </tr>
          <tr>
-            <td colspan="3" style="text-align: center;  border-bottom: 0;">POR LO TANTO:<?php  for ($i=0; $i < 155; $i++){ echo "."; }?></td>
+            <td colspan="3" style="text-align: center;  border-bottom: 0;">POR LO TANTO:<?php  for ($i=0; $i < 355; $i++){ echo "."; }?></td>
         </tr>
         <tr >
             <td style="width:35%; text-align: center; border-top: 0; border-right: 0;">

@@ -219,7 +219,7 @@ foreach ($eva as $key => $e) {   /*inicio foreach */
 
 <table width="100%" style="border: 0;">
     <tr>
-        <td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
+        <td width="20%" style="border: 0;"><img style="width: 45px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
         <td width="80%" style="border: 0;">
             <h2><?php echo $cole->col_nombre_colegio ?></h2>
             <p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono; ?></p>
