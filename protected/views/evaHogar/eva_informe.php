@@ -74,8 +74,13 @@
 
         <?php }}  ?>
         <div>
-            <strong>ASISTENCIA:  </strong>
-            <input class="span2" type="number" placeholder="<?php echo $asi; ?>" id="asi" min="0" max="100" disabled="true">
+            <strong>ASISTENCIA PRIMER SEMESTRE:  </strong>
+            <input class="span2" type="number" placeholder="<?php echo $asi1; ?>" id="asi1" min="0" max="100" >
+        </div>
+
+         <div>
+            <strong>ASISTENCIA SEGUNDO SEMESTRE:  </strong>
+            <input class="span2" type="number" placeholder="<?php echo $asi2; ?>" id="asi2" min="0" max="100" >
         </div>
     </div>
 </div>
@@ -91,7 +96,7 @@
         });
 
    
-    $('#asi').prop("disabled",false);
+   
 
    
 
@@ -144,7 +149,7 @@
         $.ajax({
             url: '<?php echo CController::createUrl("evaHogar/subir_notas")?>',
             type: 'POST',
-            data: {lista: lista, asi: $('#asi').val(), mat: $('#lista').val()},
+            data: {lista: lista, asi1: $('#asi1').val(), mat: $('#lista').val(), asi2: $('#asi2').val()},
             success: function(data){
                 swal({   
                     title: "Guardado!",     

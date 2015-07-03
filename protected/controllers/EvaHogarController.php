@@ -328,7 +328,8 @@ class EvaHogarController extends Controller
     			$mat = Matricula::model()->findByPk($id_mat);
 
     			$this->renderPartial('eva_informe',array(
-    												'asi' 		=> $mat->mat_asistencia_1,
+    												'asi1' 		=> $mat->mat_asistencia_1,
+    												'asi2'		=> $mat->mat_asistencia_2,
     												'areas' 	=> $are,
     												'nombre'	=> $inf->ih_descripcion,
     												'escala'	=> $escala,
@@ -365,11 +366,21 @@ class EvaHogarController extends Controller
     public function actionSubir_notas(){
     	if( isset($_POST['lista']) ){
     		$lista = $_POST['lista'];
-    		$asi = $_POST['asi'];
+    		
+    		
     		$mat = $_POST['mat'];
     		$a = Matricula::model()->findByPk($mat);
-    		$a->mat_asistencia_1 = $asi;
+    		
+    		if( $_POST['asi1'] != "" ){
+    			$asi1 = $_POST['asi1'];
+    			$a->mat_asistencia_1 = $asi1;
+    		}
+    		if( $_POST['asi2'] != ""){
+    			$asi2 = $_POST['asi2'];
+    			$a->mat_asistencia_2 = $asi2;
+    		}
     		$a->update();
+    		
 
     		foreach ($lista as $key => $l) {
     			$eva = EvaHogar::model()->findByPk($l['eva_id']);

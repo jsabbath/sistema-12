@@ -230,8 +230,8 @@
           <td style="border: 0;"> 
             <p>Asistencia </p>
         </td>
-        <td style="border: 0;">
-         <strong>: <?php echo $model->mat_asistencia_1; ?>%</strong>
+         <td style="border: 0;">
+         <strong>: <?php echo $model->mat_asistencia_1."% (I SEM) - ".$model->mat_asistencia_2."% (II SEM)"; ?></strong>
          </td>
 
     </tr>
