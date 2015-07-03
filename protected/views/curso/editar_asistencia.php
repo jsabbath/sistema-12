@@ -37,7 +37,7 @@
 	       		<td tabindex="1" ><?php echo $value['asi_1'] ?></td>
 	       		<td tabindex="1"><?php echo $value['asi_2'] ?></td>
 	       		<?php if( $tperiodo == "TRIMESTRE" ){ ?><td tabindex="1"><?php echo $value['asi_3'];} ?></td>
-	       		<td data-editable= 'false' id="final"></td>
+	       		<td data-editable= 'false' id="final" style="background-color: #EEEEEE"></td>
 	       	</tr>
 	      <?php } ?>
 	   
