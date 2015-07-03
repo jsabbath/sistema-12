@@ -18,14 +18,14 @@
             margin:0;
             padding:0;
             font-family:Arial;
-            font-size:9pt;
+            font-size:5pt;
             color:#000;
         }
         body
         {
             width:100%;
             font-family:Arial;
-            font-size:9pt;
+            font-size:5pt;
             margin:0;
             padding:0;
         }
@@ -63,7 +63,7 @@
         {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 2mm;
+            padding: 1mm;
         }
          
         table.heading

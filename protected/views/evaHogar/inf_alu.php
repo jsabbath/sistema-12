@@ -18,14 +18,14 @@
             margin:0;
             padding:0;
             font-family:Arial;
-            font-size:9pt;
+            font-size:5pt;
             color:#000;
         }
         body
         {
             width:100%;
             font-family:Arial;
-            font-size:9pt;
+            font-size:5pt;
             margin:0;
             padding:0;
         }
@@ -63,7 +63,7 @@
         {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 2mm;
+            padding: 1mm;
         }
          
         table.heading
@@ -249,7 +249,7 @@
         if( $are['nombre_area'] != "PERSONALIDAD"){  
 ?>
             <p><strong>AMBITO: <?php echo $are['nombre_area']; ?></strong></p>
-            <table width="100%" style="border: 1;">
+            <table width="100%" style="border: 1;" >
                 <tr>
                     <td style="text-align: center;"><strong>INDICADORES</strong></td>
                     <td style="text-align: center" width="8%">1°S</td>
