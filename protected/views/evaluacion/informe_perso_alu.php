@@ -18,14 +18,14 @@
             margin:0;
             padding:0;
             font-family:Arial;
-            font-size:9pt;
+            font-size:8pt;
             color:#000;
         }
         body
         {
             width:100%;
             font-family:Arial;
-            font-size:10pt;
+            font-size:8pt;
             margin:0;
             padding:0;
         }
