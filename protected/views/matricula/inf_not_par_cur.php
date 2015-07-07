@@ -163,7 +163,7 @@ function actionPromedio_curso_asig($id_curso,$id_asig,$p){
         $prom_curso = 0;
         $prom_count = 0;
         $final = 0;
-
+        $precision = 1;
         foreach ($lista as $key => $id_alum){
 
             $n = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => $p ));
@@ -178,8 +178,12 @@ function actionPromedio_curso_asig($id_curso,$id_asig,$p){
                     }
                 }
                 if( $count_alu != 0 ){
-                    $prom_curso += $prom_alu/$count_alu;
-                    $prom_count++;
+                    $prom = $prom_alu/$count_alu;
+                   // $prom = number_format((float) $prom, $precision, '.', '');
+                    if( $prom > 0 ){
+                        $prom_curso += $prom;
+                        $prom_count++;
+                    }
                 }
         }
 
@@ -189,7 +193,7 @@ function actionPromedio_curso_asig($id_curso,$id_asig,$p){
             if( strlen($final) == 1 ){
                 $final = $final .".0";
             }else{
-                $precision = 1;
+               
                 $final = number_format((float) $final, $precision, '.', '');
             }
         }
@@ -219,15 +223,16 @@ foreach ($lista_alu as $key => $alu) {
     foreach ($evaluaciones as $key => $alum) {
 
         $asi = Asignatura::model()->findByPk($alum->not_asig);
-
+        $prom_asi = 0;
         if( $flag ){
             $prom_asi = $this->actionPromedio_curso_asig($id_cur,$asi->asi_id,$periodo);
-            $prom2[] = array($prom_asi);
+            $prom2[$asi->asi_orden] = $prom_asi."";
         }
 
         $notas[$asi->asi_orden] = array(
               'nota'    => $alum->notas,
               'nom_asi' => $asi->asi_descripcion,
+             // 'prom_asi'=> $prom_asi,
             );
 
     }
@@ -239,11 +244,12 @@ foreach ($lista_alu as $key => $alu) {
             $asi_alu = $model->mat_asistencia_3;
         }
 
+    ksort($prom2);
     ksort($notas);
     $notas = array_unique($notas, SORT_REGULAR);
     $ano = $evaluaciones[0]['not_ano'];   
     $flag = false;
-    $count_curso = 0;
+    $count_curso = 1;
 
  ?>
 
@@ -253,7 +259,7 @@ foreach ($lista_alu as $key => $alu) {
         <td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
         <td width="80%" style="border: 0;">
             <h2><?php echo $cole->col_nombre_colegio ?></h2>
-            <p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono; ?></p>
+            <p><?php echo $cole->col_direccion. " - F(41)". $cole->col_telefono; ?></p>
         </td>
     </tr>
 </table>
@@ -338,7 +344,6 @@ foreach ($lista_alu as $key => $alu) {
         
         foreach ($notas as $key => $a) { 
                 $n = $a['nota'];
-
     ?>
         <tr>
             <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
@@ -373,6 +378,7 @@ foreach ($lista_alu as $key => $alu) {
 
                 <td class="text-center" style="background-color: #EEEEEE;"> <strong><?php 
                     if( $count !=0 ){
+                        
                         if( $prom > 6  ) {
                             echo "MB"; 
                         }else if( $prom < 6 AND $prom >= 5  ){
@@ -434,24 +440,23 @@ foreach ($lista_alu as $key => $alu) {
                     </td><!-- final -->
 
             <?php } ?><!-- fin else religion -->
-            <td><p><strong><?php if($prom2[$count_curso][0] != 0){
-                            $pl = $prom2[$count_curso][0]; 
-                            if( $a['nom_asi'] == "RELIGION"){
-                                if( $pl > 6  ) { 
-                                    echo "MB";
-                                }else if( $pl < 6 AND $pl >= 5 ){ 
-                                    echo "B";
-                                }else if( $pl < 5 AND $pl >= 4 ){ 
-                                    echo "S";
-                                }else if( $pl < 4 ){ 
-                                    echo "I";
-                                }
-                            } else{
-                                echo $prom2[$count_curso][0]; 
-                            }
-                            $count_curso++; 
-
-            }?></strong></p></td>
+            <td><p><strong><?php 
+                    $pl = $prom2[$count_curso]; 
+                    if( $a['nom_asi'] == "RELIGION"){
+                        if( $pl > 6  ) { 
+                            echo "MB";
+                        }else if( $pl < 6 AND $pl >= 5 ){ 
+                            echo "B";
+                        }else if( $pl < 5 AND $pl >= 4 ){ 
+                            echo "S";
+                        }else if( $pl < 4 ){ 
+                            echo "I";
+                        }
+                    } else{
+                        if( $prom2[$count_curso] != 0 ) echo $prom2[$count_curso]; 
+                        $count_curso++;  
+                    }     
+            ?></strong></p></td>
 
         </tr>
 

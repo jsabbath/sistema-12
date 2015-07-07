@@ -697,7 +697,7 @@ class MatriculaController extends Controller
         $prom_curso = 0;
         $prom_count = 0;
         $final = 0;
-
+        $precision = 1;
         foreach ($lista as $key => $id_alum){
 
             $n = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => $p ));
@@ -705,25 +705,30 @@ class MatriculaController extends Controller
             $not = $n->notas;
             $count_alu = 0;
             $prom_alu = 0;
-                foreach ($not as $key => $k) {
-                    if( $k > 0 ){
-                        $count_alu++;
-                        $prom_alu += $k;
-                    }
+            foreach ($not as $key => $k) {
+                if( $k > 0 ){
+                    $count_alu++;
+                    $prom_alu += $k;
                 }
-                if( $count_alu != 0 ){
-                    $prom_curso += $prom_alu/$count_alu;
+            }
+            if( $count_alu != 0 ){
+                $prom = $prom_alu/$count_alu;
+                //$prom = number_format((float) $prom, $precision, '.', '');
+                if( $prom > 0 ){
+                    $prom_curso += $prom;
                     $prom_count++;
                 }
+               
+            }
         }
 
         if( $prom_count != 0 ){
             $final = $prom_curso/$prom_count;
-
+            
             if( strlen($final) == 1 ){
                 $final = $final .".0";
             }else{
-                $precision = 1;
+                
                 $final = number_format((float) $final, $precision, '.', '');
             }
         }
