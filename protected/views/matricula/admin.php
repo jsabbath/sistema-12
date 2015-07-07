@@ -105,9 +105,7 @@ $this->menu=array(
 !-->
 
 <script type="text/javascript">
-$( ".pick" ).datepicker({
-    dateFormat: 'dd-mm-yy'
-});
+$( ".pick" ).datepicker();
 </script>
 
 <script>

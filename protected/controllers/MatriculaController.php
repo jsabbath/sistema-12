@@ -71,16 +71,14 @@ class MatriculaController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
-	{
-		$model = new Matricula;
+    {
+        $model = new Matricula;
         $alumno = new Alumno;
-
         
         //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         $estado = Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="ACTIVO"'));
-
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
@@ -88,18 +86,16 @@ class MatriculaController extends Controller
             $alumno->attributes = $_POST['Alumno'];
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
-            $model->mat_fingreso = Fecha::cambio_formato($model->mat_fingreso);
+            $model->mat_fingreso = date('Y-m-d');
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
-
                 //todo los textos a mayuscula
                 $alumno->alum_nombres = strtoupper($alumno->alum_nombres);
                 $alumno->alum_apepat = strtoupper($alumno->alum_apepat);
                 $alumno->alum_apemat = strtoupper($alumno->alum_apemat);
                 $alumno->alum_direccion = strtoupper($alumno->alum_direccion);
                 $alumno->alum_salud = strtoupper($alumno->alum_salud);
-
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
                     $model->mat_estado = $estado[0]->par_id;
@@ -115,7 +111,7 @@ class MatriculaController extends Controller
             'region'=>$region,
             'genero'=>$genero,
         ));
-	}
+    }
 
 	/**
 	 * Updates a particular model.
@@ -123,14 +119,12 @@ class MatriculaController extends Controller
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
-	{
-		$model = $this->loadModel($id);
+    {
+        $model = $this->loadModel($id);
         $alumno = Alumno::model()->findByPk($model->mat_alu_id);
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $ciudad = CHtml::listData(Ciudad::model()->findAll('ciu_reg=:id', array(':id' => $alumno->alum_region)), 'ciu_id', 'ciu_descripcion');
         $comuna = CHtml::listData(Comuna::model()->findAll('com_ciu=:id', array(':id' => $alumno->alum_ciudad)), 'com_id', 'com_descripcion');
-
-
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ESTADO"')),'par_id','par_descripcion');
         // Uncomment the following line if AJAX validation is needed
@@ -140,9 +134,6 @@ class MatriculaController extends Controller
             $alumno->attributes = $_POST['Alumno'];
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
-            $model->mat_fretiro = Fecha::cambio_formato($model->mat_fretiro);
-            $model->mat_fcambio = Fecha::cambio_formato($model->mat_fcambio);
-
             if ($valid){
                 if($alumno->save()){
                     if ($model->save()) {
@@ -162,7 +153,7 @@ class MatriculaController extends Controller
             'comuna'=>$comuna,
             'ciudad'=>$ciudad,
         ));
-	}
+    }
 
 	/**
 	 * Deletes a particular model.
