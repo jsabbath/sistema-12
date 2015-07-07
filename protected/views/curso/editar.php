@@ -89,7 +89,11 @@
 		    </thead>
 
 		    <tbody>
-			    <?php  foreach ($alumnos as $key => $alum) { ?><tr>
+			    <?php  
+			    $count_final = 0;
+			    	foreach ($alumnos as $key => $alum) { 
+			    			
+			    ?><tr>
 						<td id="notas_id" style="display:none;"><?php echo $alum['not_id'];  ?></td>
 						<td data-editable= 'false' <?php if( $alum['retirado'] ){ ?> style="color: red;" <?php } ?>  > <?php echo strtoupper($alum['nombre']); ?></td>	
 
@@ -99,6 +103,7 @@
 										if(empty($nota_alu[$i])) {
 											//echo 1;
 										} else if ( $nota_alu[$i] != 0 ){
+											$count_final++;
 											if ( strlen($nota_alu[$i]) == 1 ){
 												echo  ''.$nota_alu[$i] . '.0';
 											} else {
@@ -114,7 +119,10 @@
 
 				</tr>
 				<?php } ?>
-				   
+				<tr  style="background-color: #EEEEEE;">
+					<td colspan="<?php echo $notas_p+1; ?>" style="text-align: center;"><strong>PROMEDIO ASIGNATURA</strong></td>
+					<td data-editable="false" id="prom_final" style="background-color: #ABB7B7"></td>
+				</tr>   
 		    </tbody>
 		</table>
 	</div>
@@ -132,6 +140,7 @@
 
 
 <script>
+   // var prom_final = document.getElementById("prom_final");
 	$('#notasTable').numericInputExample().find('td:first').next().next().focus();
 
 	// dar permisos

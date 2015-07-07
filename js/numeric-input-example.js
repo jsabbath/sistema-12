@@ -5,6 +5,7 @@ $.fn.numericInputExample = function () {
 	var element = $(this),
 		footer = element.find('tfoot tr'),
 		dataRows = element.find('tbody tr'),
+		prom_final = document.getElementById("prom_final"),
 		prom = function(value){
 			var t = (Math.round(value*100)/100).toFixed(1);
 			if( t.toString().length == "1" ){
@@ -13,7 +14,7 @@ $.fn.numericInputExample = function () {
 			return t;
 		},
 		initialTotal = function () {
-			var column, total, a,count;
+			var column, total, a, count,count_final = 0, p_final = 0;
 			// se recorren todas las filas
 			dataRows.each(function () {
 				total = 0;
@@ -30,16 +31,23 @@ $.fn.numericInputExample = function () {
 					total = " "; 
 					row.children().eq(column).text(total);
 				} else{
-									
-					row.children().eq(column).text(prom(total)); // se guarda el promedio en la ultima columna de la fila ////
+					var p =	prom(total);		
+					row.children().eq(column).text(p); // se guarda el promedio en la ultima columna de la fila ////
+
+					count_final++;
+					p_final += parseFloat(p);
+					
 				}
-				// console.log(total/(column-1) + " row , c=" + column);
 			});
+
+			p_final = p_final/(count_final);	
+			prom_final.innerHTML = prom(p_final);
+
 		};
 	element.find('td').on('change', function (evt) {
 		var cell = $(this),
 			column = cell.index(),
-			row,
+			row,count_final = 0, p_final = 0,
 			total = 0,
 			count = 0;
 		if (column === 0) {
@@ -68,12 +76,19 @@ $.fn.numericInputExample = function () {
 					total = " ";
 					row.children().eq(column).text(total); 
 				} else{
-					
-					row.children().eq(column).text(prom(total));
+					var p = prom(total);
+					row.children().eq(column).text(p);
+
+					count_final++;
+					p_final += parseFloat(p);
 				}
 				
 			}
 		});
+
+		p_final = p_final/(count_final);	
+		prom_final.innerHTML = prom(p_final);
+
 	}).on('validate', function (evt, value) {
 		var cell = $(this),
 			column = cell.index();
