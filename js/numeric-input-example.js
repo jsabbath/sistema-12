@@ -5,6 +5,13 @@ $.fn.numericInputExample = function () {
 	var element = $(this),
 		footer = element.find('tfoot tr'),
 		dataRows = element.find('tbody tr'),
+		prom = function(value){
+			var t = (Math.round(value*100)/100).toFixed(1);
+			if( t.toString().length == "1" ){
+				t = t + ".0";
+			}
+			return t;
+		},
 		initialTotal = function () {
 			var column, total, a,count;
 			// se recorren todas las filas
@@ -23,11 +30,8 @@ $.fn.numericInputExample = function () {
 					total = " "; 
 					row.children().eq(column).text(total);
 				} else{
-					var t = Math.round(total*10)/10;
-					if( t.toString().length == "1" ){
-						t = t + ".0";
-					}
-					row.children().eq(column).text(t); // se guarda el promedio en la ultima columna de la fila ////total.toPrecision(3)
+									
+					row.children().eq(column).text(prom(total)); // se guarda el promedio en la ultima columna de la fila ////
 				}
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
@@ -64,11 +68,8 @@ $.fn.numericInputExample = function () {
 					total = " ";
 					row.children().eq(column).text(total); 
 				} else{
-					var t = Math.round(total*10)/10;
-					if( t.toString().length == "1" ){
-						t = t + ".0";
-					}
-					row.children().eq(column).text(t);
+					
+					row.children().eq(column).text(prom(total));
 				}
 				
 			}
@@ -86,7 +87,11 @@ $.fn.numericInputExample = function () {
 						if( value < 20 && value > 7 ){
 							return false;
 						} else{
-							return true;
+							if(  value.charAt( 0 ) == '0'){
+								return false;
+							}else{
+								return true;
+							}	
 						}
 						
 					}else{  
