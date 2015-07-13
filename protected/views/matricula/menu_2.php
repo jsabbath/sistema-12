@@ -13,6 +13,7 @@ if(
 	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('profesor_prebasica') OR
     Yii::app()->user->checkAccess('profesor')
 ){ 
 ?>
@@ -49,6 +50,7 @@ if(
 	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('profesor_prebasica') OR
     Yii::app()->user->checkAccess('profesor')
 ){ 
 ?>
@@ -86,6 +88,7 @@ if(
 	Yii::app()->user->checkAccess('administrador') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
+    Yii::app()->user->checkAccess('profesor_prebasica') OR
     Yii::app()->user->checkAccess('profesor')
 ){ 
 ?>

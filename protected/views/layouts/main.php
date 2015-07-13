@@ -105,14 +105,14 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 <br class="visible-desktop">
    
         <div class="container">    
-            <header style="background-color: #292929; border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
+            <header style="background-color: rgba(41, 41, 41, 0.5); border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
                 <div class="row">
                  
                 <div class="span12">
                     <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
                     
-                        <td width=9% align="left" class="hidden-phone">    
-                             <img src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo[0]->col_logo; ?>">
+                        <td width=7% align="left" class="hidden-phone">    
+                             <img style="padding-top: 10px;" src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo[0]->col_logo; ?>">
                         </td>
                      
                         <td class="visible-desktop">
@@ -165,6 +165,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
                             Yii::app()->user->checkAccess('profesor')
                         ){ 
                         ?>
@@ -183,6 +184,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             Yii::app()->user->checkAccess('administrador') OR 
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
                             Yii::app()->user->checkAccess('profesor')
                         ){ 
                         ?>
@@ -222,6 +224,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             Yii::app()->user->checkAccess('profesor') OR 
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
                             Yii::app()->user->checkAccess('jefe_utp')
                         ){ 
                         ?>
@@ -239,6 +242,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
                             Yii::app()->user->checkAccess('profesor')
                         ){ 
                         

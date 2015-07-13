@@ -95,10 +95,10 @@ if(
 if(
 	Yii::app()->user->checkAccess('administrador') OR
 	Yii::app()->user->checkAccess('administrativo') OR
-	Yii::app()->user->checkAccess('profesor') OR
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('evaluador') OR
+    Yii::app()->user->checkAccess('profesor_prebasica') OR
     Yii::app()->user->checkAccess('jefe_utp')
 ){ 
 ?>
@@ -182,6 +182,7 @@ if(
     Yii::app()->user->isSuperAdmin OR 
     Yii::app()->user->checkAccess('director') OR
     Yii::app()->user->checkAccess('evaluador') OR
+    Yii::app()->user->checkAccess('profesor_prebasica') OR
     Yii::app()->user->checkAccess('jefe_utp')
 ){ 
 ?>

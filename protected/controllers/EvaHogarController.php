@@ -208,7 +208,7 @@ class EvaHogarController extends Controller
 
 	    $cursos = array();
 
-	    if( Yii::app()->user->checkAccess('profesor') AND  !Yii::app()->user->isSuperAdmin){
+	    if( Yii::app()->user->checkAccess('profesor_prebasica') AND  !Yii::app()->user->isSuperAdmin){
 	    	$user = Yii::app()->user->id;
 	    	
 	    	if( $pre_cursos ){
@@ -423,7 +423,7 @@ class EvaHogarController extends Controller
 		 	$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
 
 		 	// se ve si  es admin o director para editar
-		 	if (Yii::app()->user->checkAccess('profesor') OR Yii::app()->user->checkAccess('director') OR Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
+		 	if (Yii::app()->user->checkAccess('profesor_prebasica') OR Yii::app()->user->checkAccess('director') OR Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin ){
 			 	if($usuario->password == $p){
 			 		 echo json_encode(1);
 			 		 return;
