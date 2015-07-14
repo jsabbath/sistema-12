@@ -194,7 +194,7 @@
 // subir las asistencias ajax
 	$("#bt_subir_notas").on('click',function(){
 		var tabla = document.getElementById('notasTable');
-		var rowLength = tabla.rows.length;
+		var rowLength = tabla.rows.length-1;
 		var curso_notas = [];
 		
 		for(var i = 1; i < rowLength; i++ ){

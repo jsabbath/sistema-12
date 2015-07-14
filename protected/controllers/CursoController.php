@@ -116,7 +116,7 @@ class CursoController extends Controller
                 $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
                 $niveles = CHtml::listData($para, 'par_id', 'par_descripcion');
 		
-                if ( $temp->temp_ano != 0 ){
+        if ( $temp->temp_ano != 0 ){
 			$ano = $temp->temp_ano;
 		} else {
 			$ano = $par->par_descripcion;
@@ -147,7 +147,7 @@ class CursoController extends Controller
 				$this->redirect(array('admin'));
 			}
 		}
-
+		
 		$this->render('create',array(
 					'model'=>$model,
                     'niveles' => $niveles,

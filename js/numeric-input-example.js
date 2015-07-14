@@ -7,7 +7,8 @@ $.fn.numericInputExample = function () {
 		dataRows = element.find('tbody tr'),
 		prom_final = document.getElementById("prom_final"),
 		prom = function(value){
-			var t = (Math.round(value*100)/100).toFixed(1);
+			var t =  Number(value.toString().match(/^\d+(?:\.\d{0,2})?/));
+			t = Math.round(t*10)/10;
 			if( t.toString().length == "1" ){
 				t = t + ".0";
 			}

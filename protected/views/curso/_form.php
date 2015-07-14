@@ -100,8 +100,8 @@
        
         <div class="row">
             <?php echo $form->labelEx($model,'cur_notas_periodo'); ?>
-            <?php echo $form->textField($model,'cur_notas_periodo',array('size'=>2,'maxlength'=>2)); ?>
-           
+            <p class="text-info"><strong>Sugerido: 10</strong></p>
+            <?php echo $form->dropDownList($model,'cur_notas_periodo',array("Seleccione Numero Notas",1,2,3,4,5,6,7,8,9,10,11,12),array('default' => 10)); ?>
         </div>
   
         <div class="row">

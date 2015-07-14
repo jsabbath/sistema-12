@@ -64,10 +64,10 @@ class Notas extends CActiveRecord
 		return array(
 			array('not_periodo, not_ano', 'required'),
 			array('not_periodo, not_ano, not_mat, not_asig', 'numerical', 'integerOnly'=>true),
-			array('not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_13, not_14, not_15, not_16, not_17, not_18, not_19, not_20, not_21, not_22, not_23, not_24, not_25, not_26, not_27, not_28, not_29, not_30', 'numerical'),
+			array('not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('not_id, not_periodo, not_ano, not_mat, not_asig, not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_13, not_14, not_15, not_16, not_17, not_18, not_19, not_20, not_21, not_22, not_23, not_24, not_25, not_26, not_27, not_28, not_29, not_30', 'safe', 'on'=>'search'),
+			array('not_id, not_periodo, not_ano, not_mat, not_asig, not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -107,24 +107,7 @@ class Notas extends CActiveRecord
 			'not_10' => 'Not 10',
 			'not_11' => 'Not 11',
 			'not_12' => 'Not 12',
-			'not_13' => 'Not 13',
-			'not_14' => 'Not 14',
-			'not_15' => 'Not 15',
-			'not_16' => 'Not 16',
-			'not_17' => 'Not 17',
-			'not_18' => 'Not 18',
-			'not_19' => 'Not 19',
-			'not_20' => 'Not 20',
-			'not_21' => 'Not 21',
-			'not_22' => 'Not 22',
-			'not_23' => 'Not 23',
-			'not_24' => 'Not 24',
-			'not_25' => 'Not 25',
-			'not_26' => 'Not 26',
-			'not_27' => 'Not 27',
-			'not_28' => 'Not 28',
-			'not_29' => 'Not 29',
-			'not_30' => 'Not 30',
+
 		);
 	}
 
@@ -163,24 +146,7 @@ class Notas extends CActiveRecord
 		$criteria->compare('not_10',$this->not_10);
 		$criteria->compare('not_11',$this->not_11);
 		$criteria->compare('not_12',$this->not_12);
-		$criteria->compare('not_13',$this->not_13);
-		$criteria->compare('not_14',$this->not_14);
-		$criteria->compare('not_15',$this->not_15);
-		$criteria->compare('not_16',$this->not_16);
-		$criteria->compare('not_17',$this->not_17);
-		$criteria->compare('not_18',$this->not_18);
-		$criteria->compare('not_19',$this->not_19);
-		$criteria->compare('not_20',$this->not_20);
-		$criteria->compare('not_21',$this->not_21);
-		$criteria->compare('not_22',$this->not_22);
-		$criteria->compare('not_23',$this->not_23);
-		$criteria->compare('not_24',$this->not_24);
-		$criteria->compare('not_25',$this->not_25);
-		$criteria->compare('not_26',$this->not_26);
-		$criteria->compare('not_27',$this->not_27);
-		$criteria->compare('not_28',$this->not_28);
-		$criteria->compare('not_29',$this->not_29);
-		$criteria->compare('not_30',$this->not_30);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -213,24 +179,7 @@ class Notas extends CActiveRecord
 		$notas[10] = $this->not_10;
 		$notas[11] = $this->not_11;
 		$notas[12] = $this->not_12;
-		$notas[13] = $this->not_13;
-		$notas[14] = $this->not_14;
-		$notas[15] = $this->not_15;
-		$notas[16] = $this->not_16;
-		$notas[17] = $this->not_17;
-		$notas[18] = $this->not_18;
-		$notas[19] = $this->not_19;
-		$notas[20] = $this->not_20;
-		$notas[21] = $this->not_21;
-		$notas[22] = $this->not_22;
-		$notas[23] = $this->not_23;
-		$notas[24] = $this->not_24;
-		$notas[25] = $this->not_25;
-		$notas[26] = $this->not_26;
-		$notas[27] = $this->not_27;
-		$notas[28] = $this->not_28;
-		$notas[29] = $this->not_29;
-		$notas[30] = $this->not_30;
+
 
 		return $notas;
 	}

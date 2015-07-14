@@ -192,7 +192,7 @@ class NotasController extends Controller
 
 	public function Guardarnotas($model, $notas){
 
-		while (count($notas) < 30 ) {
+		while (count($notas) < 12 ) {
 			array_push($notas,"0");
 		}
 		
@@ -208,24 +208,8 @@ class NotasController extends Controller
 		$model->not_10 = $notas[9]; 
 		$model->not_11 = $notas[10]; 
 		$model->not_12 = $notas[11]; 
-		$model->not_13 = $notas[12]; 
-		$model->not_14 = $notas[13]; 
-		$model->not_15 = $notas[14]; 
-		$model->not_16 = $notas[15]; 
-		$model->not_17 = $notas[16]; 
-		$model->not_18 = $notas[17]; 
-		$model->not_19 = $notas[18]; 
-		$model->not_20 = $notas[19]; 
-		$model->not_21 = $notas[20]; 
-		$model->not_22 = $notas[21]; 
-		$model->not_23 = $notas[22]; 
-		$model->not_24 = $notas[23]; 
-		$model->not_25 = $notas[24]; 
-		$model->not_26 = $notas[25]; 
-		$model->not_27 = $notas[26]; 
-		$model->not_28 = $notas[27]; 
-		$model->not_29 = $notas[28]; 
-		$model->not_30 = $notas[29]; 
+		
+
 
 		if( $model->save() ){
 			return true;
