@@ -138,12 +138,12 @@ if(
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Cambio de curso</strong>
+								<strong>Cambiar alumno de curso</strong>
 							</div>
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede cambiar a alumnos de curso</p>
+								<p>En este item se puede cambiar a alumnos de curso a otro del mismo nivel</p>
 							</div>
 						</div>
 					</div>

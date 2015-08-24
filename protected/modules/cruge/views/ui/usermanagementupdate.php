@@ -29,7 +29,7 @@ $form = $this->beginWidget('CActiveForm', array(
 			</div>	
 		
 			 <div class="row">
-		            <div class="span5 offset3" id="pass_ant">
+		            <div class="span12 text-center" id="pass_ant">
 		            	<p>Ingrese contraseña actual:</p>
 		                <?php echo CHtml::passwordField('Text', '',array(
 		                    'id'=>'pass_ant_inp','placeholder' => 'Contraseña Actual',
@@ -43,7 +43,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 	        <div id="nueva_pass" hidden>
 		        <div class="row">
-			            <div class="span5 offset3" id="pass_ant_div1">
+			            <div class="span12 text-center" id="pass_ant_div1">
 	                      	<p>Ingrese contraseña nueva:</p>                     
 			                <?php echo CHtml::passwordField('Text', '',array(
 			                    'id'=>'pass_n_inp','placeholder' => 'Contraseña Nueva',
@@ -55,7 +55,7 @@ $form = $this->beginWidget('CActiveForm', array(
 		        </div>
 
 	            <div class="row">
-		            <div class="span5 offset3" id="pass_ant_div2">
+		            <div class="span12 text-center" id="pass_ant_div2">
 	                  	<p>Verifique contraseña nueva:</p>                     
 		                <?php echo CHtml::passwordField('Text', '',array(
 		                    'id'=>'pass_n2_inp','placeholder' => 'Verificar contraseña nueva',

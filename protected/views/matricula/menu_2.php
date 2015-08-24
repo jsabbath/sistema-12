@@ -72,7 +72,7 @@ if(
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede crear un informe de desarrollo para el colegio</p>
+								<p>En este item se puede modificar la matricucula de un alumno</p>
 							</div>
 						</div>
 					</div>

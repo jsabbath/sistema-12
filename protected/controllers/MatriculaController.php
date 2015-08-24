@@ -643,15 +643,16 @@ class MatriculaController extends Controller
     public function obtenerCurso($data,$row){
         $curso = ListaCurso::model()->findAll(array('condition'=>'list_mat_id="'.$data->mat_id.'"'));
         $pre_curso = EvaHogar::model()->findByAttributes(array('eh_matricula' => $data->mat_id));
-        if($curso != NULL){
+        if($curso ){
             $nombre = Curso::model()->findByAttributes(array('cur_id'=>$curso[0]->list_curso_id));
             return $nombre->getCurso();
-        }else if( $pre_curso != NULL ){
+        }
+        if( $pre_curso ){
             $nombre = PreCurso::model()->findByPk($pre_curso->eh_curso);
             return $nombre->getCurso();
-        }else{
-            return "SIN CURSO";
         }
+
+        return "SIN CURSO"; 
     }
 
     public function actionInforme(){
