@@ -5,7 +5,7 @@
 	<div class="span6 offset3">
 	<div style="padding-left: 10px;">
 		<br>
-		<h2 class="text-center"><font face="papyrus">Academico</font></h2>
+		<h2 class="text-center"><font face="papyrus">Gestion Academica</font></h2>
 	</div>
 <?php
 

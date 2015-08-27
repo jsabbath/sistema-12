@@ -79,7 +79,7 @@ class Curso extends CActiveRecord
 	{
 		return array(
 			'cur_id' => 'ID',
-			'cur_ano' => 'Ano',
+			'cur_ano' => 'Año',
 			'cur_notas_periodo' => 'Notas Periodo',
 			'cur_nivel' => 'Nivel',
 			'cur_letra' => 'Letra',

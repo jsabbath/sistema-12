@@ -60,7 +60,7 @@ class PreCursoController extends Controller
 	public function actionCreate()
 	{
 		$model=new PreCurso;
-		$ano = date('Y');
+		$ano = $this->actionAnoactual();
 		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="PRENIVEL"')),'par_id','par_descripcion');
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
 		$jornada = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
@@ -97,7 +97,7 @@ class PreCursoController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		$ano = date('Y');
+		$ano = $this->actionAnoactual();
 		$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="PRENIVEL"')),'par_id','par_descripcion');
 		$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="LETRA"')),'par_id','par_descripcion');
 		$jornada = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="JORNADA"')),'par_id','par_descripcion');
@@ -206,4 +206,19 @@ class PreCursoController extends Controller
 	public function actionMatricular_precurso(){
 
 	}
+
+
+  	public function actionAnoactual(){
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+        if ( $temp->temp_ano != 0 ){
+            $ano = $temp->temp_ano;
+        } else {
+            $ano = $par->par_descripcion;
+        }
+
+        return $ano;
+    }
 }
