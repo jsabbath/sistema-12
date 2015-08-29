@@ -184,13 +184,14 @@ class NotasController extends Controller
 				$id_notas = $alumno[0];
 				$model=$this->loadModel($id_notas);
 				$notas = $alumno[1];
+				$prom = $alumno[2];
 
-				$this->Guardarnotas($model,$notas);
+				$this->Guardarnotas($model,$notas, $prom);
 			}
 		}
 	}
 
-	public function Guardarnotas($model, $notas){
+	public function Guardarnotas($model, $notas, $p){
 
 		while (count($notas) < 12 ) {
 			array_push($notas,"0");
@@ -208,7 +209,7 @@ class NotasController extends Controller
 		$model->not_10 = $notas[9]; 
 		$model->not_11 = $notas[10]; 
 		$model->not_12 = $notas[11]; 
-		
+		$model->not_prom = $p;
 
 
 		if( $model->save() ){

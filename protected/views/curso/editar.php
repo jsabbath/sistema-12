@@ -198,7 +198,8 @@
 		var curso_notas = [];
 		
 		for(var i = 1; i < rowLength; i++ ){
-
+			
+			var prom = 0;
 			var alumno = [];
 			var notas = [];
 			var cells = tabla.rows.item(i).cells;
@@ -212,9 +213,13 @@
 					notas.push(cells.item(j).innerHTML); // se crea un array de notas 
 
 				}		  	
-           }
-           
-           	alumno.push(notas); //  se guardan las notas del alumno
+            }
+
+           	prom = cells.item(j).innerHTML; // j es la ultima posicion de la tabla, que el for se salta por ser el promedio.
+           	//console.log(prom);
+			
+			alumno.push(notas); //  se guardan las notas del alumno en la posicion 1 alumno[id_notas,notas,prom]
+           	alumno.push(prom); // promedio del alumno.
 			curso_notas.push(alumno); //  se agrega el alumno  al curso
 		}
 

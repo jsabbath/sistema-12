@@ -164,27 +164,15 @@ function actionPromedio_curso_asig($id_curso,$id_asig,$p){
         $prom_count = 0;
         $final = 0;
         $precision = 1;
+
         foreach ($lista as $key => $id_alum){
 
             $n = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => $p ));
             
-            $not = $n->notas;
-            $count_alu = 0;
-            $prom_alu = 0;
-                foreach ($not as $key => $k) {
-                    if( $k > 0 ){
-                        $count_alu++;
-                        $prom_alu += $k;
-                    }
-                }
-                if( $count_alu != 0 ){
-                    $prom = $prom_alu/$count_alu;
-                   // $prom = number_format((float) $prom, $precision, '.', '');
-                    if( $prom > 0 ){
-                        $prom_curso += $prom;
-                        $prom_count++;
-                    }
-                }
+            if( $n->not_prom > 0 ){
+                $prom_curso += $n->not_prom;
+                $prom_count++;      
+            }
         }
 
         if( $prom_count != 0 ){
@@ -204,8 +192,6 @@ function actionPromedio_curso_asig($id_curso,$id_asig,$p){
 
 
 
-$prom2 = array();
-$flag = true;
 foreach ($lista_alu as $key => $alu) {
                
     $id = $alu['id'];
@@ -213,7 +199,6 @@ foreach ($lista_alu as $key => $alu) {
     $model = Matricula::model()->findByPk($id);
     $notas = array();
    
- 
 
     $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => $periodo )));
 
@@ -223,16 +208,13 @@ foreach ($lista_alu as $key => $alu) {
     foreach ($evaluaciones as $key => $alum) {
 
         $asi = Asignatura::model()->findByPk($alum->not_asig);
-        $prom_asi = 0;
-        if( $flag ){
-            $prom_asi = $this->actionPromedio_curso_asig($id_cur,$asi->asi_id,$periodo);
-            $prom2[$asi->asi_orden] = $prom_asi."";
-        }
+
+        $prom_asi = $this->actionPromedio_curso_asig($id_cur,$asi->asi_id,$periodo);  
 
         $notas[$asi->asi_orden] = array(
               'nota'    => $alum->notas,
               'nom_asi' => $asi->asi_descripcion,
-             // 'prom_asi'=> $prom_asi,
+              'prom_asi'=> $prom_asi,
             );
 
     }
@@ -244,15 +226,12 @@ foreach ($lista_alu as $key => $alu) {
             $asi_alu = $model->mat_asistencia_3;
         }
 
-    if( $flag ){
-         ksort($prom2);
-    }
+
    
     ksort($notas);
     $notas = array_unique($notas, SORT_REGULAR);
     $ano = $evaluaciones[0]['not_ano'];   
-    $flag = false;
-    $count_curso = 1;
+
 
  ?>
 
@@ -443,22 +422,27 @@ foreach ($lista_alu as $key => $alu) {
                     </td><!-- final -->
 
             <?php } ?><!-- fin else religion -->
-            <td><p><strong><?php 
-                    $pl = $prom2[$count_curso]; 
-                    if( $a['nom_asi'] == "RELIGION"){
-                        if( $pl > 6  ) { 
-                            echo "MB";
-                        }else if( $pl < 6 AND $pl >= 5 ){ 
-                            echo "B";
-                        }else if( $pl < 5 AND $pl >= 4 ){ 
-                            echo "S";
-                        }else if( $pl < 4 ){ 
-                            echo "I";
-                        }
-                    } else{
-                        if( $prom2[$count_curso] != 0 ) echo $prom2[$count_curso]; 
-                        $count_curso++;  
-                    }     
+
+
+            <td><p><strong><?php  // inicio promedio final ---
+                    $pl = $a['prom_asi']; 
+                  
+
+                    if( $pl > 0 ){
+                        if( $a['nom_asi'] == "RELIGION"){
+                            if( $pl > 6  ) { 
+                                echo "MB";
+                            }else if( $pl < 6 AND $pl >= 5 ){ 
+                                echo "B";
+                            }else if( $pl < 5 AND $pl >= 4 ){ 
+                                echo "S";
+                            }else if( $pl < 4 ){ 
+                                echo "I";
+                            }
+                        } else{
+                            echo $pl;  
+                        } 
+                    }    
             ?></strong></p></td>
 
         </tr>
