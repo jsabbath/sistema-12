@@ -49,7 +49,7 @@ $('.search-form form').submit(function(){
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'pre-curso-grid',
 	'type' => TbHtml::GRID_TYPE_BORDERED,
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->buscar($this->actionAnoactual()),
 	'filter'=>$model,
 	'columns'=>array(
 		//'pre_id',

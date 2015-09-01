@@ -247,7 +247,13 @@ class AAsignaturaController extends Controller
                 );
         }
 
-        sort($cur);
+         if( !empty($cur) ){
+            sort($cur);
+        } else{
+            throw new CHttpException(666,'$cur es null.  (AAsignatura/cursoAñoActual) : L253');
+            return;
+        }
+
 
         $cursos_actuales = array();
         foreach ($cur as $key => $c) {

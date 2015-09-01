@@ -105,6 +105,25 @@ class PreCurso extends CActiveRecord
 		));
 	}
 
+	public function buscar($ano)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('pre_ano',$ano);
+		$criteria->compare('pre_id',$this->pre_id);
+		$criteria->compare('pre_ano',$this->pre_ano);
+		$criteria->compare('pre_nivel',$this->pre_nivel);
+		$criteria->compare('pre_letra',$this->pre_letra);
+		$criteria->compare('pre_jornada',$this->pre_jornada);
+		$criteria->compare('pre_pjefe',$this->pre_pjefe);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

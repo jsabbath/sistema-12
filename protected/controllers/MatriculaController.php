@@ -332,7 +332,12 @@ class MatriculaController extends Controller
                 );
         }
 
-        if( !empty($cur) ) sort($cur);
+        if( !empty($cur) ){
+            sort($cur);
+        } else{
+            throw new CHttpException(666,'$cur es null.  (Matricula/cursoAñoActual) : L338');
+            return;
+        }
 
         $cursos_actuales = array();
         foreach ($cur as $key => $c) {

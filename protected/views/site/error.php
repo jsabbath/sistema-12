@@ -3,22 +3,54 @@
 /* @var $error array */
 $this->pageTitle=Yii::app()->name . ' - Error';
 
-?>
-<div class="row">
-	<div class="span12 text-center">
-		<h2>Error <?php echo $code; ?></h2>
-
-		<div class="error">
-		<?php echo CHtml::encode($message); ?>
-		</div>
-	</div>
-</div>
+$err_img  = "http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif";
 
 ?>
-<!-- 
+
+
+<?php if( 	Yii::app()->user->checkAccess('administrador') OR
+    		Yii::app()->user->isSuperAdmin  
+   ){ ?>
+		 <div class="row" >
+			<div class="span12 text-center" style="background-color: #FAADA8">
+				<h4>Error <?php echo $code; ?></h4>
+
+				<div class="error">
+				<?php echo CHtml::encode($message); ?>
+				</div>
+			</div>
+		</div> 
+
+<?php } ?>
+
+
+
+
 <?php 
 
-if($code==401){
+if($code==666){
+?>
+	<div class="container" >
+		<div class="row">
+		
+			<div class="span12 text-center" style="background-color: #EEEEEE">
+				<h3>No hay cursos disponibles en  este año, deben ingresarse antes de realizar esta accion.</h3>
+			</div>
+
+			<div class="span12 text-center"><br>
+				<a href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" class="btn btn-danger">Gesion Cursos</a>
+			</div> 
+
+			<div class="span4 offset4">
+				<img width="50%" src="<?php echo $err_img;?>">
+				<br><br>
+			</div>
+		 	
+		</div>
+		<br>
+	</div>
+<?php
+}elseif($code==401){
 ?>
 <div class="container" >
 <div class="row">
@@ -77,4 +109,3 @@ if($code==401){
 }
 
 ?>
- -->

@@ -229,7 +229,8 @@ class EvaHogarController extends Controller
 		}
 
 		if( $cursos == null ){
-			return $cursos[0] = "usted no tiene cursos";
+            throw new CHttpException(666,'$cur es null.  (evaHogar/Lista_pre_cursos) : L232');
+            return;
 		}
 
         return $cursos;

@@ -12,20 +12,26 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <div class="row">
-	<div class="span8 offset1">
-		<h3 class="text-center">Noticias</h3>
-		<?php $this->actionVer(); ?>
-	</div>
-	<div class="span3 text-center hidden-phone">
-		<br>
-		<?php  
-		//echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));
-		?>
-		<br>
+	<div class="span12">
 
-		<?php 
-		//Descomentar el boton para ver la funcionalidad de apoderados
-		//echo CHtml::link('Ver Notas Apoderado',array('Apoderado/notas'),array('class'=>'btn btn-warning btn-block')); 
-		?>
+		<div class="span8"><h3 class="text-center">Noticias</h3>
+			<br>
+			<?php $this->actionVer(); ?>
+		</div>
+
+		<br><br>
+		<br><br>
+
+		<div class="span3 text-center hidden-phone">
+			
+
+			<?php echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));?>
+
+			<br>
+
+			<!-- Descomentar el boton para ver la funcionalidad de apoderados -->
+			<?php echo CHtml::link('Ver Notas Apoderado',array('Apoderado/notas'),array('class'=>'btn btn-warning btn-block'));?>
+		</div>
 	</div>
+
 </div>

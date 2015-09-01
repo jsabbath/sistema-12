@@ -426,7 +426,13 @@ class CursoController extends Controller
                 );
         }
 
-        sort($cur);
+         if( !empty($cur) ){
+            sort($cur);
+        } else{
+            throw new CHttpException(666,'$cur es null.  (curso/cursoAñoActual) : L432');
+            return;
+        }
+
 
         $cursos_actuales = array();
         foreach ($cur as $key => $c) {
