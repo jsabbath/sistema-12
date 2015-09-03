@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/konami.js"></script>
 
 <?php
 /* @var $this SiteController */
@@ -35,3 +36,9 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 
 </div>
+
+<script type="text/javascript">
+var easter_egg = new Konami(function() { 
+	swal({   title: "Felicidades!!",   text: "Has descubierto el codigo konami, ahora a bailar!",   imageUrl: "http://gifdanceparty.giphy.com/dancers/pumpgirl.gif" });
+});
+</script>
