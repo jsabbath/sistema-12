@@ -742,7 +742,7 @@ class CursoController extends Controller
 
 	}
 
-	/**
+	/*
 	el profesor jefe puede ver todos sus cursos, 
 	selecciona uno y entra a la seccion  donde se pone la asistencia
 	*/
