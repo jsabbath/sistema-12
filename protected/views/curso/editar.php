@@ -226,7 +226,9 @@
 		$.ajax({
 			url: '<?php echo CController::createUrl("notas/subir_notas")?>',
 			type: 'POST',
-			data: {curso_notas: curso_notas},
+			data: {curso_notas: curso_notas, nom_cur: "<?php echo $nombre_curso; ?>", 
+												nom_asi: "<?php echo $nombre_asignatura ?>",
+												per: "<?php echo $periodo; ?>"},
 			success: function(data){
 				location.reload();
 				window.onbeforeunload = function() {

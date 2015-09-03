@@ -74,12 +74,12 @@ if(
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Informes Parciales por curso</strong>
+								<strong>Informe Notas por curso</strong>
 							</div>
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede imprimir los informes por curso</p>
+								<p>En este item se puede imprimir el informe de notas parciales por curso</p>
 							</div>
 						</div>
 					</div>

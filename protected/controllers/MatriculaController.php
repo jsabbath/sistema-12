@@ -801,6 +801,15 @@ class MatriculaController extends Controller
                         ), true));
         $mPDF1->Output();        
 
+
+        $nombre_alu = $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat." ".$model->matAlu->alum_apemat;
+        $p = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
+            if( $p ){
+                $nombre = $p->NombreCompleto;
+            } else{
+                $nombre = "admin";
+            }
+        Registrolog::registroInformeNotasAlumno($nombre_alu, $nombre);
     }
 
     public function actionCurso_par(){
@@ -871,7 +880,17 @@ class MatriculaController extends Controller
                                                                     'id_cur'        => $curso->cur_id,
                             ), true));
 
-            $mPDF1->Output();  
+            $mPDF1->Output();
+
+            $nombre_alu = $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat." ".$model->matAlu->alum_apemat;
+            $pro = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
+                if( $pro ){
+                    $nombre = $pro->NombreCompleto;
+                } else{
+                    $nombre = "admin";
+                }
+            Registrolog::registroInformeNotasCurso($nivel." ".$letra, $nombre, $p);
+
 
         }else{
         	 Yii::app()->user->setFlash('error', "seleccion un Periodo!");

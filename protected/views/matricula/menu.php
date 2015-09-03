@@ -115,7 +115,7 @@ if(
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se pueden evaluar los diferentes cursos.</p>
+								<p>En este item se pueden evaluar los diferentes Alumnos.</p>
 							</div>
 						</div>
 					</div>

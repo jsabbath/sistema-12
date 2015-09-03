@@ -58,7 +58,7 @@ if($code==666){
 		<h1>Usted no tiene permiso para entrar a este lugar</h1>
 	</div>
 	<div class="span4 offset4">
-		<img src="http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif">
+		<img width="50%"src="http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif">
 		<br><br>
 	</div>
 
@@ -76,7 +76,7 @@ if($code==666){
 		<h1>No se encuentra la ruta que esta buscando</h1>
 	</div>
 	<div class="span4 offset4">
-		<img src="http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif">
+		<img width="50%" src="http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif">
 		<br><br>
 	</div>
 

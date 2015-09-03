@@ -1,0 +1,5 @@
+( admin@tucorreo.com ) - 19:32:02 -> Genero informe Notas de: VICENTE HERALDO VIDAL ASTETE
+admin( admin@tucorreo.com ) - 19:32:29 -> Genero informe Notas de: VICENTE HERALDO VIDAL ASTETE
+admin( admin@tucorreo.com ) - 19:33:03 -> Genero informe Notas de: VICENTE ANTONIO BELMAR CARTES
+admin( admin@tucorreo.com ) - 19:38:19 -> Genero informe Notas del curso: 2° A - 1
+admin( admin@tucorreo.com ) - 19:39:52 -> Genero informe Notas del curso: 6° B - Periodo:1

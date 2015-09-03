@@ -178,6 +178,9 @@ class NotasController extends Controller
 	public function actionSubir_notas(){
 		if(isset($_POST['curso_notas'])){
 			$notas_curso = $_POST['curso_notas'];
+			$nom_cur = $_POST['nom_cur'];
+			$nom_asi = $_POST['nom_asi'];
+			$p = $_POST['per'];
 			$alu_notas = array();
 
 			foreach($notas_curso as $key => $alumno){ //  se recorre cada alumno 
@@ -188,6 +191,14 @@ class NotasController extends Controller
 
 				$this->Guardarnotas($model,$notas, $prom);
 			}
+
+			$profe = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
+			if( $profe ){
+				$nombre = $profe->NombreCompleto;
+			} else{
+				$nombre = "admin";
+			}
+			Registrolog::registroNotasCurso($nombre,$nom_cur,$nom_asi,$p);
 		}
 	}
 
@@ -213,6 +224,8 @@ class NotasController extends Controller
 
 
 		if( $model->save() ){
+
+
 			return true;
 		}
 
