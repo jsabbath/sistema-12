@@ -77,6 +77,9 @@ class NoticiaController extends Controller
 				$model->not_programa = "";
 			}
 			$model->not_programa = $programa;
+
+			$model->not_titulo = strtoupper($model->not_titulo);
+
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Noticia creada con Exito!");
 				$this->redirect(array('Site/index'));
@@ -113,6 +116,9 @@ class NoticiaController extends Controller
 				$model->not_programa = "";
 			}
 			$model->not_programa = $programa;
+
+			$model->not_titulo = strtoupper($model->not_titulo);
+			
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Noticia actualizada con Exito!");
 				$this->redirect(array('Site/index'));
