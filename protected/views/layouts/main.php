@@ -92,7 +92,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 ?>
     <body>
   
-<div class="navbar-fixed-top"  align="center" class="text-center" style="margin-bottom: 0;">
+<div class="navbar-fixed-top visible-desktop"  align="center" class="text-center" style="margin-bottom: 0;">
    <div class="container" style="background-color: #292929;">  
         <div class="row text-center" >
                 <div class="span3 offset1 text-left" style="color:white"><?php echo $nombre ?></div> 
@@ -104,7 +104,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
          
 <br class="visible-desktop">
    
-        <div class="container">    
+        <div class="container visible-desktop">    
             <header style="background-color: rgba(41, 41, 41, 0.5); border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
                 <div class="row">
                  
@@ -252,6 +252,164 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
                             </a>
                             <strong style="color: white">Administracion</strong>
+                        </td>
+                        <?php } ?>
+                         <!-- <td class="text-center">
+                            <a class="link-negro" href="#"  id="salir" onclick="logout()" title="Salir">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/cerrar.png"></div>
+                            </a>
+                            <strong style="color: white">Salir</strong>
+                        </td> -->
+                    </table>
+                </div>
+            </div>   
+        </header>
+
+       
+</div>
+
+        <div class="container hidden-desktop">    
+            <header style="background-color: rgba(41, 41, 41, 0.5); border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
+                <div class="row">
+                 
+                <div class="span12">
+                    <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
+                    
+                        <td width=7% align="left" class="hidden-phone">    
+                             <img style="padding-top: 10px;" src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo[0]->col_logo; ?>">
+                        </td>
+                     
+                        <td class="visible-desktop">
+                            <h3 style="color:#FFF6B0">Colegio Alborada</h3>
+                            <div  >
+                                <?php echo CHtml::dropDownList(
+                                    'anos', null, $anos,array(
+                                    'prompt'=>$ano_selec,
+                                    'id'=>'dropitem',
+                                    'ajax' =>
+                                        array('type'=>'POST',
+                                            'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
+                                            'update'=>'#anio',
+                                            'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
+                                            'success'=> 'function(){location.reload();}'
+                                        )
+                                ));  
+                                ?>
+                            </div>
+                        </td>
+                       
+                         <div class="hidden-desktop text-center">
+                            <h3 style="color:#FFF6B0">Colegio Alborada</h3>
+                             <div  >
+                                <?php echo CHtml::dropDownList(
+                                    'anos', null, $anos,array(
+                                    'prompt'=>$ano_selec,
+                                    'id'=>'dropitem',
+                                    'ajax' =>
+                                        array('type'=>'POST',
+                                            'url'=>$this->createUrl('curso/recieveValue'), // write in controller this action
+                                            'update'=>'#anio',
+                                            'data'=>array('ano'=>'js:this.value','tempid'=>$tempid),
+                                            'success'=> 'function(){location.reload();}'
+                                        )
+                                ));  
+                                ?>
+                            </div>
+                        </div>
+                        <td class="text-center">
+                            <a id="ax" class="link-negro" href="<?php echo Yii::app()->createUrl('site/index'); ?>" title="Inicio">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/casa.png"></div>
+                            </a>
+                        </td>
+                        <?php 
+                         if(
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        ?>
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu_2'); ?>" title="Cursos">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/history.png"></div>
+                            </a>
+                        </td>
+                        <?php
+                        }
+
+                        
+                        if(
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        ?>
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu'); ?>" title="Academico">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/book.png"></div>
+                            </a>
+                        </td>
+                        <?php
+                        }
+
+                       
+
+                        if(
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        ?>
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('curso/menu'); ?>" title="Cursos">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/blackboard.png"></div>
+                            </a>
+                        </td>
+                        <?php
+                        }
+
+                        if(
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('administrativo') OR 
+                            Yii::app()->user->checkAccess('profesor') OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
+                            Yii::app()->user->checkAccess('jefe_utp')
+                        ){ 
+                        ?>
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('informeDesarrollo/menu'); ?>" title="Informe">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/papers.png"></div>
+                            </a>
+                        </td>
+                        <?php } ?>
+                        <?php 
+                        if(
+                            Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp') OR
+                            Yii::app()->user->checkAccess('profesor_prebasica') OR
+                            Yii::app()->user->checkAccess('profesor')
+                        ){ 
+                        
+                        ?>
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('site/menu'); ?>" title="Administracion">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/our_process.png"></div>
+                            </a>
                         </td>
                         <?php } ?>
                          <!-- <td class="text-center">

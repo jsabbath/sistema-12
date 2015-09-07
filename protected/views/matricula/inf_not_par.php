@@ -267,7 +267,7 @@
                             $count ++;
                             $final += $n[$i];
                         ?>
-                            <?php if( $n[$i] > 6  ) { ?>
+                            <?php if( $n[$i] >= 6  ) { ?>
                                 <strong>MB </strong>
                             <?php }else if( $n[$i] < 6 AND $n[$i] >= 5  ){ ?>
                                 <strong>B </strong>
@@ -285,7 +285,7 @@
 
                 <td class="text-center" style="background-color: #EEEEEE"> <strong><?php 
                     if( $count !=0 ){
-                        if( $prom > 6  ) {
+                        if( $prom >= 6  ) {
                             echo "MB"; 
                         }else if( $prom < 6 AND $prom >= 5  ){
                             echo "B"; 
@@ -350,7 +350,7 @@
              <td><p><strong><?php 
                 if( $a['prom_asi'] != 0){ 
                     if( $a['nom_asi'] == "RELIGION"){
-                        if( $a['prom_asi'] > 6  ) { 
+                        if( $a['prom_asi'] >= 6  ) { 
                             echo "MB";
                         }else if( $a['prom_asi'] < 6 AND $a['prom_asi'] >= 5 ){ 
                             echo "B";
