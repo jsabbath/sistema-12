@@ -91,11 +91,11 @@ class MatriculaController extends Controller
             $valid = $alumno->validate() && $valid;
             if ($valid){
                 //todo los textos a mayuscula
-                $alumno->alum_nombres = strtoupper($alumno->alum_nombres);
-                $alumno->alum_apepat = strtoupper($alumno->alum_apepat);
-                $alumno->alum_apemat = strtoupper($alumno->alum_apemat);
-                $alumno->alum_direccion = strtoupper($alumno->alum_direccion);
-                $alumno->alum_salud = strtoupper($alumno->alum_salud);
+                $alumno->alum_nombres = mb_strtoupper($alumno->alum_nombres,'utf-8');
+                $alumno->alum_apepat = mb_strtoupper($alumno->alum_apepat,'utf-8');
+                $alumno->alum_apemat = mb_strtoupper($alumno->alum_apemat,'utf-8');
+                $alumno->alum_direccion = mb_strtoupper($alumno->alum_direccion,'utf-8');
+                $alumno->alum_salud = mb_strtoupper($alumno->alum_salud,'utf-8');
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
                     $model->mat_estado = $estado[0]->par_id;
@@ -135,6 +135,13 @@ class MatriculaController extends Controller
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
+
+                $alumno->alum_nombres = mb_strtoupper($alumno->alum_nombres,'utf-8');
+                $alumno->alum_apepat = mb_strtoupper($alumno->alum_apepat,'utf-8');
+                $alumno->alum_apemat = mb_strtoupper($alumno->alum_apemat,'utf-8');
+                $alumno->alum_direccion = mb_strtoupper($alumno->alum_direccion,'utf-8');
+                $alumno->alum_salud = mb_strtoupper($alumno->alum_salud,'utf-8');
+
                 if($alumno->save()){
                     if ($model->save()) {
                         $this->redirect(array('listaCompleta'));  

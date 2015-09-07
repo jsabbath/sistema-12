@@ -67,6 +67,7 @@ class ConceptoHogarController extends Controller
 		if(isset($_POST['ConceptoHogar']))
 		{
 			$model->attributes=$_POST['ConceptoHogar'];
+			$model->ch_descripcion = mb_strtoupper($model->ch_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ch_id));
 		}
@@ -91,6 +92,7 @@ class ConceptoHogarController extends Controller
 		if(isset($_POST['ConceptoHogar']))
 		{
 			$model->attributes=$_POST['ConceptoHogar'];
+			$model->ch_descripcion = mb_strtoupper($model->ch_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ch_id));
 		}

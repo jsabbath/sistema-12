@@ -72,7 +72,7 @@ class InformeDesarrolloController extends Controller
 		if(isset($_POST['InformeDesarrollo']))
 		{
 			$model->attributes=$_POST['InformeDesarrollo'];
-			$model->id_descripcion = strtoupper($model->id_descripcion);
+			$model->id_descripcion = mb_strtoupper($model->id_descripcion,'utf-8');
 			if($model->save()){
 				//$this->redirect(array('view','id'=>$model->id_id));
 				if(isset($model->id_id)){
@@ -103,6 +103,7 @@ class InformeDesarrolloController extends Controller
 		if(isset($_POST['InformeDesarrollo']))
 		{
 			$model->attributes=$_POST['InformeDesarrollo'];
+			$model->id_descripcion = mb_strtoupper($model->id_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_id));
 		}

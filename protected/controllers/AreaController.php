@@ -67,6 +67,7 @@ class AreaController extends Controller
 		if(isset($_POST['Area']))
 		{
 			$model->attributes=$_POST['Area'];
+			$model->are_descripcion = mb_strtoupper($model->are_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->are_id));
 		}
@@ -91,6 +92,7 @@ class AreaController extends Controller
 		if(isset($_POST['Area']))
 		{
 			$model->attributes=$_POST['Area'];
+			$model->are_descripcion = mb_strtoupper($model->are_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->are_id));
 		}

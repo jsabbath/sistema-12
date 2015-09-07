@@ -67,6 +67,7 @@ class AreaHogarController extends Controller
 		if(isset($_POST['AreaHogar']))
 		{
 			$model->attributes=$_POST['AreaHogar'];
+			$model->ah_descripcion = mb_strtoupper($model->ah_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ah_id));
 		}
@@ -91,6 +92,7 @@ class AreaHogarController extends Controller
 		if(isset($_POST['AreaHogar']))
 		{
 			$model->attributes=$_POST['AreaHogar'];
+			$model->ah_descripcion = mb_strtoupper($model->ah_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ah_id));
 		}

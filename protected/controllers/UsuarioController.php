@@ -71,10 +71,10 @@ class UsuarioController extends Controller
 			$model->usu_estado = $estado;
 
 			//todos los textos en mayuscula
-			$model->usu_nombre1 = strtoupper($model->usu_nombre1);
-			$model->usu_nombre2 = strtoupper($model->usu_nombre2);
-			$model->usu_apepat = strtoupper($model->usu_apepat);
-			$model->usu_apemat = strtoupper($model->usu_apemat);
+			$model->usu_nombre1 = mb_strtoupper($model->usu_nombre1,'utf-8');
+			$model->usu_nombre2 = mb_strtoupper($model->usu_nombre2,'utf-8');
+			$model->usu_apepat = mb_strtoupper($model->usu_apepat,'utf-8');
+			$model->usu_apemat = mb_strtoupper($model->usu_apemat,'utf-8');
 
 			// firma usuario
 			$random1 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3);
@@ -126,6 +126,11 @@ class UsuarioController extends Controller
 
 			$images_path = realpath(Yii::app()->basePath . '/../images/firmas');
             $model->usu_firma=CUploadedFile::getInstance($model,'usu_firma');
+
+            $model->usu_nombre1 = mb_strtoupper($model->usu_nombre1,'utf-8');
+			$model->usu_nombre2 = mb_strtoupper($model->usu_nombre2,'utf-8');
+			$model->usu_apepat = mb_strtoupper($model->usu_apepat,'utf-8');
+			$model->usu_apemat = mb_strtoupper($model->usu_apemat,'utf-8');
 			
 			if($model->save()){
 				if( $model->usu_firma != null ){

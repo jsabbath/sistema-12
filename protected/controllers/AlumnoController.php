@@ -70,6 +70,11 @@ class AlumnoController extends Controller
 			$matricula->attributes = $_POST['Matricula'];
             $matricula->mat_fingreso = date('d-m-Y');
 			$model->attributes=$_POST['Alumno'];
+
+			$model->alum_nombres = mb_strtoupper($model->alum_nombres,'utf-8');
+			$model->alum_apepat = mb_strtoupper($model->alum_apepat,'utf-8');
+			$model->alum_apemat = mb_strtoupper($model->alum_apemat,'utf-8');
+
 			if ($model->save()) {
 				$matricula->save();
 				$this->redirect(array('view','id'=>$model->alum_id));
@@ -101,6 +106,10 @@ class AlumnoController extends Controller
 				$this->redirect(array('view','id'=>$model->alum_id));
 			}
 		}
+
+		$model->alum_nombres = mb_strtoupper($model->alum_nombres,'utf-8');
+		$model->alum_apepat = mb_strtoupper($model->alum_apepat,'utf-8');
+		$model->alum_apemat = mb_strtoupper($model->alum_apemat,'utf-8');
 
 		$this->render('update',array(
 			'model'=>$model,

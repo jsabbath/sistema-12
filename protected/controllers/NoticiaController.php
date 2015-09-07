@@ -78,7 +78,7 @@ class NoticiaController extends Controller
 			}
 			$model->not_programa = $programa;
 
-			$model->not_titulo = strtoupper($model->not_titulo);
+			$model->not_titulo = mb_strtoupper($model->not_titulo,'utf-8');
 
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Noticia creada con Exito!");
@@ -119,7 +119,7 @@ class NoticiaController extends Controller
 			}
 			$model->not_programa = $programa;
 
-			$model->not_titulo = strtoupper($model->not_titulo);
+			$model->not_titulo = mb_strtoupper($model->not_titulo,'utf-8');
 
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Noticia actualizada con Exito!");

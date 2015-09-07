@@ -67,6 +67,7 @@ class ConceptoController extends Controller
 		if(isset($_POST['Concepto']))
 		{
 			$model->attributes=$_POST['Concepto'];
+			$model->con_descripcion = mb_strtoupper($model->con_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->con_id));
 		}
@@ -91,6 +92,7 @@ class ConceptoController extends Controller
 		if(isset($_POST['Concepto']))
 		{
 			$model->attributes=$_POST['Concepto'];
+			$model->con_descripcion = mb_strtoupper($model->con_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->con_id));
 		}

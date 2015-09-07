@@ -67,7 +67,7 @@ class InformeHogarController extends Controller
 		if(isset($_POST['InformeHogar']))
 		{
 			$model->attributes=$_POST['InformeHogar'];
-			$model->ih_descripcion = strtoupper($model->ih_descripcion);
+			$model->ih_descripcion = mb_strtoupper($model->ih_descripcion,'utf-8');
 			if($model->save()){
 				if(isset($model->ih_id)){
 					$id_informe = $model->ih_id;
@@ -96,6 +96,7 @@ class InformeHogarController extends Controller
 		if(isset($_POST['InformeHogar']))
 		{
 			$model->attributes=$_POST['InformeHogar'];
+			$model->ih_descripcion = mb_strtoupper($model->ih_descripcion,'utf-8');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ih_id));
 		}
