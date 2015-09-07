@@ -90,7 +90,9 @@ class UsuarioController extends Controller
 					$model->usu_firma->saveAs($images_path . '/'.$rand ."_" .$model->usu_firma);
 					$model->usu_firma = $nombre;
 					$model->save();
-				 }
+				}else{
+					$model->usu_firma = "default.png";
+				}
 				$this->registroCruge($model);
 				$temporal->temp_iduser = $model->usu_iduser;
 				$temporal->save();
@@ -111,6 +113,10 @@ class UsuarioController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$edit = true; // esta variable es para identificar si editan la firma o no
+		if($model->usu_firma){
+			$firma = $model->usu_firma; //firma por defecto
+		}
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -131,15 +137,20 @@ class UsuarioController extends Controller
 			$model->usu_nombre2 = mb_strtoupper($model->usu_nombre2,'utf-8');
 			$model->usu_apepat = mb_strtoupper($model->usu_apepat,'utf-8');
 			$model->usu_apemat = mb_strtoupper($model->usu_apemat,'utf-8');
+
+			if(!isset($model->usu_firma)){
+				$model->usu_firma = $firma;
+				$edit = false;
+			}
 			
 			if($model->save()){
-				if( $model->usu_firma != null ){
+				if( $edit ){
 					$nombre = $rand ."_". $model->usu_firma;
 				
 					$model->usu_firma->saveAs($images_path . '/'.$rand ."_" .$model->usu_firma);
 					$model->usu_firma = $nombre;
 					$model->save();
-				 }
+				}
 				$this->redirect(array('view','id'=>$model->usu_id));
 			}
 		}

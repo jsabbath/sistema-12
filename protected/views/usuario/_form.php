@@ -51,10 +51,20 @@
 			<?php echo $form->textField($model,'usu_apemat',array('size'=>30,'maxlength'=>30)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'usu_firma'); ?>
-		<?php echo $form->fileField($model,'usu_firma'); ?>
-	</div>
+	<?php if($model->isNewRecord){ ?>
+		<div class="row">
+			<?php echo $form->labelEx($model,'usu_firma'); ?>
+			<?php echo $form->fileField($model,'usu_firma'); ?>
+		</div>
+	<?php }else{ ?>
+		<?php echo TbHtml::button('Cambiar firma',array('color'=>TbHtml::BUTTON_COLOR_WARNING, 'id'=>'firma')) ?>
+
+		<div class="row" id="lafirma" style="display:none">
+			<?php echo $form->labelEx($model,'usu_firma'); ?>
+			<?php echo $form->fileField($model,'usu_firma'); ?>
+		</div>
+
+	<?php } ?>
 
 	<div class="form-actions text-right">
 		<?php echo TbHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar',array(
@@ -67,3 +77,12 @@
 
 </div><!-- form -->
 </div>
+
+<script type="text/javascript">
+
+$("#firma").click(function(){
+	$("#firma").hide();
+    $("#lafirma").show();
+});
+
+</script>
