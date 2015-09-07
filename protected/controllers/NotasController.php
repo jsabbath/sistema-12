@@ -198,7 +198,7 @@ class NotasController extends Controller
 			} else{
 				$nombre = "admin";
 			}
-			Registrolog::registroNotasCurso($nombre,$nom_cur,$nom_asi,$p);
+			RegistroLog::registroNotasCurso($nombre,$nom_cur,$nom_asi,$p);
 		}
 	}
 

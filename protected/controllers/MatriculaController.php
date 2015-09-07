@@ -809,7 +809,7 @@ class MatriculaController extends Controller
             } else{
                 $nombre = "admin";
             }
-        Registrolog::registroInformeNotasAlumno($nombre_alu, $nombre);
+        RegistroLog::registroInformeNotasAlumno($nombre_alu, $nombre);
     }
 
     public function actionCurso_par(){
@@ -889,7 +889,7 @@ class MatriculaController extends Controller
                 } else{
                     $nombre = "admin";
                 }
-            Registrolog::registroInformeNotasCurso($nivel." ".$letra, $nombre, $p);
+            RegistroLog::registroInformeNotasCurso($nivel." ".$letra, $nombre, $p);
 
 
         }else{
