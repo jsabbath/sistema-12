@@ -44,7 +44,10 @@
 
 			<div class="span5 offset1">
 				<?php echo $form->labelEx($model,'not_programa'); ?>
-				<?php 
+				<?php
+				if(isset($check)){
+					$model->not_programa = $check;
+				}
 				echo $form->checkBoxList($model, 'not_programa', array(
 					'ACTIVIDAD'=>'ACTIVIDAD',
 					'ACTO'=>'ACTO',

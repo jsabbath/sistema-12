@@ -100,6 +100,8 @@ class NoticiaController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		$check = $this->getProgramas($model);
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -118,7 +120,7 @@ class NoticiaController extends Controller
 			$model->not_programa = $programa;
 
 			$model->not_titulo = strtoupper($model->not_titulo);
-			
+
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Noticia actualizada con Exito!");
 				$this->redirect(array('Site/index'));
@@ -130,6 +132,7 @@ class NoticiaController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'check'=>$check,
 		));
 	}
 
@@ -208,5 +211,23 @@ class NoticiaController extends Controller
 			$usuario = Usuario::model()->findAll(array('condition'=>'usu_iduser="'.$data->not_user.'"'));
 			return $usuario->usu_nombre1." ".$usuario->usu_apepat;
 		}
+	}
+
+	public function getProgramas($model){
+		$check = array();
+		if(strpos($model->not_programa,'ACTIVIDAD')){
+			array_push($check,'ACTIVIDAD');
+		}
+		if(strpos($model->not_programa,'ACTO')){
+			array_push($check,'ACTO');
+		}
+		if(strpos($model->not_programa,'DIARIO MURAL')){
+			array_push($check,'DIARIO MURAL');
+		}
+		if(strpos($model->not_programa,'OTRO')){
+			array_push($check,'OTRO');
+		}
+
+		return $check;
 	}
 }

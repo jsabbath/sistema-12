@@ -24,4 +24,4 @@ $this->menu=array(
 </div>
 <br>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'check'=>$check)); ?>
