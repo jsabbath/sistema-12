@@ -891,7 +891,6 @@ class MatriculaController extends Controller
 
             $mPDF1->Output();
 
-            $nombre_alu = $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat." ".$model->matAlu->alum_apemat;
             $pro = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
                 if( $pro ){
                     $nombre = $pro->NombreCompleto;
