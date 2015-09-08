@@ -754,20 +754,22 @@ class MatriculaController extends Controller
         $ano = $evaluaciones[0]['not_ano'];
         $curso  = Curso::model()->findByPk($cur_list->list_curso_id);
 
-        foreach ($evaluaciones as $key => $alum) {
+        foreach ($evaluaciones as $key => $alum) { // tabla notas
 
             $asi = Asignatura::model()->findByPk($alum->not_asig);
             $prom = $this->actionPromedio_curso_asig($curso->cur_id,$asi->asi_id,$p);
 
+
             $notas[$asi->asi_orden] = array(
                   'nota'    => $alum->notas,
+                  'prom_alu'=> $alum->not_prom,
                   'nom_asi' => $asi->asi_descripcion,
                   'prom_asi'=> $prom,
                 );
 
         }
-        ksort($notas);
-        $alumnos = array_unique($notas, SORT_REGULAR);
+        ksort($notas); // se ordena por asignatura
+        $alumnos = array_unique($notas, SORT_REGULAR); 
 
         if( $p == 1 ){
             $asi_alu = $model->mat_asistencia_1;
@@ -790,7 +792,7 @@ class MatriculaController extends Controller
 
 
 
-        $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+        $mPDF1->SetHeader('San Pedro de la Paz '.date('d-m-Y'));
         $mPDF1->WriteHTML($stylesheet, 2);
         $mPDF1->WriteHTML($this->renderPartial('inf_not_par', array(
                                                                 'model'         => $model,
@@ -868,7 +870,7 @@ class MatriculaController extends Controller
            
             $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
-            $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+            $mPDF1->SetHeader('San Pedro de la Paz '.date('d-m-Y'));
             
             $mPDF1->WriteHTML($stylesheet, 2);
             $mPDF1->WriteHTML($this->renderPartial('inf_not_par_cur', array(

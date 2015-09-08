@@ -213,6 +213,7 @@ foreach ($lista_alu as $key => $alu) {
 
         $notas[$asi->asi_orden] = array(
               'nota'    => $alum->notas,
+              'prom_alu'=> $alum->not_prom,
               'nom_asi' => $asi->asi_descripcion,
               'prom_asi'=> $prom_asi,
             );
@@ -253,55 +254,61 @@ foreach ($lista_alu as $key => $alu) {
 
 
 <table style="border: 0;">
-	<tr style="border: 0;">
-		<td style="border: 0;">
-			<p>Nombre </p>
-		</td>
-		<td>
-			<strong>: <?php echo $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat
-			." ".$model->matAlu->alum_apemat; ?></strong>
-		</td>
-	</tr>
-	<tr style="border: 0;">
-		<td style="border: 0;">	
-			<p>Rut </p>
-		</td>
-		<td>
-		 <strong>: <?php echo $model->matAlu->alum_rut;?></strong>
-		 </td>
-	</tr>
+<tr style="border: 0;">
+        <td style="border: 0;">
+            <p>Nombre </p>
+        </td>
+        <td >
+            <strong>: <?php echo $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat
+            ." ".$model->matAlu->alum_apemat; ?></strong>
+        </td>
+    </tr>
+
     <tr style="border: 0;">
         <td style="border: 0;"> 
+            <p>Rut </p>
+        </td>
+        <td style="border: 0;">
+         <strong>: <?php echo $model->matAlu->alum_rut;?></strong>
+        </td>
+
+
+        <td style="border: 0;"> 
+            <p>Curso </p>
+        </td>
+        <td style="border: 0;">
+         <strong>: <?php echo $curso_nombre;?></strong>
+         </td>
+
+    </tr>
+
+
+
+    <tr style="border: 0;">
+        <td style="border: 0;"> 
+            <p>Profesor Jefe </p>
+        </td>
+        <td style="border: 0;">
+         <strong>: <?php echo $profe;?></strong>
+         </td>
+
+
+        <td style="border: 0;"> 
+            <p>Semetre </p>
+        </td>
+        <td style="border: 0;">
+         <strong>: <?php echo $periodo;?></strong>
+         </td>
+
+
+         <td style="border: 0;"> 
             <p>Año Academico </p>
         </td>
         <td>
          <strong>: <?php echo $ano;?></strong>
          </td>
     </tr>
-    <tr style="border: 0;">
-        <td style="border: 0;"> 
-            <p>Curso </p>
-        </td>
-        <td>
-         <strong>: <?php echo $curso_nombre;?></strong>
-         </td>
-    </tr>
-        <tr style="border: 0;">
-        <td style="border: 0;"> 
-            <p>Profesor Jefe </p>
-        </td>
-        <td>
-         <strong>: <?php echo $profe;?></strong>
-         </td>
-    </tr>
-    <tr style="border: 0;">
-        <td style="border: 0;"> 
-            <p>Periodo </p>
-        </td>
-        <td>
-         <strong>: <?php echo $periodo;?></strong>
-         </td>
-    </tr>
+
 
 </table>
 
@@ -323,24 +330,32 @@ foreach ($lista_alu as $key => $alu) {
 
 
 	<?php 
-        
+        $count_final = 0;
+        $pfinal = 0;
         foreach ($notas as $key => $a) { 
                 $n = $a['nota'];
+
+            $prom = $a['prom_alu'];
+           
+            if( $a['nom_asi'] != "RELIGION" ){
+                 if( $prom > 0 ){
+                    $count_final++;
+                    $pfinal += $prom;
+                }
+            }        
     ?>
         <tr>
             <td><p><strong><?php echo $a['nom_asi'] ?></strong></p></td>
 
             <?php if( $a['nom_asi'] == "RELIGION" ){ 
-                $final = 0;
-                $count = 0;
+               
             ?>
 
                 <?php for ($i=1; $i <= $max_not ; $i++){ ?>
 
                     <td class="text-center">
                         <?php if( $n[$i] != "" ){ 
-                            $count ++;
-                            $final += $n[$i];
+                          
                         ?>
                             <?php if( $n[$i] >= 6  ) { ?>
                                 <strong>MB </strong>
@@ -355,11 +370,11 @@ foreach ($lista_alu as $key => $alu) {
                     </td>
 
                 <?php } 
-                     if( $count != 0 ) $prom = $final/$count;
+                     
                 ?>
 
                 <td class="text-center" style="background-color: #EEEEEE;"> <strong><?php 
-                    if( $count !=0 ){
+
                         
                         if( $prom >= 6  ) {
                             echo "MB"; 
@@ -367,16 +382,15 @@ foreach ($lista_alu as $key => $alu) {
                             echo "B"; 
                         }else if( $prom < 5 AND $prom >= 4 ){ 
                             echo "S"; 
-                        }else if( $prom < 4 ){
+                        }else if( $prom < 4 AND $prom > 0 ){
                             echo "I"; 
                         }
-                    }   
+   
 
                 ?></strong></td><!-- final -->
 
             <?php } else{ 
-                $final = 0;
-                $count = 0;
+               
             ?> <!-- fin if religion -->
 
                 <?php for ($i=1; $i <= $max_not ; $i++){ 
@@ -384,9 +398,7 @@ foreach ($lista_alu as $key => $alu) {
                        
                     ?>
                         <td style="color: RED; " ><strong><?php if( $n[$i] != 0 ){ 
-                            $count++;
-                            $final += $n[$i];
-
+                            
                             if ( strlen($n[$i]) == 1 ){
                                 echo  ''.$n[$i] . '.0';
                             } else{
@@ -397,8 +409,7 @@ foreach ($lista_alu as $key => $alu) {
                        
                     ?>
                         <td> <strong><?php if( $n[$i] != 0 ){
-                            $count++;
-                            $final += $n[$i]; 
+                           
                             if ( strlen($n[$i]) == 1 ){
                                 echo  ''.$n[$i] . '.0';
                             } else{
@@ -408,17 +419,13 @@ foreach ($lista_alu as $key => $alu) {
                             }?></strong> </td>
                     <?php } ?>
                 <?php } 
-                    if( $count != 0 ) $prom = $final/$count;
-
-                    if( strlen($prom) == 1 ){
-                        $prom = $prom .".0";
-                    }else{
-                        $precision = 1;
-                        $prom = number_format((float) $prom, $precision, '.', '');
-                    }
+                    
+                        if( strlen($prom) == 1 ){
+                            $prom = $prom .".0";
+                        }
                 ?>
                     <td  <?php if( $prom < 4 ){ ?>style="color: RED; background-color: #EEEEEE;" <?php }else{ ?>style="background-color: #EEEEEE" <?php } ?>>
-                            <strong><?php  if( $count != 0 ) echo $prom; ?></strong>
+                            <strong><?php if( $prom > 0){ echo $prom; }?></strong>
                     </td><!-- final -->
 
             <?php } ?><!-- fin else religion -->
@@ -449,12 +456,43 @@ foreach ($lista_alu as $key => $alu) {
 
        <?php }?>
 	
-	 <tr>
+	  <tr style="border: 1;">
+            <?php for ($i=-2; $i <= $max_not ; $i++){  ?>
+                <td style="border: 0;"></td>
+            <?php } ?>
+       </tr>
+
+      <tr style="border: 1;">
         <td><p><strong>ASITENCIA</strong></p></td>
             <?php for ($i=1; $i <= $max_not ; $i++){  ?>
                 <td style="border: 0;"></td>
             <?php } ?>
-            <td style="border: 1; text-align: right;"><strong><?php if( $asi_alu != "" ) echo $asi_alu."%"; ?></strong></td>
+            <td  style="border: 1; text-align: center; background-color: #EEEEEE;"><strong><?php if($asi_alu != "") echo $asi_alu."%"; ?></strong></td>
+      </tr>
+
+        <?php 
+            if( $count_final > 0 ){
+                $final = $pfinal/$count_final;
+            
+                if( strlen($final) == 1 ){
+                    $final = $final .".0";
+                }else{
+                    $precision = 1;
+                    $final = number_format((float) $final, $precision, '.', '');
+                }
+            }
+            
+
+
+        ?>
+
+       <tr style="border: 1;">
+        <td><p><strong>PROMEDIO FINAL</strong></p></td>
+            <?php for ($i=1; $i <= $max_not ; $i++){  ?>
+                <td style="border: 0;"></td>
+            <?php } ?>
+            <td  style="border: 1; text-align: center; background-color: #EEEEEE;"><strong><?php echo $final; ?></strong></td>
+            <td></td>
       </tr>
 </table>
 <br>
