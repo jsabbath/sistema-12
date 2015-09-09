@@ -792,7 +792,7 @@ class MatriculaController extends Controller
 
 
 
-        $mPDF1->SetHeader('San Pedro de la Paz '.date('d-m-Y'));
+        $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
         $mPDF1->WriteHTML($stylesheet, 2);
         $mPDF1->WriteHTML($this->renderPartial('inf_not_par', array(
                                                                 'model'         => $model,
@@ -870,7 +870,7 @@ class MatriculaController extends Controller
            
             $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
-            $mPDF1->SetHeader('San Pedro de la Paz '.date('d-m-Y'));
+            $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
             
             $mPDF1->WriteHTML($stylesheet, 2);
             $mPDF1->WriteHTML($this->renderPartial('inf_not_par_cur', array(

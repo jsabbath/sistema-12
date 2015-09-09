@@ -179,43 +179,30 @@
 
 <table style="border: 0;">
 	<tr style="border: 0;">
-		<td style="border: 0;">
+		<td style="border: 0;" >
 			<p>Nombre </p>
 		</td>
-		<td >
+		<td style="border: 0;" >
 			<strong>: <?php echo $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat
 			." ".$model->matAlu->alum_apemat; ?></strong>
 		</td>
+
+        <td style="border: 0;"> 
+            <p>Rut </p>
+        </td>
+        <td style="border: 0;">
+         <strong>: <?php echo $model->matAlu->alum_rut;?></strong>
+        </td>
 	</tr>
 
 	<tr style="border: 0;">
-		<td style="border: 0;">	
-			<p>Rut </p>
-		</td>
-		<td style="border: 0;">
-		 <strong>: <?php echo $model->matAlu->alum_rut;?></strong>
-		</td>
-
-
+		
         <td style="border: 0;"> 
             <p>Curso </p>
         </td>
         <td style="border: 0;">
          <strong>: <?php echo $curso_nombre;?></strong>
          </td>
-
-	</tr>
-
-
-
-    <tr style="border: 0;">
-        <td style="border: 0;"> 
-            <p>Profesor Jefe </p>
-        </td>
-        <td style="border: 0;">
-         <strong>: <?php echo $profe;?></strong>
-         </td>
-
 
         <td style="border: 0;"> 
             <p>Semetre </p>
@@ -224,15 +211,13 @@
          <strong>: <?php echo $periodo;?></strong>
          </td>
 
-
-         <td style="border: 0;"> 
-            <p>Año Academico </p>
+        <td style="border: 0;"> 
+            <p>Año </p>
         </td>
         <td>
          <strong>: <?php echo $ano;?></strong>
          </td>
-    </tr>
-
+	</tr>
 
 </table>
 
@@ -415,7 +400,7 @@
 </table>
 <br>
 <div>
-	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 209; $i++) { 
+	<p><strong>Observaciones:</strong><?php for ($i=0; $i < 435; $i++) { 
         echo "_";
     } ?></p>
 	
