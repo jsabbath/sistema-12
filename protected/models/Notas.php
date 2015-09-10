@@ -21,24 +21,7 @@
  * @property double $not_10
  * @property double $not_11
  * @property double $not_12
- * @property double $not_13
- * @property double $not_14
- * @property double $not_15
- * @property double $not_16
- * @property double $not_17
- * @property double $not_18
- * @property double $not_19
- * @property double $not_20
- * @property double $not_21
- * @property double $not_22
- * @property double $not_23
- * @property double $not_24
- * @property double $not_25
- * @property double $not_26
- * @property double $not_27
- * @property double $not_28
- * @property double $not_29
- * @property double $not_30
+ * @property double $not_prom
  *
  * The followings are the available model relations:
  * @property Matricula $notMat
@@ -64,10 +47,10 @@ class Notas extends CActiveRecord
 		return array(
 			array('not_periodo, not_ano', 'required'),
 			array('not_periodo, not_ano, not_mat, not_asig', 'numerical', 'integerOnly'=>true),
-			array('not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12', 'numerical'),
+			array('not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_prom', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('not_id, not_periodo, not_ano, not_mat, not_asig, not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12', 'safe', 'on'=>'search'),
+			array('not_id, not_periodo, not_ano, not_mat, not_asig, not_01, not_02, not_03, not_04, not_05, not_06, not_07, not_08, not_09, not_10, not_11, not_12, not_prom', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -107,7 +90,7 @@ class Notas extends CActiveRecord
 			'not_10' => 'Not 10',
 			'not_11' => 'Not 11',
 			'not_12' => 'Not 12',
-
+			'not_prom' => 'Not Prom',
 		);
 	}
 
@@ -146,7 +129,7 @@ class Notas extends CActiveRecord
 		$criteria->compare('not_10',$this->not_10);
 		$criteria->compare('not_11',$this->not_11);
 		$criteria->compare('not_12',$this->not_12);
-
+		$criteria->compare('not_prom',$this->not_prom);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

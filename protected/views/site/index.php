@@ -26,12 +26,38 @@ $this->pageTitle=Yii::app()->name;
 		<div class="span3 text-center hidden-phone">
 			
 
-			<?php echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));?>
+			<?php
+			// Descomentar para ver la funcionalidad de Eventos
+			/*
+				echo "<br>"; 
+				echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));
+			*/
+			?>
+			
+			<?php
+			// Descomentar para ver la funcionalidad Mis Asignaturas
+			/*
+			if(
+			!Yii::app()->user->isSuperAdmin and
+            !Yii::app()->user->checkAccess('administrador') and 
+            !Yii::app()->user->checkAccess('director') and
+            !Yii::app()->user->checkAccess('evaluador') and
+            !Yii::app()->user->checkAccess('jefe_utp') and
+            !Yii::app()->user->checkAccess('profesor_prebasica') and
+            Yii::app()->user->checkAccess('profesor')){
+            	echo "<br>";  
+				echo CHtml::link('Mis Asignaturas',array('Notas/mis_asignaturas'),array('class'=>'btn btn-block btn-success'));
+			}
+			*/
+			?>
 
-			<br>
-
-			<!-- Descomentar el boton para ver la funcionalidad de apoderados -->
-			<?php echo CHtml::link('Ver Notas Apoderado',array('Apoderado/notas'),array('class'=>'btn btn-warning btn-block'));?>
+			<?php
+			// Descomentar el boton para ver la funcionalidad de apoderados
+			/*
+				echo "<br>"; 
+				echo CHtml::link('Ver Notas Apoderado',array('Apoderado/notas'),array('class'=>'btn btn-warning btn-block'));
+			*/
+			?>
 		</div>
 	</div>
 

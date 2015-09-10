@@ -293,4 +293,49 @@ class NotasController extends Controller
 		}	
 	}
 
+	//estadisticas asignatura
+	//inicio de las funciones para las estadisticas asignaturas
+	public function actionMis_Asignaturas(){
+		$usuario = Usuario::model()->findByAttributes(array('usu_iduser'=>Yii::app()->user->id));
+		$asignaturas = AAsignatura::model()->findAll(array('condition'=>'aa_docente=:x','params'=>array(':x'=>$usuario->usu_id)));
+
+		$this->render('asignaturas',array(
+			'usuario'=>$usuario,
+			'asignaturas'=>$asignaturas,
+		));
+	}
+
+	public function actionAsignatura($a,$c){
+		$usuario = Usuario::model()->findByAttributes(array('usu_iduser'=>Yii::app()->user->id));
+		$alumnos = ListaCurso::model()->findAll(array('condition'=>'list_curso_id=:x','params'=>array(':x'=>$c)));
+		$asignatura = Asignatura::model()->findByAttributes(array('asi_id'=>$a));
+		$lista = array();
+		$nombres = array();
+		$promedios = array();
+		$aux = array();
+
+		foreach ($alumnos as $alumno) {
+			$matricula = Matricula::model()->findByAttributes(array('mat_id'=>$alumno->list_mat_id));
+			$nota = Notas::model()->findByAttributes(array('not_mat'=>$alumno->list_mat_id,'not_asig'=>$a));
+			$aux['promedio'] = $nota->not_prom;
+			$aux['nombre'] = $matricula->matAlu->getNombre_completo_3();
+			array_push($lista, $aux);
+			array_push($nombres, $matricula->matAlu->alum_apepat);
+			array_push($promedios, $nota->not_prom);
+		}
+
+		$bajos = Merge::array_msort($lista, array('promedio'=>SORT_ASC));
+		$altos = Merge::array_msort($lista, array('promedio'=>SORT_DESC));
+
+		$this->render('asig',array(
+			'lista'=>$lista,
+			'nombres'=>$nombres,
+			'promedios'=>$promedios,
+			'bajos'=>$bajos,
+			'altos'=>$altos,
+			'asignatura'=>$asignatura,
+			'usuario'=>$usuario,
+		));
+	}
+	//fin de las funciones para estadisticas de asignaturas
 }
