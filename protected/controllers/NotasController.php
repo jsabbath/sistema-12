@@ -316,12 +316,14 @@ class NotasController extends Controller
 
 		foreach ($alumnos as $alumno) {
 			$matricula = Matricula::model()->findByAttributes(array('mat_id'=>$alumno->list_mat_id));
-			$nota = Notas::model()->findByAttributes(array('not_mat'=>$alumno->list_mat_id,'not_asig'=>$a));
-			$aux['promedio'] = $nota->not_prom;
-			$aux['nombre'] = $matricula->matAlu->getNombre_completo_3();
-			array_push($lista, $aux);
-			array_push($nombres, $matricula->matAlu->alum_apepat);
-			array_push($promedios, $nota->not_prom);
+			if ($matricula->matEstado->par_descripcion == 'ACTIVO') {
+				$nota = Notas::model()->findByAttributes(array('not_mat'=>$alumno->list_mat_id,'not_asig'=>$a));
+				$aux['promedio'] = $nota->not_prom;
+				$aux['nombre'] = $matricula->matAlu->getNombre_completo_3();
+				array_push($lista, $aux);
+				array_push($nombres, $matricula->matAlu->alum_apepat);
+				array_push($promedios, $nota->not_prom);
+			}
 		}
 
 		$bajos = Merge::array_msort($lista, array('promedio'=>SORT_ASC));
