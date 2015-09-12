@@ -305,7 +305,7 @@ class NotasController extends Controller
 		));
 	}
 
-	public function actionAsignatura($a,$c){
+	public function actionAsignatura($a,$c,$p){
 		$usuario = Usuario::model()->findByAttributes(array('usu_iduser'=>Yii::app()->user->id));
 		$alumnos = ListaCurso::model()->findAll(array('condition'=>'list_curso_id=:x','params'=>array(':x'=>$c)));
 		$asignatura = Asignatura::model()->findByAttributes(array('asi_id'=>$a));
@@ -317,7 +317,7 @@ class NotasController extends Controller
 		foreach ($alumnos as $alumno) {
 			$matricula = Matricula::model()->findByAttributes(array('mat_id'=>$alumno->list_mat_id));
 			if ($matricula->matEstado->par_descripcion == 'ACTIVO') {
-				$nota = Notas::model()->findByAttributes(array('not_mat'=>$alumno->list_mat_id,'not_asig'=>$a));
+				$nota = Notas::model()->findByAttributes(array('not_mat'=>$alumno->list_mat_id,'not_asig'=>$a,'not_periodo'=>$p));
 				$aux['promedio'] = $nota->not_prom;
 				$aux['nombre'] = $matricula->matAlu->getNombre_completo_3();
 				array_push($lista, $aux);
