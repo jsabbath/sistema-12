@@ -940,73 +940,73 @@ class MatriculaController extends Controller
         if( isset( $_FILES['xmlfile']) ){
 
             $upload = (object) $_FILES['xmlfile'];
+
             $xml_string = $upload->error ? NULL : simplexml_load_file($upload->tmp_name);
-            
-            //$xml = simplexml_load_string($xml_string);
-            $json = json_encode($xml_string);
-            $año = json_decode($json,TRUE);
-            
 
-            //echo $json;
-            foreach ($año as $key => $a) {
-                foreach ($a as $key => $l) {
-                if( $key == "tipo_ensenanza" ){
-                    foreach ($l as $key => $k) {
-                    foreach ($k as $key => $value) { // todos los cursos
-                        if( $key != "codigo" OR $key == "0"){
-                            $nivel = $value['@attributes']['grado'];
-                            $letra = $value['@attributes']['letra'];
+            if($xml_string == NULL  ){
+                throw new CHttpException(55, 'suba archivo (actionSubir_archivo) MatriculaController::947 ');
+                return;
+            }
 
-                            foreach ($value as $key => $curso) {
-                            if( $key == 'alumno' ){
-                                foreach ($curso as $key => $alumno) {
-                                    $alu = $alumno['@attributes'];
-                                    $niv = $this->nivelCurso($nivel);
+            foreach ($xml_string as $key => $a) {
 
-                            
-                                    $id_niv = Parametro::model()->findByAttributes(array('par_item' => 'nivel',
-                                                                                        'par_descripcion' => $niv ));
-                                    $id_let = Parametro::model()->findByAttributes(array('par_item' => 'letra',
-                                                                                        'par_descripcion' => $letra ));
-                                    
+                foreach ($a as $key1 => $l) {
+                   
+                if( $key1 == "tipo_ensenanza" ){
+                    foreach ($l as $key2 => $curso) {    //todos los cursos---$xml_string
+                        $nivel = (integer) $curso['grado'];
+                        $letra = (string) $curso['letra'];
 
-                                    $cu = Curso::model()->findByAttributes(array('cur_nivel'=> $id_niv->par_id,
-                                                                                 'cur_letra'=> $id_let->par_id));
+                        foreach ($curso as $key3 => $alu) { // todos alumnos--$xml_string
+
+                            if( $key3 == 'alumno'){
+
+                                //$niv = $this->nivelCurso($nivel); // en caso de usar niveles como palabra
+                        
+                                $id_niv = Parametro::model()->findByAttributes(array('par_item' => 'NIVEL',
+                                                                                    'par_descripcion' => $nivel ));
+                                $id_let = Parametro::model()->findByAttributes(array('par_item' => 'LETRA',
+                                                                                    'par_descripcion' => $letra ));
+                                
+
+                                $cu = Curso::model()->findByAttributes(array('cur_nivel'=> $id_niv["par_id"],
+                                                                            'cur_letra'=> $id_let["par_id"]));
 
                                 
-                                    if( $alu['genero'] = "M" ){
-                                        $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="MASCULINO"'));
-                                    } else{
-                                        $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="FEMENINO"'));
-                                    }
+                                if( $alu['genero'] == "M" ){
+                                    $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="MASCULINO"'));
+                                } else{
+                                    $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="FEMENINO"'));
+                                }
+                                
+                                $rut =  $alu['run']."-". $alu['digito_ve'];
+
+
+                                $existe_alumno = Alumno::model()->findByAttributes(array('alum_rut' => $rut));
+                                if(!$existe_alumno){
                                     
-                                    $rut =  $alu['run']."-". $alu['digito_ve'];
-
-
-                                    $existe_alumno = Alumno::model()->findByAttributes(array('alum_rut' => $rut));
-                                    if(!$existe_alumno){
-                                        
-                                        $id_curso = $cu->cur_id;
-                                       
-                                        $nombres =  $alu['nombres'];
-                                        $genero = $gene->par_id;
-                                        $ape_pa = $alu['ape_paterno'];
-                                        $ape_mat = $alu['ape_materno'];
-                                        $dir = $alu['direccion'];
-                                        $f_naci = $alu['fecha_nacimiento'];
-                                        $f_incri = $alu['fecha_incorporacion_curso'];
-                                        $comuna = $alu['comuna_residencia'];
-                                        echo $nombres."<br>";
-                                        $this->matricular_alumno($id_curso,$rut,$nombres,
-                                                                        $genero,$ape_pa,$ape_mat,$dir,
-                                                                        $f_naci,$f_incri,$comuna);
-                                    } else{
-                                        echo "-alumno ya en sistema<br>";
-                                    }
+                                    $id_curso = $cu->cur_id;
+                                   
+                                    $nombres =  $alu['nombres'];
+                                    $genero = $gene->par_id;
+                                    $ape_pa = $alu['ape_paterno'];
+                                    $ape_mat = $alu['ape_materno'];
+                                    $dir = $alu['direccion'];
+                                    $f_naci = $alu['fecha_nacimiento'];
+                                    $f_incri = $alu['fecha_incorporacion_curso'];
+                                    $comuna = $alu['comuna_residencia'];
+                                    echo $nombres."<br>";
+                                    $this->matricular_alumno($id_curso,$rut,$nombres,
+                                                                    $genero,$ape_pa,$ape_mat,$dir,
+                                                                    $f_naci,$f_incri,$comuna);
+                                } else{
+                                    echo $rut."-alumno ya en sistema<br>";
+                                }
                                             
                                        
                                 
-                            }}}}
+                            }
+
                                
 
                            
@@ -1137,19 +1137,19 @@ class MatriculaController extends Controller
                         $evaluacion->save();
                     }
 
-                    echo "good<br>";
+                    //echo "good<br>";
 
                 } else{
-                    echo "matricula-unsave <br>";
+                    //echo "matricula-unsave <br>";
                 }
                   
             } else{
 
-                echo "alum-unsave<br>";
+                //echo "alum-unsave<br>";
            
             }
         } else{
-            echo "matricula-invalida <br>";
+            //echo "matricula-invalida <br>";
         }
          
     }

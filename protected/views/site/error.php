@@ -28,7 +28,29 @@ $err_img  = "http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif";
 
 <?php 
 
-if($code==666){
+if($code==55){
+?>
+	<div class="container" >
+		<div class="row">
+		
+			<div class="span12 text-center" style="background-color: #EEEEEE">
+				<h3>Debe seleccionar un archivo a subir.</h3>
+			</div>
+
+			<div class="span12 text-center"><br>
+				<a href="<?php echo Yii::app()->createUrl('matricula/subir_xml'); ?>" class="btn btn-danger">Importar Alumnos</a>
+			</div> 
+
+			<div class="span4 offset4">
+				<img width="50%" src="<?php echo $err_img;?>">
+				<br><br>
+			</div>
+		 	
+		</div>
+		<br>
+	</div>
+<?php
+}elseif($code==666){
 ?>
 	<div class="container" >
 		<div class="row">

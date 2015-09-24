@@ -28,15 +28,15 @@ $this->pageTitle=Yii::app()->name;
 
 			<?php
 			// Descomentar para ver la funcionalidad de Eventos
-			/*
+			
 				echo "<br>"; 
 				echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));
-			*/
+			
 			?>
 			
 			<?php
 			// Descomentar para ver la funcionalidad Mis Asignaturas
-			/*
+			
 			if(
 			!Yii::app()->user->isSuperAdmin and
             !Yii::app()->user->checkAccess('administrador') and 
@@ -48,15 +48,15 @@ $this->pageTitle=Yii::app()->name;
             	echo "<br>";  
 				echo CHtml::link('Mis Asignaturas',array('Notas/mis_asignaturas'),array('class'=>'btn btn-block btn-success'));
 			}
-			*/
+			
 			?>
 
 			<?php
 			// Descomentar el boton para ver la funcionalidad de apoderados
-			/*
+			
 				echo "<br>"; 
 				echo CHtml::link('Ver Notas Apoderado',array('Apoderado/notas'),array('class'=>'btn btn-warning btn-block'));
-			*/
+			
 			?>
 		</div>
 	</div>
