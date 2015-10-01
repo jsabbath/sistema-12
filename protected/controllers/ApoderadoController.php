@@ -77,10 +77,10 @@ class ApoderadoController extends Controller
 			$matricula = Matricula::model()->findAll(array('condition'=>'mat_alu_id="'.$model->apo_hijo.'"'));
 			$model->apo_hijo = $matricula[0]->mat_id;
 
-			$model->apo_nombre1 = strtoupper($model->apo_nombre1);
-			$model->apo_nombre2 = strtoupper($model->apo_nombre2);
-			$model->apo_apepat = strtoupper($model->apo_apepat);
-			$model->apo_apemat = strtoupper($model->apo_apemat);
+			$model->apo_nombre1 = mb_strtoupper($model->apo_nombre1,'utf-8');
+			$model->apo_nombre2 = mb_strtoupper($model->apo_nombre2,'utf-8');
+			$model->apo_apepat = mb_strtoupper($model->apo_apepat,'utf-8');
+			$model->apo_apemat = mb_strtoupper($model->apo_apemat,'utf-8');
 
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Apoderado ingresado con Exito!");
@@ -120,6 +120,12 @@ class ApoderadoController extends Controller
 		if(isset($_POST['Apoderado']))
 		{
 			$model->attributes=$_POST['Apoderado'];
+
+			$model->apo_nombre1 = mb_strtoupper($model->apo_nombre1,'utf-8');
+			$model->apo_nombre2 = mb_strtoupper($model->apo_nombre2,'utf-8');
+			$model->apo_apepat = mb_strtoupper($model->apo_apepat,'utf-8');
+			$model->apo_apemat = mb_strtoupper($model->apo_apemat,'utf-8');
+
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Apoderado actualizado con Exito!");
 				$this->redirect(array('view','id'=>$model->apo_id));
