@@ -117,15 +117,27 @@ class ColegioController extends Controller
 
 		if(isset($_POST['Colegio']))
 		{
+			$old_logo = $model->col_logo;
 			$model->attributes=$_POST['Colegio'];
-			$images_path = realpath(Yii::app()->basePath . '/../images');
-            $model->col_logo=CUploadedFile::getInstance($model,'col_logo');
-			if($model->save()){
-				if( $model->col_logo != null ){
+
+            $c_logo = CUploadedFile::getInstance($model,'col_logo');
+
+            if( $c_logo != null ){
+            	$images_path = realpath(Yii::app()->basePath . '/../images');
+            	$model->col_logo=CUploadedFile::getInstance($model,'col_logo');
+            } else{
+            	$model->col_logo = $old_logo;
+            }
+
+        	if($model->save()){
+				if( $c_logo != null ){
 					$model->col_logo->saveAs($images_path . '/' .$model->col_logo);
 				}
 				$this->redirect(array('view','id'=>$model->col_id));
 			}
+
+           
+			
 		}
 
 		$this->render('update',array(

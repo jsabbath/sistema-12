@@ -76,7 +76,7 @@ $tempid = $temp->temp_id;
 
    
 <?php
-$logo = Colegio::model()->findAll(array('condition'=>'col_nombre_colegio="COLEGIO ALBORADA"'));
+$logo = Colegio::model()->find();
 
 //aqui empieza el control de usuarios
 if(!Yii::app()->user->checkAccess('profesor') OR
@@ -112,11 +112,11 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                     <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
                     
                         <td width=7% align="left" class="hidden-phone">    
-                             <img style="padding-top: 10px;" src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo[0]->col_logo; ?>">
+                             <img style="padding-top: 10px;" src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo->col_logo; ?>">
                         </td>
                      
                         <td class="visible-desktop">
-                            <h3 style="color:#FFF6B0">Colegio Alborada</h3>
+                            <h3 style="color:#FFF6B0"><?php echo $logo->col_nombre_colegio; ?></h3>
                             <div  >
                                 <?php echo CHtml::dropDownList(
                                     'anos', null, $anos,array(
@@ -276,11 +276,11 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                     <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
                     
                         <td width=7% align="left" class="hidden-phone">    
-                             <img style="padding-top: 10px;" src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo[0]->col_logo; ?>">
+                             <img style="padding-top: 10px;" src="<?php echo Yii::app()->baseUrl; ?>/images/<?php echo $logo->col_logo; ?>">
                         </td>
                      
                         <td class="visible-desktop">
-                            <h3 style="color:#FFF6B0">Colegio Alborada</h3>
+                            <h3 style="color:#FFF6B0"><?php echo $logo->col_nombre_colegio; ?></h3>
                             <div  >
                                 <?php echo CHtml::dropDownList(
                                     'anos', null, $anos,array(

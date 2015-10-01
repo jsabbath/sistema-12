@@ -30,7 +30,7 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 	</div>
 
 	<div class="span12">
-		<?php echo $form->errorSummary($model); ?>
+		<?php echo $form->errorSummary($model,'','',array('class'=>'alert alert-error')); ?>
 	</div>
 
 	<div class="span5 offset1">
