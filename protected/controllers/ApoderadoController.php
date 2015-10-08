@@ -251,6 +251,7 @@ class ApoderadoController extends Controller
 	}
 
 	public function actionNotas(){
+		$this->layout = "apoderados";
 		$this->render('notas');
 	}
 
