@@ -44,6 +44,10 @@ $this->menu=array(
 		    ),
 		    'data'=>$model,
 		    'attributes'=>array(
+		    	array(
+		    		'name'=>'Rut',
+		    		'value'=>$model->matAlu->alum_rut,
+		    	),
 		    	'matAlu.alum_f_nac',
 		    	'matAlu.direccion',
 				'mat_numero',
@@ -124,18 +128,18 @@ $this->menu=array(
 							?>
 							<tr>
 								<td><?php echo $nota->notAsig->asi_descripcion; ?></td>
-								<td><?php echo $nota->not_01; ?></td>
-								<td><?php echo $nota->not_02; ?></td>
-								<td><?php echo $nota->not_03; ?></td>
-								<td><?php echo $nota->not_04; ?></td>
-								<td><?php echo $nota->not_05; ?></td>
-								<td><?php echo $nota->not_06; ?></td>
-								<td><?php echo $nota->not_07; ?></td>
-								<td><?php echo $nota->not_08; ?></td>
-								<td><?php echo $nota->not_09; ?></td>
-								<td><?php echo $nota->not_10; ?></td>
-								<td><?php echo $nota->not_11; ?></td>
-								<td><?php echo $nota->not_12; ?></td>
+								<td><?php echo (($nota->not_01 != NULL AND $nota->not_01 != 0) ? $nota->not_01 : "" ); ?></td>
+								<td><?php echo (($nota->not_02 != NULL AND $nota->not_02 != 0) ? $nota->not_02 : "" ); ?></td>
+								<td><?php echo (($nota->not_03 != NULL AND $nota->not_03 != 0) ? $nota->not_03 : "" ); ?></td>
+								<td><?php echo (($nota->not_04 != NULL AND $nota->not_04 != 0) ? $nota->not_04 : "" ); ?></td>
+								<td><?php echo (($nota->not_05 != NULL AND $nota->not_05 != 0) ? $nota->not_05 : "" ); ?></td>
+								<td><?php echo (($nota->not_06 != NULL AND $nota->not_06 != 0) ? $nota->not_06 : "" ); ?></td>
+								<td><?php echo (($nota->not_07 != NULL AND $nota->not_07 != 0) ? $nota->not_07 : "" ); ?></td>
+								<td><?php echo (($nota->not_08 != NULL AND $nota->not_08 != 0) ? $nota->not_08 : "" ); ?></td>
+								<td><?php echo (($nota->not_09 != NULL AND $nota->not_09 != 0) ? $nota->not_09 : "" ); ?></td>
+								<td><?php echo (($nota->not_10 != NULL AND $nota->not_10 != 0) ? $nota->not_10 : "" ); ?></td>
+								<td><?php echo (($nota->not_11 != NULL AND $nota->not_11 != 0) ? $nota->not_11 : "" ); ?></td>
+								<td><?php echo (($nota->not_12 != NULL AND $nota->not_12 != 0) ? $nota->not_12 : "" ); ?></td>
 								<td><?php echo $nota->not_prom; ?></td>
 							</tr>
 							<?php
@@ -170,18 +174,18 @@ $this->menu=array(
 							?>
 							<tr>
 								<td><?php echo $nota->notAsig->asi_descripcion; ?></td>
-								<td><?php echo $nota->not_01; ?></td>
-								<td><?php echo $nota->not_02; ?></td>
-								<td><?php echo $nota->not_03; ?></td>
-								<td><?php echo $nota->not_04; ?></td>
-								<td><?php echo $nota->not_05; ?></td>
-								<td><?php echo $nota->not_06; ?></td>
-								<td><?php echo $nota->not_07; ?></td>
-								<td><?php echo $nota->not_08; ?></td>
-								<td><?php echo $nota->not_09; ?></td>
-								<td><?php echo $nota->not_10; ?></td>
-								<td><?php echo $nota->not_11; ?></td>
-								<td><?php echo $nota->not_12; ?></td>
+								<td><?php echo (($nota->not_01 != NULL AND $nota->not_01 != 0) ? $nota->not_01 : "" ); ?></td>
+								<td><?php echo (($nota->not_02 != NULL AND $nota->not_02 != 0) ? $nota->not_02 : "" ); ?></td>
+								<td><?php echo (($nota->not_03 != NULL AND $nota->not_03 != 0) ? $nota->not_03 : "" ); ?></td>
+								<td><?php echo (($nota->not_04 != NULL AND $nota->not_04 != 0) ? $nota->not_04 : "" ); ?></td>
+								<td><?php echo (($nota->not_05 != NULL AND $nota->not_05 != 0) ? $nota->not_05 : "" ); ?></td>
+								<td><?php echo (($nota->not_06 != NULL AND $nota->not_06 != 0) ? $nota->not_06 : "" ); ?></td>
+								<td><?php echo (($nota->not_07 != NULL AND $nota->not_07 != 0) ? $nota->not_07 : "" ); ?></td>
+								<td><?php echo (($nota->not_08 != NULL AND $nota->not_08 != 0) ? $nota->not_08 : "" ); ?></td>
+								<td><?php echo (($nota->not_09 != NULL AND $nota->not_09 != 0) ? $nota->not_09 : "" ); ?></td>
+								<td><?php echo (($nota->not_10 != NULL AND $nota->not_10 != 0) ? $nota->not_10 : "" ); ?></td>
+								<td><?php echo (($nota->not_11 != NULL AND $nota->not_11 != 0) ? $nota->not_11 : "" ); ?></td>
+								<td><?php echo (($nota->not_12 != NULL AND $nota->not_12 != 0) ? $nota->not_12 : "" ); ?></td>
 								<td><?php echo $nota->not_prom; ?></td>
 							</tr>
 							<?php
