@@ -236,7 +236,7 @@
 				    }
 				    
 				swal({   
-                                    title: "Correcto!",     
+                                    title: "Guardado!",     
                                     timer: 600,
                                     type: "success",   
                                     showConfirmButton: false 

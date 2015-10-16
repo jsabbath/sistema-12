@@ -345,7 +345,15 @@ $('#b_guardar').on('click',function(){
             type: 'POST',
             data: {notas: lista},
             success: function(data){
-                location.reload();
+                //location.reload();
+
+                swal({   
+                        title: "Guardado!",     
+                        timer: 600,
+                        type: "success",   
+                        showConfirmButton: false 
+                    });
+                
                 window.onbeforeunload = function() {
                        
                     }
