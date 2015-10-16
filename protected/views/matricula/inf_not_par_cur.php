@@ -507,6 +507,7 @@ foreach ($lista_alu as $key => $alu) {
                     </td>
                     </tr>
                 </table>
+        <pagebreak />
    <?php 
 
     

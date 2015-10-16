@@ -438,7 +438,7 @@ class MatriculaController extends Controller
                     }
 
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
-                    $this->refresh(); 
+                    $this->redirect(array('menu')); 
                     
                 }else{
                     Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
@@ -506,7 +506,7 @@ class MatriculaController extends Controller
                 }
 
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
-                $this->render('menu');
+                $this->redirect(array('menu')); 
             }else{
                 Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
                 $this->render('link_selec', array(

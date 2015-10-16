@@ -144,7 +144,7 @@ class CursoController extends Controller
 
 			if($model->save()){
 				Yii::app()->user->setFlash('success', "Curso creado con exito!");
-				$this->redirect(array('admin'));
+				$this->redirect(array('menu'));
 			}
 		}
 		

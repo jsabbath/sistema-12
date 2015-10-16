@@ -28,6 +28,19 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        if( $('#drop_curso').val() > 1 ){
+          console.log("asd");
+           $.ajax({
+                    url: '<?php echo CController::createUrl("curso/reload_asi") ?>',
+                    type: "POST", 
+                    data: {dropdown: $('#drop_curso').val() },
+                    success: function(response) { 
+                       $('#asignaturas').html(response); 
+                    }
+            })
+        }
+
+
         $('#drop_curso').change( function() {
 
             $.ajax({

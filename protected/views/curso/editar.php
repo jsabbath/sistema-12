@@ -230,10 +230,17 @@
 												nom_asi: "<?php echo $nombre_asignatura ?>",
 												per: "<?php echo $periodo; ?>"},
 			success: function(data){
-				location.reload();
+				window.history.back();
 				window.onbeforeunload = function() {
 				       
 				    }
+				    
+				swal({   
+                                    title: "Correcto!",     
+                                    timer: 600,
+                                    type: "success",   
+                                    showConfirmButton: false 
+                                });
 			}
 		})
 	})
