@@ -69,7 +69,7 @@
 				),
 				array(
 					'class'=>'bootstrap.widgets.TbButtonColumn',
-					'template'=>'{update}',
+					'template'=>'{update}{view}',
 					'buttons'=>array(
 						'update'=>array(
 							'label'=>'<i class="icon-update"></i>',
@@ -77,6 +77,14 @@
 								'class'=>"btn btn-info",
 								'data-toggle'=>'tooltip',
 								'title'=>'Actualizar',
+							),
+						),
+						'view'=>array(
+							'label'=>'<i class="icon-search"></i>',
+							'options'=>array(
+								'class'=>"btn btn-success",
+								'data-toggle'=>'tooltip',
+								'title'=>'Informacion',
 							),
 						),
 					),

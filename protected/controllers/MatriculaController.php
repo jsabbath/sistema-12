@@ -54,8 +54,15 @@ class MatriculaController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $notas1 = Notas::model()->findAll(array('condition'=>'not_mat=:x AND not_periodo=1','params'=>array(':x'=>$id)));
+        $notas2 = Notas::model()->findAll(array('condition'=>'not_mat=:x AND not_periodo=2','params'=>array(':x'=>$id)));
+        $curso = ListaCurso::model()->findByAttributes(array('list_mat_id'=>$id));
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+            'notas1'=>$notas1,
+            'notas2'=>$notas2,
+            'curso'=>$curso,
 		));
 	}
 
@@ -444,13 +451,6 @@ class MatriculaController extends Controller
           
         }
         
-
-
-
-
-        /**
-
-        */
 
         $this->render('link_selec', array(
             'id_mat' => $id,
@@ -1006,10 +1006,6 @@ class MatriculaController extends Controller
                                        
                                 
                             }
-
-                               
-
-                           
                         }
                     }
                     }
@@ -1195,8 +1191,4 @@ class MatriculaController extends Controller
             echo $count;  
 
     }
-
-
-   
-
 }
