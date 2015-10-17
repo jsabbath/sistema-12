@@ -27,10 +27,19 @@ $this->pageTitle=Yii::app()->name;
 			
 
 			<?php
-			// Descomentar para ver la funcionalidad de Eventos
+			// Descomentar para ver la funcionalidad Eventos
 			
-				echo "<br>"; 
+			if(
+			!Yii::app()->user->isSuperAdmin and
+            !Yii::app()->user->checkAccess('administrador') and 
+            !Yii::app()->user->checkAccess('director') and
+            !Yii::app()->user->checkAccess('evaluador') and
+            !Yii::app()->user->checkAccess('jefe_utp') and
+            !Yii::app()->user->checkAccess('profesor_prebasica') and
+            Yii::app()->user->checkAccess('profesor')){
+            	echo "<br>"; 
 				echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));
+			}
 			
 			?>
 			
