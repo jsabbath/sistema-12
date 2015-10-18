@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/StickyTableHeaders.js"></script>
 
 
 
@@ -141,6 +142,7 @@
 
 <script>
    // var prom_final = document.getElementById("prom_final");
+   	$('table').stickyTableHeaders();
 	$('#notasTable').numericInputExample().find('td:first').next().next().focus();
 
 	// dar permisos
@@ -197,7 +199,7 @@
 		var rowLength = tabla.rows.length-1;
 		var curso_notas = [];
 		
-		for(var i = 1; i < rowLength; i++ ){
+		for(var i = 2; i < rowLength; i++ ){ // si se activa el stickyHeader Cambiar i=2, por que se agrega un header adicional (normal i = 1)
 			
 			var prom = 0;
 			var alumno = [];

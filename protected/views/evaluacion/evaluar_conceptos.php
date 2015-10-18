@@ -1,4 +1,4 @@
-
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/StickyTableHeaders.js"></script>
 <?php
 /**
  * This file is part of the array_column library
@@ -177,18 +177,18 @@ if (!function_exists('array_column')) {
                  
                     <?php foreach ($conce as $key => $c) { ?>
                         
-                        <p><?php echo "C".$key ." = ". $c['texto']; ?></p>
+                        <p>  <?php echo "C".$key ." = ". $c['texto']; // conceptos descritos?></p>
 
                     <?php } ?>
 
                     <br>
-                        <table class="table table-striped" id="notas_inf" width="100%">
+                        <table class="table table-striped" id="notas_inf<?php echo $key; ?>" width="100%">
                           <thead>
                             <tr>
                                 <th>nombre</th>
                                 <?php foreach ($conce as $key => $c) { ?>
                         
-                                    <th>
+                                    <th title="<?php echo $c['texto']; ?>">
                                         <?php echo "C".$key; ?>
 
 
@@ -264,7 +264,9 @@ if (!function_exists('array_column')) {
 
 
 <script>
-    
+//$('#notas_inf').stickyTableHeaders();
+$('table').stickyTableHeaders();
+
 $('#b_eva').on('click',function(){
     swal({      
             title: "Ingrese su Password!",   

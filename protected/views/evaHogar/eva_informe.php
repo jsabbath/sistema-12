@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/StickyTableHeaders.js"></script>
 <div class="row">
     <div class="span10 offset1">
     <br>
@@ -98,6 +99,8 @@
 </div>
 
 <script type="text/javascript">
+
+    $('table').stickyTableHeaders();
 
     $('#bt_subir_notas').show();
     $('#lock_icon').addClass("icon-ok").removeClass("icon-lock");

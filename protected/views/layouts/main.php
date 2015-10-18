@@ -74,6 +74,7 @@ $tempid = $temp->temp_id;
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-datepicker.js"></script>
 
+
    
 <?php
 $logo = Colegio::model()->find();
@@ -90,9 +91,23 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 
     
 ?>
-    <body>
+
+
+<body>
   
-<div class="navbar-fixed-top visible-desktop"  align="center" class="text-center" style="margin-bottom: 0;">
+<table id="topbar" style=" position: fixed; margin-bottom: 0"  width="100%">
+
+    <tr class="container" style="background-color: #292929; text-align: center">
+        <td style="color:white; padding-left: 20px; text-align: left" width="45%" align="left"><?php echo $nombre ?></td>
+        <td style="color:white; padding: 0mm; text-align: left" width="60%" align="center">Termino sesion: <label class="label" id="timer" style="cursor:default; background-color: white; color: black;"><?php echo $durationMins; ?></label></td>
+        <td style="color:red; padding: 0mm; text-align: right" width="5%" align="right"><label class="label label-important"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir" style="color: white">SALIR</a></label></td>
+    </tr>
+
+    
+</table>
+
+
+<!-- <div class="navbar-fixed-top"  align="center" class="text-center" style="margin-bottom: 0;">
    <div class="container" style="background-color: #292929;">  
         <div class="row text-center" >
                 <div class="span3 offset1 text-left" style="color:white"><?php echo $nombre ?></div> 
@@ -101,10 +116,10 @@ if(!Yii::app()->user->checkAccess('profesor') OR
         </div>
     </div>
 </div>        
-         
+         -->      
 <br class="visible-desktop">
    
-        <div class="container visible-desktop">    
+        <div class="container visible-desktop" style="margin-top: 0px">    
             <header style="background-color: rgba(41, 41, 41, 0.5); border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
                 <div class="row">
                  
@@ -170,7 +185,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                         ){ 
                         ?>
                         <td class="text-center">
-                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu_2'); ?>" title="Cursos">
+                            <a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/menu_2'); ?>" title="Matricula">
                             <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/history.png"></div>
                             </a>
                             <strong style="color: white">Matricula</strong>
@@ -270,7 +285,7 @@ if(!Yii::app()->user->checkAccess('profesor') OR
 
         <div class="container hidden-desktop">    
             <header style="background-color: rgba(41, 41, 41, 0.5); border-bottom: 3px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; margin-bottom: 3px">
-                <div class="row">
+                <div class="row" style="margin-top: 20px">
                  
                 <div class="span12">
                     <table width=100%  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.1em">
