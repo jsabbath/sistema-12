@@ -20,7 +20,12 @@ $.fn.numericInputExample = function () {
 			dataRows.each(function () {
 				total = 0;
 				count = 0;
+				var retirado = 0;
 				var row = $(this);	// row = fila actual
+				console.log();
+				 if(	row.children().eq(1).css('color') == 'rgb(255, 0, 0)' ){
+				 	retirado = 1
+				 }
 				for (column = 2; column < row.children().size()-1; column++) {  // size()-1 para no contar el ultimo y  parte del 2 por el nombre y  id de notas de alumno
 						if( !isNaN(parseFloat(row.children().eq(column).text()))){
 							total += parseFloat(row.children().eq(column).text()); // eq = posicion en la fila
@@ -28,7 +33,7 @@ $.fn.numericInputExample = function () {
 						}
 				};
 				total = total/(count); // total-2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
-				if(isNaN(total) || total == 0){ 
+				if(isNaN(total) || total == 0 || retirado == 1){ 
 					total = " "; 
 					row.children().eq(column).text(total);
 				} else{

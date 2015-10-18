@@ -769,7 +769,9 @@ class MatriculaController extends Controller
 
         }
         ksort($notas); // se ordena por asignatura
+       
         $alumnos = array_unique($notas, SORT_REGULAR); 
+        //var_dump($alumnos);
 
         if( $p == 1 ){
             $asi_alu = $model->mat_asistencia_1;
@@ -787,7 +789,6 @@ class MatriculaController extends Controller
         $cole = Colegio::model()->find();
         $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
-        $mPDF1 = Yii::app()->ePdf->mpdf();
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
 
@@ -846,11 +847,11 @@ class MatriculaController extends Controller
             $cole = Colegio::model()->find();
 
            
-            $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
+            $lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
 
             $alumnos = array();
 
-            $mPDF1 = Yii::app()->ePdf->mpdf();
+            //$mPDF1 = Yii::app()->ePdf->mpdf();
             $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
             foreach ($lista as $key => $alum) {

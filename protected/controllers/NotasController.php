@@ -340,4 +340,240 @@ class NotasController extends Controller
 		));
 	}
 	//fin de las funciones para estadisticas de asignaturas
+
+    //funcion para determinar el año sobre el que se trabaja
+    public function actionAnoactual(){
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+                
+                // La variable es array por que criteria lo pide.
+        if ( $temp->temp_ano != 0 ){
+            $ano = $temp->temp_ano;
+        } else {
+            $ano = $par->par_descripcion;
+        }
+
+        return $ano;
+    }
+
+
+
+	public function actionCursoAnoActual(){
+        /*
+        La funcion devuelve un array con la ID y el nombre completo de los cursos
+        ejemplo: array('1'=>'PRIMERO A')
+        */
+        $ano = $this->actionAnoactual();
+        //$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
+        $curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
+        $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+        $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+       
+        foreach ($curso as $key => $c) {
+            $cur[] = array(
+                   'cur_nivel' => $nivel[$c->cur_nivel],
+                    'cur_id' => $c->cur_id,
+                    'cur_letra' => $letra[$c->cur_letra],
+                );
+        }
+
+        if( !empty($cur) ){
+            sort($cur);
+        } else{
+            throw new CHttpException(666,'$cur es null.  (Matricula/cursoAñoActual) : L338');
+            return;
+        }
+
+        $cursos_actuales = array();
+        foreach ($cur as $key => $c) {
+            $cursos_actuales[$c['cur_id']] = $c['cur_nivel']." ".$c['cur_letra'];
+        }
+
+        return $cursos_actuales;
+
+
+    }
+
+
+
+	public function actionList_cur(){
+		$curso = $this->actionCursoAnoActual();
+
+		$this->render('cur_conso',array(
+                        'cursos' => $curso,
+                        
+                    ));
+   
+
+
+	}
+
+	public function actionConsolidado(){
+		if( isset($_POST['id_cur']) ){
+			$id_curso = $_POST['id_cur'];
+
+			$curso = Curso::model()->findByPk($id_curso);
+			$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' => array(':x' => $id_curso)));         
+
+			$precision = 1;
+			//$curso = array();
+			$pos = 0;
+			$asigs = array();
+
+			$asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso)));
+
+			foreach ($asignaturas as $key => $value) {
+				$id = $value->aa_asignatura;
+				$asi = Asignatura::model()->findByPk($id);
+				$asigs[$asi->asi_orden] = array(
+							'id' 	=> $id,
+							'nom'	=> $asi->asi_nombrecorto,
+							'n'		=> $asi->asi_descripcion,
+							'prom'	=> $this->actionPromedio_curso_asig($id_curso,$id),
+					); 
+			}
+
+			ksort($asigs);
+
+			$alumno = array();
+            foreach ($lista as $key => $alum) {
+            	$final_alu = 0;
+                $id_mat = array('id' => $alum->list_mat_id); 
+                $mat = Matricula::model()->findByPk($id_mat); // asistencia, estado , etc
+                $alum = Alumno::model()->findByPk($mat->mat_alu_id); // nombre,rut,etc
+                $pos++;
+
+              	$notas = array();
+                foreach ($asigs as $key => $asi) {
+                	$asi_id = $asi['id'];
+
+                	// primer semestre
+                	$notas_1_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 1,'not_asig' => $asi_id));
+
+                	// segundo semestre 
+                	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
+
+                	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
+                		$prom1 = $notas_1_sem->not_prom;
+	                	$prom2 = $notas_2_sem->not_prom;
+	                	$final_alu = ($prom1 + $prom2)/2;
+                	} else{
+                		if( $notas_1_sem->not_prom > 0 ){
+                			$final_alu = $notas_1_sem->not_prom;
+                		} 
+                		if( $notas_2_sem->not_prom > 0 ){
+                			$final_alu = $notas_2_sem->not_prom;
+                		}
+                	}
+                	
+
+                	if( $asi['n'] == "RELIGION" ){
+                		if( $final_alu >= 6  ) {
+                            $final_alu = "MB"; 
+                        }else if( $final_alu < 6 AND $final_alu >= 5  ){
+                            $final_alu = "B"; 
+                        }else if( $final_alu < 5 AND $final_alu >= 4 ){ 
+                            $final_alu = "S"; 
+                        }else if( $final_alu < 4 AND $final_alu > 0 ){
+                            $final_alu = "I"; 
+                        }
+                	} else{
+                		if( strlen($final_alu) == 1 ){
+			                $final_alu = $final_alu .".0";
+			            }else{
+			                $final_alu = number_format((float) $final_alu, $precision, '.', '');
+			            }
+                	}
+
+		            $notas[] = $final_alu;
+                }
+
+
+                $alumno[] = array(
+                		'nombre' 	=> $alum->Nombre_completo_2,
+                		'pos' 		=> $pos,
+                		'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
+                		'retiro' 	=> $mat->mat_fretiro,
+                		'notas' 	=> $notas,
+            	);               	
+
+ 
+            }
+
+            $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+
+	 		$mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+	 		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+	        $mPDF1->WriteHTML($stylesheet, 2);
+	        $mPDF1->WriteHTML($this->renderPartial('inf_consolidado', array(
+	                                                                'nombre'	=> $nivel . $letra,
+	                                                                'alumnos'   => $alumno,
+	                                                                'asigs'		=> $asigs,
+
+	                        ), true));
+	        $mPDF1->Output();        
+
+
+		}
+
+	}
+
+	// calculo promedio asignatura anual no toma los alumnos retirados
+	public function actionPromedio_curso_asig($id_curso,$id_asig){
+        $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>  array( ':x' => $id_curso)));
+        $prom_curso = 0;
+        $prom_count = 0;
+        $final_f = 0;
+        $precision = 1;
+
+        foreach ($lista as $key => $id_alum){  // se recorren los alumnos del curso para obtener su promedio
+        	$final_asi = 0;
+            $n1 = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => 1 ));
+            $n2 = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => 2 ));
+            $mat = Matricula::model()->findByPk($id_alum->list_mat_id); 
+            if( !isset($mat->mat_fretiro) ){
+            	if( $n1->not_prom > 0 AND $n2->not_prom > 0 ){
+            		$final_asi = ($n1->not_prom + $n2->not_prom)/2;
+
+	        		if( strlen($final_asi) == 1 ){
+			                $final_asi = $final_asi .".0";
+			            }else{
+			                $final_asi = number_format((float) $final_asi, $precision, '.', '');
+			            }
+
+	                $prom_curso += $final_asi;
+	                $prom_count ++;
+            	} else{
+	            	if( $n1->not_prom > 0 ){
+	            		$prom_curso += $n1->not_prom;
+	            		$prom_count++;
+	            	}
+	            	if( $n2->not_prom > 0 ){
+	            		$prom_curso += $n2->not_prom;
+	            		$prom_count++;
+	            	}
+            	}
+        		
+            } 
+            
+               
+        }
+
+        if( $prom_count != 0 ){
+            $final_f = $prom_curso/$prom_count;
+            
+            if( strlen($final_f) == 1 ){
+                $final_f = $final_f .".0";
+            }else{
+                
+                $final_f = number_format((float) $final_f, $precision, '.', '');
+            }
+        }
+
+        return $final_f;
+    }
+
 }
