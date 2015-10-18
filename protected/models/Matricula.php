@@ -162,6 +162,9 @@ class Matricula extends CActiveRecord
         $criteria->addSearchCondition('matEstado.par_descripcion', $this->estado);
 
 		return new CActiveDataProvider($this, array(
+			 'pagination' => array(
+		             'pageSize' => 35,
+		        ),
 			'criteria'=>$criteria,
 		));
 	}
