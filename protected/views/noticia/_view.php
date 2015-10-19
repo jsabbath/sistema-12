@@ -25,7 +25,7 @@ if($data->not_fecha==date('Y-m-d')){
 
 </style>
 
-<table class="table table-bordered" width=100%>
+<table class="table table-bordered" style="border: 1px solid; border-color: #D2FAF8" width=100%>
   <tr>
     <th class="otro" width=25%><p class="margen" style="font-weight: bold"><?php echo CHtml::encode($fecha); ?></p></th>
     <th class="titulo" width=50%><p class="margen"><?php echo CHtml::encode($data->not_titulo); ?></p> </th>
