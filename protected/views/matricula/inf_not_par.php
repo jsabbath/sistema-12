@@ -205,7 +205,7 @@
          </td>
 
         <td style="border: 0;"> 
-            <p>Semetre </p>
+            <p>Semestre </p>
         </td>
         <td style="border: 0;">
          <strong>: <?php echo $periodo;?></strong>
