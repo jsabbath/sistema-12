@@ -168,15 +168,19 @@
             <td><?php echo $a['pos']; ?></td>
             <td><?php echo $a['nombre']; ?></td>
             <?php foreach ($a['notas'] as $key => $n) { ?>
-               <td <?php if( isset($a['retiro'])){ ?> style="background-color: #EEEEEE;" <?php } ?> ><?php if( $n != "0.0" ) echo $n; ?></td>
-            <?php 
-                if( $n > 0 ){
-                    $prom_alum += $n;
-                    $count_alum ++;
-                }
-            } ?>
-            <td style="background-color: #EEEEEE;"><?php 
-                    if( $count_alum > 0 AND !isset($a['retiro'])){ //  no se le calcula el promedio final a los alumnos retirados
+                <?php if( isset($a['retiro']) ){ ?>
+                        <td style="background-color: #EEEEEE; <?php  if( $n < 4  AND $n > 0) echo 'color: RED;' ?>" ><?php echo $n ?></td>
+                <?php } else{  ?>
+                        <td <?php if( $n < 4 AND $n > 0 ){ ?> style="color: RED;" <?php } ?> ><?php echo $n ?></td>
+                <?php } 
+                    if( $n > 0 ){
+                        $prom_alum += $n;
+                        $count_alum ++;
+                    }
+            }?> 
+
+           <?php 
+                if( $count_alum > 0 AND !isset($a['retiro'])){ //  no se le calcula el promedio final a los alumnos retirados
                         $final_alum = $prom_alum/$count_alum;
 
                         if( strlen($final_alum) == 1 ){
@@ -189,10 +193,14 @@
                         $prom_curso+= $final_alum;
                         $count_curso++;
 
-                        echo $final_alum;
-                    }
+                        //echo $final_alum;
+                   ?>
+                   <td style="background-color: #EEEEEE;"><?php echo $final_alum; ?></td>
+                   <?php } else{ ?>
+                        <td></td>
+                   <?php }
 
-             ?></td>
+             ?>
             <td><?php if($a['asistencia'] > 0) echo $a['asistencia'] ?></td>
             <td><?php echo $a['retiro']; ?></td>
         </tr>    
