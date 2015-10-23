@@ -837,9 +837,15 @@ class MatriculaController extends Controller
         
     }
 
-        // id = alumno , p = periodo
+        // id = curso , p = periodo
     public function actionCur_not(){
         if( isset($_POST['id_cur'],$_POST['id_p']) ){
+
+            // llamada funcion  para mostrar informe anual estudio
+            if( $_POST['id_p'] == 5 ){
+                $this->actionInf_anual_cur($_POST['id_cur']);
+                return;
+            }
 
             $id = $_POST['id_cur'];
             $p = $_POST['id_p'];
@@ -1190,6 +1196,207 @@ class MatriculaController extends Controller
           }
 
             echo $count;  
+    }
+
+    // id = matricula id
+    public function actionInf_anual_alum($id){
+        $mat = $this->loadModel($id);
+        $notas = array();
+
+        $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => 1 )));
+        $evaluaciones2 = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => 2 )));
+
+        if( empty($evaluaciones) OR empty($evaluaciones2)){
+           throw new CHttpException(404, 'Alumno sin Curso.');
+        }
+
+        //$c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
+        $cur_list = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id));
+
+        $ano = $evaluaciones[0]['not_ano'];
+        $curso  = Curso::model()->findByPk($cur_list->list_curso_id);
+
+        foreach ($evaluaciones as $key => $alum) { // tabla notas
+            $final = 0;
+            
+            $asi = Asignatura::model()->findByPk($alum->not_asig);
+            $n2 = $evaluaciones2[$key]['notas'];
+            $prom2 = $evaluaciones2[$key]['not_prom'];
+            if( $prom2 > 0 AND $alum->not_prom > 0 ){
+                $final = ($alum->not_prom + $prom2)/2;
+            } else{
+                if( $prom2 > 0 ){
+                    $final = $prom2;
+                }
+                if( $alum->not_prom > 0){
+                    $final = $alum->not_prom;
+                }
+            }
+            
+
+            if( strlen($final) == 1 ){
+                $final = $final .".0";
+            }else{
+                $precision = 1;
+                $final = number_format((float) $final, $precision, '.', '');
+            }
+
+            $notas[$asi->asi_orden] = array(
+                  'nota1'   => $alum->notas,
+                  'nota2'   => $n2,
+                  'prom_alu'=> $alum->not_prom,
+                  'prom_alu2'=>$prom2,
+                  'nom_asi' => $asi->asi_descripcion,
+                  'prom_f'  => $final,
+                );
+
+        }
+        ksort($notas); // se ordena por asignatura
+       
+        $alumnos = array_unique($notas, SORT_REGULAR); 
+        //var_dump($alumnos);
+
+        // if( $p == 1 ){
+        //     $asi_alu = $model->mat_asistencia_1;
+        // }else if( $p == 2 ){
+        //     $asi_alu = $model->mat_asistencia_2;
+        // }else if( $p == 3 ){
+        //     $asi_alu = $model->mat_asistencia_3;
+        // }
+
+
+        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+        $notas_periodo = $curso->cur_notas_periodo;
+        $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        $cole = Colegio::model()->find();
+        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+
+        $mPDF1 = Yii::app()->ePdf->mpdf('', 'Legal-L');
+
+
+
+        $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+        $mPDF1->WriteHTML($stylesheet, 2);
+        $mPDF1->WriteHTML($this->renderPartial('inf_anual_alum', array(
+                                                                'model'         => $mat,
+                                                                'notas'         => $alumnos,
+                                                                'curso_nombre'  => $nivel. " ". $letra,
+                                                                'max_not'       => $notas_periodo,
+                                                               // 'periodo'       => $p,
+                                                                'profe'         => $profe->NombreCompleto,
+                                                                'ano'           => $ano,
+                                                                'nom_director'  => $nombre_dir->nombreCompleto,
+                                                                'firma_profe'   => $profe->usu_firma,
+                                                                'firma_dir'     => $nombre_dir->usu_firma,
+                                                                'cole'          => $cole,
+                                                                //'asi_alu'       => $asi_alu,
+                        ), true));
+        $mPDF1->Output();        
 
     }
+
+    // id_cur = id curso;
+    public function actionInf_anual_cur($id_cur){
+
+        $lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' =>array(':x' => $id_cur)));
+
+        $alumnos = array();
+        foreach ($lista as $key => $alum) {
+            $alumnos[] = array('id' => $alum->list_mat_id);
+        }
+
+
+
+
+        $curso  = Curso::model()->findByPk($id_cur);
+
+
+        // $mat = $this->loadModel($id);
+        // $notas = array();
+
+        // $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => 1 )));
+        // $evaluaciones2 = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => 2 )));
+
+        // if( empty($evaluaciones) OR empty($evaluaciones2)){
+        //    throw new CHttpException(404, 'Alumno sin Curso.');
+        // }
+
+
+        // $ano = $evaluaciones[0]['not_ano'];
+        // $curso  = Curso::model()->findByPk($id_cur);
+
+        // foreach ($evaluaciones as $key => $alum) { // tabla notas
+        //     $final = 0;
+            
+        //     $asi = Asignatura::model()->findByPk($alum->not_asig);
+        //     $n2 = $evaluaciones2[$key]['notas'];
+        //     $prom2 = $evaluaciones2[$key]['not_prom'];
+        //     if( $prom2 > 0 AND $alum->not_prom > 0 ){
+        //         $final = ($alum->not_prom + $prom2)/2;
+        //     } else{
+        //         if( $prom2 > 0 ){
+        //             $final = $prom2;
+        //         }
+        //         if( $alum->not_prom > 0){
+        //             $final = $alum->not_prom;
+        //         }
+        //     }
+            
+
+        //     if( strlen($final) == 1 ){
+        //         $final = $final .".0";
+        //     }else{
+        //         $precision = 1;
+        //         $final = number_format((float) $final, $precision, '.', '');
+        //     }
+
+        //     $notas[$asi->asi_orden] = array(
+        //           'nota1'   => $alum->notas,
+        //           'nota2'   => $n2,
+        //           'prom_alu'=> $alum->not_prom,
+        //           'prom_alu2'=>$prom2,
+        //           'nom_asi' => $asi->asi_descripcion,
+        //           'prom_f'  => $final,
+        //         );
+
+        // }
+        // ksort($notas); // se ordena por asignatura
+       
+        // $alumnos = array_unique($notas, SORT_REGULAR); 
+
+
+
+        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+        $notas_periodo = $curso->cur_notas_periodo;
+        $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        $cole = Colegio::model()->find();
+        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+
+        $mPDF1 = Yii::app()->ePdf->mpdf('', 'Legal-L');
+
+
+
+        $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+        $mPDF1->WriteHTML($stylesheet, 2);
+        $mPDF1->WriteHTML($this->renderPartial('inf_anual_cur', array(
+                                                                'alu_list'       => $alumnos,
+                                                                //'notas'         => $alumnos,
+                                                                'curso_nombre'  => $nivel. " ". $letra,
+                                                                'max_not'       => $notas_periodo,
+                                                               // 'periodo'       => $p,
+                                                                'profe'         => $profe->NombreCompleto,
+                                                                //'ano'           => $ano,
+                                                                'nom_director'  => $nombre_dir->nombreCompleto,
+                                                                'firma_profe'   => $profe->usu_firma,
+                                                                'firma_dir'     => $nombre_dir->usu_firma,
+                                                                'cole'          => $cole,
+                                                                //'asi_alu'       => $asi_alu,
+                        ), true));
+        $mPDF1->Output();         
+
+    }
+
+
 }

@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="span12 text-center">
-		<h2>Informe Notas Parciales</h2>
+		<h2>Informes de Nota por Alumno</h2>
 	</div>
 	<div class="span12 text-center">
-		<p class="text-info">Aqui se puede generar un <strong>Informe con las notas paricales</strong> para cualquier <strong>Alumno</strong> seleccionado</p>
+		<p class="text-info">Aqui se puede generar <strong>Informes de notas paricales o Anual de estudio</strong> para cualquier <strong>Alumno</strong> seleccionado</p>
 		<br>
 	</div>
 </div>
@@ -49,7 +49,7 @@ if( $p == "SEMESTRE" ){
 		),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template'=>'{periodo1} {periodo2}',
+			'template'=>'{periodo1} {periodo2} {anual}',
 			'buttons'=>array(
 				'periodo1'=>array(
 					'label'=>'<i class="icon-list-alt"></i>',
@@ -67,6 +67,15 @@ if( $p == "SEMESTRE" ){
 						'class'=>"btn btn-success",
 						'data-toggle'=>'tooltip',
 						'title'=>'Periodo 2',
+					),
+				),
+				'anual' => array(
+					'label'=>'<i class="icon-list"></i>',
+					'url'=>'Yii::app()->createUrl("Matricula/inf_anual_alum",array("id"=>$data->mat_id))',
+					'options'=>array(
+						'class'=>"btn btn-default",
+						'data-toggle'=>'tooltip',
+						'title'=>'Anual',
 					),
 				),
 				
@@ -112,13 +121,13 @@ if( $p == "SEMESTRE" ){
 			),
 			array(
 				'class'=>'bootstrap.widgets.TbButtonColumn',
-				'template'=>'{periodo1} {periodo2} {periodo3}',
+				'template'=>'{periodo1} {periodo2} {periodo3} {anual}',
 				'buttons'=>array(
 					'periodo1'=>array(
 						'label'=>'<i class="icon-list-alt"></i>',
 						'url'=>'Yii::app()->createUrl("Matricula/certificado_nota_par",array("id"=>$data->mat_id,"p" => 1))',
 						'options'=>array(
-							'class'=>"btn btn-success",
+							'class'=>"btn btn-default",
 							'data-toggle'=>'tooltip',
 							'title'=>'Periodo 1',
 						),
@@ -136,9 +145,18 @@ if( $p == "SEMESTRE" ){
 						'label'=>'<i class="icon-list-alt"></i>',
 						'url'=>'Yii::app()->createUrl("Matricula/certificado_nota_par",array("id"=>$data->mat_id,"p" => 3))',
 						'options'=>array(
-							'class'=>"btn btn-success",
+							'class'=>"btn btn-default",
 							'data-toggle'=>'tooltip',
 							'title'=>'Periodo 2',
+						),
+					),
+					'anual' => array(
+						'label'=>'<i class="icon-list"></i>',
+						'url'=>'Yii::app()->createUrl("Matricula/inf_anual_alum",array("id"=>$data->mat_id))',
+						'options'=>array(
+							'class'=>"btn btn-success",
+							'data-toggle'=>'tooltip',
+							'title'=>'Anual',
 						),
 					),
 				),

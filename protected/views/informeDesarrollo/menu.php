@@ -33,12 +33,12 @@ if(
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Informe Notas Parciales</strong>
+								<strong>Informes de Nota por alumno</strong>
 							</div>
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se pueden obtener los informes de notas parciales</p>
+								<p>Se puede imprimir informes de notas parciales o Anual  de estudio por alumno.</p>
 							</div>
 						</div>
 					</div>
@@ -74,12 +74,12 @@ if(
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Informe Notas por curso</strong>
+								<strong>Informes de Nota por curso</strong>
 							</div>
 						</div>
 						<div class="row">
 							<div class="span3">
-								<p>En este item se puede imprimir el informe de notas parciales por curso</p>
+								<p>Se puede imprimir el informe de notas parciales o Anual de estudio por curso</p>
 							</div>
 						</div>
 					</div>
