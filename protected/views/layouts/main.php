@@ -176,7 +176,8 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                         <?php 
                          if(
                             Yii::app()->user->isSuperAdmin OR
-                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('administrador') OR
+                            Yii::app()->user->checkAccess('administrativo') OR
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
