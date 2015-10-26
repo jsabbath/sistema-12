@@ -1,4 +1,9 @@
-
+<?php
+if(
+	Yii::app()->user->checkAccess('administrador') OR
+    Yii::app()->user->isSuperAdmin
+){
+?>
 <div class="row">
 	<div class="span12">
 		<div class="row">
@@ -10,13 +15,13 @@
 		<div class="row">
 			<div class="span4">
 
-				<?php 
-				
+				<?php
+
 
 				if(
 					Yii::app()->user->checkAccess('administrador') OR
 				    Yii::app()->user->isSuperAdmin
-				){ 
+				){
 				?>
 					<div class="row">
 					<div class="visible-phone"><br/></div>
@@ -52,9 +57,9 @@
 
 				if(
 					Yii::app()->user->checkAccess('administrador') OR
-				    Yii::app()->user->isSuperAdmin OR 
+				    Yii::app()->user->isSuperAdmin OR
 				    Yii::app()->user->checkAccess('director')
-				){ 
+				){
 				?>
 						<div class="row">
 						<div class="visible-phone"><br/></div>
@@ -83,14 +88,14 @@
 						</a>
 						</div>
 						<br>
-				<?php } 
+				<?php }
 
 
 				if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director')
-			){ 
+			){
 			?>
 					<div class="row">
 						<div class="visible-phone"><br/></div>
@@ -122,19 +127,19 @@
 				<?php }
 
 				?>
-				
+
 			</div>
 			<div class="span4">
 
 			<?php
-			
-			
+
+
 
 			if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director')
-			){ 
+			){
 			?>
 				<div class="row">
 					<div class="visible-phone"><br/></div>
@@ -165,12 +170,12 @@
 				<br>
 			<?php
 			}
-			 
+
 			if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director')
-			){ 
+			){
 			?>
 				<div class="row">
 					<div class="visible-phone"><br/></div>
@@ -203,9 +208,9 @@
 
 			if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director')
-			){ 
+			){
 			?>
 					<div class="row">
 					<div class="visible-phone"><br/></div>
@@ -235,17 +240,17 @@
 				</div>
 				<br>
 			<?php } ?>
-				
+
 			</div>
 			<div class="span4">
 
 			<?php
-			 
+
 			if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director')
-			){ 
+			){
 			?>
 				<div class="row">
 					<div class="visible-phone"><br/></div>
@@ -282,10 +287,10 @@
 
 			if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director') OR
 			    Yii::app()->user->checkAccess('evaluador')
-			){ 
+			){
 			?>
 				<div class="row">
 					<a class="link-negro" href="<?php echo Yii::app()->createUrl('promedioanual/termino_ano'); ?>">
@@ -319,10 +324,10 @@
 
 			if(
 				Yii::app()->user->checkAccess('administrador') OR
-			    Yii::app()->user->isSuperAdmin OR 
+			    Yii::app()->user->isSuperAdmin OR
 			    Yii::app()->user->checkAccess('director') OR
 			    Yii::app()->user->checkAccess('evaluador')
-			){ 
+			){
 			?>
 				<div class="row">
 					<a class="link-negro" href="<?php echo Yii::app()->createUrl('asignatura/admin'); ?>">
@@ -350,15 +355,17 @@
 					</a>
 					</div>
 					<br>
-			<?php } 
+			<?php }
 
 			 ?>
-				
+
 			</div>
 		</div>
 	</div>
 </div>
-
+<?php
+} 
+?>
 
 <div class="row">
 	<div class="span12">
@@ -370,11 +377,11 @@
 
 	<div class="row">
 		<div class="span4">
-			<?php 
+			<?php
 				if(
 					Yii::app()->user->checkAccess('administrador') OR
 				    Yii::app()->user->isSuperAdmin
-				){ 
+				){
 				?>
 					<div class="row">
 						<a class="link-negro" href="<?php echo Yii::app()->createUrl('parametro/admin'); ?>">
@@ -404,45 +411,47 @@
 					</div>
 					<br>
 			<?php
-			}
+				}
 
-
-		?>
+				if(
+					Yii::app()->user->checkAccess('administrador') OR
+				    Yii::app()->user->isSuperAdmin
+				){	
+			?>	
 				<div class="row">
 				<div class="visible-phone"><br/></div>
-				<a class="link-negro" href="<?php echo Yii::app()->user->ui->getProfileUrl()?>" >
+				<a class="link-negro" href="<?php echo Yii::app()->createUrl('usuario/admin'); ?>">
 					<div class="span4" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 						<div class="row">
 							<div class="span1 text-center">
 								<div class="hidden-phone">
-									<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/insert_hyperlink.png"); ?>
+									<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/group.png"); ?>
 								</div>
 							</div>
 							<div class="span3">
 								<div class="row">
 									<div class="span3">
-										<strong>Cambiar Contraseña</strong>
+										<strong>Administrar usuarios</strong>
 									</div>
 								</div>
 								<div class="row">
 									<div class="span3">
-										<p>En este item se puede cambiar la contraseña  de tu cuenta</p>
+										<p>En este item se puede modificar o eliminar un usuario</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</a>
-
-				</div>
-				<br>
+			</div>
+			<br>
 		<?php
+		}
 
-			 
 		if(
 			Yii::app()->user->checkAccess('administrador') OR
 		    Yii::app()->user->isSuperAdmin
-		){ 
+		){
 		?>
 				<div class="row">
 				<div class="visible-phone"><br/></div>
@@ -476,50 +485,44 @@
 		<div class="span4">
 		<?php
 		}
-		 
-
-		if(
-			Yii::app()->user->checkAccess('administrador') OR
-		    Yii::app()->user->isSuperAdmin
-		){ 
 		?>
-				<div class="row">
+
+		<div class="row">
 				<div class="visible-phone"><br/></div>
-				<a class="link-negro" href="<?php echo Yii::app()->createUrl('usuario/admin'); ?>">
+				<a class="link-negro" href="<?php echo Yii::app()->user->ui->getProfileUrl()?>" >
 					<div class="span4" style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 						<div class="row">
 							<div class="span1 text-center">
 								<div class="hidden-phone">
-									<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/group.png"); ?>
+									<?php echo TbHtml::imagePolaroid(Yii::app()->request->baseUrl."/images/iconos/insert_hyperlink.png"); ?>
 								</div>
 							</div>
 							<div class="span3">
 								<div class="row">
 									<div class="span3">
-										<strong>Administrar usuarios</strong>
+										<strong>Cambiar Contraseña</strong>
 									</div>
 								</div>
 								<div class="row">
 									<div class="span3">
-										<p>En este item se puede modificar o eliminar un usuario</p>
+										<p>En este item se puede cambiar la contraseña  de tu cuenta</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</a>
-			</div>
-			<br>
+
+				</div>
+				<br>
+
 		<?php
-		}
 
-
-		 
 		if(
 			Yii::app()->user->checkAccess('administrador') OR
 		    Yii::app()->user->isSuperAdmin
-		){ 
-		?>				
+		){
+		?>
 				<div class="row">
 				<div class="visible-phone"><br/></div>
 				<a class="link-negro" href="<?php echo Yii::app()->createUrl('cruge/ui/usermanagementadmin'); ?>">
@@ -549,14 +552,14 @@
 			<br>
 		<?php
 		}
-		 
-		 
+
+
 
 		if(
 			Yii::app()->user->checkAccess('administrador') OR
 		    Yii::app()->user->isSuperAdmin
-		){ 
-		?>					
+		){
+		?>
 				<div class="row">
 				<div class="visible-phone"><br/></div>
 				<a class="link-negro" href="<?php echo Yii::app()->createUrl('cruge/ui/rbacusersassignments'); ?>">
@@ -589,12 +592,12 @@
 		<div class="span4">
 		<?php
 		}
-		 
+
 		if(
 			Yii::app()->user->checkAccess('administrador') OR
 		    Yii::app()->user->isSuperAdmin
-		){ 
-		?>					
+		){
+		?>
 				<div class="row">
 				<div class="visible-phone"><br/></div>
 				<a class="link-negro" href="<?php echo Yii::app()->createUrl('usuario/online'); ?>">
@@ -628,11 +631,11 @@
 
 					if(
 						Yii::app()->user->checkAccess('administrador') OR
-					    Yii::app()->user->isSuperAdmin OR 
+					    Yii::app()->user->isSuperAdmin OR
 					    Yii::app()->user->checkAccess('director') OR
 					    Yii::app()->user->checkAccess('evaluador') OR
 					    Yii::app()->user->checkAccess('jefe_utp')
-					){ 
+					){
 					?>
 						<div class="row">
 							<a class="link-negro" href="<?php echo Yii::app()->createUrl('matricula/subir_xml'); ?>">
@@ -666,6 +669,6 @@
 
 			?>
 		</div>
-		</div>	
+		</div>
 	</div>
 </div>
