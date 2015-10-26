@@ -277,11 +277,12 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                         <?php
                         if(
                             !(Yii::app()->user->isSuperAdmin OR
-                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('administrador') OR
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp')) AND 
                             (Yii::app()->user->checkAccess('profesor_prebasica') OR
+                            Yii::app()->user->checkAccess('administrativo') OR
                             Yii::app()->user->checkAccess('profesor'))
                         ){
                         ?>
@@ -358,7 +359,8 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                         <?php 
                          if(
                             Yii::app()->user->isSuperAdmin OR
-                            Yii::app()->user->checkAccess('administrador') OR 
+                            Yii::app()->user->checkAccess('administrador') OR
+                            Yii::app()->user->checkAccess('administrativo') OR 
                             Yii::app()->user->checkAccess('director') OR
                             Yii::app()->user->checkAccess('evaluador') OR
                             Yii::app()->user->checkAccess('jefe_utp') OR
@@ -452,6 +454,27 @@ if(!Yii::app()->user->checkAccess('profesor') OR
                             </a>
                             <strong style="color: white">Salir</strong>
                         </td> -->
+                        <?php
+                        if(
+                            !(Yii::app()->user->isSuperAdmin OR
+                            Yii::app()->user->checkAccess('administrador') OR
+                            Yii::app()->user->checkAccess('director') OR
+                            Yii::app()->user->checkAccess('evaluador') OR
+                            Yii::app()->user->checkAccess('jefe_utp')) AND 
+                            (Yii::app()->user->checkAccess('profesor_prebasica') OR
+                            Yii::app()->user->checkAccess('administrativo') OR
+                            Yii::app()->user->checkAccess('profesor'))
+                        ){
+                        ?>
+
+                        <td class="text-center">
+                            <a class="link-negro" href="<?php echo Yii::app()->user->ui->getProfileUrl()?>" title="Cambiar contraseña">
+                            <div class="tilt pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/iconos/insert_hyperlink.png"></div>
+                            </a>
+                           
+                        </td>
+
+                        <?php } ?>
                     </table>
                 </div>
             </div>   
