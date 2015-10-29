@@ -412,6 +412,7 @@ class NotasController extends Controller
 	public function actionConsolidado(){
 		if( isset($_POST['id_cur']) ){
 			$id_curso = $_POST['id_cur'];
+			$estado = Parametro::model()->find(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO"'));
 
 			$curso = Curso::model()->findByPk($id_curso);
 			$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' => array(':x' => $id_curso)));         
@@ -494,7 +495,8 @@ class NotasController extends Controller
                 		'nombre' 	=> $alum->Nombre_completo_2,
                 		'pos' 		=> $pos,
                 		'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
-                		'retiro' 	=> $mat->mat_fretiro,
+                		'retiro' 	=> $mat->mat_estado,
+                		'f_retiro'	=> $mat->mat_fretiro,
                 		'notas' 	=> $notas,
             	);               	
 
@@ -512,6 +514,7 @@ class NotasController extends Controller
 	                                                                'nombre'	=> $nivel . $letra,
 	                                                                'alumnos'   => $alumno,
 	                                                                'asigs'		=> $asigs,
+	                                                                'id_retiro'	=> $estado->par_id,
 
 	                        ), true));
 	        $mPDF1->Output();        
@@ -523,6 +526,8 @@ class NotasController extends Controller
 
 	// calculo promedio asignatura anual no toma los alumnos retirados
 	public function actionPromedio_curso_asig($id_curso,$id_asig){
+		$estado = Parametro::model()->find(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO"'));
+
         $lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x','params' =>  array( ':x' => $id_curso)));
         $prom_curso = 0;
         $prom_count = 0;
@@ -534,7 +539,7 @@ class NotasController extends Controller
             $n1 = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => 1 ));
             $n2 = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => 2 ));
             $mat = Matricula::model()->findByPk($id_alum->list_mat_id); 
-            if( !isset($mat->mat_fretiro) ){
+            if( $mat->mat_estado != $estado->par_id ){
             	if( $n1->not_prom > 0 AND $n2->not_prom > 0 ){
             		$final_asi = ($n1->not_prom + $n2->not_prom)/2;
 

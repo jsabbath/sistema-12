@@ -168,9 +168,9 @@
             <td><?php echo $a['pos']; ?></td>
             <td><?php echo $a['nombre']; ?></td>
             <?php foreach ($a['notas'] as $key => $n) { ?>
-                <?php if( isset($a['retiro']) ){ ?>
+                <?php if( $a['retiro'] == $id_retiro  ){ // si el alumno  esta retirado ?> 
                         <td style="background-color: #EEEEEE; <?php  if( $n < 4  AND $n > 0) echo 'color: RED;' ?>" ><?php echo $n ?></td>
-                <?php } else{  ?>
+                <?php } else{ //  si  el alumno no esta retirado ?>
                         <td <?php if( $n < 4 AND $n > 0 ){ ?> style="color: RED;" <?php } ?> ><?php echo $n ?></td>
                 <?php } 
                     if( $n > 0 ){
@@ -180,7 +180,7 @@
             }?> 
 
            <?php 
-                if( $count_alum > 0 AND !isset($a['retiro'])){ //  no se le calcula el promedio final a los alumnos retirados
+                if( $count_alum > 0 AND $a['retiro'] != $id_retiro ){ //  no se le calcula el promedio final a los alumnos retirados
                         $final_alum = $prom_alum/$count_alum;
 
                         if( strlen($final_alum) == 1 ){
@@ -202,7 +202,7 @@
 
              ?>
             <td><?php if($a['asistencia'] > 0) echo $a['asistencia'] ?></td>
-            <td><?php echo $a['retiro']; ?></td>
+            <td><?php if( $a['retiro'] == $id_retiro ) echo $a['f_retiro']; ?></td>
         </tr>    
     <?php } ?>
 
