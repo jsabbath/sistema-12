@@ -685,22 +685,29 @@ class MatriculaController extends Controller
 
     public function actionCertificado($id){
         $model = $this->loadModel($id);
-        $colegio = Colegio::model()->findByAttributes(array('col_nombre_colegio'=>'COLEGIO ALBORADA'));
+        $cole = Colegio::model()->find();
+        //$colegio = Colegio::model()->findByAttributes(array('col_nombre_colegio'=>'COLEGIO ALBORADA'));
         $lista = ListaCurso::model()->findByAttributes(array('list_mat_id'=>$id));
-        $usuario = Usuario::model()->findByAttributes(array('usu_id'=>$colegio->col_nombre_director));
+        //$usuario = Usuario::model()->findByAttributes(array('usu_id'=>$cole->col_nombre_director));
 
-        $director = $usuario->getNombreCompleto();
-        $curso = $lista->listCurso->getNombrecurso();
+        $director = Usuario::model()->findByPk($cole->col_nombre_director);
+        //$director = $usuario->getNombreCompleto();
+        //$curso = $lista->listCurso->getNombrecurso();
+        $curso  = Curso::model()->findByPk($lista->list_curso_id);
+        $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
 
         $mPDF1 = Yii::app()->ePdf->mpdf();
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 
-        $mPDF1->SetFooter('San Pedro de la Paz '.Fecha::fecha_actual());
+        $mPDF1->SetHeader('San Pedro de la Paz '.Fecha::fecha_actual());
         $mPDF1->WriteHTML($stylesheet, 2);
         $mPDF1->WriteHTML($this->renderPartial('certificado', array(
-            'model'=>$model,
-            'director'=>$director,
-            'curso'=>$curso,
+                                'model'         =>$model,
+                                'cole'          => $cole,
+                                'nom_director'  => $director->nombreCompleto,
+                                'firma_dir'     => $director->usu_firma,
+                                'curso_nombre'  => $nivel. " ". $letra,
             ), true));
         $mPDF1->Output();
     }

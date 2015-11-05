@@ -3,8 +3,8 @@
 	<tr>
 		<td width="20%"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png"></td>
 		<td width="80%">
-			<h2>Colegio Alborada</h2>
-			<p>Ruta 160 N° 3573 - Concepcion, San Pedro de la Paz - F(41) 2278599</p>
+			<h2><?php echo $cole->col_nombre_colegio ?></h2>
+			<p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono. " - RolDB: ".$cole->col_rolRBD; ?></p>
 		</td>
 	</tr>
 </table>
@@ -34,7 +34,7 @@
 <br>
 <div>
 	<p>Asiste regularmente a este establecimiento educacional, cursando actualmente :</p>
-	<h4><?php echo $curso; ?></h4>
+	<h4><?php echo $curso_nombre; ?></h4>
 </div>
 <br>
 <br>
@@ -44,12 +44,10 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
+
 
 <div style="text-align:center">
-	<p><?php echo $director; ?></p>
+ <img style="width: 30%"  src="<?php echo Yii::app()->request->baseUrl; ?>/images/firmas/<?php echo $firma_dir; ?>">         
+	<p><?php echo $nom_director; ?></p>
 	<p>DIRECTOR(A)</p>
 </div>
