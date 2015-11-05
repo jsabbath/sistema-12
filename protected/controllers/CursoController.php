@@ -1086,7 +1086,7 @@ class CursoController extends Controller
 	}
 
 
-	// function para matricular un alumno manual mente. 
+	// function para matricular alumno (cambio de curso). 
 	// id_alum = id_alumno, id_curso, id_mat
 	public function actionMatricular_alumno(){
 		if( isset($_POST['id_mat']) ){
@@ -1116,7 +1116,7 @@ class CursoController extends Controller
 
                 // SEMESTRE (SACADO  DE LA TABLA PARAMETRO NO CAMBIAR) ;
                 if( $tipo_periodo->par_descripcion == 'SEMESTRE' ){
-                    for ($i=1; $i <= 2 ; $i++) {
+                    for ($i=1; $i <= 2 ; $i++) {  // para cada periodo
                         foreach ( $asignadas as $p ){
                             $nota = new Notas;
 
@@ -1129,6 +1129,8 @@ class CursoController extends Controller
                             $nota->not_asig = $p->aa_asignatura;
                             $nota->not_mat = $id; // se cambia la id de la matricula a la nueva
                             $nota->insert();
+
+                            $old_notas->delete(); //  se borra la nota antigua
                         }
                     }
                     // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
@@ -1145,12 +1147,23 @@ class CursoController extends Controller
                             $nota->not_asig = $p->aa_asignatura;
                             $nota->not_mat = $id; // se cambia la id de la matricula a la nueva
                             $nota->insert();
+
+                            $old_notas->delete(); //  se borra la nota antigua
                         }
                     }
                 }
 
                 //  se cuenta el numero de alumnos que tiene el curso
                 $numero_alumnos = ListaCurso::model()->countByAttributes(array('list_curso_id' => $id_curso));
+
+
+                // se buscan las evaluaciones antiguas y  se borran
+                Evaluacion::model()->deleteAll('eva_matricula = :id', array('id' => $mat->mat_id) );
+                //$eva_old->delete();
+                //  se busca al alumno en la lista del curso  antiguo para borrarlo
+                ListaCurso::model()->deleteAll('list_mat_id = :id', array('id' => $mat->mat_id));
+                
+                $mat->delete(); //  se borra la matricula 
 
                 $lista_alumnos = new ListaCurso;
                 $lista_alumnos->list_curso_id = $id_curso;
@@ -1172,6 +1185,8 @@ class CursoController extends Controller
                     $evaluacion->eva_ano = $curso->cur_ano;
                     $evaluacion->insert();
                 }
+
+               
             }
 		}
 	}
