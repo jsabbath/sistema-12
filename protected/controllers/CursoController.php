@@ -840,20 +840,21 @@ class CursoController extends Controller
 
 			foreach($curso_asi as $key => $alumno){ //  se recorre cada alumno 
 				$id_matricula = $alumno[0];
-				
-				
+								
 				$model = Matricula::model()->findByPk($id_matricula);
-				$asistencia = $alumno[1];
+                // $alumno[1] contiene todas las asistencias 
+                $asistencia = $alumno[1];
 
-				while (count($asistencia) < 3 ) {
-				 	array_push($asistencia,"0");
-				}
-				if( !empty($asistencia[0]) && !empty($asistencia[0]) && !empty($asistencia[0]) ){
-					$model->mat_asistencia_1 = $asistencia[0];
-					$model->mat_asistencia_2 = $asistencia[1];
-					$model->mat_asistencia_3 = $asistencia[2];
-					$model->update();
-				}
+                if( !empty($asistencia[0]) ){
+                    $model->mat_asistencia_1 = $asistencia[0];
+                }
+                if( !empty($asistencia[1]) ){
+                    $model->mat_asistencia_2 = $asistencia[1];
+                }
+                if( !empty($asistencia[2]) ){
+                    $model->mat_asistencia_3 = $asistencia[2]; 
+                }
+                $model->update();
 			}
 		}
 	}

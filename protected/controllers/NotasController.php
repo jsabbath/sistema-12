@@ -581,4 +581,179 @@ class NotasController extends Controller
         return $final_f;
     }
 
+
+   	public function actionCert_anual_alum($id_mat){
+   		$mat = Matricula::model()->findByPk($id_mat);
+		$precision = 1;
+   		$lista = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id_mat));  
+   		$id_curso = $lista->list_curso_id;
+   		$curso = Curso::model()->findByPk($id_curso);
+
+		$asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso)));
+
+		foreach ($asignaturas as $key => $value) {
+			$id_asi = $value->aa_asignatura;
+			$asi = Asignatura::model()->findByPk($id_asi);
+			$asigs[$asi->asi_orden] = array(
+						'id' 	=> $id_asi,
+						'n'		=> $asi->asi_descripcion,
+				); 
+		}
+
+		ksort($asigs);   		
+		$count_final = 0;
+		$final = 0;
+
+		foreach ($asigs as $key => $asi) {
+			$asi_id = $asi['id'];
+
+        	// primer semestre
+        	$notas_1_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 1,'not_asig' => $asi_id));
+
+        	// segundo semestre 
+        	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
+
+        	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
+        		$prom1 = $notas_1_sem->not_prom;
+            	$prom2 = $notas_2_sem->not_prom;
+            	$final_alu = ($prom1 + $prom2)/2;
+        	} else{
+        		if( $notas_1_sem->not_prom > 0 ){
+        			$final_alu = $notas_1_sem->not_prom;
+        		} 
+        		if( $notas_2_sem->not_prom > 0 ){
+        			$final_alu = $notas_2_sem->not_prom;
+        		}
+        	}
+        	
+
+        	if( $asi['n'] == "RELIGION" ){
+        		if( $final_alu >= 6  ) {
+                    $final_alu = "MB"; 
+                }else if( $final_alu < 6 AND $final_alu >= 5  ){
+                    $final_alu = "B"; 
+                }else if( $final_alu < 5 AND $final_alu >= 4 ){ 
+                    $final_alu = "S"; 
+                }else if( $final_alu < 4 AND $final_alu > 0 ){
+                    $final_alu = "I"; 
+                }
+        	} else{
+        		if( strlen($final_alu) == 1 ){
+	                $final_alu = $final_alu .".0";
+	            }else{
+	                $final_alu = number_format((float) $final_alu, $precision, '.', '');
+	            }
+	            if( $final_alu > 0){
+	            	$count_final++;
+	            	$final += $final_alu;
+	            }
+	            
+        	}
+
+            $notas[] = array(
+            		"nota"		=> $final_alu,
+            		"not_pal"	=> Numero_a_palabra::convert($final_alu),
+            		"nom_asi"	=> $asi["n"],	
+            		);
+	    }
+
+	    if( $count_final > 0 ){
+	    	$final = $final / $count_final;
+
+	    	if( strlen($final) == 1 ){
+	                $final = $final .".0";
+	            }else{
+	                $final = number_format((float) $final, $precision, '.', '');
+	            }
+	    }
+
+	    $asistencia = $mat->mat_asistencia_1 + $mat->mat_asistencia_2; 
+
+
+     	$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+    	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+        $cole = Colegio::model()->find();
+        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+        $ano = $this->actionAnoactual();
+
+ 		$mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+ 		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+        $mPDF1->WriteHTML($stylesheet, 2);
+        $mPDF1->WriteHTML($this->renderPartial('cert_anual_alum', array(
+                                                                'curso_nombre'		=> $nivel . $letra,
+                                                                'model'   		=> $mat,
+                                                                'notas'			=> $notas,
+                                                                'profe'         => $profe->NombreCompleto,
+                                                                'nom_director'  => $nombre_dir->nombreCompleto,
+                                                                'firma_profe'   => $profe->usu_firma,
+                                                                'firma_dir'     => $nombre_dir->usu_firma,
+                                                                'cole'          => $cole,
+                                                                'ano'			=> $ano,
+                                                                'final'			=> $final,
+                                                                'asistencia'	=> $asistencia/2,
+
+                        ), true));
+        $mPDF1->Output();       
+
+   	}
+
+
+   	public function actionCert_anual_curso(){
+   		if( isset($_POST['id_curso']) ){
+   			$id_curso = $_POST['id_curso'];
+
+	   		
+			
+	   		$lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x', 'params' => array(':x' => $id_curso)));  
+	   		
+	   		$curso = Curso::model()->findByPk($id_curso);
+
+			$asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso)));
+
+			foreach ($asignaturas as $key => $value) {
+				$id_asi = $value->aa_asignatura;
+				$asi = Asignatura::model()->findByPk($id_asi);
+				$asigs[$asi->asi_orden] = array(
+							'id' 	=> $id_asi,
+							'n'		=> $asi->asi_descripcion,
+					); 
+			}
+
+			ksort($asigs);   		
+			
+
+
+	     	$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+	    	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+	        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+	        $cole = Colegio::model()->find();
+	        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+	        $ano = $this->actionAnoactual();
+
+	 		$mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+	 		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+	        $mPDF1->WriteHTML($stylesheet, 2);
+	        $mPDF1->WriteHTML($this->renderPartial('cert_anual_curso', array(
+	                                                                'curso_nombre'	=> $nivel . $letra,
+	                                                                'lista'	   		=> $lista,
+	                                                                'asigs'			=> $asigs,
+	                                                                'profe'         => $profe->NombreCompleto,
+	                                                                'nom_director'  => $nombre_dir->nombreCompleto,
+	                                                                'firma_profe'   => $profe->usu_firma,
+	                                                                'firma_dir'     => $nombre_dir->usu_firma,
+	                                                                'cole'          => $cole,
+	                                                                'ano'			=> $ano,
+	                                                                //'final'			=> $final,
+	                                                                //'asistencia'	=> $asistencia/2,
+
+	                        ), true));
+	        $mPDF1->Output();   
+
+
+   		}
+   	}
+
 }

@@ -1261,15 +1261,6 @@ class MatriculaController extends Controller
         ksort($notas); // se ordena por asignatura
        
         $alumnos = array_unique($notas, SORT_REGULAR); 
-        //var_dump($alumnos);
-
-        // if( $p == 1 ){
-        //     $asi_alu = $model->mat_asistencia_1;
-        // }else if( $p == 2 ){
-        //     $asi_alu = $model->mat_asistencia_2;
-        // }else if( $p == 3 ){
-        //     $asi_alu = $model->mat_asistencia_3;
-        // }
 
 
         $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
@@ -1319,60 +1310,6 @@ class MatriculaController extends Controller
         $curso  = Curso::model()->findByPk($id_cur);
 
 
-        // $mat = $this->loadModel($id);
-        // $notas = array();
-
-        // $evaluaciones = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => 1 )));
-        // $evaluaciones2 = Notas::model()->findAll(array('condition' => 'not_mat=:x AND not_periodo=:y','params' =>  array( ':x' => $id, ':y' => 2 )));
-
-        // if( empty($evaluaciones) OR empty($evaluaciones2)){
-        //    throw new CHttpException(404, 'Alumno sin Curso.');
-        // }
-
-
-        // $ano = $evaluaciones[0]['not_ano'];
-        // $curso  = Curso::model()->findByPk($id_cur);
-
-        // foreach ($evaluaciones as $key => $alum) { // tabla notas
-        //     $final = 0;
-            
-        //     $asi = Asignatura::model()->findByPk($alum->not_asig);
-        //     $n2 = $evaluaciones2[$key]['notas'];
-        //     $prom2 = $evaluaciones2[$key]['not_prom'];
-        //     if( $prom2 > 0 AND $alum->not_prom > 0 ){
-        //         $final = ($alum->not_prom + $prom2)/2;
-        //     } else{
-        //         if( $prom2 > 0 ){
-        //             $final = $prom2;
-        //         }
-        //         if( $alum->not_prom > 0){
-        //             $final = $alum->not_prom;
-        //         }
-        //     }
-            
-
-        //     if( strlen($final) == 1 ){
-        //         $final = $final .".0";
-        //     }else{
-        //         $precision = 1;
-        //         $final = number_format((float) $final, $precision, '.', '');
-        //     }
-
-        //     $notas[$asi->asi_orden] = array(
-        //           'nota1'   => $alum->notas,
-        //           'nota2'   => $n2,
-        //           'prom_alu'=> $alum->not_prom,
-        //           'prom_alu2'=>$prom2,
-        //           'nom_asi' => $asi->asi_descripcion,
-        //           'prom_f'  => $final,
-        //         );
-
-        // }
-        // ksort($notas); // se ordena por asignatura
-       
-        // $alumnos = array_unique($notas, SORT_REGULAR); 
-
-
 
         $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
         $notas_periodo = $curso->cur_notas_periodo;
@@ -1402,6 +1339,32 @@ class MatriculaController extends Controller
                                                                 //'asi_alu'       => $asi_alu,
                         ), true));
         $mPDF1->Output();         
+
+    }
+
+
+    public function ActionCertificado_anual(){
+        $estado = Parametro::model()->findAll(array('condition'=>'par_descripcion="ACTIVO"'));
+        $lista = CHtml::listData(ListaCurso::model()->findAll(),'list_mat_id','list_curso_id');
+        $ano = $this->actionAnoactual();
+        $model = new Matricula('search');
+        $model->unsetAttributes();  // clear any default values
+
+        $cole = Colegio::model()->find();
+        $per = Parametro::model()->findByPk($cole->col_periodo);
+        
+        if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
+        
+
+        $cursos = $this->actionCursoAnoActual();
+        $this->render('cert_anual_alum', array(
+            'model' => $model,
+            'lista' => $lista,
+            'estado' => $estado,
+            'cursos' => $cursos,
+            'ano' => $ano,
+        ));
+
 
     }
 
