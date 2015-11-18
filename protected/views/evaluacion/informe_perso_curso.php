@@ -159,6 +159,50 @@
 <body>
 
 
+<?php 
+
+    foreach ($lista as $key => $l) {
+        $id = $l['id'];
+
+        $model = Matricula::model()->findByPk($id);
+        $inf = array(); 
+
+            
+        $area = array();
+        $informe = InformeDesarrollo::model()->findByPk($curso->cur_infd);
+        $areas = Area::model()->findAll(array('condition' => 'are_infd=:x', 'params' => array(':x' => $curso->cur_infd)));
+
+        $evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
+        foreach ($areas as $key => $a) {
+          
+            $evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
+            $notas = array();
+            foreach ($evalu as $key => $ev) {
+                    
+                $con = Concepto::model()->findByPk($ev->eva_concepto);
+                if( $con->con_area == $a->are_id ){
+                    $notas[] = array(
+                            'eva_nota'      => $ev->eva_nota,
+                            'eva_nombre'    => $con->con_descripcion,
+                        );
+                }
+            }
+
+            $area[] = array(
+                 'are_nombre'    => $a->are_descripcion,
+                 'are_nota'      => $notas,
+            ); 
+        }
+
+        $inf[] = array(
+                'areas' => $area,
+            ); 
+  
+        $nombre_inf = $informe->id_descripcion;
+
+?>
+
+
 
 <table width="100%" style="border: 0;">
 	<tr>
@@ -226,9 +270,9 @@
 <table width="100%" style="border: 0;">
 	
 <?php
-	$areas = $inf[0]['areas'];
+	$arex = $inf[0]['areas'];
 
-	foreach ($areas as $key => $are) {
+	foreach ($arex as $key => $are) {
 		$notas = $are['are_nota'];
 ?>
 		<tr>
@@ -274,6 +318,8 @@
         </tr>
     </table>
          
+
+<?php } ?>
 
      
 </body>

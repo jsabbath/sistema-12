@@ -465,12 +465,13 @@ class EvaluacionController extends Controller
         $ano = $this->actionAnoactual();
         $model = new Matricula('search');
         $model->unsetAttributes();  // clear any default values
-
+        $cursos = $this->actionCursoAnoActual();
      	$cole = Colegio::model()->find();
         $per = Parametro::model()->findByPk($cole->col_periodo);
         
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('informe_per_lista', array(
+        	'cursos'	=> $cursos,
             'model' => $model,
             'lista' => $lista,
             'estado' => $estado,
@@ -504,10 +505,10 @@ class EvaluacionController extends Controller
         $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
      
-  $inf = array(); 
+  		$inf = array(); 
 
 		
-	$area = array();
+		$area = array();
     	$informe = InformeDesarrollo::model()->findByPk($curso->cur_infd);
 		$areas = Area::model()->findAll(array('condition' => 'are_infd=:x', 'params' => array(':x' => $curso->cur_infd)));
 
@@ -555,6 +556,57 @@ class EvaluacionController extends Controller
                                                                 'nombre_inf'	=> $informe->id_descripcion,
                                             ), true));
         $mPDF1->Output();
+    }
+
+
+
+    public function actionCertificado_perso_curso(){
+    	if( isset($_POST['id_curso']) ){
+
+    		$id_curso = $_POST['id_curso'];
+	        $ano = $this->actionAnoactual();
+	        $curso  = Curso::model()->findByPk($id_curso);
+	        $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+	        $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+	        $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+	        $cole = Colegio::model()->find();
+	        $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+
+       		$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' =>array(':x' => $id_curso)));
+
+	        $alumnos = array();
+	        foreach ($lista as $key => $alum) {
+	            $alumnos[] = array('id' => $alum->list_mat_id);
+	        }
+
+
+
+
+
+	       
+	        $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+	        $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
+	        $mPDF1->WriteHTML($stylesheet, 2);
+
+
+	        $mPDF1->WriteHTML($this->renderPartial('informe_perso_curso', array( 
+	        														//'model'         => $matricula,
+	                                                                'lista'         => $alumnos,
+	                                                                'curso_nombre'  => $nivel. " ". $letra,
+	                                                               // 'max_not'       => $notas_periodo,
+	                                                                'curso'       => $curso,
+	                                                                'profe'         => $profe->NombreCompleto,
+	                                                                'ano'           => $ano,
+	                                                                'nom_director'  => $nombre_dir->nombreCompleto,
+	                                                                'firma_profe'   => $profe->usu_firma,
+	                                                                'firma_dir'     => $nombre_dir->usu_firma,
+	                                                                'cole'          => $cole,
+	                                                                //'inf'			=> $inf,
+	                                                                //'nombre_inf'	=> $informe->id_descripcion,
+	                                            ), true));
+	        $mPDF1->Output();
+
+    	}
     }
 	
 
