@@ -4,7 +4,7 @@
 		<td width="20%"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo_colegio.png"></td>
 		<td width="80%">
 			<h2><?php echo $cole->col_nombre_colegio ?></h2>
-			<p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono. " - RolDB: ".$cole->col_rolRBD; ?></p>
+			<p><?php echo $cole->col_direccion. " - F(41) ". $cole->col_telefono. " - Rbd: ".$cole->col_rolRBD; ?></p>
 		</td>
 	</tr>
 </table>

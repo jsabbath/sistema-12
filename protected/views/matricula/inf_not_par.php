@@ -165,7 +165,7 @@
 		<td width="20%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
 		<td width="80%" style="border: 0;">
 			<h2><?php echo $cole->col_nombre_colegio ?></h2>
-			<p><?php echo $cole->col_direccion. " - ". $cole->col_telefono. " - RolDB: ".$cole->col_rolRBD; ?></p>
+			<p><?php echo $cole->col_direccion. " - ". $cole->col_telefono. " - Rbd: ".$cole->col_rolRBD; ?></p>
 		</td>
 	</tr>
 </table>
