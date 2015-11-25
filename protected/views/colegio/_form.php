@@ -76,7 +76,7 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 			</div>
 		</div>
 
-	
+
 
 							 <?php  if( !$model->isNewRecord ){  ?>
 					            <div class="row">
@@ -99,8 +99,8 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 					                    'placeholder' => $ape_dir,
 					                    'disabled'=>'disabled',
 					                     ))?>
-					            </div>     
-					        
+					            </div>
+
 					        <?php } else{ ?>
 					            <div class="row">
 					               	<?php echo $form->labelEx($model,'col_nombre_director'); ?>
@@ -123,9 +123,9 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 					                        'placeholder' => 'Apellidos',
 					                        'disabled'=>'disabled',
 					                         ))?>
-					            </div>     
+					            </div>
 
-					      
+
 					        <?php } ?>
 
 
@@ -185,7 +185,7 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 			</div>
 		</div>
 	</div>
-	
+
 
 	<div class="span5 offset1">
 		<div class="row">
@@ -234,7 +234,7 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 			<div class="span6">
 				<?php echo $form->labelEx($model,'col_fecha_segundo'); ?>
 				<?php echo $form->textField($model,'col_fecha_segundo',array('class'=>'datepicker')); ?>
-			</div>	
+			</div>
 		</div>
 
 		<div class="row">
@@ -332,14 +332,14 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 			<div class="span6">
 				<?php echo $form->labelEx($model,'ano_decreto_supremo'); ?>
 				<?php echo $form->dropDownList($model,'ano_decreto_supremo',$anos,array('prompt'=>'Seleccione año')); ?>
-			</div>	
+			</div>
 		</div>
 
 		<div class="row">
 			<div class="span6">
 				<?php echo $form->labelEx($model,'numero_promocion_evaluacion'); ?>
 				<?php echo $form->textField($model,'numero_promocion_evaluacion'); ?>
-			</div>	
+			</div>
 		</div>
 	</div>
 
@@ -353,8 +353,14 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 <br>
 
 <script type="text/javascript">
-	
-$('.datepicker').datepicker({format: 'yyyy/mm/dd',});
+
+$('.datepicker').datepicker({
+	todayHighlight: true,
+    format: 'yyyy/mm/dd',
+    autoclose: true,
+    clearBtn: true,
+    language: "es",
+});
 
 
 </script>
@@ -374,7 +380,7 @@ $('.datepicker').datepicker({format: 'yyyy/mm/dd',});
                                                         label: item.nombre +'/' + item.apellido,
                                                         apellido: item.apellido + ' ' + item.apellido2,
                                                         nombre: item.nombre + ' ' + item.nombre2,
-                                                        id: item.id_usu, 
+                                                        id: item.id_usu,
                                                         }
                                             }))
                                 }
@@ -388,9 +394,9 @@ $('.datepicker').datepicker({format: 'yyyy/mm/dd',});
 
                     })
              });
-    </script>   
+    </script>
 
-    
+
     <script>
         $("#limpiar").on('click', function() {
                         $("#nombre").val(""),

@@ -61,14 +61,14 @@
 				<?php echo $form->labelEx($model,'not_responsable'); ?>
 				<?php echo $form->textArea($model,'not_responsable',array('rows'=>6, 'cols'=>50)); ?>
 			</div>
-			
+
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="span2 offset8">
 			<?php echo CHtml::submitButton($model->isNewRecord ? 'Ingresar' : 'Guardar',array('class'=>'btn btn-primary')); ?>
-		</div>	
+		</div>
 	</div>
 
 </div>
@@ -80,6 +80,11 @@
 
 <script type="text/javascript">
 	$('.datepicker').datepicker({
-		format : 'yyyy/mm/dd',
-	});
+		todayHighlight: true,
+	    format: 'yyyy/mm/dd',
+	    autoclose: true,
+	    clearBtn: true,
+	    language: "es",
+});
+
 </script>

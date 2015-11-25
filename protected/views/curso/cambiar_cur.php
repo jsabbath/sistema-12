@@ -20,7 +20,7 @@ $this->menu=array(
 ?>
 <div class="row">
     <div class="span12 text-center">
-        <h2>Cambio de curso</h2>  
+        <h2>Cambio de curso</h2>
     </div>
     <div class="span12 text-center">
         <p class="text-info">Aqui se puede cambiar de curso un <strong>alumno</strong></p>
@@ -28,7 +28,7 @@ $this->menu=array(
 </div>
 <div class="row">
     <div class="span12 text-center">
-        <h5>1.- Ingrese el NOMBRE, APELLIDO o el RUT del alumno:</h5>    
+        <h5>1.- Ingrese el NOMBRE, APELLIDO o el RUT del alumno:</h5>
     </div>
 </div>
 <div class="row">
@@ -51,13 +51,13 @@ $this->menu=array(
   <div>
 
       <!--  Se muestra al buscar    !-->
-      <?php 
+      <?php
       echo TbHtml::textField('Text', '',array('id'=>'nombres','placeholder' => 'Nombres','disabled'=>'disabled',));
-      
+
       echo Tbhtml::hiddenField('Text','',array('id' => 'id_alum',));
 
       echo TbHtml::textField('Text', '',array('id'=>'apellido','placeholder' => 'Apellidos','disabled'=>'disabled',));
-      
+
       echo TbHtml::textField('Text', '',array('id'=>'rut_','placeholder' => 'RUT','disabled'=>'disabled',));
 
       echo TbHtml::textField('Text', '',array('id'=>'curso','placeholder' => 'curso','disabled'=>'disabled',));
@@ -78,10 +78,10 @@ $this->menu=array(
   <!-- <?php //echo CHtml::textField('Text', '',array('id' =>'estado','placeholder' => 'Estado'))?> !-->
 
   <!--  Se muestra al buscar    !-->
-  <button class="btn btn-success" id="matricular" disabled="true" style="margin-bottom:10px"><i id="lock_icon" class="icon-ok"></i></button>   
+  <button class="btn btn-success" id="matricular" disabled="true" style="margin-bottom:10px"><i id="lock_icon" class="icon-ok"></i></button>
 </div>
 
- <!-- Asignar Asignatura 
+ <!-- Asignar Asignatura
      <?php /*$this->widget('bootstrap.widgets.TbModal', array(
             'id' => 'cambio_modal',
             'header' => '<h4>Asignar Asignatura</h4>',
@@ -91,12 +91,18 @@ $this->menu=array(
                   //  TbHtml::linkButton('Retirar',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
                     TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
             ),
-    ));*/ ?>    
-        
+    ));*/ ?>
+
 !-->
 
 <script type="text/javascript">
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({
+        todayHighlight: true,
+        format: 'yyyy/mm/dd',
+        autoclose: true,
+        clearBtn: true,
+        language: "es",
+    });
 </script>
 
 <script>
@@ -120,7 +126,7 @@ $this->menu=array(
                                                     id_mat: item.id_mat,
                                                     }
                                         }))
-                               
+
 
                             }
 
@@ -132,7 +138,7 @@ $this->menu=array(
                         $("#curso").val(ui.item.curso)
                         $("#id_curso").val(ui.item.cur_id)
                         $("#mat_id").val(ui.item.id_mat)
-                        $("#id_alum").val(ui.item.id_alum)   
+                        $("#id_alum").val(ui.item.id_alum)
                         $("#rut_").val(ui.item.rut)
                         if( $('#pn').val() ) {
                             $('#hiddenpls').show();
@@ -142,17 +148,17 @@ $this->menu=array(
                               data: { idcurso: ui.item.cur_id },
                               })
                               .done(function(response) {
-                                    $('#cur_id').html(response); 
-                            }) 
+                                    $('#cur_id').html(response);
+                            })
                             $('#cur_id').on('change', function(){
-                              $('#matricular').attr("disabled", false);      
-                            }); 
+                              $('#matricular').attr("disabled", false);
+                            });
 
                         }
                     }});
        });
-</script>    
-    
+</script>
+
 
 <script>
   $(function(){
@@ -175,7 +181,7 @@ $this->menu=array(
                                                     id_mat: item.id_mat,
                                                     }
                                         }))
-                               
+
 
                             }
 
@@ -187,7 +193,7 @@ $this->menu=array(
                         $("#curso").val(ui.item.curso)
                         $("#id_curso").val(ui.item.cur_id)
                         $("#mat_id").val(ui.item.id_mat)
-                        $("#id_alum").val(ui.item.id_alum)   
+                        $("#id_alum").val(ui.item.id_alum)
                         $("#rut_").val(ui.item.rut)
                         if( $('#rut_button').val() ) {
                             $('#hiddenpls').show();
@@ -200,8 +206,8 @@ $this->menu=array(
                                       $('#cur_id').html(response);
                                 });
                             $('#cur_id').on('change', function(){
-                                $('#matricular').prop("disabled", false);        
-                            })    
+                                $('#matricular').prop("disabled", false);
+                            })
 
                         }
                     }});
@@ -210,23 +216,23 @@ $this->menu=array(
 
 
 <script>
-    function getId(){ 
+    function getId(){
         var value= $("#id").val();
-        if( value != "") 
+        if( value != "")
             return value;
-    }         
+    }
 
-    function getFecha(){ 
+    function getFecha(){
         var value= $("#fecha").val();
-        if( value != "") 
+        if( value != "")
             return value;
-    } 
+    }
 
-  /*  function getEstado(){ 
+  /*  function getEstado(){
         var value= $("#estado").val();
-        if( value != "") 
+        if( value != "")
             return value;
-    }   */       
+    }   */
 </script>
 
 
@@ -240,19 +246,19 @@ $this->menu=array(
                         $("#rut_button").val("")
                         $("#fecha_retirar").replaceWith(" <div id='fecha_retirar'>  </div> ")
                         $('#hiddenpls').hide()
-                        $('#matricular').attr("disabled", true);   
+                        $('#matricular').attr("disabled", true);
                     });
 
 
     $('#matricular').on('click',function(){
-          swal({  
-              title: "Estas seguro?",   
-              text: "Al cambiar el alumno de curso sus notas se asignaran nuevamente y seran duplicadas, y su estado sera RETIRADO!",  
-              type: "warning",   
-              showCancelButton: true,   
-              confirmButtonColor: "#DD6B55",   
-              confirmButtonText: "Cambiar de Curso!",   
-              closeOnConfirm: false, 
+          swal({
+              title: "Estas seguro?",
+              text: "Al cambiar el alumno de curso sus notas se asignaran nuevamente y seran duplicadas, y su estado sera RETIRADO!",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Cambiar de Curso!",
+              closeOnConfirm: false,
           },function(){
               $.ajax({
                 url: "<?php echo $this->createUrl('curso/matricular_alumno'); ?>",
@@ -260,14 +266,14 @@ $this->menu=array(
                 data: {id_mat: $("#mat_id").val(), id_curso: $("#cur_id").val(), id_alum: $("#id_alum").val()},
               })
               .done(function() {
-                swal({   
-                    title: "Hecho!",     
+                swal({
+                    title: "Hecho!",
                     timer: 600,
-                    type: "success",   
-                    showConfirmButton: false 
+                    type: "success",
+                    showConfirmButton: false
                   });
               });
-              
+
           }
 
         );

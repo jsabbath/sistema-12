@@ -20,7 +20,7 @@ $this->menu=array(
 ?>
 <div class="row">
     <div class="span12 text-center">
-        <h2>Retirar Alumno</h2>  
+        <h2>Retirar Alumno</h2>
     </div>
     <div class="span12 text-center">
         <p class="text-info">Aqui se puede cambiar el estado de un <strong>alumno</strong> a <strong>retirado</strong></p>
@@ -28,7 +28,7 @@ $this->menu=array(
 </div>
 <div class="row">
     <div class="span12 text-center">
-        <h5>Ingrese el NOMBRE o el RUT del alumno</h5>    
+        <h5>Ingrese el NOMBRE o el RUT del alumno</h5>
     </div>
 </div>
 <div class="row">
@@ -51,13 +51,13 @@ $this->menu=array(
 <div>
 
     <!--  Se muestra al buscar    !-->
-    <?php 
+    <?php
     echo TbHtml::textField('Text', '',array('id'=>'nombres','placeholder' => 'Nombres','disabled'=>'disabled',));
-    
+
     echo Tbhtml::hiddenField('Text','',array('id' => 'id',));
 
     echo TbHtml::textField('Text', '',array('id'=>'apellido','placeholder' => 'Apellidos','disabled'=>'disabled',));
-    
+
     echo TbHtml::textField('Text', '',array('id'=>'rut_','placeholder' => 'RUT','disabled'=>'disabled',))
 
     ?>
@@ -72,7 +72,7 @@ $this->menu=array(
 
 <!--  Se muestra al buscar    !-->
 <?php echo TbHtml::button('',array(
-    'color'=> TbHtml::ALERT_COLOR_SUCCESS, 
+    'color'=> TbHtml::ALERT_COLOR_SUCCESS,
     'id' =>'retirar',
     'style'=>'margin-bottom:10px',
     'icon' => 'icon-ok',
@@ -87,10 +87,10 @@ $this->menu=array(
             'success'=> 'function(){location.reload();}'
         )
     )
-)?>      
+)?>
 </div>
 
- <!-- Asignar Asignatura 
+ <!-- Asignar Asignatura
      <?php /*$this->widget('bootstrap.widgets.TbModal', array(
             'id' => 'cambio_modal',
             'header' => '<h4>Asignar Asignatura</h4>',
@@ -100,12 +100,19 @@ $this->menu=array(
                   //  TbHtml::linkButton('Retirar',  array( 'color' => TbHtml::BUTTON_COLOR_DANGER, 'url' => Yii::app()->user->ui->logoutUrl,)),
                     TbHtml::button('Cancelar', array('data-dismiss' => 'modal',)),
             ),
-    ));*/ ?>    
-        
+    ));*/ ?>
+
 !-->
 
 <script type="text/javascript">
-$( ".pick" ).datepicker();
+$( ".pick" ).datepicker({ 
+    todayHighlight: true,
+    format: 'yyyy/mm/dd',
+    autoclose: true,
+    clearBtn: true,
+    language: "es",
+});
+
 </script>
 
 <script>
@@ -126,7 +133,7 @@ $( ".pick" ).datepicker();
                                                     rut: item.rut,
                                                     }
                                         }))
-                               
+
                             }
 
                         })
@@ -134,15 +141,15 @@ $( ".pick" ).datepicker();
                     select: function(event, ui) {
                         $("#nombres").val(ui.item.nombres)
                         $("#apellido").val(ui.item.apellido)
-                        $("#id").val(ui.item.id)   
+                        $("#id").val(ui.item.id)
                         $("#rut_").val(ui.item.rut)
                         if( $('#pn').val() ) {
                             $('#hiddenpls').show();
                         }
                     }});
     	 });
-</script>    
-    
+</script>
+
 
 <script>
      $("#limpiar").on('click', function() {
@@ -181,7 +188,7 @@ $( ".pick" ).datepicker();
                     select: function(event, ui) {
                         $("#nombres").val(ui.item.nombres)
                         $("#apellido").val(ui.item.apellido)
-                        $("#id").val(ui.item.id)   
+                        $("#id").val(ui.item.id)
                         $("#rut_").val(ui.item.rut)
                         if( $('#rut_button').val() ) {
                             $('#hiddenpls').show();
@@ -192,21 +199,21 @@ $( ".pick" ).datepicker();
 
 
 <script>
-    function getId(){ 
+    function getId(){
         var value= $("#id").val();
-        if( value != "") 
+        if( value != "")
             return value;
-    }         
+    }
 
-    function getFecha(){ 
+    function getFecha(){
         var value= $("#fecha").val();
-        if( value != "") 
+        if( value != "")
             return value;
-    } 
+    }
 
-  /*  function getEstado(){ 
+  /*  function getEstado(){
         var value= $("#estado").val();
-        if( value != "") 
+        if( value != "")
             return value;
-    }   */       
+    }   */
 </script>
