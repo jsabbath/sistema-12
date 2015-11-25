@@ -51,7 +51,7 @@ class Matricula extends CActiveRecord
 			array('mat_ano, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'numerical', 'integerOnly'=>true),
 			array('mat_numero', 'length', 'max'=>11),
 			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
-			array('alumno_nombres','safe'),
+			array('alumno_nombres, mat_documentos','safe'),
 			array('alumno_apepat','safe'),
 			array('alumno_apemat','safe'),
 			array('estado','safe'),
@@ -94,6 +94,7 @@ class Matricula extends CActiveRecord
 			'mat_asistencia_3' => 'Asistencia 3',
 			'mat_alu_id' => 'Alumno',
 			'mat_estado' => 'Estado',
+			'mat_documentos' => 'Documentos Recibidos',
 		);
 	}
 
@@ -211,12 +212,12 @@ class Matricula extends CActiveRecord
 
 	public function validateText($attribute, $params) {
     $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
-        if($this->$attribute!=""){	
+        if($this->$attribute!=""){
 	        if (!preg_match($pattern, $this->$attribute))
 	            $this->addError($attribute,$params['message']);
     	}
 	}
-    
+
     public function validateText2($attribute, $params) {
         $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú0-9º°\.\,\'\"\)\(\-\@\:\/\+]+([[:space:]]{0,2}[a-zA-ZñÑÁÉÍÓÚáéíóú0-9º°\.\,\'\"\)\(\-\@\:\/\+]+)*)$/';
         $pattern2 = '/^([0-9º°\.\,\'\"\)\(\-\@\:\/\+]+)$/';
@@ -240,7 +241,7 @@ class Matricula extends CActiveRecord
     	}
     }
     public function validateFechaNacimiento($attribute, $params) {
-    	if($this->$attribute!=""){	
+    	if($this->$attribute!=""){
 			if(strtotime($this->$attribute) && 1 === preg_match('~[0-9]~', $this->$attribute)){
 			    $date1 = new DateTime(date('Y-m-d'));
 				$date2 = new DateTime($this->$attribute);
@@ -258,10 +259,10 @@ class Matricula extends CActiveRecord
 	 	$array_rut = array();
 	    for($i=0; $i< strlen($this->$attribute); $i++) {
 	    	if($rut[$i]!='.'){
-	    	  $array_rut[]=$rut[$i];	
+	    	  $array_rut[]=$rut[$i];
 			}
 	    }
-	    
+
 	    $rut_attribute = implode("", $array_rut);
         if (strpos($rut_attribute, "-") == false) {
             $data[0] = substr($rut_attribute, 0, -1);
@@ -292,7 +293,7 @@ class Matricula extends CActiveRecord
     	$array_rut = array();
 	    for($i=0; $i< strlen($this->$attribute); $i++) {
 	    	if($rut[$i]!='.'){
-	    	  $array_rut[]=$rut[$i];	
+	    	  $array_rut[]=$rut[$i];
 			}
 	    }
 	    $rut_attribute = implode("", $array_rut);

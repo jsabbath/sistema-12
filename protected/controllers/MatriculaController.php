@@ -81,42 +81,80 @@ class MatriculaController extends Controller
     {
         $model = new Matricula;
         $alumno = new Alumno;
-        
-        //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE   
+
+        //HAY QUE HACERLO EN AJAX PARA ACTUALIZAR AUTOMATICAMENTE
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
+        $religion = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="religion_alum"')), 'par_id', 'par_descripcion');
+        $trans = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="TRANSPORTE_ALUM"')), 'par_id', 'par_descripcion');
+        $otro = Parametro::model()->find(array('condition'=>'par_item="TRANSPORTE_ALUM" AND par_descripcion="otro"'));
         $estado = Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="ACTIVO"'));
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $vivienda = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="vivienda_alum"')), 'par_id', 'par_descripcion');
+        $constru = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="constru_alum"')), 'par_id', 'par_descripcion');
+        $baño_tipo = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="baño_alum"')), 'par_id', 'par_descripcion');
+        $nivel_edu = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="edu_nivel"')), 'par_id', 'par_descripcion');
+		$vive_con = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="alum_vive"')), 'par_id', 'par_descripcion');
+		$otro_vive = Parametro::model()->find(array('condition'=>'par_item="alum_vive" AND par_descripcion="otro"'));
+
+
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
-            $model->mat_fingreso = date('Y-m-d');
+			$model->mat_documentos = mb_strtoupper($model->mat_documentos,'utf-8');
+            if( !isset($model->mat_fingreso) ) $model->mat_fingreso = date('Y-m-d');
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
                 //todo los textos a mayuscula
-                $alumno->alum_nombres = mb_strtoupper($alumno->alum_nombres,'utf-8');
+				$alumno->alum_nombres = mb_strtoupper($alumno->alum_nombres,'utf-8');
                 $alumno->alum_apepat = mb_strtoupper($alumno->alum_apepat,'utf-8');
                 $alumno->alum_apemat = mb_strtoupper($alumno->alum_apemat,'utf-8');
                 $alumno->alum_direccion = mb_strtoupper($alumno->alum_direccion,'utf-8');
                 $alumno->alum_salud = mb_strtoupper($alumno->alum_salud,'utf-8');
+                $alumno->alum_medicamentos = mb_strtoupper($alumno->alum_medicamentos,'utf-8');
+                $alumno->alum_enfermedad = mb_strtoupper($alumno->alum_enfermedad,'utf-8');
+                $alumno->alum_aprendizaje = mb_strtoupper($alumno->alum_aprendizaje,'utf-8');
+				$alumno->alum_fonos_emergencia = mb_strtoupper($alumno->alum_fonos_emergencia,'utf-8');
+				$alumno->alum_madre_nombre = mb_strtoupper($alumno->alum_madre_nombre,'utf-8');
+				$alumno->alum_madre_actividad = mb_strtoupper($alumno->alum_madre_actividad,'utf-8');
+				$alumno->alum_madre_act_tipo = mb_strtoupper($alumno->alum_madre_act_tipo,'utf-8');
+				$alumno->alum_padre_nombre = mb_strtoupper($alumno->alum_padre_nombre,'utf-8');
+				$alumno->alum_padre_rut = mb_strtoupper($alumno->alum_padre_rut,'utf-8');
+				$alumno->alum_padre_actividad = mb_strtoupper($alumno->alum_padre_actividad,'utf-8');
+				$alumno->alum_padre_act_tipo = mb_strtoupper($alumno->alum_padre_act_tipo,'utf-8');
+				$alumno->alum_apo1_nombre = mb_strtoupper($alumno->alum_apo1_nombre,'utf-8');
+				$alumno->alum_apo2_nombre = mb_strtoupper($alumno->alum_apo2_nombre,'utf-8');
+				$alumno->alum_fam1_actividad = mb_strtoupper($alumno->alum_fam1_actividad,'utf-8');
+				$alumno->alum_fam1_lugar = mb_strtoupper($alumno->alum_fam1_lugar,'utf-8');
+				$alumno->alum_fam2_actividad = mb_strtoupper($alumno->alum_fam2_actividad,'utf-8');
+				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
+
                 if($alumno->save()){
                     $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
                     $model->mat_estado = $estado[0]->par_id;
                     if ($model->save()) {
-                        $this->redirect(array('addcurso', 'id' => $model->mat_id));  
+                        $this->redirect(array('addcurso', 'id' => $model->mat_id));
                     }
                 }
             }
-        } 
+        }
+
         $this->render('create', array(
             'model' => $model,
             'alumno' => $alumno,
             'region'=>$region,
+            'religion' => $religion,
+            'otro' => $otro,
+            'trans' => $trans,
             'genero'=>$genero,
+            'vivienda' => $vivienda,
+            'constru' => $constru,
+            'baño_tipo' => $baño_tipo,
+            'nivel_edu' => $nivel_edu,
+			'vive_con'	=> $vive_con,
+			'otro_vive'	=> $otro_vive,
         ));
     }
 
@@ -129,16 +167,26 @@ class MatriculaController extends Controller
     {
         $model = $this->loadModel($id);
         $alumno = Alumno::model()->findByPk($model->mat_alu_id);
+        $religion = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="religion_alum"')), 'par_id', 'par_descripcion');
         $region = CHtml::listData(Region::model()->findAll(), 'reg_id', 'reg_descripcion');
         $ciudad = CHtml::listData(Ciudad::model()->findAll('ciu_reg=:id', array(':id' => $alumno->alum_region)), 'ciu_id', 'ciu_descripcion');
         $comuna = CHtml::listData(Comuna::model()->findAll('com_ciu=:id', array(':id' => $alumno->alum_ciudad)), 'com_id', 'com_descripcion');
         $genero = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="SEXO"')), 'par_id', 'par_descripcion');
         $estado = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ESTADO"')),'par_id','par_descripcion');
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $trans = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="TRANSPORTE_ALUM"')), 'par_id', 'par_descripcion');
+        $otro = Parametro::model()->find(array('condition'=>'par_item="TRANSPORTE_ALUM" AND par_descripcion="otro"'));
+        $vivienda = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="vivienda_alum"')), 'par_id', 'par_descripcion');
+        $constru = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="constru_alum"')), 'par_id', 'par_descripcion');
+        $baño_tipo = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="baño_alum"')), 'par_id', 'par_descripcion');
+        $nivel_edu = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="edu_nivel"')), 'par_id', 'par_descripcion');
+		$vive_con = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="alum_vive"')), 'par_id', 'par_descripcion');
+        $otro_vive = Parametro::model()->find(array('condition'=>'par_item="alum_vive" AND par_descripcion="otro"'));
+
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
+			$model->mat_documentos = mb_strtoupper($model->mat_documentos,'utf-8');
+
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
             if ($valid){
@@ -148,24 +196,51 @@ class MatriculaController extends Controller
                 $alumno->alum_apemat = mb_strtoupper($alumno->alum_apemat,'utf-8');
                 $alumno->alum_direccion = mb_strtoupper($alumno->alum_direccion,'utf-8');
                 $alumno->alum_salud = mb_strtoupper($alumno->alum_salud,'utf-8');
+                $alumno->alum_medicamentos = mb_strtoupper($alumno->alum_medicamentos,'utf-8');
+                $alumno->alum_enfermedad = mb_strtoupper($alumno->alum_enfermedad,'utf-8');
+                $alumno->alum_aprendizaje = mb_strtoupper($alumno->alum_aprendizaje,'utf-8');
+				$alumno->alum_fonos_emergencia = mb_strtoupper($alumno->alum_fonos_emergencia,'utf-8');
+				$alumno->alum_madre_nombre = mb_strtoupper($alumno->alum_madre_nombre,'utf-8');
+				$alumno->alum_madre_actividad = mb_strtoupper($alumno->alum_madre_actividad,'utf-8');
+				$alumno->alum_madre_act_tipo = mb_strtoupper($alumno->alum_madre_act_tipo,'utf-8');
+				$alumno->alum_padre_nombre = mb_strtoupper($alumno->alum_padre_nombre,'utf-8');
+				$alumno->alum_padre_rut = mb_strtoupper($alumno->alum_padre_rut,'utf-8');
+				$alumno->alum_padre_actividad = mb_strtoupper($alumno->alum_padre_actividad,'utf-8');
+				$alumno->alum_padre_act_tipo = mb_strtoupper($alumno->alum_padre_act_tipo,'utf-8');
+				$alumno->alum_apo1_nombre = mb_strtoupper($alumno->alum_apo1_nombre,'utf-8');
+				$alumno->alum_apo2_nombre = mb_strtoupper($alumno->alum_apo2_nombre,'utf-8');
+				$alumno->alum_fam1_actividad = mb_strtoupper($alumno->alum_fam1_actividad,'utf-8');
+				$alumno->alum_fam1_lugar = mb_strtoupper($alumno->alum_fam1_lugar,'utf-8');
+				$alumno->alum_fam2_actividad = mb_strtoupper($alumno->alum_fam2_actividad,'utf-8');
+				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
 
                 if($alumno->save()){
                     if ($model->save()) {
-                        $this->redirect(array('listaCompleta'));  
+                        $this->redirect(array('listaCompleta'));
                     }
                 }
-            } else {   
-                Yii::app()->user->setFlash('error', "error!");
+            } else {
+                //Yii::app()->user->setFlash('error', "error!");
             }
-        } 
+        }
         $this->render('update', array(
-            'model' => $model,
-            'alumno' => $alumno,
-            'region'=>$region,
-            'genero'=>$genero,
-            'estado'=>$estado,
-            'comuna'=>$comuna,
-            'ciudad'=>$ciudad,
+                        'model' => $model,
+                        'alumno' => $alumno,
+                        'religion' => $religion,
+                        'region'=>$region,
+                        'genero'=>$genero,
+                        'estado'=>$estado,
+                        'comuna'=>$comuna,
+                        'ciudad'=>$ciudad,
+                        'trans' => $trans,
+                        'otro' => $otro,
+                        'vivienda' => $vivienda,
+                        'constru' => $constru,
+                        'baño_tipo' => $baño_tipo,
+                        'nivel_edu' => $nivel_edu,
+						'vive_con'	=> $vive_con,
+						'otro_vive'	=> $otro_vive,
+
         ));
     }
 
@@ -225,8 +300,8 @@ class MatriculaController extends Controller
             Yii::app()->end();
         }
     }
-    
-    
+
+
     public function actionBuscar_Alum()
     {
         $criterio = new CDbCriteria;
@@ -234,17 +309,17 @@ class MatriculaController extends Controller
         $resultado = array();
 
         if(empty($_GET['term'])) return $resultado;
-        
+
         $cdtns[] = "LOWER(alum_nombres) like LOWER(:busq)";
-        
+
         $criterio->condition = implode(' OR ', $cdtns);
         $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
         $criterio->limit = 10;
 
         $data = Alumno::model()->findAll($criterio);
-        
-                
-        foreach($data as $item) {  
+
+
+        foreach($data as $item) {
             $resultado[] = array (
                 //'id_cruge' => $item->usu_iduser,
                 'id'        => $item->alum_id,
@@ -257,7 +332,7 @@ class MatriculaController extends Controller
 
         echo CJSON::encode($resultado);
     }
-    
+
     public function actionBuscar_rut()
     {
         $criterio = new CDbCriteria;
@@ -265,17 +340,17 @@ class MatriculaController extends Controller
         $resultado = array();
 
         if(empty($_GET['term'])) return $resultado;
-        
+
         $cdtns[] = "LOWER(alum_rut) like LOWER(:busq)";
-        
+
         $criterio->condition = implode(' OR ', $cdtns);
         $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
         $criterio->limit = 10;
 
         $data = Alumno::model()->findAll($criterio);
-        
-                
-        foreach($data as $item) {  
+
+
+        foreach($data as $item) {
             $resultado[] = array (
                 //'id_cruge' => $item->usu_iduser,
                 'id'        => $item->alum_id,
@@ -300,7 +375,7 @@ class MatriculaController extends Controller
             }else{
                 $fecha_retiro = $_POST['fecha'];
             }
-           
+
             $id_alum = $_POST['id'];
 
             // se obtiene matricula del alumno
@@ -313,7 +388,7 @@ class MatriculaController extends Controller
 
                 if($matricula->save()){
                     Yii::app()->user->setFlash('success', "Alumno Retirado con Exito!");
-                    
+
                 }
             }else{
                 Yii::app()->user->setFlash('error', "El alumno esta matriculado  en otro año!");
@@ -321,9 +396,9 @@ class MatriculaController extends Controller
 
         }else{
             Yii::app()->user->setFlash('notice', "Ingrese Fecha de retiro!");
-        }      
+        }
     }
-    
+
 
 
   public function actionCursoAnoActual(){
@@ -337,7 +412,7 @@ class MatriculaController extends Controller
         $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
         $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
-       
+
         foreach ($curso as $key => $c) {
             $cur[] = array(
                    'cur_nivel' => $nivel[$c->cur_nivel],
@@ -366,10 +441,10 @@ class MatriculaController extends Controller
     //funcion para asignar un alumno a un curso y ademas asignarle las notas y las asignaturas asociadas al curso
     public function actionAddcurso($id){
 
-     
+
         if(isset($_POST['id_curso'])){
             $id_curso = $_POST['id_curso'];
-            
+
             $ano = $this->actionAnoactual();
             $cursos = $this->actionCursoAnoActual();
 
@@ -400,7 +475,7 @@ class MatriculaController extends Controller
                         }
                         // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
                     } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
-                        for ($i=1; $i <= 3; $i++) { 
+                        for ($i=1; $i <= 3; $i++) {
                             foreach ( $asignadas as $p ){
                                 $nota = new Notas;
                                 $nota->not_asig = $p->aa_asignatura;
@@ -438,24 +513,24 @@ class MatriculaController extends Controller
                     }
 
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
-                    $this->redirect(array('menu')); 
-                    
+                    $this->redirect(array('menu'));
+
                 }else{
                     Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
-                  $this->refresh(); 
+                  $this->refresh();
                 }
             } else {
                 Yii::app()->user->setFlash('error', "Este curso no Tiene Asignaturas!");
-               $this->refresh(); 
+               $this->refresh();
             }
-          
+
         }
-        
+
 
         $this->render('link_selec', array(
             'id_mat' => $id,
         ));
-        
+
 
 
     }
@@ -476,7 +551,7 @@ class MatriculaController extends Controller
             $cursos[$p->pre_id] = $nivel[$p->pre_nivel]." ".$letra[$p->pre_letra];
         }
 
-      
+
 
         $this->renderPartial('pre_link', array(
                 'id' => $id,
@@ -506,7 +581,7 @@ class MatriculaController extends Controller
                 }
 
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Alumno ingresado");
-                $this->redirect(array('menu')); 
+                $this->redirect(array('menu'));
             }else{
                 Yii::app()->user->setFlash('error', "Este Alumno ya esta Matriculado!");
                 $this->render('link_selec', array(
@@ -578,7 +653,7 @@ class MatriculaController extends Controller
                 $cur = Curso::model()->findAll($criteria);
                 // se filtran los cursos por el año  seleccionado
                 $cursos = array();
-                for ($i=0; $i < count($cur); $i++) { 
+                for ($i=0; $i < count($cur); $i++) {
                     if($cur[$i]->cur_ano == $ano ){
                         $cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
                     }
@@ -597,7 +672,7 @@ class MatriculaController extends Controller
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
         $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
+
                 // La variable es array por que criteria lo pide.
         if ( $temp->temp_ano != 0 ){
             $ano = $temp->temp_ano;
@@ -613,7 +688,7 @@ class MatriculaController extends Controller
     public function actionInfoCurso(){
         if(isset($_POST['id_curso'])){
             $idcurso = $_POST['id_curso'];
-            
+
             $criteria = new CDbCriteria();
             $criteria->condition = 'cur_id=:id';
             $criteria->params = array(':id'=>$idcurso);
@@ -629,7 +704,7 @@ class MatriculaController extends Controller
     }
 
     public function actionListaCompleta(){
-        
+
         $model = new Matricula('search');
         $cursos = $this->actionCursoAnoActual();
         $model->unsetAttributes();  // clear any default values
@@ -640,9 +715,9 @@ class MatriculaController extends Controller
         ));
     }
 
-    //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)    
+    //FUNCION PARA PONER UN LABEL PERSONALIZADO CON EL ESTADO DEL ALUMNO EN LA ACCION (MATRICULA/LISTACOMPLETA)
     public function gridEstado($data,$row){
-        
+
         $estado = $data->matEstado->par_descripcion;
 
         if($estado=='ACTIVO') return "<label class=\"label label-success\">".$estado."</label>";
@@ -664,7 +739,7 @@ class MatriculaController extends Controller
             return $nombre->getCurso();
         }
 
-        return "SIN CURSO"; 
+        return "SIN CURSO";
     }
 
     public function actionInforme(){
@@ -673,7 +748,7 @@ class MatriculaController extends Controller
         $ano = $this->actionAnoactual();
         $model = new Matricula('search');
         $model->unsetAttributes();  // clear any default values
-        
+
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('informe', array(
             'model' => $model,
@@ -722,21 +797,21 @@ class MatriculaController extends Controller
         foreach ($lista as $key => $id_alum){  // se recorren los alumnos del curso para obtener su promedio
 
             $n = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => $p ));
-             
+
             if( $n->not_prom > 0 ){
                 $prom_curso += $n->not_prom;
-                $prom_count++;      
-            } 
-               
+                $prom_count++;
+            }
+
         }
 
         if( $prom_count != 0 ){
             $final = $prom_curso/$prom_count;
-            
+
             if( strlen($final) == 1 ){
                 $final = $final .".0";
             }else{
-                
+
                 $final = number_format((float) $final, $precision, '.', '');
             }
         }
@@ -776,8 +851,8 @@ class MatriculaController extends Controller
 
         }
         ksort($notas); // se ordena por asignatura
-       
-        $alumnos = array_unique($notas, SORT_REGULAR); 
+
+        $alumnos = array_unique($notas, SORT_REGULAR);
         //var_dump($alumnos);
 
         if( $p == 1 ){
@@ -816,7 +891,7 @@ class MatriculaController extends Controller
                                                                 'cole'          => $cole,
                                                                 'asi_alu'       => $asi_alu,
                         ), true));
-        $mPDF1->Output();        
+        $mPDF1->Output();
 
 
         $nombre_alu = $model->matAlu->alum_nombres." ".$model->matAlu->alum_apepat." ".$model->matAlu->alum_apemat;
@@ -840,8 +915,8 @@ class MatriculaController extends Controller
                         'cursos' => $curso,
                         'per' => $per->par_descripcion,
                     ));
-   
-        
+
+
     }
 
         // id = curso , p = periodo
@@ -859,7 +934,7 @@ class MatriculaController extends Controller
             $curso = Curso::model()->findByPk($id);
             $cole = Colegio::model()->find();
 
-           
+
             $lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' =>array(':x' => $id)));
 
             $alumnos = array();
@@ -872,20 +947,20 @@ class MatriculaController extends Controller
                 // $mPDF1->AddPage();
                 // $this->actionCertificado_nota_par_cur($alum->list_mat_id, 1);
             }
-       
+
 
 
             //$c = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $evaluaciones[0]['not_asig']));
-            // $ano = $evaluaciones[0]['not_ano'];            
+            // $ano = $evaluaciones[0]['not_ano'];
             $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
             $notas_periodo = $curso->cur_notas_periodo;
             $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
             $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
-           
+
             $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
             $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
-            
+
             $mPDF1->WriteHTML($stylesheet, 2);
             $mPDF1->WriteHTML($this->renderPartial('inf_not_par_cur', array(
                                                                     'lista_alu'     => $alumnos,
@@ -933,7 +1008,7 @@ class MatriculaController extends Controller
 
      	$cole = Colegio::model()->find();
         $per = Parametro::model()->findByPk($cole->col_periodo);
-        
+
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('informe_not_par', array(
             'model' => $model,
@@ -965,7 +1040,7 @@ class MatriculaController extends Controller
             foreach ($xml_string as $key => $a) {
 
                 foreach ($a as $key1 => $l) {
-                   
+
                 if( $key1 == "tipo_ensenanza" ){
                     foreach ($l as $key2 => $curso) {    //todos los cursos---$xml_string
                         $nivel = (integer) $curso['grado'];
@@ -976,31 +1051,31 @@ class MatriculaController extends Controller
                             if( $key3 == 'alumno'){
 
                                 //$niv = $this->nivelCurso($nivel); // en caso de usar niveles como palabra
-                        
+
                                 $id_niv = Parametro::model()->findByAttributes(array('par_item' => 'NIVEL',
                                                                                     'par_descripcion' => $nivel ));
                                 $id_let = Parametro::model()->findByAttributes(array('par_item' => 'LETRA',
                                                                                     'par_descripcion' => $letra ));
-                                
+
 
                                 $cu = Curso::model()->findByAttributes(array('cur_nivel'=> $id_niv["par_id"],
                                                                             'cur_letra'=> $id_let["par_id"]));
 
-                                
+
                                 if( $alu['genero'] == "M" ){
                                     $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="MASCULINO"'));
                                 } else{
                                     $gene = Parametro::model()->find(array('condition'=>'par_item="SEXO" AND par_descripcion="FEMENINO"'));
                                 }
-                                
+
                                 $rut =  $alu['run']."-". $alu['digito_ve'];
 
 
                                 $existe_alumno = Alumno::model()->findByAttributes(array('alum_rut' => $rut));
                                 if(!$existe_alumno){
-                                    
+
                                     $id_curso = $cu->cur_id;
-                                   
+
                                     $nombres =  $alu['nombres'];
                                     $genero = $gene->par_id;
                                     $ape_pa = $alu['ape_paterno'];
@@ -1016,16 +1091,16 @@ class MatriculaController extends Controller
                                 } else{
                                     echo $rut."-alumno ya en sistema<br>";
                                 }
-                                            
-                                       
-                                
+
+
+
                             }
                         }
                     }
                     }
                 }
-                 
-               
+
+
             }
 
             $this->render('menu');
@@ -1040,22 +1115,22 @@ class MatriculaController extends Controller
         }
         if( $nivel == 2 ){
             return "SEGUNDO";
-        } 
+        }
         if( $nivel == 3 ){
             return "TERCERO";
-        } 
+        }
         if( $nivel == 4 ){
             return "CUARTO";
-        } 
+        }
         if( $nivel == 5 ){
             return "QUINTO";
-        } 
+        }
         if( $nivel == 6 ){
             return "SEXTO";
-        } 
+        }
         if( $nivel == 7 ){
             return "SEPTIMO";
-        } 
+        }
         if( $nivel == 8 ){
             return "OCTAVO";
         }
@@ -1070,11 +1145,11 @@ class MatriculaController extends Controller
         $alumno = new Alumno;
         $estado = Parametro::model()->find(array('condition'=>'par_item="ESTADO" AND par_descripcion="ACTIVO"'));
 
-        $matricula->mat_estado = $estado->par_id; 
+        $matricula->mat_estado = $estado->par_id;
         $matricula->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
         $matricula->mat_ano = date('Y');
         $matricula->mat_fingreso = $f_incri;
-        
+
         if ($matricula->validate()){
 
             //todo los textos a mayuscula
@@ -1111,7 +1186,7 @@ class MatriculaController extends Controller
                         }
                     // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
                     } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
-                        for ($i=1; $i <= 3; $i++) { 
+                        for ($i=1; $i <= 3; $i++) {
                             foreach ( $asignadas as $p ){
                                 $nota = new Notas;
                                 $nota->not_asig = $p->aa_asignatura;
@@ -1152,23 +1227,23 @@ class MatriculaController extends Controller
                 } else{
                     //echo "matricula-unsave <br>";
                 }
-                  
+
             } else{
 
                 //echo "alum-unsave<br>";
-           
+
             }
         } else{
             //echo "matricula-invalida <br>";
         }
-         
+
     }
 
     // function para agregar los alumnos al informe de personalidad manualmente
     public function actionInforme_manual(){
         $ano = $this->actionAnoactual();
         $count = 0;
-       
+
 
           $matriculas = Matricula::model()->findAll(array('condition' => 'mat_ano = "'.$ano.'"'));
           foreach ($matriculas as $key => $m) {
@@ -1202,7 +1277,7 @@ class MatriculaController extends Controller
 
           }
 
-            echo $count;  
+            echo $count;
     }
 
     // id = matricula id
@@ -1225,7 +1300,7 @@ class MatriculaController extends Controller
 
         foreach ($evaluaciones as $key => $alum) { // tabla notas
             $final = 0;
-            
+
             $asi = Asignatura::model()->findByPk($alum->not_asig);
             $n2 = $evaluaciones2[$key]['notas'];
             $prom2 = $evaluaciones2[$key]['not_prom'];
@@ -1239,7 +1314,7 @@ class MatriculaController extends Controller
                     $final = $alum->not_prom;
                 }
             }
-            
+
 
             if( strlen($final) == 1 ){
                 $final = $final .".0";
@@ -1259,8 +1334,8 @@ class MatriculaController extends Controller
 
         }
         ksort($notas); // se ordena por asignatura
-       
-        $alumnos = array_unique($notas, SORT_REGULAR); 
+
+        $alumnos = array_unique($notas, SORT_REGULAR);
 
 
         $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
@@ -1290,7 +1365,7 @@ class MatriculaController extends Controller
                                                                 'cole'          => $cole,
                                                                 //'asi_alu'       => $asi_alu,
                         ), true));
-        $mPDF1->Output();        
+        $mPDF1->Output();
 
     }
 
@@ -1338,7 +1413,7 @@ class MatriculaController extends Controller
                                                                 'cole'          => $cole,
                                                                 //'asi_alu'       => $asi_alu,
                         ), true));
-        $mPDF1->Output();         
+        $mPDF1->Output();
 
     }
 
@@ -1352,9 +1427,9 @@ class MatriculaController extends Controller
 
         $cole = Colegio::model()->find();
         $per = Parametro::model()->findByPk($cole->col_periodo);
-        
+
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
-        
+
 
         $cursos = $this->actionCursoAnoActual();
         $this->render('cert_anual_alum', array(

@@ -18,8 +18,18 @@ $this->menu=array(
 	</div>
 </div>
 <?php $this->renderPartial('_form', array(
-	'model'=>$model,
-	'alumno'=>$alumno,
-	'region'=>$region,
-	'genero'=>$genero,
-	)); ?>
+			'model'=>$model,
+			'alumno'=>$alumno,
+			'region'=>$region,
+			'genero'=>$genero,
+			'religion' => $religion,
+			'trans' => $trans,
+			'otro' => $otro,
+		    'vivienda' => $vivienda,
+		    'constru' => $constru,
+		    'baño_tipo' => $baño_tipo,
+		    'nivel_edu' => $nivel_edu,
+			'vive_con'	=> $vive_con,
+			'otro_vive'	=> $otro_vive,
+
+ 	)); ?>

@@ -43,14 +43,18 @@ class Alumno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('alum_comuna, alum_ciudad, alum_region, alum_genero', 'numerical', 'integerOnly'=>true),
+			array('alum_comuna, alum_ciudad, alum_region, alum_genero, alum_dormitorios, alum_fam1_ingreso,
+					alum_baño_cantidad, alum_vivienda, alum_construccion, alum_baño_tipo, alum_padre_ingresos,
+					alum_madre_nivel, alum_fam2_ingreso', 'numerical', 'integerOnly'=>true),
 			array('alum_rut','required','message'=>'Debe ingresar un Rut'),
-			array('alum_rut','validateRut','message'=>'Ingrese un Rut valido'),
-			array('alum_rut', 'length', 'max'=>12),
-			
+			array('alum_rut','validateRut','message'=>'alumno: Ingrese un Rut valido'),
+			array('alum_padre_rut','validateRut','message'=>'Padre: Ingrese un Rut valido'),
+			array('alum_madre_rut','validateRut','message'=>'Madre: Ingrese un Rut valido'),
+			array('alum_apo1_rut, alum_apo2_rut','validateRut','message'=>'Apoderado: Ingrese un Rut valido'),
+			array('alum_rut, alum_madre_rut, alum_padre_rut, alum_apo1_rut, alum_apo2_rut', 'length', 'max'=>12),
 			array('alum_nombres','required','message'=>'Debe ingresar un nombre'),
 			array('alum_nombres','validateText','message'=>'Ingrese un nombre valido'),
-			array('alum_nombres', 'length', 'max'=>100),
+			array('alum_nombres, alum_procedencia', 'length', 'max'=>100),
 			array('alum_apepat','required','message'=>'Debe ingresar un apellido paterno'),
 			array('alum_apepat','validateText','message'=>'Debe ingresar un apellido paterno valido'),
 			array('alum_apemat','required','message'=>'Debe ingresar un apellido materno'),
@@ -60,16 +64,26 @@ class Alumno extends CActiveRecord
 			array('alum_direccion', 'length', 'max'=>255),
 			array('alum_f_nac','validateFechaNacimiento'),
 			array('alum_f_nac','required','message'=>'Debe ingresar una fecha de nacimiento'),
-			array('alum_f_nac, alum_salud, alum_obs', 'safe'),
+			array('alum_f_nac, alum_salud, alum_enfermedad, alum_medicamentos, alum_padre_nombre,
+					alum_aprendizaje, alum_padre_nivel, alum_vive_con,
+					alum_apo1_nombre, alum_apo1_telefono, alum_apo2_nombre, alum_apo2_telefono, alum_fam1_actividad, alum_fam1_lugar,
+					alum_madre_ingresos, alum_madre_actividad, alum_madre_act_tipo, alum_padre_act_tipo, alum_padre_actividad,
+					alum_obs, alum_fonos_emergencia, alum_madre_nombre, alum_fam2_actividad, alum_fam2_lugar', 'safe'),
 			array('alum_comuna','required','message'=>'Debe seleccionar una comuna'),
 			array('alum_region','required','message'=>'Debe seleccionar una region'),
 			array('alum_ciudad','required','message'=>'Debe seleccionar una ciudad'),
 			array('alum_genero','required','message'=>'Debe seleccionar un genero'),
+			array('alum_transporte','required','message'=>'Debe seleccionar un Transporte'),
+			array('alum_religion','required','message'=>'Debe seleccionar una Religion'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_direccion, alum_comuna, alum_ciudad, alum_region, alum_genero, alum_f_nac, alum_salud, alum_obs', 'safe', 'on'=>'search'),
 		);
 	}
+
+
+
+
 
 	/**
 	 * @return array relational rules.
@@ -83,7 +97,14 @@ class Alumno extends CActiveRecord
 			'alumCiudad' => array(self::BELONGS_TO, 'Ciudad', 'alum_ciudad'),
 			'alumRegion' => array(self::BELONGS_TO, 'Region', 'alum_region'),
 			'alumGenero' => array(self::BELONGS_TO, 'Parametro', 'alum_genero'),
+			'alumReligion' => array(self::BELONGS_TO, 'Parametro', 'alum_religion'),
 			'matriculas' => array(self::HAS_ONE, 'Matricula', 'mat_alu_id'),
+			'alumConstruccion' => array(self::BELONGS_TO, 'Parametro', 'alum_construccion'),
+			'alumVivienda' => array(self::BELONGS_TO, 'Parametro', 'alum_vivienda'),
+			'alumBañotipo' => array(self::BELONGS_TO, 'Parametro', 'alum_baño_tipo'),
+			'alumPadrenivel' => array(self::BELONGS_TO, 'Parametro', 'alum_padre_nivel'),
+			'alumMadrenivel' => array(self::BELONGS_TO, 'Parametro', 'alum_madre_nivel'),
+			'alumVivecon'	=> array(self::BELONGS_TO, 'Parametro', 'alum_vive_con'),
 		);
 	}
 
@@ -104,8 +125,45 @@ class Alumno extends CActiveRecord
 			'alum_region' => 'Region',
 			'alum_genero' => 'Genero',
 			'alum_f_nac' => 'Fecha Nacimiento',
-			'alum_salud' => 'Salud',
-			'alum_obs' => 'Observacion',
+			'alum_salud' => 'Situacion de salud',
+			'alum_obs' => 'Observaciones',
+			'alum_procedencia' => 'Colegio  de Procedencia',
+			'alum_medicamentos' => 'Medicamentos',
+			'alum_enfermedad' => 'Enfermedad',
+			'alum_religion'	=> 'Religion',
+			'alum_transporte' => 'Transporte',
+			'alum_aprendizaje' => 'Estado academico',
+			'alum_vivienda'	=> 'Vivienda',
+			'alum_construccion' => 'Tipo de construccion',
+			'alum_baño_cantidad' => 'Cantidad de baños',
+			'alum_baño_tipo' => 'Tipo de baño',
+			'alum_dormitorios' => 'Cantidad de dormitorios',
+			'alum_fonos_emergencia' => 'Fonos de Emergencia',
+			'alum_madre_nombre'	=> 'Nombre Madre',
+			'alum_madre_rut'	=> 'Rut Madre',
+			'alum_madre_nivel'	=> 'Nivel Educacional Madre',
+			'alum_madre_actividad'	=> 'Actividad Madre',
+			'alum_madre_ingresos'	=> 'Ingresos',
+			'alum_madre_act_tipo'	=> 'Lugar o Empresa',
+			'alum_padre_nombre' 	=> 'Nombre Padre',
+			'alum_padre_rut'		=> 'Rut Padre',
+			'alum_padre_nivel'		=> 'Nivel Educacional Padre',
+			'alum_padre_actividad'	=> 'Actividad Padre',
+			'alum_padre_ingresos'	=> 'Ingresos',
+			'alum_padre_act_tipo'	=> 'Lugar o Empresa',
+			'alum_apo1_nombre'		=> 'Nombre Apoderado Oficial',
+			'alum_apo1_rut'			=> 'Rut Apoderado Oficial',
+			'alum_apo1_telefono'	=> 'Fono Apoderado Oficial',
+			'alum_apo2_nombre'		=> 'Nombre Apoderado Suplente',
+			'alum_apo2_rut'			=> 'Rut Apoderado Suplente',
+			'alum_apo2_telefono'	=> 'Fono Apoderado Suplente',
+			'alum_fam1_lugar'		=> 'Lugar o Empresa',
+			'alum_fam1_ingreso'		=> 'Ingresos',
+			'alum_fam1_actividad'	=> 'Actividad otro familiar',
+			'alum_fam2_lugar'		=> 'Lugar o Empresa',
+			'alum_fam2_ingreso'		=> 'Ingresos',
+			'alum_fam2_actividad'	=> 'Actividad otro familiar',
+			'alum_vive_con'			=> 'El alumno vive con',
 		);
 	}
 
@@ -171,12 +229,12 @@ class Alumno extends CActiveRecord
 
 	public function validateText($attribute, $params) {
     $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
-        if($this->$attribute!=""){	
+        if($this->$attribute!=""){
 	        if (!preg_match($pattern, $this->$attribute))
 	            $this->addError($attribute,$params['message']);
     	}
 	}
-    
+
     public function validateText2($attribute, $params) {
         $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú0-9º°\.\,\'\"\)\(\-\@\:\/\+]+([[:space:]]{0,2}[a-zA-ZñÑÁÉÍÓÚáéíóú0-9º°\.\,\'\"\)\(\-\@\:\/\+]+)*)$/';
         $pattern2 = '/^([0-9º°\.\,\'\"\)\(\-\@\:\/\+]+)$/';
@@ -200,7 +258,7 @@ class Alumno extends CActiveRecord
     	}
     }
     public function validateFechaNacimiento($attribute, $params) {
-    	if($this->$attribute!=""){	
+    	if($this->$attribute!=""){
 			if(strtotime($this->$attribute) && 1 === preg_match('~[0-9]~', $this->$attribute)){
 			    $date1 = new DateTime(date('Y-m-d'));
 				$date2 = new DateTime($this->$attribute);
@@ -218,10 +276,10 @@ class Alumno extends CActiveRecord
 	 	$array_rut = array();
 	    for($i=0; $i< strlen($this->$attribute); $i++) {
 	    	if($rut[$i]!='.'){
-	    	  $array_rut[]=$rut[$i];	
+	    	  $array_rut[]=$rut[$i];
 			}
 	    }
-	    
+
 	    $rut_attribute = implode("", $array_rut);
         if (strpos($rut_attribute, "-") == false) {
             $data[0] = substr($rut_attribute, 0, -1);
@@ -252,7 +310,7 @@ class Alumno extends CActiveRecord
     	$array_rut = array();
 	    for($i=0; $i< strlen($this->$attribute); $i++) {
 	    	if($rut[$i]!='.'){
-	    	  $array_rut[]=$rut[$i];	
+	    	  $array_rut[]=$rut[$i];
 			}
 	    }
 	    $rut_attribute = implode("", $array_rut);

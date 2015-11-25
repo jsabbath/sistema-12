@@ -36,7 +36,6 @@ if( $temp->temp_ano != 0 ){
 
 
 
-
 $anos = CHtml::listData(Curso::model()->findAll(array('condition' => 'cur_ano!=:x', 'params' => array(':x' => $ano_selec ))), 'cur_ano', 'cur_ano', $par->par_descripcion);
 
 if( $ano_selec != $par->par_descripcion ){
