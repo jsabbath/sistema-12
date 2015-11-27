@@ -22,7 +22,7 @@ class AlumnoController extends Controller
 	 */
 	public function accessRules()
 	{
-		
+
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','regiones','ciudades'),
@@ -209,4 +209,87 @@ class AlumnoController extends Controller
         echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($districtName), true);
     	}
     }
+
+	//funcion para determinar el año sobre el que se trabaja
+	public function actionAnoactual(){
+		$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+
+				// La variable es array por que criteria lo pide.
+		if ( $temp->temp_ano != 0 ){
+			$ano = $temp->temp_ano;
+		} else {
+			$ano = $par->par_descripcion;
+		}
+
+		return $ano;
+	}
+
+
+
+	public function actionHijo(){
+		$criterio = new CDbCriteria;
+		$cdtns = array();
+		$resultado = array();
+
+		if(empty($_GET['term'])) return $resultado;
+
+		$cdtns[] = "LOWER(alum_nombres) like LOWER(:busq)";
+
+		$criterio->condition = implode(' OR ', $cdtns);
+		$criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+		$criterio->limit = 10;
+
+		$data = Alumno::model()->findAll($criterio);
+
+		foreach($data as $item) {
+			$resultado[] = array (
+				'id' => $item->alum_id,
+				'id_alumno' => $item->alum_id,
+				'nombre' => $item->alum_nombres,
+				'apellido' => $item->alum_apepat,
+				'apellido2' => $item->alum_apemat,
+			);
+		}
+
+		echo CJSON::encode($resultado);
+	}
+
+	public function actionNotas(){
+		$this->layout = "apoderados";
+		$this->render('apoderado_notas');
+	}
+
+	public function actionVernotas(){
+		if(isset($_POST['rut_apo']) AND isset($_POST['rut_alum'])){
+			$apo = $_POST['rut_apo'];
+			$alum = $_POST['rut_alum'];
+
+			//$hijo = Apoderado::model()->findAll(array('condition'=>'apo_rut="'.$apo.'"'));
+			$tiene_hijo = Alumno::model()->findByAttributes(array('alum_rut' => $alum, 'alum_apo1_rut' => $apo));
+			$a = $this->actionAnoactual();
+
+			//if($hijo[0]->apoHijo->matAlu->alum_rut == $alum){
+			if( $tiene_hijo ){
+
+				$mat = Matricula::model()->findByAttributes(array( 'mat_alu_id' => $tiene_hijo->alum_id, 'mat_ano' => $a ));
+				$matricula = $mat->mat_id;
+				//$matricula = $hijo[0]->apoHijo->mat_id;
+				$notas_1 = Notas::model()->findAll(array('condition'=>'not_mat="'.$matricula.'" AND not_periodo="1"'));
+				$notas_2 = Notas::model()->findAll(array('condition'=>'not_mat="'.$matricula.'" AND not_periodo="2"'));
+				$curso = ListaCurso::model()->findByAttributes(array('list_mat_id'=>$matricula));
+				$notas_curso = $curso->listCurso->cur_notas_periodo;
+
+				$this->renderPartial('apoderado_ver',array(
+					'notas_1'=>$notas_1,
+					'notas_2'=>$notas_2,
+					'notas_curso'=>$notas_curso,
+					'ano' => $a,
+				));
+
+			}else echo '<p class="text-error text-center">Ingrese Rut válido<p>';
+
+		}else echo '<p class="text-error text-center">Ingrese Rut válido<p>';
+	}
+
 }

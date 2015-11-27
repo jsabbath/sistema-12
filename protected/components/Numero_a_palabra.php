@@ -3,9 +3,9 @@
 //esta clase se puede llamar desde cualquier lugar
 //se llama como cualquier funcion Num_a_palabra::funcion();
 class Numero_a_palabra extends CApplicationComponent {
- 	
-	function convert($number) {
-	    
+
+	public static function convert($number) {
+
 	    $hyphen      = '-';
 	    $conjunction = ' Y ';
 	    $separator   = ', ';
@@ -24,7 +24,7 @@ class Numero_a_palabra extends CApplicationComponent {
 	        9                   => 'NUEVE',
 	        10                  => 'DIEZ',
 	    );
-	    
+
 	    if (!is_numeric($number)) {
 	    	if( $number == "MB"){
 	    		return "MUY BUENO";
@@ -38,7 +38,7 @@ class Numero_a_palabra extends CApplicationComponent {
 
 	        return false;
 	    }
-	    
+
 	    if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
 	        // overflow
 	        trigger_error(
@@ -51,13 +51,13 @@ class Numero_a_palabra extends CApplicationComponent {
 	    if ($number < 0) {
 	        return $negative . convert_number_to_words(abs($number));
 	    }
-	    
+
 	    $string = $fraction = null;
-	    
+
 	    if (strpos($number, '.') !== false) {
 	        list($number, $fraction) = explode('.', $number);
 	    }
-	    
+
 	    switch (true) {
 	        case $number < 21:
 	            $string = $dictionary[$number];
@@ -89,7 +89,7 @@ class Numero_a_palabra extends CApplicationComponent {
 	            }
 	            break;
 	    }
-	    
+
 	    if (null !== $fraction && is_numeric($fraction)) {
 	        $string .= $decimal;
 	        $words = array();
@@ -98,7 +98,7 @@ class Numero_a_palabra extends CApplicationComponent {
 	        }
 	        $string .= implode(' ', $words);
 	    }
-	    
+
 	    return $string;
 	}
 }

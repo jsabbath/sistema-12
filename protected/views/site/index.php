@@ -30,22 +30,22 @@ $this->pageTitle=Yii::app()->name;
 			</div>
 
 			<div class="span4 text-center hidden-phone">
-				<?php /*
+                <?php /*
 				<div class="row">
 					<div class="span4">
-						<a href="<?php echo Yii::app()->createUrl('Apoderado/notas'); ?>">
+						<a href="<?php echo Yii::app()->createUrl('Alumno/notas'); ?>">
 							<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/apo.png" style="border-radius: 10px 10px 10px 10px">
 						</a>
 					</div>
 				</div>
-				<br>
-				*/ ?>
+				<br>*/
+                ?>
 				<?php
 				// Descomentar para ver la funcionalidad Eventos
-				
+
 				if(
 				!Yii::app()->user->isSuperAdmin and
-	            !Yii::app()->user->checkAccess('administrador') and 
+	            !Yii::app()->user->checkAccess('administrador') and
 	            !Yii::app()->user->checkAccess('director') and
 	            !Yii::app()->user->checkAccess('evaluador') and
 	            !Yii::app()->user->checkAccess('jefe_utp') and
@@ -73,38 +73,38 @@ $this->pageTitle=Yii::app()->name;
 				<?php
 
 				}
-				
-				?>			
+
+				?>
 
 				<?php
 				// Descomentar para ver la funcionalidad Eventos
 				/*
 				if(
 				!Yii::app()->user->isSuperAdmin and
-	            !Yii::app()->user->checkAccess('administrador') and 
+	            !Yii::app()->user->checkAccess('administrador') and
 	            !Yii::app()->user->checkAccess('director') and
 	            !Yii::app()->user->checkAccess('evaluador') and
 	            !Yii::app()->user->checkAccess('jefe_utp') and
 	            !Yii::app()->user->checkAccess('profesor_prebasica') and
 	            Yii::app()->user->checkAccess('profesor')){
-	            	echo "<br>"; 
+	            	echo "<br>";
 					echo CHtml::link('Mis Eventos',array('Evento/calendario'),array('class'=>'btn btn-success btn-block'));
 				}
-				
+
 				?>
-				
+
 				<?php
 				// Descomentar para ver la funcionalidad Mis Asignaturas
-				
+
 				if(
 				!Yii::app()->user->isSuperAdmin and
-	            !Yii::app()->user->checkAccess('administrador') and 
+	            !Yii::app()->user->checkAccess('administrador') and
 	            !Yii::app()->user->checkAccess('director') and
 	            !Yii::app()->user->checkAccess('evaluador') and
 	            !Yii::app()->user->checkAccess('jefe_utp') and
 	            !Yii::app()->user->checkAccess('profesor_prebasica') and
 	            Yii::app()->user->checkAccess('profesor')){
-	            	echo "<br>";  
+	            	echo "<br>";
 					echo CHtml::link('Mis Asignaturas',array('Notas/mis_asignaturas'),array('class'=>'btn btn-block btn-success'));
 				}
 				*/
@@ -113,7 +113,7 @@ $this->pageTitle=Yii::app()->name;
 				<?php
 				// Descomentar el boton para ver la funcionalidad de apoderados
 				/*
-					echo "<br>"; 
+					echo "<br>";
 					echo CHtml::link('Ver Notas Apoderado',array('Apoderado/notas'),array('class'=>'btn btn-warning btn-block'));
 				*/
 				?>
@@ -125,7 +125,7 @@ $this->pageTitle=Yii::app()->name;
 </div>
 
 <script type="text/javascript">
-var easter_egg = new Konami(function() { 
+var easter_egg = new Konami(function() {
 	swal({   title: "Felicidades!!",   text: "Has descubierto el codigo konami, ahora a bailar!",   imageUrl: "http://gifdanceparty.giphy.com/dancers/pumpgirl.gif" });
 });
 </script>
