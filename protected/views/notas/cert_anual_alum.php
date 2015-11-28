@@ -5,7 +5,7 @@
 </head>
 
 <style>
-        @page 
+        @page
         {
             margin-top: 10;
             margin-bottom: 50;
@@ -29,75 +29,75 @@
             margin:0;
             padding:0;
         }
-         
+
         p
         {
             margin:0;
             padding:0;
         }
-         
+
         #wrapper
         {
             width:180mm;
             margin:0 15mm;
         }
-         
+
         .page
         {
             height:297mm;
             width:210mm;
             page-break-after:always;
         }
- 
+
         table
         {
             border-left: 1px solid #000;
             border-top: 1px solid #000;
-             
+
             border-spacing:0;
-            border-collapse: collapse; 
-             
+            border-collapse: collapse;
+
         }
-         
-        table td 
+
+        table td
         {
             border-right: 1px solid #000;
             border-bottom: 1px solid #000;
             padding: 1.5mm;
         }
-         
+
         table.heading
         {
             height:50mm;
         }
-         
+
         h1.heading
         {
             font-size:14pt;
             color:#000;
             font-weight:normal;
         }
-         
+
         h2.heading
         {
             font-size:9pt;
             color:#000;
             font-weight:normal;
         }
-         
+
         hr
         {
             color:#000;
             background:#000;
         }
-         
+
         #invoice_body
         {
             height: 149mm;
         }
-         
+
         #invoice_body , #invoice_total
-        {   
+        {
             width:100%;
         }
         #invoice_body table , #invoice_total table
@@ -105,13 +105,13 @@
             width:100%;
             border-left: 1px solid #000;
             border-top: 1px solid #000;
-     
+
             border-spacing:0;
-            border-collapse: collapse; 
-             
+            border-collapse: collapse;
+
             margin-top:5mm;
         }
-         
+
         #invoice_body table td , #invoice_total table td
         {
             text-align:center;
@@ -120,7 +120,7 @@
             border-bottom: 1px solid #000;
             padding:2mm 0;
         }
-         
+
         #invoice_body table td.mono  , #invoice_total table td.mono
         {
             font-family:monospace;
@@ -128,9 +128,9 @@
             padding-right:3mm;
             font-size:10pt;
         }
-         
+
         #footer
-        {   
+        {
             width:180mm;
             margin:0 15mm;
             padding-bottom:3mm;
@@ -140,11 +140,11 @@
             width:100%;
             border-left: 1px solid #000;
             border-top: 1px solid #000;
-             
+
             background:#eee;
-             
+
             border-spacing:0;
-            border-collapse: collapse; 
+            border-collapse: collapse;
         }
         #footer table td
         {
@@ -170,7 +170,7 @@
 
         <td width="10%" style="border: 1; border-right: 0;">
             <p>Región</p>
-            <p>año Escolar</p> 
+            <p>Año Escolar</p>
 
             <td width="10%" style="border: 1; border-left: 0">
                <p><?php echo ": ". $cole->col_region; ?></p>
@@ -188,16 +188,18 @@
 
 <table style="border: 0;" width="100%">
 	<tr style="border: 0;">
-		<td style="border: 0; text-align: justify; text-justify: inter-word; font-size: 9.5pt">
-			<p>RECONOCIDO OFICIALMENTE POR EL MINISTERIO  DE EDUCACION  DE LA REPÚBLICA DE CHILE SEGÚN Res. Rec. 
-            Oficial/Doc. Transpaso N° <?php echo $cole->col_numero_resol_rec_ofic; ?> DEL AÑO <?php echo date("Y",$cole->col_fecha_resol_rec_ofic); ?> 
-            ROL BASE DE DATOS N° <?php echo $cole->col_rolRBD; ?> OTORGA EL PRESENTE CERTIFICADO DE CALIFICACIONES ANUALES Y SITUACIÓN FINAL A DON(A)
-            <strong><?php echo $model->matAlu->getNombre_completo_3(); ?> RUT: <?php echo $model->matAlu->alum_rut; ?> DEL <?php echo $curso_nombre; ?> DE ENSEÑANZA BÁSICA</strong>  
+		<td style="border: 0; font-size: 9.5pt">
+			RECONOCIDO OFICIALMENTE POR EL MINISTERIO  DE EDUCACION  DE LA REPÚBLICA DE CHILE SEGÚN Res. Rec.
+            Oficial/Doc. Transpaso N° <?php echo $cole->col_numero_resol_rec_ofic; ?> DEL AÑO <?php echo date("Y",$cole->col_fecha_resol_rec_ofic); ?>
+            ROL BASE DE DATOS N° <?php echo $cole->col_rolRBD; ?> OTORGA EL PRESENTE CERTIFICADO DE CALIFICACIONES ANUALES Y SITUACIÓN FINAL A DON(A):
+            <br>
+            <strong><?php echo $model->matAlu->getNombre_completo_3(); ?> </strong> RUT:<strong> <?php echo $model->matAlu->alum_rut; ?></strong> DEL <strong> <?php echo $curso_nombre; ?> DE ENSEÑANZA BÁSICA</strong>
+            <br>
             DE ACUERDO AL PLAN Y PROGRAMAS DE ESTUDIO APROBADOS POR DECRETO O RESOL. EXENTA DE EDUCACION N° <?php echo $cole->numero_plan_programa; ?> DEL AÑO
-            <?php echo $cole->ano_plan_programa; ?> Y REGLAMENTO DE EVALUACION Y PROMOCIÓN ESCOLAR DTO. EXENTO N° <?php echo $cole->numero_promocion_evaluacion; ?> 
-            DEL <?php echo $cole->ano_promocion_evaluacion ?></p>
+            <?php echo $cole->ano_plan_programa; ?> Y REGLAMENTO DE EVALUACION Y PROMOCIÓN ESCOLAR DTO. EXENTO N° <?php echo $cole->numero_promocion_evaluacion; ?>
+            DEL <?php echo $cole->ano_promocion_evaluacion ?>
 		</td>
-	</tr>	
+	</tr>
 </table>
 
 <br>
@@ -246,13 +248,13 @@
 <br>
 <div>
 	<p><strong>Observaciones:</strong></p>
-	
+
 </div>
 
 <br>
 <br>
 <br>
-      
+
     <table class="heading" style="width:100%; border: 0;">
         <tr>
             <td style="width:50%; text-align: center; border: 0;">
@@ -267,8 +269,8 @@
             </td>
         </tr>
     </table>
-         
 
-     
+
+
 </body>
 </html>
