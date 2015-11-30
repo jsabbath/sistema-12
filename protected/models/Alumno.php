@@ -68,13 +68,11 @@ class Alumno extends CActiveRecord
 					alum_aprendizaje, alum_padre_nivel, alum_vive_con,
 					alum_apo1_nombre, alum_apo1_telefono, alum_apo2_nombre, alum_apo2_telefono, alum_fam1_actividad, alum_fam1_lugar,
 					alum_madre_ingresos, alum_madre_actividad, alum_madre_act_tipo, alum_padre_act_tipo, alum_padre_actividad,
-					alum_obs, alum_fonos_emergencia, alum_madre_nombre, alum_fam2_actividad, alum_fam2_lugar', 'safe'),
+					alum_obs, alum_fonos_emergencia, alum_madre_nombre, alum_fam2_actividad, alum_fam2_lugar, alum_transporte, alum_religion', 'safe'),
 			array('alum_comuna','required','message'=>'Debe seleccionar una comuna'),
 			array('alum_region','required','message'=>'Debe seleccionar una region'),
 			array('alum_ciudad','required','message'=>'Debe seleccionar una ciudad'),
 			array('alum_genero','required','message'=>'Debe seleccionar un genero'),
-			array('alum_transporte','required','message'=>'Debe seleccionar un Transporte'),
-			array('alum_religion','required','message'=>'Debe seleccionar una Religion'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('alum_id, alum_rut, alum_nombres, alum_apepat, alum_apemat, alum_direccion, alum_comuna, alum_ciudad, alum_region, alum_genero, alum_f_nac, alum_salud, alum_obs', 'safe', 'on'=>'search'),
