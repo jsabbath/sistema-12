@@ -21,11 +21,15 @@ if(
 				if(
 					Yii::app()->user->checkAccess('administrador') OR
 				    Yii::app()->user->isSuperAdmin
+
+				   
 				){
+
+					 $cole = Colegio::model()->find();
 				?>
 					<div class="row">
 					<div class="visible-phone"><br/></div>
-					<a class="link-negro" href="<?php echo Yii::app()->createUrl('colegio/admin'); ?>">
+					<a class="link-negro" href="<?php echo Yii::app()->createUrl('colegio/view', array( 'id' => $cole->col_id, )); ?>">
 						<div class="span4 " style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 							<div class="row">
 								<div class="span1 text-center">

@@ -17,7 +17,7 @@ $this->menu=array(
 */
 ?>
 <div class="row">
-	<div class="span12">
+	<div class="span12 text-center">
 		<h2>Modificar Parametros Colegio <?php echo $model->col_id; ?></h2>	
 	</div>
 </div>

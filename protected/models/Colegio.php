@@ -75,7 +75,7 @@ class Colegio extends CActiveRecord
 			array('col_director_email, col_encargado_actas, col_razon_social, col_direccion, col_colegio_email',
 				 'length', 'max'=>255),
 			array('col_logo', 'length', 'max'=>1024),
-			array('col_lema, col_mision, col_vision, col_fecha_primer, col_fecha_segundo, col_fecha_tercer', 'safe'),
+			array('col_lema, col_mision, col_vision, col_fecha_primer, col_fecha_segundo, col_fecha_tercer, col_text_ficha', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('col_id, col_rolRBD, col_nombre_colegio, col_letra, col_numero, col_ano, col_periodo, col_nombre_director,
@@ -143,6 +143,7 @@ class Colegio extends CActiveRecord
 			'ano_plan_programa' => 'Ano Plan y Programa de Estudios',
 			'numero_decreto_supremo' => 'Numero Documento que lo Declara Reconocido Oficialmente',
 			'ano_decreto_supremo' => 'Ano Documento que lo Declara Reconocido Oficialmente',
+			'col_text_ficha' => 'Mensaje en la ficha de Matricula'
 		);
 	}
 

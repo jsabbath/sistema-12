@@ -184,6 +184,14 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 				<?php echo $form->dropDownList($model,'ano_promocion_evaluacion',$anos,array('prompt'=>'Seleccione año')); ?>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="span6">
+				<?php echo $form->labelEx($model,'col_text_ficha'); ?>
+				<?php echo $form->textArea($model,'col_text_ficha',array('rows'=>6, 'cols'=>50)); ?>
+			</div>
+		</div>
+
 	</div>
 
 

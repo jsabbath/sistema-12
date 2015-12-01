@@ -20,6 +20,7 @@ $this->menu=array(
 	<div class="span6 text-center">
 		<h2>Parametros : </h2>	
 		<h2><?php echo $model->col_nombre_colegio; ?></h2>
+        <?php echo TbHtml::button('EDITAR', array('submit' => array('colegio/update','id' => $model->col_id), 'color'=>TbHtml::BUTTON_COLOR_SUCCESS)); ?>
 	</div>
 	<div class="span6 text-center">
 		<h2>Logo</h2>
