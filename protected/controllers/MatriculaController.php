@@ -100,6 +100,10 @@ class MatriculaController extends Controller
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
+            if( isset($alumno->alum_id) ){ // el alumno ya existe por lo q se actualiza su tupla existente
+                $old_alum = Alumno::model()->findByPk($alumno->alum_id);
+                $old_alum->attributes = $alumno->attributes; 
+            }
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
 			$model->mat_documentos = mb_strtoupper($model->mat_documentos,'utf-8');
@@ -131,13 +135,26 @@ class MatriculaController extends Controller
 				$alumno->alum_fam2_actividad = mb_strtoupper($alumno->alum_fam2_actividad,'utf-8');
 				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
 
-                if($alumno->save()){
-                    $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
-                    $model->mat_estado = $estado[0]->par_id;
-                    if ($model->save()) {
-                        $this->redirect(array('addcurso', 'id' => $model->mat_id));
-                    }
+                if( !isset($alumno->alum_id)  ){ // si la id no viene, osea es una alumno nuevo
+                    if($alumno->save()){ // alumno Nuevo, no  tenia datos existentes
+                        $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
+                        $model->mat_estado = $estado[0]->par_id;
+                        if ($model->save()) {
+                            $this->redirect(array('addcurso', 'id' => $model->mat_id));
+                        }
+                    }                    
+                } else{
+                     if($old_alum->update()){ // alumno Viejo, tenia datos existentes
+                        $model->mat_alu_id = $old_alum->alum_id; //aqui se actualiza la foreign key
+                        $model->mat_estado = $estado[0]->par_id;
+                        if ($model->save()) {
+                            $this->redirect(array('addcurso', 'id' => $model->mat_id));
+                        }
+                       
+                    }          
                 }
+
+
             }
         }
 

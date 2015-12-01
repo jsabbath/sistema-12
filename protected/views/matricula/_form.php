@@ -1,3 +1,8 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
+  
+
+
    <style type="text/css">
       .nav-tabs > li, .nav-pills > li {
           float:none;
@@ -23,7 +28,10 @@ $rand = "X".$random1.$random2;
 ?>
 <div class="row">
   <div class="span12 text-center">
-    <p class="text-info">Los campos con <span class="required">*</span> son obligatorios.</p>
+    <p class="text-info">
+        Los campos con <span class="required">*</span> son obligatorios. <br> 
+      <?php if( $model->isNewRecord ){ ?>  Para Alumnos <strong>YA REGISTRADOS</strong>  se pueden obtener los datos <strong>INGRESANDO EL RUT DEL ALUMNO</strong><?php } ?>
+    </p>
 
 </div>
 
@@ -36,6 +44,7 @@ $rand = "X".$random1.$random2;
 
 <div class="tabbable">
   <ul class="nav nav-tabs" style="text-align: center">
+    <?php if( $model->isNewRecord ){ ?><li><a><?php echo CHtml::textField('Text', '',array('id'=>'rut_button','placeholder' => 'RUT Alumno','class' => 'input-small'))?></a></li><?php } ?>
     <li class="active"><a href="#alumno"  data-toggle="tab">Datos Alumno<span class="required">*</span></a></li>
     <li><a href="#familia"  data-toggle="tab">Familia, Apoderado</a></li>
     <li><a href="#Ingresos"  data-toggle="tab">Ingresos</a></li>
@@ -51,9 +60,10 @@ $rand = "X".$random1.$random2;
        <div class="span11">
             <div class="span4">
 
+                    <?php echo $form->hiddenField($alumno,'alum_id'); ?>
 
                     <?php echo $form->labelEx($alumno,'alum_rut'); ?>
-                    <?php echo $form->textField($alumno,'alum_rut',array('id'=>'rut', 'placeholder' => 'XXXXXXXX-X')); ?>
+                    <?php echo $form->textField($alumno,'alum_rut',array( 'placeholder' => 'XXXXXXXX-X')); ?>
 
 
                     <?php echo $form->labelEx($alumno,'alum_nombres'); ?>
@@ -70,25 +80,30 @@ $rand = "X".$random1.$random2;
                     <?php echo CHtml::dropDownList('drop_trans', null, $trans,array('empty' => 'Seleccione Transporte')); ?>
 
 
-                    <?php echo $form->TextField($alumno,'alum_transporte',array('id' => 'trans_hidden', 'placeholder' => 'Especifique')); ?>
+                    <?php echo $form->TextField($alumno,'alum_transporte',array( 'placeholder' => 'Especifique')); ?>
 
 
 
                     <script type="text/javascript">
-                        <?php if( $model->isNewRecord ){ ?>
-                            $('#trans_hidden').hide();
-                         <?php }  ?>
-                            $('#drop_trans').on('change',function(){
-                                if( this.value == <?php echo $otro->par_id; ?> ){  // si  se selecciona opcion otro
-                                    $('#trans_hidden').val("");
-                                    $('#trans_hidden').show();
-                                    $('#trans_hidden').focus();
-                                } else{
-                                     $('#trans_hidden').hide();
-                                    $('#trans_hidden').val( $('#drop_trans :selected').text() );
+                        function trans(){
+                            input_trans = $('#Alumno_alum_transporte');
+                            <?php if( $model->isNewRecord ){ ?>
+                                input_trans.hide();
+                             <?php }  ?>
+                                $('#drop_trans').on('change',function(){
+                                    if( this.value == <?php echo $otro->par_id; ?> ){  // si  se selecciona opcion otro
+                                        input_trans.val("");
+                                        input_trans.show();
+                                        input_trans.focus();
+                                    } else{
+                                        input_trans.hide();
+                                        input_trans.val( $('#drop_trans :selected').text() );
+                                    }
+                                })
+                                if( input_trans.val() != "" ){
+                                    input_trans.show();
                                 }
-                            })
-
+                        } trans();
                     </script>
 
                 <?php echo $form->labelEx($alumno,'alum_salud'); ?>
@@ -137,7 +152,6 @@ $rand = "X".$random1.$random2;
                         <?php
                         echo $form->dropDownList($alumno, 'alum_region', $region, array(
                             'empty' => 'Seleccione region',
-                            'id'    => 'drop_region',
                             'class' => 'input-medium'
                         ));
                         ?>
@@ -145,7 +159,6 @@ $rand = "X".$random1.$random2;
                         <?php echo $form->labelEx($alumno,'alum_ciudad'); ?>
                         <?php echo $form->dropDownList($alumno, 'alum_ciudad', array(),array(
                             'empty' => 'Seleccione ciudad',
-                            'id'=>'drop_ciudad',
                             'disabled'=>'disabled',
                             'class' => 'input-medium'
                         ));?>
@@ -153,39 +166,46 @@ $rand = "X".$random1.$random2;
                         <?php echo $form->labelEx($alumno,'alum_comuna'); ?>
                         <?php echo $form->dropDownList($alumno, 'alum_comuna', array(),array(
                             'empty'=>'Seleccione comuna',
-                            'id'=>'drop_comuna',
                             'disabled'=>'disabled',
                             'class' => 'input-medium'
                         ));?>
 
                     <script type="text/javascript">
-                        $('#drop_region').on('change',function(){
+
+                        $('#Alumno_alum_region').on('change',function(){ ajax_ciudad() });
+                        $('#Alumno_alum_ciudad').on('change',function(){ ajax_comuna() });
+
+                        function ajax_ciudad(){
+                            input_ciudad = $('#Alumno_alum_ciudad');
                             $.ajax({
                                 url: '<?php echo CController::createUrl('Alumno/regiones'); ?>',
                                 type: 'POST',
-                                data: {id_region: this.value},
+                                data: {id_region: $('#Alumno_alum_region').val()},
                             })
                             .done(function(response) {
-                                $('#drop_ciudad').html(response);
-                                $('#drop_ciudad').prop("disabled", false);
-                                $('#drop_comuna').prop("disabled", true);
-                                 $('#drop_comuna').html("<option value=0>Seleccione comuna<option>");
+                                input_ciudad.html(response);
+                                input_ciudad.prop("disabled", false);
+                                $('#Alumno_alum_comuna').prop("disabled", true);
+                                $('#Alumno_alum_comuna').html("<option value=0>Seleccione comuna<option>");
                             })
 
-                        })
+                        }
 
-                        $('#drop_ciudad').on('change',function(){
+                        function ajax_comuna(){
+                            input_comuna = $('#Alumno_alum_comuna');
                             $.ajax({
                                 url: '<?php echo CController::createUrl('Alumno/ciudades'); ?>',
                                 type: 'POST',
-                                data: {id_ciudad: this.value},
+                                data: {id_ciudad: $('#Alumno_alum_ciudad').val()},
                             })
                             .done(function(response) {
-                                $('#drop_comuna').html(response);
-                                $('#drop_comuna').prop("disabled", false);
+                                input_comuna.html(response);
+                                input_comuna.prop("disabled", false);
                             })
 
-                        })
+                        }
+
+
 
                     </script>
 
@@ -314,25 +334,32 @@ $rand = "X".$random1.$random2;
                     <br>
                     <?php echo $form->labelEx($alumno,'alum_vive_con'); ?>
                     <?php echo CHtml::dropDownList('drop_vive', null, $vive_con,array('empty' => 'Seleccione')); ?>
-                    <?php echo $form->TextField($alumno,'alum_vive_con',array('id' => 'vive_hidden', 'placeholder' => 'Especifique')); ?>
+                    <?php echo $form->TextField($alumno,'alum_vive_con',array('placeholder' => 'Especifique')); ?>
 
                     <script type="text/javascript">
-                        <?php if( $model->isNewRecord ){ ?>
-                            $('#vive_hidden').hide();
-                         <?php }  ?>
-                            if( $('#vive_hidden').val() == "" ){
-                                $('#vive_hidden').hide();
+                        function vive_con(){
+                            vive_hidden = $('#Alumno_alum_vive_con');
+                            <?php if( $model->isNewRecord ){ ?>
+                                vive_hidden.hide();
+                             <?php }  ?>
+                            if( vive_hidden.val() == "" ){
+                                vive_hidden.hide();
                             }
                             $('#drop_vive').on('change',function(){
                                 if( this.value == <?php echo $otro_vive->par_id; ?> ){  // si  se selecciona opcion otro
-                                    $('#vive_hidden').val("");
-                                    $('#vive_hidden').show();
-                                    $('#vive_hidden').focus();
+                                    vive_hidden.val("");
+                                    vive_hidden.show();
+                                    vive_hidden.focus();
                                 } else{
-                                     $('#vive_hidden').hide();
-                                    $('#vive_hidden').val( $('#drop_vive :selected').text() );
+                                    vive_hidden.hide();
+                                    vive_hidden.val( $('#drop_vive :selected').text() );
                                 }
                             })
+                            if( vive_hidden.val() != "" ){
+                                vive_hidden.show();
+                            }
+
+                        } vive_con();
 
                     </script>
 
@@ -341,7 +368,7 @@ $rand = "X".$random1.$random2;
 
 
         <div hidden>
-            <?php echo $form->textField($alumno,'alum_fonos_emergencia',array('id' => 'res_fonos'));// atributo REAL  que guarda los TELEFONOS no mostrar ?>
+            <?php echo $form->textField($alumno,'alum_fonos_emergencia');// atributo REAL  que guarda los TELEFONOS no mostrar ?>
         </div>
 
 
@@ -486,10 +513,10 @@ $rand = "X".$random1.$random2;
         fono1 = $('#nom').val()+ "::" + $('#fono').val();
         fono2 = $('#nom2').val()+ "::" + $('#fono2').val();
 
-        if( fono1 != "::" && fono2 == "::" ) $('#res_fonos').val(fono1);
-        if( fono1 == "::" && fono2 != "::" ) $('#res_fonos').val(fono2);
-        if( fono1 != "::" && fono2 != "::" ) $('#res_fonos').val(fono1 + "//" + fono2 );
-        if( fono1 == "::" && fono2 == "::" ) $('#res_fonos').val("");
+        if( fono1 != "::" && fono2 == "::" ) $('#Alumno_alum_fonos_emergencia').val(fono1);
+        if( fono1 == "::" && fono2 != "::" ) $('#Alumno_alum_fonos_emergencia').val(fono2);
+        if( fono1 != "::" && fono2 != "::" ) $('#Alumno_alum_fonos_emergencia').val(fono1 + "//" + fono2 );
+        if( fono1 == "::" && fono2 == "::" ) $('#Alumno_alum_fonos_emergencia').val("");
     }
 
     function fono_2(){
@@ -556,13 +583,89 @@ $rand = "X".$random1.$random2;
 
     }
 
-    a = $('#res_fonos').val();
+    a = $('#Alumno_alum_fonos_emergencia').val();
     if( a != ""){
         num_split(a);
     }
 
     $('#button_familia').on('click',function(){ $('#div_familia').toggle(); });
     $('#button_vivienda').on('click',function(){ $('#div_vivienda').toggle(); });
+
+
+</script>
+
+<script>
+  $(function(){
+        $('#rut_button').autocomplete({
+           source : function( request, response ) {
+           $.ajax({
+                    url: "<?php echo $this->createUrl('alumno/buscar_rut_alum'); ?>",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function(data) {
+                                response($.map(data, function(item) {
+                                            return {
+                                                    label: item.rut,
+                                                    id: item.id_alum,
+                                                    rut: item.rut,
+                                                    model: item.model,
+                                                    }
+                                        }))
+
+
+                            }
+
+                        })
+            },
+                    select: function(event, ui) {
+                        
+                        
+                        $.each(ui.item.model, function(index, value) {
+                            id = '#Alumno_' + index;
+                           
+                            
+                            $(id).val(value);
+                            if( index == 'alum_ciudad' ){
+                                id_ciudad = value;
+                            }
+                            if( index == 'alum_comuna' ){
+                                id_comuna = value;
+                            }    
+
+                        });
+
+                        trans();
+                        num_split($('#Alumno_alum_fonos_emergencia').val());
+                        vive_con();
+
+                        ajax_ciudad(); // se actualiza el dropdown con las ciudades
+                        function asd(){
+                            $( document ).ajaxComplete(function(event,xhr,settings) { //  se espera a que termine el ajax, por que sino el DOOM no  se actualiza a tiempo
+                                $('#Alumno_alum_ciudad').val(id_ciudad)
+                                // console.log(event)
+                                if( settings.data.toLowerCase().indexOf('region') > 0 ){ //  si contiene la palabra region se llama el ajax comuna para eviar un loop
+                                   // console.log(settings.url)
+                                   ajax_comuna();
+                                } 
+                                
+                            })
+                           
+                            $( document ).ajaxComplete(function(event,xhr,settings) {
+
+                                     
+         
+                                if( settings.data.toLowerCase().indexOf('ciudad') > 0 ){
+                                   
+                                    $(event.currentTarget).unbind('ajaxComplete');
+                                    $('#Alumno_alum_comuna').val(id_comuna); 
+
+                                }
+                            });
+                        } asd()
+ 
+
+                    }});
+       });
 
 
 </script>

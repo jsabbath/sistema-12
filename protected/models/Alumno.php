@@ -66,9 +66,9 @@ class Alumno extends CActiveRecord
 			array('alum_f_nac','required','message'=>'Debe ingresar una fecha de nacimiento'),
 			array('alum_f_nac, alum_salud, alum_enfermedad, alum_medicamentos, alum_padre_nombre,
 					alum_aprendizaje, alum_padre_nivel, alum_vive_con,
-					alum_apo1_nombre, alum_apo1_telefono, alum_apo2_nombre, alum_apo2_telefono, alum_fam1_actividad, alum_fam1_lugar,
-					alum_madre_ingresos, alum_madre_actividad, alum_madre_act_tipo, alum_padre_act_tipo, alum_padre_actividad,
-					alum_obs, alum_fonos_emergencia, alum_madre_nombre, alum_fam2_actividad, alum_fam2_lugar, alum_transporte, alum_religion', 'safe'),
+					alum_apo1_nombre, alum_apo1_telefono, alum_apo2_nombre, alum_apo2_telefono, alum_fam1_actividad, alum_fam1_lugar, alum_comuna
+					alum_madre_ingresos, alum_madre_actividad, alum_madre_act_tipo, alum_padre_act_tipo, alum_padre_actividad, alum_region, alum_ciudad
+					alum_obs, alum_fonos_emergencia, alum_madre_nombre, alum_fam2_actividad, alum_fam2_lugar, alum_transporte, alum_religion, alum_id', 'safe'),
 			array('alum_comuna','required','message'=>'Debe seleccionar una comuna'),
 			array('alum_region','required','message'=>'Debe seleccionar una region'),
 			array('alum_ciudad','required','message'=>'Debe seleccionar una ciudad'),

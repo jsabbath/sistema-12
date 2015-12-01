@@ -292,4 +292,39 @@ class AlumnoController extends Controller
 		}else echo '<p class="text-error text-center">Ingrese Rut válido<p>';
 	}
 
+
+	public function actionBuscar_rut_alum(){
+		$criterio = new CDbCriteria;
+        $cdtns = array();
+        $resultado = array();
+
+        if(empty($_GET['term'])) return $resultado;
+
+        $cdtns[] = "LOWER(alum_rut) like LOWER(:busq)";
+
+        $criterio->condition = implode(' OR ', $cdtns);
+        $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
+        $criterio->limit = 10;
+
+        $data = Alumno::model()->findAll($criterio);
+        $ano = $cursos = $this->actionAnoactual();
+
+
+        foreach($data as $item) {
+        
+        	$mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
+        	if( $mat){
+        		if( $mat->matEstado->par_descripcion != "RETIRADO" ){
+			        $resultado[] = array (
+			            'rut' => $item->alum_rut,
+			            'id_alum' => $item->alum_id,
+			            'model' => $item,
+			        );
+		        }
+			}
+        }
+
+        echo CJSON::encode($resultado);
+	}
+
 }
