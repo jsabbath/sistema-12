@@ -1444,4 +1444,94 @@ class MatriculaController extends Controller
     }
 
 
+	public function ActionFicha(){
+		$estado = Parametro::model()->findAll(array('condition'=>'par_descripcion="ACTIVO"'));
+		$lista = CHtml::listData(ListaCurso::model()->findAll(),'list_mat_id','list_curso_id');
+		$ano = $this->actionAnoactual();
+		$model = new Matricula('search');
+		$model->unsetAttributes();  // clear any default values
+
+		$cole = Colegio::model()->find();
+		$per = Parametro::model()->findByPk($cole->col_periodo);
+
+		if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
+
+
+		$cursos = $this->actionCursoAnoActual();
+		$this->render('ficha', array(
+			'model' => $model,
+			'lista' => $lista,
+			'estado' => $estado,
+			'cursos' => $cursos,
+			'ano' => $ano,
+		));
+
+
+	}
+
+	public function actionFicha_alum($id_mat){
+		$matricula = Matricula::model()->findByPk($id_mat);
+		$alumno = Alumno::model()->findByPk($matricula->mat_alu_id);
+
+		$cur_list = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id_mat));
+
+		$curso  = Curso::model()->findByPk($cur_list->list_curso_id);
+		$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+    	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        $cole = Colegio::model()->find();
+        $ano = $this->actionAnoactual();
+
+ 		$mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+ 		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+        $mPDF1->WriteHTML($stylesheet, 2);
+        $mPDF1->WriteHTML($this->renderPartial('ficha_alu', array(
+                                                                'curso_nombre'	=> $nivel . $letra,
+                                                                'alum'   		=> $alumno,
+                                                                'cole'          => $cole,
+                                                                'ano'			=> $ano,
+                                                                'mat'           => $matricula,
+
+                        ), true));
+        $mPDF1->Output();
+	}
+
+
+	public function actionFicha_curso(){
+		if( isset($_POST['id_curso']) ){
+            $id_curso = $_POST['id_curso'];
+
+            $lista =  ListaCurso::model()->findAll(array('order'=>'list_posicion',
+                                                            'condition' => 'list_curso_id=:x',
+                                                            'params' =>array(':x' => $id_curso)));
+            foreach ($lista as $key => $alum) {
+                $alumnos[] = array('id' => $alum->list_mat_id);
+            }
+
+
+            $curso  = Curso::model()->findByPk($id_curso);
+            $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+            $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+            $cole = Colegio::model()->find();
+            $ano = $this->actionAnoactual();
+
+            $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
+
+            $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+            $mPDF1->WriteHTML($stylesheet, 2);
+            $mPDF1->WriteHTML($this->renderPartial('ficha_cur', array(
+                                                        'curso_nombre'  => $nivel . $letra,
+                                                        //'alum'          => $alumno,
+                                                        'cole'          => $cole,
+                                                        'ano'           => $ano,
+                                                        'mat'           => $matricula,
+                                                        'lista'         => $alumnos,
+
+                            ), true));
+            $mPDF1->Output();
+		}
+	}
+
+
+
 }
