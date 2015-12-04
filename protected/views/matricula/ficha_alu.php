@@ -157,9 +157,9 @@
 <?php 
     $fonos = $alum->alum_fonos_emergencia;
 
-    list($f1,$f2) = split('//',$fonos);
-    list($nom1,$fon1) = split('::',$f1);
-    list($nom2,$fon2) = split('::',$f2);
+    list($f1,$f2) = explode('//',$fonos);
+    list($nom1,$fon1) = explode('::',$f1);
+    list($nom2,$fon2) = explode('::',$f2);
 ?>
 
 
