@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title><?php //echo CHtml::encode($this->pageTitle); ?>ACADEMIC</title>
 </head>
 
 <body style='background-image: url("<?php echo Yii::app()->request->baseUrl; ?>/images/fondo3.jpg");background-repeat: no-repeat; background-attachment:fixed; background-size:cover-webkit-background-size: cover; /* For WebKit*/
