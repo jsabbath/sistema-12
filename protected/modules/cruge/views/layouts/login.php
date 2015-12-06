@@ -35,6 +35,13 @@ if(isset($this->breadcrumbs)):?>
 	<?php endif
 */
 ?>
+	<script>
+	  var navegador = navigator.userAgent;
+	  if (navigator.userAgent.indexOf("Chrome") !=-1) {
+		} else {
+		location.href="images/index_error.php";
+	  }
+	</script>
 
 	<?php echo $content;?>
 	<div class="clear"></div>
