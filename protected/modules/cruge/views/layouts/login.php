@@ -42,11 +42,11 @@ if(isset($this->breadcrumbs)):?>
 
 	  
 <div align="center" class="navbar navbar-fixed-bottom visible-desktop">
-	<pre style="color:black">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+	<pre style="color:black">Academic © 2015-2016 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</pre>
 </div>
 
 <div align="center" class="navbar navbar-static-bottom hidden-desktop">
-	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+	<pre style="color:black">Academic © 2015-2016 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</pre>
 </div>
 
 

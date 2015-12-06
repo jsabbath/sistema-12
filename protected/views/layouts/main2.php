@@ -38,7 +38,7 @@ $tempid = $temp->temp_id;
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
 
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <title><?php //echo CHtml::encode($this->pageTitle); ?>ACADEMIC</title>
     </head>
 
     <body>

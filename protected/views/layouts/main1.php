@@ -44,7 +44,7 @@ $tempid = $temp->temp_id;
   <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sweet-alert.css">
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/sweet-alert.min.js"></script>
 
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <title><?php //echo CHtml::encode($this->pageTitle); ?>ACADEMIC</title>
     </head>
 
     <body>
@@ -164,7 +164,7 @@ $tempid = $temp->temp_id;
         
   
 <div align="center" class="text-center">
-	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+	<pre style="color:white">Academic © 2015 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</pre>
 </div>
     </body>
 </html>
