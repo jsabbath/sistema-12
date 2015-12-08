@@ -59,7 +59,7 @@
     text-shadow: 0px 1px 0px #4D5FAB;
     display:block; margin:0 auto 0 auto; width:219.375px; height: 50px;" type="submit" class="botonSubmit" value="Ingresar" disabled>
 </div>
-<pre id="footer" style="display:block;text-align: center;color:black; background-color: rgba(197, 42, 10, 0.3);;border-radius: 25px 25px 25px 25px; -moz-border-radius: 25px 25px 25px 25px; -webkit-border-radius: 25px 25px 25px 25px; border: 0px solid #000000;"><STRONG>WEB DESHABILITADA:<BR><A href="https://www.google.com/chrome/browser/desktop/"> Favor utilizar solo Navegador "Google Chrome" <img style="margin:0 auto 0 auto;width:50px; height: 50px;padding:1;" src="chrome.png"></a></STRONG></pre>
+<pre id="footer" style="display:block;text-align: center;color:black; background-color: rgba(197, 42, 10, 0.3);;border-radius: 25px 25px 25px 25px; -moz-border-radius: 25px 25px 25px 25px; -webkit-border-radius: 25px 25px 25px 25px; border: 0px solid #000000;"><STRONG>Sitio optimizado para Google Chrome:<BR><A href="https://www.google.com/chrome/browser/desktop/"> Si no lo tienes instalado descargado Aqui. <img style="margin:0 auto 0 auto;width:50px; height: 50px;padding:1;" src="chrome.png"></a></STRONG></pre>
 <br>
 <pre id="footer" style="padding:5px 0px;clear: both;text-align: center;color:black; margin-bottom: 10%;">Academic &copy; 2015-2016 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</pre>
 </body>
