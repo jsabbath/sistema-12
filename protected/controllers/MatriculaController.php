@@ -102,7 +102,7 @@ class MatriculaController extends Controller
             $alumno->attributes = $_POST['Alumno'];
             if( isset($alumno->alum_id) ){ // el alumno ya existe por lo q se actualiza su tupla existente
                 $old_alum = Alumno::model()->findByPk($alumno->alum_id);
-                $old_alum->attributes = $alumno->attributes; 
+                $old_alum->attributes = $alumno->attributes;
             }
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
@@ -142,7 +142,7 @@ class MatriculaController extends Controller
                         if ($model->save()) {
                             $this->redirect(array('addcurso', 'id' => $model->mat_id));
                         }
-                    }                    
+                    }
                 } else{
                      if($old_alum->update()){ // alumno Viejo, tenia datos existentes
                         $model->mat_alu_id = $old_alum->alum_id; //aqui se actualiza la foreign key
@@ -150,8 +150,8 @@ class MatriculaController extends Controller
                         if ($model->save()) {
                             $this->redirect(array('addcurso', 'id' => $model->mat_id));
                         }
-                       
-                    }          
+
+                    }
                 }
 
 
@@ -675,7 +675,7 @@ class MatriculaController extends Controller
                         $cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
                     }
                 }
-
+				asort($cursos);
                 $this->renderPartial('cur_link', array(
                     'id' => $id,
                     'cur' => $cursos,

@@ -50,7 +50,7 @@ class Matricula extends CActiveRecord
 			array('mat_fingreso','required','message'=>'Debe registrar una fecha de ingreso'),
 			array('mat_ano, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'numerical', 'integerOnly'=>true),
 			array('mat_numero', 'length', 'max'=>11),
-			array('mat_fingreso, mat_fretiro, mat_fcambio', 'safe'),
+			array('mat_fingreso, mat_fretiro, mat_fcambio, mat_desc', 'safe'),
 			array('alumno_nombres, mat_documentos','safe'),
 			array('alumno_apepat','safe'),
 			array('alumno_apemat','safe'),
@@ -95,6 +95,7 @@ class Matricula extends CActiveRecord
 			'mat_alu_id' => 'Alumno',
 			'mat_estado' => 'Estado',
 			'mat_documentos' => 'Documentos Recibidos',
+			'mat_desc' 	=> 'Observacion',
 		);
 	}
 

@@ -169,9 +169,18 @@
             <td><?php echo $a['nombre']; ?></td>
             <?php foreach ($a['notas'] as $key => $n) { ?>
                 <?php if( $a['retiro'] == $id_retiro  ){ // si el alumno  esta retirado ?> 
-                        <td style="background-color: #EEEEEE; <?php  if( $n < 4  AND $n > 0) echo 'color: RED;' ?>" ><?php echo $n ?></td>
+                <td style="background-color: #EEEEEE; <?php  if( $n < 4  AND $n > 0) echo 'color: RED;' ?>" ><?php if( $n > 0 )echo $n ?></td>
                 <?php } else{ //  si  el alumno no esta retirado ?>
-                        <td <?php if( $n < 4 AND $n > 0 ){ ?> style="color: RED;" <?php } ?> ><?php echo $n ?></td>
+                    <td <?php if( $n < 4 AND $n > 0 ){ ?> style="color: RED;" <?php } ?> >
+                            <?php if( is_numeric($n) ) {
+                                    if( $n > 0 ){
+                                        echo $n; 
+                                    }
+                                    
+                                } else{
+                                    echo $n;
+                                }
+                    ?></td>
                 <?php } 
                     if( $n > 0 ){
                         $prom_alum += $n;

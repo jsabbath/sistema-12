@@ -65,13 +65,13 @@ class CursoController extends Controller
 
  	    	$asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id )));
 
-         
+
             foreach ( $asignadas as $p ){
                 $id_asig[] = $p->aa_asignatura;
                 $id_prof[] = $p->aa_docente;
                 //array_push($id_asig, $p->aa_asignatura);
             }
-            
+
             $criteria = new CDbCriteria();
             $criteria->addInCondition('asi_id', $id_asig, 'OR');
             $asig = CHtml::listData(Asignatura::model()->findAll($criteria),'asi_id','asi_descripcion');
@@ -81,7 +81,7 @@ class CursoController extends Controller
             $criteria_doc = new CDbCriteria();
             $criteria_doc->addInCondition('usu_id', $id_prof, 'OR');
             $profesores = CHtml::listData(Usuario::model()->findAll($criteria_doc),'usu_id','Nombrecorto');
-	       	
+
 
    			$numero_alumnos = ListaCurso::model()->countByAttributes(array('list_curso_id' => $id));
 
@@ -111,32 +111,32 @@ class CursoController extends Controller
 		$model=new Curso;
                 $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-		
+
                 //  Se obtienen los niveles disponibles primero segundo...
                 $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
                 $niveles = CHtml::listData($para, 'par_id', 'par_descripcion');
-		
+
         if ( $temp->temp_ano != 0 ){
 			$ano = $temp->temp_ano;
 		} else {
 			$ano = $par->par_descripcion;
 		}
-                
+
                 // Tipo  de periodo disponible
                 $tperiodo = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'tperiodo')));
                 $tp = CHtml::listData($tperiodo, 'par_id', 'par_descripcion');
 
-                // Se obtienen las jornadas 
+                // Se obtienen las jornadas
                 $jor = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'jornada')));
                 $jornada = CHtml::listData($jor, 'par_id', 'par_descripcion');
-                
+
                 //  Se obtienen las letras para los cursos
                 $l = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'letra')));
                 $letra = CHtml::listData($l, 'par_id', 'par_descripcion');
-                
+
                 $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
-                
+
 		if(isset($_POST['Curso']))
 		{
 			$model->attributes=$_POST['Curso'];
@@ -147,7 +147,7 @@ class CursoController extends Controller
 				$this->redirect(array('menu'));
 			}
 		}
-		
+
 		$this->render('create',array(
 					'model'=>$model,
                     'niveles' => $niveles,
@@ -170,28 +170,28 @@ class CursoController extends Controller
 
                              $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-		
+
                 //  Se obtienen los niveles disponibles primero segundo...
                 $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
                 $niveles = CHtml::listData($para, 'par_id', 'par_descripcion');
-		
+
                 if ( $temp->temp_ano != 0 ){
 			$ano = $temp->temp_ano;
 		} else {
 			$ano = $par->par_descripcion;
 		}
-                
+
                 // Tipo  de periodo disponible
                 $tperiodo = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'tperiodo')));
                 $tp = CHtml::listData($tperiodo, 'par_id', 'par_descripcion');
 
-                // Se obtienen las jornadas 
+                // Se obtienen las jornadas
                 $jor = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'jornada')));
                 $jornada = CHtml::listData($jor, 'par_id', 'par_descripcion');
-                
+
                 //  Se obtienen las letras para los cursos
                 $l = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'letra')));
-                $letra = CHtml::listData($l, 'par_id', 'par_descripcion'); 
+                $letra = CHtml::listData($l, 'par_id', 'par_descripcion');
 
                 $informe = CHtml::listData(InformeDesarrollo::model()->findAll(),'id_id','id_descripcion');
 
@@ -250,20 +250,20 @@ class CursoController extends Controller
 	{
 		$par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
+
                 // La variable es array por que criteria lo pide.
 		if ( $temp->temp_ano != 0 ){
 			$ano = array($temp->temp_ano);
 		} else {
 			$ano = array($par->par_descripcion);
 		}
-                
+
                 $criteria = new CDbCriteria();
                 $criteria->addInCondition('cur_ano', $ano, 'or');
                 $dataProvider=new CActiveDataProvider('Curso', array('criteria' => $criteria));
-			
+
                 $this->render('index',array('dataProvider'=>$dataProvider,));
-                
+
 	}
 
 	/**
@@ -317,8 +317,8 @@ class CursoController extends Controller
 		$temp->temp_ano = $anio;
 		$temp->update();
 	}
-        
-                
+
+
     public function actionBuscar_prof()
     {
         $criterio = new CDbCriteria;
@@ -334,8 +334,8 @@ class CursoController extends Controller
         $criterio->limit = 10;
 
         $data = Usuario::model()->findAll($criterio);
-        
-        foreach($data as $item) {  
+
+        foreach($data as $item) {
             $resultado[] = array (
                 'id_cruge' => $item->usu_iduser,
                 'id' => $item->usu_id,
@@ -348,7 +348,7 @@ class CursoController extends Controller
 
         echo CJSON::encode($resultado);
     }
-        
+
         // BUSCAR CURSOS POR NOMBRE
     public function actionBcxn(){
         if( !isset($_POST['nombre']) ) {
@@ -357,25 +357,25 @@ class CursoController extends Controller
         }
             $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 	$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-            
+
             // La variable es array por que criteria lo pide.
 	if ( $temp->temp_ano != 0 ){
 		$ano = array($temp->temp_ano);
 	} else {
 		$ano = array($par->par_descripcion);
 	}
-                      
+
         echo "<h4>Cursos de: " . $_POST['nombre']."</h4>";
         echo "<br><br>";
-        
-        $id_cruge = array($_POST['id']); 
-        
+
+        $id_cruge = array($_POST['id']);
+
             $criteria = new CDbCriteria();
             $criteria->addInCondition('cur_ano', $ano, 'AND');
             $criteria->addInCondition('cur_pjefe', $id_cruge, 'AND' );
             $dataProvider=new CActiveDataProvider('Curso', array('criteria' => $criteria));
-		
-        $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));   
+
+        $this->renderPartial('index_cursos',array('dataProvider'=>$dataProvider,));
     }
 
     function nivelCurso($nivel){
@@ -384,22 +384,22 @@ class CursoController extends Controller
         }
         if( $nivel == "SEGUNDO" ){
             return 2;
-        } 
+        }
         if( $nivel == "TERCERO" ){
             return 3;
-        } 
+        }
         if( $nivel == "CUARTO"){
             return 4;
-        } 
+        }
         if( $nivel == "QUINTO"){
             return 5;
-        } 
+        }
         if( $nivel == "SEXTO" ){
             return 6;
-        } 
+        }
         if( $nivel == "SEPTIMO" ){
             return 7;
-        } 
+        }
         if( $nivel == "OCTAVO" ){
             return 8;
         }
@@ -411,7 +411,7 @@ class CursoController extends Controller
 		La funcion devuelve un array con la ID y el nombre completo de los cursos
 		ejemplo: array('id_curso'=>'PRIMERO A')
     	*/
-    	
+
 		$ano = $this->actionAnoactual();
     	//$ano = implode(CHtml::listData(Parametro::model()->findAll(array('select'=>'par_descripcion','condition'=>'par_item="ano_activo"')),'par_id','par_descripcion'));
 		$curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'"'));
@@ -451,7 +451,7 @@ class CursoController extends Controller
     		$this->render('buscar_notas',array(
 	    			'cur' => $cursos,
    			));
-    	
+
     	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
@@ -470,12 +470,12 @@ class CursoController extends Controller
 
 
  			$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:y','params' => array(':y' => $id_profe)));
-    		
+
     		$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
     														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
-    		
+
     		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
-    		
+
     		if( $tiene_asignaturas ){
     			foreach ( $tiene_asignaturas as $p ){
 	                $id_cur[] = $p->aa_curso;
@@ -496,12 +496,12 @@ class CursoController extends Controller
 	            $cur = Curso::model()->findAll($criteria);
 	 			// se filtran los cursos por el año  seleccionado
 	 			$cursos = array();
-	 			for ($i=0; $i < count($cur); $i++) { 
+	 			for ($i=0; $i < count($cur); $i++) {
 	 				if($cur[$i]->cur_ano == $ano ){
 						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
 					}
 				}
-
+				asort($cursos);
 				$this->render('buscar_notas',array(
 	    			'cur' => $cursos,
 	    			'usu' => $id_profe,
@@ -509,17 +509,17 @@ class CursoController extends Controller
    				));
 
 
-    	} 
-    		
+    	}
+
     }
 
- 	
-    
+
+
 
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
         $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
+
                 // La variable es array por que criteria lo pide.
         if ( $temp->temp_ano != 0 ){
             $ano = $temp->temp_ano;
@@ -539,25 +539,25 @@ class CursoController extends Controller
 
 			//  se ve si  tiene alguno de los roles que pueden  acceder a todas las asignaturas
 			if( Yii::app()->user->checkAccess('administrador') OR Yii::app()->user->isSuperAdmin OR Yii::app()->user->checkAccess('jefe_utp') OR
-				Yii::app()->user->checkAccess('evaluador') OR Yii::app()->user->checkAccess('director')){  
+				Yii::app()->user->checkAccess('evaluador') OR Yii::app()->user->checkAccess('director')){
 
-				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 
+				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x',
 	 																'params' => array(':x' => $id_curso)));
 
 			}else if( Yii::app()->user->checkAccess('profesor') ){ // se pregunta si  es profesor para cargar solo sus asignaturas
 
 				$curso_asd = Curso::model()->findByPk($id_curso);
 				$docente    = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
-	
-	 			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y', 
+
+	 			$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x AND aa_docente=:y',
 	 																'params' => array(':x' => $id_curso, ':y' => $docente['usu_id'])));
 
-	 			// si el profesor no hace clases en niuna asignatura, entonces es el profesor jefe del curso 
+	 			// si el profesor no hace clases en niuna asignatura, entonces es el profesor jefe del curso
 	 			// por lo  que puede ver todas las asignaturas
-	 			if( $docente->usu_iduser == $curso_asd->cur_pjefe ){ 
-	 				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 
+	 			if( $docente->usu_iduser == $curso_asd->cur_pjefe ){
+	 				$asignacion = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x',
 	 																'params' => array(':x' => $id_curso)));
-	 			}    
+	 			}
 			}
 
 
@@ -566,7 +566,7 @@ class CursoController extends Controller
             $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
 
            	foreach ( $asignacion as $p ){
-		  		$id_asig[] =$p->aa_asignatura;	
+		  		$id_asig[] =$p->aa_asignatura;
             }
 
 
@@ -595,16 +595,16 @@ class CursoController extends Controller
 
 		$asignatura = Asignatura::model()->findByPk($id_asig);
 
-		$lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion', 
+		$lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion',
 														'condition' => 'list_curso_id=:x', 'params' => array(':x' => $c )));
 
 		// se recorre la lista del curso
 		 foreach ($lista_curso as $key => $lista) {
-		 		// se cargan las notas  para el alumno 
-	        	$notas = Notas::model()->find(array('condition' => 'not_asig=:x AND not_periodo=:y AND not_mat=:z', 
+		 		// se cargan las notas  para el alumno
+	        	$notas = Notas::model()->find(array('condition' => 'not_asig=:x AND not_periodo=:y AND not_mat=:z',
 												'params' => array(':x' => $id_asig, ':y' => $tipo_periodo, ':z' => $lista->list_mat_id )));
 
-	        	$mat  = Matricula::model()->findByPk($lista->list_mat_id); 
+	        	$mat  = Matricula::model()->findByPk($lista->list_mat_id);
 	        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 	        	$est = Parametro::model()->findByPk($mat->mat_estado);
 	        	if( $est->par_descripcion == "RETIRADO" ){
@@ -655,7 +655,7 @@ class CursoController extends Controller
 							't_peri'			=> $b,
 							'max_per'			=> $max,
 			 ));
-		
+
 
 	}
 
@@ -667,18 +667,18 @@ class CursoController extends Controller
 		if( $tiene_asignatura ){
 
 			$ano = $this->actionAnoactual();
-            $notas = Notas::model()->findall(array( 'condition' => 'not_asig=:x AND not_ano=:y', 
+            $notas = Notas::model()->findall(array( 'condition' => 'not_asig=:x AND not_ano=:y',
             										'params' => array(':x' => $tiene_asignatura['aa_asignatura'], ':y' => $ano )));
            	if( $notas ){
 	            $mat_id = array();
 
 
-	            $lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion', 
+	            $lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion',
 													'condition' => 'list_curso_id=:x', 'params' => array(':x' => $id )));
 
 	            // se recorre la lista del curso
 				// foreach ($lista_curso as $key => $lista) {
-			 //        	$mat_id[]  = $lista->list_mat_id;	
+			 //        	$mat_id[]  = $lista->list_mat_id;
 			 //    }
 
 
@@ -703,14 +703,14 @@ class CursoController extends Controller
 	            		$matri = Matricula::model()->findByPk($alumno->list_mat_id);
 	            		$alu = Alumno::model()->findByPk($matri->mat_alu_id);
 	            		// $matri 	= Matricula::model()->findByPk($mat_id);
-	            		
+
 	            		$lista_alumnos[] = array(
 	            					'mat_id'	=> $alumno->list_mat_id,
 	            					'nombre'	=> $alu->getNombre_completo_2(),
 	            					'asi_1'		=> $matri->mat_asistencia_1,
 	            					'asi_2'		=> $matri->mat_asistencia_2,
 	            				);
-	            		
+
 	            	}
 	            }else if($tipo_periodo->par_descripcion == 'TRIMESTRE' ){
 	            	foreach ($lista_curso as $key => $alumno) {  // se recorre cada matricula y  se obtiene el nombre del alumno
@@ -724,12 +724,12 @@ class CursoController extends Controller
 	            					'asi_2'		=> $matri->mat_asistencia_2,
 	            					'asi_3'		=> $matri->mat_asistencia_3,
 	            				);
-	            		
+
 	            	}
 	            }
             	//echo CJSON::encode($lista_alumnos);
             	return $lista_alumnos; // se retorna la lista
-	            
+
 			}else{
 				//echo "no tiene alumnos";
 				return 0;
@@ -743,7 +743,7 @@ class CursoController extends Controller
 	}
 
 	/*
-	el profesor jefe puede ver todos sus cursos, 
+	el profesor jefe puede ver todos sus cursos,
 	selecciona uno y entra a la seccion  donde se pone la asistencia
 	*/
 	public function actionBuscar_asistencia(){
@@ -753,7 +753,7 @@ class CursoController extends Controller
     		$this->render('buscar_asistencia',array(
 	    			'cur' => $cursos,
    			));
-    	
+
     	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
@@ -771,14 +771,14 @@ class CursoController extends Controller
     		$usuario = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
 			$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
     														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
-		
+
 
 			if( $es_profe_jefe ){
     			// se agregan cursos si  es q es profe jefe
     			foreach ( $es_profe_jefe as $c ){
 	                $id_cur[] = $c->cur_id;
 	            }
-    		
+
 				$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
 				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
@@ -787,12 +787,12 @@ class CursoController extends Controller
 	            $cur = Curso::model()->findAll($criteria);
 	 			// se filtran los cursos por el año  seleccionado
 	 			$cursos = array();
-	 			for ($i=0; $i < count($cur); $i++) { 
+	 			for ($i=0; $i < count($cur); $i++) {
 	 				if($cur[$i]->cur_ano == $ano ){
 						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
 					}
 				}
-
+				asort($cursos);
 				$this->render('buscar_asistencia',array(
 		    			'cur' => $cursos,
 		    			//'usu' => $id_profe,
@@ -812,17 +812,17 @@ class CursoController extends Controller
 
 	// llega la id del curso  al  que se le quiere poner la asistencia
 	public function actionPoner_asistencia(){
-		
+
 		if( isset($_POST['id_cur'] )){
 			$id = $_POST['id_cur'];
-		
+
 		$lista = $this->actionListar_alumnos($id); // se obtiene la lista de alumnos
 
 		$curso = Curso::model()->findByPk($id);
 		$cole = Colegio::model()->find();
         $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
-        
-        
+
+
 
 
 		$this->renderPartial('editar_asistencia',array(
@@ -838,11 +838,11 @@ class CursoController extends Controller
 			$curso_asi= $_POST['curso_asi'];
 			$asistencia_alumno = array();
 
-			foreach($curso_asi as $key => $alumno){ //  se recorre cada alumno 
+			foreach($curso_asi as $key => $alumno){ //  se recorre cada alumno
 				$id_matricula = $alumno[0];
-								
+
 				$model = Matricula::model()->findByPk($id_matricula);
-                // $alumno[1] contiene todas las asistencias 
+                // $alumno[1] contiene todas las asistencias
                 $asistencia = $alumno[1];
 
                 if( !empty($asistencia[0]) ){
@@ -852,7 +852,7 @@ class CursoController extends Controller
                     $model->mat_asistencia_2 = $asistencia[1];
                 }
                 if( !empty($asistencia[2]) ){
-                    $model->mat_asistencia_3 = $asistencia[2]; 
+                    $model->mat_asistencia_3 = $asistencia[2];
                 }
                 $model->update();
 			}
@@ -876,13 +876,13 @@ class CursoController extends Controller
 				 		return;
 				 	}
 			}
-			
+
 			if( Yii::app()->user->checkAccess('profesor')  ){
 				// si no  es el profesor que hace la asignatura se ve si es el profe jefe del curso
 		 		$curso = Curso::model()->findByPk($curso);
 
 		 		if( $curso->cur_pjefe == Yii::app()->user->id ){
-		 			
+
 		 			if( $usuario->password == $p){
 				 		echo json_encode(1);
 				 		return;
@@ -894,7 +894,7 @@ class CursoController extends Controller
 			}
 
 			echo json_encode(2);
-			return;	
+			return;
 
 		}
 	}
@@ -927,7 +927,7 @@ class CursoController extends Controller
 			$this->render('cambiar_cur',array(
 	    			'cur' => $cursos,
 				));
-    	
+
     	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
@@ -945,11 +945,11 @@ class CursoController extends Controller
     		$id_profe = $profe['usu_id'];
 
 
- 			
-    		
+
+
     		$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
     														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
-    		
+
     		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
     		$cursos = array();
 
@@ -958,7 +958,7 @@ class CursoController extends Controller
     			foreach ( $es_profe_jefe as $c ){
 	                $id_cur[] = $c->cur_id;
 	            }
-    		
+
 
 	            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
 				$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
@@ -967,14 +967,14 @@ class CursoController extends Controller
 	            $criteria->addInCondition('cur_id', $id_cur, 'OR');
 	            $cur = Curso::model()->findAll($criteria);
 	 			// se filtran los cursos por el año  seleccionado
-	 			
-	 			for ($i=0; $i < count($cur); $i++) { 
+
+	 			for ($i=0; $i < count($cur); $i++) {
 	 				if($cur[$i]->cur_ano == $ano ){
 						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
 					}
 				}
 			}
-
+			asort($cursos);
 			$this->render('cambiar_cur',array(
     			'cur' => $cursos,
     			'usu' => $id_profe,
@@ -982,7 +982,7 @@ class CursoController extends Controller
 			));
 
 
-    	} 
+    	}
 
 
 
@@ -1007,7 +1007,7 @@ class CursoController extends Controller
 
 
         foreach($data as $item) {
-        
+
         	$mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
         	if( $mat){
         		$est = Parametro::model()->findByPk($mat->mat_estado);
@@ -1056,7 +1056,7 @@ class CursoController extends Controller
 
 
         foreach($data as $item) {
-        
+
         	$mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
         	if( $mat){
         		$est = Parametro::model()->findByPk($mat->mat_estado);
@@ -1087,7 +1087,7 @@ class CursoController extends Controller
 	}
 
 
-	// function para matricular alumno (cambio de curso). 
+	// function para matricular alumno (cambio de curso).
 	// id_alum = id_alumno, id_curso, id_mat
 	public function actionMatricular_alumno(){
 		if( isset($_POST['id_mat']) ){
@@ -1121,7 +1121,7 @@ class CursoController extends Controller
                         foreach ( $asignadas as $p ){
                             $nota = new Notas;
 
-                            $old_notas = Notas::model()->findByAttributes(array('not_asig' => $p->aa_asignatura, 
+                            $old_notas = Notas::model()->findByAttributes(array('not_asig' => $p->aa_asignatura,
                             													'not_periodo' => $i,
                             													'not_mat' => $mat->mat_id, // id de matircula vieja
                             													));
@@ -1136,10 +1136,10 @@ class CursoController extends Controller
                     }
                     // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
                 } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
-                    for ($i=1; $i <= 3; $i++) { 
+                    for ($i=1; $i <= 3; $i++) {
                         foreach ( $asignadas as $p ){
                             $nota = new Notas;
-                             $old_notas = Notas::model()->findByAttributes(array('not_asig' => $p->aa_asignatura, 
+                             $old_notas = Notas::model()->findByAttributes(array('not_asig' => $p->aa_asignatura,
                             													'not_periodo' => $i,
                             													'not_mat' => $mat->mat_id, // id de matircula vieja
                             													));
@@ -1163,8 +1163,8 @@ class CursoController extends Controller
                 //$eva_old->delete();
                 //  se busca al alumno en la lista del curso  antiguo para borrarlo
                 ListaCurso::model()->deleteAll('list_mat_id = :id', array('id' => $mat->mat_id));
-                
-                $mat->delete(); //  se borra la matricula 
+
+                $mat->delete(); //  se borra la matricula
 
                 $lista_alumnos = new ListaCurso;
                 $lista_alumnos->list_curso_id = $id_curso;
@@ -1187,7 +1187,7 @@ class CursoController extends Controller
                     $evaluacion->insert();
                 }
 
-               
+
             }
 		}
 	}
@@ -1201,16 +1201,15 @@ class CursoController extends Controller
 			$curso = Curso::model()->findAll(array('condition'=>'cur_ano="'.$ano.'" AND cur_nivel="'.$curso_actual->cur_nivel.'"'));
 			$nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
 			$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
-		
+
 			echo CHtml::tag('option', array('value' => 0), CHtml::encode('Seleccione curso'), true);
-			for ($i=0; $i < count($curso); $i++) { 
+			for ($i=0; $i < count($curso); $i++) {
 				if( $id != $curso[$i]->cur_id  ){
 					echo CHtml::tag('option', array('value' => $curso[$i]->cur_id), CHtml::encode("".$nivel[$curso[$i]->cur_nivel]." ".$letra[$curso[$i]->cur_letra]), true);
 				}
 			}
 		}
     }
-    
+
 
 }
-

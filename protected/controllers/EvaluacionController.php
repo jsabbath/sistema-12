@@ -22,7 +22,7 @@ class EvaluacionController extends Controller
 	 */
 	public function accessRules()
 	{
-		
+
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','curso_lista','evalua_manual','subir_eva'),
@@ -166,13 +166,13 @@ class EvaluacionController extends Controller
 	            $cur = Curso::model()->findAll($criteria);
 	 			// se filtran los cursos por el año  seleccionado
 	 			$cursos = array();
-	 			for ($i=0; $i < count($cur); $i++) { 
+	 			for ($i=0; $i < count($cur); $i++) {
 	 				if($cur[$i]->cur_ano == $ano ){
 						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
 					}
 				}
 
-
+				asort($cursos);
 			$this->render('evaluar_curso',array(
 					'nombre' => $profe['Nombrecorto'],
 	    			'cur' => $cursos,
@@ -184,8 +184,8 @@ class EvaluacionController extends Controller
 				throw new CHttpException(404,'Usted no tiene permisos');
     			return;
 		}
-		
-    	
+
+
 	}
 
 	public function actionCursoAnoActual(){
@@ -226,7 +226,7 @@ class EvaluacionController extends Controller
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
         $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
+
                 // La variable es array por que criteria lo pide.
         if ( $temp->temp_ano != 0 ){
             $ano = $temp->temp_ano;
@@ -281,7 +281,7 @@ class EvaluacionController extends Controller
 	}
 
 	/**
-	LISTA DEL CURSO CON EL INFORME DE PERSONALIDAD Y SUS EVALUACIONES ASOCIADAS; 
+	LISTA DEL CURSO CON EL INFORME DE PERSONALIDAD Y SUS EVALUACIONES ASOCIADAS;
 
 	*/
 
@@ -290,9 +290,9 @@ class EvaluacionController extends Controller
 		if( isset($_POST['id']) ){
 			$id_curso = $_POST['id'];
 
-			$lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion', 
+			$lista_curso = ListaCurso::model()->findAll(array('order'=>'list_posicion',
 														'condition' => 'list_curso_id=:x', 'params' => array(':x' => $id_curso )));
-			
+
 			$curso = Curso::model()->findByPk($id_curso);
 			$informe = InformeDesarrollo::model()->findByPk($curso->cur_infd);
 			$areas = Area::model()->findAll(array('condition' => 'are_infd=:x', 'params' => array(':x' => $curso->cur_infd)));
@@ -301,7 +301,7 @@ class EvaluacionController extends Controller
 			$lista = array();
 			$inf = array();
 			$are = array();
-			
+
 			foreach ($areas as $key => $a) {
 				$con = array();
 				$conceptos = Concepto::model()->findAll(array('condition' => 'con_area=:x', 'params' => array(':x' => $a->are_id)));
@@ -319,12 +319,12 @@ class EvaluacionController extends Controller
 						'are_con' 	=> $con,
 					);
 			}
-			
+
 			$inf[] = array(
 					'titulo' 	=> $informe->id_descripcion,
 					'areas' 	=> $are,
 				);
-			
+
 			foreach ($lista_curso as $key => $alumno) {
 				$notas = array();
 				$evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $alumno->list_mat_id )));
@@ -333,11 +333,11 @@ class EvaluacionController extends Controller
 					$notas[] = array(
 							'eva_nota' 	=> $e->eva_nota,
 							'eva_id' 	=> $e->eva_id,
-							'id_con'	=> $e->eva_concepto,   
+							'id_con'	=> $e->eva_concepto,
 						);
 				}
 
-				$mat  = Matricula::model()->findByPk($alumno->list_mat_id); 
+				$mat  = Matricula::model()->findByPk($alumno->list_mat_id);
 	        	$alum = Alumno::model()->findByPk($mat->mat_alu_id);
 
 				$alumnos[] = array(
@@ -346,16 +346,16 @@ class EvaluacionController extends Controller
 					'notas_alu'		=> $notas,
 				);
 			}
-				
+
 			$lista[] = array(
 					'informe' => $inf,
 					'alumnos' => $alumnos,
-				);		
+				);
 			//echo json_encode($lista);
-			
+
 
 			$escala = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="EVA_ESCALA"')),'par_id','par_descripcion');
-			
+
 			$this->renderPartial('evaluar_conceptos',array(
 				'lista'		=> $lista,
 				'escala' 	=> $escala,
@@ -369,15 +369,15 @@ class EvaluacionController extends Controller
 	// agrega manual mente a los alumnos a evaluacion de informe, id = id_curso
 	public function actionEvalua_manual($id){
 
-		$lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion', 
+		$lista_curso = Listacurso::model()->findAll(array('order'=>'list_posicion',
 													'condition' => 'list_curso_id=:x', 'params' => array(':x' => $id )));
-			
+
 		$curso = Curso::model()->findByPk($id);
 		$id_inf = $curso->cur_infd;
 
 		foreach ($lista_curso as $key => $alumno) {
 			$tiene_eva = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x',
-																	'params' => array( ':x' => $alumno->list_mat_id )));		
+																	'params' => array( ':x' => $alumno->list_mat_id )));
 			if( empty($tiene_eva)){
 		        $criteria = new CDbCriteria();
 		        $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';
@@ -423,7 +423,7 @@ class EvaluacionController extends Controller
 			if( Yii::app()->user->checkAccess('profesor')  ){
 				$curso = Curso::model()->findByPk($curso);
 			 		if( $curso->cur_pjefe == Yii::app()->user->id ){
-			 			
+
 			 			if( $usuario->password == $p){
 					 		echo json_encode(1);
 					 		return;
@@ -434,9 +434,9 @@ class EvaluacionController extends Controller
 			 		}
 			}
 		echo json_encode(2);
-		return;	
+		return;
 		}
-		
+
 	}
 
 	public function actionSubir_eva(){
@@ -447,7 +447,7 @@ class EvaluacionController extends Controller
 				$model->eva_nota = $n['nota'];
 				$model->save();
 			}
-		}	
+		}
 	}
 
     public function obtenerCurso($data,$row){
@@ -468,7 +468,7 @@ class EvaluacionController extends Controller
         $cursos = $this->actionCursoAnoActual();
      	$cole = Colegio::model()->find();
         $per = Parametro::model()->findByPk($cole->col_periodo);
-        
+
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('informe_per_lista', array(
         	'cursos'	=> $cursos,
@@ -504,22 +504,22 @@ class EvaluacionController extends Controller
         $cole = Colegio::model()->find();
         $nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
 
-     
-  		$inf = array(); 
 
-		
+  		$inf = array();
+
+
 		$area = array();
     	$informe = InformeDesarrollo::model()->findByPk($curso->cur_infd);
 		$areas = Area::model()->findAll(array('condition' => 'are_infd=:x', 'params' => array(':x' => $curso->cur_infd)));
 
 		$evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
 		foreach ($areas as $key => $a) {
-		  
+
 			$evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
 
 		  	$notas = array();
 			foreach ($evalu as $key => $ev) {
-					
+
 				$con = Concepto::model()->findByPk($ev->eva_concepto);
 				if( $con->con_area == $a->are_id ){
 					$notas[] = array(
@@ -532,7 +532,7 @@ class EvaluacionController extends Controller
 			$area[] = array(
 				'are_nombre' 	=> $a->are_descripcion,
 				'are_nota'		=> $notas,
-			); 
+			);
 		}
 
 		$inf[] = array(
@@ -540,7 +540,7 @@ class EvaluacionController extends Controller
 
 				);
 
-        $mPDF1->WriteHTML($this->renderPartial('informe_perso_alu', array( 
+        $mPDF1->WriteHTML($this->renderPartial('informe_perso_alu', array(
         														'model'         => $matricula,
                                                                 //'notas'         => $alumnos,
                                                                 'curso_nombre'  => $nivel. " ". $letra,
@@ -583,13 +583,13 @@ class EvaluacionController extends Controller
 
 
 
-	       
+
 	        $mPDF1 = Yii::app()->ePdf->mpdf('', 'A4');
 	        $mPDF1->SetFooter('San Pedro de la Paz '.date('d-m-Y'));
 	        $mPDF1->WriteHTML($stylesheet, 2);
 
 
-	        $mPDF1->WriteHTML($this->renderPartial('informe_perso_curso', array( 
+	        $mPDF1->WriteHTML($this->renderPartial('informe_perso_curso', array(
 	        														//'model'         => $matricula,
 	                                                                'lista'         => $alumnos,
 	                                                                'curso_nombre'  => $nivel. " ". $letra,
@@ -608,6 +608,6 @@ class EvaluacionController extends Controller
 
     	}
     }
-	
+
 
 }

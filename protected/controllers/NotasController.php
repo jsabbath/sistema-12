@@ -22,7 +22,7 @@ class NotasController extends Controller
 	 */
 	public function accessRules()
 	{
-		
+
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','subir_notas','guardarnotas','validar_edicion'),
@@ -183,7 +183,7 @@ class NotasController extends Controller
 			$p = $_POST['per'];
 			$alu_notas = array();
 
-			foreach($notas_curso as $key => $alumno){ //  se recorre cada alumno 
+			foreach($notas_curso as $key => $alumno){ //  se recorre cada alumno
 				$id_notas = $alumno[0];
 				$model=$this->loadModel($id_notas);
 				$notas = $alumno[1];
@@ -207,19 +207,19 @@ class NotasController extends Controller
 		while (count($notas) < 12 ) {
 			array_push($notas,"0");
 		}
-		
-		$model->not_01 = $notas[0]; 
-		$model->not_02 = $notas[1]; 
-		$model->not_03 = $notas[2]; 
-		$model->not_04 = $notas[3]; 
-		$model->not_05 = $notas[4]; 
-		$model->not_06 = $notas[5]; 
-		$model->not_07 = $notas[6]; 
-		$model->not_08 = $notas[7]; 
-		$model->not_09 = $notas[8]; 
-		$model->not_10 = $notas[9]; 
-		$model->not_11 = $notas[10]; 
-		$model->not_12 = $notas[11]; 
+
+		$model->not_01 = $notas[0];
+		$model->not_02 = $notas[1];
+		$model->not_03 = $notas[2];
+		$model->not_04 = $notas[3];
+		$model->not_05 = $notas[4];
+		$model->not_06 = $notas[5];
+		$model->not_07 = $notas[6];
+		$model->not_08 = $notas[7];
+		$model->not_09 = $notas[8];
+		$model->not_10 = $notas[9];
+		$model->not_11 = $notas[10];
+		$model->not_12 = $notas[11];
 		$model->not_prom = $p;
 
 
@@ -254,13 +254,13 @@ class NotasController extends Controller
 			 	}
 			}
 
-			// si  es jefe utp o director o evaluador pueden  cambiar notas tambien 	
+			// si  es jefe utp o director o evaluador pueden  cambiar notas tambien
 
 			if( Yii::app()->user->checkAccess('profesor')  ){
 			 	// se busca si existe la asignatura
 			 	$existe = AAsignatura::model()->findByAttributes(array('aa_asignatura' => $id_asi, 'aa_curso' => $curso ));
 			 	$usu = Usuario::model()->findByAttributes(array('usu_iduser' => Yii::app()->user->id));
-			 	
+
 			 	// existe la asignatura
 			 	if( $existe ){
 			 		// si el profesor es el que hace la aignatura
@@ -277,7 +277,7 @@ class NotasController extends Controller
 			 		$curso = Curso::model()->findByPk($existe['aa_curso']);
 
 			 		if( $curso->cur_pjefe == Yii::app()->user->id ){
-			 			
+
 			 			if( $usuario->password == $p){
 					 		echo json_encode(1);
 					 		return;
@@ -289,8 +289,8 @@ class NotasController extends Controller
 				}
 			}
 			echo json_encode(2);
-			return;	
-		}	
+			return;
+		}
 	}
 
 	//estadisticas asignatura
@@ -345,7 +345,7 @@ class NotasController extends Controller
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
         $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
+
                 // La variable es array por que criteria lo pide.
         if ( $temp->temp_ano != 0 ){
             $ano = $temp->temp_ano;
@@ -369,7 +369,7 @@ class NotasController extends Controller
         $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
         $letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
 
-       
+
         foreach ($curso as $key => $c) {
             $cur[] = array(
                    'cur_nivel' => $nivel[$c->cur_nivel],
@@ -402,9 +402,9 @@ class NotasController extends Controller
 
 		$this->render('cur_conso',array(
                         'cursos' => $curso,
-                        
+
                     ));
-   
+
 
 
 	}
@@ -415,7 +415,7 @@ class NotasController extends Controller
 			$estado = Parametro::model()->find(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO"'));
 
 			$curso = Curso::model()->findByPk($id_curso);
-			$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' => array(':x' => $id_curso)));         
+			$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' => array(':x' => $id_curso)));
 
 			$precision = 1;
 			//$curso = array();
@@ -432,7 +432,7 @@ class NotasController extends Controller
 							'nom'	=> $asi->asi_nombrecorto,
 							'n'		=> $asi->asi_descripcion,
 							'prom'	=> $this->actionPromedio_curso_asig($id_curso,$id),
-					); 
+					);
 			}
 
 			ksort($asigs);
@@ -440,7 +440,7 @@ class NotasController extends Controller
 			$alumno = array();
             foreach ($lista as $key => $alum) {
             	$final_alu = 0;
-                $id_mat = array('id' => $alum->list_mat_id); 
+                $id_mat = array('id' => $alum->list_mat_id);
                 $mat = Matricula::model()->findByPk($id_mat); // asistencia, estado , etc
                 $alum = Alumno::model()->findByPk($mat->mat_alu_id); // nombre,rut,etc
                 $pos++;
@@ -452,7 +452,7 @@ class NotasController extends Controller
                 	// primer semestre
                 	$notas_1_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 1,'not_asig' => $asi_id));
 
-                	// segundo semestre 
+                	// segundo semestre
                 	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
 
                 	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
@@ -462,22 +462,22 @@ class NotasController extends Controller
                 	} else{
                 		if( $notas_1_sem->not_prom > 0 ){
                 			$final_alu = $notas_1_sem->not_prom;
-                		} 
+                		}
                 		if( $notas_2_sem->not_prom > 0 ){
                 			$final_alu = $notas_2_sem->not_prom;
                 		}
                 	}
-                	
+
 
                 	if( $asi['n'] == "RELIGION" ){
                 		if( $final_alu >= 6  ) {
-                            $final_alu = "MB"; 
+                            $final_alu = "MB";
                         }else if( $final_alu < 6 AND $final_alu >= 5  ){
-                            $final_alu = "B"; 
-                        }else if( $final_alu < 5 AND $final_alu >= 4 ){ 
-                            $final_alu = "S"; 
+                            $final_alu = "B";
+                        }else if( $final_alu < 5 AND $final_alu >= 4 ){
+                            $final_alu = "S";
                         }else if( $final_alu < 4 AND $final_alu > 0 ){
-                            $final_alu = "I"; 
+                            $final_alu = "I";
                         }
                 	} else{
                 		if( strlen($final_alu) == 1 ){
@@ -498,9 +498,9 @@ class NotasController extends Controller
                 		'retiro' 	=> $mat->mat_estado,
                 		'f_retiro'	=> $mat->mat_fretiro,
                 		'notas' 	=> $notas,
-            	);               	
+            	);
 
- 
+
             }
 
             $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
@@ -517,7 +517,7 @@ class NotasController extends Controller
 	                                                                'id_retiro'	=> $estado->par_id,
 
 	                        ), true));
-	        $mPDF1->Output();        
+	        $mPDF1->Output();
 
 
 		}
@@ -538,7 +538,7 @@ class NotasController extends Controller
         	$final_asi = 0;
             $n1 = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => 1 ));
             $n2 = Notas::model()->findByAttributes(array('not_mat' => $id_alum->list_mat_id, 'not_asig'=> $id_asig, 'not_periodo' => 2 ));
-            $mat = Matricula::model()->findByPk($id_alum->list_mat_id); 
+            $mat = Matricula::model()->findByPk($id_alum->list_mat_id);
             if( $mat->mat_estado != $estado->par_id ){
             	if( $n1->not_prom > 0 AND $n2->not_prom > 0 ){
             		$final_asi = ($n1->not_prom + $n2->not_prom)/2;
@@ -561,19 +561,19 @@ class NotasController extends Controller
 	            		$prom_count++;
 	            	}
             	}
-        		
-            } 
-            
-               
+
+            }
+
+
         }
 
         if( $prom_count != 0 ){
             $final_f = $prom_curso/$prom_count;
-            
+
             if( strlen($final_f) == 1 ){
                 $final_f = $final_f .".0";
             }else{
-                
+
                 $final_f = number_format((float) $final_f, $precision, '.', '');
             }
         }
@@ -585,7 +585,7 @@ class NotasController extends Controller
    	public function actionCert_anual_alum($id_mat){
    		$mat = Matricula::model()->findByPk($id_mat);
 		$precision = 1;
-   		$lista = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id_mat));  
+   		$lista = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id_mat));
    		$id_curso = $lista->list_curso_id;
    		$curso = Curso::model()->findByPk($id_curso);
 
@@ -597,10 +597,10 @@ class NotasController extends Controller
 			$asigs[$asi->asi_orden] = array(
 						'id' 	=> $id_asi,
 						'n'		=> $asi->asi_descripcion,
-				); 
+				);
 		}
 
-		ksort($asigs);   		
+		ksort($asigs);
 		$count_final = 0;
 		$final = 0;
 
@@ -610,9 +610,11 @@ class NotasController extends Controller
         	// primer semestre
         	$notas_1_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 1,'not_asig' => $asi_id));
 
-        	// segundo semestre 
+        	// segundo semestre
         	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
-
+        	$prom1 = 0;
+            $prom2 = 0;
+            $final_alu = 0;
         	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
         		$prom1 = $notas_1_sem->not_prom;
             	$prom2 = $notas_2_sem->not_prom;
@@ -620,22 +622,22 @@ class NotasController extends Controller
         	} else{
         		if( $notas_1_sem->not_prom > 0 ){
         			$final_alu = $notas_1_sem->not_prom;
-        		} 
+        		}
         		if( $notas_2_sem->not_prom > 0 ){
         			$final_alu = $notas_2_sem->not_prom;
         		}
         	}
-        	
+
 
         	if( $asi['n'] == "RELIGION" ){
         		if( $final_alu >= 6  ) {
-                    $final_alu = "MB"; 
+                    $final_alu = "MB";
                 }else if( $final_alu < 6 AND $final_alu >= 5  ){
-                    $final_alu = "B"; 
-                }else if( $final_alu < 5 AND $final_alu >= 4 ){ 
-                    $final_alu = "S"; 
+                    $final_alu = "B";
+                }else if( $final_alu < 5 AND $final_alu >= 4 ){
+                    $final_alu = "S";
                 }else if( $final_alu < 4 AND $final_alu > 0 ){
-                    $final_alu = "I"; 
+                    $final_alu = "I";
                 }
         	} else{
         		if( strlen($final_alu) == 1 ){
@@ -647,13 +649,13 @@ class NotasController extends Controller
 	            	$count_final++;
 	            	$final += $final_alu;
 	            }
-	            
+
         	}
 
             $notas[] = array(
             		"nota"		=> $final_alu,
             		"not_pal"	=> Numero_a_palabra::convert($final_alu),
-            		"nom_asi"	=> $asi["n"],	
+            		"nom_asi"	=> $asi["n"],
             		);
 	    }
 
@@ -667,7 +669,7 @@ class NotasController extends Controller
 	            }
 	    }
 
-	    $asistencia = $mat->mat_asistencia_1 + $mat->mat_asistencia_2; 
+	    $asistencia = $mat->mat_asistencia_1 + $mat->mat_asistencia_2;
 
 
      	$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
@@ -695,7 +697,7 @@ class NotasController extends Controller
                                                                 'asistencia'	=> $asistencia/2,
 
                         ), true));
-        $mPDF1->Output();       
+        $mPDF1->Output();
 
    	}
 
@@ -704,10 +706,10 @@ class NotasController extends Controller
    		if( isset($_POST['id_curso']) ){
    			$id_curso = $_POST['id_curso'];
 
-	   		
-			
-	   		$lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x', 'params' => array(':x' => $id_curso)));  
-	   		
+
+
+	   		$lista = ListaCurso::model()->findAll(array('condition' => 'list_curso_id=:x', 'params' => array(':x' => $id_curso)));
+
 	   		$curso = Curso::model()->findByPk($id_curso);
 
 			$asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso)));
@@ -718,11 +720,11 @@ class NotasController extends Controller
 				$asigs[$asi->asi_orden] = array(
 							'id' 	=> $id_asi,
 							'n'		=> $asi->asi_descripcion,
-					); 
+					);
 			}
 
-			ksort($asigs);   		
-			
+			ksort($asigs);
+
 
 
 	     	$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
@@ -750,10 +752,231 @@ class NotasController extends Controller
 	                                                                //'asistencia'	=> $asistencia/2,
 
 	                        ), true));
-	        $mPDF1->Output();   
+	        $mPDF1->Output();
 
 
    		}
    	}
+
+
+   	public function actionSituacion_alum(){
+		if( Yii::app()->user->checkAccess('profesor') AND !Yii::app()->user->isSuperAdmin  ){
+			$ano = $this->actionAnoActual();
+    		$profe = Usuario::model()->findByAttributes(array( 'usu_iduser' => Yii::app()->user->id ));
+    		$id_profe = $profe['usu_id'];
+
+
+ 			$tiene_asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_docente=:y','params' => array(':y' => $id_profe)));
+
+
+    		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
+
+    		if( $tiene_asignaturas ){
+    			foreach ( $tiene_asignaturas as $p ){
+	                $id_cur[] = $p->aa_curso;
+	            }
+	        }
+
+
+            $nivel = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="nivel"')),'par_id','par_descripcion');
+			$letra = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="letra"')),'par_id','par_descripcion');
+
+			$criteria = new CDbCriteria();
+            $criteria->addInCondition('cur_id', $id_cur, 'OR');
+            $cur = Curso::model()->findAll($criteria);
+ 			// se filtran los cursos por el año  seleccionado
+ 			$cursos = array();
+ 			for ($i=0; $i < count($cur); $i++) {
+ 				if($cur[$i]->cur_ano == $ano ){
+					$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
+				}
+			}
+			asort($cursos);
+			$lock = Parametro::model()->findByAttributes(array('par_item' => 'lock_cursos'));
+			$this->render('situacion_alu',array(
+    			'cursos' => $cursos,
+				'lock' => $lock->par_descripcion,
+			));
+
+		} else {
+			$lock = Parametro::model()->findByAttributes(array('par_item' => 'lock_cursos'));
+			$curso = $this->actionCursoAnoActual();
+
+			$this->render('situacion_alu',array(
+	                        'cursos' => $curso,
+							'lock' => $lock->par_descripcion,
+	                    ));
+
+    	}
+
+   	}
+
+
+   	public function actionSit_final(){
+   		if( isset($_POST['id_cur']) ){
+			$id_curso = $_POST['id_cur'];
+			$estado = Parametro::model()->find(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO"'));
+
+			$curso = Curso::model()->findByPk($id_curso);
+			$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' => array(':x' => $id_curso)));
+
+			$precision = 1;
+			//$curso = array();
+			$pos = 0;
+			$asigs = array();
+
+			$asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso)));
+
+			foreach ($asignaturas as $key => $value) {
+				$id = $value->aa_asignatura;
+				$asi = Asignatura::model()->findByPk($id);
+				$asigs[$asi->asi_orden] = array(
+							'id' 	=> $id,
+							'nom'	=> $asi->asi_nombrecorto,
+							'n'		=> $asi->asi_descripcion,
+							'prom'	=> $this->actionPromedio_curso_asig($id_curso,$id),
+					);
+			}
+
+			ksort($asigs);
+
+			$alumno = array();
+            foreach ($lista as $key => $alum) {
+            	$final_alu = 0;
+                $id_mat = array('id' => $alum->list_mat_id);
+                $mat = Matricula::model()->findByPk($id_mat); // asistencia, estado , etc
+                $alum = Alumno::model()->findByPk($mat->mat_alu_id); // nombre,rut,etc
+                $pos++;
+
+              	$notas = array();
+                foreach ($asigs as $key => $asi) {
+                	$asi_id = $asi['id'];
+
+                	// primer semestre
+                	$notas_1_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 1,'not_asig' => $asi_id));
+
+                	// segundo semestre
+                	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
+                	$prom1 = 0;
+                	$prom2 = 0;
+                	$final_alu = 0;
+                	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
+                		$prom1 = $notas_1_sem->not_prom;
+	                	$prom2 = $notas_2_sem->not_prom;
+	                	$final_alu = ($prom1 + $prom2)/2;
+                	} else{
+                		if( $notas_1_sem->not_prom > 0 ){
+                			$final_alu = $notas_1_sem->not_prom;
+                		}
+                		if( $notas_2_sem->not_prom > 0 ){
+                			$final_alu = $notas_2_sem->not_prom;
+                		}
+                	}
+
+
+                	if( $asi['n'] == "RELIGION" ){
+                		if( $final_alu >= 6  ) {
+                            $final_alu = "MB";
+                        }else if( $final_alu < 6 AND $final_alu >= 5  ){
+                            $final_alu = "B";
+                        }else if( $final_alu < 5 AND $final_alu >= 4 ){
+                            $final_alu = "S";
+                        }else if( $final_alu < 4 AND $final_alu > 0 ){
+                            $final_alu = "I";
+                        }
+                	} else{
+                		if( strlen($final_alu) == 1 ){
+			                $final_alu = $final_alu .".0";
+			            }else{
+			                $final_alu = number_format((float) $final_alu, $precision, '.', '');
+			            }
+                	}
+
+                	if( $final_alu == "0.0" ){
+                		if( $asi['n'] == "INGLES" OR $asi['n'] == "RELIGION" ){
+                			$final_alu = "EX";
+                		}
+                	}
+
+		            $notas[] = $final_alu;
+                }
+
+
+                $alumno[] = array(
+                		'nombre' 	=> $alum->Nombre_completo_2,
+                		'pos' 		=> $pos,
+                		'mat_id'	=> $mat->mat_id,
+                		'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
+                		'retiro' 	=> $mat->mat_estado,
+                		'estado'	=> $mat->matEstado->par_descripcion,
+                		'notas' 	=> $notas,
+						'mat_desc'	=> $mat->mat_desc,
+            	);
+
+
+            }
+
+            $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        	$estados = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO" OR par_descripcion="PROMOVIDO" OR par_descripcion="REPROBADO" ')), 'par_id', 'par_descripcion');
+			$lock = Parametro::model()->findByAttributes(array('par_item' => 'lock_cursos'));
+
+	        $this->render('editar_situacion', array(
+	        								'estados' 	=> $estados,
+                                            'nombre'	=> $nivel . $letra,
+                                            'alumnos'   => $alumno,
+                                            'asigs'		=> $asigs,
+                                            'id_retiro'	=> $estado->par_id,
+											'lock'		=> $lock->par_descripcion,
+
+	                        ));
+
+
+		}
+
+   	}
+
+   	public function actionSave_sit(){
+   		if( isset($_POST['alumnos']) ){
+   			$alum = $_POST['alumnos'];
+   			foreach ($alum as $key => $l ) {
+				$mat = Matricula::model()->findByPk( $l['mat_id'] );
+				$mat->mat_estado = $l['estado'];
+				$mat->mat_desc = $l['des'];
+				$mat->update();
+   			}
+
+   		}
+   	}
+
+
+	public function actionSit_lock(){
+		if( isset($_POST['pass']) ){
+			$pass = $_POST['pass'];
+
+			$lock = Parametro::model()->findByAttributes(array('par_item' => 'lock_cursos'));
+
+
+			$usuario = Yii::app()->user->um->loadUserById(Yii::app()->user->id, true);
+			if( $usuario->password == $pass ){
+				if( $lock->par_descripcion == "0" ){
+					$lock->par_descripcion = "1";
+					$lock->update();
+				} else{
+					$lock->par_descripcion = "0";
+					$lock->update();
+				}
+
+
+				echo json_encode(1);
+				return;
+			}
+
+			echo json_encode(0);
+			return;
+
+		}
+	}
+
 
 }

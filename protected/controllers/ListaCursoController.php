@@ -22,7 +22,7 @@ class ListaCursoController extends Controller
 	 */
 	public function accessRules()
 	{
-		
+
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view', 'lista_curso', 'actualizar_lista','subir_orden'),
@@ -131,7 +131,7 @@ class ListaCursoController extends Controller
     		$this->render('ordenar_lista',array(
 	    			'cur' => $cursos,
    			));
-    	
+
     	} else if (Yii::app()->user->checkAccess('jefe_utp') OR Yii::app()->user->checkAccess('evaluador') OR
     				Yii::app()->user->checkAccess('director') ){
 
@@ -151,9 +151,9 @@ class ListaCursoController extends Controller
 
 			$es_profe_jefe = Curso::model()->findAll(array('condition' => 'cur_ano=:x AND cur_pjefe=:y',
     														'params'=> array(':x' => $ano, ':y' => Yii::app()->user->id )));
-    		    		
+
     		$id_cur = array(); //  se arma un array con  los cursos que tiene el profe
-    		
+
     		if( $es_profe_jefe ){
     			// se agregan cursos si  es q es profe jefe
     			foreach ( $es_profe_jefe as $c ){
@@ -176,12 +176,12 @@ class ListaCursoController extends Controller
 	            $cur = Curso::model()->findAll($criteria);
 	 			// se filtran los cursos por el año  seleccionado
 	 			$cursos = array();
-	 			for ($i=0; $i < count($cur); $i++) { 
+	 			for ($i=0; $i < count($cur); $i++) {
 	 				if($cur[$i]->cur_ano == $ano ){
 						$cursos[$cur[$i]->cur_id] = "".$nivel[$cur[$i]->cur_nivel]." ".$letra[$cur[$i]->cur_letra];
 					}
 				}
-
+				asort($cursos);
 				$this->render('ordenar_lista',array(
 	    			'cur' => $cursos,
 	    			'usu' => $id_profe,
@@ -189,8 +189,8 @@ class ListaCursoController extends Controller
    				));
 
 
-    	} 
-    	
+    	}
+
 	}
 
 	/**
@@ -275,7 +275,7 @@ class ListaCursoController extends Controller
     public function actionAnoactual(){
         $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
         $temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-                
+
                 // La variable es array por que criteria lo pide.
         if ( $temp->temp_ano != 0 ){
             $ano = $temp->temp_ano;
@@ -287,7 +287,7 @@ class ListaCursoController extends Controller
     }
 
 
-	// id = id curso 
+	// id = id curso
 	// funcion  para agregar alumnos que no  estaban  en la lista pero si estaban inscritos en la tabla notas.
 	public function actionActualizar_lista($id){
 		$alumnos = array();
@@ -295,12 +295,12 @@ class ListaCursoController extends Controller
 
 		if( $asignadas ){//  se ve si  tiene asignaturas
 			$esta_matriculado = Notas::model()->findAll(array('condition' => 'not_asig=:x', 'params' => array(':x' => $asignadas['aa_asignatura']) ));
-			
+
 			foreach($esta_matriculado as $key => $alumno){
 
 				if( !in_array($alumno['not_mat'], $alumnos, true) ){
-					
-					$alumnos[] = array(  
+
+					$alumnos[] = array(
 						'mat_id' => $alumno['not_mat'],
 						);
 				}
@@ -323,13 +323,13 @@ class ListaCursoController extends Controller
 	            }else{
 	            	echo "<br>". $a['mat_id'] . " ya esta inscrito";
 	            }
-			}	
+			}
 		} else{
 			echo "no tiene alumnos";
 		}
 	}
 
-	
+
 	// lista los alumnos del curso id = cur_id
 	public function actionLista_curso(){
 
@@ -368,7 +368,7 @@ class ListaCursoController extends Controller
 				));
 
 			} else{
-				// no tiene alumnos en la lista 
+				// no tiene alumnos en la lista
 				$this->renderPartial('lista',array(
 					'lista'	=> $lista,
 					'mensaje' 	=> "no tiene alumnos en la lista"
@@ -391,7 +391,7 @@ class ListaCursoController extends Controller
 
 				}
 			}
-			
+
 		}
 	}
 
@@ -414,7 +414,7 @@ class ListaCursoController extends Controller
 			 	}
 			}
 
-			// si  es jefe utp o director o evaluador pueden  cambiar notas tambien 	
+			// si  es jefe utp o director o evaluador pueden  cambiar notas tambien
 
 			if( Yii::app()->user->checkAccess('profesor')  ){
 
@@ -422,7 +422,7 @@ class ListaCursoController extends Controller
 		 		$curso = Curso::model()->findByPk($curso);
 
 		 		if( $curso->cur_pjefe == Yii::app()->user->id ){
-		 			
+
 		 			if( $usuario->password == $p){
 				 		echo json_encode(1);
 				 		return;
@@ -430,11 +430,11 @@ class ListaCursoController extends Controller
 			 			echo json_encode(0);
 			 			return;
 			 		}
-		 		}	
+		 		}
 			}
 			echo json_encode(2);
-			return;	
-		}	
+			return;
+		}
 
 	}
 
