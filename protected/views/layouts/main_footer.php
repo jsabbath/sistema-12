@@ -203,7 +203,7 @@ $tempid = $temp->temp_id;
     <div class="container" style="background-color: #292929">
         <div class="row" >
             <div class="span3" style="color:white"><?php echo $nombre ?></div> 
-            <div  class="span6" style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</div>
+            <div  class="span6" style="color:white">Academic © 2015 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</div>
              <div class="span3" style="color:red"><a href="#"  id="salir" onclick="logout()" data-toggle="tooltip" title="Salir">SALIR</a></div> 
         </div>
     </div>

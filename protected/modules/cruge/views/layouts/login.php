@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilo.css">
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title><?php //echo CHtml::encode($this->pageTitle); ?>ACADEMIC</title>
 </head>
 
 <body style='background-image: url("<?php echo Yii::app()->request->baseUrl; ?>/images/fondo3.jpg");background-repeat: no-repeat; background-attachment:fixed; background-size:cover-webkit-background-size: cover; /* For WebKit*/
@@ -35,6 +35,13 @@ if(isset($this->breadcrumbs)):?>
 	<?php endif
 */
 ?>
+	<script>
+	  var navegador = navigator.userAgent;
+	  if (navigator.userAgent.indexOf("Chrome") !=-1) {
+		} else {
+		location.href="images/index_error.php";
+	  }
+	</script>
 
 	<?php echo $content;?>
 	<div class="clear"></div>
@@ -42,11 +49,11 @@ if(isset($this->breadcrumbs)):?>
 
 	  
 <div align="center" class="navbar navbar-fixed-bottom visible-desktop">
-	<pre style="color:black">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+	<pre style="color:black">Academic © 2015-2016 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</pre>
 </div>
 
 <div align="center" class="navbar navbar-static-bottom hidden-desktop">
-	<pre style="color:white">Amsys. Copyright © Todos los Derechos Reservados. Anonimos Asociados</pre>
+	<pre style="color:black">Academic © 2015-2016 <a href="http://www.antumalen.cl">Antumalen</a>. Todos los derechos reservados.</pre>
 </div>
 
 
