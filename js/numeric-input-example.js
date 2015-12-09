@@ -9,14 +9,11 @@ $.fn.numericInputExample = function () {
 		prom = function(value){
 			var t =  Number(value.toString().match(/^\d+(?:\.\d{0,3})?/));
 			t = Math.round(t*100)/100;
-			console.log( "prom:: "+ t + " -> " +  (Math.round(t*100)/100) );
-
+			// console.log( "prom:: "+ t + " -> " +  (Math.round(t*100)/100) );
 			t = Math.round(t*10)/10;
-
 			if( t.toString().length == "1" ){
 				t = t + ".0";
 			}
-
 			return t;
 		},
 		initialTotal = function () {
