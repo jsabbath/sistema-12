@@ -1193,7 +1193,6 @@ class CursoController extends Controller
 	}
 
 	public function actionList_cur_(){
-
     	if( isset($_POST['idcurso']) ){
     		$id = $_POST['idcurso'];
 			$ano = $this->actionAnoactual();
@@ -1210,6 +1209,15 @@ class CursoController extends Controller
 			}
 		}
     }
+
+	public function actionActa_lista(){
+		$cursos = $this->actionCursoAnoActual();
+
+		$this->render('acta_lista',array(
+				'cur' => $cursos,
+		));
+	}
+
 
 
 }

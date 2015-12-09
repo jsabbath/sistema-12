@@ -141,6 +141,10 @@ class Usuario extends CActiveRecord
 		return $this->usu_nombre1." ". $this->usu_nombre2." ".$this->usu_apepat." ". $this->usu_apemat;
 	}
 
+	public function getNombreCompleto_2(){
+		return $this->usu_apepat." ". $this->usu_apemat." ".$this->usu_nombre1." ". $this->usu_nombre2;
+	}
+
 	public function validateText($attribute, $params) {
         $pattern = '/^([a-zA-ZñÑÁÉÍÓÚáéíóú]+([[:space:]]{0,2}[a-zA-ZñÑÉÍÓÚáéíóú]+)*)$/';
 	        if($this->$attribute!=""){	

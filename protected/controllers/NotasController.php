@@ -454,7 +454,9 @@ class NotasController extends Controller
 
                 	// segundo semestre
                 	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
-
+					$prom1 = 0;
+                	$prom2 = 0;
+                	$final_alu = 0;
                 	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
                 		$prom1 = $notas_1_sem->not_prom;
 	                	$prom2 = $notas_2_sem->not_prom;
@@ -977,6 +979,147 @@ class NotasController extends Controller
 
 		}
 	}
+
+
+	public function actionActa_informe(){
+		if( isset($_POST['id_curso']) ){
+			$id_curso = $_POST['id_curso'];
+
+			$estado = Parametro::model()->find(array('condition'=>'par_item="ESTADO" AND par_descripcion="RETIRADO"'));
+
+			$curso = Curso::model()->findByPk($id_curso);
+			$lista = ListaCurso::model()->findAll(array('order'=>'list_posicion','condition' => 'list_curso_id=:x','params' => array(':x' => $id_curso)));
+
+			$precision = 1;
+			//$curso = array();
+			$pos = 0;
+			$asigs = array();
+
+			$asignaturas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso)));
+
+			foreach ($asignaturas as $key => $value) {
+				$id = $value->aa_asignatura;
+				$asi = Asignatura::model()->findByPk($id);
+				$asigs[$asi->asi_orden] = array(
+							'id' 	=> $id,
+							'prof_nom'	=> $value->aaDocente->nombreCompleto_2,
+							'prof_rut'	=> $value->aaDocente->usu_rut,
+							'nom'	=> $asi->asi_nombrecorto,
+							'n'		=> $asi->asi_descripcion,
+							'prom'	=> $this->actionPromedio_curso_asig($id_curso,$id),
+					);
+			}
+
+			ksort($asigs);
+
+			$alumno = array();
+            foreach ($lista as $key => $alum) {
+            	$final_alu = 0;
+                $id_mat = array('id' => $alum->list_mat_id);
+                $mat = Matricula::model()->findByPk($id_mat); // asistencia, estado , etc
+                $alum = Alumno::model()->findByPk($mat->mat_alu_id); // nombre,rut,etc
+                $pos++;
+
+              	$notas = array();
+                foreach ($asigs as $key => $asi) {
+                	$asi_id = $asi['id'];
+
+                	// primer semestre
+                	$notas_1_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 1,'not_asig' => $asi_id));
+
+                	// segundo semestre
+                	$notas_2_sem = Notas::model()->findByAttributes(array('not_mat' => $id_mat,'not_periodo' => 2,'not_asig' => $asi_id));
+                	$prom1 = 0;
+                	$prom2 = 0;
+                	$final_alu = 0;
+                	if( $notas_1_sem->not_prom > 0 AND $notas_2_sem->not_prom > 0 ){
+                		$prom1 = $notas_1_sem->not_prom;
+	                	$prom2 = $notas_2_sem->not_prom;
+	                	$final_alu = ($prom1 + $prom2)/2;
+                	} else{
+                		if( $notas_1_sem->not_prom > 0 ){
+                			$final_alu = $notas_1_sem->not_prom;
+                		}
+                		if( $notas_2_sem->not_prom > 0 ){
+                			$final_alu = $notas_2_sem->not_prom;
+                		}
+                	}
+
+
+                	if( $asi['n'] == "RELIGION" ){
+                		if( $final_alu >= 6  ) {
+                            $final_alu = "MB";
+                        }else if( $final_alu < 6 AND $final_alu >= 5  ){
+                            $final_alu = "B";
+                        }else if( $final_alu < 5 AND $final_alu >= 4 ){
+                            $final_alu = "S";
+                        }else if( $final_alu < 4 AND $final_alu > 0 ){
+                            $final_alu = "I";
+                        }
+                	} else{
+                		if( strlen($final_alu) == 1 ){
+			                $final_alu = $final_alu .".0";
+			            }else{
+			                $final_alu = number_format((float) $final_alu, $precision, '.', '');
+			            }
+                	}
+
+                	if( $final_alu == "0.0" ){
+                		if( $asi['n'] == "INGLES" OR $asi['n'] == "RELIGION" ){
+                			$final_alu = "EX";
+                		}
+                	}
+
+		            $notas[] = $final_alu;
+                }
+
+
+                $alumno[] = array(
+                		'nombre' 	=> $alum->Nombre_completo_2,
+                		'pos' 		=> $pos,
+                        'genero'    => $alum->alumGenero->par_descripcion,
+                		'retiro' 	=> $mat->mat_estado,
+                        'situacion' => $mat->matEstado->par_descripcion,
+                		'f_retiro'	=> $mat->mat_fretiro,
+                        'rut'       => $alum->alum_rut,
+                        'comuna'    => $alum->alumComuna,
+                        'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
+                        'f_nac'     => $alum->alum_f_nac,
+                        'obs'       => $mat->mat_desc,
+                		'notas' 	=> $notas,
+            	);
+
+
+            }
+            $cole = Colegio::model()->find();
+            $profe = Usuario::model()->findByAttributes(array('usu_iduser' => $curso->cur_pjefe));
+        	$nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
+            $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
+        	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
+        	
+        	$ano = $this->actionAnoActual();
+	 		$mPDF1 = Yii::app()->ePdf->mpdf('', 'Legal-L');
+	 		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
+	        $mPDF1->WriteHTML($stylesheet, 2);
+	        $mPDF1->WriteHTML($this->renderPartial('acta_inf', array(
+	                                                                'nombre'	=> $nivel . $letra,
+	                                                                'alumnos'   => $alumno,
+	                                                                'asigs'		=> $asigs,
+	                                                                'id_retiro'	=> $estado->par_id,
+	                                                                'cole'		=> $cole,
+	                                                                'ano'		=> $ano,
+	                                                                'profe'         => $profe->NombreCompleto,
+																	'nom_director'  => $nombre_dir->nombreCompleto,
+                                                                	'firma_profe'   => $profe->usu_firma,
+                                                                	'firma_dir'     => $nombre_dir->usu_firma,
+
+	                        ), true));
+	        $mPDF1->Output();
+
+		}
+
+	}
+
 
 
 }

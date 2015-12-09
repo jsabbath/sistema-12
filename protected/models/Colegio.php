@@ -110,7 +110,7 @@ class Colegio extends CActiveRecord
 			'col_nombre_colegio' => 'Nombre Colegio',
 			'col_letra' => 'Letra',
 			'col_numero' => 'Numero',
-			'col_ano' => 'Ano',
+			'col_ano' => 'Año',
 			'col_periodo' => 'Periodo',
 			'col_nombre_director' => 'Nombre Director',
 			'col_director_email' => 'Director Email',
@@ -137,12 +137,12 @@ class Colegio extends CActiveRecord
 			'col_nota_maxima' => 'Nota Maxima',
 			'col_nota_aprovacion' => 'Nota Aprovacion',
 			'col_aproximacion' => 'Aproximacion',
-			'ano_promocion_evaluacion' => 'Ano Reglamento de Evaluacion y Promocion Escolar',
+			'ano_promocion_evaluacion' => 'Año Reglamento de Evaluacion y Promocion Escolar',
 			'numero_promocion_evaluacion' => 'Numero Reglamento de Evaluacion y Promocion Escolar',
 			'numero_plan_programa' => 'Numero Plan y Programa de Estudios',
-			'ano_plan_programa' => 'Ano Plan y Programa de Estudios',
+			'ano_plan_programa' => 'Año Plan y Programa de Estudios',
 			'numero_decreto_supremo' => 'Numero Documento que lo Declara Reconocido Oficialmente',
-			'ano_decreto_supremo' => 'Ano Documento que lo Declara Reconocido Oficialmente',
+			'ano_decreto_supremo' => 'Año Documento que lo Declara Reconocido Oficialmente',
 			'col_text_ficha' => 'Mensaje en la ficha de Matricula'
 		);
 	}
