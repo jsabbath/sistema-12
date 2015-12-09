@@ -7,11 +7,16 @@ $.fn.numericInputExample = function () {
 		dataRows = element.find('tbody tr'),
 		prom_final = document.getElementById("prom_final"),
 		prom = function(value){
-			var t =  Number(value.toString().match(/^\d+(?:\.\d{0,2})?/));
+			var t =  Number(value.toString().match(/^\d+(?:\.\d{0,3})?/));
+			t = Math.round(t*100)/100;
+			console.log( "prom:: "+ t + " -> " +  (Math.round(t*100)/100) );
+
 			t = Math.round(t*10)/10;
+
 			if( t.toString().length == "1" ){
 				t = t + ".0";
 			}
+
 			return t;
 		},
 		initialTotal = function () {
@@ -22,7 +27,6 @@ $.fn.numericInputExample = function () {
 				count = 0;
 				var retirado = 0;
 				var row = $(this);	// row = fila actual
-				console.log();
 				 if(	row.children().eq(1).css('color') == 'rgb(255, 0, 0)' ){
 				 	retirado = 1
 				 }
@@ -33,21 +37,21 @@ $.fn.numericInputExample = function () {
 						}
 				};
 				total = total/(count); // total-2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
-				if(isNaN(total) || total == 0 || retirado == 1){ 
-					total = " "; 
+				if(isNaN(total) || total == 0 || retirado == 1){
+					total = " ";
 					row.children().eq(column).text(total);
 				} else{
-					var p =	prom(total);		
+					var p =	prom(total);
 					row.children().eq(column).text(p); // se guarda el promedio en la ultima columna de la fila ////
 
 					count_final++;
 					p_final += parseFloat(p);
-					
+
 				}
 			});
+			p_final = p_final/(count_final);
+			prom_final.innerHTML = prom(p_final); // promedio asignatura
 
-			p_final = p_final/(count_final);	
-			prom_final.innerHTML = prom(p_final);
 
 		};
 	element.find('td').on('change', function (evt) {
@@ -80,7 +84,7 @@ $.fn.numericInputExample = function () {
 				$('.alert').hide();
 				if(isNaN(total) || total == 0){
 					total = " ";
-					row.children().eq(column).text(total); 
+					row.children().eq(column).text(total);
 				} else{
 					var p = prom(total);
 					row.children().eq(column).text(p);
@@ -88,11 +92,11 @@ $.fn.numericInputExample = function () {
 					count_final++;
 					p_final += parseFloat(p);
 				}
-				
+
 			}
 		});
 
-		p_final = p_final/(count_final);	
+		p_final = p_final/(count_final);
 		prom_final.innerHTML = prom(p_final);
 
 	}).on('validate', function (evt, value) {
@@ -112,17 +116,17 @@ $.fn.numericInputExample = function () {
 								return false;
 							}else{
 								return true;
-							}	
+							}
 						}
-						
-					}else{  
+
+					}else{
 						return false;
 					}
 				}else {
 					return false;
 				}
 			} else {
-				return false; } 
+				return false; }
 		}
 	});
 	initialTotal();

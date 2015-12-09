@@ -100,7 +100,7 @@ class MatriculaController extends Controller
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
-            if( isset($alumno->alum_id) ){ // el alumno ya existe por lo q se actualiza su tupla existente
+            if( $alumno->alum_id ){ // el alumno ya existe por lo q se actualiza su tupla existente
                 $old_alum = Alumno::model()->findByPk($alumno->alum_id);
                 $old_alum->attributes = $alumno->attributes;
             }
@@ -135,7 +135,7 @@ class MatriculaController extends Controller
 				$alumno->alum_fam2_actividad = mb_strtoupper($alumno->alum_fam2_actividad,'utf-8');
 				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
 
-                if( !isset($alumno->alum_id)  ){ // si la id no viene, osea es una alumno nuevo
+                if( !$alumno->alum_id  ){ // si la id no viene, osea es una alumno nuevo
                     if($alumno->save()){ // alumno Nuevo, no  tenia datos existentes
                         $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
                         $model->mat_estado = $estado[0]->par_id;

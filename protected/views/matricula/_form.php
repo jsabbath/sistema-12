@@ -1,6 +1,6 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css">
-  
+
 
 
    <style type="text/css">
@@ -25,11 +25,12 @@ $random1 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLM
 $random2 = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
 $rand = "X".$random1.$random2;
 
+
 ?>
 <div class="row">
   <div class="span12 text-center">
     <p class="text-info">
-        Los campos con <span class="required">*</span> son obligatorios. <br> 
+        Los campos con <span class="required">*</span> son obligatorios. <br>
       <?php if( $model->isNewRecord ){ ?>  Para Alumnos <strong>YA REGISTRADOS</strong>  se pueden obtener los datos <strong>INGRESANDO EL RUT DEL ALUMNO</strong><?php } ?>
     </p>
 
@@ -461,7 +462,7 @@ $rand = "X".$random1.$random2;
               <?php echo $form->textField($model,'mat_fingreso',array('class'=>'datepicker input-medium')); ?>
 
               <?php echo $form->labelEx($model,'mat_numero'); ?>
-              <?php echo $form->textField($model,'mat_numero',array('id'=>'nm','value' => $rand, 'class' => 'input-medium')); ?>
+              <?php echo $form->textField($model,'mat_numero',array('id'=>'nm', 'class' => 'input-medium')); ?>
 
           </div>
 
@@ -624,19 +625,19 @@ $( document ).ready(function(){
                         })
             },
                     select: function(event, ui) {
-                        
-                        
+
+
                         $.each(ui.item.model, function(index, value) {
                             id = '#Alumno_' + index;
-                           
-                            
+
+
                             $(id).val(value);
                             if( index == 'alum_ciudad' ){
                                 id_ciudad = value;
                             }
                             if( index == 'alum_comuna' ){
                                 id_comuna = value;
-                            }    
+                            }
 
                         });
 
@@ -652,23 +653,23 @@ $( document ).ready(function(){
                                 if( settings.data.toLowerCase().indexOf('region') > 0 ){ //  si contiene la palabra region se llama el ajax comuna para eviar un loop
                                    // console.log(settings.url)
                                    ajax_comuna();
-                                } 
-                                
+                                }
+
                             })
-                           
+
                             $( document ).ajaxComplete(function(event,xhr,settings) {
 
-                                     
-         
+
+
                                 if( settings.data.toLowerCase().indexOf('ciudad') > 0 ){
-                                   
+
                                     $(event.currentTarget).unbind('ajaxComplete');
-                                    $('#Alumno_alum_comuna').val(id_comuna); 
+                                    $('#Alumno_alum_comuna').val(id_comuna);
 
                                 }
                             });
                         } asd()
- 
+
 
                     }});
        });
