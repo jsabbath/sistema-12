@@ -168,7 +168,7 @@
 		<td width="13%" style="border: 0;"><img style="width: 80px" src="<?php echo Yii::app()->request->baseUrl."/images/". $cole->col_logo; ?>"></td>
 		<td width="50%" style="border: 0;">
 			<h2><?php echo $cole->col_nombre_colegio ?></h2>
-			<p><?php echo $cole->col_direccion. " - ". $cole->col_telefono. " - Rbd: ".$cole->col_rolRBD; ?></p>
+			<p><?php echo $cole->col_direccion. " \n ". $cole->col_telefono. " - Rbd: ".$cole->col_rolRBD; ?></p>
 		</td>
         <td style="border: 1;">
            Fecha Matricula: <strong>  <?php echo $mat->mat_fingreso; ?></strong> <br>
@@ -525,25 +525,36 @@
 
 <br><br><br><br>
 
-    <table style="width:100%; border: 0;">
+    <table style="width: 100%; border: 1;">
         <tr>
-            <td style="width:50%; text-align: center; border: 1;">
-                <p > Nombre Apoderado: <br> <strong><?php echo $alum->alum_apo1_nombre; ?> </strong></p> 
-                <p> RUT Apoderado: <br><strong><?php echo $alum->alum_apo1_rut; ?></strong></p> 
-                <p> Firma Apoderado: </p> <br> <br> <br> <br>
-            </td>
+          <td style="width: 50%; text-align: left; border: 1px solid #000;">Nombre Apoderado: 
+          <strong><?php echo $alum->alum_apo1_nombre; ?></strong></td>
+          <td style="width: 50%; text-align: left; border: 1px solid #000;">Nombre Funcionario: </td>
+      </tr>
+        <tr>
+          <td style="width: 50%; text-align: left; border: 1px solid #000;">RUT Apoderado: 
+          <strong><?php echo $alum->alum_apo1_rut; ?></strong></td>
+          <td style="width: 50%; text-align: left; border: 1px solid #000;">RUT Funcionario: </td>
+      </tr>
+        <tr>
+            <td style="width: 50%; text-align: center; border: 1px solid #000;">
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p> 
+                <p>&nbsp;</p> 
+                <p>Firma Apoderado</p></td>
 
-            <td style="border: 0;">
-                
-            </td>
-            <td style="width:50%; text-align: center;  border: 1;">
-                <p > Nombre Funcionario:  <br> <br> </p> 
-                <p> RUT Funcionario: <br>  <br></p> 
-                <p> Firma Funcionario: </p> <br> <br> <br> <br>
-            </td>
+          <td style="width:50%; text-align: center;  border: 1px solid #000;">
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p> 
+                <p>&nbsp;</p> 
+            	<p>Firma Funcionario</p></td>
 
             
-        </tr>
+      </tr>
     </table>
 
 
