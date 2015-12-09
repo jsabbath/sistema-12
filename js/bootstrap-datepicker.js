@@ -1,5 +1,5 @@
 /*!
- * Datepicker for Bootstrap v1.5.0 (https://github.com/eternicode/bootstrap-datepicker)
+ * Datepicker_1 for Bootstrap v1.5.0 (https://github.com/eternicode/bootstrap-datepicker_1)
  *
  * Copyright 2012 Stefan Petre
  * Improvements by Andrew Rowls
@@ -83,7 +83,7 @@
 
 	// Picker object
 
-	var Datepicker = function(element, options){
+	var Datepicker_1 = function(element, options){
 		this._process_options(options);
 
 		this.dates = new DateArray();
@@ -103,14 +103,14 @@
 		this._attachEvents();
 
 		if (this.isInline){
-			this.picker.addClass('datepicker-inline').appendTo(this.element);
+			this.picker.addClass('datepicker_1-inline').appendTo(this.element);
 		}
 		else {
-			this.picker.addClass('datepicker-dropdown dropdown-menu');
+			this.picker.addClass('datepicker_1-dropdown dropdown-menu');
 		}
 
 		if (this.o.rtl){
-			this.picker.addClass('datepicker-rtl');
+			this.picker.addClass('datepicker_1-rtl');
 		}
 
 		this.viewMode = this.o.startView;
@@ -142,8 +142,8 @@
 		}
 	};
 
-	Datepicker.prototype = {
-		constructor: Datepicker,
+	Datepicker_1.prototype = {
+		constructor: Datepicker_1,
 
 		_process_options: function(opts){
 			// Store raw options for reference
@@ -362,7 +362,7 @@
                     }]
                 ];
             }
-			else if (this.element.is('div')){  // inline datepicker
+			else if (this.element.is('div')){  // inline datepicker_1
 				this.isInline = true;
 			}
 			else {
@@ -405,13 +405,13 @@
 				}],
 				[$(document), {
 					mousedown: $.proxy(function(e){
-						// Clicked outside the datepicker, hide it
+						// Clicked outside the datepicker_1, hide it
 						if (!(
 							this.element.is(e.target) ||
 							this.element.find(e.target).length ||
 							this.picker.is(e.target) ||
 							this.picker.find(e.target).length ||
-							this.picker.hasClass('datepicker-inline')
+							this.picker.hasClass('datepicker_1-inline')
 						)){
 							this.hide();
 						}
@@ -500,7 +500,7 @@
 			this._detachEvents();
 			this._detachSecondaryEvents();
 			this.picker.remove();
-			delete this.element.data().datepicker;
+			delete this.element.data().datepicker_1;
 			if (!this.isInput){
 				delete this.element.data().date;
 			}
@@ -678,12 +678,12 @@
 				top = offset.top - appendOffset.top;
 
 			this.picker.removeClass(
-				'datepicker-orient-top datepicker-orient-bottom '+
-				'datepicker-orient-right datepicker-orient-left'
+				'datepicker_1-orient-top datepicker_1-orient-bottom '+
+				'datepicker_1-orient-right datepicker_1-orient-left'
 			);
 
 			if (this.o.orientation.x !== 'auto'){
-				this.picker.addClass('datepicker-orient-' + this.o.orientation.x);
+				this.picker.addClass('datepicker_1-orient-' + this.o.orientation.x);
 				if (this.o.orientation.x === 'right')
 					left -= calendarWidth - width;
 			}
@@ -692,15 +692,15 @@
 			else {
 				if (offset.left < 0) {
 					// component is outside the window on the left side. Move it into visible range
-					this.picker.addClass('datepicker-orient-left');
+					this.picker.addClass('datepicker_1-orient-left');
 					left -= offset.left - visualPadding;
 				} else if (left + calendarWidth > windowWidth) {
 					// the calendar passes the widow right edge. Align it to component right side
-					this.picker.addClass('datepicker-orient-right');
+					this.picker.addClass('datepicker_1-orient-right');
 					left = offset.left + width - calendarWidth;
 				} else {
 					// Default to left
-					this.picker.addClass('datepicker-orient-left');
+					this.picker.addClass('datepicker_1-orient-left');
 				}
 			}
 
@@ -713,7 +713,7 @@
 				yorient = top_overflow < 0 ? 'bottom' : 'top';
 			}
 
-			this.picker.addClass('datepicker-orient-' + yorient);
+			this.picker.addClass('datepicker_1-orient-' + yorient);
 			if (yorient === 'top')
 				top -= calendarHeight + parseInt(this.picker.css('padding-top'));
 			else
@@ -805,7 +805,7 @@
 			var dowCnt = this.o.weekStart,
 				html = '<tr>';
 			if (this.o.calendarWeeks){
-				this.picker.find('.datepicker-days .datepicker-switch')
+				this.picker.find('.datepicker_1-days .datepicker_1-switch')
 					.attr('colspan', function(i, val){
 						return parseInt(val) + 1;
 					});
@@ -815,7 +815,7 @@
 				html += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';
 			}
 			html += '</tr>';
-			this.picker.find('.datepicker-days thead').append(html);
+			this.picker.find('.datepicker_1-days thead').append(html);
 		},
 
 		fillMonths: function(){
@@ -824,7 +824,7 @@
 			while (i < 12){
 				html += '<span class="month">'+dates[this.o.language].monthsShort[i++]+'</span>';
 			}
-			this.picker.find('.datepicker-months td').html(html);
+			this.picker.find('.datepicker_1-months td').html(html);
 		},
 
 		setRange: function(range){
@@ -903,7 +903,7 @@
 				tooltip;
 			if (isNaN(year) || isNaN(month))
 				return;
-			this.picker.find('.datepicker-days thead .datepicker-switch')
+			this.picker.find('.datepicker_1-days thead .datepicker_1-switch')
 						.text(DPGlobal.formatDate(new UTCDate(year, month), titleFormat, this.o.language));
 			this.picker.find('tfoot .today')
 						.text(todaytxt)
@@ -911,7 +911,7 @@
 			this.picker.find('tfoot .clear')
 						.text(cleartxt)
 						.toggle(this.o.clearBtn !== false);
-			this.picker.find('thead .datepicker-title')
+			this.picker.find('thead .datepicker_1-title')
 						.text(this.o.title)
 						.toggle(this.o.title !== '');
 			this.updateNavArrows();
@@ -974,10 +974,10 @@
 				}
 				prevMonth.setUTCDate(prevMonth.getUTCDate()+1);
 			}
-			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
+			this.picker.find('.datepicker_1-days tbody').empty().append(html.join(''));
 
-			var months = this.picker.find('.datepicker-months')
-						.find('.datepicker-switch')
+			var months = this.picker.find('.datepicker_1-months')
+						.find('.datepicker_1-switch')
 							.text(this.o.maxViewMode < 2 ? 'Months' : year)
 							.end()
 						.find('span').removeClass('active');
@@ -1011,8 +1011,8 @@
 
 			html = '';
 			year = parseInt(year/10, 10) * 10;
-			var yearCont = this.picker.find('.datepicker-years')
-								.find('.datepicker-switch')
+			var yearCont = this.picker.find('.datepicker_1-years')
+								.find('.datepicker_1-switch')
 									.text(year + '-' + (year + 9))
 									.end()
 								.find('td');
@@ -1105,7 +1105,7 @@
 				switch (target[0].nodeName.toLowerCase()){
 					case 'th':
 						switch (target[0].className){
-							case 'datepicker-switch':
+							case 'datepicker_1-switch':
 								this.showMode(1);
 								break;
 							case 'prev':
@@ -1448,7 +1448,7 @@
 			this.picker
 				.children('div')
 				.hide()
-				.filter('.datepicker-' + DPGlobal.modes[this.viewMode].clsName)
+				.filter('.datepicker_1-' + DPGlobal.modes[this.viewMode].clsName)
 					.show();
 			this.updateNavArrows();
 		}
@@ -1461,11 +1461,11 @@
 		});
 		delete options.inputs;
 
-		datepickerPlugin.call($(this.inputs), options)
+		datepicker_1Plugin.call($(this.inputs), options)
 			.on('changeDate', $.proxy(this.dateUpdated, this));
 
 		this.pickers = $.map(this.inputs, function(i){
-			return $(i).data('datepicker');
+			return $(i).data('datepicker_1');
 		});
 		this.updateDates();
 	};
@@ -1492,7 +1492,7 @@
 				return;
 			this.updating = true;
 
-			var dp = $(e.target).data('datepicker');
+			var dp = $(e.target).data('datepicker_1');
 
 			if (typeof(dp) === "undefined") {
 				return;
@@ -1529,7 +1529,7 @@
 		},
 		remove: function(){
 			$.map(this.pickers, function(p){ p.remove(); });
-			delete this.element.data().datepicker;
+			delete this.element.data().datepicker_1;
 		}
 	};
 
@@ -1568,14 +1568,14 @@
 		return out;
 	}
 
-	var old = $.fn.datepicker;
-	var datepickerPlugin = function(option){
+	var old = $.fn.datepicker_1;
+	var datepicker_1Plugin = function(option){
 		var args = Array.apply(null, arguments);
 		args.shift();
 		var internal_return;
 		this.each(function(){
 			var $this = $(this),
-				data = $this.data('datepicker'),
+				data = $this.data('datepicker_1'),
 				options = typeof option === 'object' && option;
 			if (!data){
 				var elopts = opts_from_el(this, 'date'),
@@ -1588,10 +1588,10 @@
 					var ropts = {
 						inputs: opts.inputs || $this.find('input').toArray()
 					};
-					$this.data('datepicker', (data = new DateRangePicker(this, $.extend(opts, ropts))));
+					$this.data('datepicker_1', (data = new DateRangePicker(this, $.extend(opts, ropts))));
 				}
 				else {
-					$this.data('datepicker', (data = new Datepicker(this, opts)));
+					$this.data('datepicker_1', (data = new Datepicker_1(this, opts)));
 				}
 			}
 			if (typeof option === 'string' && typeof data[option] === 'function'){
@@ -1601,7 +1601,7 @@
 
 		if (
 			internal_return === undefined ||
-			internal_return instanceof Datepicker ||
+			internal_return instanceof Datepicker_1 ||
 			internal_return instanceof DateRangePicker
 		)
 			return this;
@@ -1611,9 +1611,9 @@
 		else
 			return internal_return;
 	};
-	$.fn.datepicker = datepickerPlugin;
+	$.fn.datepicker_1 = datepicker_1Plugin;
 
-	var defaults = $.fn.datepicker.defaults = {
+	var defaults = $.fn.datepicker_1.defaults = {
 		autoclose: false,
 		beforeShowDay: $.noop,
 		beforeShowMonth: $.noop,
@@ -1646,13 +1646,13 @@
 		immediateUpdates: false,
 		title: ''
 	};
-	var locale_opts = $.fn.datepicker.locale_opts = [
+	var locale_opts = $.fn.datepicker_1.locale_opts = [
 		'format',
 		'rtl',
 		'weekStart'
 	];
-	$.fn.datepicker.Constructor = Datepicker;
-	var dates = $.fn.datepicker.dates = {
+	$.fn.datepicker_1.Constructor = Datepicker_1;
+	var dates = $.fn.datepicker_1.dates = {
 		en: {
 			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
@@ -1724,13 +1724,13 @@
 							date.setUTCDate(date.getUTCDate() + dir);
 							break;
 						case 'm':
-							date = Datepicker.prototype.moveMonth.call(Datepicker.prototype, date, dir);
+							date = Datepicker_1.prototype.moveMonth.call(Datepicker_1.prototype, date, dir);
 							break;
 						case 'w':
 							date.setUTCDate(date.getUTCDate() + dir * 7);
 							break;
 						case 'y':
-							date = Datepicker.prototype.moveYear.call(Datepicker.prototype, date, dir);
+							date = Datepicker_1.prototype.moveYear.call(Datepicker_1.prototype, date, dir);
 							break;
 					}
 				}
@@ -1841,11 +1841,11 @@
 		},
 		headTemplate: '<thead>'+
 			              '<tr>'+
-			                '<th colspan="7" class="datepicker-title"></th>'+
+			                '<th colspan="7" class="datepicker_1-title"></th>'+
 			              '</tr>'+
 							'<tr>'+
 								'<th class="prev">&#171;</th>'+
-								'<th colspan="5" class="datepicker-switch"></th>'+
+								'<th colspan="5" class="datepicker_1-switch"></th>'+
 								'<th class="next">&#187;</th>'+
 							'</tr>'+
 						'</thead>',
@@ -1859,22 +1859,22 @@
 							'</tr>'+
 						'</tfoot>'
 	};
-	DPGlobal.template = '<div class="datepicker">'+
-							'<div class="datepicker-days">'+
+	DPGlobal.template = '<div class="datepicker_1">'+
+							'<div class="datepicker_1-days">'+
 								'<table class=" table-condensed">'+
 									DPGlobal.headTemplate+
 									'<tbody></tbody>'+
 									DPGlobal.footTemplate+
 								'</table>'+
 							'</div>'+
-							'<div class="datepicker-months">'+
+							'<div class="datepicker_1-months">'+
 								'<table class="table-condensed">'+
 									DPGlobal.headTemplate+
 									DPGlobal.contTemplate+
 									DPGlobal.footTemplate+
 								'</table>'+
 							'</div>'+
-							'<div class="datepicker-years">'+
+							'<div class="datepicker_1-years">'+
 								'<table class="table-condensed">'+
 									DPGlobal.headTemplate+
 									DPGlobal.contTemplate+
@@ -1883,39 +1883,40 @@
 							'</div>'+
 						'</div>';
 
-	$.fn.datepicker.DPGlobal = DPGlobal;
+	$.fn.datepicker_1.DPGlobal = DPGlobal;
 
 
-	/* DATEPICKER NO CONFLICT
+	/* DATEPICKER_1 NO CONFLICT
 	* =================== */
 
-	$.fn.datepicker.noConflict = function(){
-		$.fn.datepicker = old;
+	$.fn.datepicker_1.noConflict = function(){
+		$.fn.datepicker_1 = old;
 		return this;
 	};
 
-	/* DATEPICKER VERSION
+	/* DATEPICKER_1 VERSION
 	 * =================== */
-	$.fn.datepicker.version = '1.5.0';
+	$.fn.datepicker_1.version = '1.5.0';
 
-	/* DATEPICKER DATA-API
+	/* DATEPICKER_1 DATA-API
 	* ================== */
 
 	$(document).on(
-		'focus.datepicker.data-api click.datepicker.data-api',
-		'[data-provide="datepicker"]',
+		'focus.datepicker_1.data-api click.datepicker_1.data-api',
+		'[data-provide="datepicker_1"]',
 		function(e){
 			var $this = $(this);
-			if ($this.data('datepicker'))
+			if ($this.data('datepicker_1'))
 				return;
 			e.preventDefault();
 			// component click requires us to explicitly show it
-			datepickerPlugin.call($this, 'show');
+			datepicker_1Plugin.call($this, 'show');
 		}
 	);
 	$(function(){
-		datepickerPlugin.call($('[data-provide="datepicker-inline"]'));
+		datepicker_1Plugin.call($('[data-provide="datepicker_1-inline"]'));
 	});
 
 }));
-!function(a){a.fn.datepicker.dates.es={days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],daysShort:["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],daysMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],monthsShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],today:"Hoy",clear:"Borrar",weekStart:1,format:"dd/mm/yyyy"}}(jQuery);
+
+!function(a){a.fn.datepicker_1.dates.es={days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],daysShort:["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],daysMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],monthsShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],today:"Hoy",clear:"Borrar",weekStart:1,format:"dd/mm/yyyy"}}(jQuery);

@@ -499,13 +499,19 @@ $rand = "X".$random1.$random2;
  <?php $this->endWidget(); ?>
 
 <script type="text/javascript">
-    $('.datepicker').datepicker({
+$( document ).ready(function(){
+
+    $('.datepicker').datepicker_1({
+        todayBtn: "linked",
         todayHighlight: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy-mm-dd",
         autoclose: true,
         clearBtn: true,
         language: "es",
     });
+
+});
+
 </script>
 
 <script type="text/javascript">

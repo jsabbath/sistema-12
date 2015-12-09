@@ -96,7 +96,7 @@ $this->menu=array(
 !-->
 
 <script type="text/javascript">
-    $('.datepicker').datepicker({
+    $('.datepicker').datepicker_1({
         todayHighlight: true,
         format: 'yyyy/mm/dd',
         autoclose: true,

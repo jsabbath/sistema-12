@@ -362,7 +362,7 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 
 <script type="text/javascript">
 
-$('.datepicker').datepicker({
+$('.datepicker').datepicker_1({
 	todayHighlight: true,
     format: 'yyyy/mm/dd',
     autoclose: true,
