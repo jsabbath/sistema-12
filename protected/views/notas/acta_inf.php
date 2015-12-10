@@ -347,43 +347,43 @@
                  <td style="border: 1;"><?php echo $a['prof_rut']; ?></td>
                  <td style="border: 1;"></td>
                  <td  style="border: 0;"></td>
-                <?php if( $asd == 1 ){ ?>
+                <?php if( $asd == 2 ){ ?>
                     <td style="border: 1;">1.- Matricula Final</td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $m; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $f; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $f + $m; ?></td>
                 <?php } ?>
-                <?php if( $asd == 2 ){ ?>
+                <?php if( $asd == 3 ){ ?>
                     <td style="border: 1;">2.- Retirados durante el año</td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $y_m; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $y_f; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $y_f + $y_m; ?></td>
                 <?php } ?>
-                <?php if( $asd == 3 ){ ?>
+                <?php if( $asd == 4 ){ ?>
                     <td style="border: 1;">3.- Promovidos</td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $p_m; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $p_f; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $p_f + $p_m; ?></td>
                 <?php } ?>
-                <?php if( $asd == 4 ){ ?>
+                <?php if( $asd == 5 ){ ?>
                     <td style="border: 1;">4.- Reprobados por:</td>
                     <td style="border: 1; text-align: center;"></td>
                     <td style="border: 1; text-align: center;"></td>
                     <td style="border: 1; text-align: center;"></td>
                 <?php } ?>
-                <?php if( $asd == 5 ){ ?>
+                <?php if( $asd == 6 ){ ?>
                     <td style="border: 1;">  &nbsp;&nbsp;  4.1.- Inasistencia</td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php  ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php  ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php  ?></td>
                 <?php } ?>
-                <?php if( $asd == 6 ){ ?>
+                <?php if( $asd == 7 ){ ?>
                     <td style="border: 1;">  &nbsp;&nbsp;  4.2.- Rendimiento</td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php  ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php  ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php  ?></td>
                 <?php } ?>
-                <?php if( $asd == 7 ){ ?>
+                <?php if( $asd == 8 ){ ?>
                     <td style="border: 1;">  &nbsp;&nbsp;  TOTAL REPROBADOS</td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $r_m; ?></td>
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $r_f; ?></td>

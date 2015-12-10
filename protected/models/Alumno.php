@@ -43,7 +43,7 @@ class Alumno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('alum_comuna, alum_ciudad, alum_region, alum_genero, alum_dormitorios, alum_fam1_ingreso,
+			array('alum_comuna, alum_ciudad, alum_region, alum_genero, alum_dormitorios, alum_fam1_ingreso, alum_madre_ingresos,
 					alum_baño_cantidad, alum_vivienda, alum_construccion, alum_baño_tipo, alum_padre_ingresos,
 					alum_madre_nivel, alum_fam2_ingreso', 'numerical', 'integerOnly'=>true),
 			array('alum_rut','required','message'=>'Debe ingresar un Rut'),
@@ -63,6 +63,7 @@ class Alumno extends CActiveRecord
 			array('alum_direccion','required','message'=>'Debe ingresar una direccion'),
 			array('alum_direccion', 'length', 'max'=>255),
 			array('alum_f_nac','validateFechaNacimiento'),
+			array('alum_obs', 'length', 'max' => 1000),
 			array('alum_f_nac','required','message'=>'Debe ingresar una fecha de nacimiento'),
 			array('alum_f_nac, alum_salud, alum_enfermedad, alum_medicamentos, alum_padre_nombre,
 					alum_aprendizaje, alum_padre_nivel, alum_vive_con,
@@ -142,13 +143,13 @@ class Alumno extends CActiveRecord
 			'alum_madre_nivel'	=> 'Nivel Educacional Madre',
 			'alum_madre_actividad'	=> 'Actividad Madre',
 			'alum_madre_ingresos'	=> 'Ingresos',
-			'alum_madre_act_tipo'	=> 'Lugar o Empresa',
+			'alum_madre_act_tipo'	=> 'Lugar/Cargo y Empresa',
 			'alum_padre_nombre' 	=> 'Nombre Padre',
 			'alum_padre_rut'		=> 'Rut Padre',
 			'alum_padre_nivel'		=> 'Nivel Educacional Padre',
 			'alum_padre_actividad'	=> 'Actividad Padre',
 			'alum_padre_ingresos'	=> 'Ingresos',
-			'alum_padre_act_tipo'	=> 'Lugar o Empresa',
+			'alum_padre_act_tipo'	=> 'Lugar/Cargo y Empresa',
 			'alum_apo1_nombre'		=> 'Nombre Apoderado Oficial',
 			'alum_apo1_rut'			=> 'Rut Apoderado Oficial',
 			'alum_apo1_telefono'	=> 'Fono Apoderado Oficial',
