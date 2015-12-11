@@ -38,8 +38,6 @@
  * @property integer $col_aproximacion
  * @property integer $ano_promocion_evaluacion
  * @property integer $numero_promocion_evaluacion
- * @property integer $numero_plan_programa
- * @property integer $ano_plan_programa
  * @property integer $numero_decreto_supremo
  * @property integer $ano_decreto_supremo
  */
@@ -61,11 +59,11 @@ class Colegio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ano_promocion_evaluacion, numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, 
+			array('ano_promocion_evaluacion, numero_promocion_evaluacion, 
 				numero_decreto_supremo, ano_decreto_supremo, col_fecha_resol_rec_ofic', 'required'),
 			array('col_nombre_director, col_numero, col_ano, col_periodo, col_numero_resol_rec_ofic, col_telefono, col_nota_minima, 
 					col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, numero_promocion_evaluacion,
-					 numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo', 'numerical',
+					 numero_decreto_supremo, ano_decreto_supremo', 'numerical',
 					  'integerOnly'=>true),
 			array('col_direccion, col_lema, col_mision, col_vision, col_razon_social', 'validateText2'),
 			array('col_colegio_email, col_director_email', 'email'),
@@ -83,7 +81,7 @@ class Colegio extends CActiveRecord
 				 col_mision, col_vision, col_area, col_regimen, col_logo, col_razon_social, col_rut_razon_social, col_fecha_primer, 
 				 col_fecha_segundo, col_fecha_tercer, col_direccion, col_region, col_ciudad, col_colegio_email, col_telefono, 
 				 col_nota_minima, col_nota_maxima, col_nota_aprovacion, col_aproximacion, ano_promocion_evaluacion, 
-				 numero_promocion_evaluacion, numero_plan_programa, ano_plan_programa, numero_decreto_supremo, ano_decreto_supremo',
+				 numero_promocion_evaluacion, numero_decreto_supremo, ano_decreto_supremo',
 				  'safe', 'on'=>'search'),
 		);
 	}
@@ -139,8 +137,6 @@ class Colegio extends CActiveRecord
 			'col_aproximacion' => 'Aproximacion',
 			'ano_promocion_evaluacion' => 'Año Reglamento de Evaluacion y Promocion Escolar',
 			'numero_promocion_evaluacion' => 'Numero Reglamento de Evaluacion y Promocion Escolar',
-			'numero_plan_programa' => 'Numero Plan y Programa de Estudios',
-			'ano_plan_programa' => 'Año Plan y Programa de Estudios',
 			'numero_decreto_supremo' => 'Numero Documento que lo Declara Reconocido Oficialmente',
 			'ano_decreto_supremo' => 'Año Documento que lo Declara Reconocido Oficialmente',
 			'col_text_ficha' => 'Mensaje en la ficha de Matricula'
@@ -199,8 +195,6 @@ class Colegio extends CActiveRecord
 		$criteria->compare('col_aproximacion',$this->col_aproximacion);
 		$criteria->compare('ano_promocion_evaluacion',$this->ano_promocion_evaluacion);
 		$criteria->compare('numero_promocion_evaluacion',$this->numero_promocion_evaluacion);
-		$criteria->compare('numero_plan_programa',$this->numero_plan_programa);
-		$criteria->compare('ano_plan_programa',$this->ano_plan_programa);
 		$criteria->compare('numero_decreto_supremo',$this->numero_decreto_supremo);
 		$criteria->compare('ano_decreto_supremo',$this->ano_decreto_supremo);
 

@@ -272,8 +272,8 @@
             <br>
             <strong><?php echo $model->matAlu->getNombre_completo_3(); ?> </strong> RUT:<strong> <?php echo $model->matAlu->alum_rut; ?></strong> DEL <strong> <?php echo $curso_nombre; ?> DE ENSEÑANZA BÁSICA</strong>
             <br>
-            DE ACUERDO AL PLAN Y PROGRAMAS DE ESTUDIO APROBADOS POR DECRETO O RESOL. EXENTA DE EDUCACION N° <?php echo $cole->numero_plan_programa; ?> DEL AÑO
-            <?php echo $cole->ano_plan_programa; ?> Y REGLAMENTO DE EVALUACION Y PROMOCIÓN ESCOLAR DTO. EXENTO N° <?php echo $cole->numero_promocion_evaluacion; ?>
+            DE ACUERDO AL PLAN Y PROGRAMAS DE ESTUDIO APROBADOS POR DECRETO O RESOL. EXENTA DE EDUCACION N° <?php echo $curso->numero_plan_programa; ?> DEL AÑO
+            <?php echo $curso->ano_plan_programa; ?> Y REGLAMENTO DE EVALUACION Y PROMOCIÓN ESCOLAR DTO. EXENTO N° <?php echo $cole->numero_promocion_evaluacion; ?>
             DEL <?php echo $cole->ano_promocion_evaluacion ?>
 		</td>
 	</tr>

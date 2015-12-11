@@ -48,7 +48,7 @@ class Curso extends CActiveRecord
 			array('cur_infd','required','message'=>'Debe seleccionar un informe de desarrollo'),
 
 			array('cur_notas_periodo','numerical'),
-			array('cur_ano,cur_infd, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe', 'numerical', 'integerOnly'=>true),
+			array('cur_ano,cur_infd, cur_notas_periodo, cur_nivel, cur_letra, numero_plan_programa, ano_plan_programa, cur_jornada, cur_pjefe', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('cur_id, cur_ano, cur_notas_periodo, cur_nivel, cur_letra, cur_jornada, cur_pjefe', 'safe', 'on'=>'search'),
@@ -86,6 +86,8 @@ class Curso extends CActiveRecord
 			'cur_jornada' => 'Jornada',
 			'cur_pjefe' => 'Profesor Jefe',
 			'cur_infd' => 'Informe Desarrollo',
+			'numero_plan_programa' => 'Numero Plan y Programa de Estudios',
+			'ano_plan_programa' => 'Año Plan y Programa de Estudios',
 		);
 	}
 

@@ -139,13 +139,13 @@
 <table width="100%" style="border: 0;">
     <tr>
         <td style="border: 0; text-align: center;" width="20%">
-            
-                REPUBLICA DE CHILE<br> 
+
+                REPUBLICA DE CHILE<br>
                 MINISTERIO DE EDUCACION <br>
                 DIVISION DE EDUCACION GENERAL <br>
                 SECRETARIA REGIONAL MINISTERIAL <br>
                 DE EDUCACION
-           
+
         </td>
         <td style="border: 0; padding: 0; text-align: center;" colspan="2" width="50%">
             <h3>ACTA DE CALIFICACIONES FINALES Y PROMOCION ESCOLAR </h3>
@@ -157,7 +157,7 @@
         <td colspan="2" style="border: 0; padding: 0; text-align: center; font-size: 8pt;" >
                 <strong><?php echo $cole->col_nombre_colegio; ?></strong> <br> NOMBRE DEL ESTABLECIMIENTO
         </td>
- 
+
     </tr>
     <tr>
     <td style="border: 0;"></td>
@@ -174,7 +174,7 @@
         <td style="border: 0; text-align: left; padding: 0;  padding-left: 0%">
            Plan y programas de estudio aprobado por:(Descreto Supremo; Decreto Supremo Exento)
         </td>
-        <td style="border: 0; padding: 0;">:  <?php echo "N° ". $cole->numero_plan_programa . " de ". $cole->ano_plan_programa; ?></td>
+        <td style="border: 0; padding: 0;">:  <?php echo "N° ". $curso->numero_plan_programa . " de ". $curso->ano_plan_programa; ?></td>
         <td style="border: 0; padding: 0;"></td>
         <td  style="border: 0; padding: 0; padding-left: 35;">CURSO: <?php echo $nombre; ?></td>
         <td  style="border: 0; padding: 0;">ROL Base de Datos: <?php echo $cole->col_rolRBD; ?></td>
@@ -201,7 +201,7 @@
         <td width="3%" >SEXO</td>
         <td width="5%">F.NACIM.</td>
         <td width="9%" >COMUNA RESIDENCIA</td>
-        <?php 
+        <?php
             $asd = 1;
             foreach ($asigs as $key => $a) { ?>
                 <td  width="2%"><?php echo $asd++; ?></td>
@@ -219,7 +219,7 @@
         // numero
         $m = 0;
         $f = 0;
-        // retirados 
+        // retirados
         $y_m  = 0;
         $y_f = 0;
         // promovidos
@@ -243,7 +243,7 @@
                 if( $a['situacion'][0] == "P" ){ // promovido
                     $p_m++;
                 }
-            } 
+            }
             if( $a['genero'][0] == "F" ){ // mujer
                 $f++;
                 if( $a['retiro'] == $id_retiro ){ // alumnos retirado
@@ -296,7 +296,7 @@
                             $final_alum = number_format((float) $final_alum, 1, '.', '');
                         }
 
-     
+
 
                    ?>
                    <td style="background-color: #EEEEEE;  border: 1"><?php echo $final_alum; ?></td>
@@ -306,14 +306,14 @@
 
              ?>
             <td style=" border: 1;"><?php if( $a['asistencia'] > 0 ) echo $a['asistencia']; ?></td>
-            <td style="text-align: center; border: 1;"><?php 
-                    if( $a['situacion'][0] != 'A'){ 
-                        if( $a['retiro'] == $id_retiro ){ // si  esta retirado 
+            <td style="text-align: center; border: 1;"><?php
+                    if( $a['situacion'][0] != 'A'){
+                        if( $a['retiro'] == $id_retiro ){ // si  esta retirado
                             echo "Y";
                         }else{ // alumnos no retirados
                             echo $a['situacion'][0];
 
-                        }  
+                        }
                     }
             ?></td>
             <td style="text-align: center; border: 1;" ><?php if( $a['retiro'] == $id_retiro ){ echo $a['f_retiro']; }else{ echo $a['obs'];  }?></td>
@@ -337,7 +337,7 @@
         <td style="border: 1; text-align: center;" width="5%">Mujeres</td>
         <td style="border: 1; text-align: center;" width="5%">Total</td>
     </tr>
-        <?php 
+        <?php
             $asd = 1;
             foreach ($asigs as $key => $a) {  ?>
             <tr>
@@ -390,12 +390,12 @@
                     <td style="border: 1; text-align: center; font-size: 8pt;"><?php echo $r_f + $r_m; ?></td>
                 <?php } ?>
                 </tr>
-               
-        <?php  } ?>  
+
+        <?php  } ?>
 </table>
 <br>
 <p>
-    Observaciones: <?php for ($i=0; $i < 170 ; $i++) { 
+    Observaciones: <?php for ($i=0; $i < 170 ; $i++) {
         echo "_";
     } ?>
      <br><br> Situacion Final: P= PROMOVIDO, R= REPROBADO, Y= Retirados

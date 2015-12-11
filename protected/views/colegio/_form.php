@@ -315,19 +315,6 @@ if ( empty($nom_dir) AND empty($ape_dir) ){
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="span6">
-				<?php echo $form->labelEx($model,'numero_plan_programa'); ?>
-				<?php echo $form->textField($model,'numero_plan_programa'); ?>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="span6">
-				<?php echo $form->labelEx($model,'ano_plan_programa'); ?>
-				<?php echo $form->dropDownList($model,'ano_plan_programa',$anos,array('prompt'=>'Seleccione año')); ?>
-			</div>
-		</div>
 
 		<div class="row">
 			<div class="span6">

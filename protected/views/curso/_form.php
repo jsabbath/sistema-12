@@ -46,6 +46,20 @@
             <?php echo $form->dropDownList($model,'cur_letra',$letra,array('promp'=>'Seleccione letra')); ?>
             <?php echo $form->error($model,'cur_letra'); ?>
         </div>
+
+
+        <div class="row">
+                <?php echo $form->labelEx($model,'numero_plan_programa'); ?>
+                <?php echo $form->textField($model,'numero_plan_programa'); ?>
+        </div>
+
+        
+        <div class="row">
+                <?php echo $form->labelEx($model,'ano_plan_programa'); ?>
+                <?php echo $form->dropDownList($model,'ano_plan_programa',$anos,array('prompt'=>'Seleccione año')); ?>
+        </div>
+
+
     </div>
     <div class="span5 offset1">
         <?php  if( !$model->isNewRecord ){  ?>

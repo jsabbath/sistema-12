@@ -697,6 +697,7 @@ class NotasController extends Controller
                                                                 'ano'			=> $ano,
                                                                 'final'			=> $final,
                                                                 'asistencia'	=> $asistencia/2,
+                                                                'curso'			=> $curso,
 
                         ), true));
         $mPDF1->Output();
@@ -750,6 +751,7 @@ class NotasController extends Controller
 	                                                                'firma_dir'     => $nombre_dir->usu_firma,
 	                                                                'cole'          => $cole,
 	                                                                'ano'			=> $ano,
+	                                                                'curso'			=> $curso,
 	                                                                //'final'			=> $final,
 	                                                                //'asistencia'	=> $asistencia/2,
 
@@ -1112,6 +1114,7 @@ class NotasController extends Controller
 																	'nom_director'  => $nombre_dir->nombreCompleto,
                                                                 	'firma_profe'   => $profe->usu_firma,
                                                                 	'firma_dir'     => $nombre_dir->usu_firma,
+                                                                	'curso'			=> $curso,
 
 	                        ), true));
 	        $mPDF1->Output();

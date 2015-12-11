@@ -111,6 +111,10 @@ class CursoController extends Controller
 		$model=new Curso;
                 $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
+        $actual = date('Y');
+        for($i=$actual;$i>=($actual-100);$i--){
+            $anos[$i] = $i; 
+        }
 
                 //  Se obtienen los niveles disponibles primero segundo...
                 $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
@@ -156,6 +160,7 @@ class CursoController extends Controller
                     'jornada' => $jornada,
                     'letra'  => $letra,
                     'informe' => $informe,
+                    'anos'  => $anos,
 		));
 	}
 
@@ -170,7 +175,10 @@ class CursoController extends Controller
 
                              $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
 		$temp = Temp::model()->findByAttributes(array('temp_iduser'=>Yii::app()->user->id));
-
+        $actual = date('Y');
+        for($i=$actual;$i>=($actual-100);$i--){
+            $anos[$i] = $i; 
+        }
                 //  Se obtienen los niveles disponibles primero segundo...
                 $para = Parametro::Model()->findall(array('condition' => 'par_item=:x', 'params' => array(':x' => 'nivel')));
                 $niveles = CHtml::listData($para, 'par_id', 'par_descripcion');
@@ -226,6 +234,7 @@ class CursoController extends Controller
                                 'ape_p'	=> $apellidos,
                                 'letra_cur'=> $cur_let->par_descripcion,
                                 'nivel_cur'=> $cur_niv->par_descripcion,
+                                'anos'  => $anos,
 		));
 	}
 
