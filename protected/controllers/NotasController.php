@@ -491,12 +491,13 @@ class NotasController extends Controller
 
 		            $notas[] = $final_alu;
                 }
-
-
+				$asistencia = 0;
+				$asistencia = ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2;
+				$asistencia = number_format((float) $asistencia, 0, '.', '');
                 $alumno[] = array(
                 		'nombre' 	=> $alum->Nombre_completo_2,
                 		'pos' 		=> $pos,
-                		'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
+                		'asistencia'=> $asistencia,
                 		'retiro' 	=> $mat->mat_estado,
                 		'f_retiro'	=> $mat->mat_fretiro,
                 		'notas' 	=> $notas,
@@ -905,12 +906,14 @@ class NotasController extends Controller
 		            $notas[] = $final_alu;
                 }
 
-
+				$asistencia = 0;
+				$asistencia = ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2;
+				$asistencia = number_format((float) $asistencia, 0, '.', '');
                 $alumno[] = array(
                 		'nombre' 	=> $alum->Nombre_completo_2,
                 		'pos' 		=> $pos,
                 		'mat_id'	=> $mat->mat_id,
-                		'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
+                		'asistencia'=> $asistencia,
                 		'retiro' 	=> $mat->mat_estado,
                 		'estado'	=> $mat->matEstado->par_descripcion,
                 		'notas' 	=> $notas,
@@ -1075,7 +1078,9 @@ class NotasController extends Controller
 		            $notas[] = $final_alu;
                 }
 
-
+				$asistencia = 0;
+				$asistencia = ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2;
+				$asistencia = number_format((float) $asistencia, 0, '.', '');
                 $alumno[] = array(
                 		'nombre' 	=> $alum->Nombre_completo_2,
                 		'pos' 		=> $pos,
@@ -1085,7 +1090,7 @@ class NotasController extends Controller
                 		'f_retiro'	=> $mat->mat_fretiro,
                         'rut'       => $alum->alum_rut,
                         'comuna'    => $alum->alumComuna,
-                        'asistencia'=> ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2,
+                        'asistencia'=> $asistencia,
                         'f_nac'     => $alum->alum_f_nac,
                         'obs'       => $mat->mat_desc,
                 		'notas' 	=> $notas,
@@ -1098,7 +1103,7 @@ class NotasController extends Controller
         	$nombre_dir = Usuario::model()->findByPk($cole->col_nombre_director);
             $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
         	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
-        	
+
         	$ano = $this->actionAnoActual();
 	 		$mPDF1 = Yii::app()->ePdf->mpdf('', 'Legal-L');
 	 		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));

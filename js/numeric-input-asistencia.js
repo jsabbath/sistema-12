@@ -19,11 +19,11 @@ $.fn.numericInput = function () {
 						}
 				};
 				total = total/(count); // total-2 por el nombre, id notas. ademas parte en 0, por eso no  se resta el promedio
-				if(isNaN(total) || total == 0){ 
-					total = " "; 
+				if(isNaN(total) || total == 0){
+					total = " ";
 					row.children().eq(column).text(total);
 				} else{
-					row.children().eq(column).text(total.toPrecision(3)); // se guarda el promedio en la ultima columna de la fila
+					row.children().eq(column).text(total.toPrecision(2)); // se guarda el promedio en la ultima columna de la fila
 				}
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
@@ -61,11 +61,11 @@ $.fn.numericInput = function () {
 				$('.alert').hide();
 				if(isNaN(total) || total == 0){
 					total = " ";
-					row.children().eq(column).text(total); 
+					row.children().eq(column).text(total);
 				} else{
-					row.children().eq(column).text(total.toPrecision(3)); 
+					row.children().eq(column).text(total.toPrecision(3));
 				}
-				
+
 			}
 		});
 	}).on('validate', function (evt, value) {
@@ -79,10 +79,10 @@ $.fn.numericInput = function () {
 
 				if( value <= 100 && value >= 0){  // antes de preguntar su valor, me aseguro  que es un numero
 					return true;
-				}else{  
+				}else{
 					return false;}
 			} else {
-				return false; } 
+				return false; }
 		}
 	});
 	initialTotal();
