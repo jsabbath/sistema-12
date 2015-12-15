@@ -23,7 +23,11 @@ $.fn.numericInput = function () {
 					total = " ";
 					row.children().eq(column).text(total);
 				} else{
-					row.children().eq(column).text(total.toPrecision(2)); // se guarda el promedio en la ultima columna de la fila
+					if( total == 100 ){
+						row.children().eq(column).text(total.toPrecision(3));
+					} else{
+						row.children().eq(column).text(total.toPrecision(2)); // se guarda el promedio en la ultima columna de la fila
+					}
 				}
 				// console.log(total/(column-1) + " row , c=" + column);
 			});
@@ -63,7 +67,11 @@ $.fn.numericInput = function () {
 					total = " ";
 					row.children().eq(column).text(total);
 				} else{
-					row.children().eq(column).text(total.toPrecision(3));
+					if( total == 100 ){
+						row.children().eq(column).text(total.toPrecision(3));
+					} else{
+						row.children().eq(column).text(total.toPrecision(2)); // se guarda el promedio en la ultima columna de la fila
+					}
 				}
 
 			}
