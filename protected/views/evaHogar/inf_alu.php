@@ -320,7 +320,7 @@
     
     <table class="heading" style="width:100%;">
         <tr>
-            <td colspan="3" style="text-align: center"><strong>OBSERVACIONES SEGUNDO SEMESTRE</strong></td>
+            <td colspan="3" style="text-align: center"><strong>SITUACION FINAL</strong></td>
         </tr>
          <tr>
             <td colspan="3" style="text-align: left;  border-bottom: 0; font-size: 9pt;"><?php echo $des2; ?></td>
