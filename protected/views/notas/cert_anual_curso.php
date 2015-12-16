@@ -233,8 +233,9 @@
                     }
             }
 
-            $asistencia = ($model->mat_asistencia_1 + $model->mat_asistencia_2)/2;
-
+            $asistencia = 0;
+            $asistencia = ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2;
+            $asistencia = number_format((float) $asistencia, 0, '.', '');
 ?>
 
 <table width="100%" style="border: 0;">

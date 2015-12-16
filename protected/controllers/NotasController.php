@@ -672,8 +672,9 @@ class NotasController extends Controller
 	            }
 	    }
 
-	    $asistencia = $mat->mat_asistencia_1 + $mat->mat_asistencia_2;
-
+		$asistencia = 0;
+		$asistencia = ($mat->mat_asistencia_1 + $mat->mat_asistencia_2)/2;
+		$asistencia = number_format((float) $asistencia, 0, '.', '');
 
      	$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
     	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
@@ -697,7 +698,7 @@ class NotasController extends Controller
                                                                 'cole'          => $cole,
                                                                 'ano'			=> $ano,
                                                                 'final'			=> $final,
-                                                                'asistencia'	=> $asistencia/2,
+                                                                'asistencia'	=> $asistencia,
                                                                 'curso'			=> $curso,
 
                         ), true));
