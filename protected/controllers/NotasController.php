@@ -207,6 +207,9 @@ class NotasController extends Controller
 		while (count($notas) < 12 ) {
 			array_push($notas,"0");
 		}
+		if( !is_numeric($p) ){
+			$p = "0";
+		}
 
 		$model->not_01 = $notas[0];
 		$model->not_02 = $notas[1];
