@@ -33,7 +33,7 @@ class EvaHogarController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','evaluar','lista_alumnos','mostrar_informe','validar_edicion',
+				'actions'=>array('create','update','evaluar','lista_alumnos','mostrar_informe','validar_edicion', 'borrar_mat',
 					'subir_notas','informe','render_option','inf_alu','inf_cur','actualizar_informe_hogar_manual'),
 				'users'=>array('@'),
 			),
@@ -633,6 +633,18 @@ class EvaHogarController extends Controller
     	$mPDF1->Output();
 
 	
+    }
+
+
+    public function actionBorrar_mat($id){
+    	$mat = Matricula::model()->findByPk($id);
+
+    	$evH = EvaHogar::model()->findAll(array('condition' => 'eh_matricula = :x' , 'params' => array(':x' => $id)));
+
+    	foreach ($evH as $key => $e) {
+    		$e->delete();
+    	}
+
     }
 
 }
