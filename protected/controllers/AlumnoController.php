@@ -327,4 +327,40 @@ class AlumnoController extends Controller
         echo CJSON::encode($resultado);
 	}
 
+	// borrar alumno - matricula - listacurso - evaluacion - notas 
+	public function actionBorrar($id){ // id Alumno
+		$alum = Alumno::model()->findByPk($id);
+		if( $alum ){
+			$mat = Matricula::model()->findAll(array('condition' => 'mat_alu_id = :x', 'params' => array( ':x' => $id ) ));
+			
+			// echo $alum->getNombre_completo_3() . "<br>";
+			
+			foreach ($mat as $key => $m) {
+				// echo "borrar matricula: ". $m->mat_id;
+				$id = array($m->mat_id);
+
+				$criteria = new CDbCriteria;
+				$criteria->addInCondition('list_mat_id',$id);
+				ListaCurso::model()->deleteAll($criteria);
+
+				$criteria = new CDbCriteria;
+				$criteria->addInCondition('eva_matricula',$id);
+				Evaluacion::model()->deleteAll($criteria);
+
+				$criteria = new CDbCriteria;
+				$criteria->addInCondition('not_mat',$id);
+				Notas::model()->deleteAll($criteria);
+			
+
+				$m->delete();
+			}
+			
+			$alum->delete();
+		} else{
+			// echo "alumno no encontrado";
+		}
+		
+
+	}
+
 }

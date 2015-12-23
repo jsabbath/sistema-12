@@ -333,7 +333,7 @@ $('#b_guardar').on('click',function(){
 
                 if( $(this).css('background-color') != "rgb(255, 255, 0)" ){ // rgb(255, 255, 0) == yellow
                     $( this ).css('background-color', "rgb(255, 255, 0)"); //  esta chekeado  se cambia a color yellow
-                    console.log("subido");
+                    // console.log("subido");
                     var notas = {
                         eva_id: id_ev,
                         nota: $.trim($(this).text())

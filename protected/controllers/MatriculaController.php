@@ -136,6 +136,7 @@ class MatriculaController extends Controller
 				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
 
                 if( !$alumno->alum_id  ){ // si la id no viene, osea es una alumno nuevo
+                    unset($alumno->alum_id);//  se saca la id vacia del formulario
                     if($alumno->save()){ // alumno Nuevo, no  tenia datos existentes
                         $model->mat_alu_id = $alumno->alum_id; //aqui se actualiza la foreign key
                         $model->mat_estado = $estado[0]->par_id;

@@ -515,7 +515,7 @@ class EvaluacionController extends Controller
 		$evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
 		foreach ($areas as $key => $a) {
 
-			$evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
+			 // $evalu = Evaluacion::model()->findAll(array('condition' => 'eva_matricula=:x', 'params' => array(':x' => $id )));
 
 		  	$notas = array();
 			foreach ($evalu as $key => $ev) {

@@ -319,7 +319,7 @@ class NotasController extends Controller
 
 		foreach ($alumnos as $alumno) {
 			$matricula = Matricula::model()->findByAttributes(array('mat_id'=>$alumno->list_mat_id));
-			if ($matricula->matEstado->par_descripcion == 'ACTIVO') {
+			if ($matricula->matEstado->par_descripcion != 'RETIRADO') {
 				$nota = Notas::model()->findByAttributes(array('not_mat'=>$alumno->list_mat_id,'not_asig'=>$a,'not_periodo'=>$p));
 				$aux['promedio'] = $nota->not_prom;
 				$aux['nombre'] = $matricula->matAlu->getNombre_completo_3();

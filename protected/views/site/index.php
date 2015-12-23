@@ -20,7 +20,21 @@ $this->pageTitle=Yii::app()->name;
 				<h3 class="text-center">Noticias</h3>
 			</div>
 			<div class="span4">
-				<h3 class="text-center">Opciones</h3>
+                <?php
+				// Descomentar para ver la funcionalidad Eventos
+
+				if(
+				!Yii::app()->user->isSuperAdmin and
+	            !Yii::app()->user->checkAccess('administrador') and
+	            !Yii::app()->user->checkAccess('director') and
+	            !Yii::app()->user->checkAccess('evaluador') and
+	            !Yii::app()->user->checkAccess('jefe_utp') and
+	            !Yii::app()->user->checkAccess('profesor_prebasica') and
+	            Yii::app()->user->checkAccess('profesor')){ ?>
+
+				        <h3 class="text-center">Opciones</h3>
+
+                <?php } ?>
 			</div>
 		</div>
 
