@@ -191,42 +191,41 @@
 <div style="text-align: center">
     <h2>Ficha Matricula <?php echo $ano ?></h2>
 </div>
-
 <h3>Alumno</h3>
 <table width="100%">
     <tr>
         <td>
             Nombres: <br>
-            <strong> <?php echo $alum->alum_nombres; ?></strong>
+            <strong> <?php if( $alum->alum_nombres ){ echo $alum->alum_nombres; }else{ echo "-"; } ?></strong>
 
         </td>
 
         <td>
             Apellido Paterno:<br>
-            <strong> <?php echo $alum->alum_apepat; ?> </strong>
+            <strong> <?php if( $alum->alum_apepat ) echo $alum->alum_apepat; ?> </strong>
         </td>
 
         <td>
             Apellido Materno: <br>
-            <strong> <?php echo $alum->alum_apemat; ?> </storng>
+            <strong> <?php  echo $alum->alum_apemat; ?> </storng>
         </td>
     </tr>
 
     <tr>
         <td>
             RUT: <br>
-            <strong> <?php echo $alum->alum_rut;?></strong>
+            <strong> <?php  echo $alum->alum_rut;?></strong>
         </td>
 
         <td>
             Genero: <br>
-            <strong> <?php echo $alum->alumGenero->par_descripcion; ?> </strong>
+            <strong> <?php  echo $alum->alumGenero->par_descripcion; ?> </strong>
         </td>
 
 
         <td>
             Fecha Nacimiento: <br>
-            <strong> <?php echo $alum->alum_f_nac; ?> </strong>
+            <strong> <?php  echo $alum->alum_f_nac; ?> </strong>
         </td>
 
     </tr>
@@ -234,24 +233,24 @@
     <tr>
         <td colspan="3">
             Direccion: <br>
-            <strong> <?php echo $alum->alum_direccion; ?> </strong>
+            <strong> <?php  echo $alum->alum_direccion; ?> </strong>
         </td>
     </tr>
 
     <tr>
         <td>
             Region: <br>
-            <strong> <?php echo $alum->alumRegion->reg_descripcion; ?></strong>
+            <strong> <?php if( $alum->alumRegion->reg_descripcion ){ echo $alum->alumRegion->reg_descripcion; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Ciudad: <br>
-            <strong> <?php echo $alum->alumCiudad->ciu_descripcion; ?></strong>
+            <strong> <?php if( $alum->alumCiudad->ciu_descripcion ){ echo $alum->alumCiudad->ciu_descripcion; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Comuna: <br>
-            <strong> <?php echo $alum->alumComuna->com_descripcion; ?></strong>
+            <strong> <?php if( $alum->alumComuna->com_descripcion ){ echo $alum->alumComuna->com_descripcion; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 
@@ -260,29 +259,29 @@
     <tr>
         <td>
             Religion: <br>
-            <strong><?php echo $alum->alumReligion->par_descripcion; ?></strong>
+            <strong><?php if( $alum->alumReligion->par_descripcion ){ echo $alum->alumReligion->par_descripcion; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Metodo Transporte: <br>
-            <strong><?php echo $alum->alum_transporte; ?></strong>
+            <strong><?php if( $alum->alum_transporte ){ echo $alum->alum_transporte; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Colegio Procedencia: <br>
-            <strong><?php echo $alum->alum_procedencia; ?></strong>
+            <strong><?php if( $alum->alum_procedencia ){ echo $alum->alum_procedencia; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 
     <tr>
         <td>
             Estado Academico: <br>
-            <strong><?php echo $alum->alum_aprendizaje; ?></strong>
+            <strong><?php if( $alum->alum_aprendizaje ){ echo $alum->alum_aprendizaje; }else{ echo "-"; }?></strong>
         </td>
 
         <td colspan="2">
             Obserbaciones: <br>
-            <strong><?php echo $alum->alum_obs; ?></strong>
+            <strong><?php if( $alum->alum_obs ){ echo $alum->alum_obs; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 
@@ -293,17 +292,17 @@
     <tr>
         <td>
             Situacion Salud: <br>
-            <strong><?php echo $alum->alum_salud; ?></strong>
+            <strong><?php if( $alum->alum_salud ){ echo $alum->alum_salud; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Enfermedad: <br>
-            <strong><?php echo $alum->alum_enfermedad; ?></strong>
+            <strong><?php if( $alum->alum_enfermedad ){ echo $alum->alum_enfermedad; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Medicamentos: <br>
-            <strong><?php echo $alum->alum_medicamentos; ?></strong>
+            <strong><?php if( $alum->alum_medicamentos ){ echo $alum->alum_medicamentos; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 </table>
@@ -314,51 +313,51 @@
     <tr>
         <td>
             Nombre Madre: <br>
-            <strong><?php echo $alum->alum_madre_nombre; ?></strong>
+            <strong><?php if( $alum->alum_madre_nombre ){ echo $alum->alum_madre_nombre; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             RUT Madre: <br>
-            <strong><?php echo $alum->alum_madre_rut; ?></strong>
+            <strong><?php if( $alum->alum_madre_rut ){ echo $alum->alum_madre_rut; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Nive Educacional: <br>
-            <strong><?php echo $alum->alumMadrenivel->par_descripcion; ?></strong>
+            <strong><?php if( $alum->alumMadrenivel->par_descripcion ){ echo $alum->alumMadrenivel->par_descripcion; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 
     <tr>
         <td>
             Nombre Padre: <br>
-            <strong><?php echo $alum->alum_padre_nombre; ?></strong>
+            <strong><?php if( $alum->alum_padre_nombre ){ echo $alum->alum_padre_nombre; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             RUT Padre: <br>
-            <strong><?php echo $alum->alum_padre_rut; ?></strong>
+            <strong><?php if( $alum->alum_padre_rut ){ echo $alum->alum_padre_rut;  }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Nive Educacional: <br>
-            <strong><?php echo $alum->alumPadrenivel->par_descripcion; ?></strong>
+            <strong><?php if( $alum->alumPadrenivel->par_descripcion ){ echo $alum->alumPadrenivel->par_descripcion; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 
     <tr>
         <td >
             Alumno vive con: <br>
-            <strong><?php echo $alum->alum_vive_con; ?></strong>
+            <strong><?php if( $alum->alum_vive_con ){ echo $alum->alum_vive_con;}else{ echo "-"; } ?></strong>
         </td>
 
         <td style="border-right: 0;">
             Fonos de Emergencia: <br>
-            <strong><?php echo $nom1 . " : " . $fon1;?></strong>
+            <strong><?php if( $nom1 ){ echo $nom1 . " : " . $fon1;}else{ echo "-"; }?></strong>
         </td>
 
          <td style="border-left: 0;">
             <br>
-            <strong><?php echo $nom2 . " : " . $fon2;?></strong>
+            <strong><?php  if( $nom2 ){ echo $nom2 . " : " . $fon2;}else{ echo "-"; } ?></strong>
         </td>
     </tr>
 
@@ -370,72 +369,72 @@
     <tr>
         <td>
             Nombre Apoderado Oficial: <br>
-            <strong><?php echo $alum->alum_apo1_nombre; ?></strong>
+            <strong><?php if( $alum->alum_apo1_nombre ){ echo $alum->alum_apo1_nombre; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Rut Apodrado Oficial: <br>
-            <strong><?php echo $alum->alum_apo1_rut; ?></strong>
+            <strong><?php if($alum->alum_apo1_rut){ echo $alum->alum_apo1_rut;  }else{ echo "-"; }?></strong>
         </td>
 
         <td>
             Fono Apoderado Oficial: <br>
-            <strong><?php echo $alum->alum_apo1_telefono; ?></strong>
+            <strong><?php if($alum->alum_apo1_telefono ){ echo $alum->alum_apo1_telefono; }else{ echo "-"; }?></strong>
         </td>
     </tr>
 
     <tr>
         <td>
             Nombre Apoderado Suplente: <br>
-            <strong><?php echo $alum->alum_apo2_nombre; ?></strong>
+            <strong><?php if( $alum->alum_apo2_nombre ){  echo $alum->alum_apo2_nombre;}else{ echo "-"; } ?></strong>
         </td>
 
         <td>
             Rut Apodrado Oficial: <br>
-            <strong><?php echo $alum->alum_apo2_rut; ?></strong>
+            <strong><?php  if( $alum->alum_apo2_rut ){  echo $alum->alum_apo2_rut;}else{ echo "-"; } ?></strong>
         </td>
 
         <td>
             Fono Apoderado Oficial: <br>
-            <strong><?php echo $alum->alum_apo2_telefono; ?></strong>
+            <strong><?php if( $alum->alum_apo2_telefono ){ echo $alum->alum_apo2_telefono;}else{ echo "-"; } ?></strong>
         </td>
     </tr>
 </table>
 
-
+<pagebreak />
 <h3>Ingresos</h3>
 <table width="100%">
     <tr>
         <td>
-            Activida Madre: <br>
-            <strong><?php echo $alum->alum_madre_actividad; ?></strong>
+            Activida madre: <br>
+            <strong><?php if( $alum->alum_madre_actividad ){ echo $alum->alum_madre_actividad; }else{ echo "-"; } ?></strong>
         </td>
 
         <td>
-            Lugar o Empresa: <br>
-            <strong><?php echo $alum->alum_madre_act_tipo; ?></strong>
+            Lugar/Cargo y Empresa: <br>
+            <strong><?php if( $alum->alum_madre_act_tipo ){ echo $alum->alum_madre_act_tipo; }else{  echo "-"; }?></strong>
         </td>
 
         <td>
             Ingresos: <br>
-            <strong><?php echo $alum->alum_madre_ingresos; ?></strong>
+            <strong><?php if( $alum->alum_madre_ingresos ){ echo $alum->alum_madre_ingresos; }else{ echo "0."; }  ?></strong>
         </td>
     </tr>
 
     <tr>
         <td>
             Activida Padre: <br>
-            <strong><?php echo $alum->alum_padre_actividad; ?></strong>
+            <strong><?php if( $alum->alum_padre_actividad ){ echo $alum->alum_padre_actividad; }else{ echo "-"; } ?></strong>
         </td>
 
         <td>
-            Lugar o Empresa: <br>
-            <strong><?php echo $alum->alum_padre_act_tipo; ?></strong>
+            Lugar/Cargo y Empresa: <br>
+            <strong><?php if( $alum->alum_padre_act_tipo ){ echo $alum->alum_padre_act_tipo; }else{  echo "-"; }?></strong>
         </td>
 
         <td>
             Ingresos: <br>
-            <strong><?php echo $alum->alum_padre_ingresos; ?></strong>
+            <strong><?php if( $alum->alum_padre_ingresos ){ echo $alum->alum_padre_ingresos; }else{ echo "0."; }  ?></strong>
         </td>
     </tr>
     <tr>
@@ -444,35 +443,35 @@
 
     <tr>
         <td>
-            Activida Otro Familiar: <br>
-            <strong><?php echo $alum->alum_fam1_actividad; ?></strong>
+             Activida Otro Familiar: <br>
+            <strong><?php if( $alum->alum_fam1_actividad){ echo $alum->alum_fam1_actividad; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
-            Lugar o Empresa: <br>
-            <strong><?php echo $alum->alum_fam1_actividad; ?></strong>
+            Lugar/Cargo y Empresa: <br>
+            <strong><?php if( $alum->alum_fam1_lugar){ echo $alum->alum_fam1_lugar; }else{ echo "-"; } ?></strong>
         </td>
 
         <td>
             Ingresos: <br>
-            <strong><?php echo $alum->alum_fam1_ingreso; ?></strong>
+            <strong><?php if( $alum->alum_fam1_ingreso){ echo $alum->alum_fam1_ingreso; }else{ echo "0."; } ?></strong>
         </td>
     </tr>
 
     <tr>
         <td>
              Activida Otro Familiar: <br>
-            <strong><?php echo $alum->alum_fam2_actividad; ?></strong>
+            <strong><?php if( $alum->alum_fam2_actividad){ echo $alum->alum_fam2_actividad; }else{ echo "-"; }?></strong>
         </td>
 
         <td>
-            Lugar o Empresa: <br>
-            <strong><?php echo $alum->alum_fam2_actividad; ?></strong>
+            Lugar/Cargo y Empresa: <br>
+            <strong><?php if( $alum->alum_fam2_lugar){ echo $alum->alum_fam2_lugar; }else{ echo "-"; } ?></strong>
         </td>
 
         <td>
             Ingresos: <br>
-            <strong><?php echo $alum->alum_fam2_ingreso; ?></strong>
+            <strong><?php if( $alum->alum_fam2_ingreso){ echo $alum->alum_fam2_ingreso; }else{ echo "0."; } ?></strong>
         </td>
     </tr>
 </table>
@@ -484,29 +483,29 @@
     <tr>
         <td>
             Vivienda: <br>
-            <strong><?php echo $alum->alumVivienda->par_descripcion; ?></strong>
+            <strong><?php if( $alum->alumVivienda->par_descripcion ){ echo $alum->alumVivienda->par_descripcion; }else{ echo "-"; } ?></strong>
         </td>
 
         <td>
             Tipo Construccion: <br>
-            <strong><?php echo $alum->alumConstruccion->par_descripcion; ?></strong>
+            <strong><?php if( $alum->alumConstruccion->par_descripcion ){ echo $alum->alumConstruccion->par_descripcion; }else{ echo "-"; } ?></strong>
         </td>
 
         <td>
             Cantida de Dormitorios: <br>
-            <strong><?php echo $alum->alum_dormitorios; ?></strong>
+            <strong><?php if($alum->alum_dormitorios){ echo $alum->alum_dormitorios; }else{echo "-";} ?></strong>
         </td>
     </tr>
 
     <tr>
         <td colspan="2">
             Tipo  de baño: <br>
-            <strong><?php echo $alum->alumBañotipo->par_descripcion; ?></strong>
+            <strong><?php if( $alum->alumBañotipo->par_descripcion ){ echo $alum->alumBañotipo->par_descripcion; }else{echo "-";} ?></strong>
         </td>
 
         <td>
             Cantida de Baños: <br>
-            <strong><?php echo $alum->alum_baño_cantidad ?></strong>
+            <strong><?php if( $alum->alum_baño_cantidad ){ echo $alum->alum_baño_cantidad; }else{ echo "-"; } ?></strong>
         </td>
     </tr>
 </table>
@@ -516,7 +515,7 @@
     <tr>
         <td colspan="3">
             Documentos Recibidos: <br>
-            <strong><?php echo $mat->mat_documentos; ?></strong>
+            <strong><?php if( $mat->mat_documentos ){ echo $mat->mat_documentos; }else{ echo "-"; } ?></strong>
         </td>
     </tr>
 </table>

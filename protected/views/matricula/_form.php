@@ -441,8 +441,8 @@ $rand = "X".$random1.$random2;
                 <?php echo $form->dropDownList($alumno,'alum_baño_tipo',$baño_tipo,array('prompt'=>'Seleccione Baño','class' => 'input-medium')); ?>
 
                 <?php echo $form->labelEx($alumno,'alum_baño_cantidad'); ?>
-                <?php echo $form->dropDownList($alumno,'alum_baño_cantidad',array('1', '2', '3', '4', '5', '6', '7', '8' , '9', '10'),
-                                                          array('prompt'=>'Numero Baños','class' => 'input-medium')); ?>
+                <?php echo $form->dropDownList($alumno,'alum_baño_cantidad',array('Numero Baños','1', '2', '3', '4', '5', '6', '7', '8' , '9', '10'),
+                                                          array('class' => 'input-medium')); ?>
 
            </div>
 
