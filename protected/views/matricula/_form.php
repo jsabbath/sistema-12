@@ -45,7 +45,7 @@ $rand = "X".$random1.$random2;
 
 <div class="tabbable">
   <ul class="nav nav-tabs" style="text-align: center">
-    <?php if( $model->isNewRecord ){ ?><li><a><?php echo CHtml::textField('Text', '',array('id'=>'rut_button','placeholder' => 'RUT Alumno','class' => 'input-small'))?></a></li><?php } ?>
+  
     <li class="active"><a href="#alumno"  data-toggle="tab">Datos Alumno<span class="required">*</span></a></li>
     <li><a href="#familia"  data-toggle="tab">Familia, Apoderado</a></li>
     <li><a href="#Ingresos"  data-toggle="tab">Ingresos</a></li>
@@ -605,7 +605,7 @@ $( document ).ready(function(){
 
 <script>
   $(function(){
-        $('#rut_button').autocomplete({
+        $('#Alumno_alum_rut').autocomplete({
            source : function( request, response ) {
            $.ajax({
                     url: "<?php echo $this->createUrl('alumno/buscar_rut_alum'); ?>",
