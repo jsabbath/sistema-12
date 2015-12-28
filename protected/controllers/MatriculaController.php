@@ -107,6 +107,7 @@ class MatriculaController extends Controller
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
             $model->mat_ano = date('Y');
 			$model->mat_documentos = mb_strtoupper($model->mat_documentos,'utf-8');
+            $model->mat_otros_doc = mb_strtoupper($model->mat_otros_doc,'utf-8');
             if( !isset($model->mat_fingreso) ) $model->mat_fingreso = date('Y-m-d');
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
@@ -134,6 +135,7 @@ class MatriculaController extends Controller
 				$alumno->alum_fam1_lugar = mb_strtoupper($alumno->alum_fam1_lugar,'utf-8');
 				$alumno->alum_fam2_actividad = mb_strtoupper($alumno->alum_fam2_actividad,'utf-8');
 				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
+                $alumno->alum_procedencia = mb_strtoupper($alumno->alum_procedencia,'utf-8');
 
                 if( !$alumno->alum_id  ){ // si la id no viene, osea es una alumno nuevo
                     unset($alumno->alum_id);//  se saca la id vacia del formulario
@@ -204,6 +206,7 @@ class MatriculaController extends Controller
             $model->attributes = $_POST['Matricula'];
             $alumno->attributes = $_POST['Alumno'];
 			$model->mat_documentos = mb_strtoupper($model->mat_documentos,'utf-8');
+            $model->mat_otros_doc = mb_strtoupper($model->mat_otros_doc,'utf-8');
 
             $valid = $model->validate();
             $valid = $alumno->validate() && $valid;
@@ -231,6 +234,7 @@ class MatriculaController extends Controller
 				$alumno->alum_fam1_lugar = mb_strtoupper($alumno->alum_fam1_lugar,'utf-8');
 				$alumno->alum_fam2_actividad = mb_strtoupper($alumno->alum_fam2_actividad,'utf-8');
 				$alumno->alum_fam2_lugar = mb_strtoupper($alumno->alum_fam2_lugar,'utf-8');
+                $alumno->alum_procedencia = mb_strtoupper($alumno->alum_procedencia,'utf-8');
 
                 if($alumno->save()){
                     if ($model->save()) {

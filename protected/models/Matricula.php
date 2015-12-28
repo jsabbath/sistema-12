@@ -51,7 +51,7 @@ class Matricula extends CActiveRecord
 			array('mat_ano, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'numerical', 'integerOnly'=>true),
 			array('mat_numero', 'length', 'max'=>11),
 			array('mat_fingreso, mat_fretiro, mat_fcambio, mat_desc', 'safe'),
-			array('alumno_nombres, mat_documentos','safe'),
+			array('alumno_nombres, mat_documentos, mat_otros_doc','safe'),
 			array('alumno_apepat','safe'),
 			array('alumno_apemat','safe'),
 			array('estado','safe'),
@@ -96,6 +96,7 @@ class Matricula extends CActiveRecord
 			'mat_estado' => 'Estado',
 			'mat_documentos' => 'Documentos Recibidos',
 			'mat_desc' 	=> 'Observacion',
+			'mat_otros_doc'	=> 'Documentos Recibidos (Voluntariamente)',
 		);
 	}
 

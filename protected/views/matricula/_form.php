@@ -471,6 +471,8 @@ $rand = "X".$random1.$random2;
                 <?php echo $form->labelEx($model,'mat_documentos'); ?>
                 <?php echo $form->textArea($model,'mat_documentos'); ?>
 
+                <?php echo $form->labelEx($model,'mat_otros_doc'); ?>
+                <?php echo $form->textArea($model,'mat_otros_doc'); ?>
           </div>
 
           <div class="span3">

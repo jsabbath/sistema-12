@@ -511,6 +511,12 @@
             <strong><?php if( $mat->mat_documentos ){ echo $mat->mat_documentos; }else{ echo "-"; } ?></strong>
         </td>
     </tr>
+        <tr>
+        <td colspan="3">
+            Otros Documentos Recibidos (Voluntariamente): <br>
+            <strong><?php if( $mat->mat_otros_doc ){ echo $mat->mat_otros_doc; }else{ echo "-"; } ?></strong>
+        </td>
+    </tr>
 </table>
 
 
