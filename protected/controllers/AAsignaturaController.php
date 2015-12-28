@@ -203,14 +203,14 @@ class AAsignaturaController extends Controller
             $criterio = new CDbCriteria;
             $cdtns = array();
             $resultado = array();
-			$ano = $this->actionAnoactual();
+			// $ano = $this->actionAnoactual();
 
             if(empty($_GET['term'])) return $resultado;
 
-            $cdtns[] = "LOWER(asi_descripcion) like LOWER(:busq) AND asi_ano = :ano";
+            $cdtns[] = "LOWER(asi_descripcion) like LOWER(:busq)";
 
             $criterio->condition = implode(' OR ', $cdtns);
-            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%', ':ano' => $ano);
+            $criterio->params = array(':busq' => '%' . $_GET['term'] . '%');
             $criterio->limit = 10;
 
             $data = Asignatura::model()->findAll($criterio);

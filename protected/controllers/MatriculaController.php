@@ -95,7 +95,13 @@ class MatriculaController extends Controller
         $nivel_edu = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="edu_nivel"')), 'par_id', 'par_descripcion');
 		$vive_con = CHtml::listData(Parametro::model()->findAll(array('condition'=>'par_item="alum_vive"')), 'par_id', 'par_descripcion');
 		$otro_vive = Parametro::model()->find(array('condition'=>'par_item="alum_vive" AND par_descripcion="otro"'));
-
+        $temp = Temp::model()->findByAttributes( array('temp_iduser'=>Yii::app()->user->id) );
+        $par = Parametro::model()->findByAttributes(array('par_item'=>'ano_activo'));
+        if( $temp->temp_ano != 0 ){
+            $ano_selec = $temp->temp_ano;  
+        } else {
+            $ano_selec = $par->par_descripcion;
+        } 
 
         if (isset($_POST['Matricula'], $_POST['Alumno'])) {
             $model->attributes = $_POST['Matricula'];
@@ -105,7 +111,7 @@ class MatriculaController extends Controller
                 $old_alum->attributes = $alumno->attributes;
             }
             $model->mat_alu_id = 1; //el 1 esta por que debe haber un registro previo para ingresar una foreign key
-            $model->mat_ano = date('Y');
+            $model->mat_ano = $ano_selec;  // año seleccionado
 			$model->mat_documentos = mb_strtoupper($model->mat_documentos,'utf-8');
             $model->mat_otros_doc = mb_strtoupper($model->mat_otros_doc,'utf-8');
             if( !isset($model->mat_fingreso) ) $model->mat_fingreso = date('Y-m-d');
