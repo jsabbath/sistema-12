@@ -268,7 +268,24 @@ class MatriculaController extends Controller
 	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete($id) {
-        $this->loadModel($id)->delete();
+
+        $mat = Matricula::model()->findByPk($id);
+        $id = array($id);
+
+        $criteria = new CDbCriteria;
+        $criteria->addInCondition('list_mat_id',$id);
+        ListaCurso::model()->deleteAll($criteria);
+
+        $criteria = new CDbCriteria;
+        $criteria->addInCondition('eva_matricula',$id);
+        Evaluacion::model()->deleteAll($criteria);
+
+        $criteria = new CDbCriteria;
+        $criteria->addInCondition('not_mat',$id);
+        Notas::model()->deleteAll($criteria);
+        
+        $mat->delete();
+
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
@@ -728,6 +745,18 @@ class MatriculaController extends Controller
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
         $this->render('lista', array(
+            'cursos' => $cursos,
+            'model' => $model,
+        ));
+    }
+
+    public function actionLista_borrar(){
+
+        $model = new Matricula('search');
+        $cursos = $this->actionCursoAnoActual();
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Matricula'])) $model->attributes = $_GET['Matricula'];
+        $this->render('borrar', array(
             'cursos' => $cursos,
             'model' => $model,
         ));
@@ -1549,7 +1578,6 @@ class MatriculaController extends Controller
             $mPDF1->Output();
 		}
 	}
-
 
 
 }

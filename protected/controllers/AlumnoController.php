@@ -312,16 +312,16 @@ class AlumnoController extends Controller
 
         foreach($data as $item) {
         
-        	$mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
-        	if( $mat){
-        		if( $mat->matEstado->par_descripcion != "RETIRADO" ){
+        	// $mat = Matricula::model()->findByAttributes(array('mat_alu_id' => $item->alum_id, 'mat_ano' => $ano));
+        	// if( $mat){
+        		// if( $mat->matEstado->par_descripcion != "RETIRADO" ){
 			        $resultado[] = array (
 			            'rut' => $item->alum_rut,
 			            'id_alum' => $item->alum_id,
 			            'model' => $item,
 			        );
-		        }
-			}
+		        // }
+			// }
         }
 
         echo CJSON::encode($resultado);

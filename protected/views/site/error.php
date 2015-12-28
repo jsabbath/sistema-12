@@ -3,7 +3,6 @@
 /* @var $error array */
 $this->pageTitle=Yii::app()->name . ' - Error';
 
-$err_img  = "http://media.tumblr.com/tumblr_ls3pp2PUxQ1qboobu.gif";
 
 ?>
 
@@ -42,7 +41,6 @@ if($code==55){
 			</div> 
 
 			<div class="span4 offset4">
-				<img width="50%" src="<?php echo $err_img;?>">
 				<br><br>
 			</div>
 		 	
@@ -64,7 +62,6 @@ if($code==55){
 			</div> 
 
 			<div class="span4 offset4">
-				<img width="50%" src="<?php echo $err_img;?>">
 				<br><br>
 			</div>
 		 	

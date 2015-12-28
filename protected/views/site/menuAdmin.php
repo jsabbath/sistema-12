@@ -260,7 +260,7 @@ if(
 			){
 			?>
 				<div class="row">
-					<a class="link-negro" href="<?php echo Yii::app()->createUrl('promedioanual/termino_ano'); ?>">
+					<a class="link-negro" href="<?php echo Yii::app()->createUrl('PromedioAnual/termino_ano'); ?>">
 						<div class="span4 " style="background-color:  rgba(208,164,0, 0.5);  -webkit-border-radius: 25px 5px 1px 4px; /* recuerda la primera frase */ -moz-border-radius: 24px; /* si quieres todas las esquinas iguales */ border-radius: 0px 50px 50px 0px;">
 							<div class="row">
 								<div class="span1 text-center">
