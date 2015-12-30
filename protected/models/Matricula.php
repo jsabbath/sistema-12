@@ -57,7 +57,8 @@ class Matricula extends CActiveRecord
 			array('estado','safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_asistencia_1, mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'safe', 'on'=>'search'),
+			array('mat_id, mat_ano, mat_numero, mat_fingreso, mat_fretiro, mat_fcambio, mat_asistencia_1, 
+				mat_asistencia_2, mat_asistencia_3, mat_alu_id, mat_estado', 'safe', 'on'=>'search'),
 		);
 	}
 

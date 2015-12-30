@@ -276,25 +276,60 @@ class MatriculaController extends Controller
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
+     * cursos relations = -listaCurso -Evaluacion -Notas
+     * PreCursos relations = -EvaHogar
 	 */
 	public function actionDelete($id) {
+        $id_mat = $id;
+        $mat = Matricula::model()->findByPk($id_mat);
+        $id = array($id_mat);
 
-        $mat = Matricula::model()->findByPk($id);
-        $id = array($id);
 
-        $criteria = new CDbCriteria;
-        $criteria->addInCondition('list_mat_id',$id);
-        ListaCurso::model()->deleteAll($criteria);
+        try {
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('list_mat_id',$id);
+            ListaCurso::model()->deleteAll($criteria);
+           
+        } catch (Exception $e) {    
+        
+        }
 
-        $criteria = new CDbCriteria;
-        $criteria->addInCondition('eva_matricula',$id);
-        Evaluacion::model()->deleteAll($criteria);
+        try {
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('eva_matricula',$id);
+            Evaluacion::model()->deleteAll($criteria);
+        } catch (Exception $e) {
 
-        $criteria = new CDbCriteria;
-        $criteria->addInCondition('not_mat',$id);
-        Notas::model()->deleteAll($criteria);
+        }
+        
+        try {
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('not_mat',$id);
+            Notas::model()->deleteAll($criteria);     
+        } catch (Exception $e) {
+
+        }
+      
+
+        // ELIMINAR ALUMNO PRECURSO evaHOGAR
+        try {
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('eh_matricula',$id);
+            EvaHogar::model()->deleteAll($criteria);
+
+            // $evH = EvaHogar::model()->findAll(array('condition' => 'eh_matricula = :x' , 'params' => array(':x' => $id_mat)));
+
+            // foreach ($evH as $key => $e) {
+            //     $e->delete();
+            // }
+        } catch (Exception $e) {
+            
+        }
+       
+           
         
         $mat->delete();
+
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))

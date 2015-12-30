@@ -96,6 +96,12 @@ class Asignatura extends CActiveRecord
 
 
 		return new CActiveDataProvider($this, array(
+		 	'pagination' => array(
+             	'pageSize' => 35,
+	        ),
+	         'sort'=>array(
+			    'defaultOrder'=>'asi_orden ASC',
+			  ),
 			'criteria'=>$criteria,
 		));
 	}
