@@ -1566,10 +1566,14 @@ class MatriculaController extends Controller
 		$alumno = Alumno::model()->findByPk($matricula->mat_alu_id);
 
 		$cur_list = ListaCurso::model()->findByAttributes(array('list_mat_id' => $id_mat));
+        $pre_curso = EvaHogar::model()->findByAttributes(array('eh_matricula' => $id_mat));
+        if( $cur_list ){
+            $curso  = Curso::model()->findByPk($cur_list->list_curso_id);  
+        }
+		if( $pre_curso ){
+            $curso  = PreCurso::model()->findByPk($pre_curso->eh_curso);
+        }
 
-		$curso  = Curso::model()->findByPk($cur_list->list_curso_id);
-		$nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
-    	$letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
         $cole = Colegio::model()->find();
         $ano = $this->actionAnoactual();
 
@@ -1578,7 +1582,7 @@ class MatriculaController extends Controller
  		$mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
         $mPDF1->WriteHTML($stylesheet, 2);
         $mPDF1->WriteHTML($this->renderPartial('ficha_alu', array(
-                                                                'curso_nombre'	=> $nivel . $letra,
+                                                                'curso_nombre'	=> $curso->getCurso(),
                                                                 'alum'   		=> $alumno,
                                                                 'cole'          => $cole,
                                                                 'ano'			=> $ano,
@@ -1602,8 +1606,6 @@ class MatriculaController extends Controller
 
 
             $curso  = Curso::model()->findByPk($id_curso);
-            $nivel = Parametro::model()->findByPk($curso->cur_nivel)->par_descripcion;
-            $letra = Parametro::model()->findByPk($curso->cur_letra)->par_descripcion;
             $cole = Colegio::model()->find();
             $ano = $this->actionAnoactual();
 
@@ -1612,7 +1614,7 @@ class MatriculaController extends Controller
             $mPDF1->SetHeader('Fecha de emisión '.date('d-m-Y'));
             $mPDF1->WriteHTML($stylesheet, 2);
             $mPDF1->WriteHTML($this->renderPartial('ficha_cur', array(
-                                                        'curso_nombre'  => $nivel . $letra,
+                                                        'curso_nombre'  => $curso->getCurso(),
                                                         //'alum'          => $alumno,
                                                         'cole'          => $cole,
                                                         'ano'           => $ano,

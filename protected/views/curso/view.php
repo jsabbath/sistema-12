@@ -27,7 +27,7 @@ $this->menu=array(
     </div>
 </div>
 <div class="row">
-    <div class="span12 text-center">
+    <div class="span8 offset2 text-center">
     <table class="table table-bordered table-hover" width="100%">
         <tr>
             <td width="50%" style="background-color: #5EB59A"><p class="text-right"><strong>Nivel</strong></p></td>
@@ -59,13 +59,15 @@ $this->menu=array(
 </div>
 
 <div class="row">
-    <div class="span10">
-        <h4>Asignaturas Inscritas</h4>
+    <div class="span10 offset1">
+        <h4 style="float: left; padding-right: 2px;">Asignaturas Inscritas </h4>
+
+
     </div>
    
 </div>
 <div class="row">
-    <div class="span12">
+    <div class="span10 offset1">
 
 
     <table class="table table-striped">
@@ -96,7 +98,12 @@ $this->menu=array(
     </table>
 
 
+        <div class="text-center">
+                <?php echo TbHtml::button('Asignar Asignatura', array('submit' => array('//AAsignatura/create'), 
+                                                                'color'=>TbHtml::BUTTON_COLOR_SUCCESS, )); ?>
+        </div>
 
+<br><br><br>
     </div>     
 </div>
 
