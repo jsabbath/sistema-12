@@ -1627,4 +1627,68 @@ class MatriculaController extends Controller
 	}
 
 
+    public function actionRefresh_curso(){
+        if(isset($_POST['id_curso'])){
+            $id_curso = $_POST['id_curso'];
+            $cole = Colegio::model()->find();
+            $ano = $this->actionAnoactual();
+
+
+            // busca todas las asignaturas asignadas al curso
+            $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
+            if($asignadas){
+
+                $lista =  ListaCurso::model()->findAll(array('order'=>'list_posicion',
+                                                        'condition' => 'list_curso_id=:x',
+                                                        'params' =>array(':x' => $id_curso)));
+                foreach ($lista as $key => $alum) {
+                    $id_mat = $alum->list_mat_id;
+                    
+                    $esta_matriculado = Notas::model()->findAll(array('condition' => 'not_mat=:x', 'params' => array(':x' => $id_mat )));
+                    $tipo_periodo = Parametro::model()->findByPk($cole->col_periodo);
+
+                    // SEMESTRE (SACADO  DE LA TABLA PARAMETRO NO CAMBIAR) ;
+                    if( $tipo_periodo->par_descripcion == 'SEMESTRE' ){
+                        for ($i=1; $i <= 2 ; $i++) {
+                            foreach ( $asignadas as $p ){
+                                $tiene_la_asignatura = Notas::model()->findByAttributes(array(  'not_mat' => $id_mat, 
+                                                                                                'not_asig' => $p->aa_asignatura, 
+                                                                                                'not_periodo' => $i,
+                                                                                            ));
+                                if( !$tiene_la_asignatura ){
+                                    $nota = new Notas;
+                                    $nota->not_asig = $p->aa_asignatura;
+                                    $nota->not_mat = $id_mat;
+                                    $nota->not_ano = $ano;
+                                    $nota->not_periodo = $i;
+                                    $nota->insert();
+                                }
+                            }
+                        }
+                        // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
+                    } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
+                        for ($i=1; $i <= 3; $i++) {
+                            foreach ( $asignadas as $p ){
+                                $tiene_la_asignatura = Notas::model()->findByAttributes(array('not_mat' => $id_mat, 'not_asig' => $p->aa_asignatura ));
+                                if( !$tiene_la_asignatura ){
+                                    $nota = new Notas;
+                                    $nota->not_asig = $p->aa_asignatura;
+                                    $nota->not_mat = $id_mat;
+                                    $nota->not_ano = $ano;
+                                    $nota->not_periodo = $i;
+                                    $nota->insert();
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+
+            }
+        }
+
+
+    }
+
+
 }

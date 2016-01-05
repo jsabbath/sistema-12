@@ -60,9 +60,17 @@ $this->menu=array(
 
 <div class="row">
     <div class="span10 offset1">
+
         <h4 style="float: left; padding-right: 2px;">Asignaturas Inscritas </h4>
 
-
+        <?php if( Yii::app()->user->isSuperAdmin  OR
+                   Yii::app()->user->checkAccess('administrador')
+        ){ ?>
+        <?php echo TbHtml::button('', array('color'=>TbHtml::BUTTON_COLOR_WARNING, 
+                                            'icon' => 'icon-refresh',
+                                            'id' => 'refresh',
+                                            )); ?>
+        <?php } ?>
     </div>
    
 </div>
@@ -131,4 +139,27 @@ $this->menu=array(
     }
     
 
+</script>
+
+<script type="text/javascript">
+    $('#refresh').on('click', function(){
+        $.ajax({
+            url: '<?php echo CController::createUrl("matricula/Refresh_curso")?>',
+            type: 'POST',
+            data: {id_curso: <?php echo $model->cur_id; ?> },
+            success: function(data){
+                    
+                swal({   
+                    title: "Guardado!",     
+                    timer: 600,
+                    type: "success",   
+                    showConfirmButton: false 
+                });
+            }
+        })
+        
+    });
+
+
+ 
 </script>
