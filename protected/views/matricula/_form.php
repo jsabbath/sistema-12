@@ -448,8 +448,8 @@ $rand = "X".$random1.$random2;
 
             <div class="span3">
                 <?php echo $form->labelEx($alumno,'alum_dormitorios'); ?>
-                <?php echo $form->dropDownList($alumno,'alum_dormitorios',array('1', '2', '3', '4', '5', '6', '7', '8' , '9', '10'),
-                                                          array('prompt'=>'Numero Dormitorios','class' => 'input-small')); ?>
+                <?php echo $form->dropDownList($alumno,'alum_dormitorios',array('Numero Dormitorios','1', '2', '3', '4', '5', '6', '7', '8' , '9', '10'),
+                                                          array('class' => 'input-small')); ?>
 
             </div>
         </div>

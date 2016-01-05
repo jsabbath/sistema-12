@@ -143,7 +143,7 @@ if(
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>lista de alumnos General</strong>
+								<strong>Lista de alumnos General</strong>
 							</div>
 						</div>
 						<div class="row">
@@ -180,7 +180,7 @@ if(
 					<div class="span3">
 						<div class="row">
 							<div class="span3">
-								<strong>Borrar Alumno</strong>
+								<strong>Borrar Matricula</strong>
 							</div>
 						</div>
 						<div class="row">
