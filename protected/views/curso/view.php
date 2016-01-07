@@ -137,7 +137,7 @@ $this->menu=array(
                 function(){ 
                         $.ajax({
                             type:'POST',
-                            url: '<?php echo Yii::app()->createUrl("//aasignatura/borrar_ajax"); ?>',
+                            url: '<?php echo Yii::app()->createUrl("//AAsignatura/borrar_ajax"); ?>',
                             data: {id: id },
                             success: function(){
                                 tr = "#"+id;
