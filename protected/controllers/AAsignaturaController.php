@@ -114,6 +114,13 @@ class AAsignaturaController extends Controller
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
+    public function actionBorrar_ajax(){
+        if(isset($_POST['id'])){
+            $this->loadModel($_POST['id'])->delete();
+        }
+    }
+
+
 	/**
 	 * Lists all models.
 	 */

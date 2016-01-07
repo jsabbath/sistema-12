@@ -93,12 +93,21 @@ $this->menu=array(
                     $nombre_asi = $asignatura[$asignacion[$i]->aa_asignatura];
                     $id_asignacion = $asignacion[$i]->aa_id; 
         ?>
-            <tr>
+            <tr id="<?php echo $id_asignacion; ?>">
               <td><i class="icon-book"></i></td>
               <td><?php echo $nombre_asi;?> </td>
               <td><?php echo CHtml::link($nombre_doc,CController::createUrl('//usuario/view',array('id'=> $asignacion[$i]->aa_docente)),array('class'=>'link-negro'));?> </td>
               <?php if( $num == 0 ){ ?>
-              <td><div class="text-center"><button class="btn btn-danger" data-toggle="tooltip" title="Eliminar"><i style="cursor:pointer; cursor:hand" class = 'icon-remove' onclick="asd(<?php echo $id_asignacion ?>)"> </i></button></div></td>
+                <td>
+                    <div class="text-center">
+                        <button class="btn btn-danger elim"  title="Eliminar" id="<?php echo $id_asignacion; ?>">
+                            <i  style="cursor:pointer; cursor:hand" 
+                                class = 'icon-remove' 
+                               > 
+                            </i>
+                        </button>
+                    </div>
+                </td>
                 <?php } ?>
             </tr>
         <?php } ?>
@@ -119,44 +128,67 @@ $this->menu=array(
 
 <script>
 
-    function asd(id_a){
-        a = '<?php echo Yii::app()->createUrl("//aasignatura/delete", array("id"=>'CK' )); ?>';
-        url_delete = a.replace("CK",id_a);
-        swal({  title: "Estas seguro?",   
+    $('.elim').on('click',function(){
+            id = $(this).attr('id');
+            swal({  title: "Estas seguro?",   
                 text: "Estas Borrando una asignatura!",  
                 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
-                confirmButtonText: "Si, Borrar!",   closeOnConfirm: false }, 
+                confirmButtonText: "Si, Borrar!",   closeOnConfirm: true }, 
                 function(){ 
                         $.ajax({
                             type:'POST',
-                            url: url_delete,
+                            url: '<?php echo Yii::app()->createUrl("//aasignatura/borrar_ajax"); ?>',
+                            data: {id: id },
                             success: function(){
-                               location.reload();
+                                tr = "#"+id;
+                                $(tr).empty();
                             } 
                         });  
                 }
             );
-    }
+    });
+
+
+
     
 
 </script>
 
 <script type="text/javascript">
     $('#refresh').on('click', function(){
-        $.ajax({
-            url: '<?php echo CController::createUrl("matricula/Refresh_curso")?>',
-            type: 'POST',
-            data: {id_curso: <?php echo $model->cur_id; ?> },
-            success: function(data){
-                    
-                swal({   
-                    title: "Guardado!",     
-                    timer: 600,
-                    type: "success",   
-                    showConfirmButton: false 
-                });
+        swal({  
+            title: "Actualizar Matriculas",   
+            text: "Se agregaran asignaturas nuevas y conceptos del informe personalidad en caso  de faltar!",  
+            type: "warning",   
+            showCancelButton: true,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Actualizar!",   
+            closeOnConfirm: false,
+        }, 
+            function(){ 
+                    swal({   
+                        title: "Cargando!",     
+                        type: "info",   
+                        showConfirmButton: false,
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                    });
+                    $.ajax({
+                        url: '<?php echo CController::createUrl("matricula/Refresh_curso")?>',
+                        type: 'POST',
+                        data: {id_curso: <?php echo $model->cur_id; ?> },
+                        success: function(data){        
+                            swal({   
+                                title: "Actualizado!",     
+                                timer: 600,
+                                type: "success",   
+                                showConfirmButton: false 
+                            });
+                        }
+                    })
             }
-        })
+        );
+        
         
     });
 

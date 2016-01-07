@@ -1632,7 +1632,8 @@ class MatriculaController extends Controller
             $id_curso = $_POST['id_curso'];
             $cole = Colegio::model()->find();
             $ano = $this->actionAnoactual();
-
+            $curso = Curso::model()->findByPk($id_curso);
+            $id_inf = $curso->cur_infd;
 
             // busca todas las asignaturas asignadas al curso
             $asignadas = AAsignatura::model()->findAll(array('condition' => 'aa_curso=:x', 'params' => array(':x' => $id_curso )));
@@ -1665,7 +1666,7 @@ class MatriculaController extends Controller
                                 }
                             }
                         }
-                        // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
+                    // TRIMESTRE (NO CAMBIAR EN PARAMETRO)
                     } elseif ($tipo_periodo->par_descripcion == 'TRIMESTRE') {
                         for ($i=1; $i <= 3; $i++) {
                             foreach ( $asignadas as $p ){
@@ -1682,6 +1683,25 @@ class MatriculaController extends Controller
                         }
                     }
                     
+                    //asignar informe de desarrollo
+                    $criteria = new CDbCriteria();
+                    $criteria->join = 'LEFT JOIN area ON area.are_id = t.con_area';
+                    $criteria->condition = 'area.are_infd=:value';
+                    $criteria->params = array(":value"=>$id_inf);
+                    $con = Concepto::model()->findAll($criteria);
+                    foreach ($con as $n) {
+                        $tiene_eva = Evaluacion::model()->findByAttributes(array('eva_concepto' => $n->con_id,'eva_matricula' => $id_mat,'eva_ano' => $curso->cur_ano));
+                        if( !$tiene_eva ){
+                            $evaluacion = new Evaluacion;
+                            $evaluacion->eva_concepto = $n->con_id;
+                            $evaluacion->eva_matricula = $id_mat;
+                            $evaluacion->eva_ano = $curso->cur_ano;
+                            $evaluacion->save();
+                        }
+
+                    }
+
+
                 }
 
             }
